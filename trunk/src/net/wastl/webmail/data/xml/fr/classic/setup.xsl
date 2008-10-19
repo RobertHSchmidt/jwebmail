@@ -36,64 +36,64 @@
     <HTML>
       <HEAD>
         <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de Titre</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <BODY bgcolor="#ffffff">
 
-	<FORM ACTION="{$base}/setup/submit?session-id={$session-id}" METHOD="POST">
-	  <TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0">
-	    <TR>
-	      <TD COLSPAN="2" VALIGN="CENTER">
-		<IMG SRC="{$imgbase}/images/btn-setup.png"/>
-	      </TD>
-	      <TD COLSPAN="2" VALIGN="CENTER">
-		<FONT SIZE="+2"><STRONG>Setup WebMail de  <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/FULL_NAME)"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=setup">Aide</A>)<BR/>
-		<EM>Nom de login <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/>
-		<EM>Compte existant depuis le <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM>
-	      </TD>
-	    </TR>
-	    <TR>
-	      <TD COLSPAN="4" BGCOLOR="#aaaaaa" ALIGN="CENTER"><EM><FONT SIZE="+1">Paramètres Généraux</FONT></EM></TD>
-	    </TR>
-	    <TR>
-	      <TD WIDTH="10%"><STRONG>Nom Complet:</STRONG></TD>
-	      <TD WIDTH="40%"><INPUT TYPE="TEXT" NAME="FULLNAME" VALUE="{normalize-space(/USERMODEL/USERDATA/FULL_NAME)}" SIZE="30"/></TD>
-	      <TD><STRONG>Langue:</STRONG></TD>
-	      <TD>
-		<SELECT NAME="LANGUAGE">
-		  <xsl:for-each select="/USERMODEL/STATEDATA/VAR[@name='language']">
-		    <xsl:choose>
-		      <xsl:when test="@value = /USERMODEL/USERDATA/LOCALE">
-			<OPTION selected="selected"><xsl:apply-templates select="."/></OPTION>
-		      </xsl:when>
-		      <xsl:otherwise>
-			<OPTION><xsl:apply-templates select="."/></OPTION>
-		      </xsl:otherwise>
-		    </xsl:choose>		   
-		  </xsl:for-each>
-		</SELECT>
-	      </TD>
-	    </TR>
-	    <TR>
-	      <TD><STRONG>Thème:</STRONG></TD>
-	      <TD COLSPAN="3">
-		<SELECT NAME="THEME">
-		  <xsl:for-each select="/USERMODEL/STATEDATA/VAR[@name = $themeset]">
-		    <xsl:choose>
-		      <xsl:when test="@value = /USERMODEL/USERDATA/THEME">
-			<OPTION selected="selected"><xsl:apply-templates select="."/></OPTION>
-		      </xsl:when>
-		      <xsl:otherwise>
-			<OPTION><xsl:apply-templates select="."/></OPTION>
-		      </xsl:otherwise>
-		    </xsl:choose>		   
-		  </xsl:for-each>
-		</SELECT>		  
-	      </TD>
-	    </TR>
-	    <TR>
-	      <TD COLSPAN="4" BGCOLOR="#aaaaaa" ALIGN="CENTER"><EM><FONT SIZE="+1">Paramètres de Mot de Passe</FONT></EM></TD>
+        <FORM ACTION="{$base}/setup/submit?session-id={$session-id}" METHOD="POST">
+          <TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0">
+            <TR>
+              <TD COLSPAN="2" VALIGN="CENTER">
+                <IMG SRC="{$imgbase}/images/btn-setup.png"/>
+              </TD>
+              <TD COLSPAN="2" VALIGN="CENTER">
+                <FONT SIZE="+2"><STRONG>Setup WebMail de  <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/FULL_NAME)"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=setup">Aide</A>)<BR/>
+                <EM>Nom de login <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/>
+                <EM>Compte existant depuis le <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM>
+              </TD>
+            </TR>
+            <TR>
+              <TD COLSPAN="4" BGCOLOR="#aaaaaa" ALIGN="CENTER"><EM><FONT SIZE="+1">Paramètres Généraux</FONT></EM></TD>
+            </TR>
+            <TR>
+              <TD WIDTH="10%"><STRONG>Nom Complet:</STRONG></TD>
+              <TD WIDTH="40%"><INPUT TYPE="TEXT" NAME="FULLNAME" VALUE="{normalize-space(/USERMODEL/USERDATA/FULL_NAME)}" SIZE="30"/></TD>
+              <TD><STRONG>Langue:</STRONG></TD>
+              <TD>
+                <SELECT NAME="LANGUAGE">
+                  <xsl:for-each select="/USERMODEL/STATEDATA/VAR[@name='language']">
+                    <xsl:choose>
+                      <xsl:when test="@value = /USERMODEL/USERDATA/LOCALE">
+                        <OPTION selected="selected"><xsl:apply-templates select="."/></OPTION>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <OPTION><xsl:apply-templates select="."/></OPTION>
+                      </xsl:otherwise>
+                    </xsl:choose>                  
+                  </xsl:for-each>
+                </SELECT>
+              </TD>
+            </TR>
+            <TR>
+              <TD><STRONG>Thème:</STRONG></TD>
+              <TD COLSPAN="3">
+                <SELECT NAME="THEME">
+                  <xsl:for-each select="/USERMODEL/STATEDATA/VAR[@name = $themeset]">
+                    <xsl:choose>
+                      <xsl:when test="@value = /USERMODEL/USERDATA/THEME">
+                        <OPTION selected="selected"><xsl:apply-templates select="."/></OPTION>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <OPTION><xsl:apply-templates select="."/></OPTION>
+                      </xsl:otherwise>
+                    </xsl:choose>                  
+                  </xsl:for-each>
+                </SELECT>                 
+              </TD>
+            </TR>
+            <TR>
+              <TD COLSPAN="4" BGCOLOR="#aaaaaa" ALIGN="CENTER"><EM><FONT SIZE="+1">Paramètres de Mot de Passe</FONT></EM></TD>
         </TR>
         <xsl:variable name="cptmpl" select="/USERMODEL/STATEDATA/VAR[@name='pass change tmpl']/@value"/>
         <TR>
@@ -123,134 +123,134 @@
             </xsl:call-template>
           </TD>
         </TR>
-	    <TR>
-	      <TD COLSPAN="4" BGCOLOR="#aaaaaa" ALIGN="CENTER"><EM><FONT SIZE="+1">Paramètres d'affichage de la Boîte aux lettres</FONT></EM></TD>
-	    </TR>
-	    <TR>
-	      <TD><STRONG>Messages par page</STRONG></TD>
-	      <TD><INPUT TYPE="TEXT" NAME="intvar%max show messages" SIZE="3" VALUE="{/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value}"/></TD>
-	      <TD><STRONG>Taille de la Barre d'icône de Navigation</STRONG></TD>
-	      <TD><INPUT TYPE="TEXT" NAME="intvar%icon size" SIZE="3" VALUE="{/USERMODEL/USERDATA/INTVAR[@name='icon size']/@value}"/></TD>
-	    </TR>
-	    <TR>
-	      <TD><STRONG>Afficher Trucs et Astuces</STRONG></TD>
-	      <TD>
-		<xsl:choose>
-		  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='show fancy']/@value = 'yes'">
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%show fancy" checked="checked"/>
-		  </xsl:when>
-		  <xsl:otherwise>
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%show fancy"/>
-		  </xsl:otherwise>
-		</xsl:choose>
-	      </TD>
-	      <TD><STRONG>Afficher images attachées</STRONG></TD>
-	      <TD>
-		<xsl:choose>
-		  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='show images']/@value = 'yes'">
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%show images" checked="checked"/>
-		  </xsl:when>
-		  <xsl:otherwise>
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%show images"/>
-		  </xsl:otherwise>
-		</xsl:choose>
-	      </TD>
-	    </TR>
-	    <TR>
-	      <TD><STRONG>Autonettoyage de dossiers</STRONG></TD>
-	      <TD>
-		<xsl:choose>
-		  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='autoexpunge']/@value = 'yes'">
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%autoexpunge" checked="checked"/>
-		  </xsl:when>
-		  <xsl:otherwise>
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%autoexpunge"/>
-		  </xsl:otherwise>
-		</xsl:choose>
-	      </TD>
-	      <TD><STRONG>Activer marqueurs de message</STRONG></TD>
-	      <TD>
-		<xsl:choose>
-		  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='set message flags']/@value = 'yes'">
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%set message flags" checked="checked"/>
-		  </xsl:when>
-		  <xsl:otherwise>
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%set message flags"/>
-		  </xsl:otherwise>
-		</xsl:choose>
-	      </TD>
-	    </TR>
-	    <TR>
-	      <TD><STRONG>Retour à la ligne<BR/>(dans 'Afficher' et 'Composer')</STRONG></TD>
-	      <TD>
-		<xsl:choose>
-		  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='break lines']/@value = 'yes'">
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%break lines" checked="checked"/>
-		  </xsl:when>
-		  <xsl:otherwise>
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%break lines"/>
-		  </xsl:otherwise>
-		</xsl:choose>
-	      </TD>
-	      <TD><STRONG>longueur de ligne max</STRONG></TD>
-	      <TD><INPUT TYPE="TEXT" NAME="intvar%max line length" SIZE="3" VALUE="{/USERMODEL/USERDATA/INTVAR[@name='max line length']/@value}"/></TD>
-	    </TR>
-	    <TR>
-	      <TD COLSPAN="4" BGCOLOR="#aaaaaa" ALIGN="CENTER"><EM><FONT SIZE="+1">Paramètres de Composition</FONT></EM></TD>
-	    </TR>
-	    <TR>
-	      <TD><STRONG>Enregistrer message envoyé</STRONG></TD>
-	      <TD>
-		<xsl:choose>
-		  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='save sent messages']/@value = 'yes'">
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%save sent messages" checked="checked"/>
-		  </xsl:when>
-		  <xsl:otherwise>
-		    <INPUT TYPE="CHECKBOX" NAME="boolvar%save sent messages"/>
-		  </xsl:otherwise>
-		</xsl:choose>
-	      </TD>
-	      <TD> dans le dossier </TD>
-	      <TD>
-		<SELECT NAME="SENTFOLDER">
-		  <xsl:for-each select="/USERMODEL/MAILHOST_MODEL//FOLDER">
-		    <xsl:choose>
-		      <xsl:when test="normalize-space(/USERMODEL/USERDATA/SENT_FOLDER) = @id">
-			<OPTION value="{@id}" selected="selected"><xsl:value-of select="@name"/></OPTION>
-		      </xsl:when>
-		      <xsl:otherwise>
-			<OPTION value="{@id}"><xsl:value-of select="@name"/></OPTION>
-		      </xsl:otherwise>
-		    </xsl:choose>
-		  </xsl:for-each>
-		</SELECT>
-	      </TD>
-	    </TR>
-	    <TR>
-	      <TD><STRONG>Adresse Email:</STRONG></TD>
-	      <TD COLSPAN="3"><INPUT TYPE="TEXT" NAME="EMAIL" SIZE="40" VALUE="{normalize-space(/USERMODEL/USERDATA/EMAIL)}"/></TD>
-	    </TR>
-	    <TR>
-	      <TD VALIGN="TOP"><STRONG>Signature:</STRONG></TD>
-	      <TD COLSPAN="3">
-		<TEXTAREA ROWS="5" COLS="79" NAME="SIGNATURE"><xsl:value-of select="/USERMODEL/USERDATA/SIGNATURE"/></TEXTAREA>
-	      </TD>
-	    </TR>
-	    <TR>
-	      <TD COLSPAN="2" BGCOLOR="#aaaaaa">
-		<CENTER>
-		  <INPUT TYPE="reset" VALUE="Reset"/>
-		</CENTER>
-	      </TD>
-	      <TD COLSPAN="2" BGCOLOR="#aaaaaa">
-		<CENTER>
-		  <INPUT TYPE="submit" VALUE="Valider"/>
-		</CENTER>
-	      </TD>
-	    </TR>
-	  </TABLE>
-	</FORM>
-	
+            <TR>
+              <TD COLSPAN="4" BGCOLOR="#aaaaaa" ALIGN="CENTER"><EM><FONT SIZE="+1">Paramètres d'affichage de la Boîte aux lettres</FONT></EM></TD>
+            </TR>
+            <TR>
+              <TD><STRONG>Messages par page</STRONG></TD>
+              <TD><INPUT TYPE="TEXT" NAME="intvar%max show messages" SIZE="3" VALUE="{/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value}"/></TD>
+              <TD><STRONG>Taille de la Barre d'icône de Navigation</STRONG></TD>
+              <TD><INPUT TYPE="TEXT" NAME="intvar%icon size" SIZE="3" VALUE="{/USERMODEL/USERDATA/INTVAR[@name='icon size']/@value}"/></TD>
+            </TR>
+            <TR>
+              <TD><STRONG>Afficher Trucs et Astuces</STRONG></TD>
+              <TD>
+                <xsl:choose>
+                  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='show fancy']/@value = 'yes'">
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%show fancy" checked="checked"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%show fancy"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </TD>
+              <TD><STRONG>Afficher images attachées</STRONG></TD>
+              <TD>
+                <xsl:choose>
+                  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='show images']/@value = 'yes'">
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%show images" checked="checked"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%show images"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </TD>
+            </TR>
+            <TR>
+              <TD><STRONG>Autonettoyage de dossiers</STRONG></TD>
+              <TD>
+                <xsl:choose>
+                  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='autoexpunge']/@value = 'yes'">
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%autoexpunge" checked="checked"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%autoexpunge"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </TD>
+              <TD><STRONG>Activer marqueurs de message</STRONG></TD>
+              <TD>
+                <xsl:choose>
+                  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='set message flags']/@value = 'yes'">
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%set message flags" checked="checked"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%set message flags"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </TD>
+            </TR>
+            <TR>
+              <TD><STRONG>Retour à la ligne<BR/>(dans 'Afficher' et 'Composer')</STRONG></TD>
+              <TD>
+                <xsl:choose>
+                  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='break lines']/@value = 'yes'">
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%break lines" checked="checked"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%break lines"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </TD>
+              <TD><STRONG>longueur de ligne max</STRONG></TD>
+              <TD><INPUT TYPE="TEXT" NAME="intvar%max line length" SIZE="3" VALUE="{/USERMODEL/USERDATA/INTVAR[@name='max line length']/@value}"/></TD>
+            </TR>
+            <TR>
+              <TD COLSPAN="4" BGCOLOR="#aaaaaa" ALIGN="CENTER"><EM><FONT SIZE="+1">Paramètres de Composition</FONT></EM></TD>
+            </TR>
+            <TR>
+              <TD><STRONG>Enregistrer message envoyé</STRONG></TD>
+              <TD>
+                <xsl:choose>
+                  <xsl:when test="/USERMODEL/USERDATA/BOOLVAR[@name='save sent messages']/@value = 'yes'">
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%save sent messages" checked="checked"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <INPUT TYPE="CHECKBOX" NAME="boolvar%save sent messages"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </TD>
+              <TD> dans le dossier </TD>
+              <TD>
+                <SELECT NAME="SENTFOLDER">
+                  <xsl:for-each select="/USERMODEL/MAILHOST_MODEL//FOLDER">
+                    <xsl:choose>
+                      <xsl:when test="normalize-space(/USERMODEL/USERDATA/SENT_FOLDER) = @id">
+                        <OPTION value="{@id}" selected="selected"><xsl:value-of select="@name"/></OPTION>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <OPTION value="{@id}"><xsl:value-of select="@name"/></OPTION>
+                      </xsl:otherwise>
+                    </xsl:choose>
+                  </xsl:for-each>
+                </SELECT>
+              </TD>
+            </TR>
+            <TR>
+              <TD><STRONG>Adresse Email:</STRONG></TD>
+              <TD COLSPAN="3"><INPUT TYPE="TEXT" NAME="EMAIL" SIZE="40" VALUE="{normalize-space(/USERMODEL/USERDATA/EMAIL)}"/></TD>
+            </TR>
+            <TR>
+              <TD VALIGN="TOP"><STRONG>Signature:</STRONG></TD>
+              <TD COLSPAN="3">
+                <TEXTAREA ROWS="5" COLS="79" NAME="SIGNATURE"><xsl:value-of select="/USERMODEL/USERDATA/SIGNATURE"/></TEXTAREA>
+              </TD>
+            </TR>
+            <TR>
+              <TD COLSPAN="2" BGCOLOR="#aaaaaa">
+                <CENTER>
+                  <INPUT TYPE="reset" VALUE="Reset"/>
+                </CENTER>
+              </TD>
+              <TD COLSPAN="2" BGCOLOR="#aaaaaa">
+                <CENTER>
+                  <INPUT TYPE="submit" VALUE="Valider"/>
+                </CENTER>
+              </TD>
+            </TR>
+          </TABLE>
+        </FORM>
+        
       </BODY>
       
     </HTML>
@@ -258,7 +258,7 @@
   
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>		    
+  </xsl:template>                   
 
   <xsl:include href="changepass.xsl"/>
 

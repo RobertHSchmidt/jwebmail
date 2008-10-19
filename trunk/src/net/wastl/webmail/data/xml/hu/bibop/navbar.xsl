@@ -30,90 +30,90 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Title Frame</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
       <BODY bgcolor="#818A9E" background="{$imgbase}/images/sfondo_sx.gif" leftmargin="5" topmargin="5" marginwidth="5" marginheight="5">
 <TABLE width="50" border="0" cellspacing="0" cellpadding="0">
   <TR>
     <TD align="center">
-	<A HREF="{$base}/mailbox?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider shows a list of all folders and links to the FolderList URLHandler.';"><IMG SRC="{$imgbase}/images/mailbox.gif" BORDER="0" ALT="MailboxList" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <A HREF="{$base}/mailbox?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider shows a list of all folders and links to the FolderList URLHandler.';"><IMG SRC="{$imgbase}/images/mailbox.gif" BORDER="0" ALT="MailboxList" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
     </TD>
   </TR>
   <TR>
     <TD height="30" align="center" valign="top">
-	<A HREF="{$base}/mailbox?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider shows a list of all folders and links to the FolderList URLHandler.';">
-	  <P class="testoScuroSx">Postaláda<BR/>List</P>
-	</A>
+        <A HREF="{$base}/mailbox?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider shows a list of all folders and links to the FolderList URLHandler.';">
+          <P class="testoScuroSx">Postaláda<BR/>List</P>
+        </A>
     </TD>
   </TR>
   <TR>
     <TD align="center">
-	<A HREF="{$base}/compose?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider handles the composition of messages.';"><IMG SRC="{$imgbase}/images/composer.gif" BORDER="0" ALT="Composer" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <A HREF="{$base}/compose?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider handles the composition of messages.';"><IMG SRC="{$imgbase}/images/composer.gif" BORDER="0" ALT="Composer" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
     </TD>
   </TR>
   <TR>
     <TD height="30" align="center" valign="top">
-	<A HREF="{$base}/compose?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider handles the composition of messages.';">
-	  <P class="testoScuroSx">Üzenet<BR/>
+        <A HREF="{$base}/compose?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider handles the composition of messages.';">
+          <P class="testoScuroSx">Üzenet<BR/>
         Szerkesztõ</P>
-	</A>
+        </A>
     </TD>
   </TR>
   <TR>
     <TD align="center">
-	<A HREF="{$base}/folder/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider manages a users folder setup.';"><IMG SRC="{$imgbase}/images/folder_setup.gif" BORDER="0" ALT="FolderSetup" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <A HREF="{$base}/folder/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider manages a users folder setup.';"><IMG SRC="{$imgbase}/images/folder_setup.gif" BORDER="0" ALT="FolderSetup" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
     </TD>
   </TR>
   <TR>
     <TD height="30" align="center" valign="top">
-	<A HREF="{$base}/folder/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider manages a users folder setup.';">
-	  <P class="testoScuroSx">Folder<BR/>Setup</P>
-	</A>
+        <A HREF="{$base}/folder/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This ContentProvider manages a users folder setup.';">
+          <P class="testoScuroSx">Folder<BR/>Setup</P>
+        </A>
     </TD>
   </TR>
   <TR>
     <TD align="center">
-	<A HREF="{$base}/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Change a users settings.';"><IMG SRC="{$imgbase}/images/other_setup.gif" BORDER="0" ALT="UserSetup" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <A HREF="{$base}/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Change a users settings.';"><IMG SRC="{$imgbase}/images/other_setup.gif" BORDER="0" ALT="UserSetup" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
     </TD>
   </TR>
   <TR>
     <TD height="30" align="center" valign="top">
-	<A HREF="{$base}/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Change a users settings.';">
-	  <P class="testoScuroSx">Felhasználó<BR/>
+        <A HREF="{$base}/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Change a users settings.';">
+          <P class="testoScuroSx">Felhasználó<BR/>
         beállítások</P>
-	</A>
+        </A>
     </TD>
   </TR>
   <TR>
     <TD align="center">
-	<A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This is the WebMail help content-provider.';"><IMG SRC="{$imgbase}/images/help.gif" BORDER="0" ALT="WebMailHelp" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This is the WebMail help content-provider.';"><IMG SRC="{$imgbase}/images/help.gif" BORDER="0" ALT="WebMailHelp" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
     </TD>
   </TR>
   <TR>
     <TD height="30" align="center" valign="top">
 <A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This is the WebMail help content-provider.';">
-	  <P class="testoScuroSx">WebMail<BR/>
+          <P class="testoScuroSx">WebMail<BR/>
         Súgó</P>
-	</A>
+        </A>
     </TD>
   </TR>
   <TR>
     <TD align="center">
-	<A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ContentProvider plugin that closes an active WebMail session.';"><IMG SRC="{$imgbase}/images/logout.gif" BORDER="0" ALT="LogoutSession" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ContentProvider plugin that closes an active WebMail session.';"><IMG SRC="{$imgbase}/images/logout.gif" BORDER="0" ALT="LogoutSession" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
     </TD>
   </TR>
   <TR>
     <TD height="30" align="center" valign="top">
-	<A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ContentProvider plugin that closes an active WebMail session.';">
-	  <P class="testoScuroSx">Kilépés<BR/>
+        <A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ContentProvider plugin that closes an active WebMail session.';">
+          <P class="testoScuroSx">Kilépés<BR/>
         Session</P>
-	</A>
+        </A>
     </TD>
   </TR>
 </TABLE>
-	</BODY>
+        </BODY>
 
 
     </HTML>

@@ -39,33 +39,33 @@ public class HTMLImage extends HTMLDocument {
 
 
     public HTMLImage(ByteStore content) {
-	this.cont=content;
+        this.cont=content;
     }
 
 //     public HTMLImage(StorageManager store,String name, Locale locale, String theme) throws WebMailException {
-// 	cont=new ByteStore(store.getBinaryFile(name,locale,theme));
-// 	cont.setContentType(store.getMimeType(name));
-// 	cont.setContentEncoding("BINARY");
+//      cont=new ByteStore(store.getBinaryFile(name,locale,theme));
+//      cont.setContentType(store.getMimeType(name));
+//      cont.setContentEncoding("BINARY");
 //     }
 
     public int size() {
-	if(cont == null) {
-	    return 0;
-	} else {
-	    return cont.getSize();
-	}
+        if(cont == null) {
+            return 0;
+        } else {
+            return cont.getSize();
+        }
     }
 
     public String getContentEncoding() {
-	return cont.getContentEncoding();
+        return cont.getContentEncoding();
     }
 
     public String getContentType() {
-	return cont.getContentType();
+        return cont.getContentType();
     }
 
     public byte[] toBinary() {
-	return cont.getBytes();
+        return cont.getBytes();
     }
     
 } // HTMLImage

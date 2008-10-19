@@ -27,66 +27,66 @@ public class UnixAuthenticator extends Authenticator {
     public static final String shadow="/etc/shadow";
 
     public UnixAuthenticator() {
-	super();
+        super();
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public void init(StorageManager store) {
     }
 
     public void register(ConfigScheme store) {
-	key="UNIX";
-	store.configAddChoice("AUTH",key,"Authenticate against the local Unix server's passwd/shadow files. Password change not possible.");
-    }	
+        key="UNIX";
+        store.configAddChoice("AUTH",key,"Authenticate against the local Unix server's passwd/shadow files. Password change not possible.");
+    }   
 
     public void authenticatePreUserData(String user, String domain,
      String given_passwd) throws InvalidPasswordException 
     {
-	super.authenticatePreUserData(user,domain,given_passwd);
-	String login=user;
-	try {
-	    File f_passwd=new File(passwd);
-	    File f_shadow=new File(shadow);
-	    BufferedReader in;
-	    if(f_shadow.exists()) {		
-		in=new BufferedReader(new InputStreamReader(new FileInputStream(f_shadow)));
-	    } else {
-		in=new BufferedReader(new InputStreamReader(new FileInputStream(f_passwd)));
-	    }
-	    String line;
-	    line=in.readLine();
-	    while(line != null) {
-		if(line.startsWith(login)) break;
-		line=in.readLine();
-	    }
-	    
-	    if(line == null) throw new InvalidPasswordException("Invalid user: "+login);
-	    
-	    
-	    StringTokenizer tok=new StringTokenizer(line,":");
-	    String my_login=tok.nextToken();
-	    String password=tok.nextToken();
+        super.authenticatePreUserData(user,domain,given_passwd);
+        String login=user;
+        try {
+            File f_passwd=new File(passwd);
+            File f_shadow=new File(shadow);
+            BufferedReader in;
+            if(f_shadow.exists()) {             
+                in=new BufferedReader(new InputStreamReader(new FileInputStream(f_shadow)));
+            } else {
+                in=new BufferedReader(new InputStreamReader(new FileInputStream(f_passwd)));
+            }
+            String line;
+            line=in.readLine();
+            while(line != null) {
+                if(line.startsWith(login)) break;
+                line=in.readLine();
+            }
+            
+            if(line == null) throw new InvalidPasswordException("Invalid user: "+login);
+            
+            
+            StringTokenizer tok=new StringTokenizer(line,":");
+            String my_login=tok.nextToken();
+            String password=tok.nextToken();
 
-	    if(!password.equals(Helper.crypt(password,given_passwd))) {
-		WebMailServer.getStorage().getLogger().log(Logger.LOG_WARN,"UnixAuthentication: user "+login+
-					       " authentication failed.");
-		throw new InvalidPasswordException("Unix authentication failed");
-	    }		
-	    WebMailServer.getStorage().getLogger().log(Logger.LOG_INFO,"UnixAuthentication: user "+login+
-					   " authenticated successfully.");
-	} catch(IOException ex) {
-	    System.err.println("*** Cannot use UnixAuthentication and shadow passwords if WebMail is not executed as user 'root'! ***");
-	    throw new InvalidPasswordException("User login denied due to configuration error (contact system administrator)");
-	}
+            if(!password.equals(Helper.crypt(password,given_passwd))) {
+                WebMailServer.getStorage().getLogger().log(Logger.LOG_WARN,"UnixAuthentication: user "+login+
+                                               " authentication failed.");
+                throw new InvalidPasswordException("Unix authentication failed");
+            }           
+            WebMailServer.getStorage().getLogger().log(Logger.LOG_INFO,"UnixAuthentication: user "+login+
+                                           " authenticated successfully.");
+        } catch(IOException ex) {
+            System.err.println("*** Cannot use UnixAuthentication and shadow passwords if WebMail is not executed as user 'root'! ***");
+            throw new InvalidPasswordException("User login denied due to configuration error (contact system administrator)");
+        }
     }
 
     /**
      * Don't allow to change Unix-Passwords as this could mess things up.
      */
     public boolean canChangePassword() {
-	return false;
+        return false;
     }    
 } // UnixAuthenticator

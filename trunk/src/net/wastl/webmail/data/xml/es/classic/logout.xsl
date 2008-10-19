@@ -34,19 +34,19 @@
         </H3>
         <P>
           <CENTER>
-	    Por favor, aguarda mientras se cierra tu sesi&#243;n y tu configuraci&#243;n
-	    est&#225; siendo guardada en el disco.<BR/>
-	    If you don't see the <STRONG>pantalla-de-ingreso</STRONG> in a few seconds, please 
-	    <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/">haz click aqu&#237;</A>.
-	  </CENTER>
+            Por favor, aguarda mientras se cierra tu sesi&#243;n y tu configuraci&#243;n
+            est&#225; siendo guardada en el disco.<BR/>
+            If you don't see the <STRONG>pantalla-de-ingreso</STRONG> in a few seconds, please 
+            <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/">haz click aqu&#237;</A>.
+          </CENTER>
         </P>
         <P>
           <CENTER>
             <FONT SIZE="-1">
               <EMPH>
-		WebMail es (c)1998-2000 de <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. 
-		It is distributed under the terms of the GNU General Public License (LGPL).
-	      </EMPH>
+                WebMail es (c)1998-2000 de <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. 
+                It is distributed under the terms of the GNU General Public License (LGPL).
+              </EMPH>
             </FONT>
           </CENTER>
         </P>

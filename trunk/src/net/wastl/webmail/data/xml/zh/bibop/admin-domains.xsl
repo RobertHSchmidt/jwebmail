@@ -30,55 +30,55 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail 管理介面：虛擬網域設定</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-	
+        
       <BODY BGCOLOR="#ffffff">
-	<CENTER><H1>WebMail 虛擬網域設定</H1></CENTER>
-	<FORM ACTION="{$base}/admin/domain/set?session-id={$session-id}" METHOD="POST">
-	  <TABLE WIDTH="100%">
-	    <TR BGCOLOR="lightblue">
-	      <TD><STRONG>網域名稱</STRONG></TD>
-	      <TD><STRONG>預設主機</STRONG></TD>
-	      <TD><STRONG>認證主機</STRONG></TD>
-	      <TD><STRONG>主機
-	          存取限制</STRONG></TD>
-	      <TD><STRONG>被允許的主機</STRONG>
-	          （設定『主機存取限制』用）</TD>
-	      <TD></TD>
-	    </TR>
-	    <xsl:for-each select="/GENERICMODEL/SYSDATA/DOMAIN">
-	      <TR>
-		<TD><INPUT type="TEXT" name="{NAME} DOMAIN" value="{NAME}" SIZE="20"/></TD>
-		<TD><INPUT type="TEXT" name="{NAME} DEFAULT HOST" value="{DEFAULT_HOST}" SIZE="20"/></TD>
-		<TD><INPUT type="TEXT" name="{NAME} AUTH HOST" value="{AUTHENTICATION_HOST}" SIZE="20"/></TD>
-		<TD ALIGN="center">
-		  <xsl:choose>
-		    <xsl:when test="count(RESTRICTED) > 0">
-		      <INPUT type="CHECKBOX" checked="checked" name="{NAME} HOST RESTRICTION"/>
-		    </xsl:when>
-		    <xsl:otherwise>
-		      <INPUT type="CHECKBOX" name="{NAME} HOST RESTRICTION"/>
-		    </xsl:otherwise>
-		  </xsl:choose>
-		</TD>
-		<TD><INPUT type="TEXT" name="{NAME} ALLOWED HOSTS" value="{ALLOWED_HOST}" SIZE="40"/></TD>
-		<TD><INPUT type="submit" name="CHANGE {NAME}" value="修改"/><INPUT type="submit" name="DELETE {NAME}" value="刪除"/></TD>
-	      </TR>
-	    </xsl:for-each>
-	    
-	    <TR>
-	      <TD><INPUT type="TEXT" name="NEW DOMAIN" value="new" SIZE="20"/></TD>
-	      <TD><INPUT type="TEXT" name="NEW DEFAULT HOST" SIZE="20"/></TD>
-	      <TD><INPUT type="TEXT" name="NEW AUTH HOST" SIZE="20"/></TD>	    
-	      <TD align="center"><INPUT type="CHECKBOX" name="NEW HOST RESTRICTION"/></TD>
-	      <TD><INPUT type="TEXT" name="NEW ALLOWED HOSTS" SIZE="40"/></TD>
-	      <TD><INPUT type="submit" name="ADD NEW" value="新增"/></TD>
-	    </TR>
-	  </TABLE>
-	</FORM>
+        <CENTER><H1>WebMail 虛擬網域設定</H1></CENTER>
+        <FORM ACTION="{$base}/admin/domain/set?session-id={$session-id}" METHOD="POST">
+          <TABLE WIDTH="100%">
+            <TR BGCOLOR="lightblue">
+              <TD><STRONG>網域名稱</STRONG></TD>
+              <TD><STRONG>預設主機</STRONG></TD>
+              <TD><STRONG>認證主機</STRONG></TD>
+              <TD><STRONG>主機
+                  存取限制</STRONG></TD>
+              <TD><STRONG>被允許的主機</STRONG>
+                  （設定『主機存取限制』用）</TD>
+              <TD></TD>
+            </TR>
+            <xsl:for-each select="/GENERICMODEL/SYSDATA/DOMAIN">
+              <TR>
+                <TD><INPUT type="TEXT" name="{NAME} DOMAIN" value="{NAME}" SIZE="20"/></TD>
+                <TD><INPUT type="TEXT" name="{NAME} DEFAULT HOST" value="{DEFAULT_HOST}" SIZE="20"/></TD>
+                <TD><INPUT type="TEXT" name="{NAME} AUTH HOST" value="{AUTHENTICATION_HOST}" SIZE="20"/></TD>
+                <TD ALIGN="center">
+                  <xsl:choose>
+                    <xsl:when test="count(RESTRICTED) > 0">
+                      <INPUT type="CHECKBOX" checked="checked" name="{NAME} HOST RESTRICTION"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <INPUT type="CHECKBOX" name="{NAME} HOST RESTRICTION"/>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </TD>
+                <TD><INPUT type="TEXT" name="{NAME} ALLOWED HOSTS" value="{ALLOWED_HOST}" SIZE="40"/></TD>
+                <TD><INPUT type="submit" name="CHANGE {NAME}" value="修改"/><INPUT type="submit" name="DELETE {NAME}" value="刪除"/></TD>
+              </TR>
+            </xsl:for-each>
+            
+            <TR>
+              <TD><INPUT type="TEXT" name="NEW DOMAIN" value="new" SIZE="20"/></TD>
+              <TD><INPUT type="TEXT" name="NEW DEFAULT HOST" SIZE="20"/></TD>
+              <TD><INPUT type="TEXT" name="NEW AUTH HOST" SIZE="20"/></TD>          
+              <TD align="center"><INPUT type="CHECKBOX" name="NEW HOST RESTRICTION"/></TD>
+              <TD><INPUT type="TEXT" name="NEW ALLOWED HOSTS" SIZE="40"/></TD>
+              <TD><INPUT type="submit" name="ADD NEW" value="新增"/></TD>
+            </TR>
+          </TABLE>
+        </FORM>
       </BODY>
-	
+        
     </HTML>
 
   </xsl:template>

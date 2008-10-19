@@ -32,78 +32,78 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Login Screen</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
       
       <BODY bgcolor="#ffffff">
-	<TABLE WIDTH="100%">
-	  <TR>
-	    <TD COLSPAN="3" ALIGN="CENTER" HEIGHT="70">
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD WIDTH="20%" VALIGN="TOP"><IMG SRC="{$imgbase}/images/java_powered.png" ALT="Java powered"/></TD>
-	    <TD WIDTH="60%" ALIGN="CENTER">
-	      <FORM ACTION="{$base}/login" METHOD="POST" NAME="loginForm">
+        <TABLE WIDTH="100%">
+          <TR>
+            <TD COLSPAN="3" ALIGN="CENTER" HEIGHT="70">
+            </TD>
+          </TR>
+          <TR>
+            <TD WIDTH="20%" VALIGN="TOP"><IMG SRC="{$imgbase}/images/java_powered.png" ALT="Java powered"/></TD>
+            <TD WIDTH="60%" ALIGN="CENTER">
+              <FORM ACTION="{$base}/login" METHOD="POST" NAME="loginForm">
            <!-- Make sure we get all the needed login values -->
            <INPUT TYPE="hidden" NAME="login" VALUE="{$login}"/>
            <INPUT TYPE="hidden" NAME="challenged" VALUE="{$challenged}"/>
            <INPUT TYPE="hidden" NAME="vdom" VALUE="{$vdom}"/>
-		<TABLE CELLSPACING="0" CELLPADDING="20" BORDER="4" bgcolor="#ff0000">
-		  <TR>
-		    <TD ALIGN="CENTER">
-		      <TABLE CELLSPACING="0" CELLPADDING="10" BORDER="0" bgcolor="#ff0000">
-			<TR>
-			  <TD COLSPAN="2" ALIGN="CENTER">
-			    <IMG SRC="{$imgbase}/images/login_title.png" ALT="WebMail login"/></TD>
-			</TR>
+                <TABLE CELLSPACING="0" CELLPADDING="20" BORDER="4" bgcolor="#ff0000">
+                  <TR>
+                    <TD ALIGN="CENTER">
+                      <TABLE CELLSPACING="0" CELLPADDING="10" BORDER="0" bgcolor="#ff0000">
+                        <TR>
+                          <TD COLSPAN="2" ALIGN="CENTER">
+                            <IMG SRC="{$imgbase}/images/login_title.png" ALT="WebMail login"/></TD>
+                        </TR>
             <TR>
               <TD WIDTH="50%" ALIGN="RIGHT"><STRONG>Login:</STRONG></TD>
               <TD WIDTH="50%">
                <xsl:value-of select="$login"/>
               </TD>
             </TR>
-			<TR>
-			  <TD WIDTH="50%" ALIGN="RIGHT"><STRONG>Challenge:</STRONG></TD>
+                        <TR>
+                          <TD WIDTH="50%" ALIGN="RIGHT"><STRONG>Challenge:</STRONG></TD>
               <TD WIDTH="50%">
                <xsl:value-of select="$challenge"/>
               </TD>
-			</TR>
-			<TR>
-			  <TD WIDTH="50%" ALIGN="RIGHT"><STRONG>Response:</STRONG></TD>
-			  <TD WIDTH="50%"><INPUT TYPE="text" NAME="password" SIZE="35"/></TD>
-			</TR>
-			<TR>
-			  <TD ALIGN="CENTER"><INPUT TYPE="submit" value="Login"/></TD>
-			  <TD ALIGN="CENTER"><INPUT TYPE="reset" value="Reset"/></TD>
-			</TR>
-		      </TABLE>
-		    </TD>
-		  </TR>
-		</TABLE>
-	      </FORM>
-	    </TD>
-	    <TD WIDTH="20%">
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="3" ALIGN="CENTER">
-	      <FONT SIZE="-1">
-		<EM>WebMail is (c)1999/2000 by <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. It is distributed under the terms of the GNU Public License (GPL).</EM>
-	      </FONT>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="3" ALIGN="CENTER">
-	      <FONT SIZE="-1"><EM><STRONG>Version</STRONG>: WebMail <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'webmail version']/@value"/> on "<xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'java virtual machine']/@value"/>", <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'operating system']/@value"/></EM></FONT>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="3" ALIGN="CENTER">
-	      <FONT SIZE="-1"><EM>The Java Coffee Cup and "Java" are trademarks of <A HREF="http://java.sun.com">Sun Microsystems, Inc.</A></EM></FONT>
-	    </TD>
-	  </TR>
-	</TABLE>
+                        </TR>
+                        <TR>
+                          <TD WIDTH="50%" ALIGN="RIGHT"><STRONG>Response:</STRONG></TD>
+                          <TD WIDTH="50%"><INPUT TYPE="text" NAME="password" SIZE="35"/></TD>
+                        </TR>
+                        <TR>
+                          <TD ALIGN="CENTER"><INPUT TYPE="submit" value="Login"/></TD>
+                          <TD ALIGN="CENTER"><INPUT TYPE="reset" value="Reset"/></TD>
+                        </TR>
+                      </TABLE>
+                    </TD>
+                  </TR>
+                </TABLE>
+              </FORM>
+            </TD>
+            <TD WIDTH="20%">
+            </TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="3" ALIGN="CENTER">
+              <FONT SIZE="-1">
+                <EM>WebMail is (c)1999/2000 by <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. It is distributed under the terms of the GNU Public License (GPL).</EM>
+              </FONT>
+            </TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="3" ALIGN="CENTER">
+              <FONT SIZE="-1"><EM><STRONG>Version</STRONG>: WebMail <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'webmail version']/@value"/> on "<xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'java virtual machine']/@value"/>", <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'operating system']/@value"/></EM></FONT>
+            </TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="3" ALIGN="CENTER">
+              <FONT SIZE="-1"><EM>The Java Coffee Cup and "Java" are trademarks of <A HREF="http://java.sun.com">Sun Microsystems, Inc.</A></EM></FONT>
+            </TD>
+          </TR>
+        </TABLE>
       </BODY>
     </HTML>
   </xsl:template>

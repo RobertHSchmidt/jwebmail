@@ -42,11 +42,11 @@ public abstract class Authenticator  {
     protected String key;
 
     public Authenticator() {
-	
+        
     }    
 
     public String getKey() {
-	return key;
+        return key;
     }
 
     public abstract String getVersion();
@@ -86,9 +86,9 @@ public abstract class Authenticator  {
     public void authenticatePreUserData(String login, String domain, 
      String passwd) throws InvalidPasswordException
     {
-	    if(login.equals("") || passwd.equals("")) {
-	        throw new InvalidPasswordException();
-	    }
+            if(login.equals("") || passwd.equals("")) {
+                throw new InvalidPasswordException();
+            }
     }
 
     
@@ -115,7 +115,7 @@ public abstract class Authenticator  {
      * A Password-change option is then shown in the Options-Dialog.
      */
     public boolean canChangePassword() {
-	return true;
+        return true;
     }
 
     public void changePassword(UserData udata,String newpassword,String verify)      throws InvalidPasswordException 

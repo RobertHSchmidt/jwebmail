@@ -35,19 +35,19 @@
           <H3>Bienvenido a tu casilla de correo, <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</H3>
         </P>
         <P>
-	  Este es el* <xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/> 
-	  time you log in since 
-	  <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>. 
-	  Your <B>&#250;ltimo ingreso</B> was on 
-	  <B><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='last login']"/></B>.
-	</P>
+          Este es el* <xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/> 
+          time you log in since 
+          <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>. 
+          Your <B>&#250;ltimo ingreso</B> was on 
+          <B><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='last login']"/></B>.
+        </P>
         <P>
-	  Tu casilla de correo contiene las siguientes carpetas 
-	  (mensajes* en total* est&#225;n en <FONT COLOR="green">green</FONT>, 
-	  new messages in <FONT COLOR="red">red</FONT>) (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=mailbox">Ayuda</A>):<BR/>
-	  <CENTER><P><A HREF="{$base}/mailbox?session-id={$session-id}&amp;force-refresh=1">Forzar refrescado</A> - Click this to force a refresh of the folder information.
-	    </P><TABLE WIDTH="80%"><xsl:for-each select="/USERMODEL/MAILHOST_MODEL"><xsl:apply-templates select="."/></xsl:for-each></TABLE></CENTER>
-	</P>
+          Tu casilla de correo contiene las siguientes carpetas 
+          (mensajes* en total* est&#225;n en <FONT COLOR="green">green</FONT>, 
+          new messages in <FONT COLOR="red">red</FONT>) (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=mailbox">Ayuda</A>):<BR/>
+          <CENTER><P><A HREF="{$base}/mailbox?session-id={$session-id}&amp;force-refresh=1">Forzar refrescado</A> - Click this to force a refresh of the folder information.
+            </P><TABLE WIDTH="80%"><xsl:for-each select="/USERMODEL/MAILHOST_MODEL"><xsl:apply-templates select="."/></xsl:for-each></TABLE></CENTER>
+        </P>
       </BODY>
     </HTML>
   </xsl:template>
@@ -62,7 +62,7 @@
       <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value}" WIDTH="50%">
         <xsl:choose>
           <xsl:when test="@error != &quot;&quot;"><FONT COLOR="red"><xsl:value-of select="@name"/></FONT> (Error: <xsl:value-of select="@error"/>)
-	  </xsl:when>
+          </xsl:when>
           <xsl:otherwise>
             <STRONG>
               <FONT COLOR="green">
@@ -97,7 +97,7 @@
             </A>
           </TD>
           <TD><FONT COLOR="green"><xsl:value-of select="MESSAGELIST/@total"/></FONT>/<FONT COLOR="red"><xsl:value-of select="MESSAGELIST/@new"/></FONT> messages
-	  </TD>
+          </TD>
         </xsl:when>
         <xsl:otherwise>
           <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}">
@@ -106,8 +106,8 @@
             </STRONG>
           </TD>
           <TD>
-	    no puede contener mensajes
-	  </TD>
+            no puede contener mensajes
+          </TD>
         </xsl:otherwise>
       </xsl:choose>
     </TR>

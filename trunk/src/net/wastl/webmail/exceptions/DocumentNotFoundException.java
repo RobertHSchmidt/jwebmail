@@ -14,11 +14,11 @@ package net.wastl.webmail.exceptions;
 public class DocumentNotFoundException extends WebMailException {
     
     public DocumentNotFoundException() {
-	super();
+        super();
     }
 
     public DocumentNotFoundException(String s) {
-	super(s);
+        super(s);
     }
     
 } // DocumentNotFoundException

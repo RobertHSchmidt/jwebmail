@@ -30,18 +30,18 @@
     <HTML>
       <HEAD>
         <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de titre</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <BODY bgcolor="#ffffff">
-	<TABLE WIDTH="100%" HEIGHT="80">
-	  <TR>
-	    <TD ALIGN="left"><IMG SRC="{$imgbase}/images/title.png"/></TD>
-	    <TD ALIGN="right" VALIGN="bottom">
-	      <STRONG>Boîte aux Lettres de <FONT SIZE="+3"><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></FONT></STRONG><BR/>&#160;
-	    </TD>
-	  </TR>
-	</TABLE>
+        <TABLE WIDTH="100%" HEIGHT="80">
+          <TR>
+            <TD ALIGN="left"><IMG SRC="{$imgbase}/images/title.png"/></TD>
+            <TD ALIGN="right" VALIGN="bottom">
+              <STRONG>Boîte aux Lettres de <FONT SIZE="+3"><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></FONT></STRONG><BR/>&#160;
+            </TD>
+          </TR>
+        </TABLE>
       </BODY>
 
 

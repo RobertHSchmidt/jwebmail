@@ -30,37 +30,37 @@
     <HTML>
       <HEAD>
         <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Setup Dossier</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
       </HEAD>
       
-      <BODY bgcolor="#ffffff">		  
-	<TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0" WIDTH="100%">
-	  <TR>
-	    <TD VALIGN="CENTER">
-	      <IMG SRC="{$imgbase}/images/btn-folders.png"/>
-	    </TD>
-	    <TD VALIGN="CENTER" COLSPAN="2">
-	      <FONT SIZE="+2"><STRONG>Setup Dossier Webmail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">Aide</A>)<BR/>
-	      <EM>Nom de login <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/>
-	      <EM>Compte existant depuis le <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM>
-	    </TD>
-	  </TR>
-	</TABLE>
-	 
-	<TABLE WIDTH="100%">
-	  <xsl:for-each select="/USERMODEL/MAILHOST_MODEL">
-	    <xsl:apply-templates select="."/>
-	  </xsl:for-each>
-	</TABLE>
+      <BODY bgcolor="#ffffff">            
+        <TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0" WIDTH="100%">
+          <TR>
+            <TD VALIGN="CENTER">
+              <IMG SRC="{$imgbase}/images/btn-folders.png"/>
+            </TD>
+            <TD VALIGN="CENTER" COLSPAN="2">
+              <FONT SIZE="+2"><STRONG>Setup Dossier Webmail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">Aide</A>)<BR/>
+              <EM>Nom de login <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/>
+              <EM>Compte existant depuis le <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM>
+            </TD>
+          </TR>
+        </TABLE>
+         
+        <TABLE WIDTH="100%">
+          <xsl:for-each select="/USERMODEL/MAILHOST_MODEL">
+            <xsl:apply-templates select="."/>
+          </xsl:for-each>
+        </TABLE>
      
-	<P>
-	  Les Dossiers affichés en <STRONG>gras</STRONG> peuvent contenir des sous-dossiers, et les dossiers qui sont affichés normalement ne peuvent contenir de sous-dossiers. Les Dossiers affichés en <I>italique</I> sont masqués (dans la vue principale des boîtes aux lettres), les autres non.
-	</P>
-	<P>
-	  <FONT color="red"><STRONG>Attention!</STRONG></FONT> si vous effacez un dossier, tous les messages (et sous-dossiers) seront <FONT color="red">effacés</FONT> non seulement de WebMail mais aussi <FONT color="red">physiquement de l'hôte serveur de messagerie!</FONT> Ceci est dangereux et ne pourra être défait!
-	</P>
-	
+        <P>
+          Les Dossiers affichés en <STRONG>gras</STRONG> peuvent contenir des sous-dossiers, et les dossiers qui sont affichés normalement ne peuvent contenir de sous-dossiers. Les Dossiers affichés en <I>italique</I> sont masqués (dans la vue principale des boîtes aux lettres), les autres non.
+        </P>
+        <P>
+          <FONT color="red"><STRONG>Attention!</STRONG></FONT> si vous effacez un dossier, tous les messages (et sous-dossiers) seront <FONT color="red">effacés</FONT> non seulement de WebMail mais aussi <FONT color="red">physiquement de l'hôte serveur de messagerie!</FONT> Ceci est dangereux et ne pourra être défait!
+        </P>
+        
       </BODY>
 
 
@@ -69,19 +69,19 @@
   
   <xsl:template match="/USERMODEL/USERDATA/INTVAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>		    
+  </xsl:template>                   
   
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>		    
+  </xsl:template>                   
 
   <xsl:template match="/USERMODEL/MAILHOST_MODEL">
     <TR BGCOLOR="#dddddd">
       <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value}" WIDTH="50%">
-	<STRONG><FONT COLOR="green"><xsl:value-of select="@name"/></FONT></STRONG>
+        <STRONG><FONT COLOR="green"><xsl:value-of select="@name"/></FONT></STRONG>
       </TD>
       <TD WIDTH="50%">
-	<STRONG>Hôte </STRONG>: <xsl:value-of select="@url"/>
+        <STRONG>Hôte </STRONG>: <xsl:value-of select="@url"/>
       </TD>
     </TR>
     <xsl:for-each select="FOLDER">
@@ -97,52 +97,52 @@
       </xsl:call-template>
       <TD><IMG SRC="{$imgbase}/images/icon-folder.png"/></TD>
       <xsl:choose>
-	<xsl:when test="@holds_folders = 'true'">
-	  <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}">
+        <xsl:when test="@holds_folders = 'true'">
+          <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}">
             <xsl:choose>
-	      <xsl:when test="@subscribed = 'true'">              
-	        <STRONG><xsl:value-of select="@name"/></STRONG>
+              <xsl:when test="@subscribed = 'true'">              
+                <STRONG><xsl:value-of select="@name"/></STRONG>
               </xsl:when>
               <xsl:otherwise>
                 <EM><STRONG><xsl:value-of select="@name"/></STRONG></EM>
               </xsl:otherwise>
             </xsl:choose>
-	  </TD>
-	  <TD>
-	    <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folderadd&amp;addto={@id}">Ajouter sous-dossier</A> - <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}&amp;recurse=1">Effacer ce dossier (et tous les sous-dossiers)</A> - 
-	    <xsl:choose>
-	      <xsl:when test="@subscribed = 'true'">
-		<A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Le Masquer</A>
-	      </xsl:when>
-	      <xsl:otherwise>
-		<A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">Ne pas le Masquer</A>
-	      </xsl:otherwise>
-	    </xsl:choose>
-	  </TD>
-	</xsl:when>
-	<xsl:otherwise>
-	  <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}">
+          </TD>
+          <TD>
+            <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folderadd&amp;addto={@id}">Ajouter sous-dossier</A> - <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}&amp;recurse=1">Effacer ce dossier (et tous les sous-dossiers)</A> - 
             <xsl:choose>
-	      <xsl:when test="@subscribed = 'true'">              
-	        <xsl:value-of select="@name"/>
+              <xsl:when test="@subscribed = 'true'">
+                <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Le Masquer</A>
+              </xsl:when>
+              <xsl:otherwise>
+                <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">Ne pas le Masquer</A>
+              </xsl:otherwise>
+            </xsl:choose>
+          </TD>
+        </xsl:when>
+        <xsl:otherwise>
+          <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}">
+            <xsl:choose>
+              <xsl:when test="@subscribed = 'true'">              
+                <xsl:value-of select="@name"/>
               </xsl:when>
               <xsl:otherwise>
                 <EM><xsl:value-of select="@name"/></EM>
               </xsl:otherwise>
             </xsl:choose>
-	  </TD>
-	  <TD>
-	    <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}">Effacer ce Dossier</A> - 
-	    <xsl:choose>
-	      <xsl:when test="@subscribed = 'true'">
-		<A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Le Masquer</A>
-	      </xsl:when>
-	      <xsl:otherwise>
-		<A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">Ne pas le Masquer</A>
-	      </xsl:otherwise>
-	    </xsl:choose>	
-	  </TD>
-	</xsl:otherwise>
+          </TD>
+          <TD>
+            <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}">Effacer ce Dossier</A> - 
+            <xsl:choose>
+              <xsl:when test="@subscribed = 'true'">
+                <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Le Masquer</A>
+              </xsl:when>
+              <xsl:otherwise>
+                <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">Ne pas le Masquer</A>
+              </xsl:otherwise>
+            </xsl:choose>       
+          </TD>
+        </xsl:otherwise>
       </xsl:choose>
     </TR>
     
@@ -160,7 +160,7 @@
       <TD></TD>
       <xsl:variable name="levelneu" select="$level - 1"/>
       <xsl:call-template name="recurse-folder">
-	<xsl:with-param name="level" select="$levelneu"/>
+        <xsl:with-param name="level" select="$levelneu"/>
       </xsl:call-template>
     </xsl:if>
   </xsl:template>

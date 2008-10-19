@@ -33,7 +33,7 @@ package net.wastl.webmail.exceptions;
 public class TimeoutException extends Exception {
     
     public TimeoutException() {
-	super();
+        super();
     }
     
 } // TimeoutException

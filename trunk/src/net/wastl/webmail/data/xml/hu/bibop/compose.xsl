@@ -32,23 +32,23 @@
     <HTML>
       <HEAD>
         <TITLE><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> postaládája: Üzenet megjelenítése <xsl:value-of select="/USERMODEL/CURRENT[@type='message']/@id"/></TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
       
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
-	<FORM ACTION="{$base}/send?session-id={$session-id}" METHOD="POST">
-	  <TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
-	    <TR>
-	      <TD colspan="2" height="22" class="testoNero"><IMG SRC="{$imgbase}/images/icona_composer.gif" BORDER="0" align="absmiddle"/>
-	      Üzenet írása... (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=compose">Segítség</A>)
-		</TD>
-	    </TR>
-	    <TR>
-	      <TD colspan="2" bgcolor="#697791" height="22" class="testoBianco">
- 		Dátum: <xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='date']/@value"/>
-	      </TD>
-	    </TR>
+        <FORM ACTION="{$base}/send?session-id={$session-id}" METHOD="POST">
+          <TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
+            <TR>
+              <TD colspan="2" height="22" class="testoNero"><IMG SRC="{$imgbase}/images/icona_composer.gif" BORDER="0" align="absmiddle"/>
+              Üzenet írása... (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=compose">Segítség</A>)
+                </TD>
+            </TR>
+            <TR>
+              <TD colspan="2" bgcolor="#697791" height="22" class="testoBianco">
+                Dátum: <xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='date']/@value"/>
+              </TD>
+            </TR>
            <TR>
              <TD height="22" class="testoGrande" width="13%" bgcolor="#E2E6F0">Küldõ:</TD>
              <TD height="22" class="testoNero" width="87%" bgcolor="#E2E6F0">
@@ -88,84 +88,84 @@
            </select>
            </TD>
            </TR>
-	    <TR>
-	      <TD height="22" class="testoGrande" width="13%" bgcolor="#E2E6F0">Címzett:</TD>
-	      <TD height="22" class="testoNero" width="87%" bgcolor="#E2E6F0">
-		  <INPUT TYPE="TEXT" NAME="TO" SIZE="80" class="testoNero" VALUE="{$work/HEADER/TO}"/>
-		</TD>
-	    </TR>
-	    <TR>
-		<TD height="22" class="testoGrande" width="13%" bgcolor="#D1D7E7">	      
- 		  Másolat:
-		</TD>
-	      <TD height="22" class="testoNero" width="87%" bgcolor="#D1D7E7">
-		  <INPUT TYPE="TEXT" NAME="CC" SIZE="80" class="testoNero" VALUE="{$work/HEADER/CC}"/>
-		</TD>
-	    </TR>
-	    <TR>
-	      <TD height="22" class="testoGrande" width="13%" bgcolor="#E2E6F0">
-		  Válaszcím:
-		</TD>
-	      <TD height="22" class="testoNero" width="87%" bgcolor="#E2E6F0">
-		  <INPUT TYPE="TEXT" NAME="REPLY-TO" SIZE="80" class="testoNero" VALUE="{$work/HEADER/REPLY_TO}"/>
-		</TD>
-	    </TR>
-	    <TR>
-	      <TD height="22" class="testoGrande" width="13%" bgcolor="#D1D7E7">
-		  Titkos másolat:
-		</TD>
-	      <TD height="22" class="testoNero" width="87%" bgcolor="#D1D7E7">
-		  <INPUT TYPE="TEXT" NAME="BCC" SIZE="80" class="testoNero" VALUE="{$work/HEADER/BCC}"/>
-		</TD>
-	    </TR>
-	    <TR>
-	      <TD height="22" class="testoGrande" width="13%" bgcolor="#E2E6F0">
-		  Tárgy:
-		</TD>
-	      <TD height="22" class="testoNero" width="87%" bgcolor="#E2E6F0">
-		  <INPUT TYPE="TEXT" NAME="SUBJECT" SIZE="80" class="testoNero" VALUE="{$work/HEADER/SUBJECT}"/>
-		</TD>
-	    </TR>
-	    <TR>
-	      <TD height="22" class="testoGrande" width="13%" bgcolor="#D1D7E7">
-		  Csatolások:
-		</TD>
-	      <TD height="22" class="testoNero" width="87%" bgcolor="#D1D7E7">
-		<xsl:for-each select="$work/PART[position()=1]//PART[@type='binary']">
-		  <xsl:apply-templates select="."/>
-		</xsl:for-each>
-	        <xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
-	      </TD>
-	    </TR>
-	    <TR>
-	      <TD height="22" class="testoNero" width="13%" bgcolor="#E2E6F0">
-		  <INPUT TYPE="SUBMIT" class="testoNero" VALUE="Fájlok csatolása..." NAME="ATTACH"/>
-		</TD>
-	      <TD class="testoNero" align="right" width="87%" bgcolor="#E2E6F0">
-		  <INPUT TYPE="SUBMIT" class="testoNero" VALUE="Üzenet küldése..." NAME="SEND"/>
-		</TD>
-	    </TR>
-	    <TR>
- 		<TD bgcolor="#D1D7E7" height="22" class="testoNero" align="center">&#160;
-		</TD>
-	      <TD bgcolor="#D1D7E7" height="22" class="testoNero">
-		<TEXTAREA NAME="BODY" COLS="80" ROWS="40" class="testoNero" wrap="physical">
-		  <xsl:for-each select="$work/PART[position()=1]/PART[position()=1]/CONTENT">
-		    <xsl:apply-templates select="."/>
-		  </xsl:for-each>
-		</TEXTAREA>
-	      </TD>
-	    </TR>
-	    <TR>
-	      <TD height="22" class="testoNero" width="13%" bgcolor="#E2E6F0">
-		  <INPUT TYPE="SUBMIT" class="testoNero" VALUE="Fájlok csatolása..." NAME="ATTACH"/>
-		</TD>
-	      <TD class="testoNero" align="right" width="87%" bgcolor="#E2E6F0">
-		  <INPUT TYPE="SUBMIT" class="testoNero" VALUE="Üzenet küldése..." NAME="SEND"/>
-		</TD>
-	    </TR>
-	  </TABLE>
-	</FORM>	
+            <TR>
+              <TD height="22" class="testoGrande" width="13%" bgcolor="#E2E6F0">Címzett:</TD>
+              <TD height="22" class="testoNero" width="87%" bgcolor="#E2E6F0">
+                  <INPUT TYPE="TEXT" NAME="TO" SIZE="80" class="testoNero" VALUE="{$work/HEADER/TO}"/>
+                </TD>
+            </TR>
+            <TR>
+                <TD height="22" class="testoGrande" width="13%" bgcolor="#D1D7E7">            
+                  Másolat:
+                </TD>
+              <TD height="22" class="testoNero" width="87%" bgcolor="#D1D7E7">
+                  <INPUT TYPE="TEXT" NAME="CC" SIZE="80" class="testoNero" VALUE="{$work/HEADER/CC}"/>
+                </TD>
+            </TR>
+            <TR>
+              <TD height="22" class="testoGrande" width="13%" bgcolor="#E2E6F0">
+                  Válaszcím:
+                </TD>
+              <TD height="22" class="testoNero" width="87%" bgcolor="#E2E6F0">
+                  <INPUT TYPE="TEXT" NAME="REPLY-TO" SIZE="80" class="testoNero" VALUE="{$work/HEADER/REPLY_TO}"/>
+                </TD>
+            </TR>
+            <TR>
+              <TD height="22" class="testoGrande" width="13%" bgcolor="#D1D7E7">
+                  Titkos másolat:
+                </TD>
+              <TD height="22" class="testoNero" width="87%" bgcolor="#D1D7E7">
+                  <INPUT TYPE="TEXT" NAME="BCC" SIZE="80" class="testoNero" VALUE="{$work/HEADER/BCC}"/>
+                </TD>
+            </TR>
+            <TR>
+              <TD height="22" class="testoGrande" width="13%" bgcolor="#E2E6F0">
+                  Tárgy:
+                </TD>
+              <TD height="22" class="testoNero" width="87%" bgcolor="#E2E6F0">
+                  <INPUT TYPE="TEXT" NAME="SUBJECT" SIZE="80" class="testoNero" VALUE="{$work/HEADER/SUBJECT}"/>
+                </TD>
+            </TR>
+            <TR>
+              <TD height="22" class="testoGrande" width="13%" bgcolor="#D1D7E7">
+                  Csatolások:
+                </TD>
+              <TD height="22" class="testoNero" width="87%" bgcolor="#D1D7E7">
+                <xsl:for-each select="$work/PART[position()=1]//PART[@type='binary']">
+                  <xsl:apply-templates select="."/>
+                </xsl:for-each>
+                <xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
+              </TD>
+            </TR>
+            <TR>
+              <TD height="22" class="testoNero" width="13%" bgcolor="#E2E6F0">
+                  <INPUT TYPE="SUBMIT" class="testoNero" VALUE="Fájlok csatolása..." NAME="ATTACH"/>
+                </TD>
+              <TD class="testoNero" align="right" width="87%" bgcolor="#E2E6F0">
+                  <INPUT TYPE="SUBMIT" class="testoNero" VALUE="Üzenet küldése..." NAME="SEND"/>
+                </TD>
+            </TR>
+            <TR>
+                <TD bgcolor="#D1D7E7" height="22" class="testoNero" align="center">&#160;
+                </TD>
+              <TD bgcolor="#D1D7E7" height="22" class="testoNero">
+                <TEXTAREA NAME="BODY" COLS="80" ROWS="40" class="testoNero" wrap="physical">
+                  <xsl:for-each select="$work/PART[position()=1]/PART[position()=1]/CONTENT">
+                    <xsl:apply-templates select="."/>
+                  </xsl:for-each>
+                </TEXTAREA>
+              </TD>
+            </TR>
+            <TR>
+              <TD height="22" class="testoNero" width="13%" bgcolor="#E2E6F0">
+                  <INPUT TYPE="SUBMIT" class="testoNero" VALUE="Fájlok csatolása..." NAME="ATTACH"/>
+                </TD>
+              <TD class="testoNero" align="right" width="87%" bgcolor="#E2E6F0">
+                  <INPUT TYPE="SUBMIT" class="testoNero" VALUE="Üzenet küldése..." NAME="SEND"/>
+                </TD>
+            </TR>
+          </TABLE>
+        </FORM> 
       </BODY>
     </HTML>
   </xsl:template>

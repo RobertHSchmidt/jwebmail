@@ -30,39 +30,39 @@
     <HTML>
       <HEAD>
         <TITLE>Rapport d Erreur WebMail</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
       
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
-	<TABLE WIDTH="100%">
-	  <TR bgcolor="#A6B1C0">
-	    <TD COLSPAN="2" align="center" class="testoGrande">Une erreur a eu lieu</TD>
-	  </TR>
-	  <TR>
-	    <TD class="testoNero"><SPAN class="testoGrande">Message d'Erreur</SPAN></TD>
-	    <TD class="testoNero">
-	      <P class="testoMesg"><xsl:apply-templates select="//STATEDATA/EXCEPTION/EX_MESSAGE"/></P>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="2" ALIGN="center" class="testoNero">
-	      <TABLE bgcolor="#E2E6F0" WIDTH="80%" BORDER="1">
-		<TR>
-		  <TD><SPAN class="testoGrande">Trace de la Pile</SPAN><BR/>
-		    <PRE>
-		      <P class="testoMesg"><xsl:apply-templates select="//STATEDATA/EXCEPTION/EX_STACKTRACE"/></P>
-		    </PRE>
-		  </TD>
-		</TR>
-	      </TABLE>
-	    </TD>
-	  </TR>
-	  <TR bgcolor="#A6B1C0">
-	    <TD COLSPAN="2" align="center" class="testoGrande">!</TD>
-	  </TR>
-	</TABLE>
+        <TABLE WIDTH="100%">
+          <TR bgcolor="#A6B1C0">
+            <TD COLSPAN="2" align="center" class="testoGrande">Une erreur a eu lieu</TD>
+          </TR>
+          <TR>
+            <TD class="testoNero"><SPAN class="testoGrande">Message d'Erreur</SPAN></TD>
+            <TD class="testoNero">
+              <P class="testoMesg"><xsl:apply-templates select="//STATEDATA/EXCEPTION/EX_MESSAGE"/></P>
+            </TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="2" ALIGN="center" class="testoNero">
+              <TABLE bgcolor="#E2E6F0" WIDTH="80%" BORDER="1">
+                <TR>
+                  <TD><SPAN class="testoGrande">Trace de la Pile</SPAN><BR/>
+                    <PRE>
+                      <P class="testoMesg"><xsl:apply-templates select="//STATEDATA/EXCEPTION/EX_STACKTRACE"/></P>
+                    </PRE>
+                  </TD>
+                </TR>
+              </TABLE>
+            </TD>
+          </TR>
+          <TR bgcolor="#A6B1C0">
+            <TD COLSPAN="2" align="center" class="testoGrande">!</TD>
+          </TR>
+        </TABLE>
       </BODY>
     </HTML>
   </xsl:template>

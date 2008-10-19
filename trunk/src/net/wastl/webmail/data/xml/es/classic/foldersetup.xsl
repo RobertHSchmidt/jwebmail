@@ -51,17 +51,17 @@
               <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">Agregar/Borrar Casilla de correo </A>
             </TD>
             <TD>
-	      WebMail permite tener varias conexiones a servidores IMAP y POP. Puedes agregar o quitar esas conexiones aqu&#237;.
-	    </TD>
+              WebMail permite tener varias conexiones a servidores IMAP y POP. Puedes agregar o quitar esas conexiones aqu&#237;.
+            </TD>
           </TR>
           <TR>
             <TD>
               <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">Agregar/Borrar subcarpetas</A>
             </TD>
             <TD>
-	      WebMail te mostrar&#225; un &#225;rbol de carpetas para cada casilla donde puedes elegir entre agregar o
-	      borrar subcarpetas individuales.
-	    </TD>
+              WebMail te mostrar&#225; un &#225;rbol de carpetas para cada casilla donde puedes elegir entre agregar o
+              borrar subcarpetas individuales.
+            </TD>
           </TR>
         </TABLE>
       </BODY>

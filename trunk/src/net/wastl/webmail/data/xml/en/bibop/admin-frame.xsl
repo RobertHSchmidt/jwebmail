@@ -30,12 +30,12 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Administration Interface</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <FRAMESET COLS="120,*" border="0">
-	<FRAME NAME="Content"  SRC="{$base}/admin/navigation?session-id={$session-id}" scrolling="auto"/>
-	<FRAME NAME="Main"   SRC="{$base}/admin/system?session-id={$session-id}" scrolling="auto"/>
+        <FRAME NAME="Content"  SRC="{$base}/admin/navigation?session-id={$session-id}" scrolling="auto"/>
+        <FRAME NAME="Main"   SRC="{$base}/admin/system?session-id={$session-id}" scrolling="auto"/>
       </FRAMESET>    
     </HTML>
 

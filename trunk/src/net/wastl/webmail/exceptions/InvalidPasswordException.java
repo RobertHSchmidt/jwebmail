@@ -33,11 +33,11 @@ package net.wastl.webmail.exceptions;
 public class InvalidPasswordException extends WebMailException {
     
     public InvalidPasswordException() {
-	super();
+        super();
     }
 
     public InvalidPasswordException(String s) {
-	super(s);
+        super(s);
     }
     
 } // InvalidPasswordException

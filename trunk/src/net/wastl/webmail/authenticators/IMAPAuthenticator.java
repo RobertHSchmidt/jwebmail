@@ -28,50 +28,50 @@ public class IMAPAuthenticator extends net.wastl.webmail.server.Authenticator {
     private StorageManager storage;
 
     public IMAPAuthenticator() {
-	super();
+        super();
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public void init(StorageManager store) {
-	storage=store;
-	Session session=Session.getDefaultInstance(System.getProperties(),null);
-	try {
-	    st=session.getStore("imap");
-	} catch(NoSuchProviderException e) {
-	    e.printStackTrace();
-	}
+        storage=store;
+        Session session=Session.getDefaultInstance(System.getProperties(),null);
+        try {
+            st=session.getStore("imap");
+        } catch(NoSuchProviderException e) {
+            e.printStackTrace();
+        }
     }
-	
+        
     public void register(ConfigScheme store) {
-	key="IMAP";
-	store.configAddChoice("AUTH",key,"Authenticate against an IMAP server on the net. Does not allow password change.");
+        key="IMAP";
+        store.configAddChoice("AUTH",key,"Authenticate against an IMAP server on the net. Does not allow password change.");
     }
     
     public void authenticatePreUserData(String user,String domain,String passwd)
      throws InvalidPasswordException { 
-	super.authenticatePreUserData(user,domain,passwd);
+        super.authenticatePreUserData(user,domain,passwd);
 
-	WebMailVirtualDomain vd=storage.getVirtualDomain(domain);
-	String authhost=vd.getAuthenticationHost();
+        WebMailVirtualDomain vd=storage.getVirtualDomain(domain);
+        String authhost=vd.getAuthenticationHost();
 
-	try {
-	    st.connect(authhost,user,passwd);
-	    st.close();
-	    storage.getLogger().log(Logger.LOG_INFO,"IMAPAuthentication: user "+user+
-			" authenticated successfully (imap host: "+authhost+").");
-	} catch(MessagingException e) {
-	    storage.getLogger().log(Logger.LOG_WARN,"IMAPAuthentication: user "+user+
-			" authentication failed (imap host: "+authhost+").");
-	    //e.printStackTrace();
-	    throw new InvalidPasswordException("IMAP authentication failed!");
-	}
+        try {
+            st.connect(authhost,user,passwd);
+            st.close();
+            storage.getLogger().log(Logger.LOG_INFO,"IMAPAuthentication: user "+user+
+                        " authenticated successfully (imap host: "+authhost+").");
+        } catch(MessagingException e) {
+            storage.getLogger().log(Logger.LOG_WARN,"IMAPAuthentication: user "+user+
+                        " authentication failed (imap host: "+authhost+").");
+            //e.printStackTrace();
+            throw new InvalidPasswordException("IMAP authentication failed!");
+        }
     }
 
     public boolean canChangePassword() {
-	return false;
+        return false;
     }
 
 } // IMAPAuthenticator

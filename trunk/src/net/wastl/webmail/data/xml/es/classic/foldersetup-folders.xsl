@@ -43,10 +43,10 @@
           </xsl:for-each>
         </TABLE>
         <P>
-	  Carpetas mostradas en  <STRONG>bold</STRONG> can hold subfolders, folders that are displayed normal cannot hold subfolders. Folders displayed in <EM>italic</EM> are hidden (in the main mailbox view), others are not.
-	</P>
+          Carpetas mostradas en  <STRONG>bold</STRONG> can hold subfolders, folders that are displayed normal cannot hold subfolders. Folders displayed in <EM>italic</EM> are hidden (in the main mailbox view), others are not.
+        </P>
         <P><FONT color="red"><STRONG>&#161;Advertencia!</STRONG></FONT> If you delete a folder, all messages (and subfolders) in it will be <FONT color="red">borrado</FONT> not only from WebMail but <FONT color="red">f&#237;sicamente desde el servidor* de correo</FONT>! This is dangerous and cannot be undone!
-	</P>
+        </P>
       </BODY>
     </HTML>
   </xsl:template>
@@ -99,7 +99,7 @@
             </xsl:choose>
           </TD>
           <TD><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folderadd&amp;addto={@id}">Agregar subcarpeta</A> - <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}&amp;recurse=1">Borrar esta carpeta (y todas las subcarpetas)</A> - 
-	    <xsl:choose><xsl:when test="@subscribed = 'true'"><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Ocultar</A></xsl:when><xsl:otherwise><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">No_ocultar</A></xsl:otherwise></xsl:choose></TD>
+            <xsl:choose><xsl:when test="@subscribed = 'true'"><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Ocultar</A></xsl:when><xsl:otherwise><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">No_ocultar</A></xsl:otherwise></xsl:choose></TD>
         </xsl:when>
         <xsl:otherwise>
           <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}">
@@ -115,7 +115,7 @@
             </xsl:choose>
           </TD>
           <TD><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}">Borrar esta carpeta</A> - 
-	    <xsl:choose><xsl:when test="@subscribed = 'true'"><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Ocultar</A></xsl:when><xsl:otherwise><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">No_ocultar</A></xsl:otherwise></xsl:choose></TD>
+            <xsl:choose><xsl:when test="@subscribed = 'true'"><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Ocultar</A></xsl:when><xsl:otherwise><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">No_ocultar</A></xsl:otherwise></xsl:choose></TD>
         </xsl:otherwise>
       </xsl:choose>
     </TR>

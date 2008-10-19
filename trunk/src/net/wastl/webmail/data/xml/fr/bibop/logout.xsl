@@ -30,56 +30,56 @@
     <HTML>
       <HEAD>
         <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de Titre</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/> 
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/> 
       </HEAD>
 
       <BODY bgcolor="#ffffff">
-	<P align="center">&#160;</P>
-	<P align="center">&#160;</P>
-	<CENTER>
-	<TABLE width="402" border="0" cellspacing="0" cellpadding="1" bgcolor="#000000" height="252" align="center">
-	  <TR>
-	    <TD align="center" bgcolor="#000000" valign="middle">
-	      <TABLE width="400" border="0" cellspacing="0" cellpadding="0" height="250">
-		<TR>
-		  <TD colspan="2" width="400" height="50" bgcolor="#7B889F">&#160;
-		  </TD>
-		</TR>
-		<TR>
-		  <TD rowspan="2" width="85" align="center" bgcolor="#D3D8DE" height="110">
-		    <IMG SRC="{$imgbase}/images/logobibop.gif" ALT="Logo BiBop"/>
-		  </TD>
-		  <TD align="center" height="40" bgcolor="#FFFFFF" width="315">
-		    <IMG SRC="{$imgbase}/images/webmailtitle.gif"/>
-		  </TD>
-		</TR>
-		<TR>
-		  <TD align="center" bgcolor="#FFFFFF" width="315" class="testo">
-		    <BR/><SPAN class="testoGrande">Merci d'utiliser WebMail!</SPAN><BR/><BR/>
-		    Préparation du logout de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.<BR/><BR/>
-		  </TD>
-		</TR>
-		<TR>
-		  <TD colspan="2" align="center" height="50" bgcolor="#7B889F" width="400" class="testoBianco">
-		    Merci de patienter le temps que votre session soit fermée et que votre configuration
-		    soit écrite sur disque.<BR/>
-		    Si vous ne voyez pas la <SPAN class="bold">fenêtre de login</SPAN> dans quelques secondes, alors 
-		    <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"><SPAN class="testoScuro">cliquez ici</SPAN></A> SVP.
-		  </TD>
-		</TR>
-		<TR>
-		  <TD colspan="2" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center">
-		    <SPAN class="bold">BiBop WebMail </SPAN>is based on<BR/>
+        <P align="center">&#160;</P>
+        <P align="center">&#160;</P>
+        <CENTER>
+        <TABLE width="402" border="0" cellspacing="0" cellpadding="1" bgcolor="#000000" height="252" align="center">
+          <TR>
+            <TD align="center" bgcolor="#000000" valign="middle">
+              <TABLE width="400" border="0" cellspacing="0" cellpadding="0" height="250">
+                <TR>
+                  <TD colspan="2" width="400" height="50" bgcolor="#7B889F">&#160;
+                  </TD>
+                </TR>
+                <TR>
+                  <TD rowspan="2" width="85" align="center" bgcolor="#D3D8DE" height="110">
+                    <IMG SRC="{$imgbase}/images/logobibop.gif" ALT="Logo BiBop"/>
+                  </TD>
+                  <TD align="center" height="40" bgcolor="#FFFFFF" width="315">
+                    <IMG SRC="{$imgbase}/images/webmailtitle.gif"/>
+                  </TD>
+                </TR>
+                <TR>
+                  <TD align="center" bgcolor="#FFFFFF" width="315" class="testo">
+                    <BR/><SPAN class="testoGrande">Merci d'utiliser WebMail!</SPAN><BR/><BR/>
+                    Préparation du logout de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.<BR/><BR/>
+                  </TD>
+                </TR>
+                <TR>
+                  <TD colspan="2" align="center" height="50" bgcolor="#7B889F" width="400" class="testoBianco">
+                    Merci de patienter le temps que votre session soit fermée et que votre configuration
+                    soit écrite sur disque.<BR/>
+                    Si vous ne voyez pas la <SPAN class="bold">fenêtre de login</SPAN> dans quelques secondes, alors 
+                    <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"><SPAN class="testoScuro">cliquez ici</SPAN></A> SVP.
+                  </TD>
+                </TR>
+                <TR>
+                  <TD colspan="2" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center">
+                    <SPAN class="bold">BiBop WebMail </SPAN>is based on<BR/>
                     WebMail is &#169; 1999/2000 by Sebastian Schaffert<BR/>
-		  </TD>
-		</TR>
-	       </TABLE>
-	     </TD>
-	   </TR>
-	 </TABLE>
-	 </CENTER>
+                  </TD>
+                </TR>
+               </TABLE>
+             </TD>
+           </TR>
+         </TABLE>
+         </CENTER>
       </BODY>
 
     </HTML>

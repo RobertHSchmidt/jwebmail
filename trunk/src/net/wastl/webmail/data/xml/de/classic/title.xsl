@@ -29,18 +29,18 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Titel</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <BODY bgcolor="#ffffff">
-	<TABLE WIDTH="100%" HEIGHT="80">
-	  <TR>
-	    <TD ALIGN="left"><IMG SRC="{$imgbase}/images/title.png"/></TD>
-	    <TD ALIGN="right" VALIGN="bottom">
-	      <STRONG><FONT SIZE="+3">Briefkasten von <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></FONT></STRONG>
-	    </TD>
-	  </TR>
-	</TABLE>
+        <TABLE WIDTH="100%" HEIGHT="80">
+          <TR>
+            <TD ALIGN="left"><IMG SRC="{$imgbase}/images/title.png"/></TD>
+            <TD ALIGN="right" VALIGN="bottom">
+              <STRONG><FONT SIZE="+3">Briefkasten von <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></FONT></STRONG>
+            </TD>
+          </TR>
+        </TABLE>
       </BODY>
 
 

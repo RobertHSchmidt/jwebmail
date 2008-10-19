@@ -30,40 +30,40 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Administration Interface: Navigation</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-	
+        
       <BODY BGCOLOR="lightblue">
-	<TABLE WIDTH="100%">
-	  <TR>
-	    <TD>
-	      <A HREF="{$base}/admin/system?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">System Configuration</FONT></A>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>
-	      <A HREF="{$base}/admin/control?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">System Control</FONT></A>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>
-	      <A HREF="{$base}/admin/user?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">User Configuration</FONT></A>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>
-<!--	      <A HREF="{$base}/admin/help?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">Help</FONT></A>-->
-	      <FONT SIZE="-1" COLOR="red">Help (not yet implemented)</FONT>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>
-	      <A HREF="{$base}/admin/logout?session-id={$session-id}" TARGET="_top"><FONT SIZE="-1" COLOR="red">Logout</FONT></A>
-	    </TD>
-	  </TR>
-	</TABLE>
+        <TABLE WIDTH="100%">
+          <TR>
+            <TD>
+              <A HREF="{$base}/admin/system?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">System Configuration</FONT></A>
+            </TD>
+          </TR>
+          <TR>
+            <TD>
+              <A HREF="{$base}/admin/control?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">System Control</FONT></A>
+            </TD>
+          </TR>
+          <TR>
+            <TD>
+              <A HREF="{$base}/admin/user?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">User Configuration</FONT></A>
+            </TD>
+          </TR>
+          <TR>
+            <TD>
+<!--          <A HREF="{$base}/admin/help?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">Help</FONT></A>-->
+              <FONT SIZE="-1" COLOR="red">Help (not yet implemented)</FONT>
+            </TD>
+          </TR>
+          <TR>
+            <TD>
+              <A HREF="{$base}/admin/logout?session-id={$session-id}" TARGET="_top"><FONT SIZE="-1" COLOR="red">Logout</FONT></A>
+            </TD>
+          </TR>
+        </TABLE>
       </BODY>
-	
+        
     </HTML>
 
   </xsl:template>

@@ -50,49 +50,49 @@ public class ErrorHandler implements Plugin, URLHandler {
     StorageManager store;
 
     public ErrorHandler() {
-	
+        
     }
 
     public void register(WebMailServer parent) {
-	parent.getURLHandler().registerHandler(URL,this);
-	this.parent=parent;
-	store=parent.getStorage();
+        parent.getURLHandler().registerHandler(URL,this);
+        this.parent=parent;
+        store=parent.getStorage();
     }
 
     public String getName() {
-	return "ErrorHandler";
+        return "ErrorHandler";
     }
 
     public String getDescription() {
-	return "Handle error messages";
+        return "Handle error messages";
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public String getURL() {
-	return URL;
+        return URL;
     }
 
 
     public HTMLDocument handleURL(String suburl, HTTPSession session, HTTPRequestHeader header) throws WebMailException {
-	String theme=WebMailServer.getDefaultTheme();
-	Locale locale=WebMailServer.getDefaultLocale();
-	if(session instanceof UserSession) {
-	    UserSession sess=(UserSession)session;
-	    theme=sess.getUser().getTheme();
-	    locale=sess.getUser().getPreferredLocale();
-	}
-	return new XHTMLDocument(session.getModel(),store.getStylesheet("error.xsl",locale,theme));
+        String theme=WebMailServer.getDefaultTheme();
+        Locale locale=WebMailServer.getDefaultLocale();
+        if(session instanceof UserSession) {
+            UserSession sess=(UserSession)session;
+            theme=sess.getUser().getTheme();
+            locale=sess.getUser().getPreferredLocale();
+        }
+        return new XHTMLDocument(session.getModel(),store.getStylesheet("error.xsl",locale,theme));
     }
     
     public String provides() {
-	return "about";
+        return "about";
     }
 
     public String requires() {
-	return "";
+        return "";
     }
     
 } // About

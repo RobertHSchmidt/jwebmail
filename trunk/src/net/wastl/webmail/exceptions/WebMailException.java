@@ -36,41 +36,41 @@ public class WebMailException extends Exception {
     Exception nested;    
 
     public WebMailException() {
-	super();
+        super();
     }
 
     public WebMailException(String s) {
-	super(s);
+        super(s);
     }
 
     public WebMailException(Exception ex) {
-	super(ex.getMessage());
-	nested=ex;
+        super(ex.getMessage());
+        nested=ex;
     }
 
     public WebMailException(String s,Exception ex) {
-	super(s);
-	nested=ex;
+        super(s);
+        nested=ex;
     }
 
     public void printStackTrace(PrintStream ps) {
-	super.printStackTrace(ps);
-	if(nested!=null) {
-	    try {
-		ps.println("==> Nested exception: ");
-	    } catch(Exception ex) {}
-	    nested.printStackTrace(ps);
-	}
+        super.printStackTrace(ps);
+        if(nested!=null) {
+            try {
+                ps.println("==> Nested exception: ");
+            } catch(Exception ex) {}
+            nested.printStackTrace(ps);
+        }
     }
 
     public void printStackTrace(PrintWriter ps) {
-	super.printStackTrace(ps);
-	if(nested!=null) {
-	    try {
-		ps.println("==> Nested exception: ");
-	    } catch(Exception ex) {}
-	    nested.printStackTrace(ps);
-	}
+        super.printStackTrace(ps);
+        if(nested!=null) {
+            try {
+                ps.println("==> Nested exception: ");
+            } catch(Exception ex) {}
+            nested.printStackTrace(ps);
+        }
     }
 
 } // InvalidPasswordException

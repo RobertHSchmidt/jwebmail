@@ -137,7 +137,7 @@
                   <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part + 1}"><IMG SRC="{$imgbase}/images/arrow-left.png" BORDER="0"/> Previous <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> messages</A>
                 </xsl:when>
                 <xsl:otherwise><IMG SRC="{$imgbase}/images/arrow-left-disabled.png" BORDER="0"/> Previous <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> messages
-		</xsl:otherwise>
+                </xsl:otherwise>
               </xsl:choose>
             </EM>
           </TD>
@@ -148,8 +148,8 @@
                   <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part - 1}">Siguiente <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> messages <IMG SRC="{$imgbase}/images/arrow-right.png" BORDER="0"/></A>
                 </xsl:when>
                 <xsl:otherwise>
-		   Siguiente <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> messages <IMG SRC="{$imgbase}/images/arrow-right-disabled.png" BORDER="0"/>
-		</xsl:otherwise>
+                   Siguiente <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> messages <IMG SRC="{$imgbase}/images/arrow-right-disabled.png" BORDER="0"/>
+                </xsl:otherwise>
               </xsl:choose>
             </EM>
           </TD>

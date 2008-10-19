@@ -49,55 +49,55 @@ public class MailboxList implements Plugin, URLHandler {
     StorageManager store;
 
     public MailboxList() {
-	
+        
     }
 
     public void register(WebMailServer parent) {
-	parent.getURLHandler().registerHandler(URL,this);
-	//parent.getContentBar().registerContentItem(this);
-	store=parent.getStorage();
+        parent.getURLHandler().registerHandler(URL,this);
+        //parent.getContentBar().registerContentItem(this);
+        store=parent.getStorage();
     }
 
     public String getName() {
-	return "MailboxList";
+        return "MailboxList";
     }
 
     public String getDescription() {
-	return "This ContentProvider shows a list of all folders and links to the FolderList URLHandler.";
-    }	
+        return "This ContentProvider shows a list of all folders and links to the FolderList URLHandler.";
+    }   
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public String getURL() {
-	return URL;
+        return URL;
     }
 
     public HTMLDocument handleURL(String suburl, HTTPSession sess, HTTPRequestHeader header) throws WebMailException {
-	if(sess == null) {
-	    throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
-	}
-	UserSession session=(UserSession)sess;
-	UserData user=session.getUser();
-	HTMLDocument content;
-	/* If the user requests the folder overview, try to fetch new information */
-	/* Do so only, if this is forced, to save the time! */
-	if(header.isContentSet("force-refresh")) {
-	    session.refreshFolderInformation(true);
-	}
-	content=new XHTMLDocument(session.getModel(),
-				  store.getStylesheet("mailbox.xsl",
-						      user.getPreferredLocale(),
-						      user.getTheme()));
-	return content;
+        if(sess == null) {
+            throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
+        }
+        UserSession session=(UserSession)sess;
+        UserData user=session.getUser();
+        HTMLDocument content;
+        /* If the user requests the folder overview, try to fetch new information */
+        /* Do so only, if this is forced, to save the time! */
+        if(header.isContentSet("force-refresh")) {
+            session.refreshFolderInformation(true);
+        }
+        content=new XHTMLDocument(session.getModel(),
+                                  store.getStylesheet("mailbox.xsl",
+                                                      user.getPreferredLocale(),
+                                                      user.getTheme()));
+        return content;
     }
 
     public String provides() {
-	return "mailbox list";
+        return "mailbox list";
     }
 
     public String requires() {
-	return "content bar";
+        return "content bar";
     }
 } // MailboxList

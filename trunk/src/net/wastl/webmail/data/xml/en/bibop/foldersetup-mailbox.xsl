@@ -29,90 +29,90 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
       
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
 
-	<TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
-	 <FORM ACTION="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox&amp;add=1" METHOD="POST">
-	  <TR> 
-	    <TD colspan="4" height="22" class="testoNero">
-	      <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-	       WebMail Folder Setup for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-mailboxes">Help</A>)
-	    </TD>
-	   </TR>
-	   <TR>
-	    <TD colspan="4" bgcolor="#697791" height="22" class="testoBianco">
-	        Login name <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/><BR/>
-	        Account exists since <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>
-	   </TD>
-	  </TR>
-	  <TR>
-	    <TD bgcolor="#A6B1C0" colspan="4" height="22" align="center" class="testoGrande">Remove Mailboxes</TD>
-	  </TR>
-	  <xsl:for-each select="/USERMODEL/USERDATA/MAILHOST">	    
-	    <TR>
-	      <TD width="25%" height="35" class="testoNero" bgcolor="#E2E6F0">
-		<SPAN class="bold">
-		  <xsl:value-of select="@name"/>
-		</SPAN>
-	      </TD>
-	      <TD width="50%" colspan="2" bgcolor="#D1D7E7" class="testoNero">
-		<xsl:apply-templates select="MH_URI"/>
-	      </TD>
-	      <TD width="25%" class="testoNero" bgcolor="#E2E6F0"><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox&amp;remove={@id}">Remove</A></TD>		
-	    </TR>
-	  </xsl:for-each>
-	  <TR>
-	    <TD bgcolor="#A6B1C0" colspan="4" height="22" align="center" class="testoGrande">Add Mailboxes</TD>
-	  </TR>
-	  <TR>
-	    <TD width="25%" bgcolor="#E2E6F0" class="testoNero">Mailbox Name:</TD>
-	    <TD width="75%" colspan="3" class="testoNero" bgcolor="#D1D7E7">
-	      <INPUT TYPE="text" SIZE="25" NAME="mbox_name" class="testoNero"/>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD width="25%" class="testoNero" bgcolor="#E2E6F0">Hostname:</TD>
-	    <TD width="25%" class="testoNero" bgcolor="#D1D7E7"><INPUT TYPE="text" SIZE="10" NAME="mbox_host" class="testoNero"/>
-	    </TD>
-	    <TD width="25%" class="testoNero" bgcolor="#E2E6F0">Protocol:</TD>
-	    <TD width="25%" class="testoNero" bgcolor="#D1D7E7">
-	      <SELECT NAME="mbox_proto" class="testoNero">
-		<xsl:for-each select="/USERMODEL/STATEDATA/VAR[@name='protocol']">
-		  <xsl:choose>
-		    <xsl:when test="@value = /USERMODEL/SYSDATA//CONFIG[KEY='DEFAULT PROTOCOL']/VALUE">
-		      <OPTION selected="selected"><xsl:value-of select="@value"/></OPTION>
-		    </xsl:when>
-		    <xsl:otherwise>
-		      <OPTION><xsl:value-of select="@value"/></OPTION>
-		    </xsl:otherwise>
-		  </xsl:choose>
-		</xsl:for-each>		
-	      </SELECT>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD width="25%" class="testoNero" bgcolor="#E2E6F0">Login:
-	    </TD>
-	    <TD width="25%" class="testoNero" bgcolor="#D1D7E7">
-	      <INPUT TYPE="text" SIZE="10" NAME="mbox_login" class="testoNero"/>
-	    </TD>
-	    <TD width="25%" class="testoNero" bgcolor="#E2E6F0">Password:
-	    </TD>
-	    <TD width="25%" class="testoNero" bgcolor="#D1D7E7">
-	      <INPUT TYPE="PASSWORD" SIZE="10" NAME="mbox_password" class="testoNero"/>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD colspan="4" align="center" class="testoNero" bgcolor="#A6B1C0">
-	      <INPUT TYPE="submit" NAME="submit" VALUE="Add Mailbox" class="testoNero"/>
-	    </TD>
-	  </TR>
-	</FORM>
+        <TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
+         <FORM ACTION="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox&amp;add=1" METHOD="POST">
+          <TR> 
+            <TD colspan="4" height="22" class="testoNero">
+              <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
+               WebMail Folder Setup for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-mailboxes">Help</A>)
+            </TD>
+           </TR>
+           <TR>
+            <TD colspan="4" bgcolor="#697791" height="22" class="testoBianco">
+                Login name <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/><BR/>
+                Account exists since <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>
+           </TD>
+          </TR>
+          <TR>
+            <TD bgcolor="#A6B1C0" colspan="4" height="22" align="center" class="testoGrande">Remove Mailboxes</TD>
+          </TR>
+          <xsl:for-each select="/USERMODEL/USERDATA/MAILHOST">      
+            <TR>
+              <TD width="25%" height="35" class="testoNero" bgcolor="#E2E6F0">
+                <SPAN class="bold">
+                  <xsl:value-of select="@name"/>
+                </SPAN>
+              </TD>
+              <TD width="50%" colspan="2" bgcolor="#D1D7E7" class="testoNero">
+                <xsl:apply-templates select="MH_URI"/>
+              </TD>
+              <TD width="25%" class="testoNero" bgcolor="#E2E6F0"><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox&amp;remove={@id}">Remove</A></TD>           
+            </TR>
+          </xsl:for-each>
+          <TR>
+            <TD bgcolor="#A6B1C0" colspan="4" height="22" align="center" class="testoGrande">Add Mailboxes</TD>
+          </TR>
+          <TR>
+            <TD width="25%" bgcolor="#E2E6F0" class="testoNero">Mailbox Name:</TD>
+            <TD width="75%" colspan="3" class="testoNero" bgcolor="#D1D7E7">
+              <INPUT TYPE="text" SIZE="25" NAME="mbox_name" class="testoNero"/>
+            </TD>
+          </TR>
+          <TR>
+            <TD width="25%" class="testoNero" bgcolor="#E2E6F0">Hostname:</TD>
+            <TD width="25%" class="testoNero" bgcolor="#D1D7E7"><INPUT TYPE="text" SIZE="10" NAME="mbox_host" class="testoNero"/>
+            </TD>
+            <TD width="25%" class="testoNero" bgcolor="#E2E6F0">Protocol:</TD>
+            <TD width="25%" class="testoNero" bgcolor="#D1D7E7">
+              <SELECT NAME="mbox_proto" class="testoNero">
+                <xsl:for-each select="/USERMODEL/STATEDATA/VAR[@name='protocol']">
+                  <xsl:choose>
+                    <xsl:when test="@value = /USERMODEL/SYSDATA//CONFIG[KEY='DEFAULT PROTOCOL']/VALUE">
+                      <OPTION selected="selected"><xsl:value-of select="@value"/></OPTION>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <OPTION><xsl:value-of select="@value"/></OPTION>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:for-each>         
+              </SELECT>
+            </TD>
+          </TR>
+          <TR>
+            <TD width="25%" class="testoNero" bgcolor="#E2E6F0">Login:
+            </TD>
+            <TD width="25%" class="testoNero" bgcolor="#D1D7E7">
+              <INPUT TYPE="text" SIZE="10" NAME="mbox_login" class="testoNero"/>
+            </TD>
+            <TD width="25%" class="testoNero" bgcolor="#E2E6F0">Password:
+            </TD>
+            <TD width="25%" class="testoNero" bgcolor="#D1D7E7">
+              <INPUT TYPE="PASSWORD" SIZE="10" NAME="mbox_password" class="testoNero"/>
+            </TD>
+          </TR>
+          <TR>
+            <TD colspan="4" align="center" class="testoNero" bgcolor="#A6B1C0">
+              <INPUT TYPE="submit" NAME="submit" VALUE="Add Mailbox" class="testoNero"/>
+            </TD>
+          </TR>
+        </FORM>
       </TABLE>
     </BODY>
 
@@ -121,7 +121,7 @@
 
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>		    
+  </xsl:template>                   
 
 
 </xsl:stylesheet>

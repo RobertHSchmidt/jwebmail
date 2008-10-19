@@ -30,7 +30,7 @@
         <TABLE WIDTH="100%">
           <TR>
             <TD COLSPAN="3" ALIGN="CENTER" HEIGHT="70">
-	    </TD>
+            </TD>
           </TR>
           <TR>
             <TD WIDTH="20%" VALIGN="TOP">
@@ -76,15 +76,15 @@
               </FORM>
             </TD>
             <TD WIDTH="20%">
-	    </TD>
+            </TD>
           </TR>
           <xsl:if test="/GENERICMODEL/STATEDATA/VAR[@name='invalid password']/@value = 'yes'">
 <!-- START invalid pass -->
             <TR>
               <TD COLSPAN="3" ALIGN="CENTER">
                 <FONT COLOR="red" SIZE="+1">
-		  Ingreso incorrecto. !Las contrase&#241;as no coincideno el campo nombre/contrase&#241;a estaba vac&#237;o!. Los intentos se regisran.
-		</FONT>
+                  Ingreso incorrecto. !Las contrase&#241;as no coincideno el campo nombre/contrase&#241;a estaba vac&#237;o!. Los intentos se regisran.
+                </FONT>
               </TD>
             </TR>
 <!-- END invalid pass -->

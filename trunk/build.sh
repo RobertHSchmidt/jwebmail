@@ -24,15 +24,15 @@ ANT_HOME=./contrib
 SERVLET_CONTAINER=/usr/share/tomcat
 
 if [ "$1" = "install-catalina" ]; then
-	echo Target: Catalina
-	if [ "$CATALINA_HOME" != "" ]; then
-		SERVLET_CONTAINER=$CATALINA_HOME
-	fi
+    echo Target: Catalina
+    if [ "$CATALINA_HOME" != "" ]; then
+        SERVLET_CONTAINER=$CATALINA_HOME
+    fi
 else
-	echo Target: Tomcat
-	if [ "$TOMCAT_HOME" != "" ]; then
-		SERVLET_CONTAINER=$TOMCAT_HOME
-	fi
+    echo Target: Tomcat
+    if [ "$TOMCAT_HOME" != "" ]; then
+        SERVLET_CONTAINER=$TOMCAT_HOME
+    fi
 fi
 
 echo Building with classpath $LOCALCLASSPATH:$ADDITIONALCLASSPATH

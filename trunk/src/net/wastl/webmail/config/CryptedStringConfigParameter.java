@@ -33,15 +33,15 @@ import net.wastl.webmail.misc.Helper;
 public class CryptedStringConfigParameter extends StringConfigParameter {
     
     public CryptedStringConfigParameter(String name, String def, String desc) {
-	super(name,Helper.crypt("AA",def),desc);
+        super(name,Helper.crypt("AA",def),desc);
     }
     
 
     public String filter(String s) {
-	return Helper.crypt("AA",s);
+        return Helper.crypt("AA",s);
     }
 
     public String getType() {
-	return "crypted";
+        return "crypted";
     }
 } // CryptedStringConfigParameter

@@ -54,43 +54,43 @@ public class NavBar implements Plugin, URLHandler {
     
 
     public void register(WebMailServer parent) {
-	this.store=parent.getStorage();
-	parent.getURLHandler().registerHandler(URL,this);
+        this.store=parent.getStorage();
+        parent.getURLHandler().registerHandler(URL,this);
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public String getName() {
-	return "ContentBar";
+        return "ContentBar";
     }
 
     public String getDescription() {
-	return "This is the content-bar on the left frame in the mailbox window. "+
-	    "ContentProviders register with this content-bar to have a link and an icon added.";
+        return "This is the content-bar on the left frame in the mailbox window. "+
+            "ContentProviders register with this content-bar to have a link and an icon added.";
     }
 
     public String getURL() {
-	return URL;
+        return URL;
     }
 
     
     public HTMLDocument handleURL(String suburl, HTTPSession session, HTTPRequestHeader header) throws WebMailException {
-	if(session == null) {
-	    throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
-	}
-	UserSession sess=(UserSession)session;
-	UserData user=sess.getUser();
-	return new XHTMLDocument(session.getModel(),store.getStylesheet("navbar.xsl",user.getPreferredLocale(),user.getTheme()));
+        if(session == null) {
+            throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
+        }
+        UserSession sess=(UserSession)session;
+        UserData user=sess.getUser();
+        return new XHTMLDocument(session.getModel(),store.getStylesheet("navbar.xsl",user.getPreferredLocale(),user.getTheme()));
     }
 
     public String provides() {
-	return "content bar";
+        return "content bar";
     }
 
     public String requires() {
-	return "";
+        return "";
     }
 
 } // HMTLContentBar

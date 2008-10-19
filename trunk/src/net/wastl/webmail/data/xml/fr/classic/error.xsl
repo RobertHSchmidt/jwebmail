@@ -26,38 +26,38 @@
     <HTML>
       <HEAD>
         <TITLE>Rapport d Erreur WebMail</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
       </HEAD>
       
       <BODY bgcolor="#ffffff">
-	<TABLE WIDTH="100%">
-	  <TR BGCOLOR="red">
-	    <TD COLSPAN="2" align="center"><H1>Une erreur a eu lieu</H1></TD>
-	  </TR>
-	  <TR>
-	    <TD><STRONG>Message d'Erreur</STRONG></TD>
-	    <TD>
-	      <xsl:apply-templates select="//STATEDATA/EXCEPTION/EX_MESSAGE"/>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="2" ALIGN="center">
-	      <TABLE BGCOLOR="yellow" WIDTH="80%" BORDER="1">
-		<TR>
-		  <TD><STRONG>Trace de la Pile</STRONG><BR/>
-		    <PRE>
-		      <xsl:apply-templates select="//STATEDATA/EXCEPTION/EX_STACKTRACE"/>
-		    </PRE>
-		  </TD>
-		</TR>
-	      </TABLE>
-	    </TD>
-	  </TR>
-	  <TR BGCOLOR="red">
-	    <TD COLSPAN="2" align="center">!</TD>
-	  </TR>
-	</TABLE>
+        <TABLE WIDTH="100%">
+          <TR BGCOLOR="red">
+            <TD COLSPAN="2" align="center"><H1>Une erreur a eu lieu</H1></TD>
+          </TR>
+          <TR>
+            <TD><STRONG>Message d'Erreur</STRONG></TD>
+            <TD>
+              <xsl:apply-templates select="//STATEDATA/EXCEPTION/EX_MESSAGE"/>
+            </TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="2" ALIGN="center">
+              <TABLE BGCOLOR="yellow" WIDTH="80%" BORDER="1">
+                <TR>
+                  <TD><STRONG>Trace de la Pile</STRONG><BR/>
+                    <PRE>
+                      <xsl:apply-templates select="//STATEDATA/EXCEPTION/EX_STACKTRACE"/>
+                    </PRE>
+                  </TD>
+                </TR>
+              </TABLE>
+            </TD>
+          </TR>
+          <TR BGCOLOR="red">
+            <TD COLSPAN="2" align="center">!</TD>
+          </TR>
+        </TABLE>
       </BODY>
     </HTML>
   </xsl:template>

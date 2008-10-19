@@ -28,7 +28,7 @@
     <HTML>
       <HEAD>
         <TITLE><xsl:apply-templates select="TITLE"/></TITLE>
-	<META CONTENT="AUTHOR" VALUE="{AUTHOR}"/>
+        <META CONTENT="AUTHOR" VALUE="{AUTHOR}"/>
       </HEAD>
       <BODY BGCOLOR="#ffffff">
         <CENTER><H1>README for <xsl:value-of select="TITLE"/></H1></CENTER>
@@ -41,8 +41,8 @@
     <A NAME="{@id}"/>
     <xsl:variable name="cur_section" select="position()"/>
      <TABLE WIDTH="100%" BGCOLOR="#a0d895" CELLSPACING="0" BORDER="0">
-	<TR>
-	  <TD>
+        <TR>
+          <TD>
             <H1><CENTER><xsl:number value="position()" format="I"/>. <xsl:value-of select="@name"/></CENTER></H1>
           </TD>
         </TR>

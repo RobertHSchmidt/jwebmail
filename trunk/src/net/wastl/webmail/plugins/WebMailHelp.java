@@ -54,78 +54,78 @@ public class WebMailHelp implements Plugin, URLHandler {
     StorageManager store;
 
     public WebMailHelp() {
-	
+        
     }
 
     public void register(WebMailServer parent) {
-	parent.getURLHandler().registerHandler(URL,this);
-	cache=new ExpireableCache(20,(float).9);
-	store=parent.getStorage();
+        parent.getURLHandler().registerHandler(URL,this);
+        cache=new ExpireableCache(20,(float).9);
+        store=parent.getStorage();
     }
 
     public String getName() {
-	return "WebMailHelp";
+        return "WebMailHelp";
     }
 
     public String getDescription() {
-	return "This is the WebMail help content-provider.";
-    }	
+        return "This is the WebMail help content-provider.";
+    }   
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public String getURL() {
-	return URL;
+        return URL;
     }
 
     public HTMLDocument handleURL(String suburl, HTTPSession session, HTTPRequestHeader header) throws WebMailException {
-	UserData user=((UserSession)session).getUser();
+        UserData user=((UserSession)session).getUser();
 
-	Document helpdoc=(Document)cache.get(user.getPreferredLocale().getLanguage()+"/"+user.getTheme());
+        Document helpdoc=(Document)cache.get(user.getPreferredLocale().getLanguage()+"/"+user.getTheme());
 
-	if(helpdoc == null) {
-	    String helpdocpath="file://"+store.getBasePath(user.getPreferredLocale(),user.getTheme())+"help.xml";
-	    
-	    try {
-		DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		helpdoc=parser.parse(helpdocpath);
-	    } catch(Exception ex) {
-		ex.printStackTrace();
-		throw new WebMailException("Could not parse "+helpdocpath);
-	    }
+        if(helpdoc == null) {
+            String helpdocpath="file://"+store.getBasePath(user.getPreferredLocale(),user.getTheme())+"help.xml";
+            
+            try {
+                DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                helpdoc=parser.parse(helpdocpath);
+            } catch(Exception ex) {
+                ex.printStackTrace();
+                throw new WebMailException("Could not parse "+helpdocpath);
+            }
 
-	    cache.put(user.getPreferredLocale().getLanguage()+"/"+user.getTheme(),helpdoc);
-	}
-	
-	/* Unfortunately we can't use two input documents, so we will temporarily insert the help document
-	   into the user's model */
-	Node n=session.getModel().importNode(helpdoc.getDocumentElement(),true);
-	session.getModel().getDocumentElement().appendChild(n);
+            cache.put(user.getPreferredLocale().getLanguage()+"/"+user.getTheme(),helpdoc);
+        }
+        
+        /* Unfortunately we can't use two input documents, so we will temporarily insert the help document
+           into the user's model */
+        Node n=session.getModel().importNode(helpdoc.getDocumentElement(),true);
+        session.getModel().getDocumentElement().appendChild(n);
 
-	if(header.isContentSet("helptopic") && session instanceof UserSession) {
-	    ((UserSession)session).getUserModel().setStateVar("helptopic",header.getContent("helptopic"));
-	}
-
-
-	HTMLDocument retdoc=new XHTMLDocument(session.getModel(),store.getStylesheet("help.xsl",user.getPreferredLocale(),user.getTheme()));
-
-	/* Here we remove the help document from the model */
-	session.getModel().getDocumentElement().removeChild(n);
-	/* Remove the indicator for a specific help topic */
-	if(header.isContentSet("helptopic") && session instanceof UserSession) {
-	    ((UserSession)session).getUserModel().removeAllStateVars("helptopic");
-	}
+        if(header.isContentSet("helptopic") && session instanceof UserSession) {
+            ((UserSession)session).getUserModel().setStateVar("helptopic",header.getContent("helptopic"));
+        }
 
 
-	return retdoc;
+        HTMLDocument retdoc=new XHTMLDocument(session.getModel(),store.getStylesheet("help.xsl",user.getPreferredLocale(),user.getTheme()));
+
+        /* Here we remove the help document from the model */
+        session.getModel().getDocumentElement().removeChild(n);
+        /* Remove the indicator for a specific help topic */
+        if(header.isContentSet("helptopic") && session instanceof UserSession) {
+            ((UserSession)session).getUserModel().removeAllStateVars("helptopic");
+        }
+
+
+        return retdoc;
     }
 
     public String provides() {
-	return "help";
+        return "help";
     }
 
     public String requires() {
-	return "content bar";
+        return "content bar";
     }
 } // WebMailHelp

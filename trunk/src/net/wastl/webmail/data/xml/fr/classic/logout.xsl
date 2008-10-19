@@ -26,31 +26,31 @@
     <HTML>
       <HEAD>
         <TITLE>Boite aux Lettres de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de Titre</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/> 
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/> 
       </HEAD>
 
       <BODY bgcolor="#ffffff">
-	<H1><CENTER>Merci d'utiliser WebMail!</CENTER></H1>
-	<H3><CENTER>Préparation du logout de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</CENTER></H3>
-	<P>
-	  <CENTER>
-	    Merci de patienter le temps que votre session soit fermée et que votre configuration 
-	    soit écrite sur disque.<BR/>
-	    Si vous ne voyez pas la <STRONG>fenêtre de login</STRONG> dans quelques secondes, alors 
-	    <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/">cliquez ici</A>.
-	  </CENTER>
-	</P>
-	<P>
-	  <CENTER>
-	    <FONT SIZE="-1">
-	      <EMPH>
-		WebMail is (c)1998-2000 by <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. 
-		It is distributed under the terms of the GNU General Public License (LGPL).
-	      </EMPH>
-	    </FONT>  
-	  </CENTER>
-	</P>
+        <H1><CENTER>Merci d'utiliser WebMail!</CENTER></H1>
+        <H3><CENTER>Préparation du logout de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</CENTER></H3>
+        <P>
+          <CENTER>
+            Merci de patienter le temps que votre session soit fermée et que votre configuration 
+            soit écrite sur disque.<BR/>
+            Si vous ne voyez pas la <STRONG>fenêtre de login</STRONG> dans quelques secondes, alors 
+            <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/">cliquez ici</A>.
+          </CENTER>
+        </P>
+        <P>
+          <CENTER>
+            <FONT SIZE="-1">
+              <EMPH>
+                WebMail is (c)1998-2000 by <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. 
+                It is distributed under the terms of the GNU General Public License (LGPL).
+              </EMPH>
+            </FONT>  
+          </CENTER>
+        </P>
       </BODY>
 
     </HTML>

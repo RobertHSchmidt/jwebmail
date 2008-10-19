@@ -30,45 +30,45 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Administration Interface: System configuration</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-	
+        
       <BODY BGCOLOR="white">
-	<FORM ACTION="{$base}/admin/system/set?session-id={$session-id}" METHOD="POST">
-	  <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
-	    <xsl:for-each select="/GENERICMODEL/SYSDATA/GROUP">
-	      <TR bgcolor="#dddddd">
-		<TD COLSPAN="2" ALIGN="center"><FONT SIZE="+1"><STRONG>Group: <xsl:value-of select="@name"/></STRONG></FONT></TD>
-	      </TR>
-	      <xsl:for-each select="CONFIG">
-		<xsl:sort select="KEY" order="ascending"/>
-		<xsl:choose>
-		  <xsl:when test="position() mod 2 = 1">
-		    <TR bgcolor="#f7f3a8">
-		      <xsl:call-template name="row"/>
-		    </TR>
-		  </xsl:when>
-		  <xsl:otherwise>
-		    <TR>
-		      <xsl:call-template name="row"/>
-		    </TR>
-		  </xsl:otherwise>
-		</xsl:choose>
-	      </xsl:for-each>
-	    </xsl:for-each>
-	    <TR bgcolor="#dddddd">
-	      <TD COLSPAN="2" ALIGN="center"><FONT SIZE="+1"><STRONG>Form</STRONG></FONT></TD>
-	    </TR>
-	    <TR>
-	      <TD COLSPAN="2" ALIGN="center">
-		<INPUT TYPE="submit" name="submit" value="Activate Changes"/>
-		<INPUT TYPE="reset" name="reset" value="Undo Changes"/>
-	      </TD>
-	    </TR>
-	  </TABLE>
-	</FORM>
+        <FORM ACTION="{$base}/admin/system/set?session-id={$session-id}" METHOD="POST">
+          <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+            <xsl:for-each select="/GENERICMODEL/SYSDATA/GROUP">
+              <TR bgcolor="#dddddd">
+                <TD COLSPAN="2" ALIGN="center"><FONT SIZE="+1"><STRONG>Group: <xsl:value-of select="@name"/></STRONG></FONT></TD>
+              </TR>
+              <xsl:for-each select="CONFIG">
+                <xsl:sort select="KEY" order="ascending"/>
+                <xsl:choose>
+                  <xsl:when test="position() mod 2 = 1">
+                    <TR bgcolor="#f7f3a8">
+                      <xsl:call-template name="row"/>
+                    </TR>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <TR>
+                      <xsl:call-template name="row"/>
+                    </TR>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:for-each>
+            </xsl:for-each>
+            <TR bgcolor="#dddddd">
+              <TD COLSPAN="2" ALIGN="center"><FONT SIZE="+1"><STRONG>Form</STRONG></FONT></TD>
+            </TR>
+            <TR>
+              <TD COLSPAN="2" ALIGN="center">
+                <INPUT TYPE="submit" name="submit" value="Activate Changes"/>
+                <INPUT TYPE="reset" name="reset" value="Undo Changes"/>
+              </TD>
+            </TR>
+          </TABLE>
+        </FORM>
       </BODY>
-	
+        
     </HTML>
 
   </xsl:template>
@@ -80,40 +80,40 @@
     </TD>
     <TD>
       <xsl:choose>
-	<xsl:when test="@type = 'choice'">
-	  <SELECT name="{KEY}">
-	    <xsl:for-each select="CHOICE">
-	      <xsl:choose>
-		<xsl:when test=". = ../VALUE">
-		  <OPTION selected="selected"><xsl:value-of select="."/></OPTION>
-		</xsl:when>
-		<xsl:otherwise>
-		  <OPTION><xsl:value-of select="."/></OPTION>
-		</xsl:otherwise>
-	      </xsl:choose>
-	    </xsl:for-each>
-	  </SELECT>
-	</xsl:when>
-	<xsl:when test="@type = 'bool'">
-	  <SELECT name="{KEY}">
-	    <xsl:for-each select="CHOICE">
-	      <xsl:choose>
-		<xsl:when test=". = ../VALUE">
-		  <OPTION selected="selected"><xsl:value-of select="."/></OPTION>
-		</xsl:when>
-		<xsl:otherwise>
-		  <OPTION><xsl:value-of select="."/></OPTION>
-		</xsl:otherwise>
-	      </xsl:choose>
-	    </xsl:for-each>
-	  </SELECT>
-	</xsl:when>
-	<xsl:when test="@type = 'int'">
-	  <INPUT type="text" name="{KEY}" SIZE="6" value="{VALUE}"/>
-	</xsl:when>
-	<xsl:otherwise>
-	  <INPUT type="text" name="{KEY}" SIZE="40" value="{VALUE}"/>
-	</xsl:otherwise>
+        <xsl:when test="@type = 'choice'">
+          <SELECT name="{KEY}">
+            <xsl:for-each select="CHOICE">
+              <xsl:choose>
+                <xsl:when test=". = ../VALUE">
+                  <OPTION selected="selected"><xsl:value-of select="."/></OPTION>
+                </xsl:when>
+                <xsl:otherwise>
+                  <OPTION><xsl:value-of select="."/></OPTION>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:for-each>
+          </SELECT>
+        </xsl:when>
+        <xsl:when test="@type = 'bool'">
+          <SELECT name="{KEY}">
+            <xsl:for-each select="CHOICE">
+              <xsl:choose>
+                <xsl:when test=". = ../VALUE">
+                  <OPTION selected="selected"><xsl:value-of select="."/></OPTION>
+                </xsl:when>
+                <xsl:otherwise>
+                  <OPTION><xsl:value-of select="."/></OPTION>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:for-each>
+          </SELECT>
+        </xsl:when>
+        <xsl:when test="@type = 'int'">
+          <INPUT type="text" name="{KEY}" SIZE="6" value="{VALUE}"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <INPUT type="text" name="{KEY}" SIZE="40" value="{VALUE}"/>
+        </xsl:otherwise>
       </xsl:choose>
     </TD>
   </xsl:template>

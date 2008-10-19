@@ -30,67 +30,67 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Administration Interface: User Setup</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-	
+        
       <BODY BGCOLOR="white">
-	<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
-	  <TR bgcolor="#dddddd">
-	    <TD COLSPAN="2" ALIGN="center"><FONT SIZE="+1"><STRONG>Select Domain</STRONG></FONT></TD>
-	  </TR>
+        <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+          <TR bgcolor="#dddddd">
+            <TD COLSPAN="2" ALIGN="center"><FONT SIZE="+1"><STRONG>Select Domain</STRONG></FONT></TD>
+          </TR>
 
-	  <TR>
-	    <FORM ACTION="{$base}/admin/user?session-id={$session-id}" METHOD="POST">
-	      <TD WIDTH="70%">
-		<SELECT NAME="domain">
-		  <xsl:for-each select="/GENERICMODEL/SYSDATA/DOMAIN">
-		    <xsl:choose>
-		      <xsl:when test="NAME = /GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value">
-			<OPTION selected="selected"><xsl:value-of select="NAME"/></OPTION>
-		      </xsl:when>
-		      <xsl:otherwise>
-			<OPTION><xsl:value-of select="NAME"/></OPTION>
-		      </xsl:otherwise>
-		    </xsl:choose>
-		  </xsl:for-each>
-		</SELECT>
-	      </TD>
-	      <TD>
-		<INPUT TYPE="submit" name="submit" value="Select"/>
-	      </TD>
-	    </FORM>
-	  </TR>
-	      
-	  <xsl:if test="/GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value !='' and count(/GENERICMODEL/STATEDATA/VAR[@name = 'user']) > 0">
-	    <TR bgcolor="#dddddd">
-	      <TD COLSPAN="2" ALIGN="center">
-		<FONT SIZE="+1"><STRONG>Users in domain <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value"/></STRONG></FONT>
-	      </TD>
-	    </TR>
+          <TR>
+            <FORM ACTION="{$base}/admin/user?session-id={$session-id}" METHOD="POST">
+              <TD WIDTH="70%">
+                <SELECT NAME="domain">
+                  <xsl:for-each select="/GENERICMODEL/SYSDATA/DOMAIN">
+                    <xsl:choose>
+                      <xsl:when test="NAME = /GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value">
+                        <OPTION selected="selected"><xsl:value-of select="NAME"/></OPTION>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <OPTION><xsl:value-of select="NAME"/></OPTION>
+                      </xsl:otherwise>
+                    </xsl:choose>
+                  </xsl:for-each>
+                </SELECT>
+              </TD>
+              <TD>
+                <INPUT TYPE="submit" name="submit" value="Select"/>
+              </TD>
+            </FORM>
+          </TR>
+              
+          <xsl:if test="/GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value !='' and count(/GENERICMODEL/STATEDATA/VAR[@name = 'user']) > 0">
+            <TR bgcolor="#dddddd">
+              <TD COLSPAN="2" ALIGN="center">
+                <FONT SIZE="+1"><STRONG>Users in domain <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value"/></STRONG></FONT>
+              </TD>
+            </TR>
 
-	    <xsl:for-each select="/GENERICMODEL/STATEDATA/VAR[@name = 'user']">
-	      <xsl:sort select="@value" order="ascending"/>
-	      <xsl:choose>
-		<xsl:when test="position() mod 2 = 1">
-		  <TR bgcolor="#f7f3a8">
-		    <xsl:apply-templates select="."/>
-		  </TR>
-		</xsl:when>
-		<xsl:otherwise>
-		  <TR>
-		    <xsl:apply-templates select="."/>
-		  </TR>
-		</xsl:otherwise>
-	      </xsl:choose>	      
-	    </xsl:for-each>
-	    <TR bgcolor="lightblue">
-	      <FORM ACTION="{$base}/admin/user/edit?session-id={$session-id}&amp;domain={/GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value}" METHOD="POST">
-		<TD><INPUT TYPE="text" SIZE="20" NAME="user"/></TD>
-		<TD><INPUT TYPE="submit" name="edit" value="Create"/></TD>
-	      </FORM>
-	    </TR>
-	  </xsl:if>
-	</TABLE>
+            <xsl:for-each select="/GENERICMODEL/STATEDATA/VAR[@name = 'user']">
+              <xsl:sort select="@value" order="ascending"/>
+              <xsl:choose>
+                <xsl:when test="position() mod 2 = 1">
+                  <TR bgcolor="#f7f3a8">
+                    <xsl:apply-templates select="."/>
+                  </TR>
+                </xsl:when>
+                <xsl:otherwise>
+                  <TR>
+                    <xsl:apply-templates select="."/>
+                  </TR>
+                </xsl:otherwise>
+              </xsl:choose>           
+            </xsl:for-each>
+            <TR bgcolor="lightblue">
+              <FORM ACTION="{$base}/admin/user/edit?session-id={$session-id}&amp;domain={/GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value}" METHOD="POST">
+                <TD><INPUT TYPE="text" SIZE="20" NAME="user"/></TD>
+                <TD><INPUT TYPE="submit" name="edit" value="Create"/></TD>
+              </FORM>
+            </TR>
+          </xsl:if>
+        </TABLE>
       </BODY>
       
     </HTML>
@@ -101,8 +101,8 @@
     <FORM ACTION="{$base}/admin/user/edit?session-id={$session-id}&amp;user={@value}&amp;domain={/GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value}" METHOD="POST">
       <TD><STRONG><xsl:value-of select="@value"/></STRONG></TD>
       <TD>
-	<INPUT TYPE="submit" name="edit" value="Edit"/>
-	<INPUT TYPE="submit" name="delete" value="Delete"/>
+        <INPUT TYPE="submit" name="edit" value="Edit"/>
+        <INPUT TYPE="submit" name="delete" value="Delete"/>
       </TD>
     </FORM>
 

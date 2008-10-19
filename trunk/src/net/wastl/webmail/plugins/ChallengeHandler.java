@@ -45,40 +45,40 @@ public class ChallengeHandler implements Plugin, URLHandler {
 
     private StorageManager storage;
 
-	public void register(WebMailServer parent) {
+        public void register(WebMailServer parent) {
         parent.getURLHandler().registerHandler(URL, this);
         storage = parent.getStorage();
-	}
+        }
 
-	public String getVersion() {
+        public String getVersion() {
         return VERSION;
-	}
+        }
 
-	public String provides() {
+        public String provides() {
         return "Authentication Challenge";
-	}
+        }
 
     /* XXX Not sure what, if anything, this should return */
-	public String requires() {
+        public String requires() {
         return "";
-	}
+        }
 
-	public String getURL() {
+        public String getURL() {
         return URL;
-	}
+        }
 
-	public String getName() {
-		return "ChallengeHandler"; 
-	}
+        public String getName() {
+                return "ChallengeHandler"; 
+        }
 
-	public String getDescription() {
-		return "This URLHandler will show the user a challenge and allow them"
+        public String getDescription() {
+                return "This URLHandler will show the user a challenge and allow them"
          + "to respond to it";
-	}
+        }
 
-	public HTMLDocument handleURL(String subURL, HTTPSession sess,
+        public HTMLDocument handleURL(String subURL, HTTPSession sess,
         HTTPRequestHeader h) throws WebMailException
-	{
+        {
         XMLGenericModel model = storage.createXMLGenericModel();
         HTMLDocument content;
         XMLUserData ud;

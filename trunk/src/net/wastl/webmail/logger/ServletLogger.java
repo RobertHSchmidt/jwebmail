@@ -40,58 +40,58 @@ public class ServletLogger implements Logger, ConfigurationListener {
     protected int loglevel;
 
     public ServletLogger(WebMailServer parent, StorageManager st) throws WebMailException {
-	this.store=st;
-	
-	if(! (parent instanceof WebMailServlet)) {
-	    throw new WebMailException("ServletLogger can only be used by a Servlet!");
-	} else {
-	    this.parent=(WebMailServlet)parent;
-	}
-	parent.getConfigScheme().configRegisterIntegerKey(this,"LOGLEVEL","5",
-							  "How much debug output will be written in the logfile");
+        this.store=st;
+        
+        if(! (parent instanceof WebMailServlet)) {
+            throw new WebMailException("ServletLogger can only be used by a Servlet!");
+        } else {
+            this.parent=(WebMailServlet)parent;
+        }
+        parent.getConfigScheme().configRegisterIntegerKey(this,"LOGLEVEL","5",
+                                                          "How much debug output will be written in the logfile");
 
-	initLog();
+        initLog();
     }
 
     protected void initLog() {
-	try {
-	    loglevel=Integer.parseInt(store.getConfig("LOGLEVEL"));
-	} catch(NumberFormatException e) {
-	    loglevel = 5;
-	}
+        try {
+            loglevel=Integer.parseInt(store.getConfig("LOGLEVEL"));
+        } catch(NumberFormatException e) {
+            loglevel = 5;
+        }
     }
 
     public void notifyConfigurationChange(String key) {
-	initLog();
-    }	
+        initLog();
+    }   
 
 
     public void log(int level, String message) {
-	if(level <= loglevel) {
-	    String s="LEVEL "+level;
-	    switch(level) {
-	    case LOG_DEBUG: s="DEBUG   "; break;
-	    case LOG_INFO: s="INFO    "; break;
-	    case LOG_WARN: s="WARNING "; break;
-	    case LOG_ERR: s="ERROR   "; break;
-	    case LOG_CRIT: s="CRITICAL"; break;
-	    }
-	    parent.getServletContext().log(s+" - "+message);
-	}
-    }	
+        if(level <= loglevel) {
+            String s="LEVEL "+level;
+            switch(level) {
+            case LOG_DEBUG: s="DEBUG   "; break;
+            case LOG_INFO: s="INFO    "; break;
+            case LOG_WARN: s="WARNING "; break;
+            case LOG_ERR: s="ERROR   "; break;
+            case LOG_CRIT: s="CRITICAL"; break;
+            }
+            parent.getServletContext().log(s+" - "+message);
+        }
+    }   
 
     public void log(int level, Exception ex) {
-	if(level <= loglevel) {
-	    String s="LEVEL "+level;
-	    switch(level) {
-	    case LOG_DEBUG: s="DEBUG   "; break;
-	    case LOG_INFO: s="INFO    "; break;
-	    case LOG_WARN: s="WARNING "; break;
-	    case LOG_ERR: s="ERROR   "; break;
-	    case LOG_CRIT: s="CRITICAL"; break;
-	    }
-	    parent.getServletContext().log(s+" - An exception occured", ex);
-	}
+        if(level <= loglevel) {
+            String s="LEVEL "+level;
+            switch(level) {
+            case LOG_DEBUG: s="DEBUG   "; break;
+            case LOG_INFO: s="INFO    "; break;
+            case LOG_WARN: s="WARNING "; break;
+            case LOG_ERR: s="ERROR   "; break;
+            case LOG_CRIT: s="CRITICAL"; break;
+            }
+            parent.getServletContext().log(s+" - An exception occured", ex);
+        }
     }
 
     public void shutdown() {}

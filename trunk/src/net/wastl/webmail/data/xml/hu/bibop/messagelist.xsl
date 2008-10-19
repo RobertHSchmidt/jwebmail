@@ -29,17 +29,17 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Message List (Folder <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@id"/></TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
       
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
         <TABLE width="100%" border="0" cellspacing="2" cellpadding="2">
-	<xsl:variable name="current" select="/USERMODEL/CURRENT[@type='folder']/@id"/>
+        <xsl:variable name="current" select="/USERMODEL/CURRENT[@type='folder']/@id"/>
             <FORM ACTION="{$base}/folder/list?flag=1&amp;session-id={$session-id}&amp;folder-id={$current}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part}" METHOD="POST">
-	<xsl:apply-templates select="/USERMODEL/MAILHOST_MODEL//FOLDER[@id=$current]"/>
-		   </FORM>
-		</TABLE>
+        <xsl:apply-templates select="/USERMODEL/MAILHOST_MODEL//FOLDER[@id=$current]"/>
+                   </FORM>
+                </TABLE>
       </BODY>
     </HTML>
   </xsl:template>
@@ -59,135 +59,135 @@
 
     <TR>
       <TD width="100%" colspan="7" align="center" class="testoNero" bgcolor="#A6B1C0">
-	<TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
-	  <TR>
-	    <TD class="testo"><SPAN class="bold">Üzenet jelölõk:</SPAN></TD> 
-	    <TD class="testo"><IMG SRC="{$imgbase}/images/attach.gif" BORDER="0" hspace="2"/></TD>
-	    <TD class="testo">üzenet csatolással</TD>
-	    <TD class="testo"><IMG SRC="{$imgbase}/images/new.gif" BORDER="0" hspace="2"/></TD>
-	    <TD class="testo">új üzenet</TD>
-	    <TD class="testo"><IMG SRC="{$imgbase}/images/seen.gif" BORDER="0" hspace="2"/></TD>
-	    <TD class="testo">megtekintett üzenet</TD>
-	    <TD class="testo"><IMG SRC="{$imgbase}/images/reply.gif" BORDER="0" hspace="2"/></TD>
-	    <TD class="testo">megválaszolt üzenet</TD>
-	    <TD class="testo"><IMG SRC="{$imgbase}/images/delete.gif" BORDER="0" hspace="2"/></TD>
-	    <TD class="testo">törölt üzenet</TD>
-	  </TR>
-	 </TABLE>
-	   </TD>
-	  </TR>
+        <TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
+          <TR>
+            <TD class="testo"><SPAN class="bold">Üzenet jelölõk:</SPAN></TD> 
+            <TD class="testo"><IMG SRC="{$imgbase}/images/attach.gif" BORDER="0" hspace="2"/></TD>
+            <TD class="testo">üzenet csatolással</TD>
+            <TD class="testo"><IMG SRC="{$imgbase}/images/new.gif" BORDER="0" hspace="2"/></TD>
+            <TD class="testo">új üzenet</TD>
+            <TD class="testo"><IMG SRC="{$imgbase}/images/seen.gif" BORDER="0" hspace="2"/></TD>
+            <TD class="testo">megtekintett üzenet</TD>
+            <TD class="testo"><IMG SRC="{$imgbase}/images/reply.gif" BORDER="0" hspace="2"/></TD>
+            <TD class="testo">megválaszolt üzenet</TD>
+            <TD class="testo"><IMG SRC="{$imgbase}/images/delete.gif" BORDER="0" hspace="2"/></TD>
+            <TD class="testo">törölt üzenet</TD>
+          </TR>
+         </TABLE>
+           </TD>
+          </TR>
     <xsl:call-template name="navigation"/>
   </xsl:template>
 
 
   <xsl:template match="MESSAGELIST">
-	<TR>
-	  <TD width="5%" height="22" class="testoNero" align="center" bgcolor="#A6B1C0"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
-	  <TD width="5%" class="testoGrande" bgcolor="#A6B1C0">Szám</TD>
-	  <TD  width="7%" class="testoGrande" bgcolor="#A6B1C0">Jelölõ</TD>
-	  <TD width="28%" class="testoGrande" bgcolor="#A6B1C0">Tárgy</TD>
-	  <TD width="25%" class="testoGrande" bgcolor="#A6B1C0">Küldõ</TD>
-	  <TD width="25%" class="testoGrande" bgcolor="#A6B1C0">Dátum</TD>
-	  <TD width="5%" class="testoGrande" bgcolor="#A6B1C0">Méret</TD>
-	</TR>
-	<xsl:for-each select="MESSAGE[number(@msgnr) >= number(/USERMODEL/CURRENT[@type='folder']/@first_msg) and number(@msgnr) &lt;= number(/USERMODEL/CURRENT[@type='folder']/@last_msg)]">
-	  <xsl:sort select="@msgnr" data-type="number" order="descending"/>
-	  <!--
-	  <xsl:variable name="bgcolor" select="##E2E6F0"/>
-	  -->
-	  <xsl:choose>
-	    <xsl:when test="@msgnr mod 2 = 1">
-	      <TR bgcolor="#E2E6F0">
-		<xsl:call-template name="headerrow"/>
-	      </TR>
-	    </xsl:when>
-	    <xsl:otherwise>
-	      <TR bgcolor="#D1D7E7">
-		<xsl:call-template name="headerrow"/>
-	      </TR>
-	    </xsl:otherwise>
-	  </xsl:choose>
-	</xsl:for-each>
+        <TR>
+          <TD width="5%" height="22" class="testoNero" align="center" bgcolor="#A6B1C0"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
+          <TD width="5%" class="testoGrande" bgcolor="#A6B1C0">Szám</TD>
+          <TD  width="7%" class="testoGrande" bgcolor="#A6B1C0">Jelölõ</TD>
+          <TD width="28%" class="testoGrande" bgcolor="#A6B1C0">Tárgy</TD>
+          <TD width="25%" class="testoGrande" bgcolor="#A6B1C0">Küldõ</TD>
+          <TD width="25%" class="testoGrande" bgcolor="#A6B1C0">Dátum</TD>
+          <TD width="5%" class="testoGrande" bgcolor="#A6B1C0">Méret</TD>
+        </TR>
+        <xsl:for-each select="MESSAGE[number(@msgnr) >= number(/USERMODEL/CURRENT[@type='folder']/@first_msg) and number(@msgnr) &lt;= number(/USERMODEL/CURRENT[@type='folder']/@last_msg)]">
+          <xsl:sort select="@msgnr" data-type="number" order="descending"/>
+          <!--
+          <xsl:variable name="bgcolor" select="##E2E6F0"/>
+          -->
+          <xsl:choose>
+            <xsl:when test="@msgnr mod 2 = 1">
+              <TR bgcolor="#E2E6F0">
+                <xsl:call-template name="headerrow"/>
+              </TR>
+            </xsl:when>
+            <xsl:otherwise>
+              <TR bgcolor="#D1D7E7">
+                <xsl:call-template name="headerrow"/>
+              </TR>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:for-each>
   
-	<TR>
-	    <TD colspan="4" width="45%" align="center" class="testoNero" bgcolor="#D1D7E7">
-	      <SELECT NAME="MARK" class="testoNero">
-		<OPTION VALUE="MARK">beállít</OPTION>
-		<OPTION VALUE="UNMARK">eltávolít</OPTION>
-	      </SELECT>
-	      üzenet jelölõ
-	      <SELECT NAME="MESSAGE FLAG" class="testoNero">
-		<OPTION VALUE="DELETED">törölt</OPTION>
-		<OPTION VALUE="SEEN">megtekintett</OPTION>
-		<OPTION VALUE="ANSWERED">megválaszolt</OPTION>
-		<OPTION VALUE="RECENT">új</OPTION>
-		<OPTION VALUE="DRAFT">piszkozat</OPTION>
-	      </SELECT>
-	      <INPUT TYPE="SUBMIT" NAME="flagmsgs" VALUE="Végrehajt!" class="testoNero"/>
-	    </TD>
-	    <TD colspan="3" width="55%" align="center" class="testoNero" bgcolor="#D1D7E7">
-	      <SELECT NAME="COPYMOVE" class="testoNero">
-		<OPTION VALUE="COPY">másold</OPTION>
-		<OPTION VALUE="MOVE">mozgasd</OPTION>
-	      </SELECT>	   
-	      az üzeneteket a következõ mappába
-	      <SELECT NAME="TO" class="testoNero">
-		<xsl:for-each select="/USERMODEL/MAILHOST_MODEL//FOLDER">
-		  <OPTION value="{@id}"><xsl:value-of select="@name"/></OPTION>
-		</xsl:for-each>
-	      </SELECT>
-	      <INPUT TYPE="SUBMIT" NAME="copymovemsgs" VALUE="Végrehajt!" class="testoNero"/>
-	    </TD>
-	</TR>
+        <TR>
+            <TD colspan="4" width="45%" align="center" class="testoNero" bgcolor="#D1D7E7">
+              <SELECT NAME="MARK" class="testoNero">
+                <OPTION VALUE="MARK">beállít</OPTION>
+                <OPTION VALUE="UNMARK">eltávolít</OPTION>
+              </SELECT>
+              üzenet jelölõ
+              <SELECT NAME="MESSAGE FLAG" class="testoNero">
+                <OPTION VALUE="DELETED">törölt</OPTION>
+                <OPTION VALUE="SEEN">megtekintett</OPTION>
+                <OPTION VALUE="ANSWERED">megválaszolt</OPTION>
+                <OPTION VALUE="RECENT">új</OPTION>
+                <OPTION VALUE="DRAFT">piszkozat</OPTION>
+              </SELECT>
+              <INPUT TYPE="SUBMIT" NAME="flagmsgs" VALUE="Végrehajt!" class="testoNero"/>
+            </TD>
+            <TD colspan="3" width="55%" align="center" class="testoNero" bgcolor="#D1D7E7">
+              <SELECT NAME="COPYMOVE" class="testoNero">
+                <OPTION VALUE="COPY">másold</OPTION>
+                <OPTION VALUE="MOVE">mozgasd</OPTION>
+              </SELECT>    
+              az üzeneteket a következõ mappába
+              <SELECT NAME="TO" class="testoNero">
+                <xsl:for-each select="/USERMODEL/MAILHOST_MODEL//FOLDER">
+                  <OPTION value="{@id}"><xsl:value-of select="@name"/></OPTION>
+                </xsl:for-each>
+              </SELECT>
+              <INPUT TYPE="SUBMIT" NAME="copymovemsgs" VALUE="Végrehajt!" class="testoNero"/>
+            </TD>
+        </TR>
   </xsl:template>
 
   <xsl:template name="navigation">
 
-	<TR>
-	  <TD colspan="7" width="100%" height="22" class="testoNero" align="center">
-	    <TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
-	      <TR>
-	       <xsl:choose>
-		<xsl:when test="number(/USERMODEL/CURRENT[@type='folder']/@first_msg) > number(1)">
-		  <TD class="testoBianco" width="3%" bgcolor="#697791" valign="middle" align="center">
-		    <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part + 1}">
-		    <IMG SRC="{$imgbase}/images/back.gif" BORDER="0"/></A>
-		  </TD>
-		  <TD class="testoBianco" width="47%" bgcolor="#697791" valign="middle"><A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part + 1}"><SPAN class="testoBianco"> Previous <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> üzenetek</SPAN></A>
-		  </TD>
-		</xsl:when>
-		<xsl:otherwise>
-		  <TD class="testoBianco" width="3%" bgcolor="#697791" valign="middle" align="center" height="22">
-		  &#160;
-		</TD>
-		<TD class="testoBianco" width="47%" bgcolor="#697791" valign="middle" height="22">
-		  &#160;
-		</TD>
-	       </xsl:otherwise>
-	      </xsl:choose>
+        <TR>
+          <TD colspan="7" width="100%" height="22" class="testoNero" align="center">
+            <TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
+              <TR>
+               <xsl:choose>
+                <xsl:when test="number(/USERMODEL/CURRENT[@type='folder']/@first_msg) > number(1)">
+                  <TD class="testoBianco" width="3%" bgcolor="#697791" valign="middle" align="center">
+                    <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part + 1}">
+                    <IMG SRC="{$imgbase}/images/back.gif" BORDER="0"/></A>
+                  </TD>
+                  <TD class="testoBianco" width="47%" bgcolor="#697791" valign="middle"><A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part + 1}"><SPAN class="testoBianco"> Previous <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> üzenetek</SPAN></A>
+                  </TD>
+                </xsl:when>
+                <xsl:otherwise>
+                  <TD class="testoBianco" width="3%" bgcolor="#697791" valign="middle" align="center" height="22">
+                  &#160;
+                </TD>
+                <TD class="testoBianco" width="47%" bgcolor="#697791" valign="middle" height="22">
+                  &#160;
+                </TD>
+               </xsl:otherwise>
+              </xsl:choose>
 
-	      <xsl:choose>
-		<xsl:when test="number(/USERMODEL/CURRENT[@type='folder']/@list_part) > number(1)">
-		  <TD class="testoBianco" width="47%" bgcolor="#697791" valign="middle" align="right">
-		    <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part - 1}"><SPAN class="testoBianco"> Next <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> üzenetek</SPAN></A>
-		   </TD>
-		   <TD class="testoBianco" width="3%" bgcolor="#697791" valign="middle" align="center">
-		   <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part - 1}">
-		    <IMG SRC="{$imgbase}/images/next.gif" BORDER="0"/></A></TD>
-		</xsl:when>
-		<xsl:otherwise>
-		<TD class="testoBianco" width="47%" bgcolor="#697791" valign="middle" align="right" height="22">
-		   &#160;
-		</TD>
-		<TD class="testoBianco" width="3%" bgcolor="#697791" valign="middle" align="center"> 
-		   &#160;
-		</TD>
-		</xsl:otherwise>
-	      </xsl:choose>
-	     </TR>
-	   </TABLE>
-	  </TD>
-	</TR>
+              <xsl:choose>
+                <xsl:when test="number(/USERMODEL/CURRENT[@type='folder']/@list_part) > number(1)">
+                  <TD class="testoBianco" width="47%" bgcolor="#697791" valign="middle" align="right">
+                    <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part - 1}"><SPAN class="testoBianco"> Next <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> üzenetek</SPAN></A>
+                   </TD>
+                   <TD class="testoBianco" width="3%" bgcolor="#697791" valign="middle" align="center">
+                   <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part - 1}">
+                    <IMG SRC="{$imgbase}/images/next.gif" BORDER="0"/></A></TD>
+                </xsl:when>
+                <xsl:otherwise>
+                <TD class="testoBianco" width="47%" bgcolor="#697791" valign="middle" align="right" height="22">
+                   &#160;
+                </TD>
+                <TD class="testoBianco" width="3%" bgcolor="#697791" valign="middle" align="center"> 
+                   &#160;
+                </TD>
+                </xsl:otherwise>
+              </xsl:choose>
+             </TR>
+           </TABLE>
+          </TD>
+        </TR>
    
 
   </xsl:template>
@@ -197,20 +197,20 @@
     <TD width="5%" class="testoNero"><xsl:value-of select="@msgnr"/></TD>
     <TD width="7%">
       <xsl:if test="@attachment='true'">
-	<IMG SRC="{$imgbase}/images/attach.gif" BORDER="0" hspace="2"/>
+        <IMG SRC="{$imgbase}/images/attach.gif" BORDER="0" hspace="2"/>
       </xsl:if>
       <xsl:if test="@recent='true'">
-	<IMG SRC="{$imgbase}/images/new.gif" BORDER="0" hspace="2"/>
+        <IMG SRC="{$imgbase}/images/new.gif" BORDER="0" hspace="2"/>
       </xsl:if>
       <xsl:if test="@seen='true'">
-	<IMG SRC="{$imgbase}/images/seen.gif" BORDER="0" hspace="2"/>
+        <IMG SRC="{$imgbase}/images/seen.gif" BORDER="0" hspace="2"/>
       </xsl:if>
       <xsl:if test="@answered='true'">
-	<IMG SRC="{$imgbase}/images/reply.gif" BORDER="0" hspace="2"/>
-      </xsl:if>	
+        <IMG SRC="{$imgbase}/images/reply.gif" BORDER="0" hspace="2"/>
+      </xsl:if> 
       <xsl:if test="@deleted='true'">
-	<IMG SRC="{$imgbase}/images/delete.gif" BORDER="0" hspace="2"/>
-      </xsl:if>	
+        <IMG SRC="{$imgbase}/images/delete.gif" BORDER="0" hspace="2"/>
+      </xsl:if> 
     </TD>
     <TD width="28%" class="testoNero">
       <xsl:choose>
@@ -231,7 +231,7 @@
       <xsl:apply-templates select="HEADER/DATE"/>
     </TD>
     <TD width="5%" class="testoNero">
-	<xsl:value-of select="@size"/>
+        <xsl:value-of select="@size"/>
     </TD>
   </xsl:template>
 

@@ -30,53 +30,53 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Administration Interface: Virtual Domain Configuration</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-	
+        
       <BODY BGCOLOR="#ffffff">
-	<CENTER><H1>WebMail Virtual Domain Configuration</H1></CENTER>
-	<FORM ACTION="{$base}/admin/domain/set?session-id={$session-id}" METHOD="POST">
-	  <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
-	    <TR BGCOLOR="lightblue">
-	      <TD><STRONG>Domain Name</STRONG></TD>
-	      <TD><STRONG>Default Host</STRONG></TD>
-	      <TD><STRONG>Authentication Host</STRONG></TD>
-	      <TD><STRONG>Host Restriction</STRONG></TD>
-	      <TD><STRONG>Allowed Hosts</STRONG> (for Host Restriction)</TD>
-	      <TD></TD>
-	    </TR>
-	    <xsl:for-each select="/GENERICMODEL/SYSDATA/DOMAIN">
-	      <TR>
-		<TD><INPUT type="TEXT" name="{NAME} DOMAIN" value="{NAME}" SIZE="20"/></TD>
-		<TD><INPUT type="TEXT" name="{NAME} DEFAULT HOST" value="{DEFAULT_HOST}" SIZE="20"/></TD>
-		<TD><INPUT type="TEXT" name="{NAME} AUTH HOST" value="{AUTHENTICATION_HOST}" SIZE="20"/></TD>
-		<TD ALIGN="center">
-		  <xsl:choose>
-		    <xsl:when test="count(RESTRICTED) > 0">
-		      <INPUT type="CHECKBOX" checked="checked" name="{NAME} HOST RESTRICTION"/>
-		    </xsl:when>
-		    <xsl:otherwise>
-		      <INPUT type="CHECKBOX" name="{NAME} HOST RESTRICTION"/>
-		    </xsl:otherwise>
-		  </xsl:choose>
-		</TD>
-		<TD><INPUT type="TEXT" name="{NAME} ALLOWED HOSTS" value="{ALLOWED_HOST}" SIZE="40"/></TD>
-		<TD><INPUT type="submit" name="CHANGE {NAME}" value="Change"/><INPUT type="submit" name="DELETE {NAME}" value="Delete"/></TD>
-	      </TR>
-	    </xsl:for-each>
-	    
-	    <TR>
-	      <TD><INPUT type="TEXT" name="NEW DOMAIN" value="new" SIZE="20"/></TD>
-	      <TD><INPUT type="TEXT" name="NEW DEFAULT HOST" SIZE="20"/></TD>
-	      <TD><INPUT type="TEXT" name="NEW AUTH HOST" SIZE="20"/></TD>	    
-	      <TD align="center"><INPUT type="CHECKBOX" name="NEW HOST RESTRICTION"/></TD>
-	      <TD><INPUT type="TEXT" name="NEW ALLOWED HOSTS" SIZE="40"/></TD>
-	      <TD><INPUT type="submit" name="ADD NEW" value="Add"/></TD>
-	    </TR>
-	  </TABLE>
-	</FORM>
+        <CENTER><H1>WebMail Virtual Domain Configuration</H1></CENTER>
+        <FORM ACTION="{$base}/admin/domain/set?session-id={$session-id}" METHOD="POST">
+          <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+            <TR BGCOLOR="lightblue">
+              <TD><STRONG>Domain Name</STRONG></TD>
+              <TD><STRONG>Default Host</STRONG></TD>
+              <TD><STRONG>Authentication Host</STRONG></TD>
+              <TD><STRONG>Host Restriction</STRONG></TD>
+              <TD><STRONG>Allowed Hosts</STRONG> (for Host Restriction)</TD>
+              <TD></TD>
+            </TR>
+            <xsl:for-each select="/GENERICMODEL/SYSDATA/DOMAIN">
+              <TR>
+                <TD><INPUT type="TEXT" name="{NAME} DOMAIN" value="{NAME}" SIZE="20"/></TD>
+                <TD><INPUT type="TEXT" name="{NAME} DEFAULT HOST" value="{DEFAULT_HOST}" SIZE="20"/></TD>
+                <TD><INPUT type="TEXT" name="{NAME} AUTH HOST" value="{AUTHENTICATION_HOST}" SIZE="20"/></TD>
+                <TD ALIGN="center">
+                  <xsl:choose>
+                    <xsl:when test="count(RESTRICTED) > 0">
+                      <INPUT type="CHECKBOX" checked="checked" name="{NAME} HOST RESTRICTION"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <INPUT type="CHECKBOX" name="{NAME} HOST RESTRICTION"/>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </TD>
+                <TD><INPUT type="TEXT" name="{NAME} ALLOWED HOSTS" value="{ALLOWED_HOST}" SIZE="40"/></TD>
+                <TD><INPUT type="submit" name="CHANGE {NAME}" value="Change"/><INPUT type="submit" name="DELETE {NAME}" value="Delete"/></TD>
+              </TR>
+            </xsl:for-each>
+            
+            <TR>
+              <TD><INPUT type="TEXT" name="NEW DOMAIN" value="new" SIZE="20"/></TD>
+              <TD><INPUT type="TEXT" name="NEW DEFAULT HOST" SIZE="20"/></TD>
+              <TD><INPUT type="TEXT" name="NEW AUTH HOST" SIZE="20"/></TD>          
+              <TD align="center"><INPUT type="CHECKBOX" name="NEW HOST RESTRICTION"/></TD>
+              <TD><INPUT type="TEXT" name="NEW ALLOWED HOSTS" SIZE="40"/></TD>
+              <TD><INPUT type="submit" name="ADD NEW" value="Add"/></TD>
+            </TR>
+          </TABLE>
+        </FORM>
       </BODY>
-	
+        
     </HTML>
 
   </xsl:template>

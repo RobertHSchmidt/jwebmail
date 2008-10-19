@@ -40,7 +40,7 @@ import net.wastl.webmail.server.http.HTTPRequestHeader;
 public class Helper  {
     
     public Helper() {
-	
+        
     }
 
 
@@ -652,18 +652,18 @@ public class Helper  {
    }
 
     public static String joinAddress(Address[] a) {
-	String s="";
-	if(a != null) {
-	    for(int i=0;i<a.length;i++) {
-		s+=a[i].toString()+", ";
-	    }
-	    if(s.length()>=2) {
-		s=s.substring(0,s.length()-2);
-	    }
-	} else {
-	    s="";
-	}
-	return s;
+        String s="";
+        if(a != null) {
+            for(int i=0;i<a.length;i++) {
+                s+=a[i].toString()+", ";
+            }
+            if(s.length()>=2) {
+                s=s.substring(0,s.length()-2);
+            }
+        } else {
+            s="";
+        }
+        return s;
     }
 
     /**
@@ -674,63 +674,63 @@ public class Helper  {
      * @returns Session-ID
      */
     public static String calcSessionCode(InetAddress a, HTTPRequestHeader h) {
-	String temp=a.toString().replace('\n',' ')
-	    +h.getHeader("User-Agent").replace('\n',' ');
-	temp=""+Long.toHexString(Math.abs(temp.hashCode()));
-	if(h.getContent("login") != null && !h.getContent("login").equals("") && h.getPath().startsWith("/login")) {
-	    temp += Long.toHexString(Math.abs(h.getContent("login").hashCode()));
-	    temp += Long.toHexString(System.currentTimeMillis());
-	} else if(h.getPath().startsWith("/admin/login")) {
-	    temp+="admin";
-	}
+        String temp=a.toString().replace('\n',' ')
+            +h.getHeader("User-Agent").replace('\n',' ');
+        temp=""+Long.toHexString(Math.abs(temp.hashCode()));
+        if(h.getContent("login") != null && !h.getContent("login").equals("") && h.getPath().startsWith("/login")) {
+            temp += Long.toHexString(Math.abs(h.getContent("login").hashCode()));
+            temp += Long.toHexString(System.currentTimeMillis());
+        } else if(h.getPath().startsWith("/admin/login")) {
+            temp+="admin";
+        }
 
-	return temp;
+        return temp;
     }
 
     public static void main(String[] args) {
-	System.err.println(Helper.crypt("AA",args[1]));
-	String crypted=encryptTEA(args[1]);
-	System.err.println("DES-Crypted: "+crypted);
-	System.err.println("DES-Decrypted: "+decryptTEA(crypted));
-    }	
+        System.err.println(Helper.crypt("AA",args[1]));
+        String crypted=encryptTEA(args[1]);
+        System.err.println("DES-Crypted: "+crypted);
+        System.err.println("DES-Decrypted: "+decryptTEA(crypted));
+    }   
 
 
     private static String str_key="39e858f86df9b909a8c87cb8d9ad599";
 
     public static String encryptTEA(String src) {
-	byte[] key=new BigInteger(str_key, 16).toByteArray();
-	TEA tea=new TEA(key);
-	byte plainSource[] = src.getBytes();
-	int enc[] = tea.encode(plainSource, plainSource.length);
+        byte[] key=new BigInteger(str_key, 16).toByteArray();
+        TEA tea=new TEA(key);
+        byte plainSource[] = src.getBytes();
+        int enc[] = tea.encode(plainSource, plainSource.length);
 
-	String s="";
-	for(int i=0;i<enc.length;i++) {
-	    s+=Integer.toHexString((byte)(enc[i] >>> 24)+128).toUpperCase()+":";
-	    s+=Integer.toHexString((byte)(enc[i] >>> 16)+128).toUpperCase()+":";
-	    s+=Integer.toHexString((byte)(enc[i] >>> 8)+128).toUpperCase()+":";
-	    s+=Integer.toHexString((byte)(enc[i])+128).toUpperCase()+":";
-	}
-// 	System.err.println("encryptTEA: Returning "+s);
-	return s;
+        String s="";
+        for(int i=0;i<enc.length;i++) {
+            s+=Integer.toHexString((byte)(enc[i] >>> 24)+128).toUpperCase()+":";
+            s+=Integer.toHexString((byte)(enc[i] >>> 16)+128).toUpperCase()+":";
+            s+=Integer.toHexString((byte)(enc[i] >>> 8)+128).toUpperCase()+":";
+            s+=Integer.toHexString((byte)(enc[i])+128).toUpperCase()+":";
+        }
+//      System.err.println("encryptTEA: Returning "+s);
+        return s;
     }
     
     public static String decryptTEA(String src) {
-	StringTokenizer tok=new StringTokenizer(src,": ");
-	byte[] key=new BigInteger(str_key, 16).toByteArray();
-	TEA tea=new TEA(key);
-	byte inb[] = new byte[tok.countTokens()];
-	for(int i=0;i<inb.length && tok.hasMoreTokens();i++) {
-	    String s=tok.nextToken();
-	    try {
-		inb[i]=(byte)(Integer.parseInt(s,16)-128);
-	    } catch(NumberFormatException ex) {
-		System.err.println("Could not convert string '"+s+"' to byte.");
-	    }
-	}
-	byte dec[] = tea.decode(inb,inb.length);
-	String s=new String(dec);
-// 	System.err.println("encryptTEA: Returning "+s);
-	return s;
+        StringTokenizer tok=new StringTokenizer(src,": ");
+        byte[] key=new BigInteger(str_key, 16).toByteArray();
+        TEA tea=new TEA(key);
+        byte inb[] = new byte[tok.countTokens()];
+        for(int i=0;i<inb.length && tok.hasMoreTokens();i++) {
+            String s=tok.nextToken();
+            try {
+                inb[i]=(byte)(Integer.parseInt(s,16)-128);
+            } catch(NumberFormatException ex) {
+                System.err.println("Could not convert string '"+s+"' to byte.");
+            }
+        }
+        byte dec[] = tea.decode(inb,inb.length);
+        String s=new String(dec);
+//      System.err.println("encryptTEA: Returning "+s);
+        return s;
     }
 
     /** 
@@ -738,74 +738,74 @@ public class Helper  {
      * ">" are in front of the line, ignoring all whitespaces. 
      */
     public static int getQuoteLevel(String token) {
-	int current_quotelevel=0;
-	for(int i=0;i<token.length() && 
-		(token.substring(i).startsWith(">") || token.substring(i).startsWith(" "));
-	    i++) {
-	    if(token.substring(i).startsWith(">")) current_quotelevel++;
-	}
-	return current_quotelevel;
+        int current_quotelevel=0;
+        for(int i=0;i<token.length() && 
+                (token.substring(i).startsWith(">") || token.substring(i).startsWith(" "));
+            i++) {
+            if(token.substring(i).startsWith(">")) current_quotelevel++;
+        }
+        return current_quotelevel;
     }
 
 
     protected static int findFittingBreakPos(String line, int linesize) {
-	int pos;
-	for(pos=linesize; pos>0; pos--) {
-	    switch(line.charAt(pos)) {
-	    case ' ':
-	    case '\n':
-	    case '\t':
-	    case '.':
-	    case ',':
-	    case ';':
-	    case ':':
-	    case '!':
-	    case '?':
-		return pos+1;
-	    }
-	}
-	return linesize+1;
+        int pos;
+        for(pos=linesize; pos>0; pos--) {
+            switch(line.charAt(pos)) {
+            case ' ':
+            case '\n':
+            case '\t':
+            case '.':
+            case ',':
+            case ';':
+            case ':':
+            case '!':
+            case '?':
+                return pos+1;
+            }
+        }
+        return linesize+1;
     }
 
     public static Enumeration breakLine(String line, int linesize, int quotelevel) {
-	if(line.length() <= linesize) {
-	    final String s=line;
-	    return new Enumeration() {
-		    int count=0;
-		    public boolean hasMoreElements() {
-			return count == 0;
-		    }
-		    
-		    public Object nextElement() {
-			count++;
-			if(count==1) return s;
-			else return null;
-		    }
-		};
-	} else {
-	    int breakpos=findFittingBreakPos(line,linesize);
-	    final String first=line.substring(0,breakpos);
-	    String rest="";
-	    for(int i=0;i<quotelevel;i++) rest+=">";
-	    rest+=line.substring(breakpos);
-	    final Enumeration enum=breakLine(rest,linesize,quotelevel);
-	    return new Enumeration() {
-		    int count=0;
-		    public boolean hasMoreElements() {
-			return count < 1 || enum.hasMoreElements();
-		    }
+        if(line.length() <= linesize) {
+            final String s=line;
+            return new Enumeration() {
+                    int count=0;
+                    public boolean hasMoreElements() {
+                        return count == 0;
+                    }
+                    
+                    public Object nextElement() {
+                        count++;
+                        if(count==1) return s;
+                        else return null;
+                    }
+                };
+        } else {
+            int breakpos=findFittingBreakPos(line,linesize);
+            final String first=line.substring(0,breakpos);
+            String rest="";
+            for(int i=0;i<quotelevel;i++) rest+=">";
+            rest+=line.substring(breakpos);
+            final Enumeration enum=breakLine(rest,linesize,quotelevel);
+            return new Enumeration() {
+                    int count=0;
+                    public boolean hasMoreElements() {
+                        return count < 1 || enum.hasMoreElements();
+                    }
 
-		    public Object nextElement() {
-			count++;
-			if(count == 1) {
-			    return first;
-			} else {
-			    return enum.nextElement();
-			}
-		    }
-		};
-	}
+                    public Object nextElement() {
+                        count++;
+                        if(count == 1) {
+                            return first;
+                        } else {
+                            return enum.nextElement();
+                        }
+                    }
+                };
+        }
     }
-			   
+                           
 
 } // Helper

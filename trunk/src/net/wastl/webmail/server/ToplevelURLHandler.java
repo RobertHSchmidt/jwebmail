@@ -48,105 +48,105 @@ import javax.servlet.ServletException;
 /* 9/24/2000 devink -- changed for challenge/response authentication */
 
 public class ToplevelURLHandler implements URLHandler {
-	
+        
     WebMailServer parent;
     //Hashtable urlhandlers;
     URLHandlerTree urlhandlers;
-	
+        
     public ToplevelURLHandler(WebMailServer parent) {
-	System.err.println("- Initializing WebMail URL Handler ... done.");
-	urlhandlers=new URLHandlerTree("/");
-	urlhandlers.addHandler("/",this);
-	this.parent=parent;
+        System.err.println("- Initializing WebMail URL Handler ... done.");
+        urlhandlers=new URLHandlerTree("/");
+        urlhandlers.addHandler("/",this);
+        this.parent=parent;
     }
     
     public void registerHandler(String url, URLHandler handler) {
-	//urlhandlers.put(url,handler);
-	urlhandlers.addHandler(url,handler);
-	//System.err.println("Tree changed: "+urlhandlers.toString());
+        //urlhandlers.put(url,handler);
+        urlhandlers.addHandler(url,handler);
+        //System.err.println("Tree changed: "+urlhandlers.toString());
     }
-	
+        
     public String getURL() {
-	return "/";
+        return "/";
     }
-	
+        
     public String getName() {
-	return "TopLevelURLHandler";
+        return "TopLevelURLHandler";
     }
-	
+        
     public String getDescription() {
-	return "";
+        return "";
     }
 
     public HTMLDocument handleException(Exception ex, HTTPSession session, HTTPRequestHeader header) throws ServletException {
-	try {
-	    session.setException(ex);
-	    String theme=parent.getDefaultTheme();
-	    Locale locale=Locale.getDefault();
-	    if(session instanceof UserSession) {
-		UserSession sess=(UserSession)session;
-		theme=sess.getUser().getTheme();
-		locale=sess.getUser().getPreferredLocale();
-	    }
-	    return new XHTMLDocument(session.getModel(),parent.getStorage().getStylesheet("error.xsl",locale,theme));
-	} catch(Exception myex) {
-	    parent.getLogger().log(Logger.LOG_ERR,"Error while handling exception:");
-	    parent.getLogger().log(Logger.LOG_ERR,myex);
-	    parent.getLogger().log(Logger.LOG_ERR,"The handled exception was:");
-	    parent.getLogger().log(Logger.LOG_ERR,ex);
-	    throw new ServletException(myex);
-	}
+        try {
+            session.setException(ex);
+            String theme=parent.getDefaultTheme();
+            Locale locale=Locale.getDefault();
+            if(session instanceof UserSession) {
+                UserSession sess=(UserSession)session;
+                theme=sess.getUser().getTheme();
+                locale=sess.getUser().getPreferredLocale();
+            }
+            return new XHTMLDocument(session.getModel(),parent.getStorage().getStylesheet("error.xsl",locale,theme));
+        } catch(Exception myex) {
+            parent.getLogger().log(Logger.LOG_ERR,"Error while handling exception:");
+            parent.getLogger().log(Logger.LOG_ERR,myex);
+            parent.getLogger().log(Logger.LOG_ERR,"The handled exception was:");
+            parent.getLogger().log(Logger.LOG_ERR,ex);
+            throw new ServletException(myex);
+        }
     }
-	
+        
     public HTMLDocument handleURL(String url, HTTPSession session, HTTPRequestHeader header) throws WebMailException, ServletException {
 
-	HTMLDocument content;
-	
-	if(url.equals("/")) {
-	    //content=new HTMLLoginScreen(parent,parent.getStorage(),false);
-	    XMLGenericModel model=parent.getStorage().createXMLGenericModel();
+        HTMLDocument content;
+        
+        if(url.equals("/")) {
+            //content=new HTMLLoginScreen(parent,parent.getStorage(),false);
+            XMLGenericModel model=parent.getStorage().createXMLGenericModel();
 
-	    AuthDisplayMngr adm = parent.getStorage().getAuthenticator().getAuthDisplayMngr();
+            AuthDisplayMngr adm = parent.getStorage().getAuthenticator().getAuthDisplayMngr();
 
-	    if(header.isContentSet("login")) {
-		model.setStateVar("invalid password","yes");
-	    }
+            if(header.isContentSet("login")) {
+                model.setStateVar("invalid password","yes");
+            }
 
-	    // Let the authenticator setup the loginscreen
-	    adm.setLoginScreenVars(model);
+            // Let the authenticator setup the loginscreen
+            adm.setLoginScreenVars(model);
 
-		// Modified by exce, start.
-		/**
-		 * Show login screen depending on WebMailServer's default locale.
-		 */
-		/*
-	    content = new XHTMLDocument(model.getRoot(), 
-					parent.getStorage().getStylesheet(adm.getLoginScreenFile(), 
-									  Locale.getDefault(),"default"));
-		*/
-	    content = new XHTMLDocument(model.getRoot(), 
-					parent.getStorage().getStylesheet(adm.getLoginScreenFile(), 
-										parent.getDefaultLocale(),parent.getProperty("webmail.default.theme")));
-		// Modified by exce, end.
-	} else if(url.equals("/login")) {
+                // Modified by exce, start.
+                /**
+                 * Show login screen depending on WebMailServer's default locale.
+                 */
+                /*
+            content = new XHTMLDocument(model.getRoot(), 
+                                        parent.getStorage().getStylesheet(adm.getLoginScreenFile(), 
+                                                                          Locale.getDefault(),"default"));
+                */
+            content = new XHTMLDocument(model.getRoot(), 
+                                        parent.getStorage().getStylesheet(adm.getLoginScreenFile(), 
+                                                                                parent.getDefaultLocale(),parent.getProperty("webmail.default.theme")));
+                // Modified by exce, end.
+        } else if(url.equals("/login")) {
 
-	    UserSession sess=(UserSession)session;
-	    UserData user=sess.getUser();
-	    content=new XHTMLDocument(session.getModel(),parent.getStorage().getStylesheet("login.xsl",user.getPreferredLocale(),user.getTheme()));
-	} else {
-	    /* Let the plugins handle it */
-			
-	    URLHandler uh=urlhandlers.getHandler(url);
+            UserSession sess=(UserSession)session;
+            UserData user=sess.getUser();
+            content=new XHTMLDocument(session.getModel(),parent.getStorage().getStylesheet("login.xsl",user.getPreferredLocale(),user.getTheme()));
+        } else {
+            /* Let the plugins handle it */
+                        
+            URLHandler uh=urlhandlers.getHandler(url);
 
-	    if(uh != null && uh != this) {
-		// System.err.println("Handler: "+uh.getName()+" ("+uh.getURL()+")");
-		String suburl=url.substring(uh.getURL().length(),url.length());
-		content=uh.handleURL(suburl,session,header);
-	    } else {
-		throw new DocumentNotFoundException(url + " was not found on this server");
-	    }
-	}
-	return content;
+            if(uh != null && uh != this) {
+                // System.err.println("Handler: "+uh.getName()+" ("+uh.getURL()+")");
+                String suburl=url.substring(uh.getURL().length(),url.length());
+                content=uh.handleURL(suburl,session,header);
+            } else {
+                throw new DocumentNotFoundException(url + " was not found on this server");
+            }
+        }
+        return content;
     }
-	
+        
 } // URLHandler

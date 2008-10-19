@@ -29,49 +29,49 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
       
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
 
-	<TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
-	  <TR>
-	    <TD colspan="2" height="22" class="testoNero">
-	      <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-	    WebMail Folder Setup for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Help</A>)
-		</TD>
-	    </TR>
-	   <TR>
-	    <TD colspan="4" bgcolor="#697791" height="22" class="testoBianco">
-	        Login name <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/><BR/>
-	        Account exists since <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>
-	   </TD>
-	  </TR>
-	  <TR>
-	    <TD colspan="2" bgcolor="#A6B1C0" height="22" class="testoGrande">
-		You have the following options:
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD height="22" width="23%" class="testoNero" bgcolor="#E2E6F0">      
-	      <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">Add/Remove Mailbox</A>
-	    </TD>
-	    <TD height="22" class="testoNero" width="77%" bgcolor="#E2E6F0">
-	      WebMail allows you to have several connections to IMAP and POP hosts. You can add and remove such connections here.
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD height="22" width="23%" bgcolor="#D1D7E7" class="testoNero">      
-	      <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">Add/Remove Subfolders</A>
-	    </TD>
-	    <TD height="22" class="testoNero" width="77%" bgcolor="#D1D7E7">
-	      WebMail will display you a tree of folders for each mailbox where you can choose to add or
-	      remove individual subfolders.
-	    </TD>
-	  </TR>
-	</TABLE>
+        <TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
+          <TR>
+            <TD colspan="2" height="22" class="testoNero">
+              <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
+            WebMail Folder Setup for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Help</A>)
+                </TD>
+            </TR>
+           <TR>
+            <TD colspan="4" bgcolor="#697791" height="22" class="testoBianco">
+                Login name <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/><BR/>
+                Account exists since <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>
+           </TD>
+          </TR>
+          <TR>
+            <TD colspan="2" bgcolor="#A6B1C0" height="22" class="testoGrande">
+                You have the following options:
+            </TD>
+          </TR>
+          <TR>
+            <TD height="22" width="23%" class="testoNero" bgcolor="#E2E6F0">      
+              <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">Add/Remove Mailbox</A>
+            </TD>
+            <TD height="22" class="testoNero" width="77%" bgcolor="#E2E6F0">
+              WebMail allows you to have several connections to IMAP and POP hosts. You can add and remove such connections here.
+            </TD>
+          </TR>
+          <TR>
+            <TD height="22" width="23%" bgcolor="#D1D7E7" class="testoNero">      
+              <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">Add/Remove Subfolders</A>
+            </TD>
+            <TD height="22" class="testoNero" width="77%" bgcolor="#D1D7E7">
+              WebMail will display you a tree of folders for each mailbox where you can choose to add or
+              remove individual subfolders.
+            </TD>
+          </TR>
+        </TABLE>
       </BODY>
 
     </HTML>

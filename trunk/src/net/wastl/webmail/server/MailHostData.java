@@ -29,8 +29,8 @@ import java.util.*;
  * @author Sebastian Schaffert
  * @version $Revision$
  */
-public interface MailHostData {	
-	
+public interface MailHostData { 
+        
     /**
      * The password for this mailbox
      * @return Value of password.

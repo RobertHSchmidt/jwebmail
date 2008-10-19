@@ -52,7 +52,7 @@ public interface ConfigStore  {
     public boolean isConfigSet(String key);
 
     public void setConfig(String key, String value) 
-	throws IllegalArgumentException;
+        throws IllegalArgumentException;
 
     /**
      * Set a configuration "key" to the specified value.
@@ -60,7 +60,7 @@ public interface ConfigStore  {
      * @paran value value to set
      */
     public void setConfig(String key, String value, boolean filter, boolean notify) 
-	throws IllegalArgumentException;
+        throws IllegalArgumentException;
     
 
     public void addConfigurationListener(String key, ConfigurationListener l);

@@ -45,73 +45,73 @@ public class FolderList implements Plugin, URLHandler {
     
     public static final String VERSION="1.5";
     public static final String URL="/folder/list";
-	
-	
+        
+        
     StorageManager store;
     WebMailServer parent;
-	
+        
     public FolderList() {
-		
+                
     }
-	
+        
     public void register(WebMailServer parent) {
-	parent.getURLHandler().registerHandler(URL,this);
-	this.store=parent.getStorage();
-	this.parent=parent;
+        parent.getURLHandler().registerHandler(URL,this);
+        this.store=parent.getStorage();
+        this.parent=parent;
     }
-	
+        
     public String getName() {
-	return "FolderList";
+        return "FolderList";
     }
-	
+        
     public String getDescription() {
-	return "List the contents of a folder";
+        return "List the contents of a folder";
     }
-	
+        
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
-	
+        
     public String getURL() {
-	return URL;
+        return URL;
     }
-		
+                
     public HTMLDocument handleURL(String suburl, HTTPSession sess, HTTPRequestHeader header) throws WebMailException {
-	if(sess == null) {
-	    throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
-	}
-	UserSession session=(UserSession)sess;
-	UserData user=session.getUser();
-	String hashcode=header.getContent("folder-id");
+        if(sess == null) {
+            throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
+        }
+        UserSession session=(UserSession)sess;
+        UserData user=session.getUser();
+        String hashcode=header.getContent("folder-id");
 
-	if(header.isContentSet("flag")) {
-	    try {
-		session.setFlags(hashcode,header);
-	    } catch(Exception ex) {
-		if(WebMailServer.getDebug()) ex.printStackTrace();
-		throw new WebMailException(ex.getMessage());
-	    }
-	}
+        if(header.isContentSet("flag")) {
+            try {
+                session.setFlags(hashcode,header);
+            } catch(Exception ex) {
+                if(WebMailServer.getDebug()) ex.printStackTrace();
+                throw new WebMailException(ex.getMessage());
+            }
+        }
 
-	int nr=1;
-	try {
-	    nr=Integer.parseInt(header.getContent("part"));
-	} catch(Exception e) {}
-	try {
-	    session.createMessageList(hashcode,nr);
-	} catch(NoSuchFolderException e) {
-	    throw new DocumentNotFoundException("Could not find folder "+hashcode+"!");
-	}
-	return new XHTMLDocument(session.getModel(),
-				 store.getStylesheet("messagelist.xsl",
-						     user.getPreferredLocale(),user.getTheme()));
+        int nr=1;
+        try {
+            nr=Integer.parseInt(header.getContent("part"));
+        } catch(Exception e) {}
+        try {
+            session.createMessageList(hashcode,nr);
+        } catch(NoSuchFolderException e) {
+            throw new DocumentNotFoundException("Could not find folder "+hashcode+"!");
+        }
+        return new XHTMLDocument(session.getModel(),
+                                 store.getStylesheet("messagelist.xsl",
+                                                     user.getPreferredLocale(),user.getTheme()));
     }
-	
+        
     public String provides() {
-	return "message list";
+        return "message list";
     }
-	
+        
     public String requires() {
-	return "mailbox list";
+        return "mailbox list";
     }
 } // FolderList

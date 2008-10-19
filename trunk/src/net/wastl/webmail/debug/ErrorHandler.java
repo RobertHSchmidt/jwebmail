@@ -13,8 +13,8 @@ package net.wastl.webmail.debug;
 public class ErrorHandler  {
     
     public ErrorHandler(Exception ex) {
-	//System.err.println(ex.getMessage());;
-	ex.printStackTrace();
+        //System.err.println(ex.getMessage());;
+        ex.printStackTrace();
     }
     
 } // ErrorHandler

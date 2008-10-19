@@ -50,61 +50,61 @@ public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
     
     public XHTMLDocument(Document xml, String xsl) throws WebMailException {
 
-	StringWriter writer = new StringWriter();
+        StringWriter writer = new StringWriter();
 
-	long start_t=System.currentTimeMillis();
-	try {
-	    DOMSource msg_xml=new DOMSource((Node)xml);
-	    StreamSource msg_xsl=new StreamSource("file://"+xsl);
-	    StreamResult msg_result=new StreamResult(writer);
-	    
-	    TransformerFactory factory = TransformerFactory.newInstance();
+        long start_t=System.currentTimeMillis();
+        try {
+            DOMSource msg_xml=new DOMSource((Node)xml);
+            StreamSource msg_xsl=new StreamSource("file://"+xsl);
+            StreamResult msg_result=new StreamResult(writer);
+            
+            TransformerFactory factory = TransformerFactory.newInstance();
 
-	    Transformer processor = factory.newTransformer(msg_xsl);
+            Transformer processor = factory.newTransformer(msg_xsl);
 
-	    //processor.setDiagnosticsOutput(System.err);
-	    processor.transform(msg_xml,msg_result);
-	} catch(Exception ex) {
-	    System.err.println("Error transforming XML with "+xsl+" to XHTML.");
-	    WebMailServer.getLogger().log(Logger.LOG_INFO,"Error transforming XML with "+xsl+" to XHTML.");
-	    throw new WebMailException(ex.getMessage());
-	}
-	long end_t=System.currentTimeMillis();
-	//System.err.println("Transformation XML --> XHTML took "+(end_t-start_t)+" ms.");
-	WebMailServer.getLogger().log(Logger.LOG_DEBUG,"Transformation XML --> XHTML took "+(end_t-start_t)+" ms.");
+            //processor.setDiagnosticsOutput(System.err);
+            processor.transform(msg_xml,msg_result);
+        } catch(Exception ex) {
+            System.err.println("Error transforming XML with "+xsl+" to XHTML.");
+            WebMailServer.getLogger().log(Logger.LOG_INFO,"Error transforming XML with "+xsl+" to XHTML.");
+            throw new WebMailException(ex.getMessage());
+        }
+        long end_t=System.currentTimeMillis();
+        //System.err.println("Transformation XML --> XHTML took "+(end_t-start_t)+" ms.");
+        WebMailServer.getLogger().log(Logger.LOG_DEBUG,"Transformation XML --> XHTML took "+(end_t-start_t)+" ms.");
 
-	content=writer.toString();
+        content=writer.toString();
     }
 
     public XHTMLDocument(Document xml, Templates stylesheet) throws WebMailException {
-	StringWriter writer = new StringWriter();
+        StringWriter writer = new StringWriter();
 
-	long start_t=System.currentTimeMillis();
-	try {
-	    DOMSource msg_xml=new DOMSource((Node)xml);
-	    StreamResult msg_result=new StreamResult(writer);
-	    
-	    Transformer processor = stylesheet.newTransformer();
-	    processor.transform(msg_xml,msg_result);
-	} catch(Exception ex) {
-	    System.err.println("Error transforming XML to XHTML.");
-	    ex.printStackTrace();	    
-	    throw new WebMailException(ex.toString());
-	}
-	long end_t=System.currentTimeMillis();
-	//System.err.println("Transformation (with precompiled stylesheet) XML --> XHTML took "+(end_t-start_t)+" ms.");
-	WebMailServer.getLogger().log(Logger.LOG_DEBUG,"Transformation (with precompiled stylesheet) XML --> XHTML took "+(end_t-start_t)+" ms.");
+        long start_t=System.currentTimeMillis();
+        try {
+            DOMSource msg_xml=new DOMSource((Node)xml);
+            StreamResult msg_result=new StreamResult(writer);
+            
+            Transformer processor = stylesheet.newTransformer();
+            processor.transform(msg_xml,msg_result);
+        } catch(Exception ex) {
+            System.err.println("Error transforming XML to XHTML.");
+            ex.printStackTrace();           
+            throw new WebMailException(ex.toString());
+        }
+        long end_t=System.currentTimeMillis();
+        //System.err.println("Transformation (with precompiled stylesheet) XML --> XHTML took "+(end_t-start_t)+" ms.");
+        WebMailServer.getLogger().log(Logger.LOG_DEBUG,"Transformation (with precompiled stylesheet) XML --> XHTML took "+(end_t-start_t)+" ms.");
 
-	content=writer.toString();
+        content=writer.toString();
     }
-	
+        
 
     public String toString() {
-	return content;
+        return content;
     }
-	
+        
     public int length() {
-	return content.length();
+        return content.length();
     }
     
 } // XHTMLDocument

@@ -25,31 +25,31 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Title Frame</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/> 
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/> 
       </HEAD>
 
       <BODY bgcolor="#ffffff">
-	<H1><CENTER>Thanks for using WebMail!</CENTER></H1>
-	<H3><CENTER>Preparing logout for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</CENTER></H3>
-	<P>
-	  <CENTER>
-	    Please stand by while your session is being closed and your configuration
-	    is being written to disk.<BR/>
-	    If you don't see the <STRONG>login-screen</STRONG> in a few seconds, please 
-	    <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/">click here</A>.
-	  </CENTER>
-	</P>
-	<P>
-	  <CENTER>
-	    <FONT SIZE="-1">
-	      <EMPH>
-		WebMail is (c)1998-2000 by <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. 
-		It is distributed under the terms of the GNU General Public License (LGPL).
-	      </EMPH>
-	    </FONT>  
-	  </CENTER>
-	</P>
+        <H1><CENTER>Thanks for using WebMail!</CENTER></H1>
+        <H3><CENTER>Preparing logout for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</CENTER></H3>
+        <P>
+          <CENTER>
+            Please stand by while your session is being closed and your configuration
+            is being written to disk.<BR/>
+            If you don't see the <STRONG>login-screen</STRONG> in a few seconds, please 
+            <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/">click here</A>.
+          </CENTER>
+        </P>
+        <P>
+          <CENTER>
+            <FONT SIZE="-1">
+              <EMPH>
+                WebMail is (c)1998-2000 by <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. 
+                It is distributed under the terms of the GNU General Public License (LGPL).
+              </EMPH>
+            </FONT>  
+          </CENTER>
+        </P>
       </BODY>
 
     </HTML>

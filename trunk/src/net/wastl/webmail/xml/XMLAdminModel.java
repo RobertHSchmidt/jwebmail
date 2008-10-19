@@ -42,32 +42,32 @@ import javax.xml.parsers.ParserConfigurationException;
 public class XMLAdminModel extends XMLGenericModel {
     
     public XMLAdminModel(WebMailServer parent, Element rsysdata) throws ParserConfigurationException {
-	super(parent,rsysdata);
+        super(parent,rsysdata);
     }
 
     public synchronized Element addStateElement(String tag) {
-	Element elem=root.createElement(tag);
-	statedata.appendChild(elem);
-	return elem;
+        Element elem=root.createElement(tag);
+        statedata.appendChild(elem);
+        return elem;
     }
 
     public synchronized Element createElement(String tag) {
-	return root.createElement(tag);
+        return root.createElement(tag);
     }
 
     public synchronized Element createTextElement(String tag, String value) {
-	Element elem=root.createElement(tag);
-	XMLCommon.setElementTextValue(elem,value);
-	return elem;
+        Element elem=root.createElement(tag);
+        XMLCommon.setElementTextValue(elem,value);
+        return elem;
     }
     
     public synchronized void importUserData(Element userdata) {
-	XMLCommon.genericRemoveAll(statedata,"USERDATA");
-	statedata.appendChild(root.importNode(userdata,true));
+        XMLCommon.genericRemoveAll(statedata,"USERDATA");
+        statedata.appendChild(root.importNode(userdata,true));
     }
     
     public synchronized void clearUserData() {
-	XMLCommon.genericRemoveAll(statedata,"USERDATA");
+        XMLCommon.genericRemoveAll(statedata,"USERDATA");
     }
 
 } // XMLAdminModel

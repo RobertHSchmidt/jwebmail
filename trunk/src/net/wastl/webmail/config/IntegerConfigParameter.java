@@ -31,19 +31,19 @@ package net.wastl.webmail.config;
 public class IntegerConfigParameter extends ConfigParameter {
     
     public IntegerConfigParameter(String name, String def, String desc) {
-	super(name,def,desc);
+        super(name,def,desc);
     }
     
     public boolean isPossibleValue(Object value) {
-	try {
-	    int i=Integer.parseInt((String)value);
-	    return true;
-	} catch(NumberFormatException e) {
-	    return false;
-	}	
+        try {
+            int i=Integer.parseInt((String)value);
+            return true;
+        } catch(NumberFormatException e) {
+            return false;
+        }       
     }
     
     public String getType() {
-	return "integer";
+        return "integer";
     }
 } // ConfigIntegerParameter

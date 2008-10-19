@@ -11,7 +11,7 @@
 <!ELEMENT EMAIL (#PCDATA)>
 <!ELEMENT SIGNATURE (#PCDATA)>
 <!ATTLIST SIGNATURE
-	xml:space 	(default|preserve) 	'preserve'>
+        xml:space       (default|preserve)      'preserve'>
 <!ELEMENT LOCALE (#PCDATA)>
 <!ELEMENT THEME (#PCDATA)>
 <!ELEMENT MAILHOST (MH_LOGIN,MH_PASSWORD,MH_URI)>
@@ -31,21 +31,21 @@
 <!ELEMENT COMMENT (#PCDATA)>
 
 <!-- Currently (0.7) the following INTVARs are used in WebMail:
-"show images"		- Show attached images inline
-"show fancy"		- Show fancy stuff (Replace smilies with icons, ...)
-"filter javascript"	- Remove JavaScript from HTML messages (security)
-"set message flags"	- Allow WebMail to write on folders (for message flagging, deletion, etc)
-"save sent messages"	- Save sent messages to a folder (SENT_FOLDER)
+"show images"           - Show attached images inline
+"show fancy"            - Show fancy stuff (Replace smilies with icons, ...)
+"filter javascript"     - Remove JavaScript from HTML messages (security)
+"set message flags"     - Allow WebMail to write on folders (for message flagging, deletion, etc)
+"save sent messages"    - Save sent messages to a folder (SENT_FOLDER)
 -->
 <!ATTLIST BOOLVAR     name  CDATA       #REQUIRED
                       value (yes|no)    #IMPLIED>
 
 <!-- Currently (0.7) the following INTVARs are used in WebMail:
-"first login"		- The first login of a user in seconds since 1.1.1970 (for a formated string see statedata.dtd)
-"last login"		- The last login of the user in seconds since 1.1.1970
-"login count"		- The number of logins this user already had
-"max show messages" 	- The number of messages to show on a page in the message list
-"icon size" 		- The size of the navbar icons (for default layout).
+"first login"           - The first login of a user in seconds since 1.1.1970 (for a formated string see statedata.dtd)
+"last login"            - The last login of the user in seconds since 1.1.1970
+"login count"           - The number of logins this user already had
+"max show messages"     - The number of messages to show on a page in the message list
+"icon size"             - The size of the navbar icons (for default layout).
 -->
 <!ATTLIST INTVAR      name  CDATA       #REQUIRED
                       value CDATA       #IMPLIED>

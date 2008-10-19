@@ -70,7 +70,7 @@
 
     <!-- Storage mechanism to be used by WebMail. Don't change unless you know
          what you are doing (i.e. if you have a different Storage 
-	 implementation -->
+         implementation -->
     <init-param>
       <param-name>webmail.storage.user</param-name>
       <param-value>net.wastl.webmail.storage.xml.XMLStorage</param-value>
@@ -171,8 +171,8 @@
 
     <!-- WebMail should be loaded on startup as it needs quite some time for
          initialization. The order doesn't matter, however.
-	 Also, please ensure that reloading of the servlet classes is disabled
-	 for WebMail -->
+         Also, please ensure that reloading of the servlet classes is disabled
+         for WebMail -->
     <load-on-startup>
       -2147483646
     </load-on-startup>

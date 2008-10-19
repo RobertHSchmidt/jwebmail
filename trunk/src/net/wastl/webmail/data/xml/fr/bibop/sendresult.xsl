@@ -34,65 +34,65 @@
     <HTML>
       <HEAD>
         <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Resultat Envoi Message</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META CONTENT="GENERATOR" VALUE="WebMail 0.7 XSL"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="GENERATOR" VALUE="WebMail 0.7 XSL"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
       
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
-	<TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
-	  <TR>
-	    <TD height="22" class="testoNero">
-	      <IMG SRC="{$imgbase}/images/icona_composer.gif" BORDER="0" align="absmiddle"/>Résultat délivrance du Message
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD bgcolor="#697791" height="22" class="testoBianco">Date: <xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='date']/@value"/></TD>
-	  </TR>
-	  <TR>
-	    <TD class="testoGrande" bgcolor="#A6B1C0">Envoi du message<BR/>
-	      Sujet: <SPAN class="testoNero"><xsl:value-of select="$work/HEADER/SUBJECT"/></SPAN><BR/>
-	      Destinataire: <SPAN class="testoNero"><xsl:value-of select="$work/HEADER/TO"/></SPAN><BR/>
-	      Date: <SPAN class="testoNero"><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='date']/@value"/></SPAN>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD class="testoGrande" bgcolor="#D1D7E7">Status d'Envoi:
-		<SPAN class="testoNero"><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='send status']/@value"/>
-		</SPAN>
-	    </TD>
-	</TR>
-	<TR>
+        <TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
+          <TR>
+            <TD height="22" class="testoNero">
+              <IMG SRC="{$imgbase}/images/icona_composer.gif" BORDER="0" align="absmiddle"/>Résultat délivrance du Message
+            </TD>
+          </TR>
+          <TR>
+            <TD bgcolor="#697791" height="22" class="testoBianco">Date: <xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='date']/@value"/></TD>
+          </TR>
+          <TR>
+            <TD class="testoGrande" bgcolor="#A6B1C0">Envoi du message<BR/>
+              Sujet: <SPAN class="testoNero"><xsl:value-of select="$work/HEADER/SUBJECT"/></SPAN><BR/>
+              Destinataire: <SPAN class="testoNero"><xsl:value-of select="$work/HEADER/TO"/></SPAN><BR/>
+              Date: <SPAN class="testoNero"><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='date']/@value"/></SPAN>
+            </TD>
+          </TR>
+          <TR>
+            <TD class="testoGrande" bgcolor="#D1D7E7">Status d'Envoi:
+                <SPAN class="testoNero"><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='send status']/@value"/>
+                </SPAN>
+            </TD>
+        </TR>
+        <TR>
          <TD class="testoGrande" bgcolor="#E2E6F0">
-	  <!-- Only show the section for valid addresses if there actually were any -->
-	  <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid sent addresses']/@value != ''">
-	       Délivré aux adresses: <SPAN class="testoNero">valide&#160;&#160;<xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='valid sent addresses']/@value"/></SPAN>
-	  </xsl:if>
-	 </TD>
-	</TR>
-	<TR>
-	  <TD class="testoGrande" bgcolor="#E2E6F0">  
-	  <!-- Only show the section for invalid addresses if there actually were any -->
-	  <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value != '' or /USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value != ''">
-	    Non délivré aux adresses: 
-	      <SPAN class="testoNero">
-		<xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value != ''">valide&#160;&#160;
+          <!-- Only show the section for valid addresses if there actually were any -->
+          <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid sent addresses']/@value != ''">
+               Délivré aux adresses: <SPAN class="testoNero">valide&#160;&#160;<xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='valid sent addresses']/@value"/></SPAN>
+          </xsl:if>
+         </TD>
+        </TR>
+        <TR>
+          <TD class="testoGrande" bgcolor="#E2E6F0">  
+          <!-- Only show the section for invalid addresses if there actually were any -->
+          <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value != '' or /USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value != ''">
+            Non délivré aux adresses: 
+              <SPAN class="testoNero">
+                <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value != ''">valide&#160;&#160;
 <xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value"/>
-	        </xsl:if></SPAN>
-	    <SPAN class="testoNero"><xsl:if test="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value != ''">
-	      invalide&#160;&#160;<xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value"/> 
-	    </xsl:if></SPAN> 
-	  </xsl:if>
-	  </TD>
-	</TR>
-	<TR>
-	  <TD bgcolor="#697791">   
-	<TABLE border="0" cellpadding="0" cellspacing="0"><TR><TD>
-	<A HREF="{$base}/compose?session-id={$session-id}&amp;continue=1"><IMG SRC="{$imgbase}/images/back.gif" BORDER="0"/></A></TD><TD><A HREF="{$base}/compose?session-id={$session-id}&amp;continue=1"><SPAN class="testoBianco"> Retour à la composition ...</SPAN></A></TD></TR></TABLE>
-	  </TD>
-	</TR>
+                </xsl:if></SPAN>
+            <SPAN class="testoNero"><xsl:if test="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value != ''">
+              invalide&#160;&#160;<xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value"/> 
+            </xsl:if></SPAN> 
+          </xsl:if>
+          </TD>
+        </TR>
+        <TR>
+          <TD bgcolor="#697791">   
+        <TABLE border="0" cellpadding="0" cellspacing="0"><TR><TD>
+        <A HREF="{$base}/compose?session-id={$session-id}&amp;continue=1"><IMG SRC="{$imgbase}/images/back.gif" BORDER="0"/></A></TD><TD><A HREF="{$base}/compose?session-id={$session-id}&amp;continue=1"><SPAN class="testoBianco"> Retour à la composition ...</SPAN></A></TD></TR></TABLE>
+          </TD>
+        </TR>
       </TABLE>
-	
+        
 
       </BODY>
     </HTML>

@@ -20,11 +20,11 @@ public class SimpleAuthenticator extends Authenticator {
     public final String VERSION="1.0";
 
     public SimpleAuthenticator() {
-	super();
+        super();
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     
@@ -32,17 +32,17 @@ public class SimpleAuthenticator extends Authenticator {
     }
 
     public void register(ConfigScheme store) {
-	key="SIMPLE";
-	store.configAddChoice("AUTH",key,"Very simple style authentication. First login sets password. Password may be changed.");
-    }	
+        key="SIMPLE";
+        store.configAddChoice("AUTH",key,"Very simple style authentication. First login sets password. Password may be changed.");
+    }   
 
     public void authenticatePostUserData(UserData udata, String domain,String password) throws InvalidPasswordException {
-	if(!udata.checkPassword(password) || password.equals("")) {
-	    throw new InvalidPasswordException();
-	}
+        if(!udata.checkPassword(password) || password.equals("")) {
+            throw new InvalidPasswordException();
+        }
     }
 
     public void changePassword(UserData udata, String passwd, String verify) throws InvalidPasswordException {
-	udata.setPassword(passwd,verify);
+        udata.setPassword(passwd,verify);
     }
 } // SimpleAuthenticator

@@ -53,40 +53,40 @@ public abstract class ConfigParameter {
      * @param desc Description for this parameter
      */
     public ConfigParameter(String name, Object def, String desc) {
-	key=name;
-	this.def_value=def;
-	this.desc=desc;
-	group="default";
-	listeners=new Vector();
+        key=name;
+        this.def_value=def;
+        this.desc=desc;
+        group="default";
+        listeners=new Vector();
     }
     
     public void setGroup(String g) {
-	group=g;
+        group=g;
     }
 
     /**
      * Return the key of this parameter.
      */
     public String getKey() {
-	return key;
+        return key;
     }
     
     /**
      * Return the default value of this parameter.
      */
     public Object getDefault() {
-	return def_value;
+        return def_value;
     }
 
     public void setDefault(Object value) {
-	def_value=value;
+        def_value=value;
     }
     
     /**
      * Return the description for this parameter.
      */
     public String getDescription() {
-	return desc;
+        return desc;
     }
 
     /**
@@ -94,14 +94,14 @@ public abstract class ConfigParameter {
      * value changes.
      */
     public void addConfigurationListener(ConfigurationListener l) {
-	listeners.addElement(l);
+        listeners.addElement(l);
     }
 
     /**
      * Get a list of all configuration listeners.
      */
     public Enumeration getConfigurationListeners() {
-	return listeners.elements();
+        return listeners.elements();
     }
 
     /**
@@ -111,7 +111,7 @@ public abstract class ConfigParameter {
      * @see CryptedStringConfigParameter
      */
     public String filter(String s) {
-	return s;
+        return s;
     }
     
     /**
@@ -122,11 +122,11 @@ public abstract class ConfigParameter {
     public abstract boolean isPossibleValue(Object value);
 
     public String getType() {
-	return "undefined";
+        return "undefined";
     }
 
     public String getGroup() {
-	return group;
+        return group;
     }
 }
 

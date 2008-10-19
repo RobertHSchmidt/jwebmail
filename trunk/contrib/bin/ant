@@ -38,9 +38,9 @@ if [ "$ANT_HOME" = "" ] ; then
     ls=`ls -ld "$PRG"`
     link=`expr "$ls" : '.*-> \(.*\)$'`
     if expr "$link" : '.*/.*' > /dev/null; then
-	PRG="$link"
+        PRG="$link"
     else
-	PRG="`dirname $PRG`/$link"
+        PRG="`dirname $PRG`/$link"
     fi
   done
   

@@ -47,47 +47,47 @@ public class LogoutSession implements Plugin, URLHandler {
     StorageManager store;
 
     public LogoutSession() {
-	
+        
     }
  
     public void register(WebMailServer parent) {
-	parent.getURLHandler().registerHandler(URL,this);
-	//parent.getContentBar().registerContentItem(this);
-	store=parent.getStorage();
+        parent.getURLHandler().registerHandler(URL,this);
+        //parent.getContentBar().registerContentItem(this);
+        store=parent.getStorage();
     }
 
     public String getName() {
-	return "LogoutSession";
+        return "LogoutSession";
     }
 
     public String getDescription() {
-	return "ContentProvider plugin that closes an active WebMail session.";
+        return "ContentProvider plugin that closes an active WebMail session.";
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public String getURL() {
-	return URL;
+        return URL;
     }
     public HTMLDocument handleURL(String suburl, HTTPSession session, HTTPRequestHeader header) throws WebMailException {
-	if(session == null) {
-	    throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
-	}
-	UserData user=((UserSession)session).getUser();
-	HTMLDocument content=new XHTMLDocument(session.getModel(),store.getStylesheet("logout.xsl",user.getPreferredLocale(),user.getTheme()));
-	if(!session.isLoggedOut()) {
-	    session.logout();
-	}
-	return content;
+        if(session == null) {
+            throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
+        }
+        UserData user=((UserSession)session).getUser();
+        HTMLDocument content=new XHTMLDocument(session.getModel(),store.getStylesheet("logout.xsl",user.getPreferredLocale(),user.getTheme()));
+        if(!session.isLoggedOut()) {
+            session.logout();
+        }
+        return content;
     }
 
     public String provides() {
-	return "logout";
+        return "logout";
     }
 
     public String requires() {
-	return "content bar";
+        return "content bar";
     }
 } // LogoutSession

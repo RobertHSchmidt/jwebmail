@@ -33,11 +33,11 @@ package net.wastl.webmail.exceptions;
 public class CreateUserDataException extends UserDataException {
     
     public CreateUserDataException() {
-	super();
+        super();
     }
 
     public CreateUserDataException(String s, String user, String domain) {
-	super(s,user,domain);
+        super(s,user,domain);
     }
     
 } // InvalidPasswordException

@@ -41,57 +41,57 @@ public class About implements Plugin, URLHandler {
     WebMailServer parent;
 
     public About() {
-	
+        
     }
 
     public void register(WebMailServer parent) {
-	parent.getURLHandler().registerHandler(URL,this);
-	this.parent=parent;
+        parent.getURLHandler().registerHandler(URL,this);
+        this.parent=parent;
     }
 
     public String getName() {
-	return "About";
+        return "About";
     }
 
     public String getDescription() {
-	return "About WebMail";
+        return "About WebMail";
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public String getURL() {
-	return URL;
+        return URL;
     }
 
 
     public HTMLDocument handleURL(String suburl, HTTPSession session, HTTPRequestHeader header) throws DocumentNotFoundException {
-	String content="<BODY BGCOLOR=WHITE><CENTER><H1>About WebMail</H1></CENTER><BR>";
-	content+="<H3>Copyright</H3><BR>WebMail is (c)1999 by Sebastian Schaffert, wastl@wastl.net "
-	    +"and is distributed under the terms of the <A HREF=\"<<BASE>>/license/gnu\">GNU Lesser General Public License</A> "
-	    +".<BR><P><HR><P>"
-	    +"<H3>Registered Plugins</H3><BR><UL>";
-	Enumeration e=parent.getPluginHandler().getPlugins();
-	while(e.hasMoreElements()) {
-	    Plugin p=(Plugin)e.nextElement();
-	    content+="<LI><B>"+p.getName()+"</B> (v"+p.getVersion()+"): "+p.getDescription()+"</LI>";
-	}
-	//System.gc();
-	content+="</UL><P><HR><P><H3>System Information</H3><BR><UL><LI><B>Operating System:</B> "+System.getProperty("os.name")
-	    +"/"+System.getProperty("os.arch")+" "+System.getProperty("os.version")+"</LI><LI><B>Java Virtual Machine:</B> "
-	    +System.getProperty("java.vm.name")+" version "+System.getProperty("java.version")+" from "
-	    +System.getProperty("java.vendor")+"</LI><LI><B>Free memory for this JVM:</B> "
-	    +Runtime.getRuntime().freeMemory()+" bytes</LI></UL></BODY>";
-	return new HTMLDocument("About WebMail",content);
+        String content="<BODY BGCOLOR=WHITE><CENTER><H1>About WebMail</H1></CENTER><BR>";
+        content+="<H3>Copyright</H3><BR>WebMail is (c)1999 by Sebastian Schaffert, wastl@wastl.net "
+            +"and is distributed under the terms of the <A HREF=\"<<BASE>>/license/gnu\">GNU Lesser General Public License</A> "
+            +".<BR><P><HR><P>"
+            +"<H3>Registered Plugins</H3><BR><UL>";
+        Enumeration e=parent.getPluginHandler().getPlugins();
+        while(e.hasMoreElements()) {
+            Plugin p=(Plugin)e.nextElement();
+            content+="<LI><B>"+p.getName()+"</B> (v"+p.getVersion()+"): "+p.getDescription()+"</LI>";
+        }
+        //System.gc();
+        content+="</UL><P><HR><P><H3>System Information</H3><BR><UL><LI><B>Operating System:</B> "+System.getProperty("os.name")
+            +"/"+System.getProperty("os.arch")+" "+System.getProperty("os.version")+"</LI><LI><B>Java Virtual Machine:</B> "
+            +System.getProperty("java.vm.name")+" version "+System.getProperty("java.version")+" from "
+            +System.getProperty("java.vendor")+"</LI><LI><B>Free memory for this JVM:</B> "
+            +Runtime.getRuntime().freeMemory()+" bytes</LI></UL></BODY>";
+        return new HTMLDocument("About WebMail",content);
     }
     
     public String provides() {
-	return "about";
+        return "about";
     }
 
     public String requires() {
-	return "";
+        return "";
     }
     
 } // About

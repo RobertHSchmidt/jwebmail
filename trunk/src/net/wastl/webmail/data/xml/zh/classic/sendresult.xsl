@@ -33,64 +33,64 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Send message result</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META CONTENT="GENERATOR" VALUE="WebMail 0.7 XSL"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="GENERATOR" VALUE="WebMail 0.7 XSL"/>
       </HEAD>
       
       <BODY bgcolor="#ffffff">
-	<TABLE WIDTH="100%" BGCOLOR="#eae723" BORDER="0" CELLSPACING="0" >
-	  <TR bgcolor="#dddddd">
-	    <TD VALIGN="CENTER" COLSPAN="2" WIDTH="30%"><IMG SRC="{$imgbase}/images/btn-compose.png" BORDER="0"/></TD>
-	    <TD VALIGN="CENTER" ALIGN="right" WIDTH="70%">
-	      <FONT SIZE="+2"><STRONG>Sending message</STRONG></FONT><BR/>
-	      <STRONG>Subject: </STRONG><xsl:value-of select="$work/HEADER/SUBJECT"/><BR/>
-	      <STRONG>To: </STRONG><xsl:value-of select="$work/HEADER/TO"/><BR/>
-	      <STRONG>Date: </STRONG><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='date']/@value"/>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="3" ALIGN="center"><STRONG>mail delivery results</STRONG></TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="2"><STRONG>send status</STRONG></TD>
-	    <TD><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='send status']/@value"/></TD>
-	  </TR>
+        <TABLE WIDTH="100%" BGCOLOR="#eae723" BORDER="0" CELLSPACING="0" >
+          <TR bgcolor="#dddddd">
+            <TD VALIGN="CENTER" COLSPAN="2" WIDTH="30%"><IMG SRC="{$imgbase}/images/btn-compose.png" BORDER="0"/></TD>
+            <TD VALIGN="CENTER" ALIGN="right" WIDTH="70%">
+              <FONT SIZE="+2"><STRONG>Sending message</STRONG></FONT><BR/>
+              <STRONG>Subject: </STRONG><xsl:value-of select="$work/HEADER/SUBJECT"/><BR/>
+              <STRONG>To: </STRONG><xsl:value-of select="$work/HEADER/TO"/><BR/>
+              <STRONG>Date: </STRONG><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='date']/@value"/>
+            </TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="3" ALIGN="center"><STRONG>mail delivery results</STRONG></TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="2"><STRONG>send status</STRONG></TD>
+            <TD><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='send status']/@value"/></TD>
+          </TR>
 
-	  <!-- Only show the section for valid addresses if there actually were any -->
-	  <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid sent addresses']/@value != ''">
-	    <TR>
-	      <TD COLSPAN="3"><STRONG>delivered to addresses</STRONG></TD>
-	    </TR>
-	    <TR>
-	      <TD WIDTH="8%"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
-	      <TD><EM>valid</EM></TD>
-	      <TD><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='valid sent addresses']/@value"/></TD>
-	    </TR>
-	  </xsl:if>
+          <!-- Only show the section for valid addresses if there actually were any -->
+          <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid sent addresses']/@value != ''">
+            <TR>
+              <TD COLSPAN="3"><STRONG>delivered to addresses</STRONG></TD>
+            </TR>
+            <TR>
+              <TD WIDTH="8%"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
+              <TD><EM>valid</EM></TD>
+              <TD><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='valid sent addresses']/@value"/></TD>
+            </TR>
+          </xsl:if>
 
-	  <!-- Only show the section for invalid addresses if there actually were any -->
-	  <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value != '' or /USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value != ''">
-	    <TR>
-	      <TD COLSPAN="3"><STRONG>not delivered to addresses</STRONG></TD>
-	    </TR>
-	    <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value != ''">
-	      <TR>
-		<TD WIDTH="8%"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
-		<TD><EM>valid</EM></TD>
-		<TD><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value"/></TD>
-	      </TR>
-	    </xsl:if>
-	    <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value != ''">
-	      <TR>
-		<TD WIDTH="8%"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
-		<TD><EM>invalid</EM></TD>
-		<TD><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value"/></TD>
-	      </TR>	  
-	    </xsl:if>
-	  </xsl:if>
-	</TABLE>
-	
-	<A HREF="{$base}/compose?session-id={$session-id}&amp;continue=1"><IMG SRC="{$imgbase}/images/arrow-left.png" BORDER="0"/> Back to compose dialog ...</A>
+          <!-- Only show the section for invalid addresses if there actually were any -->
+          <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value != '' or /USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value != ''">
+            <TR>
+              <TD COLSPAN="3"><STRONG>not delivered to addresses</STRONG></TD>
+            </TR>
+            <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value != ''">
+              <TR>
+                <TD WIDTH="8%"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
+                <TD><EM>valid</EM></TD>
+                <TD><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value"/></TD>
+              </TR>
+            </xsl:if>
+            <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value != ''">
+              <TR>
+                <TD WIDTH="8%"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
+                <TD><EM>invalid</EM></TD>
+                <TD><xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value"/></TD>
+              </TR>       
+            </xsl:if>
+          </xsl:if>
+        </TABLE>
+        
+        <A HREF="{$base}/compose?session-id={$session-id}&amp;continue=1"><IMG SRC="{$imgbase}/images/arrow-left.png" BORDER="0"/> Back to compose dialog ...</A>
       </BODY>
     </HTML>
   </xsl:template>

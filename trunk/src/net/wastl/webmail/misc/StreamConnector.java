@@ -39,28 +39,28 @@ public class StreamConnector extends Thread {
     boolean ready=false;
     
     public StreamConnector(InputStream sin, int size) {
-	super();
-	in=sin;
-	this.size=size;
-	b=null;
-	this.start();
+        super();
+        in=sin;
+        this.size=size;
+        b=null;
+        this.start();
     }
     
     public void run() {
-	b=ByteStore.getBinaryFromIS(in,size);
-	ready=true;
+        b=ByteStore.getBinaryFromIS(in,size);
+        ready=true;
     }
     
     public ByteStore getResult() {
-	while(!ready) {
-	    try {
-		sleep(500);
-		System.err.print(".");
-	    } catch(InterruptedException ex) {
-	    }
-	}
-	System.err.println();
-	return b;
+        while(!ready) {
+            try {
+                sleep(500);
+                System.err.print(".");
+            } catch(InterruptedException ex) {
+            }
+        }
+        System.err.println();
+        return b;
     }
    
 } // StreamConnector

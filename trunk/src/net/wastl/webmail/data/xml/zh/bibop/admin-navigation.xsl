@@ -30,45 +30,45 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail 管理介面：導覽選單</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-	
+        
       <BODY BGCOLOR="lightblue">
-	<TABLE WIDTH="100%">
-	  <TR>
-	    <TD>
-	      <A HREF="{$base}/admin/system?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">系統設定</FONT></A>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>
-	      <A HREF="{$base}/admin/control?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">系統控制</FONT></A>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>
-	      <A HREF="{$base}/admin/domain?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">虛擬網域設定</FONT></A>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>
-	      <A HREF="{$base}/admin/user?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">使用者設定</FONT></A>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>
-<!--	      <A HREF="{$base}/admin/help?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">求救</FONT></A>-->
-	      <FONT SIZE="-1" COLOR="red">求救（此功能尚未完成）</FONT>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>
-	      <A HREF="{$base}/admin/logout?session-id={$session-id}" TARGET="_top"><FONT SIZE="-1" COLOR="red">登出</FONT></A>
-	    </TD>
-	  </TR>
-	</TABLE>
+        <TABLE WIDTH="100%">
+          <TR>
+            <TD>
+              <A HREF="{$base}/admin/system?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">系統設定</FONT></A>
+            </TD>
+          </TR>
+          <TR>
+            <TD>
+              <A HREF="{$base}/admin/control?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">系統控制</FONT></A>
+            </TD>
+          </TR>
+          <TR>
+            <TD>
+              <A HREF="{$base}/admin/domain?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">虛擬網域設定</FONT></A>
+            </TD>
+          </TR>
+          <TR>
+            <TD>
+              <A HREF="{$base}/admin/user?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">使用者設定</FONT></A>
+            </TD>
+          </TR>
+          <TR>
+            <TD>
+<!--          <A HREF="{$base}/admin/help?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">求救</FONT></A>-->
+              <FONT SIZE="-1" COLOR="red">求救（此功能尚未完成）</FONT>
+            </TD>
+          </TR>
+          <TR>
+            <TD>
+              <A HREF="{$base}/admin/logout?session-id={$session-id}" TARGET="_top"><FONT SIZE="-1" COLOR="red">登出</FONT></A>
+            </TD>
+          </TR>
+        </TABLE>
       </BODY>
-	
+        
     </HTML>
 
   </xsl:template>

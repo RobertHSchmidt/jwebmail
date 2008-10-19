@@ -31,22 +31,22 @@
     <HTML>
       <HEAD>
         <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de Titre</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <BODY bgcolor="#dddddd">
 
-	<A HREF="{$base}/mailbox?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='affiche la liste de tous les dossiers et liens.';"><IMG SRC="{$imgbase}/images/btn-mailbox.png" BORDER="0" ALT="Liste des Boites" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/>
-	<A HREF="{$base}/compose?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='gere la composition des messages.';"><IMG SRC="{$imgbase}/images/btn-compose.png" BORDER="0" ALT="Composer Message" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/>
-	<A HREF="{$base}/folder/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='gere le parametrage dossier de l utilisateur.';"><IMG SRC="{$imgbase}/images/btn-folders.png" BORDER="0" ALT="Setup Dossier" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/>
-	<A HREF="{$base}/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='change les parametres utilisateurs.';"><IMG SRC="{$imgbase}/images/btn-setup.png" BORDER="0" ALT="Setup Utilisateur" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/>
-	<A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='fournit l Aide WebMail.';"><IMG SRC="{$imgbase}/images/btn-help.png" BORDER="0" ALT="Aide WebMail" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/><A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ferme une session WebMail active.';"><IMG SRC="{$imgbase}/images/btn-logout.png" BORDER="0" ALT="Logout Session" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/>
+        <A HREF="{$base}/mailbox?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='affiche la liste de tous les dossiers et liens.';"><IMG SRC="{$imgbase}/images/btn-mailbox.png" BORDER="0" ALT="Liste des Boites" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/>
+        <A HREF="{$base}/compose?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='gere la composition des messages.';"><IMG SRC="{$imgbase}/images/btn-compose.png" BORDER="0" ALT="Composer Message" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/>
+        <A HREF="{$base}/folder/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='gere le parametrage dossier de l utilisateur.';"><IMG SRC="{$imgbase}/images/btn-folders.png" BORDER="0" ALT="Setup Dossier" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/>
+        <A HREF="{$base}/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='change les parametres utilisateurs.';"><IMG SRC="{$imgbase}/images/btn-setup.png" BORDER="0" ALT="Setup Utilisateur" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/>
+        <A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='fournit l Aide WebMail.';"><IMG SRC="{$imgbase}/images/btn-help.png" BORDER="0" ALT="Aide WebMail" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/><A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ferme une session WebMail active.';"><IMG SRC="{$imgbase}/images/btn-logout.png" BORDER="0" ALT="Logout Session" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/>
       </BODY>
 
 

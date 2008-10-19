@@ -48,23 +48,23 @@ public class XMLData implements Storable {
     protected String name;
 
     public XMLData (Document d, Storage loader, String name){
-	this.root = d;
-	this.data = d.getDocumentElement();
-	this.loader = loader;
-	this.name = name;
+        this.root = d;
+        this.data = d.getDocumentElement();
+        this.loader = loader;
+        this.name = name;
     }
 
     /**
      * Return a DOM representation of this Storable.     
      */
     public Document getDocumentInstance() {
-	return root;
+        return root;
     }
 
     public DocumentFragment getDocumentFragment() {
-	DocumentFragment df=root.createDocumentFragment();
-	df.appendChild(data);
-	return df;
+        DocumentFragment df=root.createDocumentFragment();
+        df.appendChild(data);
+        return df;
     }
 
 
@@ -73,28 +73,28 @@ public class XMLData implements Storable {
      * node.
      */
     public String getProperty(String xpath) {
-	return getValueXPath(xpath);
+        return getValueXPath(xpath);
     }
 
 
 
     public void save() throws WebMailException {
-	loader.saveStorable(name,this);
+        loader.saveStorable(name,this);
     }
 
     public void saveWith(Storage storage) throws WebMailException {
-	storage.saveStorable(name,this);
+        storage.saveStorable(name,this);
     }
 
     /* -------------------------- Access Members ------------------------- */
 
     protected String getParentXPath(String str) {
-	int last_slash = str.lastIndexOf("/");
-	if(last_slash == -1) {
-	    return ".";
-	} else {
-	    return str.substring(0,last_slash);
-	}
+        int last_slash = str.lastIndexOf("/");
+        if(last_slash == -1) {
+            return ".";
+        } else {
+            return str.substring(0,last_slash);
+        }
     }
 
 
@@ -103,71 +103,71 @@ public class XMLData implements Storable {
      * expression.
      */
     public String getValueXPath(String path) {
-	data.normalize();
-	try {
-	    Node n = XPathAPI.selectSingleNode(data,path);
-	    if(n != null) {
-		return n.getNodeValue();
-	    } else {
-		return null;
-	    }
-	} catch(Exception ex) {
-	    ex.printStackTrace();
-	    return null;
-	}
+        data.normalize();
+        try {
+            Node n = XPathAPI.selectSingleNode(data,path);
+            if(n != null) {
+                return n.getNodeValue();
+            } else {
+                return null;
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     /**
      * Set the node value of the node selected by the given xpath expression.
      */
     public void setValueXPath(String path, String value) {
-	data.normalize();
-	try {
-	    Node n = XPathAPI.selectSingleNode(data,path);
-	    if(n != null) {
-		n.setNodeValue(value);
-	    } else {
-		addNodeXPath(getParentXPath(path),root.createTextNode(value));
-	    }
-	} catch(TransformerException ex) {
-	    addNodeXPath(getParentXPath(path),root.createTextNode(value));
-	} catch(Exception ex) {
-	    ex.printStackTrace();
-	}
+        data.normalize();
+        try {
+            Node n = XPathAPI.selectSingleNode(data,path);
+            if(n != null) {
+                n.setNodeValue(value);
+            } else {
+                addNodeXPath(getParentXPath(path),root.createTextNode(value));
+            }
+        } catch(TransformerException ex) {
+            addNodeXPath(getParentXPath(path),root.createTextNode(value));
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 
     public Node getNodeXPath(String path) {
-	try {
-	    Node n = XPathAPI.selectSingleNode(data,path);
-	    return n;
-	} catch(Exception ex) {
-	    ex.printStackTrace();
-	    return null;
-	}
+        try {
+            Node n = XPathAPI.selectSingleNode(data,path);
+            return n;
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     /**
      * Add a node as child to the node selected by the given xpath expression.
      */
     public void addNodeXPath(String path, Node child) {
-	try {
-	    Node n = XPathAPI.selectSingleNode(data,path);
-	    n.appendChild(child);
-	} catch(Exception ex) {
-	    ex.printStackTrace();
-	}
+        try {
+            Node n = XPathAPI.selectSingleNode(data,path);
+            n.appendChild(child);
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 
     public NodeList getNodeListXPath(String path) {
-	try {
-	    NodeList n = XPathAPI.selectNodeList(data,path);
-	    return n;
-	} catch(Exception ex) {
-	    ex.printStackTrace();
-	    return null;
-	}
+        try {
+            NodeList n = XPathAPI.selectNodeList(data,path);
+            return n;
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
 

@@ -44,18 +44,18 @@ public abstract class Storage {
     protected Properties options;
 
     public Storage(Properties options) {
-	this.options=options;
+        this.options=options;
 
-	int cache_size=100;
-	float cache_expire=(float)0.9;
-	try {
-	    cache_size=Integer.parseInt(getProperty("webmail.cache.size"));
-	} catch(Exception e) {}
-	try {
-	    cache_expire=Float.parseFloat(getProperty("webmail.cache.expire"));
-	} catch(Exception e) {}
+        int cache_size=100;
+        float cache_expire=(float)0.9;
+        try {
+            cache_size=Integer.parseInt(getProperty("webmail.cache.size"));
+        } catch(Exception e) {}
+        try {
+            cache_expire=Float.parseFloat(getProperty("webmail.cache.expire"));
+        } catch(Exception e) {}
 
-	this.cache=new ExpireableCache(cache_size,cache_expire);
+        this.cache=new ExpireableCache(cache_size,cache_expire);
     }
 
     private static Hashtable instances = new Hashtable();
@@ -64,29 +64,29 @@ public abstract class Storage {
      * Storages are singletons, thus this is the method to create them.
      */
     public static Storage getInstance(String classname, Properties options) 
-	throws WebMailException {
-	try {
-	    if(instances.get(classname) == null) {
-		Class c = Class.forName(classname);
-		Class[] argtypes={Class.forName("java.util.Properties")};
-		Object[] args={options};
-		Storage instance=(Storage)c.getConstructor(argtypes).newInstance(args);
-		instances.put(classname,instance);
-		return instance;
-	    } else {
-		return (Storage)instances.get(classname);
-	    }
-	} catch(NoSuchMethodException ex) {
-	    throw new WebMailException("Class "+classname+" did not have an appropriate constructor");
-	} catch(ClassNotFoundException ex) {
-	    throw new WebMailException("Class "+classname+" not found.");
-	} catch(Exception ex) {
-	    throw new WebMailException("An error occured",ex);
-	}
+        throws WebMailException {
+        try {
+            if(instances.get(classname) == null) {
+                Class c = Class.forName(classname);
+                Class[] argtypes={Class.forName("java.util.Properties")};
+                Object[] args={options};
+                Storage instance=(Storage)c.getConstructor(argtypes).newInstance(args);
+                instances.put(classname,instance);
+                return instance;
+            } else {
+                return (Storage)instances.get(classname);
+            }
+        } catch(NoSuchMethodException ex) {
+            throw new WebMailException("Class "+classname+" did not have an appropriate constructor");
+        } catch(ClassNotFoundException ex) {
+            throw new WebMailException("Class "+classname+" not found.");
+        } catch(Exception ex) {
+            throw new WebMailException("An error occured",ex);
+        }
     }
 
     public String getProperty(String key) {
-	return (String)options.get(key);
+        return (String)options.get(key);
     }
 
     /**
@@ -98,11 +98,11 @@ public abstract class Storage {
      * @param data the data to store.
      */
     public void saveStorable(String path, Storable data) throws WebMailException {
-	try {
-	    _saveStorable(path,data.getDocumentInstance());
-	} catch(IOException ex) {
-	    throw new WebMailException("IO Exception while saving storable",ex);
-	}
+        try {
+            _saveStorable(path,data.getDocumentInstance());
+        } catch(IOException ex) {
+            throw new WebMailException("IO Exception while saving storable",ex);
+        }
     }
 
 
@@ -115,7 +115,7 @@ public abstract class Storage {
      * @param data the data to store.
      */
     public abstract void _saveStorable(String path, Document data) 
-	throws WebMailException,IOException;
+        throws WebMailException,IOException;
 
 
     /**
@@ -129,29 +129,29 @@ public abstract class Storage {
      * data.
      */
     public Storable loadStorable(String path, Class c) 
-	throws WebMailException {
-	if(cache.get(path) != null) {
-	    cache.hit();
-	    return (Storable)cache.get(path);
-	} else {
-	    cache.miss();
-	    try {
-		Class[] argtypes={
-		    Class.forName("org.w3c.dom.Document"),
-		    this.getClass(),
-		    Class.forName("java.lang.String")
-		 };
-		Object[] args={_loadStorable(path),this,path};
-		
-		return (Storable)c.getConstructor(argtypes).newInstance(args);	    
-	    } catch(ClassNotFoundException ex) {
-		throw new WebMailException("You don't have org.w3c.dom.Document; Please upgrade your Java installation");
-	    } catch(NoSuchMethodException ex) {
-		throw new WebMailException("Class "+c.getName()+" does not have an appropriate constructor!");
-	    } catch(Exception ex) {
-		throw new WebMailException("An error occured",ex);
-	    }
-	}
+        throws WebMailException {
+        if(cache.get(path) != null) {
+            cache.hit();
+            return (Storable)cache.get(path);
+        } else {
+            cache.miss();
+            try {
+                Class[] argtypes={
+                    Class.forName("org.w3c.dom.Document"),
+                    this.getClass(),
+                    Class.forName("java.lang.String")
+                 };
+                Object[] args={_loadStorable(path),this,path};
+                
+                return (Storable)c.getConstructor(argtypes).newInstance(args);      
+            } catch(ClassNotFoundException ex) {
+                throw new WebMailException("You don't have org.w3c.dom.Document; Please upgrade your Java installation");
+            } catch(NoSuchMethodException ex) {
+                throw new WebMailException("Class "+c.getName()+" does not have an appropriate constructor!");
+            } catch(Exception ex) {
+                throw new WebMailException("An error occured",ex);
+            }
+        }
     }
 
 

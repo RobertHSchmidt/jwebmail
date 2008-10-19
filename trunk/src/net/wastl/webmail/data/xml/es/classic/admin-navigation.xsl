@@ -59,7 +59,7 @@
           </TR>
           <TR>
             <TD>
-<!--	      <A HREF="{$base}/admin/help?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">Help</FONT></A>-->
+<!--          <A HREF="{$base}/admin/help?session-id={$session-id}" TARGET="Main"><FONT SIZE="-1" COLOR="red">Help</FONT></A>-->
               <FONT SIZE="-1" COLOR="red">Ayuda (a&#250;n no implementada)</FONT>
             </TD>
           </TR>

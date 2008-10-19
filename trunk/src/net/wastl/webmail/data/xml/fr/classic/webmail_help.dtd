@@ -32,9 +32,9 @@
 -->
 <!ELEMENT helptopic (icon?,helpdata,ref*)>
 <!ATTLIST helptopic 
-	id		CDATA				#REQUIRED
-	title		CDATA				#REQUIRED
-	audience	(novice|intermediate|advanced)	#IMPLIED>
+        id              CDATA                           #REQUIRED
+        title           CDATA                           #REQUIRED
+        audience        (novice|intermediate|advanced)  #IMPLIED>
 
 <!-- Contains the real data of the help topic -->
 <!ELEMENT helpdata (#PCDATA|note|warning|p|br|em|strong)*>
@@ -56,9 +56,9 @@
 <!-- References to other topics -->
 <!ELEMENT ref EMPTY>
 <!ATTLIST ref
-	ref-id		CDATA				#REQUIRED>
+        ref-id          CDATA                           #REQUIRED>
 
 <!ELEMENT icon EMPTY>
 <!ATTLIST icon
-	href		CDATA				#REQUIRED>
+        href            CDATA                           #REQUIRED>
 

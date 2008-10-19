@@ -22,11 +22,11 @@ package org.bulbul.webmail.xmlresource;
 /**
  * Deafult resource.
  *
- * @author	  Steve Excellent Lee
- * @version	 1.0 2001
+ * @author        Steve Excellent Lee
+ * @version      1.0 2001
  */
 public class Resources extends ResourceBase {
-	protected String getXmlResourceFilename() {
-		return "resources.xml";
-	}
+        protected String getXmlResourceFilename() {
+                return "resources.xml";
+        }
 }

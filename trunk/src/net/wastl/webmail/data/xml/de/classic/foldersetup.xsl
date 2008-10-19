@@ -31,47 +31,47 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Ordner einrichten</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
       </HEAD>
       
       <BODY bgcolor="#ffffff">
 
-	<TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0">
-	  <TR>
-	    <TD VALIGN="CENTER">
-	      <IMG SRC="{$imgbase}/images/btn-folders.png"/>
-	    </TD>
-	    <TD VALIGN="CENTER">
-	      <FONT SIZE="+2"><STRONG>JWebMail Ordnereinstellungen für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Hilfe</A>) <BR/>
-	      <EM>Benutzer <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/>
-	      <EM>Kennung existiert seit <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="2" BGCOLOR="#aaaaaa"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="2"><STRONG>Du hast folgende Möglichkeiten:</STRONG></TD>
-	  </TR>
-	  <TR>
-	    <TD>	      
-	      <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">Briefkästen einrichten</A>
-	    </TD>
-	    <TD>
-	      Mit WebMail kannst Du mehrere Briefkästen gleichzeitig verwalten, die auf dem gleichen oder auf verschiedenen IMAP Servern liegen. Hier kannst Du neue Briefkästen hinzufügen und bestehende entfernen.
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>	      
-	      <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">(Unter)Ordner einrichten</A>
-	    </TD>
-	    <TD>
-	      Du bekommst eine Baumsicht Deiner Briefkästen und kannst Ordner hinzufügen und löschen, verstecken und
-	      wieder anzeigen.
-	    </TD>
-	  </TR>
-	</TABLE>
+        <TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0">
+          <TR>
+            <TD VALIGN="CENTER">
+              <IMG SRC="{$imgbase}/images/btn-folders.png"/>
+            </TD>
+            <TD VALIGN="CENTER">
+              <FONT SIZE="+2"><STRONG>JWebMail Ordnereinstellungen für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Hilfe</A>) <BR/>
+              <EM>Benutzer <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/>
+              <EM>Kennung existiert seit <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM>
+            </TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="2" BGCOLOR="#aaaaaa"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="2"><STRONG>Du hast folgende Möglichkeiten:</STRONG></TD>
+          </TR>
+          <TR>
+            <TD>              
+              <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">Briefkästen einrichten</A>
+            </TD>
+            <TD>
+              Mit WebMail kannst Du mehrere Briefkästen gleichzeitig verwalten, die auf dem gleichen oder auf verschiedenen IMAP Servern liegen. Hier kannst Du neue Briefkästen hinzufügen und bestehende entfernen.
+            </TD>
+          </TR>
+          <TR>
+            <TD>              
+              <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">(Unter)Ordner einrichten</A>
+            </TD>
+            <TD>
+              Du bekommst eine Baumsicht Deiner Briefkästen und kannst Ordner hinzufügen und löschen, verstecken und
+              wieder anzeigen.
+            </TD>
+          </TR>
+        </TABLE>
       </BODY>
 
     </HTML>

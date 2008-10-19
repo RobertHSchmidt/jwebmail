@@ -44,64 +44,64 @@ public class JavaScriptCleaner  {
     Document d;
 
     public JavaScriptCleaner(Document d) {
-	this.d=d;
-	walkTree(d.getDocumentElement());	
+        this.d=d;
+        walkTree(d.getDocumentElement());       
     }
     
     protected void walkTree(Node node) {
 
-	
+        
 
-	/* First we check for element types that shouldn't be sent to the user.
-	   For that, we add an attribute "malicious" that can be handled by the XSLT
-	   stylesheets that display the message.
-	 */
-	if(node instanceof Element && ((Element)node).getTagName().toUpperCase().equals("SCRIPT")) {
+        /* First we check for element types that shouldn't be sent to the user.
+           For that, we add an attribute "malicious" that can be handled by the XSLT
+           stylesheets that display the message.
+         */
+        if(node instanceof Element && ((Element)node).getTagName().toUpperCase().equals("SCRIPT")) {
 
-	    ((Element)node).setAttribute("malicious","Marked malicious because of potential JavaScript abuse");	    
-	}
+            ((Element)node).setAttribute("malicious","Marked malicious because of potential JavaScript abuse");     
+        }
 
-	if(node instanceof Element && ((Element)node).getTagName().toUpperCase().equals("IMG")) {
+        if(node instanceof Element && ((Element)node).getTagName().toUpperCase().equals("IMG")) {
 
-	    ((Element)node).setAttribute("malicious","Marked malicious because of potential Image/CGI abuse");	    
-	}
+            ((Element)node).setAttribute("malicious","Marked malicious because of potential Image/CGI abuse");      
+        }
 
-	/* What we also really don't like in HTML messages are FORMs! */
+        /* What we also really don't like in HTML messages are FORMs! */
 
-	if(node instanceof Element && ((Element)node).getTagName().toUpperCase().equals("FORM")) {
-	    ((Element)node).setAttribute("malicious","Marked malicious because of potential JavaScript abuse");	    
-	}
+        if(node instanceof Element && ((Element)node).getTagName().toUpperCase().equals("FORM")) {
+            ((Element)node).setAttribute("malicious","Marked malicious because of potential JavaScript abuse");     
+        }
 
-	/* Now we search the attribute list for attributes that may potentially be used maliciously.
-	   These will be:
-	   - href: check for a String containing "javascript"
-	   - onXXX events: if they exist, the link will be marked "malicious".
-	 */
-	String javascript_href="javascript";
-	NamedNodeMap map=node.getAttributes();
-	for(int i=0;i<map.getLength();i++) {
-	    Attr a=(Attr)map.item(i);
-	    /* First case: look for hrefs containing "javascript" */
-	    if(a.getName().toUpperCase().equals("HREF")) {
-		for(int j=0;j<a.getValue().length()-javascript_href.length() ;j++) {
-		    if(a.getValue().regionMatches(true,j,javascript_href,0,javascript_href.length())) {
-			((Element)node).setAttribute("malicious","Marked malicious because of potential JavaScript abuse (HREF attribute contains javascript code)");	    
-			break;
-		    }
-		}
-		/* All elements containing "onXXX" tags get the malicious attribute immediately */
-	    } else if(a.getName().toUpperCase().startsWith("ON")) {
-			((Element)node).setAttribute("malicious","Marked malicious because of potential JavaScript abuse (element contains script events)");
-	    }
-	}
+        /* Now we search the attribute list for attributes that may potentially be used maliciously.
+           These will be:
+           - href: check for a String containing "javascript"
+           - onXXX events: if they exist, the link will be marked "malicious".
+         */
+        String javascript_href="javascript";
+        NamedNodeMap map=node.getAttributes();
+        for(int i=0;i<map.getLength();i++) {
+            Attr a=(Attr)map.item(i);
+            /* First case: look for hrefs containing "javascript" */
+            if(a.getName().toUpperCase().equals("HREF")) {
+                for(int j=0;j<a.getValue().length()-javascript_href.length() ;j++) {
+                    if(a.getValue().regionMatches(true,j,javascript_href,0,javascript_href.length())) {
+                        ((Element)node).setAttribute("malicious","Marked malicious because of potential JavaScript abuse (HREF attribute contains javascript code)");       
+                        break;
+                    }
+                }
+                /* All elements containing "onXXX" tags get the malicious attribute immediately */
+            } else if(a.getName().toUpperCase().startsWith("ON")) {
+                        ((Element)node).setAttribute("malicious","Marked malicious because of potential JavaScript abuse (element contains script events)");
+            }
+        }
 
-	/* Do that recursively */
-	if(node.hasChildNodes()) {
-	    NodeList nl=node.getChildNodes();
-	    for(int i=0;i<nl.getLength();i++) {
-		walkTree(nl.item(i));
-	    }	
-	}
+        /* Do that recursively */
+        if(node.hasChildNodes()) {
+            NodeList nl=node.getChildNodes();
+            for(int i=0;i<nl.getLength();i++) {
+                walkTree(nl.item(i));
+            }   
+        }
     }
 
 } // JavaScriptCleaner

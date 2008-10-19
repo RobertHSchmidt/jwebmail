@@ -29,50 +29,50 @@ public class POPAuthenticator extends net.wastl.webmail.server.Authenticator {
     private StorageManager storage;
 
     public POPAuthenticator() {
-	super();
+        super();
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public void init(StorageManager store) {
-	storage=store;
-	Session session=Session.getDefaultInstance(System.getProperties(),null);
-	try {
-	    st=session.getStore("pop3");
-	} catch(NoSuchProviderException e) {
-	    e.printStackTrace();
-	}
+        storage=store;
+        Session session=Session.getDefaultInstance(System.getProperties(),null);
+        try {
+            st=session.getStore("pop3");
+        } catch(NoSuchProviderException e) {
+            e.printStackTrace();
+        }
     }
-	
+        
     public void register(ConfigScheme store) {
-	key="POP3";
-	store.configAddChoice("AUTH",key,"Authenticate against an POP3 server on the net. Does not allow password change.");
+        key="POP3";
+        store.configAddChoice("AUTH",key,"Authenticate against an POP3 server on the net. Does not allow password change.");
     }
     
     public void authenticatePreUserData(String user,String domain,String passwd)
      throws InvalidPasswordException {
-	super.authenticatePreUserData(user,domain,passwd);
+        super.authenticatePreUserData(user,domain,passwd);
 
-	WebMailVirtualDomain vd=storage.getVirtualDomain(domain);
-	String authhost=vd.getAuthenticationHost();
+        WebMailVirtualDomain vd=storage.getVirtualDomain(domain);
+        String authhost=vd.getAuthenticationHost();
 
-	try {
-	    st.connect(authhost,user,passwd);
-	    st.close();
-	    storage.getLogger().log(Logger.LOG_INFO,"POPAuthentication: user "+user+
-			" authenticated successfully (pop host: "+authhost+").");
-	} catch(MessagingException e) {
-	    storage.getLogger().log(Logger.LOG_WARN,"POPAuthentication: user "+user+
-			" authentication failed (pop host: "+authhost+").");
-	    //e.printStackTrace();
-	    throw new InvalidPasswordException("POP authentication failed!");
-	}
+        try {
+            st.connect(authhost,user,passwd);
+            st.close();
+            storage.getLogger().log(Logger.LOG_INFO,"POPAuthentication: user "+user+
+                        " authenticated successfully (pop host: "+authhost+").");
+        } catch(MessagingException e) {
+            storage.getLogger().log(Logger.LOG_WARN,"POPAuthentication: user "+user+
+                        " authentication failed (pop host: "+authhost+").");
+            //e.printStackTrace();
+            throw new InvalidPasswordException("POP authentication failed!");
+        }
     }
 
     public boolean canChangePassword() {
-	return false;
+        return false;
     }
 
 } // POPAuthenticator

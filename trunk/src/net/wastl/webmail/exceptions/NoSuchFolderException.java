@@ -30,10 +30,10 @@ package net.wastl.webmail.exceptions;
 public class NoSuchFolderException extends Exception {
     
     public NoSuchFolderException() {
-	super();
+        super();
     }
     
     public NoSuchFolderException(String msg) {
-	super(msg);
+        super(msg);
     }
 } // NoSuchFolderException

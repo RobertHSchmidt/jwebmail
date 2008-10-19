@@ -32,16 +32,16 @@ package net.wastl.webmail.config;
  */
 
 public class UnchangeableStringConfigParameter extends StringConfigParameter {
-    	
+        
     public UnchangeableStringConfigParameter(String name, String def, String desc) {
-	super(name,def,desc);
+        super(name,def,desc);
     }
     
     public boolean isPossibleValue(Object value) {
-	return false;
+        return false;
     }
    
     public String getType() {
-	return "unchangeable";
+        return "unchangeable";
     }
 } // UnchangeableStringConfigParameter

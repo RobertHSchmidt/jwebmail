@@ -48,15 +48,15 @@ import net.wastl.webmail.server.WebMailServer;
  * `webmail.template.path' property, hence <code>getXmlResourceFilename</code>
  * must returns only filename without pathname)
  *
- * @author	  Steve Excellent Lee
- * @version	 1.0 2001
+ * @author        Steve Excellent Lee
+ * @version      1.0 2001
  */
 public abstract class ResourceBase extends ResourceBundle {
     protected boolean debug = true;
 
     protected Document xmlRoot = null;
 
-    protected Element elementBundle = null;	// The <BUNDLE> element of resource xml file
+    protected Element elementBundle = null;     // The <BUNDLE> element of resource xml file
     protected Element elem_common = null;
 
     /**
@@ -65,106 +65,106 @@ public abstract class ResourceBase extends ResourceBundle {
      */
     public ResourceBase() {
     }
-	
+        
 
     public Enumeration getKeys() {
-	Hashtable prop=new Hashtable();
-	
-	if(elem_common != null) {
-	    getKeys(elem_common,prop);
-	}
-	if(elementBundle != null) {
-	    getKeys(elementBundle,prop);
-	}
-	return prop.keys();
+        Hashtable prop=new Hashtable();
+        
+        if(elem_common != null) {
+            getKeys(elem_common,prop);
+        }
+        if(elementBundle != null) {
+            getKeys(elementBundle,prop);
+        }
+        return prop.keys();
     }
-	
+        
     protected Object handleGetObject(String key) throws MissingResourceException {
-	String retval=null;
+        String retval=null;
 
-	// Lazily load the XML resource file
-	if (xmlRoot == null) {
-	    loadXmlResourceFile();
-	}
-		
-	if (elementBundle != null) {
-	    retval = getResult(elementBundle, key);
-	}
-	if ((retval == null) && (elem_common != null)) {
-	    retval = getResult(elem_common,key);
-	}
+        // Lazily load the XML resource file
+        if (xmlRoot == null) {
+            loadXmlResourceFile();
+        }
+                
+        if (elementBundle != null) {
+            retval = getResult(elementBundle, key);
+        }
+        if ((retval == null) && (elem_common != null)) {
+            retval = getResult(elem_common,key);
+        }
 
-	if (debug)
-	    System.err.println("XMLResourceBundle: "+key+" = "+retval);
+        if (debug)
+            System.err.println("XMLResourceBundle: "+key+" = "+retval);
 
-	return retval;
+        return retval;
     }
 
     /**
      * See class description.
      */
     abstract protected String getXmlResourceFilename();
-	
+        
     protected void loadXmlResourceFile() {
-	try {
-	    DocumentBuilder parser=DocumentBuilderFactory.newInstance().newDocumentBuilder();
-	    System.err.println("file://" + 
-			       WebMailServer.getServer().getProperty("webmail.template.path") + 
-			       System.getProperty("file.separator") + 
-			       getXmlResourceFilename());
-	    xmlRoot = parser.parse("file://" + 
-				   WebMailServer.getServer().getProperty("webmail.template.path") + 
-				   System.getProperty("file.separator") + 
-				   getXmlResourceFilename());
-		
-		
-	    NodeList nl = xmlRoot.getElementsByTagName("COMMON");
-	    if (nl.getLength() > 0) {
-		elem_common=(Element)nl.item(0);
-	    } 
-		
-	    nl = xmlRoot.getElementsByTagName("LOCALE");
-	    if (nl.getLength() > 0) {
-		elementBundle = (Element)nl.item(0);
-	    } 
-	}
-	catch (IOException e) {
-	    System.err.println(e);
-	} 
-	catch (SAXException e) {
-	    System.err.println(e);
-	}
-	catch (ParserConfigurationException e) {
-	    System.err.println(e);
-	}
+        try {
+            DocumentBuilder parser=DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            System.err.println("file://" + 
+                               WebMailServer.getServer().getProperty("webmail.template.path") + 
+                               System.getProperty("file.separator") + 
+                               getXmlResourceFilename());
+            xmlRoot = parser.parse("file://" + 
+                                   WebMailServer.getServer().getProperty("webmail.template.path") + 
+                                   System.getProperty("file.separator") + 
+                                   getXmlResourceFilename());
+                
+                
+            NodeList nl = xmlRoot.getElementsByTagName("COMMON");
+            if (nl.getLength() > 0) {
+                elem_common=(Element)nl.item(0);
+            } 
+                
+            nl = xmlRoot.getElementsByTagName("LOCALE");
+            if (nl.getLength() > 0) {
+                elementBundle = (Element)nl.item(0);
+            } 
+        }
+        catch (IOException e) {
+            System.err.println(e);
+        } 
+        catch (SAXException e) {
+            System.err.println(e);
+        }
+        catch (ParserConfigurationException e) {
+            System.err.println(e);
+        }
     }
 
     protected void getKeys(Element element, Hashtable hash) {
-	NodeList nl = element.getElementsByTagName("RESOURCE");
-	for (int i=0; i < nl.getLength(); i++) {
-	    hash.put(((Element)nl.item(i)).getAttribute("name"), "");
-	}
+        NodeList nl = element.getElementsByTagName("RESOURCE");
+        for (int i=0; i < nl.getLength(); i++) {
+            hash.put(((Element)nl.item(i)).getAttribute("name"), "");
+        }
     }
-	
+        
     protected String getResult(Element element, String key) {
-	NodeList nl = element.getElementsByTagName("RESOURCE");
-	for(int i = 0; i < nl.getLength(); i++) {
-	    Element e = (Element)nl.item(i);
-	    if (e.getAttribute("name").equals(key)) {
-		String s="";
-		NodeList textl = e.getChildNodes();
-		for (int j=0; j < textl.getLength(); j++) {
-		    if (debug)
-			System.err.println("XMLResourceBundle ("+key+"): Type "+textl.item(j).getNodeName());
-		    if (textl.item(j).getNodeName().equals("#text") ||
-			textl.item(j).getNodeName().equals("#cdata-section")) {
-			s += textl.item(j).getNodeValue();
-		    }
-		}
-		return s;
-	    }
-	}
-	return null;
+        NodeList nl = element.getElementsByTagName("RESOURCE");
+        for(int i = 0; i < nl.getLength(); i++) {
+            Element e = (Element)nl.item(i);
+            if (e.getAttribute("name").equals(key)) {
+                String s="";
+                NodeList textl = e.getChildNodes();
+                for (int j=0; j < textl.getLength(); j++) {
+                    if (debug)
+                        System.err.println("XMLResourceBundle ("+key+"): Type "+textl.item(j).getNodeName());
+                    if (textl.item(j).getNodeName().equals("#text") ||
+                        textl.item(j).getNodeName().equals("#cdata-section")) {
+                        s += textl.item(j).getNodeValue();
+                    }
+                }
+                return s;
+            }
+        }
+        return null;
     }
 }
 

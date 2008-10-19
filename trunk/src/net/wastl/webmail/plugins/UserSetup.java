@@ -44,46 +44,46 @@ import org.webengruven.webmail.auth.*;
 /* 9/24/2000 devink - changed for new challenge/response auth */
 
 public class UserSetup implements Plugin, URLHandler {
-    	
+        
     public static final String VERSION="1.3";
     public static final String URL="/setup";
 
     StorageManager store;
 
     public UserSetup() {
-		
+                
     }
 
     public void register(WebMailServer parent) {
-	parent.getURLHandler().registerHandler(URL,this);
-	store=parent.getStorage();
+        parent.getURLHandler().registerHandler(URL,this);
+        store=parent.getStorage();
     }
 
     public String getName() {
-	return "UserSetup";
+        return "UserSetup";
     }
 
     public String getDescription() {
-	return "Change a users settings.";
-    }	
+        return "Change a users settings.";
+    }   
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public String getURL() {
-	return URL;
+        return URL;
     }
 
     public HTMLDocument handleURL(String suburl,HTTPSession sess,
      HTTPRequestHeader header) throws WebMailException 
     {  
-	if(sess == null) {
-	    throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
-	}
-	UserSession session=(UserSession)sess;
-	UserData user=session.getUser();
-	HTMLDocument content;
+        if(sess == null) {
+            throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
+        }
+        UserSession session=(UserSession)sess;
+        UserData user=session.getUser();
+        HTMLDocument content;
     AuthDisplayMngr adm=store.getAuthenticator().getAuthDisplayMngr();
 
     /* 9/24/2000 devink - set up password change stuff */
@@ -91,26 +91,26 @@ public class UserSetup implements Plugin, URLHandler {
     session.getUserModel().setStateVar(
         "pass change tmpl", adm.getPassChangeTmpl());
 
-	session.refreshFolderInformation();
+        session.refreshFolderInformation();
 
-	if(suburl.startsWith("/submit")) {
-	    try {
-		session.changeSetup(header);
-		content=new XHTMLDocument(session.getModel(),store.getStylesheet("setup.xsl",user.getPreferredLocale(),user.getTheme()));
-	    } catch(InvalidPasswordException e) {
-		throw new DocumentNotFoundException("The two passwords did not match");
-	    }
-	} else {
-	    content=new XHTMLDocument(session.getModel(),store.getStylesheet("setup.xsl",user.getPreferredLocale(),user.getTheme()));
-	}   
-	return content;
+        if(suburl.startsWith("/submit")) {
+            try {
+                session.changeSetup(header);
+                content=new XHTMLDocument(session.getModel(),store.getStylesheet("setup.xsl",user.getPreferredLocale(),user.getTheme()));
+            } catch(InvalidPasswordException e) {
+                throw new DocumentNotFoundException("The two passwords did not match");
+            }
+        } else {
+            content=new XHTMLDocument(session.getModel(),store.getStylesheet("setup.xsl",user.getPreferredLocale(),user.getTheme()));
+        }   
+        return content;
     }
 
     public String provides() {
-	return "user setup";
+        return "user setup";
     }
 
     public String requires() {
-	return "content bar";
+        return "content bar";
     }
 } // UserSetup

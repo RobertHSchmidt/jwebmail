@@ -29,40 +29,40 @@
     <HTML>
       <HEAD>
         <TITLE><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> Webmail postafiókja: Fõ képernyõ/Súgó</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
-	  <TABLE width="100%" border="0" cellspacing="0" cellpadding="4">
-	    <TR>
-		<TD colspan="2" height="22" class="testoNero"><img src="images/icona_help.gif" align="absmiddle"/>WebMail Súgó 
-		</TD>
-	    </TR>
-	    <TR>
-		<TD colspan="2" height="22" class="testoBianco" bgcolor="#697791">&#160;		</TD>
-	    </TR>
+          <TABLE width="100%" border="0" cellspacing="0" cellpadding="4">
+            <TR>
+                <TD colspan="2" height="22" class="testoNero"><img src="images/icona_help.gif" align="absmiddle"/>WebMail Súgó 
+                </TD>
+            </TR>
+            <TR>
+                <TD colspan="2" height="22" class="testoBianco" bgcolor="#697791">&#160;                </TD>
+            </TR>
 
-	    <!-- Test whether the user has choosen a specific help topic or wants to display the whole
+            <!-- Test whether the user has choosen a specific help topic or wants to display the whole
                  help file -->
-	    <xsl:choose>
-	      <xsl:when test="/USERMODEL/STATEDATA/VAR[@name='helptopic']">
-		<xsl:apply-templates select="/USERMODEL/help/helptopic[@id = /USERMODEL/STATEDATA/VAR[@name='helptopic']/@value]"/>
-	      </xsl:when>
-	      <xsl:otherwise>
-		<xsl:apply-templates select="/USERMODEL/help/helptopic"/>
-	      </xsl:otherwise>
-	    </xsl:choose>
+            <xsl:choose>
+              <xsl:when test="/USERMODEL/STATEDATA/VAR[@name='helptopic']">
+                <xsl:apply-templates select="/USERMODEL/help/helptopic[@id = /USERMODEL/STATEDATA/VAR[@name='helptopic']/@value]"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:apply-templates select="/USERMODEL/help/helptopic"/>
+              </xsl:otherwise>
+            </xsl:choose>
 
-	    <TR>
-		<TD height="22" width="11%" bgcolor="#A6B1C0">&#160;
-		</TD>
-	      <TD height="22" class="testo" width="89%" bgcolor="#E2E6F0">
-		This system uses <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR			[@name='java virtual machine']"/> on <xsl:apply-templates 					select="/USERMODEL/STATEDATA/VAR[@name='operating system']"/><BR/>
-		WebMail <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='webmail version']"/> (c)1999-@year@ Sebastian Schaffert, schaffer@informatik.uni-muenchen.de
-	      </TD>
-	    </TR>
-	  </TABLE>
+            <TR>
+                <TD height="22" width="11%" bgcolor="#A6B1C0">&#160;
+                </TD>
+              <TD height="22" class="testo" width="89%" bgcolor="#E2E6F0">
+                This system uses <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR                  [@name='java virtual machine']"/> on <xsl:apply-templates                                       select="/USERMODEL/STATEDATA/VAR[@name='operating system']"/><BR/>
+                WebMail <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='webmail version']"/> (c)1999-@year@ Sebastian Schaffert, schaffer@informatik.uni-muenchen.de
+              </TD>
+            </TR>
+          </TABLE>
       </BODY>
 
     </HTML>
@@ -70,28 +70,28 @@
   
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>		    
+  </xsl:template>                   
  
    <xsl:template match="helptopic">
     <TR>
       <A NAME="{@id}"/>
       <TD rowspan="2" width="11%" valign="top" bgcolor="#A6B1C0">
-	<xsl:if test="icon">
-	  <IMG SRC="{$imgbase}/images/{icon/@href}" BORDER="0"/>
-	</xsl:if>&#160;
+        <xsl:if test="icon">
+          <IMG SRC="{$imgbase}/images/{icon/@href}" BORDER="0"/>
+        </xsl:if>&#160;
       </TD>
       <TD class="testo" width="89%" bgcolor="#E2E6F0" valign="top">
-	<SPAN class="testoGrande">
-	  <xsl:value-of select="@title"/>
-	</SPAN>
+        <SPAN class="testoGrande">
+          <xsl:value-of select="@title"/>
+        </SPAN>
       </TD>
      </TR>
      <TR>
        <TD class="testo" width="89%" bgcolor="#D1D7E7" valign="top">
-	<xsl:apply-templates select="helpdata"/>	
+        <xsl:apply-templates select="helpdata"/>        
 <P class="testo" align="justify">
-	  <SPAN class="bold">further references:</SPAN> <xsl:apply-templates select="ref"/>
-	</P>
+          <SPAN class="bold">further references:</SPAN> <xsl:apply-templates select="ref"/>
+        </P>
       </TD>
     </TR>
   </xsl:template>
@@ -130,26 +130,26 @@
   <xsl:template match="note">
     <TABLE width="100%" border="0" cellspacing="0" cellpadding="4">
       <TR>
-	<TD width="6%" class="testo" valign="top">
-	  <SPAN class="bold">Note: </SPAN>
-	</TD>
-	<TD width="94%" class="testo" bgcolor="#3399FF" valign="top">
-	  <xsl:apply-templates/>
-	</TD>
-      </TR>	
+        <TD width="6%" class="testo" valign="top">
+          <SPAN class="bold">Note: </SPAN>
+        </TD>
+        <TD width="94%" class="testo" bgcolor="#3399FF" valign="top">
+          <xsl:apply-templates/>
+        </TD>
+      </TR>     
     </TABLE>
   </xsl:template>
 
   <xsl:template match="warning">
     <TABLE width="100%" border="0" cellspacing="0" cellpadding="4">
       <TR>
-	<TD width="6%" class="testo" valign="top">
-	  <SPAN class="bold">Warning: </SPAN>
-	</TD>
-	<TD width="94%" class="testo" bgcolor="#FF9933" valign="top">
-	  <xsl:apply-templates/>
-	</TD>
-      </TR>	
+        <TD width="6%" class="testo" valign="top">
+          <SPAN class="bold">Warning: </SPAN>
+        </TD>
+        <TD width="94%" class="testo" bgcolor="#FF9933" valign="top">
+          <xsl:apply-templates/>
+        </TD>
+      </TR>     
     </TABLE>
   </xsl:template>
 
@@ -157,10 +157,10 @@
     <xsl:variable name="href" select="@ref-id"/>
     <xsl:choose>
       <xsl:when test="/USERMODEL/STATEDATA/VAR[@name='helptopic']">
-	<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic={$href}"><xsl:value-of select="/USERMODEL/help/helptopic[@id = $href]/@title"/></A>,
+        <A HREF="{$base}/help?session-id={$session-id}&amp;helptopic={$href}"><xsl:value-of select="/USERMODEL/help/helptopic[@id = $href]/@title"/></A>,
       </xsl:when>
       <xsl:otherwise>
-	<A HREF="#{$href}"><xsl:value-of select="/USERMODEL/help/helptopic[@id = $href]/@title"/></A>, 
+        <A HREF="#{$href}"><xsl:value-of select="/USERMODEL/help/helptopic[@id = $href]/@title"/></A>, 
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>

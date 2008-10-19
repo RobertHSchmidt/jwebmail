@@ -30,16 +30,16 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
       <FRAMESET ROWS="65,*" border="0">
-	<FRAME NAME="Title" SRC="{$base}/title?session-id={$session-id}" scrolling="no"/>
-	<FRAMESET COLS="{/USERMODEL/USERDATA/INTVAR[@name='icon size']/@value + 46},*" border="0">
-	  <FRAME NAME="Content" SRC="{$base}/content?session-id={$session-id}" scrolling="auto"/>
-	  <FRAME NAME="Main" SRC="{$base}/mailbox?session-id={$session-id}&amp;force-refresh=1" scrolling="auto"/>
-	</FRAMESET>
+        <FRAME NAME="Title" SRC="{$base}/title?session-id={$session-id}" scrolling="no"/>
+        <FRAMESET COLS="{/USERMODEL/USERDATA/INTVAR[@name='icon size']/@value + 46},*" border="0">
+          <FRAME NAME="Content" SRC="{$base}/content?session-id={$session-id}" scrolling="auto"/>
+          <FRAME NAME="Main" SRC="{$base}/mailbox?session-id={$session-id}&amp;force-refresh=1" scrolling="auto"/>
+        </FRAMESET>
       </FRAMESET>
     </HTML>
 

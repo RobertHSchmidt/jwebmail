@@ -30,48 +30,48 @@
     <HTML>
       <HEAD>
         <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Setup des Dossiers</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
       
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
 
-	<TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
-	  <TR>
-	    <TD colspan="2" height="22" class="testoNero">
-	      <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-	    Setup des Dossiers Webmail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Aide</A>)
-		</TD>
-	    </TR>
-	   <TR>
-	    <TD colspan="4" bgcolor="#697791" height="22" class="testoBianco">
-	        Nom de Login <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/><BR/>
-	        Compte existant depuis le <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></TD>
-	  </TR>
-	  <TR>
-	    <TD colspan="2" bgcolor="#A6B1C0" height="22" class="testoGrande">
-		Vous avez les options suivantes:
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD height="22" width="23%" class="testoNero" bgcolor="#E2E6F0">      
-	      <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">Configuration de Boîtes aux Lettres</A>
-	    </TD>
-	    <TD height="22" class="testoNero" width="77%" bgcolor="#E2E6F0">
-	      WebMail vous autorise à avoir des connexions vers plusieurs hôtes IMAP ou POP. Vous pouvez ajouter ou supprimer de telles connexions ici.
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD height="22" width="23%" bgcolor="#D1D7E7" class="testoNero">      
-	      <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">Configuration des Dossiers</A>
-	    </TD>
-	    <TD height="22" class="testoNero" width="77%" bgcolor="#D1D7E7">
-	      WebMail affichera une arborescence de dossiers (IMAP uniquement) pour chaque boîte aux lettres dans laquelle vous pourrez choisir d'ajouter, masquer ou
-	      supprimer des sous-dossiers individuellement.
-	    </TD>
-	  </TR>
-	</TABLE>
+        <TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
+          <TR>
+            <TD colspan="2" height="22" class="testoNero">
+              <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
+            Setup des Dossiers Webmail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Aide</A>)
+                </TD>
+            </TR>
+           <TR>
+            <TD colspan="4" bgcolor="#697791" height="22" class="testoBianco">
+                Nom de Login <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/><BR/>
+                Compte existant depuis le <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></TD>
+          </TR>
+          <TR>
+            <TD colspan="2" bgcolor="#A6B1C0" height="22" class="testoGrande">
+                Vous avez les options suivantes:
+            </TD>
+          </TR>
+          <TR>
+            <TD height="22" width="23%" class="testoNero" bgcolor="#E2E6F0">      
+              <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">Configuration de Boîtes aux Lettres</A>
+            </TD>
+            <TD height="22" class="testoNero" width="77%" bgcolor="#E2E6F0">
+              WebMail vous autorise à avoir des connexions vers plusieurs hôtes IMAP ou POP. Vous pouvez ajouter ou supprimer de telles connexions ici.
+            </TD>
+          </TR>
+          <TR>
+            <TD height="22" width="23%" bgcolor="#D1D7E7" class="testoNero">      
+              <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">Configuration des Dossiers</A>
+            </TD>
+            <TD height="22" class="testoNero" width="77%" bgcolor="#D1D7E7">
+              WebMail affichera une arborescence de dossiers (IMAP uniquement) pour chaque boîte aux lettres dans laquelle vous pourrez choisir d'ajouter, masquer ou
+              supprimer des sous-dossiers individuellement.
+            </TD>
+          </TR>
+        </TABLE>
       </BODY>
 
     </HTML>

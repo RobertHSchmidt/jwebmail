@@ -27,31 +27,31 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Abmeldung</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/> 
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/> 
       </HEAD>
 
       <BODY bgcolor="#ffffff">
-	<H1><CENTER>Danke dass Du WebMail benutzt!</CENTER></H1>
-	<H3><CENTER>Bereite Abmeldung vor für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</CENTER></H3>
-	<P>
-	  <CENTER>
-	    Die Benutzereinstellungen wurden gespeichert.
-	<BR/>
-	    Wenn Du den <STRONG>Anmeldeschirm</STRONG> nicht in ein paar Sekunden siehst, 
-	    <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/">hier klicken</A>.
-	  </CENTER>
-	</P>
-	<P>
-	  <CENTER>
-	    <FONT SIZE="-">
-	      <EMPH>
-		WebMail ist (c)1998-2000 von <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. 
-		Es steht unter den Bedingungen der GNU General Public License (GPL).
-	      </EMPH>
-	    </FONT>  
-	  </CENTER>
-	</P>
+        <H1><CENTER>Danke dass Du WebMail benutzt!</CENTER></H1>
+        <H3><CENTER>Bereite Abmeldung vor für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</CENTER></H3>
+        <P>
+          <CENTER>
+            Die Benutzereinstellungen wurden gespeichert.
+        <BR/>
+            Wenn Du den <STRONG>Anmeldeschirm</STRONG> nicht in ein paar Sekunden siehst, 
+            <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/">hier klicken</A>.
+          </CENTER>
+        </P>
+        <P>
+          <CENTER>
+            <FONT SIZE="-">
+              <EMPH>
+                WebMail ist (c)1998-2000 von <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. 
+                Es steht unter den Bedingungen der GNU General Public License (GPL).
+              </EMPH>
+            </FONT>  
+          </CENTER>
+        </P>
       </BODY>
 
     </HTML>

@@ -29,28 +29,28 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Postafiók lista</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
       
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
-	<P class="testoChiaro">
-	  <SPAN class="testoScuro">Köszöntjük a levelezõben, <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</SPAN><BR/>
-	  Ez a <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/>-ik 
-	  alkalom</SPAN>, hogy belépett 
-	  <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/> óta</SPAN>. 
-	  Ön <SPAN class="bold">utoljára</SPAN>
-	  <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='last login']"/>-án/én lépett be</SPAN>.<BR/>
-	  Az Ön Postafiókja a következõ mappákat tartalmazza 
-	  (összes üzenet <SPAN class="testoVerde">zölddel</SPAN>, 
-	  új üzenetek <SPAN class="testoRosso">pirossal</SPAN>) (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=mailbox">Súgó</A>):<BR/><BR/>
-	      <A HREF="{$base}/mailbox?session-id={$session-id}&amp;force-refresh=1">Újraolvas</A> - Kattintson ide, hogy mindenképpen újraolvastassa a mappák információit.
-	</P>
-	    <TABLE width="100%" border="0" cellspacing="0" cellpadding="3">
-	      <xsl:for-each select="/USERMODEL/MAILHOST_MODEL">
-		<xsl:apply-templates select="."/>
-	      </xsl:for-each>
-	    </TABLE>
+        <P class="testoChiaro">
+          <SPAN class="testoScuro">Köszöntjük a levelezõben, <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</SPAN><BR/>
+          Ez a <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/>-ik 
+          alkalom</SPAN>, hogy belépett 
+          <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/> óta</SPAN>. 
+          Ön <SPAN class="bold">utoljára</SPAN>
+          <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='last login']"/>-án/én lépett be</SPAN>.<BR/>
+          Az Ön Postafiókja a következõ mappákat tartalmazza 
+          (összes üzenet <SPAN class="testoVerde">zölddel</SPAN>, 
+          új üzenetek <SPAN class="testoRosso">pirossal</SPAN>) (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=mailbox">Súgó</A>):<BR/><BR/>
+              <A HREF="{$base}/mailbox?session-id={$session-id}&amp;force-refresh=1">Újraolvas</A> - Kattintson ide, hogy mindenképpen újraolvastassa a mappák információit.
+        </P>
+            <TABLE width="100%" border="0" cellspacing="0" cellpadding="3">
+              <xsl:for-each select="/USERMODEL/MAILHOST_MODEL">
+                <xsl:apply-templates select="."/>
+              </xsl:for-each>
+            </TABLE>
       </BODY>
 
 
@@ -59,29 +59,29 @@
   
   <xsl:template match="/USERMODEL/USERDATA/INTVAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>		    
+  </xsl:template>                   
   
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>		    
+  </xsl:template>                   
 
   <xsl:template match="/USERMODEL/MAILHOST_MODEL">
     <TR>
       <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value}" WIDTH="50%" bgcolor="#A6B1C0" class="testoGrande">
         <xsl:choose>
-	  <xsl:when test='@error != ""'>
-	    <SPAN class="testoRosso"><xsl:value-of select="@name"/></SPAN> (Hiba: <xsl:value-of select="@error"/>)
-	  </xsl:when>
-	  <xsl:otherwise>
-	    <SPAN class="testoVerde"><xsl:value-of select="@name"/></SPAN>
+          <xsl:when test='@error != ""'>
+            <SPAN class="testoRosso"><xsl:value-of select="@name"/></SPAN> (Hiba: <xsl:value-of select="@error"/>)
+          </xsl:when>
+          <xsl:otherwise>
+            <SPAN class="testoVerde"><xsl:value-of select="@name"/></SPAN>
           </xsl:otherwise>
-        </xsl:choose>	    
+        </xsl:choose>       
       </TD>
       <TD bgcolor="#909CAF" width="48%" class="testoScuro">
-	Host: <xsl:value-of select="@url"/>
+        Host: <xsl:value-of select="@url"/>
       </TD>
       <TD bgcolor="#909CAF" width="2%" class="testoScuro">
-	&#160;
+        &#160;
       </TD>
     </TR>
     <xsl:for-each select="FOLDER[@subscribed='true']">
@@ -97,28 +97,28 @@
       </xsl:call-template>
       <TD bgcolor="#E2E6F0" align="right"><IMG SRC="{$imgbase}/images/folder.gif"/></TD>
       <xsl:choose>
-	<xsl:when test="@holds_messages = 'true'">
-	  <TD bgcolor="#E2E6F0" COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}" valign="middle" class="testoGrande">
-	    <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part=1"><xsl:value-of select="@name"/></A>
-	  </TD>
-	  <TD WIDTH="48%" bgcolor="#D3D8DE" valign="middle" class="testoNero">
-	    <SPAN class="testoVerde"><xsl:value-of select="MESSAGELIST/@total"/></SPAN>/<SPAN class="testoRosso"><xsl:value-of select="MESSAGELIST/@new"/></SPAN> üzenet
-	  </TD>
+        <xsl:when test="@holds_messages = 'true'">
+          <TD bgcolor="#E2E6F0" COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}" valign="middle" class="testoGrande">
+            <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part=1"><xsl:value-of select="@name"/></A>
+          </TD>
+          <TD WIDTH="48%" bgcolor="#D3D8DE" valign="middle" class="testoNero">
+            <SPAN class="testoVerde"><xsl:value-of select="MESSAGELIST/@total"/></SPAN>/<SPAN class="testoRosso"><xsl:value-of select="MESSAGELIST/@new"/></SPAN> üzenet
+          </TD>
      <TD width="2%" class="testoScuro">
-	&#160;
-      </TD>	
-	</xsl:when>
-	<xsl:otherwise>
-	  <TD bgcolor="#E2E6F0" COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}" valign="middle" class="testoGrande">
-	    <xsl:value-of select="@name"/>
-	  </TD>
-	  <TD WIDTH="48%" bgcolor="#D3D8DE" valign="middle" class="testoNero">
-	    nem tartlamaz üzeneteket
-	  </TD>
+        &#160;
+      </TD>     
+        </xsl:when>
+        <xsl:otherwise>
+          <TD bgcolor="#E2E6F0" COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}" valign="middle" class="testoGrande">
+            <xsl:value-of select="@name"/>
+          </TD>
+          <TD WIDTH="48%" bgcolor="#D3D8DE" valign="middle" class="testoNero">
+            nem tartlamaz üzeneteket
+          </TD>
      <TD width="2%" class="testoScuro">
-	&#160;
+        &#160;
       </TD>
-	</xsl:otherwise>
+        </xsl:otherwise>
       </xsl:choose>
     </TR>
     
@@ -136,7 +136,7 @@
       <TD bgcolor="#E2E6F0" class="testoNero">&#160;</TD>
       <xsl:variable name="levelneu" select="$level - 1"/>
       <xsl:call-template name="recurse-folder">
-	<xsl:with-param name="level" select="$levelneu"/>
+        <xsl:with-param name="level" select="$levelneu"/>
       </xsl:call-template>
     </xsl:if>
   </xsl:template>

@@ -53,90 +53,90 @@ public class Composer implements Plugin, URLHandler {
     StorageManager store;
 
     public Composer() {
-	
+        
     }
 
     public void register(WebMailServer parent) {
-	parent.getURLHandler().registerHandler(URL,this);
-	store=parent.getStorage();
+        parent.getURLHandler().registerHandler(URL,this);
+        store=parent.getStorage();
     }
 
     public String getName() {
-	return "Composer";
+        return "Composer";
     }
 
     public String getDescription() {
-	return "This plugin handles the composition of a message.";
+        return "This plugin handles the composition of a message.";
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
 
     public String getURL() {
-	return URL;
+        return URL;
     }
 
 
     public HTMLDocument handleURL(String suburl, HTTPSession sess, HTTPRequestHeader header) throws WebMailException {
-	HTMLDocument content;
+        HTMLDocument content;
 
-	UserSession session=(UserSession)sess;
-	UserData user=session.getUser();
+        UserSession session=(UserSession)sess;
+        UserData user=session.getUser();
 
-	/* We were not continuing to edit a message, so we should delete the current draft! */
-	if(!header.isContentSet("continue")) {
+        /* We were not continuing to edit a message, so we should delete the current draft! */
+        if(!header.isContentSet("continue")) {
 
-	    session.clearAttachments();
-	    session.clearWork();
+            session.clearAttachments();
+            session.clearWork();
 
-	    session.prepareCompose();
+            session.prepareCompose();
 
-	    session.setEnv();
-	}
-	
-	int mode=0;
+            session.setEnv();
+        }
+        
+        int mode=0;
 
-	if(header.isContentSet("reply")) {
-	    mode += UserSession.GETMESSAGE_MODE_REPLY;
-	}
-	if(header.isContentSet("forward")) {
-	    mode += UserSession.GETMESSAGE_MODE_FORWARD;
-	}
-	if(mode>0) {
-	    if(!header.isContentSet("folder-id") || !header.isContentSet("message-nr")) {
-		/// XXX error handler TBD here!
-		System.err.println("Error: no folder-id or message-nr in request for reply or forward!");
-	    } else {
-		String folderhash=header.getContent("folder-id");	  
-		int msgnr=0;
-		try {
-		    msgnr=Integer.parseInt(header.getContent("message-nr"));
-		} catch(NumberFormatException ex) {
-		    /// XXX error handler TBD here!
-		    System.err.println("MSGNR wrong in forward/reply!");
-		}
-		 
-		try {
-		    session.getMessage(folderhash,msgnr,mode);
-		} catch(NoSuchFolderException ex) {
-		    /// XXX error handler TBD here!
-		}
-	    }
-	}
+        if(header.isContentSet("reply")) {
+            mode += UserSession.GETMESSAGE_MODE_REPLY;
+        }
+        if(header.isContentSet("forward")) {
+            mode += UserSession.GETMESSAGE_MODE_FORWARD;
+        }
+        if(mode>0) {
+            if(!header.isContentSet("folder-id") || !header.isContentSet("message-nr")) {
+                /// XXX error handler TBD here!
+                System.err.println("Error: no folder-id or message-nr in request for reply or forward!");
+            } else {
+                String folderhash=header.getContent("folder-id");         
+                int msgnr=0;
+                try {
+                    msgnr=Integer.parseInt(header.getContent("message-nr"));
+                } catch(NumberFormatException ex) {
+                    /// XXX error handler TBD here!
+                    System.err.println("MSGNR wrong in forward/reply!");
+                }
+                 
+                try {
+                    session.getMessage(folderhash,msgnr,mode);
+                } catch(NoSuchFolderException ex) {
+                    /// XXX error handler TBD here!
+                }
+            }
+        }
 
-	return new XHTMLDocument(session.getModel(),
-				 store.getStylesheet("compose.xsl",
-						     user.getPreferredLocale(),user.getTheme()));
+        return new XHTMLDocument(session.getModel(),
+                                 store.getStylesheet("compose.xsl",
+                                                     user.getPreferredLocale(),user.getTheme()));
     }
   
 
     public String provides() {
-	return "composer";
+        return "composer";
     }
 
     public String requires() {
-	return "content bar";
+        return "content bar";
     }
 } // Composer

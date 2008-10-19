@@ -45,7 +45,7 @@ public class XMLStorage extends Storage {
     
 
     public XMLStorage(Properties options) {
-	super(options);
+        super(options);
     }
 
     /**
@@ -57,15 +57,15 @@ public class XMLStorage extends Storage {
      * @param data the data to store.
      */
     public void _saveStorable(String path, Document data) throws WebMailException, IOException {
-	File file = new File(getProperty("webmail.data.path")+File.separator+path);
-	if(!file.canRead() || !file.canWrite()) {
-	    throw new WebMailException("Cannot read file "+path+". Please check the permissions.");
-	}
+        File file = new File(getProperty("webmail.data.path")+File.separator+path);
+        if(!file.canRead() || !file.canWrite()) {
+            throw new WebMailException("Cannot read file "+path+". Please check the permissions.");
+        }
 
-	OutputStream out = new FileOutputStream(file);
-	XMLCommon.writeXML(data,out,null);  // instead of "null" should state the DTD
-	out.flush();
-	out.close();
+        OutputStream out = new FileOutputStream(file);
+        XMLCommon.writeXML(data,out,null);  // instead of "null" should state the DTD
+        out.flush();
+        out.close();
     }
 
 
@@ -77,24 +77,24 @@ public class XMLStorage extends Storage {
      * need to take care of properly representing UNIX-like paths.
      */
     public Document _loadStorable(String path) throws WebMailException, IOException {
-	File file = new File(getProperty("webmail.data.path")+File.separator+path);
-	if(!file.canRead() || !file.canWrite()) {
-	    throw new WebMailException("Cannot read file "+path+". Please check the permissions.");
-	}
+        File file = new File(getProperty("webmail.data.path")+File.separator+path);
+        if(!file.canRead() || !file.canWrite()) {
+            throw new WebMailException("Cannot read file "+path+". Please check the permissions.");
+        }
 
-	InputStream in = new FileInputStream(file);
-	
+        InputStream in = new FileInputStream(file);
+        
 
-	try {
-	    DocumentBuilderFactory dfactory=DocumentBuilderFactory.newInstance();
-	    dfactory.setNamespaceAware(true);
-	    DocumentBuilder parser = dfactory.newDocumentBuilder();
-	    Document root = parser.parse(new InputSource(new InputStreamReader(in, "UTF-8")));
+        try {
+            DocumentBuilderFactory dfactory=DocumentBuilderFactory.newInstance();
+            dfactory.setNamespaceAware(true);
+            DocumentBuilder parser = dfactory.newDocumentBuilder();
+            Document root = parser.parse(new InputSource(new InputStreamReader(in, "UTF-8")));
 
-	    return root;
-	} catch(Exception ex) {
-	    throw new WebMailException("Could not load "+path,ex);
-	}
+            return root;
+        } catch(Exception ex) {
+            throw new WebMailException("Could not load "+path,ex);
+        }
 
     }
 
@@ -103,14 +103,14 @@ public class XMLStorage extends Storage {
      * Remove a certain configuration item from the store.
      */
     public void removeStorable(String path) throws WebMailException, IOException {
-	File file = new File(getProperty("webmail.data.path")+File.separator+path);
-	if(!file.canRead() || !file.canWrite()) {
-	    throw new WebMailException("Cannot read file "+path+". Please check the permissions.");
-	}
-	if(!file.exists()) {
-	    throw new WebMailException("Cannot delete file "+path+". It does not exist.");
-	}
-	file.delete();
+        File file = new File(getProperty("webmail.data.path")+File.separator+path);
+        if(!file.canRead() || !file.canWrite()) {
+            throw new WebMailException("Cannot read file "+path+". Please check the permissions.");
+        }
+        if(!file.exists()) {
+            throw new WebMailException("Cannot delete file "+path+". It does not exist.");
+        }
+        file.delete();
     }
     
 }

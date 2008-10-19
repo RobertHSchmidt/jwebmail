@@ -33,22 +33,22 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Navigationsleiste</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <BODY bgcolor="#dddddd">
 
-	<A HREF="{$base}/mailbox?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Liste aller Ordner anzeigen';"><IMG SRC="{$imgbase}/images/btn-mailbox.png" BORDER="0" ALT="MailboxList" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/>
-	<A HREF="{$base}/compose?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Neue Nachricht erstellen';"><IMG SRC="{$imgbase}/images/btn-compose.png" BORDER="0" ALT="Composer" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/>
-	<A HREF="{$base}/folder/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Ordner/Briefkästen einrichten';"><IMG SRC="{$imgbase}/images/btn-folders.png" BORDER="0" ALT="FolderSetup" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/>
-	<A HREF="{$base}/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Benutzereinstellungen ändern';"><IMG SRC="{$imgbase}/images/btn-setup.png" BORDER="0" ALT="UserSetup" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/>
-	<A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Hilfe';"><IMG SRC="{$imgbase}/images/btn-help.png" BORDER="0" ALT="WebMailHelp" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/><A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='Sitzung beenden';"><IMG SRC="{$imgbase}/images/btn-logout.png" BORDER="0" ALT="LogoutSession" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
-	<BR/>
+        <A HREF="{$base}/mailbox?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Liste aller Ordner anzeigen';"><IMG SRC="{$imgbase}/images/btn-mailbox.png" BORDER="0" ALT="MailboxList" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/>
+        <A HREF="{$base}/compose?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Neue Nachricht erstellen';"><IMG SRC="{$imgbase}/images/btn-compose.png" BORDER="0" ALT="Composer" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/>
+        <A HREF="{$base}/folder/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Ordner/Briefkästen einrichten';"><IMG SRC="{$imgbase}/images/btn-folders.png" BORDER="0" ALT="FolderSetup" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/>
+        <A HREF="{$base}/setup?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Benutzereinstellungen ändern';"><IMG SRC="{$imgbase}/images/btn-setup.png" BORDER="0" ALT="UserSetup" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/>
+        <A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='Hilfe';"><IMG SRC="{$imgbase}/images/btn-help.png" BORDER="0" ALT="WebMailHelp" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/><A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='Sitzung beenden';"><IMG SRC="{$imgbase}/images/btn-logout.png" BORDER="0" ALT="LogoutSession" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <BR/>
       </BODY>
 
 

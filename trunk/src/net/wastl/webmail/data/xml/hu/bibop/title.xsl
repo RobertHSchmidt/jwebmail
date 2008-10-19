@@ -29,36 +29,36 @@
     <HTML>
       <HEAD>
         <TITLE><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> WebMail fiókja: Fõoldal</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
       <BODY bgcolor="#B5C1CF" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
-	<TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
-	  <TR>
-	    <TD width="5%" background="{$imgbase}/images/sfondino_grigio.gif">
-		<IMG SRC="{$imgbase}/images/logo.gif" alt="Logo BiBop"/>
-	    </TD>
-	    <TD width="13%" background="{$imgbase}/images/sfondino_grigio.gif">
-		<IMG SRC="{$imgbase}/images/webmail.gif" alt="Logo WebMail BiBop"/>
-	    </TD>
-	    <TD width="2%" background="{$imgbase}/images/sfondino_scuro.gif">
-		<IMG SRC="{$imgbase}/images/spacer.gif" width="15" height="1"/>
-	    </TD>
-	    <TD width="32%" background="{$imgbase}/images/sfondino_scuro.gif" align="center">
-	      &#160;
-	    </TD>
-   	    <TD width="23%" valign="top" background="{$imgbase}/images/sfondino_scuro.gif">
-		&#160;
-    	    </TD>
-	    <TD width="16%" valign="top" align="right" bgcolor="#697791" background="{$imgbase}/images/curva_alto.gif" class="mailbox">
-	      <SPAN class="mailbold"><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></SPAN><BR/> Levelesládája
-	    </TD>
+        <TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
+          <TR>
+            <TD width="5%" background="{$imgbase}/images/sfondino_grigio.gif">
+                <IMG SRC="{$imgbase}/images/logo.gif" alt="Logo BiBop"/>
+            </TD>
+            <TD width="13%" background="{$imgbase}/images/sfondino_grigio.gif">
+                <IMG SRC="{$imgbase}/images/webmail.gif" alt="Logo WebMail BiBop"/>
+            </TD>
+            <TD width="2%" background="{$imgbase}/images/sfondino_scuro.gif">
+                <IMG SRC="{$imgbase}/images/spacer.gif" width="15" height="1"/>
+            </TD>
+            <TD width="32%" background="{$imgbase}/images/sfondino_scuro.gif" align="center">
+              &#160;
+            </TD>
+            <TD width="23%" valign="top" background="{$imgbase}/images/sfondino_scuro.gif">
+                &#160;
+            </TD>
+            <TD width="16%" valign="top" align="right" bgcolor="#697791" background="{$imgbase}/images/curva_alto.gif" class="mailbox">
+              <SPAN class="mailbold"><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></SPAN><BR/> Levelesládája
+            </TD>
             <TD align="right" width="9%" background="{$imgbase}/images/sfondino_grigio_scuro.gif">
-		<IMG SRC="{$imgbase}/images/mailbox_dx.gif"/>
-	    </TD>
-	  </TR>
-	</TABLE>
+                <IMG SRC="{$imgbase}/images/mailbox_dx.gif"/>
+            </TD>
+          </TR>
+        </TABLE>
       </BODY>
 
 

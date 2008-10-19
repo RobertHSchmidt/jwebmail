@@ -40,36 +40,36 @@ public class JavaScriptFilter  {
     private static boolean initialized=false;
     
     public JavaScriptFilter() {
-	
+        
     }
 
     public static void init() {
-	try {
-	    filter[0]=Pattern.compile("<\\s*SCRIPT[^>]*>",Pattern.CASE_INSENSITIVE);
-	    filter[1]=Pattern.compile("<\\s*\\/SCRIPT[^>]*>",Pattern.CASE_INSENSITIVE);
-	    filter[2]=Pattern.compile("<\\s*A +HREF *=.*\"(javascript:[^\"]*)\"[^>]*>([^<]+)</A>",Pattern.CASE_INSENSITIVE);
+        try {
+            filter[0]=Pattern.compile("<\\s*SCRIPT[^>]*>",Pattern.CASE_INSENSITIVE);
+            filter[1]=Pattern.compile("<\\s*\\/SCRIPT[^>]*>",Pattern.CASE_INSENSITIVE);
+            filter[2]=Pattern.compile("<\\s*A +HREF *=.*\"(javascript:[^\"]*)\"[^>]*>([^<]+)</A>",Pattern.CASE_INSENSITIVE);
 
-	    substitution[0]="<P><FONT color=\"red\">WebMail security: JavaScript filtered</FONT>:<BR>\n<HR>\n<FONT COLOR=\"orange\"><PRE>";
-	    substitution[1]="</PRE></FONT><HR><FONT color=\"red\">JavaScript end</FONT><P>";
-	    substitution[2]="<FONT COLOR=\"red\">WebMail security: JavaScript link filtered:</FONT> <FONT COLOR=\"orange\">$1</FONT> $2 ";
-	    // Link highlighting
-	    //uri=new RE("http\\:\\/\\/(.+)(html|\\/)(\\S|\\-|\\+|\\.|\\\|\\:)");
-	    initialized=true;
-	} catch(Exception e) {
-	    e.printStackTrace();
-	}
+            substitution[0]="<P><FONT color=\"red\">WebMail security: JavaScript filtered</FONT>:<BR>\n<HR>\n<FONT COLOR=\"orange\"><PRE>";
+            substitution[1]="</PRE></FONT><HR><FONT color=\"red\">JavaScript end</FONT><P>";
+            substitution[2]="<FONT COLOR=\"red\">WebMail security: JavaScript link filtered:</FONT> <FONT COLOR=\"orange\">$1</FONT> $2 ";
+            // Link highlighting
+            //uri=new RE("http\\:\\/\\/(.+)(html|\\/)(\\S|\\-|\\+|\\.|\\\|\\:)");
+            initialized=true;
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static String apply(String s) {
-	if(!initialized) {
-	    init();
-	}
-	String retval=s;
-	for(int i=0;i<filter.length;i++) {
-	    Matcher m = filter[i].matcher(retval);
-	    retval=m.replaceAll(substitution[i]);
-	}
-	return retval;
+        if(!initialized) {
+            init();
+        }
+        String retval=s;
+        for(int i=0;i<filter.length;i++) {
+            Matcher m = filter[i].matcher(retval);
+            retval=m.replaceAll(substitution[i]);
+        }
+        return retval;
     }
     
 } // JavaScriptFilter

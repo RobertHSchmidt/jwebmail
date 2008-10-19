@@ -36,21 +36,21 @@ public class UserDataException extends WebMailException {
     String domain;
 
     public UserDataException() {
-	super();
+        super();
     }
 
     public UserDataException(String s, String user, String domain) {
-	super(s);
-	this.user=user;
-	this.domain=domain;
+        super(s);
+        this.user=user;
+        this.domain=domain;
     }
     
     public String getUser() {
-	return user;
+        return user;
     }
 
     public String getDomain() {
-	return domain;
+        return domain;
     }
 
 } // InvalidPasswordException

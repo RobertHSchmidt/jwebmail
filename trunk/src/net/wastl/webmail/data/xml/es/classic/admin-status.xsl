@@ -137,7 +137,7 @@
             <STRONG>Sesi&#243;n de Adminis</STRONG>
           </xsl:when>
           <xsl:otherwise><STRONG>Sesi&#243;n de Usuario </STRONG> (User <xsl:value-of select="SESS_USER"/>)
-	  </xsl:otherwise>
+          </xsl:otherwise>
         </xsl:choose>
       </TD>
       <TD><STRONG>direcci&#243;n remota: </STRONG><xsl:value-of select="SESS_ADDRESS"/>, <STRONG>tiempo sin uso: </STRONG><xsl:value-of select="VAR[@name='idle time']/@value"/><BR/><xsl:if test="count(SESS_CONN) &gt; 0"><STRONG>coneciones activas de correo:</STRONG><BR/><UL><xsl:for-each select="SESS_CONN"><LI><EM><xsl:value-of select="."/></EM></LI></xsl:for-each></UL></xsl:if></TD>

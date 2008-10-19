@@ -46,45 +46,45 @@ public class WebMailTitle implements Plugin, URLHandler {
     StorageManager store;
 
     public WebMailTitle() {
-	
+        
     }
     public void register(WebMailServer parent) {
-	parent.getURLHandler().registerHandler(URL,this);
-	store=parent.getStorage();
+        parent.getURLHandler().registerHandler(URL,this);
+        store=parent.getStorage();
     }
 
     public String getName() {
-	return "WebMailTitle";
+        return "WebMailTitle";
     }
 
     public String getDescription() {
-	return "The WebMail title-frame plugin";
+        return "The WebMail title-frame plugin";
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public String getURL() {
-	return URL;
+        return URL;
     }
 
 
     public HTMLDocument handleURL(String suburl, HTTPSession session, HTTPRequestHeader header) throws WebMailException {
-	if(session == null) {
-	    throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
-	}
-	//return new HTMLParsedDocument(store,session,"title");
-	UserData user=((UserSession)session).getUser();
-	return new XHTMLDocument(session.getModel(),store.getStylesheet("title.xsl",user.getPreferredLocale(),user.getTheme()));
+        if(session == null) {
+            throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
+        }
+        //return new HTMLParsedDocument(store,session,"title");
+        UserData user=((UserSession)session).getUser();
+        return new XHTMLDocument(session.getModel(),store.getStylesheet("title.xsl",user.getPreferredLocale(),user.getTheme()));
     }
 
     public String provides() {
-	return "title";
+        return "title";
     }
 
     public String requires() {
-	return "";
+        return "";
     }
     
 } // WebMailTitle

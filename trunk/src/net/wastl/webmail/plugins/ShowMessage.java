@@ -47,68 +47,68 @@ public class ShowMessage implements Plugin, URLHandler {
     StorageManager store;
 
     public ShowMessage() {
-	
+        
     }
 
     public void register(WebMailServer parent) {
-	parent.getURLHandler().registerHandler(URL,this);
-	this.store=parent.getStorage();
+        parent.getURLHandler().registerHandler(URL,this);
+        this.store=parent.getStorage();
     }
 
     public String getName() {
-	return "ShowMessage";
+        return "ShowMessage";
     }
 
     public String getDescription() {
-	return "Display a message";
+        return "Display a message";
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
     public String getURL() {
-	return URL;
+        return URL;
     }
 
 
     public HTMLDocument handleURL(String suburl, HTTPSession sess, HTTPRequestHeader header) throws WebMailException {
-	if(sess == null) {
-	    throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
-	}
-	UserSession session=(UserSession)sess;
-	UserData user=session.getUser();
-	String folderhash=header.getContent("folder-id");
+        if(sess == null) {
+            throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
+        }
+        UserSession session=(UserSession)sess;
+        UserData user=session.getUser();
+        String folderhash=header.getContent("folder-id");
 
-	if(header.isContentSet("flag")) {
-	    try {
-		session.setFlags(folderhash,header);
-	    } catch(Exception ex) {
-		if(WebMailServer.getDebug()) ex.printStackTrace();
-		throw new WebMailException(ex.getMessage());
-	    }
-	}
-	
-	int nr=1;
-	try {
-	    nr=Integer.parseInt(header.getContent("message-nr"));
-	} catch(Exception e) {}
-	try {
-	    session.getMessage(folderhash,nr);
-	} catch(NoSuchFolderException e) {
-	    throw new DocumentNotFoundException("Could not find folder "+folderhash+"!");
-	}
-	return new XHTMLDocument(session.getModel(),
-				 store.getStylesheet("showmessage.xsl",
-						     user.getPreferredLocale(),user.getTheme()));
-	//return new HTMLParsedDocument(store,session,"showmessage");
+        if(header.isContentSet("flag")) {
+            try {
+                session.setFlags(folderhash,header);
+            } catch(Exception ex) {
+                if(WebMailServer.getDebug()) ex.printStackTrace();
+                throw new WebMailException(ex.getMessage());
+            }
+        }
+        
+        int nr=1;
+        try {
+            nr=Integer.parseInt(header.getContent("message-nr"));
+        } catch(Exception e) {}
+        try {
+            session.getMessage(folderhash,nr);
+        } catch(NoSuchFolderException e) {
+            throw new DocumentNotFoundException("Could not find folder "+folderhash+"!");
+        }
+        return new XHTMLDocument(session.getModel(),
+                                 store.getStylesheet("showmessage.xsl",
+                                                     user.getPreferredLocale(),user.getTheme()));
+        //return new HTMLParsedDocument(store,session,"showmessage");
     }
 
     public String provides() {
-	return "message show";
+        return "message show";
     }
 
     public String requires() {
-	return "message list";
+        return "message list";
     }
 } // ShowMessage

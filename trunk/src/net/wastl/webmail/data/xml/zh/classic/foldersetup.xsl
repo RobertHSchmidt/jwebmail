@@ -29,47 +29,47 @@
     <HTML>
       <HEAD>
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
-	<META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-	<META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
       </HEAD>
       
       <BODY bgcolor="#ffffff">
 
-	<TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0">
-	  <TR>
-	    <TD VALIGN="CENTER">
-	      <IMG SRC="{$imgbase}/images/btn-folders.png"/>
-	    </TD>
-	    <TD VALIGN="CENTER">
-	      <FONT SIZE="+2"><STRONG>JWebMail Folder Setup for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Help</A>) <BR/>
-	      <EM>Login name <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/>
-	      <EM>Account exists since <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="2" BGCOLOR="#aaaaaa"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
-	  </TR>
-	  <TR>
-	    <TD COLSPAN="2"><STRONG>You have the following options:</STRONG></TD>
-	  </TR>
-	  <TR>
-	    <TD>	      
-	      <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">Add/Remove Mailbox</A>
-	    </TD>
-	    <TD>
-	      WebMail allows you to have several connections to IMAP and POP hosts. You can add and remove such connections here.
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD>	      
-	      <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">Add/Remove Subfolders</A>
-	    </TD>
-	    <TD>
-	      WebMail will display you a tree of folders for each mailbox where you can choose to add or
-	      remove individual subfolders.
-	    </TD>
-	  </TR>
-	</TABLE>
+        <TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0">
+          <TR>
+            <TD VALIGN="CENTER">
+              <IMG SRC="{$imgbase}/images/btn-folders.png"/>
+            </TD>
+            <TD VALIGN="CENTER">
+              <FONT SIZE="+2"><STRONG>JWebMail Folder Setup for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Help</A>) <BR/>
+              <EM>Login name <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/>
+              <EM>Account exists since <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM>
+            </TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="2" BGCOLOR="#aaaaaa"><xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text></TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="2"><STRONG>You have the following options:</STRONG></TD>
+          </TR>
+          <TR>
+            <TD>              
+              <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">Add/Remove Mailbox</A>
+            </TD>
+            <TD>
+              WebMail allows you to have several connections to IMAP and POP hosts. You can add and remove such connections here.
+            </TD>
+          </TR>
+          <TR>
+            <TD>              
+              <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">Add/Remove Subfolders</A>
+            </TD>
+            <TD>
+              WebMail will display you a tree of folders for each mailbox where you can choose to add or
+              remove individual subfolders.
+            </TD>
+          </TR>
+        </TABLE>
       </BODY>
 
     </HTML>

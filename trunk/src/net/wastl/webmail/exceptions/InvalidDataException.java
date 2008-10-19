@@ -32,11 +32,11 @@ package net.wastl.webmail.exceptions;
 public class InvalidDataException extends WebMailException {
     
     public InvalidDataException() {
-	super();
+        super();
     }
     
 
     public InvalidDataException(String s) {
-	super(s);
+        super(s);
     }
 } // InvalidDataException

@@ -49,13 +49,13 @@ public class PluginHandler  {
     Vector plugins;
 
     public PluginHandler(WebMailServer parent) throws WebMailException {
-	this.parent=parent;
-	this.plugin_list=parent.getProperty("webmail.plugins");
-	if(plugin_list == null) {
-	    throw new WebMailException("Error: No Plugins defined (Property webmail.plugins).");
-	}
-	plugins=new Vector();
-	registerPlugins();
+        this.parent=parent;
+        this.plugin_list=parent.getProperty("webmail.plugins");
+        if(plugin_list == null) {
+            throw new WebMailException("Error: No Plugins defined (Property webmail.plugins).");
+        }
+        plugins=new Vector();
+        registerPlugins();
     }
 
 
@@ -63,76 +63,76 @@ public class PluginHandler  {
      * Initialize and register WebMail Plugins.
      */
     public void registerPlugins() {
-	parent.getLogger().log(Logger.LOG_INFO,"Initializing WebMail Plugins ...");
-	//	System.setProperty("java.class.path",System.getProperty("java.class.path")+System.getProperty("path.separator")+pluginpath);
+        parent.getLogger().log(Logger.LOG_INFO,"Initializing WebMail Plugins ...");
+        //      System.setProperty("java.class.path",System.getProperty("java.class.path")+System.getProperty("path.separator")+pluginpath);
 
 
 
-	StringTokenizer tok=new StringTokenizer(plugin_list,":;, ");
+        StringTokenizer tok=new StringTokenizer(plugin_list,":;, ");
 
-	Class plugin_class=null;
-	try {
-	    plugin_class=Class.forName("net.wastl.webmail.server.Plugin");
-	} catch(ClassNotFoundException ex) {
-	    parent.getLogger().log(Logger.LOG_CRIT,"===> Could not find interface 'Plugin'!!");
-	    System.exit(1);
-	}
+        Class plugin_class=null;
+        try {
+            plugin_class=Class.forName("net.wastl.webmail.server.Plugin");
+        } catch(ClassNotFoundException ex) {
+            parent.getLogger().log(Logger.LOG_CRIT,"===> Could not find interface 'Plugin'!!");
+            System.exit(1);
+        }
 
-	PluginDependencyTree pt=new PluginDependencyTree("");
-	Queue q=new Queue();
-	
-	int count=0;
-	
-	while(tok.hasMoreTokens()) {
-	    String name=(String)tok.nextToken();
-	    try {
-		Class c=Class.forName(name);
-		if(plugin_class.isAssignableFrom(c)) {
-		    Plugin p=(Plugin) c.newInstance();
-		    q.queue(p);
-		    plugins.addElement(p);
-		    //System.err.print(p.getName()+" ");
-		    //System.err.flush();
-		    count++;
-		}
-	    } catch(Exception ex) {
-		parent.getLogger().log(Logger.LOG_ERR,"could not register plugin \""+name+"\"!");
-		ex.printStackTrace();
-	    }
-	}
-	
-	parent.getLogger().log(Logger.LOG_INFO,count+" plugins loaded correctly.");
+        PluginDependencyTree pt=new PluginDependencyTree("");
+        Queue q=new Queue();
+        
+        int count=0;
+        
+        while(tok.hasMoreTokens()) {
+            String name=(String)tok.nextToken();
+            try {
+                Class c=Class.forName(name);
+                if(plugin_class.isAssignableFrom(c)) {
+                    Plugin p=(Plugin) c.newInstance();
+                    q.queue(p);
+                    plugins.addElement(p);
+                    //System.err.print(p.getName()+" ");
+                    //System.err.flush();
+                    count++;
+                }
+            } catch(Exception ex) {
+                parent.getLogger().log(Logger.LOG_ERR,"could not register plugin \""+name+"\"!");
+                ex.printStackTrace();
+            }
+        }
+        
+        parent.getLogger().log(Logger.LOG_INFO,count+" plugins loaded correctly.");
 
 
-	count=0;
-	while(!q.isEmpty()) {
-	    Plugin p=(Plugin)q.next();
-	    if(!pt.addPlugin(p)) {
-		q.queue(p);
-	    }
-	}
-	pt.register(parent);
-	parent.getLogger().log(Logger.LOG_INFO,count+" plugins initialized.");
+        count=0;
+        while(!q.isEmpty()) {
+            Plugin p=(Plugin)q.next();
+            if(!pt.addPlugin(p)) {
+                q.queue(p);
+            }
+        }
+        pt.register(parent);
+        parent.getLogger().log(Logger.LOG_INFO,count+" plugins initialized.");
     };
    
     public Enumeration getPlugins() {
-	return plugins.elements();
+        return plugins.elements();
     }
 
     /**
      * A filter to find WebMail Plugins.
      */
     class FFilter implements FilenameFilter {
-	FFilter() {
-	}
-	
-	public boolean accept(File f, String s) {
-	    if(s.endsWith(".class")) {
-		return true;
-	    } else {
-		return false;
-	    }
-	}	
+        FFilter() {
+        }
+        
+        public boolean accept(File f, String s) {
+            if(s.endsWith(".class")) {
+                return true;
+            } else {
+                return false;
+            }
+        }       
     }
 
 } // PluginHandler
