@@ -235,3 +235,11 @@ v0.5.1 => v0.5.2
 # Changed the 10 minute default timeout to one hour
 # Number of total messages is now shown correctly in the folder overview
 # BCC field and CC field showed the same values
+
+
+Subversion rev. 5 (no tag yet)
++ Converted baseline from CVS to Subversion, setting proper SVN proerties
+  (for mime-types, EOL styles, RCS keywords).
++ Got rid of tabs and trailing white from text files.
++ Changed license from GNU Lesser to Apache 2.0, with explicit permission
+  from the Copyright holder, Sebastian Schaffert.
