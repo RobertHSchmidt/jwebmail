@@ -98,9 +98,9 @@ public class StorageManager implements ConfigurationListener {
     public void initConfigKeys() {
         // Initialize the configuration file with the default or set parameters
         // needed to complete the XML file
-        Enumeration enum=parent.getConfigScheme().getPossibleKeys();
-        while(enum.hasMoreElements()) {
-            String key=(String)enum.nextElement();
+        Enumeration enumVar=parent.getConfigScheme().getPossibleKeys();
+        while(enumVar.hasMoreElements()) {
+            String key=(String)enumVar.nextElement();
             if(!sysdata.isConfigSet(key)) {
                 // We must use the raw method so the input doesn't get filtered.
                 sysdata.setConfig(key,(String)parent.getConfigScheme().getDefaultValue(key),false,false);
@@ -269,10 +269,10 @@ public class StorageManager implements ConfigurationListener {
         for(int i=0;i<flist.length;i++) {
             String cur_lang=flist[i];
             Locale loc=new Locale(cur_lang,"","");
-            Enumeration enum=available.elements();
+            Enumeration enumVar=available.elements();
             boolean added=false;
-            while(enum.hasMoreElements()) {
-                Locale l=(Locale)enum.nextElement();
+            while(enumVar.hasMoreElements()) {
+                Locale l=(Locale)enumVar.nextElement();
                 if(l.getLanguage().equals(loc.getLanguage())) {
                     s+=l.toString()+" ";
                     count++;
@@ -492,19 +492,19 @@ public class StorageManager implements ConfigurationListener {
     public Enumeration getUsers() {
         final Enumeration domains=getVirtualDomains();
         return new Enumeration() {
-                Enumeration enum=null;
+                Enumeration enumVar=null;
                 public boolean hasMoreElements() {
-                    return (domains.hasMoreElements() || (enum != null && enum.hasMoreElements()));
+                    return (domains.hasMoreElements() || (enumVar != null && enumVar.hasMoreElements()));
                 }
                 public Object nextElement() {
-                    if(enum == null || !enum.hasMoreElements()) {
+                    if(enumVar == null || !enumVar.hasMoreElements()) {
                         if(domains.hasMoreElements()) {
-                            enum=getUsers((String)domains.nextElement());
+                            enumVar=getUsers((String)domains.nextElement());
                         } else {
                             return null;
                         }
                     }
-                    return enum.nextElement();
+                    return enumVar.nextElement();
                 }
             };
     }

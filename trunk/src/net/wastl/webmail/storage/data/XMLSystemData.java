@@ -205,9 +205,9 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
     }
 
     public void initChoices() {
-        Enumeration enum=getConfigKeys();
-        while(enum.hasMoreElements()) {
-            initChoices((String)enum.nextElement());
+        Enumeration enumVar=getConfigKeys();
+        while(enumVar.hasMoreElements()) {
+            initChoices((String)enumVar.nextElement());
         }
     }
 
@@ -219,10 +219,10 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
 
         ConfigParameter param=scheme.getConfigParameter(key);
         if(param instanceof ChoiceConfigParameter) {
-            Enumeration enum=((ChoiceConfigParameter)param).choices();
-            while(enum.hasMoreElements()) {
+            Enumeration enumVar=((ChoiceConfigParameter)param).choices();
+            while(enumVar.hasMoreElements()) {
                 Element choice=root.createElement("CHOICE");
-                choice.appendChild(root.createTextNode((String)enum.nextElement()));
+                choice.appendChild(root.createTextNode((String)enumVar.nextElement()));
                 config.appendChild(choice);
             }
         }
@@ -242,10 +242,10 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
         config.setAttribute("type",type);
         ConfigParameter param=scheme.getConfigParameter(key);
         if(param instanceof ChoiceConfigParameter) {
-            Enumeration enum=((ChoiceConfigParameter)param).choices();
-            while(enum.hasMoreElements()) {
+            Enumeration enumVar=((ChoiceConfigParameter)param).choices();
+            while(enumVar.hasMoreElements()) {
                 Element choice=root.createElement("CHOICE");
-                choice.appendChild(root.createTextNode((String)enum.nextElement()));
+                choice.appendChild(root.createTextNode((String)enumVar.nextElement()));
                 config.appendChild(choice);
             }
         }
@@ -312,9 +312,9 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
                             while(e.hasMoreElements()) {
                                 v.addElement(e.nextElement());
                             }
-                            Enumeration enum=v.elements();
-                            while(enum.hasMoreElements()) {
-                                String next=(String)enum.nextElement();
+                            Enumeration enumVar=v.elements();
+                            while(enumVar.hasMoreElements()) {
+                                String next=(String)enumVar.nextElement();
                                 if(host.toUpperCase().endsWith(next.toUpperCase())) {
                                     return true;
                                 }

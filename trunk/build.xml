@@ -17,6 +17,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
+  <property file="local.properties"/> <!-- NON-SHARED build properties -->
+
   <!-- =================================================================== -->
   <!-- Initialization target                                               -->
   <!-- =================================================================== -->
@@ -199,7 +201,7 @@ limitations under the License.
 <!--    <echo message="Compiling net \& org package trees to ${build.dest}"/> -->
     <javac srcdir="${build.src}"
            destdir="${build.dest}"
-           classpath=".:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/nekohtml.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar:${contrib.dir}/servlet-2.3.jar"
+           classpath=".:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/nekohtml.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar:${contrib.dir}/servlet-2.3.jar:${contrib.dir}/xalan.jar"
            debug="${debug}"
            optimize="${optimize}"
            deprecation="${deprecation}"

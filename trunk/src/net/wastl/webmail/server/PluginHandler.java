@@ -81,7 +81,7 @@ public class PluginHandler  {
         }
 
         PluginDependencyTree pt=new PluginDependencyTree("");
-        Queue q=new Queue();
+        net.wastl.webmail.misc.Queue q=new net.wastl.webmail.misc.Queue();
 
         int count=0;
 

@@ -77,9 +77,9 @@ public class WebMailServlet extends WebMailServer implements Servlet {
         System.err.println("Init");
         srvlt_config=config;
         this.config=new Properties();
-        Enumeration enum=config.getInitParameterNames();
-        while(enum.hasMoreElements()) {
-            String s=(String)enum.nextElement();
+        Enumeration enumVar=config.getInitParameterNames();
+        while(enumVar.hasMoreElements()) {
+            String s=(String)enumVar.nextElement();
             this.config.put(s,config.getInitParameter(s));
             System.err.println(s+": "+config.getInitParameter(s));
         }
@@ -321,9 +321,9 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                     res.setStatus(content.getReturnCode());
 
                     if(content.hasHTTPHeader()) {
-                        Enumeration enum=content.getHTTPHeaderKeys();
-                        while(enum.hasMoreElements()) {
-                            String s=(String)enum.nextElement();
+                        Enumeration enumVar=content.getHTTPHeaderKeys();
+                        while(enumVar.hasMoreElements()) {
+                            String s=(String)enumVar.nextElement();
                             res.setHeader(s,content.getHTTPHeader(s));
                         }
                     }

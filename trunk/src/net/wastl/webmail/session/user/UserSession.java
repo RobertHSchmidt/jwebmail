@@ -171,9 +171,9 @@ public class UserSession implements HTTPSession {
 
         /* If the user logs in for the first time we want all folders subscribed */
         if(user.getLoginCount().equals("1")) {
-            Enumeration enum=user.mailHosts();
-            while(enum.hasMoreElements()) {
-                String id=(String)enum.nextElement();
+            Enumeration enumVar=user.mailHosts();
+            while(enumVar.hasMoreElements()) {
+                String id=(String)enumVar.nextElement();
                 if(user.getMailHost(id).getName().equals("Default")) {
                     try {
                         setSubscribedAll(id,true);
@@ -788,10 +788,10 @@ public class UserSession implements HTTPSession {
                     }
 
                     if(user.wantsBreakLines()) {
-                        Enumeration enum=Helper.breakLine(token,user.getMaxLineLength(),current_quotelevel);
+                        Enumeration enumVar=Helper.breakLine(token,user.getMaxLineLength(),current_quotelevel);
 
-                        while(enum.hasMoreElements()) {
-                            String s=(String)enum.nextElement();
+                        while(enumVar.hasMoreElements()) {
+                            String s=(String)enumVar.nextElement();
                             if(user.wantsShowFancy()) {
                                 content.append(Fancyfier.apply(s)).append("\n");
                             } else {
@@ -1010,10 +1010,10 @@ public class UserSession implements HTTPSession {
         if(mime_parts_decoded == null) {
             mime_parts_decoded=new Hashtable();
         }
-        Enumeration enum=mime_parts_decoded.keys();
+        Enumeration enumVar=mime_parts_decoded.keys();
         Vector v=new Vector();
-        while(enum.hasMoreElements()) {
-            String key=(String)enum.nextElement();
+        while(enumVar.hasMoreElements()) {
+            String key=(String)enumVar.nextElement();
             if(key.startsWith(msgid)) {
                 v.addElement(key);
             }
@@ -1041,10 +1041,10 @@ public class UserSession implements HTTPSession {
 
         String msgid=xml_message.getAttribute("msgid");
 
-        Enumeration enum=getMimeParts(msgid);
+        Enumeration enumVar=getMimeParts(msgid);
         attachments_size=0;
-        while(enum.hasMoreElements()) {
-            mime_parts_decoded.remove((String)enum.nextElement());
+        while(enumVar.hasMoreElements()) {
+            mime_parts_decoded.remove((String)enumVar.nextElement());
         }
     }
 
@@ -1057,9 +1057,9 @@ public class UserSession implements HTTPSession {
 
         String msgid=xml_message.getAttribute("msgid");
 
-        Enumeration enum=getMimeParts(msgid);
-        while(enum.hasMoreElements()) {
-            String key=(String)enum.nextElement();
+        Enumeration enumVar=getMimeParts(msgid);
+        while(enumVar.hasMoreElements()) {
+            String key=(String)enumVar.nextElement();
             String filename=key.substring(msgid.length()+1);
             hash.put(filename,mime_parts_decoded.get(key));
         }
@@ -1091,10 +1091,10 @@ public class UserSession implements HTTPSession {
 
         bs.setDescription(description);
 
-        Enumeration enum=getMimeParts(msgid);
+        Enumeration enumVar=getMimeParts(msgid);
         attachments_size=0;
-        while(enum.hasMoreElements()) {
-            ByteStore b=(ByteStore)mime_parts_decoded.get((String)enum.nextElement());
+        while(enumVar.hasMoreElements()) {
+            ByteStore b=(ByteStore)mime_parts_decoded.get((String)enumVar.nextElement());
             attachments_size+=b.getSize();
         }
 
@@ -1132,17 +1132,17 @@ public class UserSession implements HTTPSession {
 
         mime_parts_decoded.remove(msgid+"/"+name);
 
-        Enumeration enum=getMimeParts(msgid);
+        Enumeration enumVar=getMimeParts(msgid);
         attachments_size=0;
-        while(enum.hasMoreElements()) {
-            ByteStore b=(ByteStore)mime_parts_decoded.get((String)enum.nextElement());
+        while(enumVar.hasMoreElements()) {
+            ByteStore b=(ByteStore)mime_parts_decoded.get((String)enumVar.nextElement());
             attachments_size+=b.getSize();
         }
 
-        enum=xml_multipart.getParts();
+        enumVar=xml_multipart.getParts();
         XMLMessagePart oldpart=null;
-        while(enum.hasMoreElements()) {
-            XMLMessagePart tmp=(XMLMessagePart)enum.nextElement();
+        while(enumVar.hasMoreElements()) {
+            XMLMessagePart tmp=(XMLMessagePart)enumVar.nextElement();
             if(tmp.getAttribute("filename") != null &&
                tmp.getAttribute("filename").equals(name)) {
                 oldpart=tmp;
@@ -1188,10 +1188,10 @@ public class UserSession implements HTTPSession {
                 StringTokenizer tok=new StringTokenizer(bodyString,"\n");
                 while(tok.hasMoreTokens()) {
                     String line=tok.nextToken();
-                    Enumeration enum=Helper.breakLine(line,user.getMaxLineLength(),
+                    Enumeration enumVar=Helper.breakLine(line,user.getMaxLineLength(),
                                                       Helper.getQuoteLevel(line));
-                    while(enum.hasMoreElements()) {
-                        content.append((String)enum.nextElement()).append('\n');
+                    while(enumVar.hasMoreElements()) {
+                        content.append((String)enumVar.nextElement()).append('\n');
                     }
                 }
             } else {
@@ -1541,7 +1541,7 @@ public class UserSession implements HTTPSession {
      */
     public void setSubscribedAll(String id, boolean subscribed) throws MessagingException {
         Folder folder=getRootFolder(id);
-        Queue q=new Queue();
+        net.wastl.webmail.misc.Queue q=new net.wastl.webmail.misc.Queue();
         q.queue(folder);
         // Only IMAP supports subscription...
         try {
@@ -1806,9 +1806,9 @@ public class UserSession implements HTTPSession {
      */
     public void expungeFolders() {
         if(need_expunge_folders != null) {
-            Enumeration enum=need_expunge_folders.elements();
-            while(enum.hasMoreElements()) {
-                String hash=(String)enum.nextElement();
+            Enumeration enumVar=need_expunge_folders.elements();
+            while(enumVar.hasMoreElements()) {
+                String hash=(String)enumVar.nextElement();
                 if(user.wantsSetFlags()) {
                     Folder f=getFolder(hash);
                     try {
@@ -2043,9 +2043,9 @@ public class UserSession implements HTTPSession {
                          host_url,
                          login,
                          password);
-        Enumeration enum=user.mailHosts();
-        while(enum.hasMoreElements()) {
-            String id=(String)enum.nextElement();
+        Enumeration enumVar=user.mailHosts();
+        while(enumVar.hasMoreElements()) {
+            String id=(String)enumVar.nextElement();
             if(user.getMailHost(id).getName().equals(name)) {
                 setSubscribedAll(id,true);
                 break;

@@ -111,9 +111,9 @@ public class XMLMessage extends XMLMessagePart {
         newmainpart.appendPart(firstpart);
 
         if(mainpart != null) {
-            Enumeration enum=mainpart.getParts();
-            while(enum.hasMoreElements()) {
-                newmainpart.appendPart((XMLMessagePart)enum.nextElement());
+            Enumeration enumVar=mainpart.getParts();
+            while(enumVar.hasMoreElements()) {
+                newmainpart.appendPart((XMLMessagePart)enumVar.nextElement());
             }
         }
     }

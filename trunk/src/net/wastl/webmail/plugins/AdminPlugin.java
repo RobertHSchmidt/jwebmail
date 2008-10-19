@@ -100,9 +100,9 @@ public class AdminPlugin implements Plugin, URLHandler {
         } else if(suburl.startsWith("/system")) {
             if(suburl.startsWith("/system/set")) {
                 XMLSystemData sysdata=parent.getStorage().getSystemData();
-                Enumeration enum=sysdata.getConfigKeys();
-                while(enum.hasMoreElements()) {
-                    String ckey=(String)enum.nextElement();
+                Enumeration enumVar=sysdata.getConfigKeys();
+                while(enumVar.hasMoreElements()) {
+                    String ckey=(String)enumVar.nextElement();
                     if(header.isContentSet(ckey)) {
 //                      System.err.println(ckey+" = "+header.getContent(ckey));
                         sysdata.setConfig(ckey,header.getContent(ckey));
@@ -157,9 +157,9 @@ public class AdminPlugin implements Plugin, URLHandler {
             if(suburl.startsWith("/domain/set")) {
 
                 try {
-                    Enumeration enum=parent.getStorage().getVirtualDomains();
-                    while(enum.hasMoreElements()) {
-                        String s1=(String)enum.nextElement();
+                    Enumeration enumVar=parent.getStorage().getVirtualDomains();
+                    while(enumVar.hasMoreElements()) {
+                        String s1=(String)enumVar.nextElement();
                         if(header.getContent("CHANGE "+s1) != null && !header.getContent("CHANGE "+s1).equals("")) {
                             WebMailVirtualDomain vd=parent.getStorage().getVirtualDomain(s1);
                             if(!vd.getDomainName().equals(header.getContent(s1+" DOMAIN"))) {

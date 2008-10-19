@@ -219,10 +219,10 @@ public class ConfigScheme {
 //      System.err.println("NOTIFY: "+key);
         ConfigParameter parm=getConfigParameter(key);
         if(parm!=null) {
-            Enumeration enum=parm.getConfigurationListeners();
+            Enumeration enumVar=parm.getConfigurationListeners();
 
-            while(enum.hasMoreElements()) {
-                ConfigurationListener l=(ConfigurationListener)enum.nextElement();
+            while(enumVar.hasMoreElements()) {
+                ConfigurationListener l=(ConfigurationListener)enumVar.nextElement();
 //              System.err.println(l);
                 try {
                     l.notifyConfigurationChange(key);

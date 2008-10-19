@@ -1,6 +1,9 @@
 WebMail Developer Documentation
 ===============================
 
+If you are editing code for eventual entry into the JWebMail code base,
+please read and follow the conventions described in the file "conventions.txt".
+
 The documentation in this directory is mainly useful for developers that are interested
 in making changes in WebMail.
 Mainly you can find a short documentation about how things actually work in WebMail
