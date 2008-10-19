@@ -243,3 +243,7 @@ Subversion rev. 5 (no tag yet)
 + Got rid of tabs and trailing white from text files.
 + Changed license from GNU Lesser to Apache 2.0, with explicit permission
   from the Copyright holder, Sebastian Schaffert.
+
+Tag 1.0a-jdk456
++ Builds with JDK 1.4, 1.5, 1.6.
++ Rebranded deliverable base names from "webmail" to "jwebmail".

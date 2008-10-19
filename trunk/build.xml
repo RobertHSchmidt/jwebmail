@@ -1,4 +1,4 @@
-<project default="compile" basedir=".">
+<project name="jwebmail" default="compile" basedir=".">
 <!--
 $Id$
 
@@ -24,10 +24,9 @@ limitations under the License.
   <!-- =================================================================== -->
   <target name="init">
     <tstamp/>
-    <property name="Name" value="WEBMAIL"/>
-    <property name="name" value="webmail"/>
-    <property name="version" value="0.8pre"/>
-    <property name="year" value="2002"/>
+    <property name="Name" value="JWebMail"/>
+    <property name="version" value="1.0a"/>
+    <property name="year" value="2008"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
 
@@ -46,7 +45,7 @@ limitations under the License.
     <property name="build.javadocs" value="./build/apidocs"/>
 
     <property name="dist.root" value="./dist"/>
-    <property name="dist.dir" value="${dist.root}/${name}-${version}"/>
+    <property name="dist.dir" value="${dist.root}/${ant.project.name}-${version}"/>
 
     <filter token="year" value="${year}"/>
     <filter token="version" value="${version}"/>
@@ -69,7 +68,7 @@ limitations under the License.
     <echo message=""/>
     <echo message=" available targets are:"/>
     <echo message=""/>
-    <echo message="   package  --> generates the ${name}.jar file"/>
+    <echo message="   package  --> generates the ${ant.project.name}.jar file"/>
     <echo message="   compile  --> compiles the source code (default)"/>
     <echo message="   javadoc  --> generates the API documentation"/>
     <echo message="   clean    --> cleans up the directory"/>
@@ -235,14 +234,14 @@ limitations under the License.
   <target name="package" depends="compile">
     <fixcrlf srcdir="." includes="**/*.bat" cr="add"/>
     <fixcrlf srcdir="." includes="**/*.sh" cr="remove"/>
-    <jar jarfile="${lib.dir}/${name}-common.jar"
+    <jar jarfile="${lib.dir}/${ant.project.name}-common.jar"
          basedir="${build.dest}"
          includes="net/**,org/**"
          excludes="**/standalone/**,**/servlet/**" />
-<!--    <jar jarfile="${lib.dir}/${name}-standalone.jar"
+       <!--    <jar jarfile="${lib.dir}/${ant.project.name}-standalone.jar"
          basedir="${build.dest}"
          includes="**/standalone/**" /> -->
-<!--    <jar jarfile="${lib.dir}/${name}-servlet.jar"
+       <!--    <jar jarfile="${lib.dir}/${ant.project.name}-servlet.jar"
          basedir="${build.dest}"
          includes="**/servlet/**" /> -->
 <!-- rather than copying these to lib/plugins etc. just waiting till tomcat deploy
@@ -399,21 +398,21 @@ limitations under the License.
   <target name="install-tomcat" depends="package, copy-xml-files">
     <fail unless="webapp.home"
       message="Property 'webapp.home' is required for target 'install-tomcat'"/>
-    <echo message="Installing ${name} to Tomcat apps directory ..."/>
-    <mkdir dir="${webapp.home}/${name}"/>
-    <mkdir dir="${webapp.home}/${name}/WEB-INF"/>
-    <copy todir="${webapp.home}/${name}/lib">
+    <echo message="Installing ${ant.project.name} to Tomcat apps directory ..."/>
+    <mkdir dir="${webapp.home}/${ant.project.name}"/>
+    <mkdir dir="${webapp.home}/${ant.project.name}/WEB-INF"/>
+    <copy todir="${webapp.home}/${ant.project.name}/lib">
         <fileset dir="${lib.dir}" excludes="**/*.jar" />
     </copy>
-    <copy todir="${webapp.home}/${name}/data">
+    <copy todir="${webapp.home}/${ant.project.name}/data">
         <fileset dir="data"/>
     </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes" flatten="yes">
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes" flatten="yes">
         <fileset dir="${build.dest}">
            <include name="**/plugins/**,**/authenticators/**" />
         </fileset>
     </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/lib">
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/lib">
         <fileset dir="${lib.dir}">
            <include name="**/*.jar"/>
            <exclude name="mail.jar"/>
@@ -421,22 +420,22 @@ limitations under the License.
         </fileset>
     </copy>
     <!-- Install plugin and authenticator classes -->
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes">
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes">
         <fileset dir="${build.dest}/plugins" />
     </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes">
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes">
         <fileset dir="${build.dest}/authenticators" />
     </copy>
-    <filter token="webapp-home" value="${webapp.home}${name}"/>
+    <filter token="webapp-home" value="${webapp.home}/${ant.project.name}"/>
     <filter token="plugin-dir" value="WEB-INF/classes"/>
     <filter token="authenticator-dir" value="WEB-INF/classes"/>
-    <filter token="base-uri" value="/${name}"/>
-    <copy file="WEB-INF/web.xml" todir="${webapp.home}/${name}/WEB-INF/" filtering="true" />
-    <copy todir="${webapp.home}/${name}" filtering="true">
+    <filter token="base-uri" value="//${ant.project.name}"/>
+    <copy file="WEB-INF/web.xml" todir="${webapp.home}/${ant.project.name}/WEB-INF/" filtering="true" />
+    <copy todir="${webapp.home}/${ant.project.name}" filtering="true">
       <fileset dir="${src.dir}/jsp"/>
     </copy>
 
-    <war warfile="${webapp.home}/${name}.war" webxml="${webapp.home}/${name}/WEB-INF/web.xml" basedir="${webapp.home}/${name}"/>
+    <war warfile="${webapp.home}/${ant.project.name}.war" webxml="${webapp.home}/${ant.project.name}/WEB-INF/web.xml" basedir="${webapp.home}/${ant.project.name}"/>
     <!-- Copy images -->
   </target>
 
@@ -475,7 +474,7 @@ limitations under the License.
   <target name="clean-tomcat-app" depends="clean">
     <fail unless="webapp.home"
     message="Property 'webapp.home' is required for target 'clean-tomcat-app'"/>
-    <deltree dir="${webapp.home}${name}"/>
+  <deltree dir="${webapp.home}/${ant.project.name}"/>
   </target>
 
 </project>
