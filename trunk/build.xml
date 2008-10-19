@@ -199,7 +199,7 @@ limitations under the License.
 <!--    <echo message="Compiling net \& org package trees to ${build.dest}"/> -->
     <javac srcdir="${build.src}"
            destdir="${build.dest}"
-           classpath=".:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/nekohtml.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar"
+           classpath=".:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/nekohtml.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar:${contrib.dir}/servlet-2.3.jar"
            debug="${debug}"
            optimize="${optimize}"
            deprecation="${deprecation}"
@@ -209,7 +209,7 @@ limitations under the License.
     <mkdir dir="${build.dest}/plugins" />
     <javac srcdir="${build.src}"
            destdir="${build.dest}/plugins"
-           classpath="${build.dest}:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/nekohtml.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar"
+           classpath="${build.dest}:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/nekohtml.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar:${contrib.dir}/servlet-2.3.jar"
            debug="${debug}"
            optimize="${optimize}"
            deprecation="${deprecation}"
@@ -392,53 +392,12 @@ limitations under the License.
   </target>
 
   <!-- =================================================================== -->
-  <!-- Copies the class files into the webapp dir for Tomcat.              -->
+  <!-- Copies the class files into the webapp dir for Tomcat.            -->
   <!-- =================================================================== -->
   <target name="install-tomcat" depends="package, copy-xml-files">
+    <fail unless="webapp.home"
+      message="Property 'webapp.home' is required for target 'install-tomcat'"/>
     <echo message="Installing ${name} to Tomcat apps directory ..."/>
-    <mkdir dir="${webapp.home}/${name}"/>
-    <mkdir dir="${webapp.home}/${name}/WEB-INF"/>
-    <copy todir="${webapp.home}/${name}/lib">
-        <fileset dir="${lib.dir}" excludes="**/*.jar" />
-    </copy>
-    <copy todir="${webapp.home}/${name}/data">
-        <fileset dir="data"/>
-    </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes" flatten="yes">
-        <fileset dir="${build.dest}">
-           <include name="**/plugins/**,**/authenticators/**" />
-        </fileset>
-    </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/lib">
-        <fileset dir="${lib.dir}">
-           <include name="**/*.jar"/>
-        </fileset>
-    </copy>
-    <!-- Install plugin and authenticator classes -->
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes">
-        <fileset dir="${build.dest}/plugins" />
-    </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes">
-        <fileset dir="${build.dest}/authenticators" />
-    </copy>
-    <filter token="webapp-home" value="${webapp.home}${name}"/>
-    <filter token="plugin-dir" value="WEB-INF/classes"/>
-    <filter token="authenticator-dir" value="WEB-INF/classes"/>
-    <filter token="base-uri" value="/${name}"/>
-    <copy file="WEB-INF/web.xml" todir="${webapp.home}/${name}/WEB-INF/" filtering="true" />
-    <copy todir="${webapp.home}/${name}" filtering="true">
-      <fileset dir="${src.dir}/jsp"/>
-    </copy>
-
-    <war warfile="${webapp.home}/${name}.war" webxml="${webapp.home}/${name}/WEB-INF/web.xml" basedir="${webapp.home}/${name}"/>
-    <!-- Copy images -->
-  </target>
-
-  <!-- =================================================================== -->
-  <!-- Copies the class files into the webapp dir for Catalina.            -->
-  <!-- =================================================================== -->
-  <target name="install-catalina" depends="package, copy-xml-files">
-    <echo message="Installing ${name} to Catalina apps directory ..."/>
     <mkdir dir="${webapp.home}/${name}"/>
     <mkdir dir="${webapp.home}/${name}/WEB-INF"/>
     <copy todir="${webapp.home}/${name}/lib">
@@ -512,6 +471,8 @@ limitations under the License.
   </target>
 
   <target name="clean-tomcat-app" depends="clean">
+    <fail unless="webapp.home"
+    message="Property 'webapp.home' is required for target 'clean-tomcat-app'"/>
     <deltree dir="${webapp.home}${name}"/>
   </target>
 
