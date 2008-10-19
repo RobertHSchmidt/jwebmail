@@ -11,17 +11,17 @@ import java.util.*;
  * Created: Wed Mar 24 1999
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -40,11 +40,11 @@ public interface UserData {
 
     /**
      * Add a mailbox to this user's data.
-     * The new mailbox will be stored in the user configuration and used 
+     * The new mailbox will be stored in the user configuration and used
      * for connection.
      *
      * @param name Name used to represent the mailhost in WebMail
-     * @param host This will usually be the URL to the mailhost, constructed 
+     * @param host This will usually be the URL to the mailhost, constructed
      * from the protocol and the hostname
      * @param login The login name used for the host
      * @param password The corresponding password
@@ -66,22 +66,22 @@ public interface UserData {
      * @see MailHostData
      */
     public MailHostData getMailHost(String name);
-    
+
     /**
      * Return the list of mailbox names of the mailboxes this user has.
      *
      * @returns list of mailbox names for this user
      */
     public Enumeration mailHosts();
- 
+
     /**
-     * Return the value that the user configured as maximum number of 
+     * Return the value that the user configured as maximum number of
      * messages to display on one page of the message list.
-     */    
+     */
     public int getMaxShowMessages();
 
     /**
-     * Set the number of maximum messages to display on one page of the 
+     * Set the number of maximum messages to display on one page of the
      * messagelist.
      *
      * @param i maximum number of messages on one page
@@ -95,11 +95,11 @@ public interface UserData {
      * @see wantsBreakLines()
      */
     public int getMaxLineLength();
-    
+
     /**
-     * Set the maximum column count for messages. Only applicable if the user 
+     * Set the maximum column count for messages. Only applicable if the user
      * configured to break lines.
-     * 
+     *
      * @param i maximum column count
      * @see wantsBreakLines()
      */
@@ -107,7 +107,7 @@ public interface UserData {
 
     /**
      * Check whether the user wants to force line breaks.
-     * If this is set to true, lines in composed and shown messages are 
+     * If this is set to true, lines in composed and shown messages are
      * smartly broken at the configured positions.
      *
      * @see getMaxLineLength()
@@ -143,11 +143,11 @@ public interface UserData {
     public void setFullName(String s);
 
     /**
-     * Return the signature of this user that should be appended to 
+     * Return the signature of this user that should be appended to
      * composed messages.
      */
     public String getSignature();
-    
+
     /**
      * Set the signature that should be appended to composed messages.
      *
@@ -166,7 +166,7 @@ public interface UserData {
      * This will be used for outgoing mail.
      *
      * @param s String containing the Email address
-     */     
+     */
     public void setEmail(String s);
 
     /**
@@ -202,11 +202,11 @@ public interface UserData {
     public String getFirstLogin();
 
     /**
-     * Get a localized string containing the date when the user logged in 
+     * Get a localized string containing the date when the user logged in
      * the last time.
      */
     public String getLastLogin();
-    
+
     /**
      * Get a string containing the total count of logins for the user.
      */
@@ -228,12 +228,12 @@ public interface UserData {
      */
     public void setPassword(String newpasswd, String verify) throws InvalidPasswordException;
 
-    /** 
+    /**
      * Set the password data for a user.  This can contain any string which
      * will then become password data for a user.  It can be encoded
-     * however the authenticator chooses.  
-     * Note that when switching authenticators, this password data will 
-     * most likely not be valid anymore, and the user will be locked out 
+     * however the authenticator chooses.
+     * Note that when switching authenticators, this password data will
+     * most likely not be valid anymore, and the user will be locked out
      * of their account.
      *
      * @param data The new data to use
@@ -248,19 +248,19 @@ public interface UserData {
     public String getPasswordData();
 
     /**
-     * Check whether the user wants attached images to be shown inlined in 
+     * Check whether the user wants attached images to be shown inlined in
      * the messages or not.
      *
      * @return true, if the user wants images to be shown inline
      */
     public boolean wantsShowImages();
-    
+
     /**
      * Set whether the user wants attached images to be shown inlined in the messages.
      *
      * @param b true if images are to be shown inline
      */
-    public void setShowImages(boolean b);    
+    public void setShowImages(boolean b);
 
 
     /**
@@ -286,8 +286,8 @@ public interface UserData {
      * @see net.wastl.webmail.server.UserSession.copyMoveMessage()
      * @see net.wastl.webmail.server.UserSession.setFlags()
      */
-    public boolean wantsSetFlags();    
-    
+    public boolean wantsSetFlags();
+
     /**
      * Enable/disable write mode on mailboxes.
      * This influences many things like setting message flags, copying/moving messages, deleting
@@ -297,7 +297,7 @@ public interface UserData {
      * @see net.wastl.webmail.server.UserSession.getMessage()
      * @see net.wastl.webmail.server.UserSession.copyMoveMessage()
      * @see net.wastl.webmail.server.UserSession.setFlags()
-     */       
+     */
     public void setSetFlags(boolean b);
 
     /**
@@ -309,7 +309,7 @@ public interface UserData {
      * @see setSentFolder()
      */
     public void setSaveSent(boolean b);
-    
+
     /**
      * Check whether the user wants to save sent messages or not. The folder where sent messages
      * will be stored has to be configured also.

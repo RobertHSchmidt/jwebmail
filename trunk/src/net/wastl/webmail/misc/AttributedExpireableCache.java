@@ -14,14 +14,14 @@ import java.util.*;
  * @version
  */
 public class AttributedExpireableCache extends ExpireableCache {
-    
+
     protected Hashtable attributes;
 
     public AttributedExpireableCache(int capacity, float expire_factor) {
-        super(capacity,expire_factor);  
+        super(capacity,expire_factor);
         attributes=new Hashtable(capacity);
     }
-    
+
     public AttributedExpireableCache(int capacity) {
         super(capacity);
         attributes=new Hashtable(capacity);
@@ -39,5 +39,5 @@ public class AttributedExpireableCache extends ExpireableCache {
     public synchronized void remove(Object key) {
         attributes.remove(key);
         super.remove(key);
-    }                           
+    }
 } // AttributedExpireableCache

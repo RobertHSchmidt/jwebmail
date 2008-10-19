@@ -13,17 +13,17 @@ import javax.xml.transform.TransformerException;
  * Created: Sat Mar 11 15:59:22 2000
  *
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -166,14 +166,14 @@ public final class XMLCommon  {
         e.normalize();
         if(e.hasChildNodes()) {
             NodeList nl=e.getChildNodes();
-            
+
             /* This suxx: NodeList Object is changed when removing children !!!
                I will store all nodes that should be deleted in a Vector and delete them afterwards */
             int length=nl.getLength();
-        
+
             Vector v=new Vector(nl.getLength());
             for(int i=0;i<length;i++) {
-                if(nl.item(i) instanceof CharacterData) {       
+                if(nl.item(i) instanceof CharacterData) {
                     v.addElement(nl.item(i));
                 }
             }
@@ -216,14 +216,14 @@ public final class XMLCommon  {
         } catch(Exception ex) {}
     }
 
-    public static void setTagValue(Element e,String tagname, String text, 
+    public static void setTagValue(Element e,String tagname, String text,
                                       boolean unique,String errormsg) throws Exception
     {
         setTagValue(e,tagname,text,unique,errormsg,false);
     }
 
-    public static void setTagValue(Element e,String tagname, String text, 
-                                   boolean unique,String errormsg, boolean cdata) 
+    public static void setTagValue(Element e,String tagname, String text,
+                                   boolean unique,String errormsg, boolean cdata)
         throws Exception {
 
         if(text == null || tagname == null) throw new NullPointerException("Text or Tagname may not be null!");
@@ -273,7 +273,7 @@ public final class XMLCommon  {
     public static void writeXML(Document d, OutputStream os, String sysID) throws IOException {
         // Modified by exce, start
         /**
-         * To support i18n, we have to specify the encoding of 
+         * To support i18n, we have to specify the encoding of
          * output writer to UTF-8 when we writing the XML.
          */
         // PrintWriter out=new PrintWriter(os);
@@ -283,14 +283,14 @@ public final class XMLCommon  {
         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         out.println();
         if(sysID != null) {
-            out.println("<!DOCTYPE "+d.getDoctype().getName()+" SYSTEM \""+sysID+"\">"); 
+            out.println("<!DOCTYPE "+d.getDoctype().getName()+" SYSTEM \""+sysID+"\">");
             out.println();
         }
         //d.getDocumentElement().normalize();
         writeXMLwalkTree(d.getDocumentElement(),0,out);
         out.flush();
     }
-    
+
     protected static void writeXMLwalkTree(Node node, int indent, PrintWriter out) {
         if(node == null) {
             System.err.println("??? Node was null ???");
@@ -345,7 +345,7 @@ public final class XMLCommon  {
                 StringBuffer buf=new StringBuffer(text.getData().length());
                 for(int i=0;i<text.getData().length();i++) {
                     if(text.getData().charAt(i) == '\n' ||
-                       text.getData().charAt(i) == '\r' || 
+                       text.getData().charAt(i) == '\r' ||
                        text.getData().charAt(i) == ' ' ||
                        text.getData().charAt(i) == '\t') {
                         if(buf.length()>0 && buf.charAt(buf.length()-1)!=' ') {
@@ -382,11 +382,11 @@ public final class XMLCommon  {
         }
         return r;
     }
-                    
+
     public static Node cloneNode(Document d,Node n) {
         Node r=null;
         switch(n.getNodeType()) {
-        case Node.TEXT_NODE: 
+        case Node.TEXT_NODE:
             r = d.createTextNode(((Text)n).getData());
             break;
         case Node.CDATA_SECTION_NODE:
@@ -399,12 +399,12 @@ public final class XMLCommon  {
                 ((Element)r).setAttribute(((Attr)map.item(i)).getName(),
                                           ((Attr)map.item(i)).getValue());
             }
-            break;          
+            break;
         }
         return r;
     }
 
-    public static synchronized void debugXML(Document d) {      
+    public static synchronized void debugXML(Document d) {
         try {
             FileOutputStream fout=new FileOutputStream("/tmp/webmail.xml."+System.currentTimeMillis());
             PrintWriter out=new PrintWriter(fout);
@@ -420,7 +420,7 @@ public final class XMLCommon  {
 //          System.err.println("Doctype system:"+of.getDoctypeSystem());
 //          XMLSerializer ser=new XMLSerializer(System.out,of);
 //          ser.serialize(d.getDocumentElement());
-            out.println("==============================================================");          
+            out.println("==============================================================");
             fout.flush();
             fout.close();
         } catch(Exception ex) {

@@ -6,17 +6,17 @@
 
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -34,7 +34,7 @@
 
 <!-- The WebMail usermodel consists of
    - the navigation data, which stores the current state of the WebMail main screen
-   - the system data, the subtree which contains WebMail's system configuration, which the admin 
+   - the system data, the subtree which contains WebMail's system configuration, which the admin
      may opt to display to the user
    - the userdata, representing "static" user information like name, login etc
    - the state, represented with some environment-like variables
@@ -82,7 +82,7 @@
 
 <!-- A message has a header and a body -->
 <!ELEMENT MESSAGE (HEADER,PART?)>
-<!-- A message belongs to a certain folder, has a unique message id and a number in 
+<!-- A message belongs to a certain folder, has a unique message id and a number in
     that folder. Message size will be set if possible and also some of the message flags -->
 <!ATTLIST MESSAGE
         msgid           CDATA           #REQUIRED
@@ -110,14 +110,14 @@
 <!ATTLIST HEADERVAR
         name    CDATA   #REQUIRED>
 
-<!-- A message body consists of parts which can contain text or MIME data 
-     The JavaScript section is used to filter JavaScript contents. It is no part since 
-     WebMail does the filtering, not the message 
-     The quotelevel attribute for CONTENT will be used to indicate that this text should 
+<!-- A message body consists of parts which can contain text or MIME data
+     The JavaScript section is used to filter JavaScript contents. It is no part since
+     WebMail does the filtering, not the message
+     The quotelevel attribute for CONTENT will be used to indicate that this text should
      possibly displayed in another format because it is quoted. -->
 <!ELEMENT PART (PART|JAVASCRIPT|CONTENT)*>
 <!-- The part type is required so the XSL stylesheets can determine how the part should
-     be displayed (usually either inlined, as an image or as an external link 
+     be displayed (usually either inlined, as an image or as an external link
      encoding, content-type and description are just used for further description of the
      content and filename is used for images and external links.
 -->

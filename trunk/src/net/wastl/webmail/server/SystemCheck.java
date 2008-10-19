@@ -11,17 +11,17 @@ import net.wastl.webmail.exceptions.*;
  * Created: Tue Aug 31 15:40:57 1999
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -35,7 +35,7 @@ import net.wastl.webmail.exceptions.*;
  */
 
 public class SystemCheck  {
-    
+
     public SystemCheck(WebMailServer parent) throws WebMailException {
         System.err.println("- Checking Java Virtual Machine ... ");
         System.err.print("  * Version: "+System.getProperty("java.version")+" ... ");
@@ -50,8 +50,8 @@ public class SystemCheck  {
 
         /* Test if the operating system is supported */
         System.err.print("  * Operating System: "+System.getProperty("os.name")+"/"+System.getProperty("os.arch")+" "+System.getProperty("os.version")+" ... ");
-        if(System.getProperty("os.name").equals("SunOS") || 
-           System.getProperty("os.name").equals("Solaris") || 
+        if(System.getProperty("os.name").equals("SunOS") ||
+           System.getProperty("os.name").equals("Solaris") ||
            System.getProperty("os.name").equals("Linux")) {
             System.err.println("ok.");
         } else {
@@ -84,7 +84,7 @@ public class SystemCheck  {
         System.err.print("  * Setting DTD-path in webmail.xml ... ");
         File f1=new File(parent.getProperty("webmail.data.path")+System.getProperty("file.separator")+"webmail.xml");
         File f2=new File(parent.getProperty("webmail.data.path")+System.getProperty("file.separator")+"webmail.xml."+Long.toHexString(System.currentTimeMillis()));
-        
+
         try {
             Pattern regexp=Pattern.compile("<!DOCTYPE SYSDATA SYSTEM \".*\">");
             BufferedReader file1=new BufferedReader(new FileReader(f1));
@@ -117,7 +117,7 @@ public class SystemCheck  {
         f2.renameTo(f1);
         System.err.println("done!");
     }
-    
+
     protected static void checkPathProperty(WebMailServer parent,String property) throws WebMailException {
         if(parent.getProperty(property) == null ||
            parent.getProperty(property).equals("")) {

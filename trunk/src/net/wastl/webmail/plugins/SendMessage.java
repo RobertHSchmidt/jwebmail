@@ -31,24 +31,24 @@ import org.bulbul.webmail.util.TranscodeUtil;
  * Created: Tue Sep  7 13:59:30 1999
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 /**
  * Send a message and show a result page.
- * 
+ *
  * provides: message send
  * requires: composer
  *
@@ -57,10 +57,10 @@ import org.bulbul.webmail.util.TranscodeUtil;
  */
 
 public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
-    
+
     public static final String VERSION="1.8";
     public static final String URL="/send";
-    
+
     StorageManager store;
 
     WebMailServer parent;
@@ -68,7 +68,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
     Session mailsession;
 
     public SendMessage() {
-        
+
     }
 
     public void register(WebMailServer parent) {
@@ -88,7 +88,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
         props.put("mail.host",store.getConfig("SMTP HOST"));
         props.put("mail.smtp.host",store.getConfig("SMTP HOST"));
         mailsession=Session.getInstance(props,null);
-    } 
+    }
 
     public String getName() {
         return "SendMessage";
@@ -105,7 +105,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
     public String getURL() {
         return URL;
     }
-    
+
     public void notifyConfigurationChange(String key) {
         init();
     }
@@ -121,22 +121,22 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
         // Modified by exce, start
         Locale locale = user.getPreferredLocale();
         // Modified by exce, end
-        
+
         /* Save message in case there is an error */
         session.storeMessage(head);
 
         if(head.isContentSet("SEND")) {
             /* The form was submitted, now we will send it ... */
             try {
-                
-                
-                MimeMessage msg=new MimeMessage(mailsession);           
-                
+
+
+                MimeMessage msg=new MimeMessage(mailsession);
+
                 Address from[]=new Address[1];
                 try {
                     // Modified by exce, start
                     /**
-                     * Why we need 
+                     * Why we need
                      * org.bulbul.util.TranscodeUtil.transcodeThenEncodeByLocale()?
                      *
                      * Because we specify client browser's encoding to UTF-8, IE seems
@@ -170,7 +170,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                         new InternetAddress(session.getUser().getEmail(),
                                             session.getUser().getFullName());
                 }
-                
+
                 StringTokenizer t;
                 try {
                     // Modified by exce, start
@@ -197,7 +197,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     to[i]=new InternetAddress(t.nextToken().trim());
                     i++;
                 }
-                
+
                 try {
                     // Modified by exce, start
                     /**
@@ -218,7 +218,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     cc[i]=new InternetAddress(t.nextToken().trim());
                     i++;
                 }
-                
+
                 try {
                     // Modified by exce, start
                     /**
@@ -239,7 +239,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     bcc[i]=new InternetAddress(t.nextToken().trim());
                     i++;
                 }
-                
+
                 session.setSent(false);
 
 
@@ -268,9 +268,9 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     } catch(UnsupportedEncodingException e) {
                         store.getLogger().log(Logger.LOG_WARN,"Unsupported Encoding while trying to send message: "+e.getMessage());
                         subject=head.getContent("SUBJECT");
-                    }       
+                    }
                 }
-                                
+
                 msg.addHeader("Subject",subject);
 
                 if(head.isContentSet("REPLY-TO")) {
@@ -279,9 +279,9 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     msg.addHeader("Reply-To", TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("REPLY-TO"), "ISO8859_1", locale));
                     // Modified by exce, end
                 }
-                
+
                 msg.setSentDate(new Date(System.currentTimeMillis()));
-                
+
                 String contnt=head.getContent("BODY");
 
                 //String charset=MimeUtility.mimeCharset(MimeUtility.getDefaultJavaCharset());
@@ -327,7 +327,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     } catch(IOException ex) {}
 
                     /**
-                     * Transcode to UTF-8; Since advcont comes from file, we transcode 
+                     * Transcode to UTF-8; Since advcont comes from file, we transcode
                      * it from default encoding.
                      */
                     // Encode text
@@ -336,13 +336,13 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                         advcont = new String(advcont.getBytes(), "Big5");
                         adv.setText(advcont,"Big5");
                         adv.setHeader("Content-Type","text/plain; charset=\"Big5\"");
-                        adv.setHeader("Content-Transfer-Encoding", "quoted-printable"); 
+                        adv.setHeader("Content-Transfer-Encoding", "quoted-printable");
                     } else {
                         advcont = new String(advcont.getBytes(), "UTF-8");
                         adv.setText(advcont,"utf-8");
                         adv.setHeader("Content-Type","text/plain; charset=\"utf-8\"");
-                        adv.setHeader("Content-Transfer-Encoding", "quoted-printable"); 
-                    }                   
+                        adv.setHeader("Content-Transfer-Encoding", "quoted-printable");
+                    }
 
                     cont.addBodyPart(adv);
                 }
@@ -352,10 +352,10 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     InternetHeaders ih=new InternetHeaders();
                     ih.addHeader("Content-Type",bs.getContentType());
                     ih.addHeader("Content-Transfer-Encoding","BASE64");
-                    
+
                     PipedInputStream pin=new PipedInputStream();
                     PipedOutputStream pout=new PipedOutputStream(pin);
-                    
+
                     /* This is used to write to the Pipe asynchronously to avoid blocking */
                     StreamConnector sconn=new StreamConnector(pin,(int)(bs.getSize()*1.6)+1000);
                     BufferedOutputStream encoder=new BufferedOutputStream(MimeUtility.encode(pout,"BASE64"));
@@ -364,13 +364,13 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     encoder.close();
                     //MimeBodyPart att1=sconn.getResult();
                     MimeBodyPart att1=new MimeBodyPart(ih,sconn.getResult().getBytes());
-                    
-                    
+
+
                     att1.addHeader("Content-Type",bs.getContentType());
                     att1.setDescription(bs.getDescription(),"utf-8");
                     // Modified by exce, start
                     /**
-                     * As described in FileAttacher.java line #95, now we need to 
+                     * As described in FileAttacher.java line #95, now we need to
                      * encode the attachment file name.
                      */
                     // att1.setFileName(bs.getName());
@@ -385,14 +385,14 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                 }
                 msg.setContent(cont);
                 //              }
-                
+
                 msg.saveChanges();
 
                 boolean savesuccess=true;
 
                 msg.setHeader("Message-ID",session.getUserModel().getWorkMessage().getAttribute("msgid"));
                 if(session.getUser().wantsSaveSent()) {
-                    String folderhash=session.getUser().getSentFolder();                    
+                    String folderhash=session.getUser().getSentFolder();
                     try {
                         Folder folder=session.getFolder(folderhash);
                         Message[] m=new Message[1];
@@ -426,7 +426,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                 } catch(SendFailedException e) {
                     session.handleTransportException(e);
                 }
-                
+
                 //session.clearMessage();
 
                 content=new XHTMLDocument(session.getModel(),
@@ -435,13 +435,13 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                 if(sendsuccess) session.clearWork();
             } catch(Exception e) {
                 e.printStackTrace();
-                
+
                 store.getLogger().log(Logger.LOG_ERR,e);
                 throw new DocumentNotFoundException("Could not send message. (Reason: "+e.getMessage()+")");
             }
-            
+
         } else if(head.isContentSet("ATTACH")) {
-            /* Redirect request for attachment (unfortunately HTML forms are not flexible enough to 
+            /* Redirect request for attachment (unfortunately HTML forms are not flexible enough to
                have two targets without Javascript) */
             content=parent.getURLHandler().handleURL("/compose/attach",session,head);
         } else {
@@ -449,7 +449,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
         }
         return content;
     }
-    
+
 
     public String provides() {
         return "message send";

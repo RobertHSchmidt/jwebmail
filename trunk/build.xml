@@ -37,10 +37,10 @@
     <filter token="date" value="${TODAY}"/>
     <filter token="log" value="true"/>
     <filter token="verbose" value="true"/>
-    <filter token="java-version" value="${java.version}"/>    
-    
+    <filter token="java-version" value="${java.version}"/>
+
   </target>
-  
+
   <!-- =================================================================== -->
   <!-- Help on usage                                                       -->
   <!-- =================================================================== -->
@@ -155,7 +155,7 @@
   <!-- =================================================================== -->
   <!-- Creates HTTPParser.java                                             -->
   <!-- =================================================================== -->
-  <target name="create-HTTPParser"> 
+  <target name="create-HTTPParser">
     <java classname="JFlex.Main" fork="yes" dir="${build.src}/net/wastl/webmail/standalone/">
       <arg value="-q" />
       <arg value="http.lex" />
@@ -247,7 +247,7 @@
     <copy todir="data" flatten="yes">
         <fileset dir="${src.dir}">
            <include name="**/webmail.xml" />
-        </fileset> 
+        </fileset>
     </copy>
     <echo message="Installing XML DTDs ..."/>
     <copy todir="${lib.dir}/xml" flatten="yes">
@@ -257,13 +257,13 @@
            <include name="**/data/xml/userdata.xml" />
            <include name="**/data/xml/usermodel_template.xml" />
            <include name="**/data/xml/generic_template.xml" />
-        </fileset> 
+        </fileset>
     </copy>
     <echo message="Installing resource.dtd and resources.xml ..."/>
     <copy todir="${lib.dir}/templates" flatten="yes">
         <fileset dir="${src.dir}">
            <include name="**/data/xml/resource*" />
-        </fileset> 
+        </fileset>
     </copy>
 
     <!-- English -->
@@ -272,13 +272,13 @@
         <fileset dir="${src.dir}">
            <include name="**/data/xml/en/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
     </copy>
     <copy todir="${lib.dir}/templates/en" filtering="false">
         <fileset dir="${src.dir}">
            <include name="**/data/xml/en/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
     </copy>
 
@@ -288,13 +288,13 @@
         <fileset dir="${src.dir}">
            <include name="**/data/xml/es/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
     </copy>
     <copy todir="${lib.dir}/templates/es" filtering="false">
         <fileset dir="${src.dir}">
            <include name="**/data/xml/es/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
     </copy>
 
@@ -304,9 +304,9 @@
     <copy todir="${lib.dir}/templates/pt" filtering="true">
         <fileset dir="${src.dir}">
            <include name="**/data/xml/pt/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/pt/(.*)$$" to="\1" />
-    </copy> 
+    </copy>
     -->
 
     <!-- German -->
@@ -315,13 +315,13 @@
         <fileset dir="${src.dir}">
            <include name="**/data/xml/de/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
-    </copy> 
+    </copy>
     <copy todir="${lib.dir}/templates/de" filtering="false">
         <fileset dir="${src.dir}">
            <include name="**/data/xml/de/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
     </copy>
 
@@ -331,13 +331,13 @@
         <fileset dir="${src.dir}">
            <include name="**/data/xml/fr/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
-    </copy> 
+    </copy>
     <copy todir="${lib.dir}/templates/fr" filtering="false">
         <fileset dir="${src.dir}">
            <include name="**/data/xml/fr/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
     </copy>
 
@@ -347,13 +347,13 @@
         <fileset dir="${src.dir}">
            <include name="**/data/xml/hu/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
-    </copy> 
+    </copy>
     <copy todir="${lib.dir}/templates/hu" filtering="false">
         <fileset dir="${src.dir}">
            <include name="**/data/xml/hu/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
     </copy>
 
@@ -364,13 +364,13 @@
         <fileset dir="${src.dir}">
            <include name="**/data/xml/zh/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
-    </copy> 
+    </copy>
     <copy todir="${lib.dir}/templates/zh" filtering="false">
         <fileset dir="${src.dir}">
            <include name="**/data/xml/zh/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
     </copy>
 
@@ -406,9 +406,9 @@
     <copy todir="${webapp.home}/${name}/WEB-INF/classes">
         <fileset dir="${build.dest}/authenticators" />
     </copy>
-    <filter token="webapp-home" value="${webapp.home}${name}"/> 
-    <filter token="plugin-dir" value="WEB-INF/classes"/> 
-    <filter token="authenticator-dir" value="WEB-INF/classes"/> 
+    <filter token="webapp-home" value="${webapp.home}${name}"/>
+    <filter token="plugin-dir" value="WEB-INF/classes"/>
+    <filter token="authenticator-dir" value="WEB-INF/classes"/>
     <filter token="base-uri" value="/${name}"/>
     <copy file="WEB-INF/web.xml" todir="${webapp.home}/${name}/WEB-INF/" filtering="true" />
     <copy todir="${webapp.home}/${name}" filtering="true">
@@ -451,9 +451,9 @@
     <copy todir="${webapp.home}/${name}/WEB-INF/classes">
         <fileset dir="${build.dest}/authenticators" />
     </copy>
-    <filter token="webapp-home" value="${webapp.home}${name}"/> 
-    <filter token="plugin-dir" value="WEB-INF/classes"/> 
-    <filter token="authenticator-dir" value="WEB-INF/classes"/> 
+    <filter token="webapp-home" value="${webapp.home}${name}"/>
+    <filter token="plugin-dir" value="WEB-INF/classes"/>
+    <filter token="authenticator-dir" value="WEB-INF/classes"/>
     <filter token="base-uri" value="/${name}"/>
     <copy file="WEB-INF/web.xml" todir="${webapp.home}/${name}/WEB-INF/" filtering="true" />
     <copy todir="${webapp.home}/${name}" filtering="true">

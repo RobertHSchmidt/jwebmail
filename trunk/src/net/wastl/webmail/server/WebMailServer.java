@@ -23,17 +23,17 @@ import net.wastl.webmail.storage.StorageManager;
  * Created: Tue Feb  2 12:07:25 1999
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -46,7 +46,7 @@ import net.wastl.webmail.storage.StorageManager;
  */
 /* 9/24/2000 devink - Updated for new challenge/response auth */
 public abstract class WebMailServer  {
-    
+
     protected ConnectionTimer timer;
 
     protected AuthenticatorHandler ahandler;
@@ -72,14 +72,14 @@ public abstract class WebMailServer  {
     protected static WebMailServer server;
 
     protected Properties config;
-    
+
     // Modified by exce, start.
     /**
      * Webmail default locale setting.
      */
     protected static Locale defaultLocale = null;
     // Modified by exce, end.
-    
+
 
     protected static String defaultTheme = null;
 
@@ -118,7 +118,7 @@ public abstract class WebMailServer  {
     public static void setDebug(boolean b) {
         debug=b;
     }
-    
+
 
     protected void doInit() throws WebMailException {
         server=this;
@@ -127,7 +127,7 @@ public abstract class WebMailServer  {
         System.err.println("Initalizing...");
 
         new SystemCheck(this);
-        
+
         initConfig();
         // Modified by exce, start
         /**
@@ -156,7 +156,7 @@ public abstract class WebMailServer  {
         System.err.println("- Default Theme: " + defaultTheme);
 
         ahandler=new AuthenticatorHandler(this);
-        
+
         System.err.println("- Storage API ("+System.getProperty("webmail.storage")+
                            ") and Configuration ... ");
 
@@ -187,7 +187,7 @@ public abstract class WebMailServer  {
         storage.getLogger().log(Logger.LOG_CRIT,"WebMail/Java Server "+VERSION+" initialization completed.");
         System.err.println("Initalization complete.");
         start_time=System.currentTimeMillis();
-        
+
     }
 
     protected void initStorage() {
@@ -247,13 +247,13 @@ public abstract class WebMailServer  {
         /* We want to use IMAP as default, since this is the most useful protocol for WebMail */
         config_scheme.setDefaultValue("DEFAULT PROTOCOL","imap");
     }
-    
+
 
     /**
      * Init possible servers of this main class
      */
     protected abstract void initServers();
-        
+
     protected abstract void shutdownServers();
 
     public abstract Object getServer(String ID);
@@ -274,7 +274,7 @@ public abstract class WebMailServer  {
 
 
     public abstract void reinitServer(String ID);
-        
+
 
     public String getBaseURI(HTTPRequestHeader header) {
         String host=header.getHeader("Host");
@@ -328,7 +328,7 @@ public abstract class WebMailServer  {
     public PluginHandler getPluginHandler() {
         return phandler;
     }
-    
+
     public AuthenticatorHandler getAuthenticatorHandler() {
         return ahandler;
     }
@@ -356,9 +356,9 @@ public abstract class WebMailServer  {
      * Return default locale.
      *
      * Related code:
-     * 1. login screen: 
+     * 1. login screen:
      *    server/TopLevelHandler.java line #110.
-     * 2. webmail.css: 
+     * 2. webmail.css:
      *    plugins/PassThroughPlugin.java line #77.
      * 3. user's default locale setting:
      *    xml/XMLUserData.java line #82.
@@ -395,7 +395,7 @@ public abstract class WebMailServer  {
             Thread.sleep(5000);
         } catch(Exception ex) {}
         storage.getLogger().log(Logger.LOG_CRIT,"Shutdown completed successfully. Restarting.");
-        storage.shutdown();          
+        storage.shutdown();
         System.err.println("Garbage collecting ...");
         System.gc();
         try {
@@ -403,7 +403,7 @@ public abstract class WebMailServer  {
         } catch(WebMailException ex) {
             ex.printStackTrace();
             System.exit(1);
-        }       
+        }
     }
 
     public void shutdown() {
@@ -459,7 +459,7 @@ public abstract class WebMailServer  {
     public HTTPSession getSession(String key) {
         return (HTTPSession)sessions.get(key);
     }
-        
+
 
     public Enumeration getSessions() {
         return sessions.keys();

@@ -11,7 +11,7 @@
  * @author Devin Kowatch
  * @version $Revision$
  * @see org.webengruven.auth.CRAuthenticator
- * @see OTPAuthenticator 
+ * @see OTPAuthenticator
  *
  * Copyright (C) 2000 Devin Kowatch
  */
@@ -19,12 +19,12 @@
  * modify it under the terms of the Lesser GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * Lesser GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the Lesser GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307,
@@ -42,7 +42,7 @@ import net.wastl.webmail.xml.*;
 public class OTPAuthDisplayMngr extends CRAuthDisplayMngr {
     /* the length of the passwords */
     private int     PASS_LEN = 30;
-    
+
     /** Default C'tor */
     public OTPAuthDisplayMngr() { super(null);}
 
@@ -53,13 +53,13 @@ public class OTPAuthDisplayMngr extends CRAuthDisplayMngr {
         auth = a;
     }
 
-    /** Setup state vars for the password change prompt.  
+    /** Setup state vars for the password change prompt.
      * @param ud UserData for the user who will have their password changed
      * @param model The model to set state vars in
      */
     public void setPassChangeVars(UserData ud, XMLGenericModel model)
         throws WebMailException
-    { 
+    {
         try {
             OTPAuthenticatorIface otp_auth = (OTPAuthenticatorIface)auth;
 

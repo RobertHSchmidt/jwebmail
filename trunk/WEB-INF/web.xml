@@ -6,7 +6,7 @@
 
 <!-- CVS ID: $Id$ -->
 
-<!-- 
+<!--
   This file provides a Servlet API 2.3 compliant configuration for the
   WebMail Servlet. Please modify according to your needs.
 
@@ -26,7 +26,7 @@
     <servlet-class>
       net.wastl.webmail.server.WebMailServlet
     </servlet-class>
-    
+
     <!-- WebMail's Plugins.
          The plugins that should be used by WebMail, full classnames separated by
          ":". All of them MUST implement the Plugin-Interface.
@@ -46,14 +46,14 @@
     </init-param>
 
 
-    <!-- WebMail default language; if ommited, Locale.getDefault() will be 
+    <!-- WebMail default language; if ommited, Locale.getDefault() will be
          used. -->
     <init-param>
       <param-name>webmail.default.locale.language</param-name>
       <param-value>en</param-value>
     </init-param>
 
-    <!-- WebMail default country; if ommited, Locale.getDefault() will be 
+    <!-- WebMail default country; if ommited, Locale.getDefault() will be
          used. -->
     <init-param>
       <param-name>webmail.default.locale.country</param-name>
@@ -69,7 +69,7 @@
 
 
     <!-- Storage mechanism to be used by WebMail. Don't change unless you know
-         what you are doing (i.e. if you have a different Storage 
+         what you are doing (i.e. if you have a different Storage
          implementation -->
     <init-param>
       <param-name>webmail.storage.user</param-name>
@@ -96,11 +96,11 @@
       <param-value>@base-uri@/WebMail</param-value>
     </init-param>
 
-    <!-- This parameter is useful if you want to put the images in a different 
-         directory so they can be handled by the webserver instead of passing 
-         through the (slower) WebMail 
+    <!-- This parameter is useful if you want to put the images in a different
+         directory so they can be handled by the webserver instead of passing
+         through the (slower) WebMail
          UPDATE(0.7.7) This URL is now the same as the base webapp URL
-         The path to the individual images will be composed with 
+         The path to the individual images will be composed with
          webmail.imagebase + "/" + language + "/" + theme
     -->
     <init-param>
@@ -110,13 +110,13 @@
 
 
     <!-- The following path names are real path names of the operating system.
-         WebMail tries to use reasonable defaults if you have a default 
+         WebMail tries to use reasonable defaults if you have a default
          installation, by using ServletContext.getRealPath(...) .
          You might want to set explicit paths however, if you move around the
          WebMail directory structure -->
 
     <!-- WebMail Data Path. Points to the directory where WebMail configuration
-         files will be placed. Must be owned by the user running WebMail 
+         files will be placed. Must be owned by the user running WebMail
          If you move the data directory to a more secure place, please enter
          the full system path to this directory here
     -->
@@ -127,7 +127,7 @@
     </init-param>
     -->
 
-    <!-- WebMail Library Path. Contains the libraries needed for WebMail 
+    <!-- WebMail Library Path. Contains the libraries needed for WebMail
          Usually it is not necessary to move this directory away from the
          WebMail apphome.
          Only set this if you know what you are doing, WebMail tries to use
@@ -155,7 +155,7 @@
     -->
 
     <!-- WebMail XML Path. Contains DTDs and dummy files for WebMail's internal
-         data model. 
+         data model.
          Usually it is not necessary to move this directory away from the
          WebMail apphome.
          Only set this if you know what you are doing, WebMail tries to use

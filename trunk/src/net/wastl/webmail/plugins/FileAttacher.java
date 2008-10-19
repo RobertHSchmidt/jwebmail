@@ -19,17 +19,17 @@ import net.wastl.webmail.storage.StorageManager;
  * Created: Tue Sep  7 16:45:21 1999
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -46,14 +46,14 @@ import net.wastl.webmail.storage.StorageManager;
  */
 
 public class FileAttacher implements URLHandler, Plugin {
-    
+
     public static final String VERSION="1.00";
     public static final String URL="/compose/attach";
-    
+
     StorageManager store;
 
     public FileAttacher() {
-        
+
     }
 
     public void register(WebMailServer parent) {
@@ -77,7 +77,7 @@ public class FileAttacher implements URLHandler, Plugin {
     public String getURL() {
         return URL;
     }
-    
+
     public HTMLDocument handleURL(String suburl, HTTPSession sess, HTTPRequestHeader head) throws WebMailException {
         if(sess == null) {
             throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
@@ -95,17 +95,17 @@ public class FileAttacher implements URLHandler, Plugin {
                 //System.err.println("Description: "+description);
                 // Modified by exce, start
                 /**
-                 * It seems that IE will use its browser encoding setting to 
-                 * encode the file name that sent to us. Hence we have to 
-                 * transcode this carefully. 
+                 * It seems that IE will use its browser encoding setting to
+                 * encode the file name that sent to us. Hence we have to
+                 * transcode this carefully.
                  *
-                 * Since we set browser's encoding to UTF-8, the attachment 
-                 * fliename, ie, p.getFileName(), should be UTF-8 encoded. 
+                 * Since we set browser's encoding to UTF-8, the attachment
+                 * fliename, ie, p.getFileName(), should be UTF-8 encoded.
                  * However the filename retrived from JavaMail MimeBodyPart
                  * is ISO8859_1 encoded, we have to decode its raw bytes and
-                 * construct a new string with UTF-8 encoding. 
+                 * construct a new string with UTF-8 encoding.
                  *
-                 * But where should we write this code? 
+                 * But where should we write this code?
                  * UserSession.java, FileAttacher.java, or HTTPRequestHeader.java?
                  *
                  * I guess the transocde operation should be done here. We retain the
@@ -114,12 +114,12 @@ public class FileAttacher implements URLHandler, Plugin {
                  * Note that the after we called bs.setName() to set name to fileName,
                  * the client browser will display the file name correctly. However,
                  * to safely transfer mail, the file name must be encoded -- eg, by
-                 * MimeUtility.encodeText() which is also adopted by M$-OutLook. 
-                 * We delay such operation until the mail is being sent, that is, 
+                 * MimeUtility.encodeText() which is also adopted by M$-OutLook.
+                 * We delay such operation until the mail is being sent, that is,
                  * SendMessage.java line #390.
                  */
                 String fileName = bs.getName();
-                
+
                 // Transcode file name
                 if (!((fileName == null) || fileName.equals(""))) {
                         int offset = fileName.lastIndexOf("\\");                // This is no effect. It seems that MimeBodyPart.getFileName() filters '\' character.
@@ -127,7 +127,7 @@ public class FileAttacher implements URLHandler, Plugin {
                         fileName = new String(fileName.getBytes("ISO8859_1"), "UTF-8");
                         bs.setName(fileName);
                 }
-                
+
                 // Transcode decription
                 if ((description != null) && (!description.equals("")))
                         description = new String(description.getBytes("ISO8859_1"), "UTF-8");
@@ -143,7 +143,7 @@ public class FileAttacher implements URLHandler, Plugin {
                 try {
                         // Modified by exce, Start
                         /**
-                         * Since attachmentName comes from HTTPRequestHeader, we have to 
+                         * Since attachmentName comes from HTTPRequestHeader, we have to
                          * transcode it.
                          */
                     // System.err.println("Removing "+head.getContent("ATTACHMENTS"));
@@ -158,7 +158,7 @@ public class FileAttacher implements URLHandler, Plugin {
                         throw new DocumentNotFoundException("Could not remove attachment. (Reason: "+e.getMessage()+")");
                 }
         }
-            
+
         return new XHTMLDocument(session.getModel(),
                                  store.getStylesheet("compose_attach.xsl",
                                                      user.getPreferredLocale(),user.getTheme()));

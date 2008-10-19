@@ -16,17 +16,17 @@ import net.wastl.webmail.exceptions.WebMailException;
  * Created: Oct 2002
  *
  * Copyright (C) 1999-2002 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -34,13 +34,13 @@ import net.wastl.webmail.exceptions.WebMailException;
 
 /**
  * This class specifies an abstract class used to store persistent DOM data.
- * 
+ *
  * @see Storable
  */
 public abstract class Storage {
 
     protected ExpireableCache cache;
-    
+
     protected Properties options;
 
     public Storage(Properties options) {
@@ -63,7 +63,7 @@ public abstract class Storage {
     /**
      * Storages are singletons, thus this is the method to create them.
      */
-    public static Storage getInstance(String classname, Properties options) 
+    public static Storage getInstance(String classname, Properties options)
         throws WebMailException {
         try {
             if(instances.get(classname) == null) {
@@ -114,7 +114,7 @@ public abstract class Storage {
      * need to take care of properly representing UNIX-like paths.
      * @param data the data to store.
      */
-    public abstract void _saveStorable(String path, Document data) 
+    public abstract void _saveStorable(String path, Document data)
         throws WebMailException,IOException;
 
 
@@ -124,11 +124,11 @@ public abstract class Storage {
      *
      * @param path the path where to store the data. The implementing subclasses
      * need to take care of properly representing UNIX-like paths.
-     * @param c the class to create. A new instance will be created where the 
+     * @param c the class to create. A new instance will be created where the
      * constructor takes as a sole parameter a Document representing the
      * data.
      */
-    public Storable loadStorable(String path, Class c) 
+    public Storable loadStorable(String path, Class c)
         throws WebMailException {
         if(cache.get(path) != null) {
             cache.hit();
@@ -142,8 +142,8 @@ public abstract class Storage {
                     Class.forName("java.lang.String")
                  };
                 Object[] args={_loadStorable(path),this,path};
-                
-                return (Storable)c.getConstructor(argtypes).newInstance(args);      
+
+                return (Storable)c.getConstructor(argtypes).newInstance(args);
             } catch(ClassNotFoundException ex) {
                 throw new WebMailException("You don't have org.w3c.dom.Document; Please upgrade your Java installation");
             } catch(NoSuchMethodException ex) {

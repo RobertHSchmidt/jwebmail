@@ -8,17 +8,17 @@ package net.wastl.webmail.storage;
  * Created: Feb 2002
  *
  * Copyright (C) 1999-2002 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -43,10 +43,10 @@ import net.wastl.webmail.xml.*;
 import net.wastl.webmail.config.*;
 
 /**
- * This class provides an interface to all storable data in JWebMail. Depending 
+ * This class provides an interface to all storable data in JWebMail. Depending
  * on the configuration, different means of storage are used for different data.
  *
- * 
+ *
  * @author Sebastian Schaffert
  * @version $Revision$
  */
@@ -120,7 +120,7 @@ public class StorageManager implements ConfigurationListener {
             Element entry = (Element)cachelist.item(i);
             String name = entry.getAttribute("name");
             System.err.print("  * "+getSystemData().getProperty("/SYSDATA/cache[@name='"+name+"']/description/text()")+" ... ");
-            
+
             int size = 40;
             float factor = (float)0.9;
             try {
@@ -132,7 +132,7 @@ public class StorageManager implements ConfigurationListener {
             caches.put(name,new AttributedExpireableCache(size,factor));
             System.err.println(size+" entries, threshold "+factor+".");
         }
-        
+
         cache = (AttributedExpireableCache)caches.get("stylesheet");
         user_cache = (AttributedExpireableCache)caches.get("user");
     }
@@ -164,7 +164,7 @@ public class StorageManager implements ConfigurationListener {
 
         }
     }
-        
+
     protected void initAuth() {
         System.err.print("  * Authenticator ... ");
         Authenticator a=parent.getAuthenticatorHandler().getAuthenticator(getConfig("AUTH"));
@@ -178,8 +178,8 @@ public class StorageManager implements ConfigurationListener {
             auth=null;
         }
     }
-    
-        
+
+
     protected void initMIME() {
         System.err.print("  * MIME types ... ");
         if(getConfig("mime types") != null) {
@@ -215,7 +215,7 @@ public class StorageManager implements ConfigurationListener {
             System.err.println(" not configured. Will use standard MIME types.");
         }
     }
-    
+
     protected void initLanguages() throws WebMailException {
         System.err.print("  * Available languages ... ");
         File f=new File(parent.getProperty("webmail.template.path")+System.getProperty("file.separator"));
@@ -263,7 +263,7 @@ public class StorageManager implements ConfigurationListener {
             available.addElement(available1[i]);
         }
         String s="";
-        int count=0;       
+        int count=0;
         for(int i=0;i<flist.length;i++) {
             String cur_lang=flist[i];
             Locale loc=new Locale(cur_lang,"","");
@@ -285,7 +285,7 @@ public class StorageManager implements ConfigurationListener {
         System.err.println(count+" languages initialized.");
         parent.getConfigScheme().configRegisterStringKey(this,"LANGUAGES",s,"Languages available in WebMail");
         getSystemData().setConfig("LANGUAGES",s);
-        
+
         /*
           Setup list of themes for each language
         */
@@ -312,7 +312,7 @@ public class StorageManager implements ConfigurationListener {
 
 
     /* ---------------------------- Member Methods ------------------------- */
-    
+
 
     /**
      * Get the system configuration with the given key.
@@ -387,7 +387,7 @@ public class StorageManager implements ConfigurationListener {
     }
 
     /**
-     * Return a XML model that contains state and system information for administrator use   
+     * Return a XML model that contains state and system information for administrator use
      */
     public XMLAdminModel createXMLAdminModel() throws WebMailException {
         try {
@@ -418,7 +418,7 @@ public class StorageManager implements ConfigurationListener {
     }
 
 
-    public XMLUserData createUserData(String user, String domain, String password) 
+    public XMLUserData createUserData(String user, String domain, String password)
         throws CreateUserDataException {
         XMLUserData data;
         String template="templates"+System.getProperty("file.separator")+"userdata.xml";
@@ -431,7 +431,7 @@ public class StorageManager implements ConfigurationListener {
             getLogger().log(Logger.LOG_WARN,"SimpleStorage: User configuration template ("+template+") is not readable!");
             throw new CreateUserDataException("User configuration template ("+template+") is not readable!",user,domain);
         }
-        
+
         try {
             Properties options = new Properties();
             options.put("webmail.cache.size","40");
@@ -467,7 +467,7 @@ public class StorageManager implements ConfigurationListener {
             WebMailVirtualDomain vdom=getVirtualDomain(domain);
             data.addMailHost("Default",getConfig("DEFAULT PROTOCOL")+"://"+
                              vdom.getDefaultServer(),user,password);
-                    
+
         } catch(Exception ex) {
             getLogger().log(Logger.LOG_WARN,"SimpleStorage: User configuration template ("+template+") exists but could not be parsed");
             throw new CreateUserDataException("User configuration template ("+template+") exists but could not be parsed",user,domain);
@@ -534,19 +534,19 @@ public class StorageManager implements ConfigurationListener {
     }
 
 
-    /** 
+    /**
      * Get a xsl stylesheet for the specified locale and theme.
      * @param key Identifier for the String
      * @param locale locale of the String to fetch
      * @param theme theme where to look for the file
      */
-    public Templates getStylesheet(String name, Locale locale, String theme) 
+    public Templates getStylesheet(String name, Locale locale, String theme)
         throws WebMailException {
 
         String key = locale.getLanguage()+"/"+theme+"/"+name;
 
         Templates stylesheet=null;
-            
+
         String basepath=getBasePath(locale,theme);
 
         File f=new File(basepath+name);
@@ -554,7 +554,7 @@ public class StorageManager implements ConfigurationListener {
             throw new StylesheetNotFoundException("The requested stylesheet "+name+" could not be found (path tried: "+basepath+".");
         }
 
-        if(cache != null && cache.get(key) != null && 
+        if(cache != null && cache.get(key) != null &&
            ((Long)cache.getAttributes(key)).longValue() >= f.lastModified()) {
             // Keep statistics :-)
             cache.hit();
@@ -568,15 +568,15 @@ public class StorageManager implements ConfigurationListener {
                     cache.put(key,stylesheet, new Long(f.lastModified()));
                     cache.miss();
                 }
-            } catch(Exception ex) { 
-                throw new WebMailException("Error while compiling stylesheet "+name+", language="+locale.getLanguage()+", theme="+theme+":\n"+ex.toString()); 
+            } catch(Exception ex) {
+                throw new WebMailException("Error while compiling stylesheet "+name+", language="+locale.getLanguage()+", theme="+theme+":\n"+ex.toString());
             }
             return stylesheet;
         }
 
     }
 
-    
+
     public XMLSystemData getSystemData() throws WebMailException {
         if(sysdata == null) {
             System.err.print("  * System Configuration ... ");
@@ -594,7 +594,7 @@ public class StorageManager implements ConfigurationListener {
                 throw new WebMailException("A fatal error occured.",ex);
             }
             System.err.println("ok.");
-        }       
+        }
         return sysdata;
     }
 
@@ -607,14 +607,14 @@ public class StorageManager implements ConfigurationListener {
      * @param passwd Password that the user provided
      *
      */
-    public XMLUserData getUserData(String user, String domain, String password, 
-                                   boolean authenticate) 
+    public XMLUserData getUserData(String user, String domain, String password,
+                                   boolean authenticate)
          throws WebMailException
     {
         if(authenticate) {
             auth.authenticatePreUserData(user,domain,password);
         }
-                
+
         if(user.equals("")) {
             return null;
         }
@@ -622,7 +622,7 @@ public class StorageManager implements ConfigurationListener {
         String key = user+"/"+domain;
 
         XMLUserData data = null;
-        if(user_cache != null) 
+        if(user_cache != null)
             data=(XMLUserData)user_cache.get(key);
         else
             throw new WebMailException("Error. User cache was not initialised! Check system configuration!");
@@ -648,7 +648,7 @@ public class StorageManager implements ConfigurationListener {
             }
             if(user_cache != null)
                 user_cache.put(key,data);
-        } else {            
+        } else {
             user_cache.hit();
         }
 
@@ -662,7 +662,7 @@ public class StorageManager implements ConfigurationListener {
     public void saveUserData(String user, String domain) throws WebMailException {
         String key = user+"/"+domain;
         XMLUserData data = null;
-        if(user_cache != null) 
+        if(user_cache != null)
             data=(XMLUserData)user_cache.get(key);
         else
             throw new WebMailException("Error. User cache was not initialised! Check system configuration!");
@@ -709,7 +709,7 @@ public class StorageManager implements ConfigurationListener {
         }
         String basepath=theme_path+System.getProperty("file.separator");
         return basepath;
-    }   
+    }
 
     public String getMimeType(String name) {
         String content_type;

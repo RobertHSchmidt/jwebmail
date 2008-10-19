@@ -6,17 +6,17 @@
 
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -49,7 +49,7 @@
     <helpdata>
       <p>
         Dans la liste des messages, vous avez une vue d'ensemble des messages contenus dans le dossier. Vous verrez
-        le sujet, l'expéditeur, la date, la taille et des marqueurs positionnés ou non ('nouveau', 'lu', 
+        le sujet, l'expéditeur, la date, la taille et des marqueurs positionnés ou non ('nouveau', 'lu',
         'répondu', 'doc. attaché', 'effacé').<br/>
         Vous pouvez afficher le message en cliquant sur son sujet.<br/>
         Vous avez la possibilité de sélectionner un ou plusieurs messages afin d'effectuer certaines actions
@@ -106,14 +106,14 @@
       </p>
       <p>
         La <bold>fenêtre d'attachement</bold> vous permet de parcourir votre disque dur pour ajouter un fichier
-        si vous appuyez sur le bouton <bold>'Parcourir'</bold>. Après avoir sélectionné un fichier, 
+        si vous appuyez sur le bouton <bold>'Parcourir'</bold>. Après avoir sélectionné un fichier,
         vous pouvez entrer une description pour celui-ci et finalement cliquer sur <bold>'Ajouter Nouveau Fichier'</bold>
-        pour l'ajouter au message. Il peut exister une taille limite totale de documents attachés. Cette limite, si elle existe, 
+        pour l'ajouter au message. Il peut exister une taille limite totale de documents attachés. Cette limite, si elle existe,
         est configurée par votre administrateur système (affichée en octet).
       </p>
       <p>
         Les fichiers déjà attachés sont affichés dans la section gauche de l'écran.
-        Pour supprimer l'attachement du fichier, sélectionnez le dans la liste et appuyez sur le bouton 
+        Pour supprimer l'attachement du fichier, sélectionnez le dans la liste et appuyez sur le bouton
         <bold>'Effacer fichier(s) sélectionné(s)'</bold>.
       </p>
     </helpdata>
@@ -134,36 +134,36 @@
       </p>
       <p>
         <bold>Configuration des Dossiers:</bold> Dans chaque boîte aux lettres, il peut y avoir plusieurs dossiers
-        (organisés en arborescence). Ce système fonctionne UNIQUEMENT avec les boîtes IMAP, pas avec POP3. 
+        (organisés en arborescence). Ce système fonctionne UNIQUEMENT avec les boîtes IMAP, pas avec POP3.
         Avec IMAP, vous pouvez ajouter ou supprimer des dossiers dans l'arborescence.
       </p>
     </helpdata>
     <ref ref-id="folder-setup-folders"/>
     <ref ref-id="folder-setup-mailboxes"/>
   </helptopic>
- 
+
   <helptopic id="folder-setup-folders" title="Configuration des Dossiers">
     <helpdata>
       <p>
         Comme mentionné ci-avant, une boîte aux lettres IMAP peut contenir plusieurs dossiers.
         La fenêtre 'Setup Dossier' vous permet d'ajouter ou supprimer des dossiers de chacune de
         vos boîtes aux lettres. Les dossiers sont organisés en structure arborescente pour chaque
-        boîte aux lettres et affichés dans cette fenêtre. Vous avez la possibilité 
+        boîte aux lettres et affichés dans cette fenêtre. Vous avez la possibilité
         de supprimer chaque dossier ou, si c'est une boîte qui contient d'autres dossiers, d'ajouter des sous-dossiers à celle-ci.
       </p>
       <warning>
-        <p>Les dossiers seront <bold>physiquement effacé de votre serveur de messagerie</bold> (en même temps que tous les messages et 
-        sous-dossiers qu'ils contiennent), <bold>et non pas seulement de WebMail</bold>! Ceci est une fonction <bold>dangereuse</bold> 
+        <p>Les dossiers seront <bold>physiquement effacé de votre serveur de messagerie</bold> (en même temps que tous les messages et
+        sous-dossiers qu'ils contiennent), <bold>et non pas seulement de WebMail</bold>! Ceci est une fonction <bold>dangereuse</bold>
         et vous ne pourrez plus revenir en arrière !</p>
       </warning>
     </helpdata>
   </helptopic>
- 
+
   <helptopic id="folder-setup-mailboxes" title="Configuration de Boîtes aux Lettres">
     <helpdata>
       <p>
         Webmail vous permet d'accéder à plusieurs boîtes aux lettres POP3/IMAP indépendantes par la même interface.
-        Pour configurer ceci vous pouvez utiliser <bold>Setup Dossier</bold>.   
+        Pour configurer ceci vous pouvez utiliser <bold>Setup Dossier</bold>.
       </p>
       <p>
         <bold>Dans la première partie</bold> de l'écran, vous avez une liste de vos boîtes actuellement configurées.
@@ -174,7 +174,7 @@
         <bold>'Supprimer'</bold> ici. Vous pourrez toujours accéder à celle-ci depuis d'autre clients de messagerie, ou si vous la recréez (cf. ci-après).</p>
       </note>
       <p>
-        <bold>Dans la seconde partie</bold> de l'écran, vous pouvez ajouter une nouvelle boîte aux lettres en entrant les informations requises 
+        <bold>Dans la seconde partie</bold> de l'écran, vous pouvez ajouter une nouvelle boîte aux lettres en entrant les informations requises
         (nom de boîte, nom d'hôte serveur de messagerie, protocole, login et mot de passe, obligatoires pour la création de la boîte aux lettres - demandez à votre administrateur le cas échéant).
       </p>
     </helpdata>
@@ -196,7 +196,7 @@
       <p>
         Vous pouvez aussi changer vos paramètres d'affichage:
       </p>
-        <ul>  
+        <ul>
           <li><bold>Messages par page</bold>: Change le nombre de messages affichés dans la liste de messages (par défaut: 20)</li>
           <li><bold>Afficher Trucs et Astuces</bold>: Affiche des 'rehaussements graphiques', comme la substitution des 'smiley', surlignage des liens, ...</li>
 <!--      <li><bold>Filtrer JavaScript</bold>: Essaie de reconnaître du JavaScript dans les messages et le filtre de façon à ce que vous n'ayez pas de problèmes de sécurité (devrait être actif).</li> -->

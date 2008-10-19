@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-2"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -19,7 +19,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" indent="yes"/>
-  
+
     <xsl:variable name="imgbase" select="/USERMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
     <xsl:variable name="base" select="/USERMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
     <xsl:variable name="session-id" select="/USERMODEL/STATEDATA/VAR[@name='session id']/@value"/>
@@ -32,7 +32,7 @@
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
-      
+
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
         <TABLE width="100%" border="0" cellspacing="2" cellpadding="2">
         <xsl:variable name="current" select="/USERMODEL/CURRENT[@type='folder']/@id"/>
@@ -47,8 +47,8 @@
 
   <xsl:template match="FOLDER">
     <TR>
-      <TD width="100%" colspan="7" height="22" class="testoNero"><IMG SRC="{$imgbase}/images/icona_mail.gif" BORDER="0" align="absmiddle"/>    
-      Üzenetek megjelnítése <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@first_msg"/> 
+      <TD width="100%" colspan="7" height="22" class="testoNero"><IMG SRC="{$imgbase}/images/icona_mail.gif" BORDER="0" align="absmiddle"/>
+      Üzenetek megjelnítése <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@first_msg"/>
       tól/től <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@last_msg"/> -ig
       a <xsl:value-of select="@name"/> mappában (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=messagelist">Súgó</A>).
      </TD>
@@ -61,7 +61,7 @@
       <TD width="100%" colspan="7" align="center" class="testoNero" bgcolor="#A6B1C0">
         <TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
           <TR>
-            <TD class="testo"><SPAN class="bold">Üzenet jelölők:</SPAN></TD> 
+            <TD class="testo"><SPAN class="bold">Üzenet jelölők:</SPAN></TD>
             <TD class="testo"><IMG SRC="{$imgbase}/images/attach.gif" BORDER="0" hspace="2"/></TD>
             <TD class="testo">üzenet csatolással</TD>
             <TD class="testo"><IMG SRC="{$imgbase}/images/new.gif" BORDER="0" hspace="2"/></TD>
@@ -108,7 +108,7 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:for-each>
-  
+
         <TR>
             <TD colspan="4" width="45%" align="center" class="testoNero" bgcolor="#D1D7E7">
               <SELECT NAME="MARK" class="testoNero">
@@ -129,7 +129,7 @@
               <SELECT NAME="COPYMOVE" class="testoNero">
                 <OPTION VALUE="COPY">másold</OPTION>
                 <OPTION VALUE="MOVE">mozgasd</OPTION>
-              </SELECT>    
+              </SELECT>
               az üzeneteket a következő mappába
               <SELECT NAME="TO" class="testoNero">
                 <xsl:for-each select="/USERMODEL/MAILHOST_MODEL//FOLDER">
@@ -179,7 +179,7 @@
                 <TD class="testoBianco" width="47%" bgcolor="#697791" valign="middle" align="right" height="22">
                    &#160;
                 </TD>
-                <TD class="testoBianco" width="3%" bgcolor="#697791" valign="middle" align="center"> 
+                <TD class="testoBianco" width="3%" bgcolor="#697791" valign="middle" align="center">
                    &#160;
                 </TD>
                 </xsl:otherwise>
@@ -188,7 +188,7 @@
            </TABLE>
           </TD>
         </TR>
-   
+
 
   </xsl:template>
 
@@ -207,10 +207,10 @@
       </xsl:if>
       <xsl:if test="@answered='true'">
         <IMG SRC="{$imgbase}/images/reply.gif" BORDER="0" hspace="2"/>
-      </xsl:if> 
+      </xsl:if>
       <xsl:if test="@deleted='true'">
         <IMG SRC="{$imgbase}/images/delete.gif" BORDER="0" hspace="2"/>
-      </xsl:if> 
+      </xsl:if>
     </TD>
     <TD width="28%" class="testoNero">
       <xsl:choose>
@@ -221,7 +221,7 @@
           <A HREF="{$base}/folder/showmsg?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}" class="unseen">
             <xsl:apply-templates select="HEADER/SUBJECT"/>
           </A>
-        </xsl:otherwise>        
+        </xsl:otherwise>
       </xsl:choose>
     </TD>
     <TD width="25%" class="testoNero">

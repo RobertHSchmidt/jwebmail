@@ -3,17 +3,17 @@
 
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -21,11 +21,11 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" indent="yes"/>
-  
+
   <xsl:variable name="imgbase" select="/USERMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
   <xsl:variable name="base" select="/USERMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
   <xsl:variable name="session-id" select="/USERMODEL/STATEDATA/VAR[@name='session id']/@value"/>
-  
+
   <xsl:variable name="work" select="/USERMODEL/WORK/MESSAGE[position()=1]"/>
 
     <xsl:template match="/">
@@ -37,7 +37,7 @@
         <META CONTENT="GENERATOR" VALUE="WebMail 0.7 XSL"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
-      
+
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
         <TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
           <TR>
@@ -70,7 +70,7 @@
          </TD>
         </TR>
         <TR>
-          <TD class="testoGrande" bgcolor="#E2E6F0">  
+          <TD class="testoGrande" bgcolor="#E2E6F0">
           <!-- Only show the section for invalid addresses if there actually were any -->
           <xsl:if test="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value != '' or /USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value != ''">
             未傳送到位址：
@@ -79,24 +79,24 @@
 <xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='valid unsent addresses']/@value"/>
                 </xsl:if></SPAN>
             <SPAN class="testoNero"><xsl:if test="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value != ''">
-              無效的&#160;&#160;<xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value"/> 
-            </xsl:if></SPAN> 
+              無效的&#160;&#160;<xsl:value-of select="/USERMODEL/STATEDATA/VAR[@name='invalid unsent addresses']/@value"/>
+            </xsl:if></SPAN>
           </xsl:if>
           </TD>
         </TR>
         <TR>
-          <TD bgcolor="#697791">   
+          <TD bgcolor="#697791">
         <TABLE border="0" cellpadding="0" cellspacing="0"><TR><TD>
         <A HREF="{$base}/compose?session-id={$session-id}&amp;continue=1"><IMG SRC="{$imgbase}/images/back.gif" BORDER="0"/></A></TD><TD><A HREF="{$base}/compose?session-id={$session-id}&amp;continue=1"><SPAN class="testoBianco"> 回到信件編輯器 ...</SPAN></A></TD></TR></TABLE>
           </TD>
         </TR>
       </TABLE>
-        
+
 
       </BODY>
     </HTML>
   </xsl:template>
 
-  
-  
+
+
 </xsl:stylesheet>

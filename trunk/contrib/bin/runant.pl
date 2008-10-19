@@ -11,7 +11,7 @@
 # the code is not totally portable due to classpath and directory splitting
 # issues. oops. (NB, use File::Spec::Functions  will help and the code is
 # structured for the catfile() call, but because of perl version funnies
-# the code is not included. 
+# the code is not included.
 #
 # created:         2000-8-24
 # last modified:   2000-8-24
@@ -51,7 +51,7 @@ if ($HOME eq "")
 my $JAVACMD = $ENV{JAVACMD};
 $JAVACMD = "java" if $JAVACMD eq "";
 
-#ISSUE: what java wants to split up classpath varies from platform to platform 
+#ISSUE: what java wants to split up classpath varies from platform to platform
 #and perl is not too hot at hinting which box it is on.
 #here I assume ":" 'cept on win32 and dos. Add extra tests here as needed.
 my $s=":";

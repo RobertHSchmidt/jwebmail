@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -35,15 +35,15 @@
           <H3>Bienvenido a tu casilla de correo, <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</H3>
         </P>
         <P>
-          Este es el* <xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/> 
-          time you log in since 
-          <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>. 
-          Your <B>&#250;ltimo ingreso</B> was on 
+          Este es el* <xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/>
+          time you log in since
+          <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>.
+          Your <B>&#250;ltimo ingreso</B> was on
           <B><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='last login']"/></B>.
         </P>
         <P>
-          Tu casilla de correo contiene las siguientes carpetas 
-          (mensajes* en total* est&#225;n en <FONT COLOR="green">green</FONT>, 
+          Tu casilla de correo contiene las siguientes carpetas
+          (mensajes* en total* est&#225;n en <FONT COLOR="green">green</FONT>,
           new messages in <FONT COLOR="red">red</FONT>) (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=mailbox">Ayuda</A>):<BR/>
           <CENTER><P><A HREF="{$base}/mailbox?session-id={$session-id}&amp;force-refresh=1">Forzar refrescado</A> - Click this to force a refresh of the folder information.
             </P><TABLE WIDTH="80%"><xsl:for-each select="/USERMODEL/MAILHOST_MODEL"><xsl:apply-templates select="."/></xsl:for-each></TABLE></CENTER>

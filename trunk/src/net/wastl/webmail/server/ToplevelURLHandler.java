@@ -18,21 +18,21 @@ import javax.servlet.ServletException;
 
 /*
  * ToplevelURLHandler.java
- * 
+ *
  * Created: Tue Aug 31 17:20:29 1999
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -48,32 +48,32 @@ import javax.servlet.ServletException;
 /* 9/24/2000 devink -- changed for challenge/response authentication */
 
 public class ToplevelURLHandler implements URLHandler {
-        
+
     WebMailServer parent;
     //Hashtable urlhandlers;
     URLHandlerTree urlhandlers;
-        
+
     public ToplevelURLHandler(WebMailServer parent) {
         System.err.println("- Initializing WebMail URL Handler ... done.");
         urlhandlers=new URLHandlerTree("/");
         urlhandlers.addHandler("/",this);
         this.parent=parent;
     }
-    
+
     public void registerHandler(String url, URLHandler handler) {
         //urlhandlers.put(url,handler);
         urlhandlers.addHandler(url,handler);
         //System.err.println("Tree changed: "+urlhandlers.toString());
     }
-        
+
     public String getURL() {
         return "/";
     }
-        
+
     public String getName() {
         return "TopLevelURLHandler";
     }
-        
+
     public String getDescription() {
         return "";
     }
@@ -97,11 +97,11 @@ public class ToplevelURLHandler implements URLHandler {
             throw new ServletException(myex);
         }
     }
-        
+
     public HTMLDocument handleURL(String url, HTTPSession session, HTTPRequestHeader header) throws WebMailException, ServletException {
 
         HTMLDocument content;
-        
+
         if(url.equals("/")) {
             //content=new HTMLLoginScreen(parent,parent.getStorage(),false);
             XMLGenericModel model=parent.getStorage().createXMLGenericModel();
@@ -120,12 +120,12 @@ public class ToplevelURLHandler implements URLHandler {
                  * Show login screen depending on WebMailServer's default locale.
                  */
                 /*
-            content = new XHTMLDocument(model.getRoot(), 
-                                        parent.getStorage().getStylesheet(adm.getLoginScreenFile(), 
+            content = new XHTMLDocument(model.getRoot(),
+                                        parent.getStorage().getStylesheet(adm.getLoginScreenFile(),
                                                                           Locale.getDefault(),"default"));
                 */
-            content = new XHTMLDocument(model.getRoot(), 
-                                        parent.getStorage().getStylesheet(adm.getLoginScreenFile(), 
+            content = new XHTMLDocument(model.getRoot(),
+                                        parent.getStorage().getStylesheet(adm.getLoginScreenFile(),
                                                                                 parent.getDefaultLocale(),parent.getProperty("webmail.default.theme")));
                 // Modified by exce, end.
         } else if(url.equals("/login")) {
@@ -135,7 +135,7 @@ public class ToplevelURLHandler implements URLHandler {
             content=new XHTMLDocument(session.getModel(),parent.getStorage().getStylesheet("login.xsl",user.getPreferredLocale(),user.getTheme()));
         } else {
             /* Let the plugins handle it */
-                        
+
             URLHandler uh=urlhandlers.getHandler(url);
 
             if(uh != null && uh != this) {
@@ -148,5 +148,5 @@ public class ToplevelURLHandler implements URLHandler {
         }
         return content;
     }
-        
+
 } // URLHandler

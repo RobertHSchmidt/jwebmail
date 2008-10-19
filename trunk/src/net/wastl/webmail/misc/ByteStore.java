@@ -12,17 +12,17 @@ import net.wastl.webmail.server.*;
  * Created: Sun Sep 19 17:22:13 1999
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -33,18 +33,18 @@ import net.wastl.webmail.server.*;
  * @version
  */
 public class ByteStore implements Serializable {
-        
+
     byte[] bytes;
-        
+
     String content_type=null;
     String content_encoding=null;
     String name;
     String description="";
-        
+
     public ByteStore(byte[] b) {
         bytes=b;
     }
-    
+
     public void setDescription(String s) {
         description=s;
     }
@@ -56,7 +56,7 @@ public class ByteStore implements Serializable {
     public void setContentType(String s) {
         content_type=s;
     }
-    
+
     public String getContentType() {
         if(content_type != null) {
             return content_type;
@@ -65,32 +65,32 @@ public class ByteStore implements Serializable {
             return content_type;
         }
     }
-    
+
     public void setContentEncoding(String s) {
         content_encoding=s;
     }
-    
+
     public String getContentEncoding() {
         return content_encoding;
     }
-    
+
     public byte[] getBytes() {
         return bytes;
     }
-    
+
     public void setName(String s) {
         name=s;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public int getSize() {
         return bytes.length;
     }
-        
-        
+
+
     /**
      * Create a ByteStore out of an InputStream
      */

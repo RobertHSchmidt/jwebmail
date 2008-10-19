@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -24,7 +24,7 @@
     <xsl:variable name="imgbase" select="/GENERICMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
     <xsl:variable name="base" select="/GENERICMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
     <xsl:variable name="session-id" select="/GENERICMODEL/STATEDATA/VAR[@name='session id']/@value"/>
-  
+
     <xsl:template match="/">
 
     <HTML>
@@ -32,7 +32,7 @@
         <TITLE>WebMail Administration Interface: System Status</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-        
+
       <BODY BGCOLOR="white">
         <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
           <TR bgcolor="#dddddd">
@@ -62,7 +62,7 @@
               <TD COLSPAN="2"><PRE><xsl:value-of select='/GENERICMODEL/STATEDATA/VAR[@name="storage status"]/@value'/></PRE></TD>
             </TR>
           </xsl:if>
-              
+
           <TR bgcolor="#dddddd">
             <TD COLSPAN="3" ALIGN="center"><FONT SIZE="+1"><STRONG>Active Sessions</STRONG></FONT></TD>
           </TR>
@@ -81,7 +81,7 @@
                   </TR>
                 </xsl:otherwise>
               </xsl:choose>
-              
+
           </xsl:for-each>
 
           <TR bgcolor="#dddddd">
@@ -94,10 +94,10 @@
               <TD><INPUT TYPE="submit" name="REBOOT" value="Restart"/><INPUT TYPE="submit" name="SHUTDOWN" value="Shutdown"/></TD>
             </FORM>
           </TR>
-          
+
         </TABLE>
       </BODY>
-      
+
     </HTML>
 
   </xsl:template>

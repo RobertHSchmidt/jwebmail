@@ -1,8 +1,8 @@
 WebMail templates
 =================
 
-WebMail pages are assembled using templates in normal HTML with special tags that are 
-enclosed in "<<" and ">>". The tag name is looked up in the current session's 
+WebMail pages are assembled using templates in normal HTML with special tags that are
+enclosed in "<<" and ">>". The tag name is looked up in the current session's
 environment table and the tag replaced with the value found there.
 WebMail uses the gnu.regexp package for this.
 There is currently no list of all available tags, but those are the most common:

@@ -10,17 +10,17 @@ package net.wastl.webmail.server;
  * Created: Tue Aug 31 15:28:45 1999
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -43,7 +43,7 @@ import net.wastl.webmail.exceptions.WebMailException;
  */
 
 public class PluginHandler  {
-    
+
     WebMailServer parent;
     String plugin_list;
     Vector plugins;
@@ -80,9 +80,9 @@ public class PluginHandler  {
 
         PluginDependencyTree pt=new PluginDependencyTree("");
         Queue q=new Queue();
-        
+
         int count=0;
-        
+
         while(tok.hasMoreTokens()) {
             String name=(String)tok.nextToken();
             try {
@@ -100,7 +100,7 @@ public class PluginHandler  {
                 ex.printStackTrace();
             }
         }
-        
+
         parent.getLogger().log(Logger.LOG_INFO,count+" plugins loaded correctly.");
 
 
@@ -114,7 +114,7 @@ public class PluginHandler  {
         pt.register(parent);
         parent.getLogger().log(Logger.LOG_INFO,count+" plugins initialized.");
     };
-   
+
     public Enumeration getPlugins() {
         return plugins.elements();
     }
@@ -125,14 +125,14 @@ public class PluginHandler  {
     class FFilter implements FilenameFilter {
         FFilter() {
         }
-        
+
         public boolean accept(File f, String s) {
             if(s.endsWith(".class")) {
                 return true;
             } else {
                 return false;
             }
-        }       
+        }
     }
 
 } // PluginHandler

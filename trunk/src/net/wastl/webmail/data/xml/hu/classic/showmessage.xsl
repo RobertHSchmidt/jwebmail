@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -19,7 +19,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" encoding="UTF-8"/>
-  
+
     <xsl:variable name="imgbase" select="/USERMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
     <xsl:variable name="base" select="/USERMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
     <xsl:variable name="session-id" select="/USERMODEL/STATEDATA/VAR[@name='session id']/@value"/>
@@ -31,7 +31,7 @@
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Showing message <xsl:value-of select="/USERMODEL/CURRENT[@type='message']/@id"/></TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-      
+
       <BODY bgcolor="#ffffff">
         <xsl:variable name="current_msg" select="/USERMODEL/CURRENT[@type='message']/@id"/>
         <xsl:variable name="current_folder" select="/USERMODEL/CURRENT[@type='folder']/@id"/>
@@ -42,7 +42,7 @@
 
   <xsl:template match="MESSAGE">
 
-    <xsl:call-template name="navigation"/>    
+    <xsl:call-template name="navigation"/>
 
     <TABLE WIDTH="100%" BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0">
       <TR>
@@ -95,7 +95,7 @@
       </TR>
       <TR>
         <TD COLSPAN="4" ALIGN="right">
-          <A HREF="{$base}/compose?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}&amp;reply=1">reply to this message...</A> - 
+          <A HREF="{$base}/compose?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}&amp;reply=1">reply to this message...</A> -
           <A HREF="{$base}/compose?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}&amp;forward=1">forward this message...</A>
         </TD>
       </TR>
@@ -104,7 +104,7 @@
     <xsl:for-each select="PART">
       <xsl:apply-templates select="."/>
     </xsl:for-each>
-    
+
     <TABLE WIDTH="100%" BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0">
       <TR>
         <FONT SIZE="-1">
@@ -132,7 +132,7 @@
               <SELECT NAME="COPYMOVE">
                 <OPTION VALUE="COPY">copy</OPTION>
                 <OPTION VALUE="MOVE">move</OPTION>
-              </SELECT>    
+              </SELECT>
               <STRONG>message to folder</STRONG>
               <SELECT NAME="TO">
                 <xsl:for-each select="/USERMODEL/MAILHOST_MODEL//FOLDER">
@@ -145,12 +145,12 @@
         </FONT>
       </TR>
     </TABLE>
-   
-    
+
+
     <xsl:call-template name="navigation"/>
-    
+
   </xsl:template>
-  
+
   <xsl:template match="PART">
     <xsl:choose>
       <xsl:when test="@type='text' and @hidden='true'" />
@@ -172,7 +172,7 @@
           <CENTER><EM>MIME part</EM></CENTER><BR/>
           <xsl:apply-templates select="."/>
           <HR/>
-        </xsl:for-each>         
+        </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
         <HR/>
@@ -182,7 +182,7 @@
               <STRONG>Attached file</STRONG>
             </TD>
             <TD>
-              <A HREF="{$base}/showmime/{@filename}?session-id={$session-id}&amp;msgid={ancestor::MESSAGE/@msgid}"><xsl:value-of select="@filename"/><xsl:value-of select="@name"/></A> 
+              <A HREF="{$base}/showmime/{@filename}?session-id={$session-id}&amp;msgid={ancestor::MESSAGE/@msgid}"><xsl:value-of select="@filename"/><xsl:value-of select="@name"/></A>
             </TD>
           </TR>
           <xsl:if test="@description != ''">
@@ -223,7 +223,7 @@
         <xsl:choose>
           <xsl:when test="@quotelevel > 2">
             <FONT COLOR="orange">
-              <EM>          
+              <EM>
                 <xsl:value-of disable-output-escaping="yes" select="."/>
               </EM>
             </FONT>
@@ -285,7 +285,7 @@
             </EM>
           </TD>
         </TR>
-      </TABLE>    
+      </TABLE>
     </P>
   </xsl:template>
 
@@ -312,7 +312,7 @@
   <xsl:template match="REPLY-TO">
     <EM><xsl:value-of select="."/></EM>
   </xsl:template>
-    
+
   <xsl:template match="FROM">
     <xsl:choose>
       <xsl:when test="contains(.,'&lt;')">
@@ -327,12 +327,12 @@
 
   <!-- The following three sections deal with displaying HTML code from HTML attachments.
   Elements marked "malicious" will get a special treatment -->
-  <xsl:template match="@*|node()"> 
+  <xsl:template match="@*|node()">
     <xsl:choose>
       <xsl:when test="not(@malicious)">
         <xsl:copy>
           <xsl:apply-templates select="@*|node()"/>
-        </xsl:copy> 
+        </xsl:copy>
       </xsl:when>
       <xsl:otherwise>
         <TABLE  BORDER="1" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
@@ -351,14 +351,14 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="node()" mode="quote"> 
+  <xsl:template match="node()" mode="quote">
     <xsl:choose>
       <xsl:when test="name(.)">
         &lt;<xsl:value-of select="name(.)"/>
         <xsl:text> </xsl:text><xsl:apply-templates select="@*" mode="quote"/>
         <xsl:if test="./node()">
           &gt;
-          <xsl:apply-templates select="node()" mode="quote"/>       
+          <xsl:apply-templates select="node()" mode="quote"/>
           &lt;/<xsl:value-of select="name(.)"/>
         </xsl:if>
         &gt;
@@ -369,7 +369,7 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="@*" mode="quote"> 
+  <xsl:template match="@*" mode="quote">
     <xsl:if test="name(.) != 'malicious'">
       <xsl:text> </xsl:text><xsl:value-of select="name(.)"/>="<xsl:value-of select="."/>"
     </xsl:if>

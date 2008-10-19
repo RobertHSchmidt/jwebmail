@@ -9,17 +9,17 @@ import java.util.*;
  * Created: 31.08.99
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -36,7 +36,7 @@ import java.util.*;
  * @version $Revision$
  */
 public class ConfigScheme {
-    
+
     protected Hashtable config_scheme;
 
     public ConfigScheme() {
@@ -169,7 +169,7 @@ public class ConfigScheme {
     public void addConfigurationListener(String key,ConfigurationListener l) {
         ConfigParameter parm=getConfigParameter(key);
         parm.addConfigurationListener(l);
-    }   
+    }
 
     public ConfigParameter getConfigParameter(String key) {
         return (ConfigParameter)config_scheme.get(key);
@@ -198,7 +198,7 @@ public class ConfigScheme {
             cp.setDefault(default_value);
         }
     }
-       
+
 
     public String getDescription(String key) {
         ConfigParameter cp=(ConfigParameter)config_scheme.get(key);
@@ -218,7 +218,7 @@ public class ConfigScheme {
         ConfigParameter parm=getConfigParameter(key);
         if(parm!=null) {
             Enumeration enum=parm.getConfigurationListeners();
-        
+
             while(enum.hasMoreElements()) {
                 ConfigurationListener l=(ConfigurationListener)enum.nextElement();
 //              System.err.println(l);
@@ -248,4 +248,4 @@ public class ConfigScheme {
         }
     }
 }
- 
+

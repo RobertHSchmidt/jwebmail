@@ -7,17 +7,17 @@ package net.wastl.webmail.storage.data;
  *
  * Created: Sat Oct 12 15:02:09 2002
  * Copyright (C) 1999-2002 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -63,7 +63,7 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
     public void setConfigScheme(ConfigScheme scheme) {
         this.scheme=scheme;
     }
-   
+
 
     public ConfigScheme getConfigScheme() {
         return scheme;
@@ -91,7 +91,7 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
         return df;
     }
 
-    
+
     public void addConfigurationListener(String key, ConfigurationListener listener) {
         scheme.addConfigurationListener(key,listener);
     }
@@ -122,17 +122,17 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
     }
 
 
-    public void setConfig(String key, String value) 
+    public void setConfig(String key, String value)
         throws IllegalArgumentException {
         setConfig(key,value,true,true);
     }
-    
+
    /**
      * Set a configuration "key" to the specified value.
      * @param key Identifier for the configuration
      * @paran value value to set
      */
-    public void setConfig(String key, String value, boolean filter, boolean notify) 
+    public void setConfig(String key, String value, boolean filter, boolean notify)
         throws IllegalArgumentException {
         if(!scheme.isValid(key,value)) throw new IllegalArgumentException();
         if(!(isConfigSet(key) && getConfig(key).equals(value))) {
@@ -146,7 +146,7 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
     }
 
 
-    public void setConfigRaw(String groupname,String key, String value, String type) {  
+    public void setConfigRaw(String groupname,String key, String value, String type) {
         String curval=getConfig(key);
         if(curval == null || !curval.equals(value)) {
             /* Find all GROUP elements */
@@ -225,7 +225,7 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
         }
     }
 
-    protected Element createConfigElement(String key, String value, String type) {                     
+    protected Element createConfigElement(String key, String value, String type) {
         Element config=root.createElement("CONFIG");
         Element keyelem=root.createElement("KEY");
         Element desc=root.createElement("DESCRIPTION");
@@ -248,14 +248,14 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
         }
         return config;
     }
-                
+
 
 
     public Enumeration getVirtualDomains() {
         final NodeList nl=getNodeListXPath("/SYSDATA/DOMAIN");
         return new Enumeration() {
                 int i=0;
-                
+
                 public boolean hasMoreElements() {
                     return i<nl.getLength();
                 }
@@ -287,7 +287,7 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
                         String value=XMLCommon.getValueXPath(domain,"DEFAULT_HOST/text()");
                         return value==null?"unknown":value;
                     }
-                        
+
                     public void setDefaultServer(String name) {
                         XMLCommon.setValueXPath(domain,"DEFAULT_HOST/text()",name);
                     }
@@ -334,15 +334,15 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
                             domain.appendChild(ahost);
                         }
                     }
-                            
+
                     public Enumeration getAllowedHosts() {
-                        final NodeList nl=XMLCommon.getNodeListXPath(domain,"ALLOWED_HOST");                    
+                        final NodeList nl=XMLCommon.getNodeListXPath(domain,"ALLOWED_HOST");
                         return new Enumeration() {
                                 int i=0;
                                 public boolean hasMoreElements() {
                                     return i<nl.getLength();
                                 }
-                                
+
                                 public Object nextElement() {
                                     String value=XMLCommon.getElementTextValue((Element)nl.item(i++));
                                     return value==null?"error":value;
@@ -357,14 +357,14 @@ public class XMLSystemData extends XMLData implements Storable, ConfigStore {
                         }
                         if(b) {
                             domain.appendChild(root.createElement("RESTRICTED"));
-                        }                           
+                        }
                     }
 
                     public boolean getHostsRestricted() {
                         Node n=XMLCommon.getNodeXPath(domain,"RESTRICTED");
                         return n != null;
                     }
-                };                  
+                };
         } else {
             return null;
         }

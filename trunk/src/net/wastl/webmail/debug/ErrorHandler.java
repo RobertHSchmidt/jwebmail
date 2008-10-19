@@ -11,10 +11,10 @@ package net.wastl.webmail.debug;
  * @version $Revision$
  */
 public class ErrorHandler  {
-    
+
     public ErrorHandler(Exception ex) {
         //System.err.println(ex.getMessage());;
         ex.printStackTrace();
     }
-    
+
 } // ErrorHandler

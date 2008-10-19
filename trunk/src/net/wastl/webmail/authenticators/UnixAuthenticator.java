@@ -20,7 +20,7 @@ import net.wastl.webmail.logger.Logger;
  */
 
 public class UnixAuthenticator extends Authenticator {
-    
+
     public final String VERSION="1.2";
 
     public static final String passwd="/etc/passwd";
@@ -40,10 +40,10 @@ public class UnixAuthenticator extends Authenticator {
     public void register(ConfigScheme store) {
         key="UNIX";
         store.configAddChoice("AUTH",key,"Authenticate against the local Unix server's passwd/shadow files. Password change not possible.");
-    }   
+    }
 
     public void authenticatePreUserData(String user, String domain,
-     String given_passwd) throws InvalidPasswordException 
+     String given_passwd) throws InvalidPasswordException
     {
         super.authenticatePreUserData(user,domain,given_passwd);
         String login=user;
@@ -51,7 +51,7 @@ public class UnixAuthenticator extends Authenticator {
             File f_passwd=new File(passwd);
             File f_shadow=new File(shadow);
             BufferedReader in;
-            if(f_shadow.exists()) {             
+            if(f_shadow.exists()) {
                 in=new BufferedReader(new InputStreamReader(new FileInputStream(f_shadow)));
             } else {
                 in=new BufferedReader(new InputStreamReader(new FileInputStream(f_passwd)));
@@ -62,10 +62,10 @@ public class UnixAuthenticator extends Authenticator {
                 if(line.startsWith(login)) break;
                 line=in.readLine();
             }
-            
+
             if(line == null) throw new InvalidPasswordException("Invalid user: "+login);
-            
-            
+
+
             StringTokenizer tok=new StringTokenizer(line,":");
             String my_login=tok.nextToken();
             String password=tok.nextToken();
@@ -74,7 +74,7 @@ public class UnixAuthenticator extends Authenticator {
                 WebMailServer.getStorage().getLogger().log(Logger.LOG_WARN,"UnixAuthentication: user "+login+
                                                " authentication failed.");
                 throw new InvalidPasswordException("Unix authentication failed");
-            }           
+            }
             WebMailServer.getStorage().getLogger().log(Logger.LOG_INFO,"UnixAuthentication: user "+login+
                                            " authenticated successfully.");
         } catch(IOException ex) {
@@ -88,5 +88,5 @@ public class UnixAuthenticator extends Authenticator {
      */
     public boolean canChangePassword() {
         return false;
-    }    
+    }
 } // UnixAuthenticator

@@ -13,10 +13,10 @@ package net.wastl.webmail.server;
  */
 
 public interface StatusServer  {
-    
+
     /**
      * Return a status message.
      */
     public String getStatus();
-    
+
 } // StatusServer

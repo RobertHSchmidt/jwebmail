@@ -15,17 +15,17 @@ import net.wastl.webmail.server.WebMailServer;
  * Created: Sun Mar  5 17:59:33 2000
  *
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -96,7 +96,7 @@ public class XMLResourceBundle extends ResourceBundle {
         }
         return null;
     }
-    
+
     public Object handleGetObject(String key) {
         String retval=null;
         if(elem_locale != null) {
@@ -118,11 +118,11 @@ public class XMLResourceBundle extends ResourceBundle {
             hash.put(((Element)nl.item(i)).getAttribute("name"),"");
         }
     }
-    
+
     public Enumeration getKeys() {
-        
+
         Hashtable prop=new Hashtable();
-        
+
         if(elem_common != null) {
             getKeys(elem_common,prop);
         }
@@ -134,7 +134,7 @@ public class XMLResourceBundle extends ResourceBundle {
         }
         return prop.keys();
     }
-        
+
     public static synchronized ResourceBundle getBundle(String name, Locale locale, ClassLoader cl) throws MissingResourceException {
         String lang=locale.getLanguage();
 
@@ -148,7 +148,7 @@ public class XMLResourceBundle extends ResourceBundle {
             ex.printStackTrace();
             throw new MissingResourceException("Resource not found",name,"");
         }
-        
+
         return ret;
     }
 

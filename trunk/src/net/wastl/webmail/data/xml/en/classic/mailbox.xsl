@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -19,7 +19,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" encoding="UTF-8"/>
-  
+
     <xsl:variable name="imgbase" select="/USERMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
     <xsl:variable name="base" select="/USERMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
     <xsl:variable name="session-id" select="/USERMODEL/STATEDATA/VAR[@name='session id']/@value"/>
@@ -31,23 +31,23 @@
         <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Mailbox List</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-      
+
       <BODY bgcolor="#ffffff">
         <CENTER><IMG SRC="{$imgbase}/images/welcome.png"/></CENTER>
-        
+
         <P>
           <H3>Welcome to your mailbox, <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</H3>
         </P>
         <P>
-          This is the <xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/> 
-          time you log in since 
-          <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>. 
-          Your <B>last login</B> was on 
+          This is the <xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/>
+          time you log in since
+          <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>.
+          Your <B>last login</B> was on
           <B><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='last login']"/></B>.
         </P>
         <P>
-          Your Mailbox contains the following folders 
-          (total messages are in <FONT COLOR="green">green</FONT>, 
+          Your Mailbox contains the following folders
+          (total messages are in <FONT COLOR="green">green</FONT>,
           new messages in <FONT COLOR="red">red</FONT>) (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=mailbox">Help</A>):<BR/>
           <CENTER>
             <P>
@@ -65,14 +65,14 @@
 
     </HTML>
   </xsl:template>
-  
+
   <xsl:template match="/USERMODEL/USERDATA/INTVAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>                   
-  
+  </xsl:template>
+
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>                   
+  </xsl:template>
 
   <xsl:template match="/USERMODEL/MAILHOST_MODEL">
     <TR BGCOLOR="#dddddd">
@@ -84,7 +84,7 @@
           <xsl:otherwise>
             <STRONG><FONT COLOR="green"><xsl:value-of select="@name"/></FONT></STRONG>
           </xsl:otherwise>
-        </xsl:choose>       
+        </xsl:choose>
       </TD>
       <TD WIDTH="50%">
         <STRONG>Host</STRONG>: <xsl:value-of select="@url"/>
@@ -121,11 +121,11 @@
         </xsl:otherwise>
       </xsl:choose>
     </TR>
-    
+
 
     <xsl:for-each select="FOLDER">
       <xsl:apply-templates select="."/>
-    </xsl:for-each>    
+    </xsl:for-each>
   </xsl:template>
 
 

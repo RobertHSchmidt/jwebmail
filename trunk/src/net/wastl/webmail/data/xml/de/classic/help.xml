@@ -6,17 +6,17 @@
 
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -34,7 +34,7 @@
         Hier bekommst Du eine Übersicht über alle Deine Briefkästen und die darin enthaltenen Ordner (die nicht
         als "versteckt" markiert sind - siehe Ordnereinstellungen).<br/>
         Jeder Ordner hat eine Spalte mit der Anzahl an Nachrichten insgesamt und der Anzahl an neuen Nachrichten.
-        Möglicherweise gibt es auch Ordner die keine Nachrichten enthalten können sondern nur Unterordner (oder 
+        Möglicherweise gibt es auch Ordner die keine Nachrichten enthalten können sondern nur Unterordner (oder
         der Ordner ist versteckt, aber ein Unterordner sichtbar).<br/>
         Du kannst auf jeden Ordner (der Nachrichten enthalten kann) klicken um eine Übersicht über die Nachrichten
         zu erhalten.
@@ -54,8 +54,8 @@
         Du wirst von einer Nachricht das Thema, den Absender, die Größe und einige Markierungen, die gesetzt sind
         ("neu","gelesen","beantwortet","mehrere Teile") sehen.<br/>
         Du kannst eine Nachricht anzeigen, indem Du auf ihr Thema klickst.<br/>
-        Du hast die Möglichkeit eine oder mehrere Nachrichten auszuwählen und Aktionen darauf auszuführen, wie das 
-        Setzen/Entfernen obiger Markierungen oder das Kopieren/Verschieben in andere Ordner (und andere 
+        Du hast die Möglichkeit eine oder mehrere Nachrichten auszuwählen und Aktionen darauf auszuführen, wie das
+        Setzen/Entfernen obiger Markierungen oder das Kopieren/Verschieben in andere Ordner (und andere
         Briefkästen).
       </p>
       <note>Du mußt den Schreibmodus in den Benutzereinstellungen aktivieren, um Nachrichtenmarkierungen zu ändern!</note>
@@ -68,17 +68,17 @@
       <p>
         Die Nachrichtenanzeige besteht aus drei Teilen: Einem Kopf, einem Körper und einem Fuß.<br/>
         <p>
-          Im <em>Kopf</em> erhälst Du Informationen aus dem Nachrichtenkopf, wie dem Absender, den Empfängern, 
+          Im <em>Kopf</em> erhälst Du Informationen aus dem Nachrichtenkopf, wie dem Absender, den Empfängern,
           dem Thema und dem Datum.
         </p>
         <p>
-          Im <em>Körper</em> wird der Nachrichtentext angezeigt. Wenn es angehängte Teile gibt, so hast Du die 
+          Im <em>Körper</em> wird der Nachrichtentext angezeigt. Wenn es angehängte Teile gibt, so hast Du die
           Möglichkeit, diese entweder eingebettet (Bilder oder Text) anzuzeigen oder Du bekommst einen Link
-          zum Herunterladen auf Deinen Rechner. Informationen über die angehängte Datei werden nach dem 
+          zum Herunterladen auf Deinen Rechner. Informationen über die angehängte Datei werden nach dem
           Nachrichtentext angezeigt.
         </p>
         <p>
-          Im <em>Fuß</em> hast Du wieder die Möglichkeit Aktionen auf diese Nachricht auszuführen 
+          Im <em>Fuß</em> hast Du wieder die Möglichkeit Aktionen auf diese Nachricht auszuführen
           (verschieben/kopieren in anderen Ordner, Markierungen setzen).
         </p>
       </p>
@@ -89,7 +89,7 @@
     <helpdata>
       <p>
         Im Formular zum Schreiben neuer Nachrichten kannst Du (logischerweise) neue Nachrichten schreiben. Im Kopf
-        mußt Du mindestens den Empfänger und das Thema ausfüllen. Im großen Feld darunter kannst Du den 
+        mußt Du mindestens den Empfänger und das Thema ausfüllen. Im großen Feld darunter kannst Du den
         Nachrichtentext schreiben.
       </p>
       <p>
@@ -109,7 +109,7 @@
       <p>
         Der <em>Dateien anhängen</em>-Schirm gibt Dir die Möglichkeit, Deine Festplatte zu durchsuchen und eine
         Datei anzuhängen, wenn Du den "Durchsuchen"-Knopf drückst. Nachdem Du eine Datei ausgewählt hast, kannst
-        Du eine Beschreibung dazu eingeben und schließlich alles mit <em>Neue Datei hinzufügen</em> an die 
+        Du eine Beschreibung dazu eingeben und schließlich alles mit <em>Neue Datei hinzufügen</em> an die
         Nachricht anhängen. Abhängig von der Systemkonfiguration gibt es ein Limit für die maximale Gesamtgröße
         der Attachments. Das kann von Deinem Systemadministrator konfiguriert werden.
       </p>
@@ -144,18 +144,18 @@
   <helptopic id="folder-setup-folders" title="Unterordner einrichten">
     <helpdata>
       <p>
-        Wie bereits erwähnt kann ein (IMAP-) Briefkasten mehrere Ordner haben. Der 
+        Wie bereits erwähnt kann ein (IMAP-) Briefkasten mehrere Ordner haben. Der
         <em>Unterordner hinzufügen/löschen</em>-Schirm erlaubt Dir, in jedem Deiner Briefkästen Ordner hinzuzufügen
-        oder zu löschen. Außerdem kannst Du angeben, welche Ordner in der Übersicht angezeigt werden sollen und 
+        oder zu löschen. Außerdem kannst Du angeben, welche Ordner in der Übersicht angezeigt werden sollen und
         welche nicht.<br/>
         Ordner sind für jeden Deiner Briefkästen in einer Baumstruktur organisiert. Bei jedem Ordner hast Du die
-        Möglichkeit, ihn zu löschen oder, wenn der Ordner andere Ordner enthalten kann, einen Unterordner 
+        Möglichkeit, ihn zu löschen oder, wenn der Ordner andere Ordner enthalten kann, einen Unterordner
         hinzuzufügen. Versteckte Ordner bieten ausserdem die Option, sie wieder anzuzeigen, sichtbare die Option
         sie zu verstecken.
       </p>
       <warning>
-        <strong>Achtung!</strong> Wenn Du einen Ordner löschst, werden alle darin enthaltenen Nachrichten und 
-        Ordner <strong>gelöscht</strong>, und zwar nicht nur aus WebMail, sondern <strong>physisch auf dem 
+        <strong>Achtung!</strong> Wenn Du einen Ordner löschst, werden alle darin enthaltenen Nachrichten und
+        Ordner <strong>gelöscht</strong>, und zwar nicht nur aus WebMail, sondern <strong>physisch auf dem
           Mailserver</strong>! Das ist gefährlich und kann nicht rückgängig gemacht werden!
       </warning>
     </helpdata>
@@ -200,16 +200,16 @@
             Nachrichtenliste (default: 20)</li>
           <li><em>Verzierungen anzeigen</em>: Anzeigen von graphischen "Verschönerungen", die ansonsten nicht sehr
           viel Funktionalität bieten</li>
-<!--      <li><em>Filter JavaScript</em>: Try to recognize JavaScript in emails and filter it out so you 
+<!--      <li><em>Filter JavaScript</em>: Try to recognize JavaScript in emails and filter it out so you
             don't have security problems (this should be enabled).</li> -->
-          <li><em>Ordner automatisch leeren</em>: Hier kann man einstellen, ob Nachrichten sofort gelöscht werden, 
+          <li><em>Ordner automatisch leeren</em>: Hier kann man einstellen, ob Nachrichten sofort gelöscht werden,
             oder erst beim Abmelden</li>
-          <li><em>Angehängte Bilder zeigen</em>: An Nachrichten angehängte Bilder eingebettet zeigen. Ansonsten 
+          <li><em>Angehängte Bilder zeigen</em>: An Nachrichten angehängte Bilder eingebettet zeigen. Ansonsten
             werden sie wie normale Dateien behandelt.</li>
           <li><em>Schreibmodus</em>: Schreibmodus auf Ordnern aktivieren. Wenn das nicht gesetzt ist, kann man weder
-            Nachrichten löschen noch Markierungen setzen. Allerdings setzt dann WebMail auch nicht automatisch die 
+            Nachrichten löschen noch Markierungen setzen. Allerdings setzt dann WebMail auch nicht automatisch die
             "gelesen" und "beantwortet" Markierung.</li>
-          <li><em>Zeilenumbruch</em> und <em>max. Zeilenlänge</em>: Ob und wo ein Zeilenumbruch eingefügt werden 
+          <li><em>Zeilenumbruch</em> und <em>max. Zeilenlänge</em>: Ob und wo ein Zeilenumbruch eingefügt werden
             soll beim Lesen und Bearbeiten von Nachrichten.</li>
           <li><em>Gesendete speichern</em> und <em>in Ordner</em>: Ob und wo gesendete Nachrichten gespeichert
           werden sollen.</li>
@@ -220,7 +220,7 @@
     </helpdata>
   </helptopic>
   <helptopic id="logout" title="Abmelden">
-    <icon href="btn-logout.png"/>    
+    <icon href="btn-logout.png"/>
     <helpdata>
       <p>
         Diese Sitzung verlassen und den Server Deine Benutzerkonfiguration speichern lassen. Du bekommst nach

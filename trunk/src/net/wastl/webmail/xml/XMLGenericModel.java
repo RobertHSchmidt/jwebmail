@@ -16,17 +16,17 @@ import net.wastl.webmail.server.*;
  * Created: Thu May  4 15:53:12 2000
  *
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -34,7 +34,7 @@ import net.wastl.webmail.server.*;
  */
 
 /**
- * A generic representation of WebMail data. Contains mainly state information 
+ * A generic representation of WebMail data. Contains mainly state information
  * and the system configuration
  *
  * @author Sebastian Schaffert
@@ -54,13 +54,13 @@ public class XMLGenericModel  {
     protected long current_id=0;
 
     protected DocumentBuilder parser;
-   
-    public XMLGenericModel(WebMailServer parent, Element rsysdata) 
+
+    public XMLGenericModel(WebMailServer parent, Element rsysdata)
         throws ParserConfigurationException {
 
         this.parent=parent;
 
-        parser=DocumentBuilderFactory.newInstance().newDocumentBuilder(); 
+        parser=DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
         initRoot();
 
@@ -73,11 +73,11 @@ public class XMLGenericModel  {
         } else {
             root.getDocumentElement().appendChild(statedata);
         }
-            
-        this.sysdata=rsysdata;  
-        
+
+        this.sysdata=rsysdata;
+
     }
-    
+
     protected void initRoot() {
         // Create a new usermodel from the template file
         try {
@@ -129,7 +129,7 @@ public class XMLGenericModel  {
     public String getNextID() {
         return Long.toHexString(++current_id).toUpperCase();
     }
-    
+
     public synchronized void setException(Exception ex) {
         Element exception=root.createElement("EXCEPTION");
         Element ex_message=root.createElement("EX_MESSAGE");
@@ -158,7 +158,7 @@ public class XMLGenericModel  {
     }
 
     /**
-     * We need to synchronize that to avoid problems, but this should be fast anyway 
+     * We need to synchronize that to avoid problems, but this should be fast anyway
      */
     public synchronized void setStateVar(String name, String value) {
         Element var=XMLCommon.getElementByAttribute(statedata,"VAR","name",name);
@@ -194,8 +194,8 @@ public class XMLGenericModel  {
            I will store all nodes that should be deleted in a Vector and delete them afterwards */
         int length=nl.getLength();
         Vector v=new Vector(nl.getLength());
-        for(int i=0;i<length;i++) {         
-            if(((Element)nl.item(i)).getAttribute("name").equals(name)) {       
+        for(int i=0;i<length;i++) {
+            if(((Element)nl.item(i)).getAttribute("name").equals(name)) {
                 v.addElement(nl.item(i));
             }
         }
@@ -205,7 +205,7 @@ public class XMLGenericModel  {
             statedata.removeChild(n);
         }
     }
-        
+
 
     public String getStateVar(String name) {
         Element var=XMLCommon.getElementByAttribute(statedata,"VAR","name",name);

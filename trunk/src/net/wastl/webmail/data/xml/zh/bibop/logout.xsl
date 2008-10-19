@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -23,7 +23,7 @@
    <xsl:variable name="imgbase" select="/USERMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
     <xsl:variable name="base" select="/USERMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
 
-  
+
     <xsl:template match="/">
 
     <HTML>
@@ -31,7 +31,7 @@
         <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 信箱: 標題框</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
-        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/> 
+        <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
       <BODY bgcolor="#ffffff">
@@ -64,7 +64,7 @@
                 <TR>
                   <TD colspan="2" align="center" height="50" bgcolor="#7B889F" width="400" class="testoBianco">
                         請稍候，正在將您的連線關閉並將組態寫回磁碟中。
-                    如果幾秒鐘內您還沒見到 <SPAN class="bold">登入視窗</SPAN> 出現, 請 
+                    如果幾秒鐘內您還沒見到 <SPAN class="bold">登入視窗</SPAN> 出現, 請
                     <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"><SPAN class="testoScuro">按這裡</SPAN></A>.
                   </TD>
                 </TR>
@@ -84,5 +84,5 @@
     </HTML>
   </xsl:template>
 
-  
+
 </xsl:stylesheet>

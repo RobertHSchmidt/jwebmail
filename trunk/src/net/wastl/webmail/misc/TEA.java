@@ -22,7 +22,7 @@ import java.math.*;
 * diffusion (where a one bit difference in the plaintext will cause
 * approximately 32 bit differences in the ciphertext) after only six
 * rounds. Performance on a modern desktop computer or workstation is
-* very impressive. 
+* very impressive.
 * <P>
 * TEA takes 64 bits of data in v[0] and v[1], and 128 bits of key in
 * k[0] - k[3]. The result is returned in w[0] and w[1]. Returning the
@@ -45,14 +45,14 @@ import java.math.*;
 * multiplied by 232. On entry to decipher(), sum is set to be delta *
 * n. Which way round you call the functions is arbitrary: DK(EK(P)) =
 * EK(DK(P)) where EK and DK are encryption and decryption under key K
-* respectively. 
+* respectively.
 * <P>
 * Translator's notes:
 * <UL>
 * <LI> Although the <I>this algorithm is optimised for
 * 32-bit CPUs with fast shift capabilities</I> Java manages to throw
 * it all away by not providing unsigned values resulting in the excessive
-* use of AND's to prevent sign extension on promotion of a byte 
+* use of AND's to prevent sign extension on promotion of a byte
 * to an integer.
 * </LI>
 * <P>
@@ -137,7 +137,7 @@ public class TEA
    {
       int klen = key.length;
       _key = new int[4];
-      
+
       // Incorrect key length throws exception.
       if (klen != 16)
          throw new ArrayIndexOutOfBoundsException(this.getClass().getName() + ": Key is not 16 bytes");
@@ -172,7 +172,7 @@ public class TEA
    * v = encipher(v);
    * </PRE>
    *
-   * @param v two <code>int</code> array as input. 
+   * @param v two <code>int</code> array as input.
    *
    * @return array of two <code>int</code>s, enciphered.
    */
@@ -235,7 +235,7 @@ public class TEA
       int d=_key[3];
       int n=32;
 
-      // sum = delta<<5, in general sum = delta * n 
+      // sum = delta<<5, in general sum = delta * n
 
       while(n-->0)
       {
@@ -301,7 +301,7 @@ public class TEA
       int d=_key[3];
       int n=32;
 
-      // sum = delta<<5, in general sum = delta * n 
+      // sum = delta<<5, in general sum = delta * n
 
       while(n-->0)
       {

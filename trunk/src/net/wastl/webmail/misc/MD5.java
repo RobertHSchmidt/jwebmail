@@ -11,27 +11,27 @@ package net.wastl.webmail.misc;
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
  * version 2 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Library General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Library General Public
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- * 
+ *
  * See http://www.cs.hut.fi/~santtu/java/ for more information on this
  * class.
- * 
+ *
  * This is rather straight re-implementation of the reference implementation
  * given in RFC1321 by RSA.
  *
  * Passes MD5 test suite as defined in RFC1321.
  *
  *
- * This Java class has been derived from the RSA Data Security, Inc. MD5 
- * Message-Digest Algorithm and its reference implementation. 
+ * This Java class has been derived from the RSA Data Security, Inc. MD5
+ * Message-Digest Algorithm and its reference implementation.
  *
  *
  * $Log: MD5.java,v $
@@ -80,7 +80,7 @@ package net.wastl.webmail.misc;
 
 class MD5State {
   /**
-   * 128-byte state 
+   * 128-byte state
    */
   int   state[];
 
@@ -98,7 +98,7 @@ class MD5State {
     buffer = new byte[64];
     count = new int[2];
     state = new int[4];
-    
+
     state[0] = 0x67452301;
     state[1] = 0xefcdab89;
     state[2] = 0x98badcfe;
@@ -115,7 +115,7 @@ class MD5State {
 
     for (i = 0; i < buffer.length; i++)
       this.buffer[i] = from.buffer[i];
-    
+
     for (i = 0; i < state.length; i++)
       this.state[i] = from.state[i];
 
@@ -136,19 +136,19 @@ public class MD5 {
    * MD5 state
    */
   MD5State      state;
- 
+
   /**
    * If Final() has been called, finals is set to the current finals
    * state. Any Update() causes this to be set to null.
    */
   MD5State      finals;
 
-  /** 
+  /**
    * Padding for Final()
    */
   static byte   padding[] = {
-    (byte) 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    (byte) 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   };
 
@@ -190,7 +190,7 @@ public class MD5 {
     long aa, bb;
     aa = ((long) a) & 0xffffffffL;
     bb = ((long) b) & 0xffffffffL;
-    
+
     aa += bb;
 
     return (int) (aa & 0xffffffffL);
@@ -214,12 +214,12 @@ public class MD5 {
     return uadd(rotate_left(a, s), b);
   }
 
-  private int HH (int a, int b, int c, int d, int x, int s, int ac) { 
+  private int HH (int a, int b, int c, int d, int x, int s, int ac) {
     a = uadd(a, (b ^ c ^ d), x, ac);
     return uadd(rotate_left(a, s) , b);
   }
 
-  private int II (int a, int b, int c, int d, int x, int s, int ac) {  
+  private int II (int a, int b, int c, int d, int x, int s, int ac) {
     a = uadd(a, (c ^ (b | ~d)), x, ac);
     return uadd(rotate_left(a, s), b);
   }
@@ -231,9 +231,9 @@ public class MD5 {
     out = new int[16];
 
     for (i = j = 0; j < len; i++, j += 4) {
-      out[i] = ((int) (buffer[j + shift] & 0xff)) | 
+      out[i] = ((int) (buffer[j + shift] & 0xff)) |
         (((int) (buffer[j + 1 + shift] & 0xff)) << 8) |
-        (((int) (buffer[j + 2 + shift] & 0xff)) << 16) | 
+        (((int) (buffer[j + 2 + shift] & 0xff)) << 16) |
         (((int) (buffer[j + 3 + shift] & 0xff)) << 24);
 
 /*      System.out.println("out[" + i + "] = \t" +
@@ -242,12 +242,12 @@ public class MD5 {
                          ((int) buffer[j + 2 + shift] & 0xff) + "\t|\t" +
                          ((int) buffer[j + 3 + shift] & 0xff));*/
     }
-    
+
     return out;
   }
 
   private void Transform (MD5State state, byte buffer[], int shift) {
-    int 
+    int
       a = state.state[0],
       b = state.state[1],
       c = state.state[2],
@@ -255,7 +255,7 @@ public class MD5 {
       x[];
 
     x = Decode(buffer, 64, shift);
-       
+
     /* Round 1 */
     a = FF (a, b, c, d, x[ 0],   7, 0xd76aa478); /* 1 */
     d = FF (d, a, b, c, x[ 1],  12, 0xe8c7b756); /* 2 */
@@ -334,7 +334,7 @@ public class MD5 {
     state.state[3] += d;
   }
 
-  /**   
+  /**
    * Updates hash with the bytebuffer given (using at maximum length bytes from
    * that buffer)
    *
@@ -375,23 +375,23 @@ public class MD5 {
         stat.buffer[i + index] = buffer[i + offset];
 
       Transform(stat, stat.buffer, 0);
-    
+
       for (i = partlen; (i + 63) < length; i+= 64)
         Transform(stat, buffer, i);
 
       index = 0;
-    } else 
+    } else
       i = 0;
 
     /* buffer remaining input */
     if (i < length) {
       start = i;
-      for (; i < length; i++) 
+      for (; i < length; i++)
         stat.buffer[index + i - start] = buffer[i + offset];
     }
   }
 
-  /* 
+  /*
    * Update()s for other datatypes than byte[] also. Update(byte[], int)
    * is only the main driver.
    */
@@ -428,7 +428,7 @@ public class MD5 {
 
     Update(buffer, 1);
   }
-  
+
   /**
    * Update buffer with given string.
    *
@@ -455,7 +455,7 @@ public class MD5 {
    * Update buffer with a single integer (only & 0xff part is used,
    * as a byte)
    *
-   * @param i           Integer value, which is then converted to 
+   * @param i           Integer value, which is then converted to
    *                    byte as i & 0xff
    */
 
@@ -483,7 +483,7 @@ public class MD5 {
    * Returns array of bytes (16 bytes) representing hash as of the
    * current state of this object. Note: getting a hash does not
    * invalidate the hash object, it only creates a copy of the real
-   * state which is finalized. 
+   * state which is finalized.
    *
    * @return    Array of 16 bytes, the hash of all updated bytes
    */
@@ -496,25 +496,25 @@ public class MD5 {
       fin = new MD5State(state);
 
       bits = Encode(fin.count, 8);
-    
+
       index = (int) ((fin.count[0] >>> 3) & 0x3f);
       padlen = (index < 56) ? (56 - index) : (120 - index);
 
       Update(fin, padding, 0, padlen);
       /**/
-      Update(fin, bits, 0, 8);  
+      Update(fin, bits, 0, 8);
 
       /* Update() sets finalds to null */
       finals = fin;
-    } 
+    }
 
     return Encode(finals.state, 16);
-  }    
+  }
 
   /**
    * Turns array of bytes into string representing each byte as
    * unsigned hex number.
-   * 
+   *
    * @param hash        Array of bytes to convert to hex-string
    * @return    Generated hex string
    */
@@ -523,7 +523,7 @@ public class MD5 {
     int i;
 
     for (i = 0; i < hash.length; i++) {
-      if (((int) hash[i] & 0xff) < 0x10) 
+      if (((int) hash[i] & 0xff) < 0x10)
         buf.append("0");
 
       buf.append(Long.toString((int) hash[i] & 0xff, 16));

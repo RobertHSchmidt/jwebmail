@@ -1,7 +1,7 @@
 WebMail Plugin support
 ======================
 
-Since version v0.6.0, WebMail supports so-called plugins that are loaded at 
+Since version v0.6.0, WebMail supports so-called plugins that are loaded at
 WebMail boot time and are all singletons that provide some functionality.
 They can all be found in a special directory and all implement the interface
 webmail.server.Plugin.
@@ -39,11 +39,11 @@ All WebMail plugins have two methods:
   change if necessary). For example, WebMailHelp depends on some sort of "content bar".
 
 Dependencies are resolved using a simple tree structure that has the dependency "" in
-its root and therefore all Plugins with a returnvalue of requires() of "" as its 
+its root and therefore all Plugins with a returnvalue of requires() of "" as its
 children. All other plugins are tried to add to this structure, each as a direct child
 of its requirement.
-If all plugins are added, the method register is called on the root node, thus 
-performing a depth first search on all its nodes and registering plugins in a 
+If all plugins are added, the method register is called on the root node, thus
+performing a depth first search on all its nodes and registering plugins in a
 (one of many) valid order.
 
 Special plugins
@@ -56,6 +56,6 @@ There are two kinds of "special" plugins: URLHandler and ContentProvider
   that has the HTTP-header, the Session and the remaining suburl as parameters.
   All URLHandlers are stored in a hierarchical URLHandler tree to speed up calls
 - ContentProvider
-  ContentProviders can register with their own icon and URL in the left-hand 
-  content bar. Otherwise they are like URLHandlers. They provide a number to 
+  ContentProviders can register with their own icon and URL in the left-hand
+  content bar. Otherwise they are like URLHandlers. They provide a number to
   determine the order where they appear on the content bar.

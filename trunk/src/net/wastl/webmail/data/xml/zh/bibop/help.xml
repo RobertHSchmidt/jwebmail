@@ -6,17 +6,17 @@
 
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -122,14 +122,14 @@
         ¹ï¨C­Ó«H½cªº³]©w¡A±z¥²¶·´£¨Ñ«H½c¥D¾÷¡B³q°T¨ó©w¡A»Pµn¤J¸ê°T¡C
       </p>
       <p>
-        <bold>³]©w¦¬«H§X¡G</bold> ¤@­Ó«H½c¤¤¥i¯à·|¦³¦n´X­Ó¦¬«H§X¡]¥H¾ðª¬µ²ºc²ÕÂ´¦Ó¦¨¡^¡A³o¼Ëªº²ÕÂ´¤è¦¡¦b IMAP ³q°T¨ó©w¤§¤U¥i¥H¥¿±`°õ¦æ¡A¦ý¥Î¦b POP3 ¤W¥i¯à´N¦³°ÝÃD¤F¡C 
+        <bold>³]©w¦¬«H§X¡G</bold> ¤@­Ó«H½c¤¤¥i¯à·|¦³¦n´X­Ó¦¬«H§X¡]¥H¾ðª¬µ²ºc²ÕÂ´¦Ó¦¨¡^¡A³o¼Ëªº²ÕÂ´¤è¦¡¦b IMAP ³q°T¨ó©w¤§¤U¥i¥H¥¿±`°õ¦æ¡A¦ý¥Î¦b POP3 ¤W¥i¯à´N¦³°ÝÃD¤F¡C
         ¦b³o¸Ì±z¥i¥H¦b¾ðª¬µ²ºc¸Ì·s¼W©Î§R°£¦¬«H§X¡C
       </p>
     </helpdata>
     <ref ref-id="folder-setup-folders"/>
     <ref ref-id="folder-setup-mailboxes"/>
   </helptopic>
- 
+
   <helptopic id="folder-setup-folders" title="³]©w¦¬«H§X">
     <helpdata>
       <p>
@@ -144,7 +144,7 @@
       </warning>
     </helpdata>
   </helptopic>
- 
+
   <helptopic id="folder-setup-mailboxes" title="³]©w«H½c">
     <helpdata>
       <p>
@@ -156,7 +156,7 @@
     ±z¥i¥H¨Ï¥Î <bold>§R°£</bold> ³sµ²¥H±q WebMail ¨t²Î¤¤§R°£¤@­Ó«H½c¡C
       </p>
       <note>
-        <p>¬Û¹ï©ó«H¥ó§X³]©w¡A¤@­Ó«H½c±N¥u¯à±q WebMail ¨t²Î¤¤³Q§R°£¡A¦pªG±z«ö¤U¤F³o¸Ìªº <bold>§R°£</bold>¡C 
+        <p>¬Û¹ï©ó«H¥ó§X³]©w¡A¤@­Ó«H½c±N¥u¯à±q WebMail ¨t²Î¤¤³Q§R°£¡A¦pªG±z«ö¤U¤F³o¸Ìªº <bold>§R°£</bold>¡C
         ±z±N¤´µM¥i¥H±q¨ä¥Lªº¹q¤l¶l¥ó¦¬µo³nÅé¦s¨ú¸Ó«H½c¡C</p>
       </note>
       <p>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-2"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -19,12 +19,12 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" indent="no"/>
-  
-  
+
+
   <xsl:variable name="imgbase" select="/USERMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
   <xsl:variable name="base" select="/USERMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
   <xsl:variable name="session-id" select="/USERMODEL/STATEDATA/VAR[@name='session id']/@value"/>
-  
+
   <xsl:variable name="work" select="/USERMODEL/WORK/MESSAGE[position()=1]"/>
 
     <xsl:template match="/">
@@ -35,7 +35,7 @@
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
-      
+
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
         <FORM ACTION="{$base}/send?session-id={$session-id}" METHOD="POST">
           <TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
@@ -95,7 +95,7 @@
                 </TD>
             </TR>
             <TR>
-                <TD height="22" class="testoGrande" width="13%" bgcolor="#D1D7E7">            
+                <TD height="22" class="testoGrande" width="13%" bgcolor="#D1D7E7">
                   Másolat:
                 </TD>
               <TD height="22" class="testoNero" width="87%" bgcolor="#D1D7E7">
@@ -165,12 +165,12 @@
                 </TD>
             </TR>
           </TABLE>
-        </FORM> 
+        </FORM>
       </BODY>
     </HTML>
   </xsl:template>
 
-  
+
   <!-- All parts that are attachments (= have a file name) should be displayed with their name and
        size only -->
   <xsl:template match="PART">

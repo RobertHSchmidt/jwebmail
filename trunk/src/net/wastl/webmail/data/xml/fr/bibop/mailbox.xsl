@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -20,7 +20,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" indent="yes"/>
-  
+
     <xsl:variable name="imgbase" select="/USERMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
     <xsl:variable name="base" select="/USERMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
     <xsl:variable name="session-id" select="/USERMODEL/STATEDATA/VAR[@name='session id']/@value"/>
@@ -33,17 +33,17 @@
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
-      
+
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
         <P class="testoChiaro">
           <SPAN class="testoScuro">Bienvenue dans votre boîte aux lettres, <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</SPAN><BR/>
-          Ceci est la <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/>ème 
-          fois</SPAN> que vous vous connectez depuis le 
-          <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></SPAN>. 
-          Votre <SPAN class="bold">dernier login</SPAN> date du 
+          Ceci est la <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/>ème
+          fois</SPAN> que vous vous connectez depuis le
+          <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></SPAN>.
+          Votre <SPAN class="bold">dernier login</SPAN> date du
           <SPAN class="testoScuro"><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='last login']"/></SPAN>.<BR/>
           Votre boîte aux lettres contient les dossiers suivants:
-          (Nombre total de messages en <SPAN class="testoVerde">vert</SPAN>, 
+          (Nombre total de messages en <SPAN class="testoVerde">vert</SPAN>,
           nouveaux messages en <SPAN class="testoRosso">rouge</SPAN>) (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=mailbox">Aide</A>):<BR/><BR/>
               <A HREF="{$base}/mailbox?session-id={$session-id}&amp;force-refresh=1">Forcer rafraîchissement</A> - Cliquer ici pour forcer un rafraîchissement des informations de dossier.
         </P>
@@ -57,14 +57,14 @@
 
     </HTML>
   </xsl:template>
-  
+
   <xsl:template match="/USERMODEL/USERDATA/INTVAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>                   
-  
+  </xsl:template>
+
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>                   
+  </xsl:template>
 
   <xsl:template match="/USERMODEL/MAILHOST_MODEL">
     <TR>
@@ -76,7 +76,7 @@
           <xsl:otherwise>
             <SPAN class="testoVerde"><xsl:value-of select="@name"/></SPAN>
           </xsl:otherwise>
-        </xsl:choose>       
+        </xsl:choose>
       </TD>
       <TD bgcolor="#909CAF" width="48%" class="testoScuro">
         Hôte: <xsl:value-of select="@url"/>
@@ -107,7 +107,7 @@
           </TD>
      <TD width="2%" class="testoScuro">
         &#160;
-      </TD>     
+      </TD>
         </xsl:when>
         <xsl:otherwise>
           <TD bgcolor="#E2E6F0" COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}" valign="middle" class="testoGrande">
@@ -122,11 +122,11 @@
         </xsl:otherwise>
       </xsl:choose>
     </TR>
-    
+
 
     <xsl:for-each select="FOLDER">
       <xsl:apply-templates select="."/>
-    </xsl:for-each>    
+    </xsl:for-each>
   </xsl:template>
 
 

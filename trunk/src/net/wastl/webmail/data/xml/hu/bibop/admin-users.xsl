@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-2"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -24,7 +24,7 @@
     <xsl:variable name="imgbase" select="/GENERICMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
     <xsl:variable name="base" select="/GENERICMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
     <xsl:variable name="session-id" select="/GENERICMODEL/STATEDATA/VAR[@name='session id']/@value"/>
-  
+
     <xsl:template match="/">
 
     <HTML>
@@ -32,7 +32,7 @@
         <TITLE>WebMail Administration Interface: User Setup</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-        
+
       <BODY BGCOLOR="white">
         <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
           <TR bgcolor="#dddddd">
@@ -60,7 +60,7 @@
               </TD>
             </FORM>
           </TR>
-              
+
           <xsl:if test="/GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value !='' and count(/GENERICMODEL/STATEDATA/VAR[@name = 'user']) > 0">
             <TR bgcolor="#dddddd">
               <TD COLSPAN="2" ALIGN="center">
@@ -81,7 +81,7 @@
                     <xsl:apply-templates select="."/>
                   </TR>
                 </xsl:otherwise>
-              </xsl:choose>           
+              </xsl:choose>
             </xsl:for-each>
             <TR bgcolor="lightblue">
               <FORM ACTION="{$base}/admin/user/edit?session-id={$session-id}&amp;domain={/GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value}" METHOD="POST">
@@ -92,12 +92,12 @@
           </xsl:if>
         </TABLE>
       </BODY>
-      
+
     </HTML>
 
   </xsl:template>
 
-  <xsl:template match="VAR">    
+  <xsl:template match="VAR">
     <FORM ACTION="{$base}/admin/user/edit?session-id={$session-id}&amp;user={@value}&amp;domain={/GENERICMODEL/STATEDATA/VAR[@name = 'selected domain']/@value}" METHOD="POST">
       <TD><STRONG><xsl:value-of select="@value"/></STRONG></TD>
       <TD>

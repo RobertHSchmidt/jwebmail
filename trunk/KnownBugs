@@ -1,14 +1,14 @@
-This is a list of known bugs in WebMail. Some of them are bugs that I cannot 
+This is a list of known bugs in WebMail. Some of them are bugs that I cannot
 fix, because they are not directly in the WebMail code but in some third party
 library or program:
 
-Title: 
+Title:
   WU-IMAP server doesn't show recent messages in the message list
-WebMail part: 
+WebMail part:
   Message List, Folder overview
-Description: 
-  You get a certain count of "recent" (or "new") messages in the folder 
-  overview, if you click on the message list for the folder these new 
+Description:
+  You get a certain count of "recent" (or "new") messages in the folder
+  overview, if you click on the message list for the folder these new
   messages are not shown.
 Explanation:
   -

@@ -28,17 +28,17 @@ import com.oreilly.servlet.multipart.*;
  * Created: Oct 1999
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -59,18 +59,18 @@ import com.oreilly.servlet.multipart.*;
  * devink 9/24/2000 - remove TwoPassAuthenticationException stuff
  */
 public class WebMailServlet extends WebMailServer implements Servlet {
-        
+
     ServletConfig srvlt_config;
-        
+
     /** Size of the chunks that are sent. Must not be greater than 65536 */
     private static final int chunk_size=8192;
-        
+
     protected String basepath;
     protected String imgbase;
-    
+
     public WebMailServlet() {
     }
-    
+
     public void init(ServletConfig config) throws ServletException {
         System.err.println("Init");
         srvlt_config=config;
@@ -95,14 +95,14 @@ public class WebMailServlet extends WebMailServer implements Servlet {
         if(config.getInitParameter("webmail.imagebase") == null) {
             config.getServletContext().log("Error: webmail.basepath initArg should be set to the WebMail Servlet's base path");
             imgbase="";
-        } else {            
+        } else {
             imgbase = config.getInitParameter("webmail.imagebase");
         }
 
         /*
          * Try to get the pathnames from the URL's if no path was given
          * in the initargs.
-         */     
+         */
         if(config.getInitParameter("webmail.data.path") == null) {
             this.config.put("webmail.data.path",getServletContext().getRealPath("/data"));
         }
@@ -120,7 +120,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
         }
 
         /*
-         * Call the WebMailServer's initialization method 
+         * Call the WebMailServer's initialization method
          * and forward all Exceptions to the ServletServer
          */
         try {
@@ -131,13 +131,13 @@ public class WebMailServlet extends WebMailServer implements Servlet {
         }
 
     }
-        
+
     public void debugOut(String msg, Exception ex) {
         if(getDebug()) {
             srvlt_config.getServletContext().log(msg,ex);
         }
     }
-        
+
 
     public ServletConfig getServletConfig() {
         return srvlt_config;
@@ -146,15 +146,15 @@ public class WebMailServlet extends WebMailServer implements Servlet {
     public ServletContext getServletContext() {
         return srvlt_config.getServletContext();
     }
-        
+
     public String getServletInfo() {
         return getVersion()+"\n(c)2000 by Sebastian Schaffert\nThis software is distributed under the GNU General Public License (GPL)";
     }
-        
+
     public void destroy() {
         shutdown();
     }
-        
+
 
     /**
      * Handle a request to the WebMail servlet.
@@ -166,16 +166,16 @@ public class WebMailServlet extends WebMailServer implements Servlet {
     public void service(ServletRequest req1, ServletResponse res1) throws ServletException {
         HttpServletRequest req=(HttpServletRequest)req1;
         HttpServletResponse res=(HttpServletResponse)res1;
-                                
+
         HTTPRequestHeader http_header=new HTTPRequestHeader();
-                
+
         Enumeration en=req.getHeaderNames();
         while(en.hasMoreElements()) {
             String s=(String)en.nextElement();
             http_header.setHeader(s,req.getHeader(s));
         }
 
-                
+
         if(req.getPathInfo()!=null) {
             http_header.setPath(req.getPathInfo());
         } else {
@@ -193,14 +193,14 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                 throw new ServletException("Remote host must identify!");
             }
         }
-        
-        
+
+
         HTMLDocument content=null;
         int err_code=400;
         HTTPSession sess=null;
-                
+
         /* Here we try to parse the MIME content that the Client sent in his POST
-           since the JServ doesn't do that for us:-( 
+           since the JServ doesn't do that for us:-(
            At least we can use the functionality provided by the standalone server where we need to parse
            the content ourself anyway.
         */
@@ -214,7 +214,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                we will have to handle that ourselves */
 
 
-            /* First get all the parameters and set their values into http_header */          
+            /* First get all the parameters and set their values into http_header */
             Enumeration enum2=req.getParameterNames();
             while(enum2.hasMoreElements()) {
                 String s=(String)enum2.nextElement();
@@ -240,7 +240,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
 
             /* Now let's try to handle multipart/form-data posts */
 
-            if(req.getContentType() != null && 
+            if(req.getContentType() != null &&
                req.getContentType().toUpperCase().startsWith("MULTIPART/FORM-DATA")) {
 
 
@@ -256,7 +256,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                         http_header.setContent(p.getName(),bs);
                         getLogger().log(Logger.LOG_INFO,"File name "+bs.getName());
                         getLogger().log(Logger.LOG_INFO,"Type      "+bs.getContentType());
-                        
+
                     } else if(p.isParam()) {
                         http_header.setContent(p.getName(),((ParamPart)p).getStringValue());
                     }
@@ -266,11 +266,11 @@ public class WebMailServlet extends WebMailServer implements Servlet {
 
             }
 
-            
+
             try {
                 String url=http_header.getPath();
-                                
-                                
+
+
                 try {
                     /* Find out about the session id */
                     sess=req.getSession(false)==null?null:(HTTPSession)req.getSession(false).getAttribute("webmail.session");
@@ -288,7 +288,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
 
                     /* Let the URLHandler determine the result of the query */
                     content=getURLHandler().handleURL(url,sess,http_header);
-                                        
+
                 } catch(InvalidPasswordException e) {
                     getLogger().log(Logger.LOG_ERR,"Connection to "+addr.toString()+
                                      ": Authentication failed!");
@@ -305,19 +305,19 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                     content=getURLHandler().handleException(ex,sess,http_header);
                     debugOut("Some strange error while handling request",ex);
                 }
-                                
+
                 /* Set some HTTP headers: Date is now, the document should expire in 5 minutes,
-                   proxies and clients shouldn't cache it and all WebMail documents must be revalidated 
+                   proxies and clients shouldn't cache it and all WebMail documents must be revalidated
                    when they think they don't have to follow the "no-cache". */
                 res.setDateHeader("Date:",System.currentTimeMillis());
                 res.setDateHeader("Expires",System.currentTimeMillis()+300000);
                 res.setHeader("Pragma","no-cache");
                 res.setHeader("Cache-Control","must-revalidate");
-                                
-                                
+
+
                 synchronized(out) {
                     res.setStatus(content.getReturnCode());
-                                        
+
                     if(content.hasHTTPHeader()) {
                         Enumeration enum=content.getHTTPHeaderKeys();
                         while(enum.hasMoreElements()) {
@@ -325,7 +325,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                             res.setHeader(s,content.getHTTPHeader(s));
                         }
                     }
-                        
+
                     /* What we will send is an image or some other sort of binary */
                     if(content instanceof HTMLImage) {
                         HTMLImage img=(HTMLImage)content;
@@ -335,7 +335,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                         res.setHeader("Content-Transfer-Encoding",img.getContentEncoding());
                         res.setHeader("Content-Length",""+img.size());
                         res.setHeader("Connection","Keep-Alive");
-                                                                                                
+
                         /* Send 8k junks */
                         int offset=0;
                         while(offset + chunk_size < img.size()) {
@@ -344,7 +344,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                         }
                         out.write(img.toBinary(),offset,img.size()-offset);
                         out.flush();
-                                                
+
                         out.close();
                     } else {
                         byte[] encoded_content=content.toString().getBytes("UTF-8");
@@ -354,9 +354,9 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                         res.setHeader("Connection","Keep-Alive");
                         res.setHeader("Content-Type","text/html; charset=\"UTF-8\"");
 
-                        out.write(encoded_content);                    
+                        out.write(encoded_content);
                         out.write("\r\n".getBytes());
-                        
+
                         out.flush();
 
                         out.close();
@@ -369,7 +369,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
 //              res.setStatus(err_code);
 //              res.setHeader("Content-type","text/html");
 //              res.setHeader("Connection","close");
-                                
+
 //              content=new HTMLErrorMessage(getStorage(),e.getMessage());
 //              out.write((content+"\r\n").getBytes("UTF-8"));
 //              out.write("</HTML>\r\n".getBytes());
@@ -382,16 +382,16 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             throw new ServletException("Error: "+e.getMessage(),e);
         }
     }
-    
+
     /**
      * Init possible servers of this main class
      */
     protected void initServers() {
     }
-        
+
     protected void shutdownServers() {
     }
-        
+
     public String getBasePath() {
         return basepath;
     }
@@ -399,11 +399,11 @@ public class WebMailServlet extends WebMailServer implements Servlet {
     public String getImageBasePath() {
         return imgbase;
     }
-        
+
     public UserSession newSession(HttpServletRequest req,HTTPRequestHeader h)
      throws UserDataException, InvalidPasswordException, WebMailException {
         HttpSession sess=req.getSession(true);
-                
+
         if(sess.getAttribute("webmail.session") == null) {
             UserSession n=new UserSession(this,req,h);
             timer.addTimeableConnection(n);
@@ -427,10 +427,10 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             }
         }
     }
-        
+
     public AdminSession newAdminSession(HttpServletRequest req, HTTPRequestHeader h) throws InvalidPasswordException, WebMailException {
         HttpSession sess=req.getSession(true);
-                
+
         if(sess.getAttribute("webmail.session") == null) {
             AdminSession n=new AdminSession(this,req,h);
             timer.addTimeableConnection(n);
@@ -453,26 +453,26 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             }
         }
     }
-        
-        
+
+
     /** Overwrite the old session handling methods */
 
     public UserSession newSession(InetAddress a,HTTPRequestHeader h) throws InvalidPasswordException {
         System.err.println("newSession invalid call");
         return null;
     }
-        
+
     public AdminSession newAdminSession(InetAddress a,HTTPRequestHeader h) throws InvalidPasswordException {
         System.err.println("newAdminSession invalid call");
         return null;
     }
-    
-        
+
+
     public HTTPSession getSession(String sessionid, InetAddress a,HTTPRequestHeader h) throws InvalidPasswordException {
         System.err.println("getSession invalid call");
         return null;
     }
-        
+
     public Enumeration getServers() {
         return new Enumeration() {
                 public boolean hasMoreElements() {
@@ -483,7 +483,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                 }
             };
     }
-        
+
     public String toString() {
         String s="";
         s+="Server: "+srvlt_config.getServletContext().getServerInfo()+"\n";
@@ -491,16 +491,16 @@ public class WebMailServlet extends WebMailServer implements Servlet {
         s+=getServletInfo();
         return s;
     }
-        
+
     public Object getServer(String ID) {
         return null;
     }
-        
+
     public void reinitServer(String ID) {
     }
-        
+
     public static String getVersion() {
         return "WebMail/Java Servlet v"+VERSION;
     }
-        
+
 } // WebMailServer

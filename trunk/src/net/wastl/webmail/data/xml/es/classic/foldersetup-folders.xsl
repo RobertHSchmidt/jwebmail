@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -98,7 +98,7 @@
               </xsl:otherwise>
             </xsl:choose>
           </TD>
-          <TD><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folderadd&amp;addto={@id}">Agregar subcarpeta</A> - <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}&amp;recurse=1">Borrar esta carpeta (y todas las subcarpetas)</A> - 
+          <TD><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folderadd&amp;addto={@id}">Agregar subcarpeta</A> - <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}&amp;recurse=1">Borrar esta carpeta (y todas las subcarpetas)</A> -
             <xsl:choose><xsl:when test="@subscribed = 'true'"><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Ocultar</A></xsl:when><xsl:otherwise><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">No_ocultar</A></xsl:otherwise></xsl:choose></TD>
         </xsl:when>
         <xsl:otherwise>
@@ -114,7 +114,7 @@
               </xsl:otherwise>
             </xsl:choose>
           </TD>
-          <TD><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}">Borrar esta carpeta</A> - 
+          <TD><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}">Borrar esta carpeta</A> -
             <xsl:choose><xsl:when test="@subscribed = 'true'"><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Ocultar</A></xsl:when><xsl:otherwise><A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">No_ocultar</A></xsl:otherwise></xsl:choose></TD>
         </xsl:otherwise>
       </xsl:choose>

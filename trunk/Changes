@@ -9,7 +9,7 @@ v0.7.9 => v0.7.10
 + added Hungarian translation (Deim 'ago' Agoston)
 
 v0.7.8 => v0.7.9
-# Moved from Xerces 1/Xalan 1 to JAXP and Trax (i.e. Xerces 2 or equivalent 
+# Moved from Xerces 1/Xalan 1 to JAXP and Trax (i.e. Xerces 2 or equivalent
   parser, Xalan 2 or equivalent transformer) (mostly by Leonard Sitongia)
 # Moved from servlet API 2.2 to 2.3 (requires Tomcat 4.1)
 # Moved from JTidy to nekoHTML for parsing HTML messages
@@ -53,11 +53,11 @@ v0.7.4 => v0.7.5
 + WebMail advertisments can now be turned off and/or adminstrator-configured
   (i.e. you can turn off that users have "WebMail 0.x HTML<->Mail ..." in their
   signatures)
-# bugfix 
+# bugfix
 ! TODO: Translate bibop theme to German and Spanish
 
 v0.7.3 => v0.7.4
-# Fixed the makefile so it won't even start with make other than GNU make 
+# Fixed the makefile so it won't even start with make other than GNU make
   (Problem was deleting /bin/ on BSD systems)
 + Added Spanish templates (thanks to Ale Feltes Quenhan)
 
@@ -68,7 +68,7 @@ v0.7.2 => v0.7.3
   to display
 
 v0.7.1 => v0.7.2
-# Fixed a bug where WebMail added an (empty) Reply-To header to messages where none 
+# Fixed a bug where WebMail added an (empty) Reply-To header to messages where none
   was given
 # Fixed a bug where composed messages got a "no subject" even if the user entered one
 # Added a workaround for email clients/servers that don't add a message id to
@@ -85,9 +85,9 @@ v0.7.0 => v0.7.1
 # Fixed bug in folder template that prevented creating message folders
 # Fixed bug where only localhost could be used as SMTP server
 # Switched to UTF-8 as message encoding instead of Latin1. I hope this allows
-  to send messages with non-Latin characters in the future. Perhaps there will 
+  to send messages with non-Latin characters in the future. Perhaps there will
   be an option to choose a message encoding some time.
-# Replacement of "%DTDDIR%" in webmail.xml is now done in SystemCheck.java 
+# Replacement of "%DTDDIR%" in webmail.xml is now done in SystemCheck.java
   instead of webmail.sh
 # Various startup speedups (cache for language list, etc)
 # Fixed a bug where the /tmp directory contained debug files
@@ -97,7 +97,7 @@ v0.7.0 => v0.7.1
   PNG
 # Emoticons now work as they should (forgot to include them in the 0.7 release)
 + A user can now hide/unhide folders so that only a selected list gets displayed
-  in the mailbox overview. (Works great with Cyrus IMAPD, don't know whether 
+  in the mailbox overview. (Works great with Cyrus IMAPD, don't know whether
   other IMAPDs support that, POP3 certainly does not)
 + German translation of the templates (hope this inspires others to do it for
   other languages)
@@ -131,18 +131,18 @@ v0.7.0pre1 => v0.7.0pre2
 + WebMail now uses an XML model to store session information
 + WebMail now uses XSL stylesheets to display HTML
 + the new folder setup now is understandable by most users; together with an
-  "intelligent" IMAP server (like Cyrus) it works fantastic.:-) 
+  "intelligent" IMAP server (like Cyrus) it works fantastic.:-)
 # There have been many major changes, most parts of WebMail were rewritten to
   use the new XML/XSL WebMail model
 - MySQL support temporarily removed (first need a converter from SQL to XML)
 
 v0.6.1pre2 => v0.7.0pre1
-+ WebMail now has virtual domain support (users can be splitted into several 
-  domains with each having specific settings (e.g. different authentication 
-  hosts, different available folder hosts, ...). This is a big change, 
++ WebMail now has virtual domain support (users can be splitted into several
+  domains with each having specific settings (e.g. different authentication
+  hosts, different available folder hosts, ...). This is a big change,
   therefore there is a new major number for WebMail instead of 0.6.2
 # WebMail now runs and compiles on JDK 1.1. This now supports all you *BSD
-  users as well as increases WebMail's performance greatly on Linux using 
+  users as well as increases WebMail's performance greatly on Linux using
   the IBM JDK 1.1.8 (this is now the recommended JDK on Linux).
 
 v0.6.1 => v0.6.2pre1
@@ -157,7 +157,7 @@ v0.6.0 => v0.6.1
   common part, one for the standalone server and one for the Servlet server
   See README.Servlet for more information on the Servlet release
 + WebMail is now able to get a folderlist from an IMAP server
-+ Recognize MULTIPART/ALTERNATIVE and choose HTML or Plain text 
++ Recognize MULTIPART/ALTERNATIVE and choose HTML or Plain text
 + Now filters JavaScript from HTML attachments
 # Fixed bug in file cache
 # Runs again with JDK 1.1. Note however, that JDK 1.2 is about 50% faster.
@@ -193,13 +193,13 @@ v0.5.4 => v0.6.0
   when a certain limit is reached. This will ensure a longer uptime on large
   installations
 # WebMail configuration is now stored in plain text as default
-# WebMail now makes second attempt with login password if authentication to 
+# WebMail now makes second attempt with login password if authentication to
   an IMAP server fails. This is useful if you are on a system that forces you
   to change your passwords regularly. WebMail then trys to "auto-guess" for
   the folders, too ("Uni Giessen patch").
 # WebMail now auto-detects available languages
 # Users can now "forward" emails
-# Further reorganized directory structure to fit closer in a Unix environment 
+# Further reorganized directory structure to fit closer in a Unix environment
 - Removed the Swing administration interface
 
 v0.5.3 => v0.5.4
@@ -211,12 +211,12 @@ v0.5.3 => v0.5.4
 
 v0.5.2 => v0.5.3
 + AdminInterface written in Java/Swing to make administration easier.
-+ The Adminserver's commands are now parsed with CUP and JFLEX, resulting in 
++ The Adminserver's commands are now parsed with CUP and JFLEX, resulting in
   easier command specification (no `"' needed if no special chars in a string)
 + SSL support now functional (see README)
-+ Parsing of HTTP protocol now done properly (this results in some changes in 
++ Parsing of HTTP protocol now done properly (this results in some changes in
   the html-templates though!), using CUP and JFLEX.
-# Now switched to HTTP/1.1. WebMail will now use "Persistant Connections" 
+# Now switched to HTTP/1.1. WebMail will now use "Persistant Connections"
   (Keep-Alive) to improve speed and reduce network load, if the client supports
   it. Unfortunately, IE5 doesn't seem to work yet (Perhaps someone can help me
   here!?!).

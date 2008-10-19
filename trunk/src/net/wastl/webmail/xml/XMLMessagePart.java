@@ -12,17 +12,17 @@ import org.w3c.dom.*;
  * Created: Tue Apr 18 14:08:56 2000
  *
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -33,7 +33,7 @@ import org.w3c.dom.*;
  * A message part object for an XML message
  */
 public class XMLMessagePart  {
-    
+
     protected Document root;
     protected Element part;
 
@@ -91,7 +91,7 @@ public class XMLMessagePart  {
     public void addContent(Document content) {
         Element content_elem=root.createElement("CONTENT");
         content_elem.setAttribute("quotelevel","0");
-        
+
         /* Find all <BODY> elements and add the child nodes to the content */
         for(int count=0; count < 2; count++) {
             NodeList nl=content.getDocumentElement().getElementsByTagName(count==0?"BODY":"body");
@@ -106,7 +106,7 @@ public class XMLMessagePart  {
             }
         }
 
-        
+
         part.appendChild(content_elem);
 
         //XMLCommon.debugXML(root);
@@ -123,10 +123,10 @@ public class XMLMessagePart  {
         Element content_elem=root.createElement("CONTENT");
         content_elem.setAttribute("quotelevel",quotelevel+"");
         XMLCommon.setElementTextValue(content_elem,content,true);
-        Node first=part.getFirstChild();        
+        Node first=part.getFirstChild();
         part.insertBefore(content_elem,first);
     }
-        
+
 
     public void addJavaScript(String content) {
         Element javascript_elem=root.createElement("JAVASCRIPT");

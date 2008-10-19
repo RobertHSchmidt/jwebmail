@@ -6,17 +6,17 @@
 
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -29,12 +29,12 @@
     <icon href="btn-mailbox.png"/>
     <helpdata>
       <p>
-        You get an overview of all your mailboxes and the folders contained in each mailbox. 
+        You get an overview of all your mailboxes and the folders contained in each mailbox.
         Each folder has a column where the number of total messages and the number of new messages are
-        displayed. There might also be folders that cannot contain messages but only subfolders. 
+        displayed. There might also be folders that cannot contain messages but only subfolders.
         You may click on each folder (that can contain messages) to view a message list.
       </p>
-      <note>If you don't see folders that you expected here, maybe they are hidden. Go to the folder setup to 
+      <note>If you don't see folders that you expected here, maybe they are hidden. Go to the folder setup to
         make folders visible</note>
     </helpdata>
     <ref ref-id="messagelist"/>
@@ -45,7 +45,7 @@
     <helpdata>
       <p>
         In the message list, you get an overview of the messages in your folder. You will see the subject,
-        the sender, the size of the message and some flags that are set on it ("new", "seen", 
+        the sender, the size of the message and some flags that are set on it ("new", "seen",
         "answered", "mime").<br/>
         You can display a message by clicking on its subject.<br/>
         You have the option to select one more messages and perform some kind of action on it like setting
@@ -66,7 +66,7 @@
         </p>
         <p>
           In the <em>body</em> the message text is displayed. If there are attachments to the message, you
-          will be able to view them either inline (e.g. images or text) or download them from the server. 
+          will be able to view them either inline (e.g. images or text) or download them from the server.
           The attachment information is displayed after the message text.
         </p>
         <p>
@@ -84,7 +84,7 @@
         and the subject at least. In the large area below, you can enter your message.
       </p>
       <p>
-        You can attach files by hitting the <em>attach files</em> button. Your message will be saved while 
+        You can attach files by hitting the <em>attach files</em> button. Your message will be saved while
         editing attachments.
       </p>
     </helpdata>
@@ -93,12 +93,12 @@
   <helptopic id="compose-attach" title="Attaching Files">
     <helpdata>
       <p>
-        While you are composing a message, you can attach files from your local system. These will be sent 
-        to the WebMail server and attached to your message (this may take some time, depending on your 
+        While you are composing a message, you can attach files from your local system. These will be sent
+        to the WebMail server and attached to your message (this may take some time, depending on your
         Internet connection).
       </p>
       <p>
-        The <em>attach screen</em> offers you to browse your harddisk to add a file if you hit the 
+        The <em>attach screen</em> offers you to browse your harddisk to add a file if you hit the
         <em>browse</em> button. After you have selected a file you can enter a description for it and
         finally click on <em>add new file</em> to add it to the message. There is a certain limit to the
         size of attachments. This may be configured by your system administrator.
@@ -114,11 +114,11 @@
     <icon href="btn-folders.png"/>
     <helpdata>
       <p>
-        In the <em>Folder Setup</em> you have to select whether you would like to change your mailbox settings 
-        or configure folders within existing mailboxes. 
+        In the <em>Folder Setup</em> you have to select whether you would like to change your mailbox settings
+        or configure folders within existing mailboxes.
       </p>
       <p>
-        <em>Configuring Mailboxes</em>: WebMail allows you to access several completely independent mailboxes 
+        <em>Configuring Mailboxes</em>: WebMail allows you to access several completely independent mailboxes
         via IMAP or POP3. For each mailbox you will have to provide the mailhost, the protocol and the
         login information.
       </p>
@@ -134,14 +134,14 @@
   <helptopic id="folder-setup-folders" title="Setting up Folders">
     <helpdata>
       <p>
-        As mentioned before, a (IMAP) mailbox might have several folders. The <em>folder setup screen</em> 
+        As mentioned before, a (IMAP) mailbox might have several folders. The <em>folder setup screen</em>
         allows you to add or remove folders from each of your mailboxes. Folders are organized in a tree
-        structure for each of your mailboxes and displayed on this screen. For each folder you have the 
+        structure for each of your mailboxes and displayed on this screen. For each folder you have the
         option to remove it or, if it is a folder that can contain other folders, to append a subfolder to it.
       </p>
       <warning>
-        Folders will be <strong>physically removed from your mailbox</strong> (together with all mail and 
-        subfolders in them), <strong>not only from WebMail</strong>! This is a <strong>dangerous</strong> 
+        Folders will be <strong>physically removed from your mailbox</strong> (together with all mail and
+        subfolders in them), <strong>not only from WebMail</strong>! This is a <strong>dangerous</strong>
         option and you cannot undo this step!
       </warning>
     </helpdata>
@@ -150,14 +150,14 @@
     <helpdata>
       <p>
         WebMail allows you to access several independent POP3/IMAP mailboxes within one interface. To configure
-        this you can use the <em>mailbox setup</em>.    
+        this you can use the <em>mailbox setup</em>.
       </p>
       <p>
         In the first part of the screen you have a list of your currently configured mailboxes. You can use
         the <em>Remove</em> link to remove a mailbox from WebMail.
       </p>
       <note>
-        In contrast to the folder setup, a mailbox will only be removed from WebMail if you click on 
+        In contrast to the folder setup, a mailbox will only be removed from WebMail if you click on
         <em>Remove</em> here. You will still be able to access it from other email clients.
       </note>
       <p>
@@ -178,19 +178,19 @@
           <li><em>Full Name</em>: The name that will appear in outgoing messages and in WebMail greetings.</li>
           <li><em>Language</em>: The language WebMail will use for you.</li>
           <li><em>Password</em> and <em>Verify</em>: If your setup allows you to change your password, you can
-            do it here (ask your administrator). Please don't forget to enter the same password in both 
+            do it here (ask your administrator). Please don't forget to enter the same password in both
             fields.</li>
-          <li><em>Messages per Page</em>: Change how many messages will be displayed in the message list 
+          <li><em>Messages per Page</em>: Change how many messages will be displayed in the message list
             (default: 20)</li>
-          <li><em>Show fancy stuff</em>: Display some "graphical enhancements" that are otherwise pretty 
+          <li><em>Show fancy stuff</em>: Display some "graphical enhancements" that are otherwise pretty
             useless, like smiley substitution, link highlighting, ...</li>
-<!--      <li><em>Filter JavaScript</em>: Try to recognize JavaScript in emails and filter it out so you 
+<!--      <li><em>Filter JavaScript</em>: Try to recognize JavaScript in emails and filter it out so you
             don't have security problems (this should be enabled).</li> -->
-          <li><em>Autoexpunge folders</em>: Controls whether messages that carry the "deleted"-flag should 
+          <li><em>Autoexpunge folders</em>: Controls whether messages that carry the "deleted"-flag should
             be deleted automatically or manually.</li>
-          <li><em>Show attached images</em>: Show images that are attached to a message inline. Otherwise 
+          <li><em>Show attached images</em>: Show images that are attached to a message inline. Otherwise
             they will be displayed like any other attachment.</li>
-          <li><em>Set message flags</em>: Enable write mode on folders. If this is not set, you may not change 
+          <li><em>Set message flags</em>: Enable write mode on folders. If this is not set, you may not change
             anything on messages (flag, copy, move).</li>
           <li><em>Break lines</em> and <em>max line length</em>: If and where to break lines in the compose and
             show message screens.</li>
@@ -202,10 +202,10 @@
     </helpdata>
   </helptopic>
   <helptopic id="logout" title="Logout">
-    <icon href="btn-logout.png"/>    
+    <icon href="btn-logout.png"/>
     <helpdata>
       <p>
-        Leave this session and have the server save your user configuration. You will be 
+        Leave this session and have the server save your user configuration. You will be
         presented the login-screen after a few seconds. If you forget to log out, your
         session will be closed after a default timeout.
       </p>

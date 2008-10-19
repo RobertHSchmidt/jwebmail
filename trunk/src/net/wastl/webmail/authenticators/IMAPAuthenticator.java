@@ -44,14 +44,14 @@ public class IMAPAuthenticator extends net.wastl.webmail.server.Authenticator {
             e.printStackTrace();
         }
     }
-        
+
     public void register(ConfigScheme store) {
         key="IMAP";
         store.configAddChoice("AUTH",key,"Authenticate against an IMAP server on the net. Does not allow password change.");
     }
-    
+
     public void authenticatePreUserData(String user,String domain,String passwd)
-     throws InvalidPasswordException { 
+     throws InvalidPasswordException {
         super.authenticatePreUserData(user,domain,passwd);
 
         WebMailVirtualDomain vd=storage.getVirtualDomain(domain);

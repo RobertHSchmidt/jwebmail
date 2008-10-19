@@ -1,6 +1,6 @@
 #! /bin/sh
 
-if [ -f $HOME/.antrc ] ; then 
+if [ -f $HOME/.antrc ] ; then
   . $HOME/.antrc
 fi
 
@@ -22,18 +22,18 @@ fi
 
 if [ "$ANT_HOME" = "" ] ; then
   # try to find ANT
-  if [ -d /opt/ant ] ; then 
+  if [ -d /opt/ant ] ; then
     ANT_HOME=/opt/ant
   fi
 
-  if [ -d ${HOME}/opt/ant ] ; then 
+  if [ -d ${HOME}/opt/ant ] ; then
     ANT_HOME=${HOME}/opt/ant
   fi
 
   ## resolve links - $0 may be a link to ant's home
   PRG=$0
   progname=`basename $0`
-  
+
   while [ -h "$PRG" ] ; do
     ls=`ls -ld "$PRG"`
     link=`expr "$ls" : '.*-> \(.*\)$'`
@@ -43,21 +43,21 @@ if [ "$ANT_HOME" = "" ] ; then
         PRG="`dirname $PRG`/$link"
     fi
   done
-  
+
   ANT_HOME=`dirname "$PRG"`/..
 
 fi
 
 if [ "$JAVA_HOME" != "" ] ; then
-  if [ "$JAVACMD" = "" ] ; then 
+  if [ "$JAVACMD" = "" ] ; then
     JAVACMD=$JAVA_HOME/bin/java
   fi
 else
-  if [ "$JAVACMD" = "" ] ; then 
+  if [ "$JAVACMD" = "" ] ; then
     JAVACMD=java
   fi
 fi
- 
+
 # add in the dependency .jar files
 DIRLIBS=${ANT_HOME}/lib/*.jar
 for i in ${DIRLIBS}

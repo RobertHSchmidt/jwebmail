@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -20,21 +20,21 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" encoding="UTF-8"/>
-  
+
     <xsl:variable name="imgbase" select="/USERMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
     <xsl:variable name="base" select="/USERMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
     <xsl:variable name="session-id" select="/USERMODEL/STATEDATA/VAR[@name='session id']/@value"/>
 
     <xsl:template match="/">
-    
+
     <HTML>
       <HEAD>
         <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Setup Dossier</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
       </HEAD>
-      
-      <BODY bgcolor="#ffffff">            
+
+      <BODY bgcolor="#ffffff">
         <TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0" WIDTH="100%">
           <TR>
             <TD VALIGN="CENTER">
@@ -47,33 +47,33 @@
             </TD>
           </TR>
         </TABLE>
-         
+
         <TABLE WIDTH="100%">
           <xsl:for-each select="/USERMODEL/MAILHOST_MODEL">
             <xsl:apply-templates select="."/>
           </xsl:for-each>
         </TABLE>
-     
+
         <P>
           Les Dossiers affichés en <STRONG>gras</STRONG> peuvent contenir des sous-dossiers, et les dossiers qui sont affichés normalement ne peuvent contenir de sous-dossiers. Les Dossiers affichés en <I>italique</I> sont masqués (dans la vue principale des boîtes aux lettres), les autres non.
         </P>
         <P>
           <FONT color="red"><STRONG>Attention!</STRONG></FONT> si vous effacez un dossier, tous les messages (et sous-dossiers) seront <FONT color="red">effacés</FONT> non seulement de WebMail mais aussi <FONT color="red">physiquement de l'hôte serveur de messagerie!</FONT> Ceci est dangereux et ne pourra être défait!
         </P>
-        
+
       </BODY>
 
 
     </HTML>
   </xsl:template>
-  
+
   <xsl:template match="/USERMODEL/USERDATA/INTVAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>                   
-  
+  </xsl:template>
+
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
-  </xsl:template>                   
+  </xsl:template>
 
   <xsl:template match="/USERMODEL/MAILHOST_MODEL">
     <TR BGCOLOR="#dddddd">
@@ -100,7 +100,7 @@
         <xsl:when test="@holds_folders = 'true'">
           <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}">
             <xsl:choose>
-              <xsl:when test="@subscribed = 'true'">              
+              <xsl:when test="@subscribed = 'true'">
                 <STRONG><xsl:value-of select="@name"/></STRONG>
               </xsl:when>
               <xsl:otherwise>
@@ -109,7 +109,7 @@
             </xsl:choose>
           </TD>
           <TD>
-            <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folderadd&amp;addto={@id}">Ajouter sous-dossier</A> - <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}&amp;recurse=1">Effacer ce dossier (et tous les sous-dossiers)</A> - 
+            <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folderadd&amp;addto={@id}">Ajouter sous-dossier</A> - <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}&amp;recurse=1">Effacer ce dossier (et tous les sous-dossiers)</A> -
             <xsl:choose>
               <xsl:when test="@subscribed = 'true'">
                 <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Le Masquer</A>
@@ -123,7 +123,7 @@
         <xsl:otherwise>
           <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}">
             <xsl:choose>
-              <xsl:when test="@subscribed = 'true'">              
+              <xsl:when test="@subscribed = 'true'">
                 <xsl:value-of select="@name"/>
               </xsl:when>
               <xsl:otherwise>
@@ -132,7 +132,7 @@
             </xsl:choose>
           </TD>
           <TD>
-            <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}">Effacer ce Dossier</A> - 
+            <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;remove={@id}">Effacer ce Dossier</A> -
             <xsl:choose>
               <xsl:when test="@subscribed = 'true'">
                 <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;hide={@id}&amp;">Le Masquer</A>
@@ -140,16 +140,16 @@
               <xsl:otherwise>
                 <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder&amp;unhide={@id}&amp;">Ne pas le Masquer</A>
               </xsl:otherwise>
-            </xsl:choose>       
+            </xsl:choose>
           </TD>
         </xsl:otherwise>
       </xsl:choose>
     </TR>
-    
+
 
     <xsl:for-each select="FOLDER">
       <xsl:apply-templates select="."/>
-    </xsl:for-each>    
+    </xsl:for-each>
   </xsl:template>
 
 

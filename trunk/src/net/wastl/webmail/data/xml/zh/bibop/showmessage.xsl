@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -19,7 +19,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" indent="no"/>
-  
+
     <xsl:variable name="imgbase" select="/USERMODEL/STATEDATA/VAR[@name='img base uri']/@value"/>
     <xsl:variable name="base" select="/USERMODEL/STATEDATA/VAR[@name='base uri']/@value"/>
     <xsl:variable name="session-id" select="/USERMODEL/STATEDATA/VAR[@name='session id']/@value"/>
@@ -32,7 +32,7 @@
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
-      
+
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
 <IMG SRC="{$imgbase}/images/icona_mail.gif" BORDER="0" hspace="5" align="absmiddle"/><SPAN class="testoNero">顯示信件 (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=messagelist">求救</A>)</SPAN>
         <xsl:variable name="current_msg" select="/USERMODEL/CURRENT[@type='message']/@id"/>
@@ -44,7 +44,7 @@
 
   <xsl:template match="MESSAGE">
 
-    <xsl:call-template name="navigation"/>    
+    <xsl:call-template name="navigation"/>
 
     <TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
       <TR>
@@ -53,7 +53,7 @@
             <TR>
               <TD class="testoGrande">
                 <xsl:apply-templates select="HEADER/SUBJECT"/>
-              </TD>          
+              </TD>
             </TR>
           </TABLE>
         </TD>
@@ -101,20 +101,20 @@
       </TR>
       <TR>
         <TD COLSPAN="4" bgcolor="A6B1C0" ALIGN="right" class="testoNero">
-          <A HREF="{$base}/compose?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}&amp;reply=1">回信...</A> - 
+          <A HREF="{$base}/compose?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}&amp;reply=1">回信...</A> -
           <A HREF="{$base}/compose?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}&amp;forward=1">轉寄...</A>
         </TD>
       </TR>
     </TABLE>
 
     <xsl:for-each select="PART">
-     
+
       <P class="testoMesg">
         <xsl:apply-templates select="."/>
       </P>
-        
+
     </xsl:for-each>
-    
+
     <TABLE WIDTH="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="A6B1C0">
       <TR>
         <FORM ACTION="{$base}/folder/list?flag=1&amp;session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}" METHOD="POST">
@@ -141,7 +141,7 @@
               <SELECT NAME="COPYMOVE" class="testoNero">
                 <OPTION VALUE="COPY">拷貝</OPTION>
                 <OPTION VALUE="MOVE">移動</OPTION>
-              </SELECT>    
+              </SELECT>
               信件至收信匣
               <SELECT NAME="TO" class="testoNero">
                 <xsl:for-each select="/USERMODEL/MAILHOST_MODEL//FOLDER">
@@ -153,13 +153,13 @@
          </FORM>
        </TR>
     </TABLE>
-   
-    
+
+
     <xsl:call-template name="navigation"/>
-    
+
   </xsl:template>
-  
-        
+
+
   <xsl:template match="PART">
     <xsl:choose>
         <!-- Modified by exce, start -->
@@ -193,7 +193,7 @@
         </xsl:otherwise>
         </xsl:choose>
         <!-- Modified by exce, end -->
-        </xsl:for-each>         
+        </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
         <TABLE width="100%" border="0" cellspacing="2" cellpadding="4">
@@ -201,7 +201,7 @@
             <TD height="22" class="testoGrande" width="13%" bgcolor="#E2E6F0">附加檔案：
             </TD>
             <TD height="22" class="testoNero" width="87%" bgcolor="#D1D7E7">
-              <A HREF="{$base}/showmime/{@hrefFileName}?session-id={$session-id}&amp;msgid={ancestor::MESSAGE/@msgid}"><xsl:value-of select="@filename"/></A>   
+              <A HREF="{$base}/showmime/{@hrefFileName}?session-id={$session-id}&amp;msgid={ancestor::MESSAGE/@msgid}"><xsl:value-of select="@filename"/></A>
             </TD>
           </TR>
           <xsl:if test="@description != ''">
@@ -249,7 +249,7 @@
         <TR>
           <xsl:choose>
              <xsl:when test="@msgnr > 1">
-                <TD width="5%" bgcolor="#697791" valign="middle" align="center">    
+                <TD width="5%" bgcolor="#697791" valign="middle" align="center">
                   <A HREF="{$base}/folder/showmsg?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr - 1}">
                      <IMG SRC="{$imgbase}/images/back.gif" BORDER="0"/>
                   </A>
@@ -260,7 +260,7 @@
                 </TD>
                 </xsl:when>
                 <xsl:otherwise>
-                <TD width="5%" bgcolor="#697791" valign="middle" align="center"> 
+                <TD width="5%" bgcolor="#697791" valign="middle" align="center">
                   &#160;
                 </TD>
                 <TD class="testoBianco" width="30%" bgcolor="#697791" valign="middle">
@@ -279,17 +279,17 @@
                 <xsl:when test="@msgnr &lt; /USERMODEL/MAILHOST_MODEL//FOLDER[@id=$current_folder]/MESSAGELIST/@total">
                 <TD width="30%" bgcolor="#697791" valign="middle" align="right">
                  <A HREF="{$base}/folder/showmsg?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr + 1}">
-                   <SPAN class="testoBianco">下一封信件</SPAN> 
+                   <SPAN class="testoBianco">下一封信件</SPAN>
                  </A>
                 </TD>
                 <TD width="5%" bgcolor="#697791" valign="middle" align="center">
-                  <A HREF="{$base}/folder/showmsg?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr + 1}"> 
+                  <A HREF="{$base}/folder/showmsg?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr + 1}">
                   <IMG SRC="{$imgbase}/images/next.gif" BORDER="0"/>
                   </A>
                 </TD>
                 </xsl:when>
                 <xsl:otherwise>
-                <TD width="30%" bgcolor="#697791" valign="middle" align="right">        
+                <TD width="30%" bgcolor="#697791" valign="middle" align="right">
                    &#160;
                 </TD>
                 <TD width="5%" bgcolor="#697791" valign="middle" align="center">
@@ -298,7 +298,7 @@
               </xsl:otherwise>
             </xsl:choose>
         </TR>
-      </TABLE>    
+      </TABLE>
   </xsl:template>
 
   <xsl:template match="DATE">
@@ -320,7 +320,7 @@
   <xsl:template match="REPLY-TO">
     <xsl:value-of select="."/>
   </xsl:template>
-    
+
   <xsl:template match="FROM">
     <xsl:choose>
       <xsl:when test="contains(.,'&lt;')">
@@ -336,12 +336,12 @@
 
   <!-- The following three sections deal with displaying HTML code from HTML attachments.
   Elements marked "malicious" will get a special treatment -->
-  <xsl:template match="@*|node()"> 
+  <xsl:template match="@*|node()">
     <xsl:choose>
       <xsl:when test="not(@malicious)">
         <xsl:copy>
           <xsl:apply-templates select="@*|node()"/>
-        </xsl:copy> 
+        </xsl:copy>
       </xsl:when>
       <xsl:otherwise>
         <TABLE  BORDER="1" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
@@ -360,14 +360,14 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="node()" mode="quote"> 
+  <xsl:template match="node()" mode="quote">
     <xsl:choose>
       <xsl:when test="name(.)">
         &lt;<xsl:value-of select="name(.)"/>
         <xsl:text> </xsl:text><xsl:apply-templates select="@*" mode="quote"/>
         <xsl:if test="./node()">
           &gt;
-          <xsl:apply-templates select="node()" mode="quote"/>       
+          <xsl:apply-templates select="node()" mode="quote"/>
           &lt;/<xsl:value-of select="name(.)"/>
         </xsl:if>
         &gt;
@@ -378,7 +378,7 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="@*" mode="quote"> 
+  <xsl:template match="@*" mode="quote">
     <xsl:if test="name(.) != 'malicious'">
       <xsl:text> </xsl:text><xsl:value-of select="name(.)"/>="<xsl:value-of select="."/>"
     </xsl:if>

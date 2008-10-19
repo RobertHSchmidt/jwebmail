@@ -15,17 +15,17 @@ import net.wastl.webmail.exceptions.*;
  * Created: Tue Mar 21 15:08:18 2000
  *
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -46,13 +46,13 @@ import net.wastl.webmail.exceptions.*;
  */
 
 public class XMLUserModel extends XMLGenericModel {
-    
+
     protected Element usermodel;
 
     protected Element userdata;
 
 
-    public XMLUserModel(WebMailServer parent, Element rsysdata, Element ruserdata) 
+    public XMLUserModel(WebMailServer parent, Element rsysdata, Element ruserdata)
         throws ParserConfigurationException {
 
         super(parent,rsysdata);
@@ -60,8 +60,8 @@ public class XMLUserModel extends XMLGenericModel {
         usermodel=root.getDocumentElement();
 
         this.userdata=ruserdata;
-        
-        update();       
+
+        update();
     }
 
     protected void initRoot() {
@@ -74,7 +74,7 @@ public class XMLUserModel extends XMLGenericModel {
             ex.printStackTrace();
         }
     }
-    
+
 
     public synchronized void update() {
         // Insert the sysdata and userdata objects into the usermodel tree
@@ -198,7 +198,7 @@ public class XMLUserModel extends XMLGenericModel {
     }
 
     public synchronized void clearWork() {
-        NodeList nl=usermodel.getElementsByTagName("WORK");     
+        NodeList nl=usermodel.getElementsByTagName("WORK");
         if(nl.getLength() > 0) {
             Element work=(Element)nl.item(0);
             NodeList nl2=work.getChildNodes();
@@ -228,12 +228,12 @@ public class XMLUserModel extends XMLGenericModel {
             work=root.createElement("WORK");
             usermodel.appendChild(work);
         }
-        
+
         Element newmessage=(Element)root.importNode(message.getMessageElement(),true);
-        work.appendChild(newmessage);   
+        work.appendChild(newmessage);
         return new XMLMessage(newmessage);
     }
-        
+
 
 
     public synchronized Element createMailhost(String name, String id,String url) {

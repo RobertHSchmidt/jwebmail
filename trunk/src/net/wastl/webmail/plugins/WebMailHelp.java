@@ -19,17 +19,17 @@ import javax.xml.parsers.*;
  * Created: Wed Sep  1 16:23:14 1999
  *
  * Copyright (C) 1999-2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -54,7 +54,7 @@ public class WebMailHelp implements Plugin, URLHandler {
     StorageManager store;
 
     public WebMailHelp() {
-        
+
     }
 
     public void register(WebMailServer parent) {
@@ -69,7 +69,7 @@ public class WebMailHelp implements Plugin, URLHandler {
 
     public String getDescription() {
         return "This is the WebMail help content-provider.";
-    }   
+    }
 
     public String getVersion() {
         return VERSION;
@@ -86,7 +86,7 @@ public class WebMailHelp implements Plugin, URLHandler {
 
         if(helpdoc == null) {
             String helpdocpath="file://"+store.getBasePath(user.getPreferredLocale(),user.getTheme())+"help.xml";
-            
+
             try {
                 DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 helpdoc=parser.parse(helpdocpath);
@@ -97,7 +97,7 @@ public class WebMailHelp implements Plugin, URLHandler {
 
             cache.put(user.getPreferredLocale().getLanguage()+"/"+user.getTheme(),helpdoc);
         }
-        
+
         /* Unfortunately we can't use two input documents, so we will temporarily insert the help document
            into the user's model */
         Node n=session.getModel().importNode(helpdoc.getDocumentElement(),true);

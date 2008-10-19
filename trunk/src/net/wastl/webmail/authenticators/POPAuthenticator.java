@@ -45,12 +45,12 @@ public class POPAuthenticator extends net.wastl.webmail.server.Authenticator {
             e.printStackTrace();
         }
     }
-        
+
     public void register(ConfigScheme store) {
         key="POP3";
         store.configAddChoice("AUTH",key,"Authenticate against an POP3 server on the net. Does not allow password change.");
     }
-    
+
     public void authenticatePreUserData(String user,String domain,String passwd)
      throws InvalidPasswordException {
         super.authenticatePreUserData(user,domain,passwd);

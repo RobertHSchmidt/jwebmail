@@ -4,17 +4,17 @@
 
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -22,7 +22,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" indent="yes"/>
-  
+
   <xsl:template match="README">
 
     <HTML>
@@ -68,7 +68,7 @@
     <A HREF="#{@id}">Top of section "<xsl:value-of select="@name"/>"</A>
     <HR/>
   </xsl:template>
-  
+
   <xsl:template match="SUBSUBSECTION">
     <A NAME="{@id}"/>
     <H3><xsl:number value="$cur_section"/>.<xsl:number value="$cur_subsection"/>.<xsl:number value="position()"/>. <xsl:value-of select="@name"/></H3>
@@ -92,7 +92,7 @@
 
    <xsl:template match="STRONG">
      <STRONG>
-       <xsl:apply-templates/> 
+       <xsl:apply-templates/>
      </STRONG>
    </xsl:template>
 
@@ -104,7 +104,7 @@
 
    <xsl:template match="CODE">
      <CODE>
-       <xsl:apply-templates/> 
+       <xsl:apply-templates/>
      </CODE>
    </xsl:template>
 

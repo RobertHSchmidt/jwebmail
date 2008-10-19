@@ -5,22 +5,22 @@
 <!DOCTYPE BUNDLE SYSTEM "resource.dtd">
 
 <BUNDLE default="en">
-  
+
   <!-- Section common to all locales -->
   <COMMON>
     <RESOURCE name="stmt_get_countuser">2
-      SELECT COUNT(*) FROM users 
+      SELECT COUNT(*) FROM users
       WHERE login=? AND domain=?
     </RESOURCE>
     <RESOURCE name="stmt_get_loginuser">
-      SELECT password FROM users 
+      SELECT password FROM users
       WHERE login=? AND domain=?
     </RESOURCE>
     <RESOURCE name="stmt_get_userid">
-      SELECT users.id AS id 
-      FROM users, virtual_domains 
-      WHERE login=? 
-            AND users.domain=virtual_domains.id 
+      SELECT users.id AS id
+      FROM users, virtual_domains
+      WHERE login=?
+            AND users.domain=virtual_domains.id
             AND virtual_domains.domain=?
     </RESOURCE>
     <RESOURCE name="stmt_get_userdata">
@@ -29,24 +29,24 @@
              flag_savesent, flag_setflags, flag_showfancy, flag_showimages,
              userdata.id AS id, virtual_domains.domain AS domain
       FROM users,userdata,users2userdata, virtual_domains
-      WHERE users.id=users2userdata.r_user 
+      WHERE users.id=users2userdata.r_user
              AND users2userdata.r_data=userdata.id
              AND virtual_domains.id=users.domain
-             AND users.login=? 
+             AND users.login=?
              AND users.domain=?
     </RESOURCE>
     <RESOURCE name="stmt_get_mailhosts">
-      SELECT host,mailhosts.login AS login,mailhosts.password AS password 
+      SELECT host,mailhosts.login AS login,mailhosts.password AS password
       FROM mailhosts,users,users2mailhosts
-      WHERE users.id=users2mailhosts.r_user 
+      WHERE users.id=users2mailhosts.r_user
              AND mailhosts.id=user2mailhosts.r_host
-             AND users.login=? 
+             AND users.login=?
              AND users.domain=?
     </RESOURCE>
     <RESOURCE name="stmt_get_userlist">
-      SELECT login, virtual_domains.domain AS domain 
-      FROM users,virtual_domains 
-      WHERE virtual_domains.id=users.domain 
+      SELECT login, virtual_domains.domain AS domain
+      FROM users,virtual_domains
+      WHERE virtual_domains.id=users.domain
              OR users.domain IS NULL
     </RESOURCE>
     <RESOURCE name="stmt_add_loginuser">
@@ -106,7 +106,7 @@
       DELETE FROM users2mailhosts WHERE r_host=?
     </RESOURCE>
     <RESOURCE name="stmt_set_lastlogin">
-      UPDATE userdata 
+      UPDATE userdata
       SET last_login=NOW(), count_login=count_login+1
       WHERE id=?
     </RESOURCE>
@@ -117,7 +117,7 @@
       SELECT COUNT(*) FROM virtual_domains
     </RESOURCE>
     <RESOURCE name="stmt_get_vdom">
-      SELECT domain, default_server, auth_server, host_restriction, allowed_hosts, id 
+      SELECT domain, default_server, auth_server, host_restriction, allowed_hosts, id
       FROM virtual_domains WHERE domain=?
     </RESOURCE>
     <RESOURCE name="stmt_add_vdom">

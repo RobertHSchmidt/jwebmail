@@ -23,17 +23,17 @@ import java.io.*;
  * Created: Mon Mar 27 16:05:52 2000
  *
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -47,7 +47,7 @@ import java.io.*;
  */
 
 public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
-    
+
     public XHTMLDocument(Document xml, String xsl) throws WebMailException {
 
         StringWriter writer = new StringWriter();
@@ -57,7 +57,7 @@ public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
             DOMSource msg_xml=new DOMSource((Node)xml);
             StreamSource msg_xsl=new StreamSource("file://"+xsl);
             StreamResult msg_result=new StreamResult(writer);
-            
+
             TransformerFactory factory = TransformerFactory.newInstance();
 
             Transformer processor = factory.newTransformer(msg_xsl);
@@ -83,12 +83,12 @@ public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
         try {
             DOMSource msg_xml=new DOMSource((Node)xml);
             StreamResult msg_result=new StreamResult(writer);
-            
+
             Transformer processor = stylesheet.newTransformer();
             processor.transform(msg_xml,msg_result);
         } catch(Exception ex) {
             System.err.println("Error transforming XML to XHTML.");
-            ex.printStackTrace();           
+            ex.printStackTrace();
             throw new WebMailException(ex.toString());
         }
         long end_t=System.currentTimeMillis();
@@ -97,14 +97,14 @@ public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
 
         content=writer.toString();
     }
-        
+
 
     public String toString() {
         return content;
     }
-        
+
     public int length() {
         return content.length();
     }
-    
+
 } // XHTMLDocument

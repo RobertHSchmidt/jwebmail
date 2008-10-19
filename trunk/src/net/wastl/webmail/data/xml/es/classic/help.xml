@@ -4,17 +4,17 @@
 <!-- CVS ID: $Id$ -->
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -24,12 +24,12 @@
     <icon href="btn-mailbox.png"/>
     <helpdata>
       <p>
-        Obtienes una vista general de todas tus casillas de correo y las carpetas contenidas en cada casilla. 
+        Obtienes una vista general de todas tus casillas de correo y las carpetas contenidas en cada casilla.
         Cada casilla de correo tiene una columna d&#243;nde el n&#250;mero total de mensajes y el n&#250;mero de mensajes nuevos son
-        mostrados. Tambi&#233;n haber carpetas que pueden no contener mensajes, s&#243;lo subcarpetas. 
+        mostrados. Tambi&#233;n haber carpetas que pueden no contener mensajes, s&#243;lo subcarpetas.
         Puedes hacer click en cada una (que pueda contener mensajes) para ver la lista de correos.
       </p>
-      <note>Si no ves subcarpetas que deber&#237;an estar, tal vez est&#233;n ocultas. Ve al men&#250; de configuraci&#243;n de carpetas para 
+      <note>Si no ves subcarpetas que deber&#237;an estar, tal vez est&#233;n ocultas. Ve al men&#250; de configuraci&#243;n de carpetas para
         hacer visibles las carpetas</note>
     </helpdata>
     <ref ref-id="messagelist"/>
@@ -40,7 +40,7 @@
     <helpdata>
       <p>
         En la lista de mensajes, obtendr&#225;s una lista general de los mensaljes en tu carpeta. Ver&#225;s el tema,
-        el remitente, el tama&#241;o del mensaje y algunas banderas que est&#225;n puestas en &#233;l (&quot;new(nuevo)&quot;, &quot;seen(visto)&quot;, 
+        el remitente, el tama&#241;o del mensaje y algunas banderas que est&#225;n puestas en &#233;l (&quot;new(nuevo)&quot;, &quot;seen(visto)&quot;,
         &quot;answered(respondido)&quot;, &quot;mime&quot;).<br/>
         You can display a message by clicking on its subject.<br/>
         You have the option to select one more messages and perform some kind of action on it like setting
@@ -61,7 +61,7 @@
         </p>
         <p>
           En el <em>cuerpo</em> the message text is displayed. If there are attachments to the message, you
-          will be able to view them either inline (e.g. images or text) or download them from the server. 
+          will be able to view them either inline (e.g. images or text) or download them from the server.
           The attachment information is displayed after the message text.
         </p>
         <p>
@@ -79,7 +79,7 @@
         y el tema, por lo menos. En el area grande de abajo, puedes escribir el mensaje.
       </p>
       <p>
-        Puedes adjuntar archivos presionando  <em>adjuntar archivos</em> button. Your message will be saved while 
+        Puedes adjuntar archivos presionando  <em>adjuntar archivos</em> button. Your message will be saved while
         editing attachments.
       </p>
     </helpdata>
@@ -88,14 +88,14 @@
   <helptopic id="compose-attach" title="Attaching Files">
     <helpdata>
       <p>
-        Mientras redactas un mensaje, puedes adjuntar archivos de tu sistema de archivos. Estos ser&#225;n enviados 
-        al servidor WebMail y agregados a tu mensaje (eso puede tardar un tiempo,dependiendo de  
+        Mientras redactas un mensaje, puedes adjuntar archivos de tu sistema de archivos. Estos ser&#225;n enviados
+        al servidor WebMail y agregados a tu mensaje (eso puede tardar un tiempo,dependiendo de
         tu conexi&#243;n a internet).
       </p>
       <p>
-        La  <em>pantalla de adjuntar</em> te permite explorar tu disco duro para adjuntar un archivo si presionas en el bot&#243;n 
-        <em>examinar</em>. Luego de haber seleccionado el archivo puedes ingresar una descripci&#243;n para el mismo y 
-        finalmente hacer click en <em>adjuntar nuevo archivo</em> para agregarlo al mensaje. Hay un cierto l&#237;mite para 
+        La  <em>pantalla de adjuntar</em> te permite explorar tu disco duro para adjuntar un archivo si presionas en el bot&#243;n
+        <em>examinar</em>. Luego de haber seleccionado el archivo puedes ingresar una descripci&#243;n para el mismo y
+        finalmente hacer click en <em>adjuntar nuevo archivo</em> para agregarlo al mensaje. Hay un cierto l&#237;mite para
         el tama&#241;o de los archivos. Esto puede ser configurado por el administrador del sistema.
       </p>
       <p>
@@ -109,10 +109,10 @@
     <icon href="btn-folders.png"/>
     <helpdata>
       <p>
-        En la  <em>Configuraci&#243;n de carpetas</em> you have to select whether you would like to change your mailbox settings 
-        or configure folders within existing mailboxes. 
+        En la  <em>Configuraci&#243;n de carpetas</em> you have to select whether you would like to change your mailbox settings
+        or configure folders within existing mailboxes.
       </p>
-      <p><em>Configurando casillas de correo</em>: WebMail allows you to access several completely independent mailboxes 
+      <p><em>Configurando casillas de correo</em>: WebMail allows you to access several completely independent mailboxes
         via IMAP or POP3. For each mailbox you will have to provide the mailhost, the protocol and the
         login information.
       </p>
@@ -127,14 +127,14 @@
   <helptopic id="folder-setup-folders" title="Setting up Folders">
     <helpdata>
       <p>
-        Como se mencion&#243; antes, una casilla de correo (IMAP) puede tener varias carpetas. La  <em>pantalla de configuraci&#243;n de carpetas</em> 
+        Como se mencion&#243; antes, una casilla de correo (IMAP) puede tener varias carpetas. La  <em>pantalla de configuraci&#243;n de carpetas</em>
         allows you to add or remove folders from each of your mailboxes. Folders are organized in a tree
-        structure for each of your mailboxes and displayed on this screen. For each folder you have the 
+        structure for each of your mailboxes and displayed on this screen. For each folder you have the
         option to remove it or, if it is a folder that can contain other folders, to append a subfolder to it.
       </p>
       <warning>
-        Las carpetas ser&#225;n  <strong>f&#237;sicamente borradas de tu casilla de correos</strong> (together with all mail and 
-        subfolders in them), <strong>no s&#243;lo de WebMail</strong>! This is a <strong>peligroso</strong> 
+        Las carpetas ser&#225;n  <strong>f&#237;sicamente borradas de tu casilla de correos</strong> (together with all mail and
+        subfolders in them), <strong>no s&#243;lo de WebMail</strong>! This is a <strong>peligroso</strong>
         option and you cannot undo this step!
       </warning>
     </helpdata>
@@ -143,18 +143,18 @@
     <helpdata>
       <p>
         WebMail te permite acceder a varias casillas de correo POP3/IMAP independientes dentro de una interface. para configurar
-        puedes usar la <em>configuraci&#243;n de la casilla de correo</em>.     
+        puedes usar la <em>configuraci&#243;n de la casilla de correo</em>.
       </p>
       <p>
         En la primera parte de la pantalla tienes una lista de las casillas de correo configuradas actualmente. Puedes usar
         la <em>Borrar</em> link to remove a mailbox from WebMail.
       </p>
       <note>
-        En contraste con la configuraci&#243;n de carpetas, una casilla de correo s&#243;lo se borrara del WebMail si haces click en 
+        En contraste con la configuraci&#243;n de carpetas, una casilla de correo s&#243;lo se borrara del WebMail si haces click en
         <em>Borrar</em> here. You will still be able to access it from other email clients.
       </note>
       <p>
-        En la segunda parte de la pantalla, puedes adjuntar una nueva casilla de correo proveyendo la informaci&#243;n necesaria 
+        En la segunda parte de la pantalla, puedes adjuntar una nueva casilla de correo proveyendo la informaci&#243;n necesaria
         (nombre del servidor, protocolo, usuario y contrase&#241;a para la casilla de correo - pregunta a tu administradosr si no los sabes
         que hacer).
       </p>
@@ -171,19 +171,19 @@
           <li><em>Nombre Completo</em>: The name that will appear in outgoing messages and in WebMail greetings.</li>
           <li><em>Idioma</em>: The language WebMail will use for you.</li>
           <li><em>Contrase&#241;a</em> and <em>Verificar</em>: If your setup allows you to change your password, you can
-            do it here (ask your administrator). Please don&apos;t forget to enter the same password in both 
+            do it here (ask your administrator). Please don&apos;t forget to enter the same password in both
             fields.</li>
-          <li><em>Mensajes por P&#225;gina</em>: Change how many messages will be displayed in the message list 
+          <li><em>Mensajes por P&#225;gina</em>: Change how many messages will be displayed in the message list
             (default: 20)</li>
-          <li><em>Mostrar detalles superfluos</em>: Display some &quot;graphical enhancements&quot; that are otherwise pretty 
+          <li><em>Mostrar detalles superfluos</em>: Display some &quot;graphical enhancements&quot; that are otherwise pretty
             useless, like smiley substitution, link highlighting, ...</li>
-<!--      <li><em>Filter JavaScript</em>: Try to recognize JavaScript in emails and filter it out so you 
+<!--      <li><em>Filter JavaScript</em>: Try to recognize JavaScript in emails and filter it out so you
             don't have security problems (this should be enabled).</li> -->
-          <li><em>Autoexpunge* carpetas</em>: Controls whether messages that carry the &quot;deleted&quot;-flag should 
+          <li><em>Autoexpunge* carpetas</em>: Controls whether messages that carry the &quot;deleted&quot;-flag should
             be deleted automatically or manually.</li>
-          <li><em>Mostrar im&#225;genes agregadas</em>: Show images that are attached to a message inline. Otherwise 
+          <li><em>Mostrar im&#225;genes agregadas</em>: Show images that are attached to a message inline. Otherwise
             they will be displayed like any other attachment.</li>
-          <li><em>Colocar banderas de mensajes</em>: Enable write mode on folders. If this is not set, you may not change 
+          <li><em>Colocar banderas de mensajes</em>: Enable write mode on folders. If this is not set, you may not change
             anything on messages (flag, copy, move).</li>
           <li><em>Cortar* l&#237;neas</em> and <em>max long. de l&#237;nea</em>: If and where to break lines in the compose and
             show message screens.</li>
@@ -198,7 +198,7 @@
     <icon href="btn-logout.png"/>
     <helpdata>
       <p>
-        Abandonar esta sesi&#243;n y dejar que el servidor guarde tu configuraci&#243;n. Se te presentar&#225; 
+        Abandonar esta sesi&#243;n y dejar que el servidor guarde tu configuraci&#243;n. Se te presentar&#225;
         la pantalla de ingreso luego de unos pocos segundos. si te olvidas de salir del sistema, tu
         ser&#225; cerrada despu&#233;s de un tiempo de espera predeterminado.
       </p>

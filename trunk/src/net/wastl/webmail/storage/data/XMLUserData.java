@@ -22,17 +22,17 @@ import org.w3c.dom.*;
  * Created: Fri Mar 10 16:17:28 2000
  *
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -48,7 +48,7 @@ import org.w3c.dom.*;
 /* 9/25/2000 devink -- modified for challenge/response authentication */
 
 public class XMLUserData extends XMLData implements UserData, Storable {
-    
+
     protected Document root;
 
     protected Element userdata;
@@ -72,7 +72,7 @@ public class XMLUserData extends XMLData implements UserData, Storable {
         setUserName(user);
         setDomain(domain);
         setFullName(user);
-        if(domain.equals("")) { 
+        if(domain.equals("")) {
           // This is a special case when the user already contains the domain
           // e.g. QMail
           setEmail(user);
@@ -109,7 +109,7 @@ public class XMLUserData extends XMLData implements UserData, Storable {
     public Element getUserData() {
         return data;
     }
-    
+
     public DocumentFragment getDocumentFragment() {
         DocumentFragment df=root.createDocumentFragment();
         df.appendChild(data);
@@ -176,23 +176,23 @@ public class XMLUserData extends XMLData implements UserData, Storable {
             //System.err.println("Adding mailhost "+name);
             if(getMailHost(name) != null) {
                 removeMailHost(name);
-            }   
+            }
             Element mailhost=root.createElement("MAILHOST");
             mailhost.setAttribute("name",name);
             mailhost.setAttribute("id",Long.toHexString(Math.abs(name.hashCode()))+Long.toHexString(System.currentTimeMillis()));
-            
+
             Element mh_login=root.createElement("MH_LOGIN");
             XMLCommon.setElementTextValue(mh_login,login);
             mailhost.appendChild(mh_login);
-            
+
             Element mh_pass=root.createElement("MH_PASSWORD");
             XMLCommon.setElementTextValue(mh_pass,Helper.encryptTEA(password));
             mailhost.appendChild(mh_pass);
-            
+
             Element mh_uri=root.createElement("MH_URI");
             XMLCommon.setElementTextValue(mh_uri,host);
             mailhost.appendChild(mh_uri);
-            
+
             data.appendChild(mailhost);
             //System.err.println("Done mailhost "+name);
             //XMLCommon.writeXML(root,System.err,"");
@@ -225,15 +225,15 @@ public class XMLUserData extends XMLData implements UserData, Storable {
                     return XMLCommon.getValueXPath(mailhost,"MH_LOGIN/text()");
                 }
 
-                public String getName() { 
-                    return mailhost.getAttribute("name"); 
+                public String getName() {
+                    return mailhost.getAttribute("name");
                 }
 
                 public void setLogin(String s) {
                     XMLCommon.setValueXPath(mailhost,"MH_LOGIN/text()",s);
                 }
 
-                public void setName(String s) { 
+                public void setName(String s) {
                     mailhost.setAttribute("name",s);
                 }
 
@@ -251,7 +251,7 @@ public class XMLUserData extends XMLData implements UserData, Storable {
             };
     }
 
-    public Enumeration mailHosts() { 
+    public Enumeration mailHosts() {
         final NodeList nl=getNodeListXPath("//MAILHOST");
         return new Enumeration() {
                 int i=0;
@@ -265,13 +265,13 @@ public class XMLUserData extends XMLData implements UserData, Storable {
                 }
             };
     }
- 
-    public int getMaxShowMessages() { 
+
+    public int getMaxShowMessages() {
         int retval=(int)getIntVarWrapper("max show messages");
         return retval==0?20:retval;
     }
 
-    public void setMaxShowMessages(int i) { 
+    public void setMaxShowMessages(int i) {
         setIntVarWrapper("max show messages",i);
     }
 
@@ -280,32 +280,32 @@ public class XMLUserData extends XMLData implements UserData, Storable {
      * consists of the username and the domain.
      * @see getUserName()
      */
-    public String getLogin() { 
-        return getUserName()+"@"+getDomain(); 
+    public String getLogin() {
+        return getUserName()+"@"+getDomain();
     }
 
     public String getFullName() {
         return getValueXPath("/USERDATA/FULL_NAME/text()");
     }
-    public void setFullName(String s) { 
+    public void setFullName(String s) {
         setValueXPath("/USERDATA/FULL_NAME/text()",s);
     }
 
-    public String getSignature() { 
+    public String getSignature() {
         return XMLCommon.getTagValue(data,"SIGNATURE");
     }
-    public void setSignature(String s) { 
+    public void setSignature(String s) {
         XMLCommon.setTagValue(data,"SIGNATURE",s,true);
     }
 
-    public String getEmail() { 
+    public String getEmail() {
         return getValueXPath("/USERDATA/EMAIL/text()");
     }
-    public void setEmail(String s) { 
+    public void setEmail(String s) {
         setValueXPath("/USERDATA/EMAIL/text()",s);
     }
 
-    public Locale getPreferredLocale() { 
+    public Locale getPreferredLocale() {
         String loc=getValueXPath("/USERDATA/LOCALE/text()");
         StringTokenizer t=new StringTokenizer(loc,"_");
         String language=t.nextToken().toLowerCase();
@@ -316,7 +316,7 @@ public class XMLUserData extends XMLData implements UserData, Storable {
         return new Locale(language,country);
     }
 
-    public void setPreferredLocale(String newloc) { 
+    public void setPreferredLocale(String newloc) {
         setValueXPath("/USERDATA/LOCALE/text()",newloc);
     }
 
@@ -339,23 +339,23 @@ public class XMLUserData extends XMLData implements UserData, Storable {
         df.setTimeZone(tz);
         String now=df.format(new Date(date));
         return now;
-    }   
+    }
 
     public String getFirstLogin() {
         long date=getIntVarWrapper("first login");
         return formatDate(date);
     }
 
-    public String getLastLogin() { 
+    public String getLastLogin() {
         long date=getIntVarWrapper("last login");
         return formatDate(date);
     }
 
-    public String getLoginCount() { 
+    public String getLoginCount() {
         return getIntVarWrapper("login count")+"";
     }
 
-    public boolean checkPassword(String s) { 
+    public boolean checkPassword(String s) {
         String password=getValueXPath("/USERDATA/PASSWORD/text()");
         if(password.startsWith(">")) {
             password=password.substring(1);
@@ -414,14 +414,14 @@ public class XMLUserData extends XMLData implements UserData, Storable {
         setBoolVarWrapper("show images",b);
     }
 
-    public boolean wantsShowFancy() { 
+    public boolean wantsShowFancy() {
         return getBoolVarWrapper("show fancy");
     }
     public void setShowFancy(boolean b) {
         setBoolVarWrapper("show fancy",b);
     }
 
-    public boolean wantsSetFlags() { 
+    public boolean wantsSetFlags() {
         return getBoolVarWrapper("set message flags");
     }
     public void setSetFlags(boolean b) {
@@ -434,10 +434,10 @@ public class XMLUserData extends XMLData implements UserData, Storable {
     public boolean wantsSaveSent() {
         return getBoolVarWrapper("save sent messages");
     }
-    public String getSentFolder() { 
+    public String getSentFolder() {
         return getValueXPath("/USERDATA/SENT_FOLDER/text()");
     }
-    public void setSentFolder(String s) { 
+    public void setSentFolder(String s) {
         setValueXPath("/USERDATA/SENT_FOLDER/text()",s);
     }
 
@@ -453,10 +453,10 @@ public class XMLUserData extends XMLData implements UserData, Storable {
      * @see getLogin()
      */
     public String getUserName() {
-        return getValueXPath("/USERDATA/LOGIN/text()"); 
+        return getValueXPath("/USERDATA/LOGIN/text()");
     }
 
-    public void setUserName(String s) { 
+    public void setUserName(String s) {
         setValueXPath("/USERDATA/LOGIN/text()",s);
     }
 
@@ -485,7 +485,7 @@ public class XMLUserData extends XMLData implements UserData, Storable {
         e.setAttribute("value",value+"");
         if(debug) System.err.println("XMLData ("+getUserName()+"@"+getDomain()+"): Setting '"+var+"' to '"+value+"'");
     }
-        
+
     protected long getIntVarWrapper(String var) {
         ensureElement("INTVAR","name",var);
         long r=0;
@@ -508,7 +508,7 @@ public class XMLUserData extends XMLData implements UserData, Storable {
         e.setAttribute("value",value?"yes":"no");
         if(debug) System.err.println("XMLData ("+getUserName()+"@"+getDomain()+"): Setting '"+var+"' to '"+value+"'");
     }
-        
+
     protected boolean getBoolVarWrapper(String var) {
         ensureElement("BOOLVAR","name",var);
         String value = getValueXPath("/USERDATA/BOOLVAR[@name='"+var+"']/@value");
@@ -526,5 +526,5 @@ public class XMLUserData extends XMLData implements UserData, Storable {
             elem.setAttribute("value","no");
         }
     }
-    
+
 } // XMLUserData

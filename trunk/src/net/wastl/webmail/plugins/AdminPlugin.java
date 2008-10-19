@@ -19,17 +19,17 @@ import java.util.*;
  * Created: Thu Sep  9 16:52:36 1999
  *
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -43,7 +43,7 @@ import java.util.*;
  */
 
 public class AdminPlugin implements Plugin, URLHandler {
-    
+
     public static final String VERSION="1.3";
     public static final String URL="/admin";
 
@@ -131,7 +131,7 @@ public class AdminPlugin implements Plugin, URLHandler {
                     parent.removeSession(sess2);
                 }
                 session.setEnv();
-            }       
+            }
             if(header.isContentSet("SHUTDOWN")) {
                 int time=0;
                 try {
@@ -171,7 +171,7 @@ public class AdminPlugin implements Plugin, URLHandler {
                         } else if(header.getContent("DELETE "+s1) != null && !header.getContent("DELETE "+s1).equals("")) {
                             parent.getStorage().deleteVirtualDomain(s1);
                         }
-                    } 
+                    }
                     if(header.getContent("ADD NEW") != null && !header.getContent("ADD NEW").equals("")) {
                         WebMailVirtualDomain vd=parent.getStorage().createVirtualDomain(header.getContent("NEW DOMAIN"));
                         vd.setDomainName(header.getContent("NEW DOMAIN"));
@@ -187,7 +187,7 @@ public class AdminPlugin implements Plugin, URLHandler {
                 parent.getStorage().getSystemData().save();
                 session.setEnv();
             }
-            
+
             content=new XHTMLDocument(session.getModel(),
                                       parent.getStorage().getStylesheet("admin-domains.xsl",
                                                                         parent.getDefaultLocale(),
@@ -198,21 +198,21 @@ public class AdminPlugin implements Plugin, URLHandler {
                 ((AdminSession)session).selectDomain(header.getContent("domain"));
             }
 
-            if(suburl.startsWith("/user/edit") && 
+            if(suburl.startsWith("/user/edit") &&
                (header.isContentSet("edit") || header.isContentSet("change"))) {
                 if(header.isContentSet("user")) {
                     ((AdminSession)session).selectUser(header.getContent("user"));
             /* 10/22/2000 devink -- setup new password changing stuff */
             ((AdminSession)session).setupUserEdit();
-                    
-                    if(header.isContentSet("change")) {                 
+
+                    if(header.isContentSet("change")) {
                         ((AdminSession)session).changeUser(header);
                     }
-                    
+
                 } else {
                     ((AdminSession)session).clearUser();
                 }
-                
+
                 content=new XHTMLDocument(session.getModel(),
                                         parent.getStorage().getStylesheet("admin-edituser.xsl",
                                                                         parent.getDefaultLocale(),
@@ -227,7 +227,7 @@ public class AdminPlugin implements Plugin, URLHandler {
                                                                         parent.getDefaultLocale(),
                                                                         parent.getProperty("webmail.default.theme")));
             }
-        } else {            
+        } else {
             if(suburl.startsWith("/logout")) {
                 session.logout();
             }
@@ -240,7 +240,7 @@ public class AdminPlugin implements Plugin, URLHandler {
         }
         return content;
     }
-    
+
     public String provides() {
         return "admin";
     }

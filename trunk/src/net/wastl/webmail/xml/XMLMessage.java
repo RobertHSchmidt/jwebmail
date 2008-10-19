@@ -12,17 +12,17 @@ import org.w3c.dom.*;
  * Created: Tue Apr 18 14:02:30 2000
  *
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -34,14 +34,14 @@ import org.w3c.dom.*;
  * @see XMLUserModel
  */
 public class XMLMessage extends XMLMessagePart {
-    
+
     protected Element message;
 
     public XMLMessage(Element message) {
         super(message);
         this.message=message;
     }
-    
+
     public Element getMessageElement() {
         return message;
     }
@@ -55,7 +55,7 @@ public class XMLMessage extends XMLMessagePart {
 
     public void prepareReply(String prefix_subject, String postfix_subject,
                              String prefix_message, String postfix_message) {
-        
+
         String subject=getHeader("SUBJECT");
         // Test whether this is already a reply (prefixed with RE or AW)
         if(!isReply(subject)) {
@@ -63,9 +63,9 @@ public class XMLMessage extends XMLMessagePart {
                 +getHeader("SUBJECT")+" "
                 +postfix_subject;
         }
-        setHeader("SUBJECT",subject);                   
+        setHeader("SUBJECT",subject);
 
-        XMLMessagePart firstpart=new XMLMessagePart(getFirstMessageTextPart(message));  
+        XMLMessagePart firstpart=new XMLMessagePart(getFirstMessageTextPart(message));
 
         firstpart.quoteContent();
 
@@ -74,7 +74,7 @@ public class XMLMessage extends XMLMessagePart {
 
         removeAllParts();
 
-        XMLMessagePart newmainpart=createPart("multi"); 
+        XMLMessagePart newmainpart=createPart("multi");
 
         newmainpart.appendPart(firstpart);
     }
@@ -86,7 +86,7 @@ public class XMLMessage extends XMLMessagePart {
         subject=prefix_subject+" "
             +getHeader("SUBJECT")+" "
             +postfix_subject;
-        setHeader("SUBJECT",subject);                   
+        setHeader("SUBJECT",subject);
 
         XMLMessagePart mainpart=null;
         NodeList nl=message.getChildNodes();
@@ -98,7 +98,7 @@ public class XMLMessage extends XMLMessagePart {
             }
         }
         XMLMessagePart firstpart=new XMLMessagePart(getFirstMessageTextPart(message));
-        
+
         firstpart.insertContent(prefix_message+"\n",0);
         firstpart.addContent(postfix_message,0);
 
@@ -113,7 +113,7 @@ public class XMLMessage extends XMLMessagePart {
             while(enum.hasMoreElements()) {
                 newmainpart.appendPart((XMLMessagePart)enum.nextElement());
             }
-        }               
+        }
     }
 
 
@@ -139,7 +139,7 @@ public class XMLMessage extends XMLMessagePart {
         }
         return XMLCommon.getElementTextValue(element);
     }
-        
+
 
     public void setHeader(String header, String value) {
         Element xml_header=getHeader();
@@ -154,7 +154,7 @@ public class XMLMessage extends XMLMessagePart {
         XMLCommon.setElementTextValue(element,value);
     }
 
-    
+
     protected boolean isReply(String subject) {
         String s=subject.toUpperCase();
         return s.startsWith("RE") || s.startsWith("AW");
@@ -178,7 +178,7 @@ public class XMLMessage extends XMLMessagePart {
                     }
                 } else if(elem.getAttribute("type").equals("text")) {
                     return elem;
-                }                       
+                }
             }
         }
         // Modified by exce, start
@@ -192,12 +192,12 @@ public class XMLMessage extends XMLMessagePart {
                     }
                 } else if(elem.getAttribute("type").equals("html")) {
                         return elem;
-                }                       
+                }
             }
         }
         // Modified by exce, end
         return null;
-    }   
+    }
 
     public XMLMessagePart getFirstMessageTextPart() {
         return new XMLMessagePart(getFirstMessageTextPart(message));
@@ -210,11 +210,11 @@ public class XMLMessage extends XMLMessagePart {
             if(elem.getTagName().equals("PART")) {
                 if(elem.getAttribute("type").equals("multi")) {
                     return new XMLMessagePart(elem);
-                }                       
+                }
             }
         }
         return null;
-    }   
-        
+    }
+
 
 } // XMLMessage

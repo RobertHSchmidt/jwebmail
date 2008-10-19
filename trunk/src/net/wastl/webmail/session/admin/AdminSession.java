@@ -25,17 +25,17 @@ import org.webengruven.webmail.auth.*;
  * Created: Thu Sep  9 18:24:05 1999
  *
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -47,29 +47,29 @@ import org.webengruven.webmail.auth.*;
  */
 /* 9/24/2000 devink -- updated for new challenge/response authentication */
 public class AdminSession implements HTTPSession {
-    
+
     /** When has the session been last accessed? */
     private long last_access;
     /** The session-ID for this session */
     private String session_code;
     /** Parent WebMailServer */
     protected WebMailServer parent;
-        
+
     protected InetAddress remote;
     private String remote_agent;
     private String remote_accepts;
-        
+
     protected XMLAdminModel model;
-        
+
     protected HttpSession sess=null;
-        
+
     protected boolean running_as_servlet=false;
 
     protected String selected_domain="";
     protected String selected_user="";
 
     protected boolean is_logged_out=false;
-        
+
     public AdminSession(WebMailServer parent, Object parm, HTTPRequestHeader h) throws InvalidPasswordException, WebMailException {
         try {
             Class srvltreq=Class.forName("javax.servlet.http.HttpServletRequest");
@@ -97,10 +97,10 @@ public class AdminSession implements HTTPSession {
             session_code=Helper.calcSessionCode(remote,h);
         }
         doInit(parent,h);
-                
+
     }
-        
-    protected void doInit(WebMailServer parent, HTTPRequestHeader h) 
+
+    protected void doInit(WebMailServer parent, HTTPRequestHeader h)
         throws InvalidPasswordException, WebMailException {
         this.parent=parent;
         last_access=System.currentTimeMillis();
@@ -114,7 +114,7 @@ public class AdminSession implements HTTPSession {
 
         setEnv();
     }
-        
+
     public void login(HTTPRequestHeader h) throws InvalidPasswordException {
         String passwd=parent.getStorage().getConfig("ADMIN PASSWORD");
         if(!Helper.crypt(passwd,h.getContent("password")).equals(passwd)) {
@@ -128,7 +128,7 @@ public class AdminSession implements HTTPSession {
         setLastAccess();
         setEnv();
     }
-        
+
     public void logout() {
         if(!is_logged_out) {
             if(sess!=null) {
@@ -142,7 +142,7 @@ public class AdminSession implements HTTPSession {
         }
         is_logged_out=true;
     }
-        
+
     public boolean isLoggedOut() {
         return is_logged_out;
     }
@@ -150,35 +150,35 @@ public class AdminSession implements HTTPSession {
     public String getSessionCode() {
         return session_code;
     }
-        
+
     public Locale getLocale() {
         return Locale.getDefault();
     }
-        
+
     public long getLastAccess() {
         return last_access;
     }
-        
+
     public void setLastAccess() {
         last_access=System.currentTimeMillis();
     }
-        
+
     public String getEnv(String key) {
         return model.getStateVar(key);
     }
-        
-        
+
+
     public void selectUser(String user) {
       try {
             selected_user=user;
             System.err.println("Selecting user "+user);
             XMLUserData ud=parent.getStorage().getUserData(user,selected_domain,"",false);
             System.err.println("Done.");
-            model.importUserData(ud.getUserData());         
+            model.importUserData(ud.getUserData());
       }
-      catch (WebMailException e) { } 
+      catch (WebMailException e) { }
     }
-        
+
     public void clearUser() {
         selected_user="";
         model.clearUserData();
@@ -195,8 +195,8 @@ public class AdminSession implements HTTPSession {
      * user.
      */
     public void setupUserEdit() throws WebMailException {
-        XMLUserData ud; 
-        AuthDisplayMngr adm; 
+        XMLUserData ud;
+        AuthDisplayMngr adm;
 
         ud=parent.getStorage().getUserData(selected_user, selected_domain, "", false);
         adm=parent.getStorage().getAuthenticator().getAuthDisplayMngr();
@@ -204,12 +204,12 @@ public class AdminSession implements HTTPSession {
         adm.setPassChangeVars(ud, model);
         model.setStateVar("pass change tmpl", adm.getPassChangeTmpl());
     }
-        
-        
+
+
     public void setException(Exception ex) {
         model.setException(ex);
     }
-        
+
     /**
      * Change the settings for a specific user.
      * This method will check for changes to a user's configuration and save the new user configuration.
@@ -271,20 +271,20 @@ public class AdminSession implements HTTPSession {
         model.setStateVar("selected domain",domain);
 
         selected_domain=domain;
-        
+
         Enumeration enum=parent.getStorage().getUsers(domain);
         model.removeAllStateVars("user");
         while(enum.hasMoreElements()) {
             model.addStateVar("user",(String)enum.nextElement());
         }
     }
-        
-        
+
+
     public void setEnv(String key, String value) {
         //env.put(key,value);
         model.setStateVar(key,value);
     }
-        
+
     public void setEnv() {
         model.setStateVar("session id",session_code);
         model.setStateVar("base uri",parent.getBasePath());
@@ -294,17 +294,17 @@ public class AdminSession implements HTTPSession {
 
         try {
             // Here we must initialize which choices are available for ChoiceConfigParameters!
-            XMLSystemData sysdata=parent.getStorage().getSystemData();  
+            XMLSystemData sysdata=parent.getStorage().getSystemData();
             sysdata.initChoices();
         } catch(WebMailException ex) {
         }
-        
+
         if(running_as_servlet) {
             model.setStateVar("servlet status",parent.toString());
         } else {
             model.setStateVar("http server status",((StatusServer)parent.getServer("HTTP")).getStatus());
             model.setStateVar("ssl server status",((StatusServer)parent.getServer("SSL")).getStatus());
-        }           
+        }
         model.setStateVar("storage status",parent.getStorage().toString());
 
         /*
@@ -313,21 +313,21 @@ public class AdminSession implements HTTPSession {
         */
         XMLCommon.genericRemoveAll(model.getStateData(),"SESSION");
         Enumeration e=parent.getSessions();
-        if(e != null && e.hasMoreElements()) {    
+        if(e != null && e.hasMoreElements()) {
             while(e.hasMoreElements()) {
                 String name=(String)e.nextElement();
                 HTTPSession h=parent.getSession(name);
                 if(h instanceof UserSession) {
-                    UserSession w=(UserSession)h;                   
+                    UserSession w=(UserSession)h;
 
                     Element sess_elem=model.addStateElement("SESSION");
                     sess_elem.setAttribute("type","user");
-                    
+
                     sess_elem.appendChild(model.createTextElement("SESS_USER",w.getUserName()));
                     sess_elem.appendChild(model.createTextElement("SESS_CODE",w.getSessionCode()));
                     sess_elem.appendChild(model.createTextElement("SESS_ADDRESS",w.getRemoteAddress().toString()));
                     sess_elem.appendChild(model.createStateVar("idle time",(System.currentTimeMillis()-w.getLastAccess())/1000+""));
-                                                        
+
                     Enumeration keys=w.getActiveConnections().keys();
                     while(keys.hasMoreElements()) {
                         String next=(String)keys.nextElement();
@@ -368,21 +368,21 @@ public class AdminSession implements HTTPSession {
         }
 
     }
-        
-        
+
+
     public InetAddress getRemoteAddress() {
         return remote;
     }
-        
-        
+
+
     public long getTimeout() {
         return 600000;
     }
-        
+
     public void timeoutOccured() {
     }
-        
-        
+
+
     public void saveData() {
     }
 

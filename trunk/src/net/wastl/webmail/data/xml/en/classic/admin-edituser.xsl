@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -40,7 +40,7 @@
         </xsl:choose>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
-        
+
       <BODY BGCOLOR="white">
 
         <FORM ACTION="{$base}/admin/user/edit?session-id={$session-id}" METHOD="POST">
@@ -56,7 +56,7 @@
                 </xsl:otherwise>
               </xsl:choose>
             </TR>
-            
+
             <TR>
               <TD COLSPAN="4" BGCOLOR="lightblue" ALIGN="CENTER"><EM><FONT SIZE="+1">General settings</FONT></EM></TD>
             </TR>
@@ -73,8 +73,8 @@
                     <INPUT TYPE="text" NAME="user" SIZE="10"/>
                   </xsl:otherwise>
                 </xsl:choose>
-              </TD>         
-                    
+              </TD>
+
             </TR>
 
             <TR>
@@ -94,7 +94,7 @@
                       <xsl:otherwise>
                         <OPTION><xsl:apply-templates select="@value"/></OPTION>
                       </xsl:otherwise>
-                    </xsl:choose>                  
+                    </xsl:choose>
                   </xsl:for-each>
                 </SELECT>
               </TD>
@@ -131,8 +131,8 @@
 
             <TR>
               <TD><STRONG>Messages per page</STRONG></TD>
-              <TD><INPUT TYPE="TEXT" NAME="intvar%max show messages" SIZE="3" VALUE="{$ud/INTVAR[@name='max show messages']/@value}"/></TD>         
-            
+              <TD><INPUT TYPE="TEXT" NAME="intvar%max show messages" SIZE="3" VALUE="{$ud/INTVAR[@name='max show messages']/@value}"/></TD>
+
               <TD><STRONG>Navigation bar icon size</STRONG></TD>
               <TD><INPUT TYPE="TEXT" NAME="intvar%icon size" SIZE="3" VALUE="{$ud/INTVAR[@name='icon size']/@value}"/></TD>
             </TR>
@@ -148,8 +148,8 @@
                     <INPUT TYPE="CHECKBOX" NAME="boolvar%show fancy"/>
                   </xsl:otherwise>
                 </xsl:choose>
-              </TD>         
-            
+              </TD>
+
               <TD><STRONG>Show att. images</STRONG></TD>
               <TD>
                 <xsl:choose>
@@ -174,8 +174,8 @@
                     <INPUT TYPE="CHECKBOX" NAME="boolvar%filter javascript"/>
                   </xsl:otherwise>
                 </xsl:choose>
-              </TD>         
-            
+              </TD>
+
               <TD><STRONG>Set message flags</STRONG></TD>
               <TD>
                 <xsl:choose>
@@ -201,7 +201,7 @@
                   </xsl:otherwise>
                 </xsl:choose>
               </TD>
-            
+
               <TD><STRONG>max line length</STRONG></TD>
               <TD><INPUT TYPE="TEXT" NAME="intvar%max line length" SIZE="3" VALUE="{$ud/INTVAR[@name='max line length']/@value}"/></TD>
             </TR>
@@ -225,7 +225,7 @@
             <TR bgcolor="#dddddd">
               <TD COLSPAN="4" ALIGN="center"><FONT SIZE="+1"><STRONG>Submit changes</STRONG></FONT></TD>
             </TR>
-            
+
             <TR>
               <TD COLSPAN="4" ALIGN="center">
                 <xsl:choose>
@@ -238,7 +238,7 @@
                 </xsl:choose>
                 <INPUT type="reset" name="reset" value="Reset"/>
               </TD>
-            </TR>           
+            </TR>
 
           </TABLE>
         </FORM>

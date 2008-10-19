@@ -79,5 +79,5 @@ public class HTTPResponseHeader  {
         s+="\r\n";
         return s;
     }
-    
+
 } // HTTPHeader

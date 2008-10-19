@@ -35,17 +35,17 @@ import org.xml.sax.InputSource;
  * Created: Thu Feb  4 12:59:30 1999
  *
  * Copyright (C) 1999-2001 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -62,7 +62,7 @@ import org.xml.sax.InputSource;
  */
 /* 9/24/2000 devink - updated for challenge/response auth */
 public class UserSession implements HTTPSession {
-        
+
     /** When has the session been last accessed? */
     private long last_access;
     /** The session-ID for this session */
@@ -76,33 +76,33 @@ public class UserSession implements HTTPSession {
 
     /** Connections to Mailboxes */
     private Hashtable connections;
-    
+
     /** Connections to hosts */
     private Hashtable stores;
 
     /** javax.mail Mailsession */
     private Session mailsession;
-        
+
     private InetAddress remote;
-        
+
     /* Files attached to messages will be stored here. We will have to take care of
        possible memory problems! */
     private Hashtable mime_parts_decoded;
-        
+
     private boolean sent;
-        
+
     private String remote_agent;
     private String remote_accepts;
-        
+
     private int attachments_size=0;
-        
+
     private String last_login;
-        
+
     /** Save the login password. It will be used for the second try password if
      * opening a folder fails.
      */
     private String login_password;
-        
+
     private Object sess=null;
 
     private Hashtable folders;
@@ -111,8 +111,8 @@ public class UserSession implements HTTPSession {
 
     protected boolean is_logged_out=false;
 
-                        
-    public UserSession(WebMailServer parent,Object parm,HTTPRequestHeader h) 
+
+    public UserSession(WebMailServer parent,Object parm,HTTPRequestHeader h)
          throws UserDataException, InvalidPasswordException, WebMailException {
         try {
             Class srvltreq=Class.forName("javax.servlet.http.HttpServletRequest");
@@ -120,7 +120,7 @@ public class UserSession implements HTTPSession {
                 javax.servlet.http.HttpServletRequest req=(javax.servlet.http.HttpServletRequest)parm;
                 this.sess=req.getSession(false);
                 session_code=((javax.servlet.http.HttpSession)sess).getId();
-                                
+
                 try {
                     remote=InetAddress.getByName(req.getRemoteHost());
                 } catch(UnknownHostException e) {
@@ -140,24 +140,24 @@ public class UserSession implements HTTPSession {
             session_code=Helper.calcSessionCode(remote,h);
         }
         doInit(parent,h);
-                
+
     }
-        
+
     /**
      * This method does the actual initialisation
      *
-     * devink 7/15/2000 - added TwoPassAuthenticationException 
+     * devink 7/15/2000 - added TwoPassAuthenticationException
      *                  - updated call to getUserData(), to use my new one.
      * devink 9/24/2000 - reverted back to old getUserData call
      */
-    protected void doInit(WebMailServer parent, HTTPRequestHeader h) 
+    protected void doInit(WebMailServer parent, HTTPRequestHeader h)
          throws UserDataException, InvalidPasswordException, WebMailException {
         setLastAccess();
         this.parent=parent;
         remote_agent=h.getHeader("User-Agent").replace('\n',' ');
         remote_accepts=h.getHeader("Accept").replace('\n',' ');
         parent.getLogger().log(Logger.LOG_INFO,"WebMail: New Session ("+session_code+")");
-        user=WebMailServer.getStorage().getUserData(h.getContent("login"),h.getContent("vdom"),h.getContent("password"),true);       
+        user=WebMailServer.getStorage().getUserData(h.getContent("login"),h.getContent("vdom"),h.getContent("password"),true);
         last_login=user.getLastLogin();
         user.login();
         login_password=h.getContent("password");
@@ -192,7 +192,7 @@ public class UserSession implements HTTPSession {
     public Document getModel() {
         return model.getRoot();
     }
-        
+
     /**
      * Calculate session-ID for a session.
      *
@@ -216,7 +216,7 @@ public class UserSession implements HTTPSession {
             }
         }
     }
-        
+
     /**
      * Login to this session.
      * Establishes connections to a user´s Mailhosts
@@ -239,8 +239,8 @@ public class UserSession implements HTTPSession {
         setEnv();
         connectAll();
     }
-        
-                
+
+
     /**
      * Return a locale-specific string resource
      */
@@ -248,7 +248,7 @@ public class UserSession implements HTTPSession {
         return parent.getStorage().getStringResource(key,user.getPreferredLocale());
     }
 
-    
+
     /**
      * Create a Message List.
      * Fetches a list of headers in folder foldername for part list_part.
@@ -257,7 +257,7 @@ public class UserSession implements HTTPSession {
      * @param foldername folder for which a message list should be built
      * @param list_part part of list to display (1 = last xx messages, 2 = total-2*xx - total-xx messages)
      */
-    public void createMessageList(String folderhash,int list_part) 
+    public void createMessageList(String folderhash,int list_part)
         throws NoSuchFolderException {
 
         long time_start=System.currentTimeMillis();
@@ -266,7 +266,7 @@ public class UserSession implements HTTPSession {
         df.setTimeZone(tz);
 
         try {
-                        
+
             Folder folder=getFolder(folderhash);
             Element xml_folder=model.getFolder(folderhash);
             Element xml_current=model.setCurrentFolder(folderhash);
@@ -274,23 +274,23 @@ public class UserSession implements HTTPSession {
 
             if(folder == null) {
                 throw new NoSuchFolderException(folderhash);
-            }           
-                        
+            }
+
             long fetch_start=System.currentTimeMillis();
-                        
+
             if(!folder.isOpen()) {
                 folder.open(Folder.READ_ONLY);
             } else {
                 folder.close(false);
                 folder.open(Folder.READ_ONLY);
             }
-                        
+
             /* Calculate first and last message to show */
             int total_messages=folder.getMessageCount();
             int new_messages=folder.getNewMessageCount();
             int show_msgs=user.getMaxShowMessages();
 
-            
+
             xml_messagelist.setAttribute("total",total_messages+"");
             xml_messagelist.setAttribute("new",new_messages+"");
 
@@ -329,9 +329,9 @@ public class UserSession implements HTTPSession {
             //System.err.println(msgs.length + " messages fetching...");
             folder.fetch(msgs,fp);
             long fetch_stop=System.currentTimeMillis();
-                        
+
             Hashtable header=new Hashtable(15);
-                                                
+
             Flags.Flag[] sf;
             String from,to,cc,bcc,replyto,subject;
             String messageid;
@@ -356,10 +356,10 @@ public class UserSession implements HTTPSession {
 
                 XMLMessage xml_message=model.getMessage(xml_folder,msgs[i].getMessageNumber()+"",
                                                      messageid);
-                    
+
                                 /* Addresses */
                 from="";replyto="";to="";cc="";bcc="";
-                try {              
+                try {
                     from=MimeUtility.decodeText(Helper.joinAddress(msgs[i].getFrom()));
                     replyto=MimeUtility.decodeText(Helper.joinAddress(msgs[i].getReplyTo()));
                     to=MimeUtility.decodeText(Helper.joinAddress(msgs[i].getRecipients(Message.RecipientType.TO)));
@@ -369,12 +369,12 @@ public class UserSession implements HTTPSession {
                     parent.getLogger().log(Logger.LOG_WARN,"Unsupported Encoding: "+e.getMessage());
                 }
                 if(from=="") from=getStringResource("unknown sender");
-                if(to == "") to = getStringResource("unknown recipient");                  
-                    
+                if(to == "") to = getStringResource("unknown recipient");
+
                                 /* Flags */
                 sf = msgs[i].getFlags().getSystemFlags();
                 String basepath=parent.getBasePath();
-                    
+
                 for(int j=0;j<sf.length;j++) {
                     if(sf[j]==Flags.Flag.RECENT) xml_message.setAttribute("recent","true");
                     if(sf[j]==Flags.Flag.SEEN) xml_message.setAttribute("seen","true");
@@ -384,17 +384,17 @@ public class UserSession implements HTTPSession {
                     if(sf[j]==Flags.Flag.FLAGGED) xml_message.setAttribute("flagged","true");
                     if(sf[j]==Flags.Flag.USER) xml_message.setAttribute("user","true");
                 }
-                if(msgs[i] instanceof MimeMessage && 
+                if(msgs[i] instanceof MimeMessage &&
                    ((MimeMessage) msgs[i]).getContentType().toUpperCase().startsWith("MULTIPART/")) {
                     xml_message.setAttribute("attachment","true");
                 }
-                    
+
                 if(msgs[i] instanceof MimeMessage) {
                     int size=((MimeMessage) msgs[i]).getSize();
                     size/=1024;
                     xml_message.setAttribute("size",(size>0?size+"":"<1")+" kB");
                 }
-                    
+
                 /* Subject */
                 subject="";
                 if(msgs[i].getSubject() != null) {
@@ -407,7 +407,7 @@ public class UserSession implements HTTPSession {
                 if(subject == null || subject.equals("")) {
                     subject=getStringResource("no subject");
                 }
-                    
+
                 /* Set all of what we found into the DOM */
                 xml_message.setHeader("FROM",from);
                 try {
@@ -423,7 +423,7 @@ public class UserSession implements HTTPSession {
                 xml_message.setHeader("CC",cc);
                 xml_message.setHeader("BCC",bcc);
                 xml_message.setHeader("REPLY-TO",replyto);
-                    
+
                 /* Date */
                 Date d=msgs[i].getSentDate();
                 String ds="";
@@ -447,28 +447,28 @@ public class UserSession implements HTTPSession {
             ex.printStackTrace();
         }
     }
-        
+
 
     /**
-     * This indicates standard getMessage behaviour: Fetch the message from the IMAP server and store it in the 
+     * This indicates standard getMessage behaviour: Fetch the message from the IMAP server and store it in the
      * current UserModel.
      * @see getMessage(String,int,int)
      */
     public static final int GETMESSAGE_MODE_STANDARD=0;
 
-    /** 
-     * Set this mode in getMessage to indicate that the message is requested to generate a reply message and 
+    /**
+     * Set this mode in getMessage to indicate that the message is requested to generate a reply message and
      * should therefore be set as the current "work" message.
      * @see getMessage(String,int,int)
      */
     public static final int GETMESSAGE_MODE_REPLY=1;
-    
+
     /**
      * Set this mode in getMessage to indicate that the message is to be forwarded to someone else and a "work"
      * message should be generated.
      * @see getMessage(String,int,int)
      */
-    public static final int GETMESSAGE_MODE_FORWARD=2;    
+    public static final int GETMESSAGE_MODE_FORWARD=2;
 
     /**
      * This is a wrapper to call getMessage with standard mode.
@@ -494,25 +494,25 @@ public class UserSession implements HTTPSession {
     public void getMessage(String folderhash, int msgnum, int mode) throws NoSuchFolderException {
         // security reasons:
         // attachments=null;
-                
+
         try {
             TimeZone tz=TimeZone.getDefault();
             DateFormat df=DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT, user.getPreferredLocale());
             df.setTimeZone(tz);
             Folder folder=getFolder(folderhash);
             Element xml_folder=model.getFolder(folderhash);
-                        
+
             if(folder==null) {
                 throw new NoSuchFolderException("No such folder: "+folderhash);
             }
-                        
+
             if(folder.isOpen() && folder.getMode()==Folder.READ_WRITE) {
                 folder.close(false);
-                folder.open(Folder.READ_ONLY);          
+                folder.open(Folder.READ_ONLY);
             } else if(!folder.isOpen()) {
                 folder.open(Folder.READ_ONLY);
             }
-            
+
             MimeMessage m=(MimeMessage)folder.getMessage(msgnum);
 
             String messageid;
@@ -534,7 +534,7 @@ public class UserSession implements HTTPSession {
             /* If we cached the message, we don't need to fetch it again */
             if(!cached) {
                 //Element xml_header=model.getHeader(xml_message);
-                
+
                 try {
                     String from=MimeUtility.decodeText(Helper.joinAddress(m.getFrom()));
                     String replyto=MimeUtility.decodeText(Helper.joinAddress(m.getReplyTo()));
@@ -546,17 +546,17 @@ public class UserSession implements HTTPSession {
                     if(date_orig!=null) {
                         date=df.format(date_orig);
                     }
-                    String subject="";              
+                    String subject="";
                     if(m.getSubject() != null) {
                         subject=MimeUtility.decodeText(m.getSubject());
                     }
                     if(subject == null || subject.equals("")) {
                         subject=getStringResource("no subject");
                     }
-                    
+
                     try {
                         Flags.Flag[] sf = m.getFlags().getSystemFlags();
-                        for(int j=0;j<sf.length;j++) {                      
+                        for(int j=0;j<sf.length;j++) {
                             if(sf[j]==Flags.Flag.RECENT) xml_message.setAttribute("recent","true");
                             if(sf[j]==Flags.Flag.SEEN) xml_message.setAttribute("seen","true");
                             if(sf[j]==Flags.Flag.DELETED) xml_message.setAttribute("deleted","true");
@@ -569,12 +569,12 @@ public class UserSession implements HTTPSession {
                     if(m.getContentType().toUpperCase().startsWith("MULTIPART/")) {
                         xml_message.setAttribute("attachment","true");
                     }
-                    
+
                     int size=m.getSize();
                     size/=1024;
-                    xml_message.setAttribute("size",(size>0?size+"":"<1")+" kB");               
+                    xml_message.setAttribute("size",(size>0?size+"":"<1")+" kB");
 
-                    
+
                     /* Set all of what we found into the DOM */
                     xml_message.setHeader("FROM",from);
                     xml_message.setHeader("SUBJECT",Fancyfier.apply(subject));
@@ -583,11 +583,11 @@ public class UserSession implements HTTPSession {
                     xml_message.setHeader("BCC",bcc);
                     xml_message.setHeader("REPLY-TO",replyto);
                     xml_message.setHeader("DATE",date);
-                    
+
                     /* Decode MIME contents recursively */
                     xml_message.removeAllParts();
                     parseMIMEContent(m,xml_message,messageid);
-                    
+
                 } catch(UnsupportedEncodingException e) {
                     parent.getLogger().log(Logger.LOG_WARN,"Unsupported Encoding in parseMIMEContent: "+e.getMessage());
                     System.err.println("Unsupported Encoding in parseMIMEContent: "+e.getMessage());
@@ -605,7 +605,7 @@ public class UserSession implements HTTPSession {
                 folder.setFlags(msgnum,msgnum,new Flags(Flags.Flag.RECENT), false);
                 if((mode & GETMESSAGE_MODE_REPLY) == GETMESSAGE_MODE_REPLY) {
                     folder.setFlags(msgnum,msgnum,new Flags(Flags.Flag.ANSWERED),true);
-                }       
+                }
             }
             folder.close(false);
 
@@ -614,18 +614,18 @@ public class UserSession implements HTTPSession {
                further editing (replying or forwarding). In this case we set the current "work" message to the
                message we just fetched and then modifiy it a little (quote, add a "Re" to the subject, etc). */
             XMLMessage work=null;
-            if((mode & GETMESSAGE_MODE_REPLY) == GETMESSAGE_MODE_REPLY || 
+            if((mode & GETMESSAGE_MODE_REPLY) == GETMESSAGE_MODE_REPLY ||
                (mode & GETMESSAGE_MODE_FORWARD) == GETMESSAGE_MODE_FORWARD) {
                 //System.err.println("Setting work message!");
                 work=model.setWorkMessage(xml_message);
-                
+
                 String newmsgid=WebMailServer.generateMessageID(user.getUserName());
-                
+
                 if(work != null && (mode & GETMESSAGE_MODE_REPLY) == GETMESSAGE_MODE_REPLY) {
                     String from=work.getHeader("FROM");
                     work.setHeader("FROM",user.getEmail());
                     work.setHeader("TO",from);
-                    work.prepareReply(getStringResource("reply subject prefix"), 
+                    work.prepareReply(getStringResource("reply subject prefix"),
                                       getStringResource("reply subject postfix"),
                                       getStringResource("reply message prefix"),
                                       getStringResource("reply message postfix"));
@@ -635,7 +635,7 @@ public class UserSession implements HTTPSession {
                     work.setHeader("FROM",user.getEmail());
                     work.setHeader("TO","");
                     work.setHeader("CC","");
-                    work.prepareForward(getStringResource("forward subject prefix"), 
+                    work.prepareForward(getStringResource("forward subject prefix"),
                                         getStringResource("forward subject postfix"),
                                         getStringResource("forward message prefix"),
                                         getStringResource("forward message postfix"));
@@ -660,11 +660,11 @@ public class UserSession implements HTTPSession {
             ex.printStackTrace();
         }
     }
-        
+
 
     /**
        Use depth-first search to go through MIME-Parts recursively.
-         
+
        @param p Part to begin with
     */
     protected void parseMIMEContent(Part p, XMLMessagePart parent_part, String msgid) throws MessagingException {
@@ -685,7 +685,7 @@ public class UserSession implements HTTPSession {
                 //Tidy tidy=new Tidy();
                 //tidy.setUpperCaseTags(true);
                 //Document htmldoc=tidy.parseDOM(p.getInputStream(),null);
-                org.cyberneko.html.parsers.DOMParser parser = 
+                org.cyberneko.html.parsers.DOMParser parser =
                     new org.cyberneko.html.parsers.DOMParser();
                 parser.parse(new InputSource(p.getInputStream()));
                 Document htmldoc = parser.getDocument();
@@ -702,7 +702,7 @@ public class UserSession implements HTTPSession {
                 /* HTML doesn't allow us to do such fancy stuff like different quote colors,
                    perhaps this will be implemented in the future */
 
-                /* So we just add this HTML document to the message part, which will deal with 
+                /* So we just add this HTML document to the message part, which will deal with
                    removing headers and tags that we don't need */
                 xml_part.addContent(htmldoc);
 
@@ -722,18 +722,18 @@ public class UserSession implements HTTPSession {
                     int size=p.getSize();
                     MimeBodyPart mpb=(MimeBodyPart)p;
                     InputStream is=mpb.getInputStream();
-                                        
+
                     /* Workaround for Java or Javamail Bug */
                     is=new BufferedInputStream(is);
                     ByteStore ba=ByteStore.getBinaryFromIS(is,size);
                     in=new BufferedReader(new InputStreamReader(new ByteArrayInputStream(ba.getBytes())));
                     /* End of workaround */
                     size=is.available();
-                                        
+
                 } else {
                     in=new BufferedReader(new InputStreamReader(p.getInputStream()));
                 }
-                
+
 
                 //System.err.println("Content-Type: "+p.getContentType());
 
@@ -761,21 +761,21 @@ public class UserSession implements HTTPSession {
                       token=new String(token.getBytes(),charset);
                     } catch(UnsupportedEncodingException ex1) {
                       parent.getLogger().log(Logger.LOG_INFO,"Java Engine does not support charset "+charset+". Trying to convert from MIME ...");
-                      
+
                       try {
                         charset=MimeUtility.javaCharset(charset);
                         token=new String(token.getBytes(),charset);
-                
+
                       } catch(UnsupportedEncodingException ex) {
                       parent.getLogger().log(Logger.LOG_WARN,"Converted charset ("+charset+") does not work. Using default charset (ouput may contain errors)");
                         token=new String(token.getBytes());
                       }
                     }
-                    
+
                     /* Here we figure out which quote level this line has, simply by counting how many
                        ">" are in front of the line, ignoring all whitespaces. */
                     int current_quotelevel=Helper.getQuoteLevel(token);
-                        
+
 
                     /* When we are in a different quote level than the last line, we append all we got
                        so far to the part with the old quotelevel and begin with a clean String buffer */
@@ -787,7 +787,7 @@ public class UserSession implements HTTPSession {
 
                     if(user.wantsBreakLines()) {
                         Enumeration enum=Helper.breakLine(token,user.getMaxLineLength(),current_quotelevel);
-                        
+
                         while(enum.hasMoreElements()) {
                             String s=(String)enum.nextElement();
                             if(user.wantsShowFancy()) {
@@ -802,9 +802,9 @@ public class UserSession implements HTTPSession {
                         } else {
                             content.append(token).append("\n");
                         }
-                    }                   
+                    }
                 }
-                xml_part.addContent(content.toString(),old_quotelevel);         
+                xml_part.addContent(content.toString(),old_quotelevel);
                 // Modified by exce, start
                 // Why the following code???
                 content=new StringBuffer(1000);
@@ -818,7 +818,7 @@ public class UserSession implements HTTPSession {
                 boolean found=false;
                 int alt=0;
                 // Walk though our preferred list of encodings. If we have found a fitting part,
-                // decode it and replace it for the parent (this is what we really want with an 
+                // decode it and replace it for the parent (this is what we really want with an
                 // alternative!)
                 // Modified by exce, start
                 /**
@@ -845,13 +845,13 @@ public class UserSession implements HTTPSession {
                  * easy and precise (consider a html: <body><div><b>some text..</b>
                  * </div></body>. Even we try to get text node under <body>, we'll
                  * just get nothing, because "some text..." is marked up by
-                 * <div><b>. There is no easy way to retrieve text from html 
+                 * <div><b>. There is no easy way to retrieve text from html
                  * unless we parse the html to analyse its semantics.
-                 * 
+                 *
                  * Here is our policy for alternative part:
                  * 1. Displays HTML but hides TEXT.
                  * 2. When replying this mail, try to quote TEXT part. If no TEXT
-                 *    part exists, quote HTML in best effort(use 
+                 *    part exists, quote HTML in best effort(use
                  *    XMLMessagePart.quoteContent() by Sebastian Schaffert.)
                  */
                 while (alt < preferred.length) {
@@ -879,7 +879,7 @@ public class UserSession implements HTTPSession {
                         for (int i = 0; i < attributes.getLength(); ++i) {
                             Node attr = attributes.item(i);
                             // If type=="TEXT", add a hidden attribute.
-                            if (attr.getNodeName().toUpperCase().equals("TYPE") && 
+                            if (attr.getNodeName().toUpperCase().equals("TYPE") &&
                                 attr.getNodeValue().toUpperCase().equals("TEXT")) {
                                 ((Element)textPartNode).setAttribute("hidden", "true");
                             }
@@ -896,7 +896,7 @@ public class UserSession implements HTTPSession {
                 }
 
             } else if(p.getContentType().toUpperCase().startsWith("MULTIPART/")) {
-                /* This is a standard multipart message. We should recursively walk thorugh all of 
+                /* This is a standard multipart message. We should recursively walk thorugh all of
                    the parts and decode them, appending as children to the current part */
 
                 xml_part=parent_part.createPart("multi");
@@ -928,19 +928,19 @@ public class UserSession implements HTTPSession {
                     MimeBodyPart mpb=(MimeBodyPart)p;
                     System.err.println("MIME Body part (image), Encoding: "+mpb.getEncoding());
                     InputStream is=mpb.getInputStream();
-                                        
+
                     /* Workaround for Java or Javamail Bug */
                     in=new BufferedInputStream(is);
                     ByteStore ba=ByteStore.getBinaryFromIS(in,size);
                     in=new ByteArrayInputStream(ba.getBytes());
                     /* End of workaround */
                     size=in.available();
-                                        
+
                 } else {
                     System.err.println("*** No MIME Body part!! ***");
                     in=p.getInputStream();
                 }
-                                
+
                 ByteStore data=ByteStore.getBinaryFromIS(in,size);
                 if(mime_parts_decoded==null) {
                     mime_parts_decoded=new Hashtable();
@@ -969,10 +969,10 @@ public class UserSession implements HTTPSession {
 
                 // Modified by exce, start
                 /**
-                 * For multibytes language system, we have to separate filename into 
+                 * For multibytes language system, we have to separate filename into
                  * 2 format: one for display (UTF-8 encoded), another for encode the
                  * url of hyperlink.
-                 * `filename' is for display, while `hrefFileName' is for hyperlink. 
+                 * `filename' is for display, while `hrefFileName' is for hyperlink.
                  * To make use of these two attributes, `showmessage.xsl' is slightly
                  * modified.
                  */
@@ -995,7 +995,7 @@ public class UserSession implements HTTPSession {
             ex.printStackTrace();
         }
     }
-    
+
     public ByteStore getMIMEPart(String msgid,String name) {
         if(mime_parts_decoded != null) {
             return (ByteStore)mime_parts_decoded.get(msgid+"/"+name);
@@ -1012,13 +1012,13 @@ public class UserSession implements HTTPSession {
         Vector v=new Vector();
         while(enum.hasMoreElements()) {
             String key=(String)enum.nextElement();
-            if(key.startsWith(msgid)) {         
+            if(key.startsWith(msgid)) {
                 v.addElement(key);
             }
         }
         return v.elements();
     }
-        
+
     public void clearWork() {
         clearAttachments();
         model.clearWork();
@@ -1034,7 +1034,7 @@ public class UserSession implements HTTPSession {
      */
     public void clearAttachments() {
         attachments_size=0;
-        
+
         XMLMessage xml_message=model.getWorkMessage();
 
         String msgid=xml_message.getAttribute("msgid");
@@ -1045,7 +1045,7 @@ public class UserSession implements HTTPSession {
             mime_parts_decoded.remove((String)enum.nextElement());
         }
     }
-        
+
     /**
      * This method returns a table of attachments for the current "work" message
      */
@@ -1061,7 +1061,7 @@ public class UserSession implements HTTPSession {
             String filename=key.substring(msgid.length()+1);
             hash.put(filename,mime_parts_decoded.get(key));
         }
-        
+
         return hash;
     }
 
@@ -1071,7 +1071,7 @@ public class UserSession implements HTTPSession {
     public ByteStore getAttachment(String key) {
         XMLMessage xml_message=model.getWorkMessage();
         String msgid=xml_message.getAttribute("msgid");
-        
+
         return getMIMEPart(msgid,key);
     }
 
@@ -1102,14 +1102,14 @@ public class UserSession implements HTTPSession {
         } catch(NumberFormatException e) {
             parent.getLogger().log(Logger.LOG_WARN,"Invalid setting for parameter \"MAX ATTACH SIZE\". Must be a number!");
         }
-                                
+
         if(attachments_size+bs.getSize() > max_size) {
             throw new WebMailException("Attachments are too big. The sum of the sizes may not exceed "+max_size+" bytes.");
         } else {
             mime_parts_decoded.put(msgid+"/"+name,bs);
             attachments_size+=bs.getSize();
             XMLMessagePart xml_part=xml_multipart.createPart("binary");
-            
+
             xml_part.setAttribute("filename",name);
             xml_part.setAttribute("size",bs.getSize()+"");
             xml_part.setAttribute("description",description);
@@ -1136,7 +1136,7 @@ public class UserSession implements HTTPSession {
             ByteStore b=(ByteStore)mime_parts_decoded.get((String)enum.nextElement());
             attachments_size+=b.getSize();
         }
-        
+
         enum=xml_multipart.getParts();
         XMLMessagePart oldpart=null;
         while(enum.hasMoreElements()) {
@@ -1153,22 +1153,22 @@ public class UserSession implements HTTPSession {
         setEnv();
         //XMLCommon.debugXML(model.getRoot());
     }
-        
+
     /**
      * Store a message in the environment for further processing.
      */
     public void storeMessage(HTTPRequestHeader head) {
         XMLMessage xml_message=model.getWorkMessage();
         XMLMessagePart xml_textpart=xml_message.getFirstMessageTextPart();
-        
+
         /* Store the already typed message if necessary/possible */
         if(head.isContentSet("BODY")) {
             StringBuffer content=new StringBuffer();
                 // Modified by exce, start
                 /**
                  * Because the data transfered through HTTP should be ISO8859_1,
-                 * HTTPRequestHeader is also ISO8859_1 encoded. Furthermore, the 
-                 * string we used in brwoser is UTF-8 encoded, hence we have to 
+                 * HTTPRequestHeader is also ISO8859_1 encoded. Furthermore, the
+                 * string we used in brwoser is UTF-8 encoded, hence we have to
                  * transcode the stored variables from ISO8859_1 to UTF-8 so that
                  * the client browser displays correctly.
                  */
@@ -1179,16 +1179,16 @@ public class UserSession implements HTTPSession {
                         e.printStackTrace();
                         bodyString = head.getContent("BODY");
                 }
-                
+
             // If the user enabled "break line", then do it!
             if(user.wantsBreakLines()) {
                 // StringTokenizer tok=new StringTokenizer(head.getContent("BODY"),"\n");
                 StringTokenizer tok=new StringTokenizer(bodyString,"\n");
                 while(tok.hasMoreTokens()) {
-                    String line=tok.nextToken();                
+                    String line=tok.nextToken();
                     Enumeration enum=Helper.breakLine(line,user.getMaxLineLength(),
                                                       Helper.getQuoteLevel(line));
-                    while(enum.hasMoreElements()) {            
+                    while(enum.hasMoreElements()) {
                         content.append((String)enum.nextElement()).append('\n');
                     }
                 }
@@ -1196,7 +1196,7 @@ public class UserSession implements HTTPSession {
                 // content.append(head.getContent("BODY"));
                 content.append(bodyString);
                 // Modified by exce, end
-            }   
+            }
             xml_textpart.removeAllContent();
             xml_textpart.addContent(content.toString(),0);
         }
@@ -1257,8 +1257,8 @@ public class UserSession implements HTTPSession {
                 // Modified by exce, end
         }
         setEnv();
-    }           
-    
+    }
+
     /**
      * Connect to all Mailhosts
      * @deprecated Should use refreshFolderInformation now.
@@ -1274,7 +1274,7 @@ public class UserSession implements HTTPSession {
     public Folder getChildFolder(Folder root, String folderhash) {
         return getFolder(folderhash);
     }
-    
+
     /**
      * Get the folder with the given hashvalue.
      * @returns Folder with the given hashvalue
@@ -1290,10 +1290,10 @@ public class UserSession implements HTTPSession {
      * @see net.wastl.webmail.misc.MD5
      */
     protected String generateFolderHash(Folder folder) {
-        String id=Integer.toHexString(folder.hashCode());       
+        String id=Integer.toHexString(folder.hashCode());
         // If possible, use the MD5-Sum for the folder ID because it is persistant over sessions
         try {
-            MD5 md5=new MD5(folder.getURLName());          
+            MD5 md5=new MD5(folder.getURLName());
             id=md5.asHex();
         } catch(MessagingException ex) {
         }
@@ -1304,7 +1304,7 @@ public class UserSession implements HTTPSession {
 
     /**
      * Construct the folder subtree for the given folder and append it to xml_parent.
-     * 
+     *
      * @param folder the folder where we begin
      * @param xml_parent the XML Element where the gathered information will be appended
      * @param subscribed_only Only list subscribed folders
@@ -1364,7 +1364,7 @@ public class UserSession implements HTTPSession {
             if(holds_folders) {
                 Folder[] subfolders;
 
-                /* If the user only wanted to see subscribed folders, call listSubscribed 
+                /* If the user only wanted to see subscribed folders, call listSubscribed
                    otherwise call list() */
                 if(subscribed_only) {
                     try {
@@ -1415,18 +1415,18 @@ public class UserSession implements HTTPSession {
             cur_mh_id=(String)mailhosts.nextElement();
 
             MailHostData mhd=user.getMailHost(cur_mh_id);
-            
+
             URLName url=new URLName(mhd.getHostURL());
-            
+
             Element mailhost=model.createMailhost(mhd.getName(),mhd.getID(),url.toString());
-            
+
             int depth=0;
 
             try {
 
-                cur_folder=getRootFolder(cur_mh_id);            
-                               
-                
+                cur_folder=getRootFolder(cur_mh_id);
+
+
                 /* Cannot unsubscribe root folder! */
                 try {
                     cur_folder.setSubscribed(true);
@@ -1442,27 +1442,27 @@ public class UserSession implements HTTPSession {
                         /* Washington University stores user mailboxes as
                          * ~user/mail/... */
                         depth=getFolderTree(cur_folder.getFolder("INBOX"),mailhost, subscribed_only);
-                        if(depth>max_depth) {                           
+                        if(depth>max_depth) {
                             max_depth=depth;
                         }
                         depth=getFolderTree(cur_folder.getFolder("~"+mhd.getLogin()+"/mail"),mailhost, subscribed_only);
-                    } 
+                    }
                     /* Cyrus, Courier & Co have their folders beneath the INBOX */
                     else if(cur_folder.getFolder("INBOX").exists()) {
                         depth=getFolderTree(cur_folder.getFolder("INBOX"),mailhost, subscribed_only);
-                    }               
+                    }
                 } /* If it didn't work it failed in the "if" statement, since "getFolderTree" doesn't throw exceptions
                      so what we want to do is to simply construct the folder tree for INBOX */
                 catch(MessagingException ex) {
                     depth=getFolderTree(cur_folder.getFolder("INBOX"),mailhost, subscribed_only);
                 }
-            } 
+            }
             // Here a more serious exception has been caught (Connection failed)
             catch(MessagingException ex) {
                 mailhost.setAttribute("error",ex.getMessage());
                 parent.getLogger().log(Logger.LOG_WARN,"Error connecting to mailhost ("+url.toString()+"): "+ex.getMessage());
             }
-                    
+
             if(depth>max_depth) {
                 max_depth=depth;
             }
@@ -1472,37 +1472,37 @@ public class UserSession implements HTTPSession {
         }
 
         model.setStateVar("max folder depth",(1+max_depth)+"");
-    }           
+    }
 
     public void refreshFolderInformation(String folderhash) {
         Folder folder=getFolder(folderhash);
         Element xml_folder=model.getFolder(folderhash);
-        
+
         if(xml_folder.getAttribute("holds_messages").toLowerCase().equals("true")) {
             try {
                 Element messagelist=model.createMessageList();
-                
+
                 int total_messages=folder.getMessageCount();
                 int new_messages=folder.getNewMessageCount();
-                
+
                 if((total_messages == -1 || new_messages == -1) && !folder.isOpen()) {
                     folder.open(Folder.READ_ONLY);
                     total_messages=folder.getMessageCount();
                     new_messages=folder.getNewMessageCount();
                 }
                 if(folder.isOpen()) folder.close(false);
-                
+
                 messagelist.setAttribute("total",total_messages+"");
                 messagelist.setAttribute("new",new_messages+"");
 
                 model.removeMessageList(xml_folder);
                 xml_folder.appendChild(messagelist);
-            
+
             } catch(MessagingException ex) {
                 xml_folder.setAttribute("error",ex.getMessage());
             }
         }
-        
+
     }
 
     /**
@@ -1510,7 +1510,7 @@ public class UserSession implements HTTPSession {
      */
     public void subscribeFolder(String folderhash) {
         Folder folder=getFolder(folderhash);
-        
+
         // Only IMAP supports subscription...
         try {
             folder.setSubscribed(true);
@@ -1524,17 +1524,17 @@ public class UserSession implements HTTPSession {
      */
     public void unsubscribeFolder(String folderhash) {
         Folder folder=getFolder(folderhash);
-        
+
         // Only IMAP supports subscription...
         try {
             folder.setSubscribed(false);
         } catch(MessagingException ex) {
             //System.err.println("Folder subscription not supported");
         }
-    }    
+    }
 
     /**
-     * Subscribe all folders for a Mailhost 
+     * Subscribe all folders for a Mailhost
      * Do it the non-recursive way: Uses a simple Queue :-)
      */
     public void setSubscribedAll(String id, boolean subscribed) throws MessagingException {
@@ -1545,7 +1545,7 @@ public class UserSession implements HTTPSession {
         try {
             while(!q.isEmpty()) {
                 folder=(Folder)q.next();
-                
+
                 folder.setSubscribed(subscribed);
                 Folder[] list=folder.list();
                 for(int i=0;i<list.length;i++) {
@@ -1555,7 +1555,7 @@ public class UserSession implements HTTPSession {
         } catch(MessagingException ex) {}
     }
 
-   
+
     /**
        Disconnect from all Mailhosts
     */
@@ -1574,13 +1574,13 @@ public class UserSession implements HTTPSession {
                 parent.getLogger().log(Logger.LOG_INFO,"Mail: Connection to "+st.toString()+" closed.");
             } catch(Exception ex) {
                 parent.getLogger().log(Logger.LOG_WARN,"Mail: Failed to close connection to "+st.toString()+". Reason: "+ex.getMessage());
-            }           
+            }
             stores.remove(name);
         }
         folders=null;
     }
-        
-        
+
+
     public Folder getRootFolder(String name) throws MessagingException {
         if(connections != null && connections.containsKey(name)) {
             return (Folder)connections.get(name);
@@ -1588,9 +1588,9 @@ public class UserSession implements HTTPSession {
             return connect(name);
         }
     }
-        
+
     protected Store connectStore(String host,String protocol,String login, String password) throws MessagingException {
-        /* Check whether the domain of this user allows to connect to the host */       
+        /* Check whether the domain of this user allows to connect to the host */
         WebMailVirtualDomain vdom=parent.getStorage().getVirtualDomain(user.getDomain());
         if(!vdom.isAllowedHost(host)) {
             throw new MessagingException("You are not allowed to connect to this host");
@@ -1620,8 +1620,8 @@ public class UserSession implements HTTPSession {
             }
         }
         return st;
-    }    
-        
+    }
+
     /**
        Connect to mailhost "name"
     */
@@ -1632,14 +1632,14 @@ public class UserSession implements HTTPSession {
         Store st=connectStore(url.getHost(),url.getProtocol(),m.getLogin(),m.getPassword());
 
         //System.err.println("Default folder: "+st.getDefaultFolder().toString());
-                
+
         Folder f=st.getDefaultFolder();
         connections.put(name,f);
         parent.getLogger().log(Logger.LOG_INFO,"Mail: Folder "+f.toString()+" opened at store "+st.toString()+".");
         return f;
     }
-    
-        
+
+
     /**
        Disconnect from mailhost "name"
     */
@@ -1664,7 +1664,7 @@ public class UserSession implements HTTPSession {
             connections.remove(name);
         }
     }
-        
+
     /**
      * Terminate this session.
      *
@@ -1677,7 +1677,7 @@ public class UserSession implements HTTPSession {
             expungeFolders();
             disconnectAll();
             user.logout();
-            saveData();     
+            saveData();
             parent.getLogger().log(Logger.LOG_INFO,"WebMail: Session "+getSessionCode()+" logout.");
             // Make sure the session is invalidated
             if(sess != null) {
@@ -1691,12 +1691,12 @@ public class UserSession implements HTTPSession {
             }
             if(parent.getSession(getSessionCode()) != null) {
                 parent.removeSession(this);
-            }   
+            }
         } else {
             System.err.println("WARNING: Session was already logged out. Ignoring logout request.");
         }
     }
-    
+
     /**
      * Check whether this session is already logged out.
      * Useful to avoid loops.
@@ -1711,7 +1711,7 @@ public class UserSession implements HTTPSession {
     public String getSessionCode() {
         return session_code;
     }
-    
+
     /**
      * Return the last access time of this session
      *
@@ -1720,7 +1720,7 @@ public class UserSession implements HTTPSession {
     public long getLastAccess() {
         return last_access;
     }
-    
+
     /**
      * Update the last access time.
      * Sets the last access time to the current time.
@@ -1731,7 +1731,7 @@ public class UserSession implements HTTPSession {
         last_access=System.currentTimeMillis();
         //System.err.println("Setting last access to session: "+last_access);
     }
-        
+
     /**
      * Handle a timeout for this session.
      * This calls the logout method, effectively terminating this session.
@@ -1743,7 +1743,7 @@ public class UserSession implements HTTPSession {
         parent.getLogger().log(Logger.LOG_WARN,"WebMail: Session "+getSessionCode()+" timeout.");
         logout();
     }
-    
+
     public long getTimeout() {
         long i=600000;
         try {
@@ -1753,11 +1753,11 @@ public class UserSession implements HTTPSession {
         }
         return i;
     }
-        
+
     public Locale getLocale() {
         return user.getPreferredLocale();
     }
-    
+
     public void saveData() {
         try {
             user.save();
@@ -1767,16 +1767,16 @@ public class UserSession implements HTTPSession {
         }
         //parent.getStorage().saveUserData(user.getUserName(),user.getDomain());
     }
-        
-        
-        
+
+
+
     protected static int[] getSelectedMessages(HTTPRequestHeader head, int max) {
         //      System.err.print(" - select messages...");
-                
+
         Enumeration e=head.getContent().keys();
         int _msgs[]=new int[max];
         int j=0;
-                
+
         while(e.hasMoreElements()) {
             String s=(String)e.nextElement();
             if(s.startsWith("CH") && head.getContent(s).equals("on")) {
@@ -1790,16 +1790,16 @@ public class UserSession implements HTTPSession {
             }
         }
         //System.err.println();
-                
+
         int msgs[]=new int[j];
         for(int i=0;i<j;i++) {
             msgs[i]=_msgs[i];
         }
         return msgs;
     }
-        
 
-    /** 
+
+    /**
      * Expunge all folders that have messages waiting to be deleted
      */
     public void expungeFolders() {
@@ -1827,30 +1827,30 @@ public class UserSession implements HTTPSession {
             }
         }
     }
-        
+
     /**
        Change the Flags of the messages the user selected.
-         
+
     */
     public void setFlags(String folderhash, HTTPRequestHeader head) throws MessagingException {
-                
+
         if(head.isContentSet("copymovemsgs") && head.getContent("COPYMOVE").equals("COPY")) {
             copyMoveMessage(folderhash,head.getContent("TO"),head,false);
         } else if(head.isContentSet("copymovemsgs") && head.getContent("COPYMOVE").equals("MOVE")) {
             copyMoveMessage(folderhash,head.getContent("TO"),head,true);
         } else if(head.isContentSet("flagmsgs")) {
-                        
+
             System.err.println("setting message flags");
             Folder folder=getFolder(folderhash);
-                        
-                        
+
+
             //System.err.println("Processing Request Header...");
-                        
+
             /* Get selected messages */
             int msgs[]=getSelectedMessages(head,folder.getMessageCount());
-                        
+
             //System.err.println(" - get flags...");
-                        
+
             /* Get selected flags */
             Flags fl=new Flags(Flags.Flag.USER);
             if(head.getContent("MESSAGE FLAG").equals("DELETED")) {
@@ -1868,15 +1868,15 @@ public class UserSession implements HTTPSession {
             } else if(head.getContent("MESSAGE FLAG").equals("DRAFT")) {
                 fl=new Flags(Flags.Flag.DRAFT);
             }
-                        
+
             boolean value=true;
             if(head.getContent("MARK").equals("UNMARK")) {
                 value=false;
             }
-                        
+
             //System.err.println("Done!");
             //System.err.println("Setting flags...");
-                        
+
             if(user.wantsSetFlags()) {
                 if(folder.isOpen() && folder.getMode()==Folder.READ_ONLY) {
                     folder.close(false);
@@ -1896,10 +1896,10 @@ public class UserSession implements HTTPSession {
             }
 
             refreshFolderInformation(folderhash);
-            
+
         }
     }
-        
+
     /**
      * Copy or move the selected messages from folder fromfolder to folder tofolder.
      */
@@ -1936,7 +1936,7 @@ public class UserSession implements HTTPSession {
         if(move && user.wantsSetFlags()) {
             from.setFlags(m,new Flags(Flags.Flag.DELETED),true);
             if(user.getBoolVar("autoexpunge")) {
-                from.close(true);           
+                from.close(true);
                 to.close(true);
             } else {
                 if(need_expunge_folders == null) {
@@ -1957,10 +1957,10 @@ public class UserSession implements HTTPSession {
         refreshFolderInformation(fromfolder);
         refreshFolderInformation(tofolder);
     }
-        
-        
+
+
     /**
-     * Change a user's configuration. 
+     * Change a user's configuration.
      * Header fields given in the requestheader are parsed and turned into user options (probably should not be in UserSession
      * but in a plugin or something; this is very hacky).
      */
@@ -1985,8 +1985,8 @@ public class UserSession implements HTTPSession {
 
         // Modified by exce, start
         /**
-         * As described in line #1088, we have to transcode these strings. 
-         * We only allow SIGNATURE and FULLNAME to contain locale-specific 
+         * As described in line #1088, we have to transcode these strings.
+         * We only allow SIGNATURE and FULLNAME to contain locale-specific
          * characters.
          */
         // user.setSignature(head.getContent("SIGNATURE"));
@@ -2021,8 +2021,8 @@ public class UserSession implements HTTPSession {
         setEnv();
         model.update();
     }
-        
-   
+
+
     /**
      * Add the mailbox with the given parameters to this user's configuration. Subscribe all folders on startup (the
      * user can later unsubscribe them) and update the model.
@@ -2033,14 +2033,14 @@ public class UserSession implements HTTPSession {
      * @param login Login name the user provided for the host
      * @param password Password the user provided to the given login
      */
-    public void addMailbox(String name, String protocol, String host, String login, String password) 
+    public void addMailbox(String name, String protocol, String host, String login, String password)
         throws MessagingException {
         disconnectAll();
         String host_url=protocol+"://"+host;
         user.addMailHost(name,
                          host_url,
                          login,
-                         password);     
+                         password);
         Enumeration enum=user.mailHosts();
         while(enum.hasMoreElements()) {
             String id=(String)enum.nextElement();
@@ -2051,7 +2051,7 @@ public class UserSession implements HTTPSession {
         }
         model.update();
     }
-        
+
     /**
      * Remove the mailbox with the given name.
      * Will first disconnect all mailboxes, remove the given mailbox and then update the model.
@@ -2065,14 +2065,14 @@ public class UserSession implements HTTPSession {
         // Should be called from FolderSetup Plugin
         //refreshFolderInformation(true);
     }
-        
+
     public void setAddToFolder(String id) {
         model.setStateVar("add to folder",id);
     }
 
-    public void addFolder(String toid, String name, boolean holds_messages, boolean holds_folders) 
+    public void addFolder(String toid, String name, boolean holds_messages, boolean holds_folders)
         throws MessagingException {
-        
+
         Folder parent=getFolder(toid);
         Folder folder=parent.getFolder(name);
         if(!folder.exists()) {
@@ -2088,7 +2088,7 @@ public class UserSession implements HTTPSession {
         // Should be called from FolderSetup Plugin
         //refreshFolderInformation();
     }
-            
+
 
     public void removeFolder(String id, boolean recurse) throws MessagingException {
         Folder folder=getFolder(id);
@@ -2102,10 +2102,10 @@ public class UserSession implements HTTPSession {
     public String getEnv(String key) {
         return "";
     }
-        
+
     public void setEnv(String key, String value) {
     }
-        
+
     public void setException(Exception ex) {
         model.setException(ex);
     }
@@ -2153,32 +2153,32 @@ public class UserSession implements HTTPSession {
 
         model.setStateVar("themeset","themes_"+user.getPreferredLocale().getLanguage().toLowerCase());
     }
-        
-        
+
+
     public UserData getUser() {
         return user;
     }
-        
+
     public String getUserName() {
         return user.getLogin();
     }
-        
+
     public InetAddress getRemoteAddress() {
         return remote;
     }
-        
+
     public Hashtable getActiveConnections() {
         return connections;
     }
-        
+
     public void setSent(boolean b) {
         sent=b;
     }
-        
+
     public boolean isSent() {
         return sent;
     }
-        
+
     private String formatDate(long date) {
         TimeZone tz=TimeZone.getDefault();
         DateFormat df=DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.DEFAULT, getLocale());
@@ -2186,8 +2186,8 @@ public class UserSession implements HTTPSession {
         String now=df.format(new Date(date));
         return now;
     }
-        
-        
+
+
     public void handleTransportException(SendFailedException e) {
         model.setStateVar("send status",e.getNextException().getMessage());
         model.setStateVar("valid sent addresses",Helper.joinAddress(e.getValidSentAddresses()));
@@ -2195,7 +2195,7 @@ public class UserSession implements HTTPSession {
         model.setStateVar("invalid addresses",Helper.joinAddress(e.getInvalidAddresses()));
         sent=true;
     }
-        
-        
-        
+
+
+
 } // UserSession
