@@ -72,7 +72,6 @@ public class About implements Plugin, URLHandler {
     public HTMLDocument handleURL(String suburl, HTTPSession session, HTTPRequestHeader header) throws DocumentNotFoundException {
         String content="<BODY BGCOLOR=WHITE><CENTER><H1>About WebMail</H1></CENTER><BR>";
         content+="<H3>Copyright</H3><BR>JWebMail is (c)2008 by the JWebMail Development Team and Sebastian Schaffert,<BR/>"
-            + "
             +"and is distributed under the terms of the <A HREF=\"http://www.apache.org/licenses/LICENSE-2.0\">Apache 2.0 License</A> "
             +".<BR><P><HR><P>"
             +"<H3>Registered Plugins</H3><BR><UL>";
