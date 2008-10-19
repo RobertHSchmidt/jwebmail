@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/j2ee/dtds/web-app_2_3.dtd">
+
+<!-- CVS ID: $Id$ -->
+
+<!-- 
+  This file provides a Servlet API 2.3 compliant configuration for the
+  WebMail Servlet. Please modify according to your needs.
+
+  (c)2002 Sebastian Schaffert
+  This file is distributed under the terms of the GNU General Public License
+-->
+
+<web-app>
+  <display-name>WebMail/Java - WWW access to your mail</display-name>
+
+  <servlet>
+
+    <!-- The servlet's name. Don't change unless you know what you are doing -->
+    <servlet-name>
+      WebMail
+    </servlet-name>
+    <servlet-class>
+      net.wastl.webmail.server.WebMailServlet
+    </servlet-class>
+    
+    <!-- WebMail's Plugins.
+         The plugins that should be used by WebMail, full classnames separated by
+         ":". All of them MUST implement the Plugin-Interface.
+    -->
+    <init-param>
+      <param-name>webmail.plugins</param-name>
+      <param-value>About:AdminPlugin:ChallengeHandler:Composer:ErrorHandler:FileAttacher:FolderList:FolderSetup:NavBar:ImageHandler:LogoutSession:MailboxList:PassThroughPlugin:SendMessage:ShowMessage:ShowMIME:UserSetup:WebMailHelp:WebMailTitle</param-value>
+    </init-param>
+
+    <!-- WebMail's Authenticator Plugins
+         WebMail Authenticator Plugins to use. Same as above, but all MUST implement
+         the Authenticator-Interface.
+    -->
+    <init-param>
+      <param-name>webmail.authenticators</param-name>
+      <param-value>IMAPAuthenticator:POPAuthenticator:OTPAuthenticator:SimpleAuthenticator:UnixAuthenticator</param-value>
+    </init-param>
+
+
+    <!-- WebMail default language; if ommited, Locale.getDefault() will be 
+         used. -->
+    <init-param>
+      <param-name>webmail.default.locale.language</param-name>
+      <param-value>en</param-value>
+    </init-param>
+
+    <!-- WebMail default country; if ommited, Locale.getDefault() will be 
+         used. -->
+    <init-param>
+      <param-name>webmail.default.locale.country</param-name>
+      <param-value>US</param-value>
+    </init-param>
+    <!-- Modified by exce, end -->
+
+    <!-- WebMail default theme to use; if not specified, "bibop" will be used -->
+    <init-param>
+      <param-name>webmail.default.theme</param-name>
+      <param-value>bibop</param-value>
+    </init-param>
+
+
+    <!-- Storage mechanism to be used by WebMail. Don't change unless you know
+         what you are doing (i.e. if you have a different Storage 
+	 implementation -->
+    <init-param>
+      <param-name>webmail.storage.user</param-name>
+      <param-value>net.wastl.webmail.storage.xml.XMLStorage</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>webmail.storage.system</param-name>
+      <param-value>net.wastl.webmail.storage.xml.XMLStorage</param-value>
+    </init-param>
+
+
+    <!-- The log facility to use. Currently, JWebMail supports log-to-file and the
+         servlet container's logging method. -->
+    <init-param>
+      <param-name>webmail.log.facility</param-name>
+      <param-value>net.wastl.webmail.logger.ServletLogger</param-value>
+    </init-param>
+
+    <!-- The basepath for the WebMail Servlet. Needed to construct references to
+         program parts -->
+    <init-param>
+      <param-name>webmail.basepath</param-name>
+      <param-value>@base-uri@/WebMail</param-value>
+    </init-param>
+
+    <!-- This parameter is useful if you want to put the images in a different 
+         directory so they can be handled by the webserver instead of passing 
+         through the (slower) WebMail 
+         UPDATE(0.7.7) This URL is now the same as the base webapp URL
+         The path to the individual images will be composed with 
+         webmail.imagebase + "/" + language + "/" + theme
+    -->
+    <init-param>
+      <param-name>webmail.imagebase</param-name>
+      <param-value>@base-uri@/lib/templates</param-value>
+    </init-param>
+
+
+    <!-- The following path names are real path names of the operating system.
+         WebMail tries to use reasonable defaults if you have a default 
+         installation, by using ServletContext.getRealPath(...) .
+         You might want to set explicit paths however, if you move around the
+         WebMail directory structure -->
+
+    <!-- WebMail Data Path. Points to the directory where WebMail configuration
+         files will be placed. Must be owned by the user running WebMail 
+         If you move the data directory to a more secure place, please enter
+         the full system path to this directory here
+    -->
+    <!--
+    <init-param>
+      <param-name>webmail.data.path</param-name>
+      <param-value>@webapp-home@/data</param-value>
+    </init-param>
+    -->
+
+    <!-- WebMail Library Path. Contains the libraries needed for WebMail 
+         Usually it is not necessary to move this directory away from the
+         WebMail apphome.
+         Only set this if you know what you are doing, WebMail tries to use
+         reasonable defaults
+    -->
+    <!--
+    <init-param>
+      <param-name>webmail.lib.path</param-name>
+      <param-value>@webapp-home@/lib</param-value>
+    </init-param>
+    -->
+
+    <!-- WebMail Template Path. Contains the XSL stylesheets for the user
+         interfaces.
+         Usually it is not necessary to move this directory away from the
+         WebMail apphome.
+         Only set this if you know what you are doing, WebMail tries to use
+         reasonable defaults
+    -->
+    <!--
+    <init-param>
+      <param-name>webmail.template.path</param-name>
+      <param-value>@webapp-home@/lib/templates</param-value>
+    </init-param>
+    -->
+
+    <!-- WebMail XML Path. Contains DTDs and dummy files for WebMail's internal
+         data model. 
+         Usually it is not necessary to move this directory away from the
+         WebMail apphome.
+         Only set this if you know what you are doing, WebMail tries to use
+         reasonable defaults
+    -->
+    <!--
+    <init-param>
+      <param-name>webmail.xml.path</param-name>
+      <param-value>@webapp-home@/lib/xml</param-value>
+    </init-param>
+    -->
+
+
+    <!-- WebMail should be loaded on startup as it needs quite some time for
+         initialization. The order doesn't matter, however.
+	 Also, please ensure that reloading of the servlet classes is disabled
+	 for WebMail -->
+    <load-on-startup>
+      -2147483646
+    </load-on-startup>
+
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>WebMail</servlet-name>
+    <url-pattern>/WebMail/*</url-pattern>
+  </servlet-mapping>
+</web-app>
