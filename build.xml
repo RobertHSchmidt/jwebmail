@@ -14,14 +14,14 @@
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
 
-    <property name="build.compiler" 	value="classic"/>
-    <property name="debug" 		value="false"/>
-    <property name="optimize" 		value="on"/>
-    <property name="deprecation" 	value="on"/>
+    <property name="build.compiler"     value="classic"/>
+    <property name="debug"              value="false"/>
+    <property name="optimize"           value="on"/>
+    <property name="deprecation"        value="on"/>
 
-    <property name="src.dir" 		value="./src"/>
-    <property name="lib.dir" 		value="./lib"/>
-    <property name="contrib.dir" 	value="./contrib"/>
+    <property name="src.dir"            value="./src"/>
+    <property name="lib.dir"            value="./lib"/>
+    <property name="contrib.dir"        value="./contrib"/>
 
     <property name="build.dir" value="./build"/>
     <property name="build.src" value="./build/src"/>
@@ -37,10 +37,10 @@
     <filter token="date" value="${TODAY}"/>
     <filter token="log" value="true"/>
     <filter token="verbose" value="true"/>
-    <filter token="java-version" value="${java.version}"/>    
-    
+    <filter token="java-version" value="${java.version}"/>
+
   </target>
-  
+
   <!-- =================================================================== -->
   <!-- Help on usage                                                       -->
   <!-- =================================================================== -->
@@ -80,10 +80,10 @@
 
     <!-- copy src files -->
     <copy todir="${build.src}" filtering="true">
-	<fileset dir="${src.dir}">
-	   <include name="net/**" />
-	   <include name="org/**" />
-	   <include name="META-INF/**" />
+        <fileset dir="${src.dir}">
+           <include name="net/**" />
+           <include name="org/**" />
+           <include name="META-INF/**" />
         </fileset>
     </copy>
   </target>
@@ -92,9 +92,9 @@
   <!-- Checks to see if JARs available                                     -->
   <!-- =================================================================== -->
   <target name="check-jars">
-	<available file="${lib.dir}/mail.jar" property="mail.jar.present"/>
-	<available file="${lib.dir}/activation.jar" property="jaf.jar.present"/>
-	<available file="${lib.dir}/pop3.jar" property="pop3.jar.present"/>
+        <available file="${lib.dir}/mail.jar" property="mail.jar.present"/>
+        <available file="${lib.dir}/activation.jar" property="jaf.jar.present"/>
+        <available file="${lib.dir}/pop3.jar" property="pop3.jar.present"/>
         <available file="${lib.dir}/domsdk.jar" property="domsdk.jar.present"/>
   </target>
 
@@ -105,8 +105,8 @@
     <mkdir dir="${build.src}/temp"/>
     <unzip src="${contrib.dir}/javamail-1_3.zip" dest="${build.src}/temp" />
     <copy todir="${lib.dir}" flatten="yes">
-	<fileset dir="${build.src}/temp">
-	   <include name="**/mail.jar" />
+        <fileset dir="${build.src}/temp">
+           <include name="**/mail.jar" />
         </fileset>
     </copy>
   </target>
@@ -118,8 +118,8 @@
     <mkdir dir="${build.src}/temp"/>
     <unzip src="${contrib.dir}/jaf-1_0_2.zip" dest="${build.src}/temp" />
     <copy todir="${lib.dir}" flatten="yes">
-	<fileset dir="${build.src}/temp">
-	   <include name="**/activation.jar" />
+        <fileset dir="${build.src}/temp">
+           <include name="**/activation.jar" />
         </fileset>
     </copy>
   </target>
@@ -131,8 +131,8 @@
     <mkdir dir="${build.src}/temp"/>
     <unzip src="${contrib.dir}/pop31_1_1.zip" dest="${build.src}/temp" />
     <copy todir="${lib.dir}" flatten="yes">
-	<fileset dir="${build.src}/temp">
-	   <include name="**/pop3.jar" />
+        <fileset dir="${build.src}/temp">
+           <include name="**/pop3.jar" />
         </fileset>
     </copy>
   </target>
@@ -140,18 +140,18 @@
   <!-- =================================================================== -->
   <!-- Prepare POP3 JAR                                                    -->
   <!-- =================================================================== -->
-  <target name="prep-domsdk.jar" unless="domsdk.jar.present" depends="prepare">    
+  <target name="prep-domsdk.jar" unless="domsdk.jar.present" depends="prepare">
 
-    <get src="http://www.docuverse.com/downloads/domsdk_a5.zip" 
+    <get src="http://www.docuverse.com/downloads/domsdk_a5.zip"
          dest="${contrib.dir}/domsdk_a5.zip"
          usetimestamp="true"
-	 verbose="true"/>
-    <mkdir dir="${build.src}/temp"/>    
+         verbose="true"/>
+    <mkdir dir="${build.src}/temp"/>
     <unzip src="${contrib.dir}/domsdk_a5.zip" dest="${build.src}/temp" />
     <copy todir="${lib.dir}" flatten="yes">
-	<fileset dir="${build.src}/temp">
-	   <include name="**/domsdk.jar" />
-	   <include name="**/w3cdom1.jar" />
+        <fileset dir="${build.src}/temp">
+           <include name="**/domsdk.jar" />
+           <include name="**/w3cdom1.jar" />
         </fileset>
     </copy>
   </target>
@@ -161,9 +161,9 @@
   <!-- =================================================================== -->
   <target name="prep-lib" depends="check-jars, prep-mail.jar, prep-activation.jar, prep-pop3.jar, prep-domsdk.jar">
     <copy todir="${lib.dir}">
-	<fileset dir="${contrib.dir}">
-	   <include name="*.jar" />
-	   <include name="mime.types" />
+        <fileset dir="${contrib.dir}">
+           <include name="*.jar" />
+           <include name="mime.types" />
            <exclude name="**/*ant*" />
            <exclude name="**/*jakarta-regexp*" />
            <exclude name="**/*servlet*" />
@@ -175,7 +175,7 @@
   <!-- =================================================================== -->
   <!-- Creates HTTPParser.java                                             -->
   <!-- =================================================================== -->
-  <target name="create-HTTPParser"> 
+  <target name="create-HTTPParser">
     <java classname="JFlex.Main" fork="yes" dir="${build.src}/net/wastl/webmail/standalone/">
       <arg value="-q" />
       <arg value="http.lex" />
@@ -204,30 +204,30 @@
 <!--    <echo message="Compiling net \& org package trees to ${build.dest}"/> -->
     <javac srcdir="${build.src}"
            destdir="${build.dest}"
-	   classpath=".:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/domsdk.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar:${lib.dir}/xalan.jar"
+           classpath=".:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/domsdk.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar:${lib.dir}/xalan.jar"
            debug="${debug}"
            optimize="${optimize}"
-	   deprecation="${deprecation}"
+           deprecation="${deprecation}"
            excludes="**/plugins/**,**/authenticators/**" />
 
     <echo message="     Compiling plugins"/>
     <mkdir dir="${build.dest}/plugins" />
     <javac srcdir="${build.src}"
            destdir="${build.dest}/plugins"
-	   classpath="${build.dest}:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/domsdk.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar"
+           classpath="${build.dest}:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/domsdk.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar"
            debug="${debug}"
            optimize="${optimize}"
-	   deprecation="${deprecation}"
+           deprecation="${deprecation}"
            includes="**/plugins/**" />
 
     <echo message="     Compiling authenticators"/>
     <mkdir dir="${build.dest}/authenticators" />
     <javac srcdir="${build.src}"
            destdir="${build.dest}/authenticators"
-	   classpath="${build.dest}:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/domsdk.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar"
+           classpath="${build.dest}:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/domsdk.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar"
            debug="${debug}"
            optimize="${optimize}"
-	   deprecation="${deprecation}"
+           deprecation="${deprecation}"
            includes="**/authenticators/**" />
 
   </target>
@@ -251,10 +251,10 @@
 <!-- rather than copying these to lib/plugins etc. just waiting till tomcat deploy
      and copy straight from build.dest to WEB-INF/classes -->
 <!--    <copy todir="${lib.dir}/plugins">
-	<fileset dir="${build.dest}/plugins" />
+        <fileset dir="${build.dest}/plugins" />
     </copy>
     <copy todir="${lib.dir}/authenticators">
-	<fileset dir="${build.dest}/authenticators" />
+        <fileset dir="${build.dest}/authenticators" />
     </copy> -->
 
   </target>
@@ -265,56 +265,56 @@
   <target name="copy-xml-files">
     <echo message="Installing webmail.xml ..."/>
     <copy todir="data" flatten="yes">
-	<fileset dir="${src.dir}">
-	   <include name="**/webmail.xml" />
-        </fileset> 
+        <fileset dir="${src.dir}">
+           <include name="**/webmail.xml" />
+        </fileset>
     </copy>
     <echo message="Installing XML DTDs ..."/>
     <copy todir="${lib.dir}/xml" flatten="yes">
-	<fileset dir="${src.dir}">
-	   <include name="**/data/xml/*.dtd" />
-	   <include name="**/data/xml/mysql_statements.xml" />
-	   <include name="**/data/xml/userdata.xml" />
-	   <include name="**/data/xml/usermodel_template.xml" />
-	   <include name="**/data/xml/generic_template.xml" />
-        </fileset> 
+        <fileset dir="${src.dir}">
+           <include name="**/data/xml/*.dtd" />
+           <include name="**/data/xml/mysql_statements.xml" />
+           <include name="**/data/xml/userdata.xml" />
+           <include name="**/data/xml/usermodel_template.xml" />
+           <include name="**/data/xml/generic_template.xml" />
+        </fileset>
     </copy>
     <echo message="Installing resource.dtd and resources.xml ..."/>
     <copy todir="${lib.dir}/templates" flatten="yes">
-	<fileset dir="${src.dir}">
-	   <include name="**/data/xml/resource*" />
-        </fileset> 
+        <fileset dir="${src.dir}">
+           <include name="**/data/xml/resource*" />
+        </fileset>
     </copy>
 
     <!-- English -->
     <echo message="Installing English Language Templates ..."/>
     <copy todir="${lib.dir}/templates/en" filtering="true">
-	<fileset dir="${src.dir}">
-	   <include name="**/data/xml/en/**" />
+        <fileset dir="${src.dir}">
+           <include name="**/data/xml/en/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
     </copy>
     <copy todir="${lib.dir}/templates/en" filtering="false">
-	<fileset dir="${src.dir}">
+        <fileset dir="${src.dir}">
            <include name="**/data/xml/en/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
     </copy>
 
     <!-- Spanish -->
     <echo message="Installing Spanish Language Templates ..."/>
     <copy todir="${lib.dir}/templates/es" filtering="true">
-	<fileset dir="${src.dir}">
-	   <include name="**/data/xml/es/**" />
+        <fileset dir="${src.dir}">
+           <include name="**/data/xml/es/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
     </copy>
     <copy todir="${lib.dir}/templates/es" filtering="false">
-	<fileset dir="${src.dir}">
+        <fileset dir="${src.dir}">
            <include name="**/data/xml/es/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
     </copy>
 
@@ -322,74 +322,74 @@
     <!--
     <echo message="Installing Portugese Language Templates ..."/>
     <copy todir="${lib.dir}/templates/pt" filtering="true">
-	<fileset dir="${src.dir}">
-	   <include name="**/data/xml/pt/**" />
-        </fileset> 
+        <fileset dir="${src.dir}">
+           <include name="**/data/xml/pt/**" />
+        </fileset>
         <mapper type="regexp" from="^.*/pt/(.*)$$" to="\1" />
-    </copy> 
+    </copy>
     -->
 
     <!-- German -->
     <echo message="Installing German Language Templates ..."/>
     <copy todir="${lib.dir}/templates/de" filtering="true">
-	<fileset dir="${src.dir}">
-	   <include name="**/data/xml/de/**" />
+        <fileset dir="${src.dir}">
+           <include name="**/data/xml/de/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
-    </copy> 
+    </copy>
     <copy todir="${lib.dir}/templates/de" filtering="false">
-	<fileset dir="${src.dir}">
+        <fileset dir="${src.dir}">
            <include name="**/data/xml/de/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
     </copy>
 
     <!-- French -->
     <echo message="Installing French Language Templates ..."/>
     <copy todir="${lib.dir}/templates/fr" filtering="true">
-	<fileset dir="${src.dir}">
-	   <include name="**/data/xml/fr/**" />
+        <fileset dir="${src.dir}">
+           <include name="**/data/xml/fr/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
-    </copy> 
+    </copy>
     <copy todir="${lib.dir}/templates/fr" filtering="false">
-	<fileset dir="${src.dir}">
+        <fileset dir="${src.dir}">
            <include name="**/data/xml/fr/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
     </copy>
 
     <!-- Hungarian -->
     <echo message="Installing Hungarian Language Templates ..."/>
     <copy todir="${lib.dir}/templates/hu" filtering="true">
-	<fileset dir="${src.dir}">
-	   <include name="**/data/xml/hu/**" />
+        <fileset dir="${src.dir}">
+           <include name="**/data/xml/hu/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
-    </copy> 
+    </copy>
     <copy todir="${lib.dir}/templates/hu" filtering="false">
-	<fileset dir="${src.dir}">
+        <fileset dir="${src.dir}">
            <include name="**/data/xml/hu/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
     </copy>
 
     <!-- Chinese (Taiwan) -->
     <echo message="Installing Chinese Language Templates ..."/>
     <copy todir="${lib.dir}/templates/zh" filtering="true">
-	<fileset dir="${src.dir}">
-	   <include name="**/data/xml/zh/**" />
+        <fileset dir="${src.dir}">
+           <include name="**/data/xml/zh/**" />
            <exclude name="**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
-    </copy> 
+    </copy>
     <copy todir="${lib.dir}/templates/zh" filtering="false">
-	<fileset dir="${src.dir}">
+        <fileset dir="${src.dir}">
            <include name="**/data/xml/zh/**/images/**" />
-        </fileset> 
+        </fileset>
         <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
     </copy>
 
@@ -403,31 +403,31 @@
     <mkdir dir="${webapp.home}/${name}"/>
     <mkdir dir="${webapp.home}/${name}/WEB-INF"/>
     <copy todir="${webapp.home}/${name}/lib">
-    	<fileset dir="${lib.dir}" excludes="**/*.jar" />
+        <fileset dir="${lib.dir}" excludes="**/*.jar" />
     </copy>
     <copy todir="${webapp.home}/${name}/data">
-    	<fileset dir="data"/>
+        <fileset dir="data"/>
     </copy>
     <copy todir="${webapp.home}/${name}/WEB-INF/classes" flatten="yes">
-    	<fileset dir="${build.dest}">
+        <fileset dir="${build.dest}">
            <include name="**/plugins/**,**/authenticators/**" />
         </fileset>
     </copy>
     <copy todir="${webapp.home}/${name}/WEB-INF/lib">
-    	<fileset dir="${lib.dir}">
+        <fileset dir="${lib.dir}">
            <include name="**/*.jar"/>
         </fileset>
     </copy>
     <!-- Install plugin and authenticator classes -->
     <copy todir="${webapp.home}/${name}/WEB-INF/classes">
-	<fileset dir="${build.dest}/plugins" />
+        <fileset dir="${build.dest}/plugins" />
     </copy>
     <copy todir="${webapp.home}/${name}/WEB-INF/classes">
-	<fileset dir="${build.dest}/authenticators" />
+        <fileset dir="${build.dest}/authenticators" />
     </copy>
-    <filter token="webapp-home" value="${webapp.home}${name}"/> 
-    <filter token="plugin-dir" value="WEB-INF/classes"/> 
-    <filter token="authenticator-dir" value="WEB-INF/classes"/> 
+    <filter token="webapp-home" value="${webapp.home}${name}"/>
+    <filter token="plugin-dir" value="WEB-INF/classes"/>
+    <filter token="authenticator-dir" value="WEB-INF/classes"/>
     <filter token="base-uri" value="/${name}"/>
     <copy file="WEB-INF/web.xml" todir="${webapp.home}/${name}/WEB-INF/" filtering="true" />
     <copy todir="${webapp.home}/${name}" filtering="true">
@@ -446,35 +446,35 @@
     <mkdir dir="${webapp.home}/${name}"/>
     <mkdir dir="${webapp.home}/${name}/WEB-INF"/>
     <copy todir="${webapp.home}/${name}/lib">
-    	<fileset dir="${lib.dir}" excludes="**/*.jar" />
+        <fileset dir="${lib.dir}" excludes="**/*.jar" />
     </copy>
     <copy todir="${webapp.home}/${name}/data">
-    	<fileset dir="data"/>
+        <fileset dir="data"/>
     </copy>
     <copy todir="${webapp.home}/${name}/WEB-INF/classes" flatten="yes">
-    	<fileset dir="${build.dest}">
+        <fileset dir="${build.dest}">
            <include name="**/plugins/**,**/authenticators/**" />
         </fileset>
     </copy>
     <copy todir="${webapp.home}/${name}/WEB-INF/lib">
-    	<fileset dir="${lib.dir}">
+        <fileset dir="${lib.dir}">
            <include name="**/*.jar"/>
            <!--<exclude name="mail.jar"/>-->
            <exclude name="servlet-2.3.jar"/>
-	   <exclude name="xercesImpl.jar"/>
-	   <!--<exclude name="xalan.jar"/>-->
+           <exclude name="xercesImpl.jar"/>
+           <!--<exclude name="xalan.jar"/>-->
         </fileset>
     </copy>
     <!-- Install plugin and authenticator classes -->
     <copy todir="${webapp.home}/${name}/WEB-INF/classes">
-	<fileset dir="${build.dest}/plugins" />
+        <fileset dir="${build.dest}/plugins" />
     </copy>
     <copy todir="${webapp.home}/${name}/WEB-INF/classes">
-	<fileset dir="${build.dest}/authenticators" />
+        <fileset dir="${build.dest}/authenticators" />
     </copy>
-    <filter token="webapp-home" value="${webapp.home}${name}"/> 
-    <filter token="plugin-dir" value="WEB-INF/classes"/> 
-    <filter token="authenticator-dir" value="WEB-INF/classes"/> 
+    <filter token="webapp-home" value="${webapp.home}${name}"/>
+    <filter token="plugin-dir" value="WEB-INF/classes"/>
+    <filter token="authenticator-dir" value="WEB-INF/classes"/>
     <filter token="base-uri" value="/${name}"/>
     <copy file="WEB-INF/web.xml" todir="${webapp.home}/${name}/WEB-INF/" filtering="true" />
     <copy todir="${webapp.home}/${name}" filtering="true">
@@ -512,7 +512,7 @@
     <delete dir="${build.dir}"/>
     <echo message="Deleting contents of ${lib.dir} ..."/>
     <delete includeEmptyDirs="true" >
-    	<fileset dir="${lib.dir}" />
+        <fileset dir="${lib.dir}" />
     </delete>
     <delete file="data/webmail.xml"/>
   </target>
