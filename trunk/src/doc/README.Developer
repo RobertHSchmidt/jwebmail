@@ -1,0 +1,12 @@
+WebMail Developer Documentation
+===============================
+
+The documentation in this directory is mainly useful for developers that are interested
+in making changes in WebMail.
+Mainly you can find a short documentation about how things actually work in WebMail
+here. 
+Most documents require that you are familiar with Java and programming concepts like
+OO-software engineering, regular expressions, data structures and so on, as I don't go
+into detail with that (Anyone should know tree structures e.g.).
+
+Sebastian Schaffert

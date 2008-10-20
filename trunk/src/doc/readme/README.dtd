@@ -1,0 +1,54 @@
+<!-- DTD for WebMail README -->
+
+<!-- CVS ID: $Id$ -->
+
+<!--
+ * Copyright (C) 2000 Sebastian Schaffert
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-->
+
+<!ELEMENT README (TITLE,AUTHOR,SECTION+)>
+<!ELEMENT TITLE (#PCDATA)>
+<!ELEMENT AUTHOR (#PCDATA)>
+<!ELEMENT SECTION (SUBSECTION|P|CONTENTS)*>
+<!ELEMENT CONTENTS (#PCDATA)>
+<!ELEMENT SUBSECTION (SUBSUBSECTION|P)*>
+<!ELEMENT SUBSUBSECTION (P)*>
+<!ELEMENT P (#PCDATA|LIST|NLIST|NOTE|TABLE|STRONG|CODE|EM|A|BR)*>
+<!ELEMENT LIST (ITEM)*>
+<!ELEMENT NLIST (ITEM)*>
+<!ELEMENT ITEM (#PCDATA|TABLE|P|STRONG|CODE|EM|A|BR)*>
+<!ELEMENT NOTE (#PCDATA|STRONG|CODE|EM|A|BR)*>
+<!ELEMENT STRONG (#PCDATA|A|EM)*>
+<!ELEMENT EM (#PCDATA|A)*>
+<!ELEMENT CODE (#PCDATA|STRONG|EM|A|BR)*>
+<!ELEMENT BR (#PCDATA)>
+<!ELEMENT A (#PCDATA)>
+<!ELEMENT TABLE (TR)*>
+<!ELEMENT TR (TD)*>
+<!ELEMENT TD (#PCDATA|CODE|EM|STRONG|A)*>
+
+<!-- Sections, Subsections and Subsubsections require a name (the title of the section)
+     and a unique ID within the document for referencing -->
+<!ATTLIST SECTION       name CDATA #REQUIRED
+                        id   CDATA #REQUIRED>
+<!ATTLIST SUBSECTION    name CDATA #REQUIRED
+                        id   CDATA #REQUIRED>
+<!ATTLIST SUBSUBSECTION name CDATA #REQUIRED
+                        id   CDATA #REQUIRED>
+
+<!-- Links are very simple here, they just require a reference -->
+<!ATTLIST A             href CDATA #REQUIRED>
