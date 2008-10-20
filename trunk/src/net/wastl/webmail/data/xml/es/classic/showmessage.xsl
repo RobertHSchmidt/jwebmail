@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -88,8 +88,8 @@
         </TD>
       </TR>
       <TR>
-        <TD COLSPAN="4" ALIGN="right"><A HREF="{$base}/compose?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}&amp;reply=1">responder a este mensaje...</A> - 
-	  <A HREF="{$base}/compose?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}&amp;forward=1">reenviar este mensaje...</A></TD>
+        <TD COLSPAN="4" ALIGN="right"><A HREF="{$base}/compose?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}&amp;reply=1">responder a este mensaje...</A> -
+          <A HREF="{$base}/compose?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr}&amp;forward=1">reenviar este mensaje...</A></TD>
       </TR>
     </TABLE>
     <xsl:for-each select="PART">
@@ -220,35 +220,35 @@
   <xsl:template match="CONTENT">
     <xsl:choose>
       <xsl:when test="../@type = 'html'">
-	<xsl:apply-templates select="*"/>
+        <xsl:apply-templates select="*"/>
       </xsl:when>
       <xsl:otherwise>
-	<xsl:choose>
-	  <xsl:when test="@quotelevel > 2">
-	    <FONT COLOR="orange">
-	      <EM>	    
-		<xsl:value-of disable-output-escaping="yes" select="."/>
-	      </EM>
-	    </FONT>
-	  </xsl:when>
-	  <xsl:when test="@quotelevel = 2">
-	    <FONT COLOR="green">
-	      <EM>
-		<xsl:value-of disable-output-escaping="yes" select="."/>
-	      </EM>
-	    </FONT>
-	  </xsl:when>
-	  <xsl:when test="@quotelevel = 1">
-	    <FONT COLOR="blue">
-	      <EM>
-		<xsl:value-of disable-output-escaping="yes" select="."/>
-	      </EM>
-	    </FONT>
-	  </xsl:when>
-	  <xsl:otherwise>
-	    <xsl:value-of disable-output-escaping="yes" select="."/>
-	  </xsl:otherwise>
-	</xsl:choose>
+        <xsl:choose>
+          <xsl:when test="@quotelevel > 2">
+            <FONT COLOR="orange">
+              <EM>
+                <xsl:value-of disable-output-escaping="yes" select="."/>
+              </EM>
+            </FONT>
+          </xsl:when>
+          <xsl:when test="@quotelevel = 2">
+            <FONT COLOR="green">
+              <EM>
+                <xsl:value-of disable-output-escaping="yes" select="."/>
+              </EM>
+            </FONT>
+          </xsl:when>
+          <xsl:when test="@quotelevel = 1">
+            <FONT COLOR="blue">
+              <EM>
+                <xsl:value-of disable-output-escaping="yes" select="."/>
+              </EM>
+            </FONT>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of disable-output-escaping="yes" select="."/>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -265,7 +265,7 @@
                   <A HREF="{$base}/folder/showmsg?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr - 1}"><IMG SRC="{$imgbase}/images/arrow-left.png" BORDER="0"/> Mensaje anterior</A>
                 </xsl:when>
                 <xsl:otherwise><IMG SRC="{$imgbase}/images/arrow-left-disabled.png" BORDER="0"/> Mensaje anterior
-		</xsl:otherwise>
+                </xsl:otherwise>
               </xsl:choose>
             </EM>
           </TD>
@@ -282,8 +282,8 @@
                   <A HREF="{$base}/folder/showmsg?session-id={$session-id}&amp;folder-id={/USERMODEL/CURRENT[@type='folder']/@id}&amp;message-nr={@msgnr + 1}">Siguiente mensaje <IMG SRC="{$imgbase}/images/arrow-right.png" BORDER="0"/></A>
                 </xsl:when>
                 <xsl:otherwise>
-		   Siguiente mensaje <IMG SRC="{$imgbase}/images/arrow-right-disabled.png" BORDER="0"/>
-		</xsl:otherwise>
+                   Siguiente mensaje <IMG SRC="{$imgbase}/images/arrow-right-disabled.png" BORDER="0"/>
+                </xsl:otherwise>
               </xsl:choose>
             </EM>
           </TD>
@@ -328,49 +328,49 @@
 
   <!-- The following three sections deal with displaying HTML code from HTML attachments.
   Elements marked "malicious" will get a special treatment -->
-  <xsl:template match="@*|node()"> 
+  <xsl:template match="@*|node()">
     <xsl:choose>
       <xsl:when test="not(@malicious)">
-	<xsl:copy>
-	  <xsl:apply-templates select="@*|node()"/>
-	</xsl:copy> 
+        <xsl:copy>
+          <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
       </xsl:when>
       <xsl:otherwise>
-	<TABLE  BORDER="1" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
-	  <TR>
-	    <TD BGCOLOR="#FF9933">
-	      Elemento HTML no fiable eliminado: <xsl:value-of select="@malicious"/>
-	    </TD>
-	  </TR>
-	  <TR>
-	    <TD bgcolor="#3399FF" >
-	      <xsl:apply-templates select="." mode="quote"/>
-	    </TD>
-	  </TR>
-	</TABLE>
+        <TABLE  BORDER="1" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD BGCOLOR="#FF9933">
+              Elemento HTML no fiable eliminado: <xsl:value-of select="@malicious"/>
+            </TD>
+          </TR>
+          <TR>
+            <TD bgcolor="#3399FF" >
+              <xsl:apply-templates select="." mode="quote"/>
+            </TD>
+          </TR>
+        </TABLE>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="node()" mode="quote"> 
+  <xsl:template match="node()" mode="quote">
     <xsl:choose>
       <xsl:when test="name(.)">
-	&lt;<xsl:value-of select="name(.)"/>
-	<xsl:text> </xsl:text><xsl:apply-templates select="@*" mode="quote"/>
-	<xsl:if test="./node()">
-	  &gt;
-	  <xsl:apply-templates select="node()" mode="quote"/>	    
-	  &lt;/<xsl:value-of select="name(.)"/>
-	</xsl:if>
-	&gt;
+        &lt;<xsl:value-of select="name(.)"/>
+        <xsl:text> </xsl:text><xsl:apply-templates select="@*" mode="quote"/>
+        <xsl:if test="./node()">
+          &gt;
+          <xsl:apply-templates select="node()" mode="quote"/>
+          &lt;/<xsl:value-of select="name(.)"/>
+        </xsl:if>
+        &gt;
       </xsl:when>
       <xsl:otherwise>
-	<xsl:value-of select="."/>
+        <xsl:value-of select="."/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="@*" mode="quote"> 
+  <xsl:template match="@*" mode="quote">
     <xsl:if test="name(.) != 'malicious'">
       <xsl:text> </xsl:text><xsl:value-of select="name(.)"/>="<xsl:value-of select="."/>"
     </xsl:if>

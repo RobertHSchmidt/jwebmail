@@ -25,7 +25,7 @@ SERVLET_CONTAINER=/usr/share/tomcat
 
 echo Target: Catalina
 if [ "$CATALINA_HOME" != "" ]; then
-	SERVLET_CONTAINER=$CATALINA_HOME
+    SERVLET_CONTAINER=$CATALINA_HOME
 fi
 
 echo Building with classpath $LOCALCLASSPATH:$ADDITIONALCLASSPATH

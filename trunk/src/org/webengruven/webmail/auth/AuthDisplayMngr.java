@@ -31,12 +31,12 @@
  * modify it under the terms of the Lesser GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * Lesser GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the Lesser GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307,
@@ -50,7 +50,7 @@ import net.wastl.webmail.server.*;
 import net.wastl.webmail.xml.*;
 
 public class AuthDisplayMngr {
-    
+
     /** Default C'tor */
     public AuthDisplayMngr() { }
 
@@ -59,27 +59,27 @@ public class AuthDisplayMngr {
      * up.
      * @param model The model to set vars in.
      */
-    public void setLoginScreenVars(XMLGenericModel model) 
+    public void setLoginScreenVars(XMLGenericModel model)
         throws WebMailException
-    { 
+    {
         model.setStateVar("action uri", "login");
         model.setStateVar("pass prompt", "1");
     }
 
-    /** Get the filename of the loginscreen. 
+    /** Get the filename of the loginscreen.
      * @return The filename of the login screen .xsl template
      */
     public String getLoginScreenFile() {
         return "loginscreen.xsl";
     }
 
-    /** Setup state vars for the password change prompt.  
+    /** Setup state vars for the password change prompt.
      * @param ud UserData for the user who will have their password changed
      * @param model The model to set state vars in
      */
     public void setPassChangeVars(UserData ud, XMLGenericModel model)
         throws WebMailException
-    { 
+    {
         model.setStateVar("pass len", "15");
     }
 

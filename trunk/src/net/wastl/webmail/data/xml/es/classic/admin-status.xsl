@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -137,7 +137,7 @@
             <STRONG>Sesi&#243;n de admin.</STRONG>
           </xsl:when>
           <xsl:otherwise><STRONG>Sesi&#243;n de usuario </STRONG> (usuario <xsl:value-of select="SESS_USER"/>)
-	  </xsl:otherwise>
+          </xsl:otherwise>
         </xsl:choose>
       </TD>
       <TD><STRONG>direcci&#243;n remota: </STRONG><xsl:value-of select="SESS_ADDRESS"/>, <STRONG>tiempo sin uso: </STRONG><xsl:value-of select="VAR[@name='idle time']/@value"/><BR/><xsl:if test="count(SESS_CONN) &gt; 0"><STRONG>conexiones de correo activas:</STRONG><BR/><UL><xsl:for-each select="SESS_CONN"><LI><EM><xsl:value-of select="."/></EM></LI></xsl:for-each></UL></xsl:if></TD>

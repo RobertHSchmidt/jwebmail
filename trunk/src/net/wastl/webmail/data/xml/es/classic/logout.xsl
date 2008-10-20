@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -34,19 +34,19 @@
         </H3>
         <P>
           <CENTER>
-	    Por favor, espera mientras se cierra la sesi&#243;n y se guarda
-	    la configuración en el disco.<BR/>
-	    Si no ves la <STRONG>pantalla de conexi&#243;n</STRONG> en unos pocos segundos, por favor 
-	    <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/">haz click aqu&#237;</A>.
-	  </CENTER>
+            Por favor, espera mientras se cierra la sesi&#243;n y se guarda
+            la configuración en el disco.<BR/>
+            Si no ves la <STRONG>pantalla de conexi&#243;n</STRONG> en unos pocos segundos, por favor
+            <A HREF="{/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/">haz click aqu&#237;</A>.
+          </CENTER>
         </P>
         <P>
           <CENTER>
             <FONT SIZE="-1">
               <EMPH>
-		WebMail es &#169; 1998-2000 de <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. 
-		Est&#225; distribu&#237;do bajo los t&#233;rminos de la GNU General Public License (LGPL).
-	      </EMPH>
+                WebMail es &#169; 1998-2000 de <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>.
+                Est&#225; distribu&#237;do bajo los t&#233;rminos de la GNU General Public License (LGPL).
+              </EMPH>
             </FONT>
           </CENTER>
         </P>

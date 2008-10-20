@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -35,19 +35,19 @@
           <H3>Bienvenido a tu buz&#243;n, <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</H3>
         </P>
         <P>
-	  Este es la <xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/> 
-	  vez que te conectas desde el 
-	  <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>. 
-	  La <B>&#250;ltima vez que te conectaste</B> fue el 
-	  <B><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='last login']"/></B>.
-	</P>
+          Este es la <xsl:apply-templates select="/USERMODEL/USERDATA/INTVAR[@name='login count']"/>
+          vez que te conectas desde el
+          <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/>.
+          La <B>&#250;ltima vez que te conectaste</B> fue el
+          <B><xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='last login']"/></B>.
+        </P>
         <P>
-	  Tu buz&#243;n contiene las siguientes carpetas 
-	  (el total de mensajes est&#225;n en <FONT COLOR="green">verde</FONT>, 
-	  los nuevos mensajes en <FONT COLOR="red">rojo</FONT>) (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=mailbox">Ayuda</A>):<BR/>
-	  <CENTER><P><A HREF="{$base}/mailbox?session-id={$session-id}&amp;force-refresh=1">Forzar actualizaci&#243;n</A> - Haz click aqu&#237; para forzar a que se actualice la informaci&#243;n de las carpetas.
-	    </P><TABLE WIDTH="80%"><xsl:for-each select="/USERMODEL/MAILHOST_MODEL"><xsl:apply-templates select="."/></xsl:for-each></TABLE></CENTER>
-	</P>
+          Tu buz&#243;n contiene las siguientes carpetas
+          (el total de mensajes est&#225;n en <FONT COLOR="green">verde</FONT>,
+          los nuevos mensajes en <FONT COLOR="red">rojo</FONT>) (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=mailbox">Ayuda</A>):<BR/>
+          <CENTER><P><A HREF="{$base}/mailbox?session-id={$session-id}&amp;force-refresh=1">Forzar actualizaci&#243;n</A> - Haz click aqu&#237; para forzar a que se actualice la informaci&#243;n de las carpetas.
+            </P><TABLE WIDTH="80%"><xsl:for-each select="/USERMODEL/MAILHOST_MODEL"><xsl:apply-templates select="."/></xsl:for-each></TABLE></CENTER>
+        </P>
       </BODY>
     </HTML>
   </xsl:template>
@@ -62,7 +62,7 @@
       <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value}" WIDTH="50%">
         <xsl:choose>
           <xsl:when test="@error != &quot;&quot;"><FONT COLOR="red"><xsl:value-of select="@name"/></FONT> (Error: <xsl:value-of select="@error"/>)
-	  </xsl:when>
+          </xsl:when>
           <xsl:otherwise>
             <STRONG>
               <FONT COLOR="green">
@@ -97,7 +97,7 @@
             </A>
           </TD>
           <TD><FONT COLOR="green"><xsl:value-of select="MESSAGELIST/@total"/></FONT>/<FONT COLOR="red"><xsl:value-of select="MESSAGELIST/@new"/></FONT> mensajes
-	  </TD>
+          </TD>
         </xsl:when>
         <xsl:otherwise>
           <TD COLSPAN="{/USERMODEL/STATEDATA/VAR[@name='max folder depth']/@value - $level - 1}">
@@ -106,8 +106,8 @@
             </STRONG>
           </TD>
           <TD>
-	    no puede contener mensajes
-	  </TD>
+            no puede contener mensajes
+          </TD>
         </xsl:otherwise>
       </xsl:choose>
     </TR>

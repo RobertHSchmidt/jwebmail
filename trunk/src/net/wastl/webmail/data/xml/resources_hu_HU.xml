@@ -5,7 +5,7 @@
 <!DOCTYPE BUNDLE SYSTEM "resource.dtd">
 
 <BUNDLE default="hu">
-  
+
   <!-- Section common to all locales -->
   <COMMON>
     <!-- First we have the different html document names -->
