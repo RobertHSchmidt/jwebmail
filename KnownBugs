@@ -1,0 +1,32 @@
+This is a list of known bugs in WebMail. Some of them are bugs that I cannot 
+fix, because they are not directly in the WebMail code but in some third party
+library or program:
+
+Title: 
+  WU-IMAP server doesn't show recent messages in the message list
+WebMail part: 
+  Message List, Folder overview
+Description: 
+  You get a certain count of "recent" (or "new") messages in the folder 
+  overview, if you click on the message list for the folder these new 
+  messages are not shown.
+Explanation:
+  -
+Solution:
+  The problem doesn't exist if you use the Cyrus IMAP server
+
+
+Title:
+  Cannot delete messages on a POP3-Server
+WebMail part:
+  Message List, Message View
+Description:
+  It is not possible to delete messages if you use a POP3 Server
+Explanation:
+  The limitation is not from WebMail, but a problem of the POP3-Provider
+  used by the JavaMail API. POP3 was not thought for remote message management
+  and thus the message deletion support does not fit into JavaMails ideas on
+  how to handle folders.
+Solution:
+  Either use IMAP (preferred) or try different POP3-Providers for JavaMail.
+  For the latter, simply replace the file pop3.jar by the new provider.

@@ -1,0 +1,74 @@
+Installation instructions for WebMail 0.7.10
+============================================
+
+
+I. Requirements
+===============
+
+For building/running JWebMail you need the following software:
+
+- JDK 1.4 or greater (get it at http://java.sun.com)
+- a mailserver for sending (SMTP) and receiving (IMAP) mails; by default, 
+  JWebMail will use "localhost" for both
+- a webapp capable servlet container (e.g. Apache Tomcat, preferably >= 4.1,
+  http://jakarta.apache.org)
+
+In the WebMail contrib/ directory of the source distribution, you can find a
+number of libraries that are needed by WebMail. The required libraries will be
+installed automatically during the build process.
+
+II. Installation
+================
+
+
+There are two approaches to installing WebMail >= 0.7.7, both require the Tomcat
+(or a similar Servlet API 2.[23] + WebApp compatible) server.
+
+
+1. Installation of a pre-compiled WAR-file (Webapp ARchive)
+2. Build and install from source
+
+The first installation method is almost always the preferred choice. Building 
+from source may be relevant to you if you need to do modifications to the
+source.
+
+1. Installation of a pre-compiled WAR-file
+------------------------------------------
+
+This installation method is very simple:
+
+1. Drop the webmail.war-file in your webapp-home. Under Apache Tomcat, this
+   is usually $CATALINA_HOME/webapps, but you might find it under different
+   locations on your system.
+2. chown www-data.www-data webmail.war, i.e. change the owner of the WAR-file
+   to the WWW-User (the user under which Tomcat is running)
+3. Restart Tomcat (or do any steps required by your servlet engine to deploy
+   the WAR-file)
+
+WebMail is then available by calling http://yourhost/webmail/index.jsp
+
+Please don't forget to visit the administration interface first. You can access 
+it by calling http://yourhost/webmail/admin.jsp
+
+
+
+2. Build and install from source
+--------------------------------
+
+WebMail is compiled by using the Ant build-system. For the installation, you 
+will need a running JDK 1.4 (or greater).
+
+The following steps are required (for a quick-start):
+1. Set your JAVA_HOME environment variable (to the directory where the JDK is
+   installed)
+2. If you do not have TOMCAT_HOME or CATALINA_HOME set, then change the
+   build.sh script such that the SERVLET_CONTAINER is set properly
+3. Run './build.sh install-tomcat' if you have Tomcat installed and
+   './build.sh install-catalina' in case you have Catalina installed to
+   compile and install WebMail in your webapp-home. Make sure you have
+   write-permissions on that directory.
+4. chown -R www-data.www-data the webmail/ directory in the WebApp-home
+
+Please see build.xml for further possible targets that may be used.
+
+
