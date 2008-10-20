@@ -1004,16 +1004,17 @@ limitations under the License.
 
 
   <SECTION name="License" id="license">
-    <P>
-      WebMail is (c)1998-2000 by Sebastian Schaffert, schaffer@informatik.uni-muenchen.de
+        <P>
+      JWebMail is copyright 2008 by the JWebMail Development Team and Sebastian Schaffert.
     </P>
-    <P>
-      WebMail is distributed under the terms of the GNU General Public License
-      (GPL). You can find a copy in the file <A href="COPYING">COPYING</A>.
-    </P>
-    <P>
-      The LGPL allows you, said in short, to add WebMail to other projects that are not
-      covered by the GPL.
+        <P>
+      The base JWebMail product
+      is distributed under the terms of the Apache 2.0 license.
+      You can find a copy in the file <A HREF="LICENSE.txt">LICENSE.txt</A>,
+      or at <A HREF="http://www.apache.org/licenses/LICENSE-2.0">
+      http://www.apache.org/licenses/LICENSE-2.0</A>.
+    </P> <P>
+      The Bibop theme is copyrighted under the supplied GPL 2 license.
     </P>
   </SECTION>
 
