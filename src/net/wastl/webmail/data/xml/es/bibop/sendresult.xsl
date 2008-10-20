@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- CVS ID: $Id$ -->
+<!-- $Id$ -->
 
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
