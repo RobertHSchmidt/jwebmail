@@ -1,8 +1,8 @@
 Copyright (C) 2001-2002 by Jason Hunter, jhunter@servlets.com.
-All rights reserved. 
+All rights reserved.
 
 The source code, object code, and documentation in the com.oreilly.servlet
-package is copyright and owned by Jason Hunter. 
+package is copyright and owned by Jason Hunter.
 
 
 USE RIGHTS
@@ -16,10 +16,10 @@ com.oreilly.servlet.* packages provided that every person on the development
 team for that project owns a copy of the book Java Servlet Programming
 (O'Reilly) in its most recent edition. The most recent edition is currently
 the 2nd Edition, available in association with Amazon.com at
-http://www.amazon.com/exec/obidos/ASIN/0596000405/jasonhunter. 
+http://www.amazon.com/exec/obidos/ASIN/0596000405/jasonhunter.
 
 Other (sometimes cheaper) license terms are available upon request; please
-write to jhunter@servlets.com for more information. 
+write to jhunter@servlets.com for more information.
 
 
 REDISTRIBUTION RIGHTS
@@ -31,7 +31,7 @@ Non-commercial redistribution is permitted provided that:
 
 1. You redistribute the package in object code form only (as Java .class files
 or a .jar file containing the .class files) and only as part of a product that
-uses the classes as part of its primary functionality. 
+uses the classes as part of its primary functionality.
 
 2. The product containing the package is non-commercial in nature.
 
@@ -50,7 +50,7 @@ provided with the distribution.
 
 6. You reproduce the above copyright notice, this list of conditions, and the
 following disclaimer in the documentation and/or other materials provided with
-the distribution.  
+the distribution.
 
 7. Licensor retains title to and ownership of the Software and all
 enhancements, modifications, and updates to the Software.
@@ -58,14 +58,14 @@ enhancements, modifications, and updates to the Software.
 Note that the com.oreilly.servlet package is provided "as is" and the author
 will not be liable for any damages suffered as a result of your use.
 Furthermore, you understand the package comes without any guarantee of
-technical support. 
+technical support.
 
 You can always find the latest version of the com.oreilly.servlet package at
-http://www.servlets.com. 
+http://www.servlets.com.
 
 
 THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
-OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
 FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL

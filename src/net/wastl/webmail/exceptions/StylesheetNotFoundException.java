@@ -11,13 +11,13 @@ package net.wastl.webmail.exceptions;
  */
 
 public class StylesheetNotFoundException extends WebMailException {
-    
+
     public StylesheetNotFoundException() {
-	super();
+        super();
     }
 
     public StylesheetNotFoundException(String s) {
-	super(s);
+        super(s);
     }
-    
+
 } // StylesheetNotFoundException

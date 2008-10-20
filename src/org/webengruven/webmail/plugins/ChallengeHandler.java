@@ -14,12 +14,12 @@
  * modify it under the terms of the Lesser GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * Lesser GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the Lesser GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307,
@@ -43,40 +43,40 @@ public class ChallengeHandler implements Plugin, URLHandler {
 
     private Storage store;
 
-	public void register(WebMailServer parent) {
+        public void register(WebMailServer parent) {
         parent.getURLHandler().registerHandler(URL, this);
         storage = parent.getStorage();
-	}
+        }
 
-	public String getVersion() {
+        public String getVersion() {
         return VERSION;
-	}
+        }
 
-	public String provides() {
+        public String provides() {
         return "Authentication Challenge";
-	}
+        }
 
     /* XXX Not sure what, if anything, this should return */
-	public String requires() {
+        public String requires() {
         return "";
-	}
+        }
 
-	public String getURL() {
+        public String getURL() {
         return URL;
-	}
+        }
 
-	public String getName() {
-		return "ChallengeHandler"; 
-	}
+        public String getName() {
+                return "ChallengeHandler";
+        }
 
-	public String getDescription() {
-		return "This URLHandler will show the user a challenge and allow them"
+        public String getDescription() {
+                return "This URLHandler will show the user a challenge and allow them"
          + "to respond to it";
-	}
+        }
 
-	public HTMLDocument handleURL(String subURL, HTTPSession sess,
+        public HTMLDocument handleURL(String subURL, HTTPSession sess,
         HTTPRequestHeader h) throws WebMailException
-	{
+        {
         XMLGenericModel model = storage.createXMLGenericModel();
         HTMLDocument content;
         XMLUserData ud;
@@ -107,7 +107,7 @@ public class ChallengeHandler implements Plugin, URLHandler {
 
     private Storage storage;
 
-            
+
 } /* END class ChallengeHandler */
 
 

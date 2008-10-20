@@ -6,7 +6,7 @@ import net.wastl.webmail.config.ConfigScheme;
 /**
  * SimpleAuthenticator.java
  *
- * Does simple authentication just based on the UserData checkPasswd() 
+ * Does simple authentication just based on the UserData checkPasswd()
  *
  * Created: Mon Apr 19 11:17:03 1999
  *
@@ -15,33 +15,33 @@ import net.wastl.webmail.config.ConfigScheme;
  * @see webmail.server.UserData
  */
 public class SimpleAuthenticator extends Authenticator {
-    
+
     public final String VERSION="1.0";
 
     public SimpleAuthenticator() {
-	super();
+        super();
     }
 
     public String getVersion() {
-	return VERSION;
+        return VERSION;
     }
 
-    
+
     public void init(Storage store) {
     }
 
     public void register(ConfigScheme store) {
-	key="SIMPLE";
-	store.configAddChoice("AUTH",key,"Very simple style authentication. First login sets password. Password may be changed.");
-    }	
+        key="SIMPLE";
+        store.configAddChoice("AUTH",key,"Very simple style authentication. First login sets password. Password may be changed.");
+    }
 
     public void authenticatePostUserData(UserData udata, String domain,String password) throws InvalidPasswordException {
-	if(!udata.checkPassword(password) || password.equals("")) {
-	    throw new InvalidPasswordException();
-	}
+        if(!udata.checkPassword(password) || password.equals("")) {
+            throw new InvalidPasswordException();
+        }
     }
 
     public void changePassword(UserData udata, String passwd, String verify) throws InvalidPasswordException {
-	udata.setPassword(passwd,verify);
+        udata.setPassword(passwd,verify);
     }
 } // SimpleAuthenticator

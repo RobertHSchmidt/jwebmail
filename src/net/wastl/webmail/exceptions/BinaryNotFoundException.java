@@ -11,13 +11,13 @@ package net.wastl.webmail.exceptions;
  */
 
 public class BinaryNotFoundException extends WebMailException {
-    
+
     public BinaryNotFoundException() {
-	super();
+        super();
     }
 
     public BinaryNotFoundException(String s) {
-	super(s);
+        super(s);
     }
-    
+
 } // BinaryNotFoundException

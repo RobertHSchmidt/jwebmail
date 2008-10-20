@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -34,10 +34,10 @@
     </HTML>
   </xsl:template>
   <xsl:template match="FOLDER"><H3>
-      Mostrando mensajes <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@first_msg"/> 
-      a <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@last_msg"/> 
+      Mostrando mensajes <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@first_msg"/>
+      a <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@last_msg"/>
       en carpeta <xsl:value-of select="@name"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=messagelist">Ayuda</A>).
-    </H3><xsl:call-template name="navigation"/><HR/><xsl:apply-templates select="MESSAGELIST"/><STRONG>Marcas del mensaje:</STRONG><IMG SRC="{$imgbase}/images/icon-attachment.gif" BORDER="0"/> mensaje con adjuntos 
+    </H3><xsl:call-template name="navigation"/><HR/><xsl:apply-templates select="MESSAGELIST"/><STRONG>Marcas del mensaje:</STRONG><IMG SRC="{$imgbase}/images/icon-attachment.gif" BORDER="0"/> mensaje con adjuntos
     <IMG SRC="{$imgbase}/images/icon-new.gif" BORDER="0"/> nuevo mensaje
     <IMG SRC="{$imgbase}/images/icon-seen.gif" BORDER="0"/> mensaje visto
     <IMG SRC="{$imgbase}/images/icon-answered.gif" BORDER="0"/> mensaje respondido
@@ -137,7 +137,7 @@
                   <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part + 1}"><IMG SRC="{$imgbase}/images/arrow-left.png" BORDER="0"/> Anteriores <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> mensajes</A>
                 </xsl:when>
                 <xsl:otherwise><IMG SRC="{$imgbase}/images/arrow-left-disabled.png" BORDER="0"/> Anteriores <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> mensajes
-		</xsl:otherwise>
+                </xsl:otherwise>
               </xsl:choose>
             </EM>
           </TD>
@@ -148,8 +148,8 @@
                   <A HREF="{$base}/folder/list?session-id={$session-id}&amp;folder-id={@id}&amp;part={/USERMODEL/CURRENT[@type='folder']/@list_part - 1}">Siguientes <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> mensajes <IMG SRC="{$imgbase}/images/arrow-right.png" BORDER="0"/></A>
                 </xsl:when>
                 <xsl:otherwise>
-		   Siguientes <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> mensajes <IMG SRC="{$imgbase}/images/arrow-right-disabled.png" BORDER="0"/>
-		</xsl:otherwise>
+                   Siguientes <xsl:value-of select="/USERMODEL/USERDATA/INTVAR[@name='max show messages']/@value"/> mensajes <IMG SRC="{$imgbase}/images/arrow-right-disabled.png" BORDER="0"/>
+                </xsl:otherwise>
               </xsl:choose>
             </EM>
           </TD>

@@ -7,7 +7,7 @@ It is also possible that objects are notified on configuration changes so an app
 action can be taken. This works much like Java's AWT Listeners, so the corresponding
 interface is called ConfigurationListener.
 
-Unfortunately, this decentralized configuration doesn't allow a effective central 
+Unfortunately, this decentralized configuration doesn't allow a effective central
 compile-time configuration any longer. Therefore, there are some system properties
 that can be passed to the WebMail startcommand. Mainly, you will need to use
 --data-path, if your configuration file cannot be found in the default place.
@@ -22,7 +22,7 @@ Currently there are three types of Configuration Parameters:
 - YesNo-parameters: can only take "YES" or "NO" as value and are just a specialized
                     version of the choice parameters.
 
-Each configuration parameter must be registered with a unique String key 
-(name of the parameter), a short description to be used as help text in the 
+Each configuration parameter must be registered with a unique String key
+(name of the parameter), a short description to be used as help text in the
 administration interface and with a default value if not yet set by the user.
 

@@ -43,8 +43,8 @@ authenticatePostUserData(UserData ud, String passwd, String domain)
 
 Additionally there are three other functions which may be of interest:
 
-boolean canChangePassword() 
-void changePassword(UserData ud, String passwd, String verify) 
+boolean canChangePassword()
+void changePassword(UserData ud, String passwd, String verify)
 AuthDisplayMngr getAuthDisplayMngr()
 
 Note that canChangePassword() defaults to true, but changePassword() is

@@ -4,17 +4,17 @@
 
 <!--
  * Copyright (C) 2000 Sebastian Schaffert
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -28,49 +28,49 @@
   <SECTION name="Contents" id="contents"><CONTENTS/></SECTION>
   <SECTION name="What is WebMail" id="about">
     <P>
-      WebMail is a server application that allows ISPs to provide a WWW interface 
-      for each user to his mailbox(es) (similar to the programs YahooMail or HotMail 
-      use). WebMail should scale well enough to support large userbases and 
+      WebMail is a server application that allows ISPs to provide a WWW interface
+      for each user to his mailbox(es) (similar to the programs YahooMail or HotMail
+      use). WebMail should scale well enough to support large userbases and
       should be easy enough to be used in a home LAN.
     </P>
-    
+
     <SUBSECTION name="Features" id="about:features">
       <P>
-	Features include:
-	<LIST>
-	  <ITEM>Gives a user full access to his/her IMAP mailbox through a simple-to-use WWW interface</ITEM>
-	  <ITEM>Supports multiple folders on multiple hosts, depending on mail protocol used 
-	    (IMAP supports different folders on the same host, POP doesn't)</ITEM>
-	  <ITEM>Sophisticated folder management system</ITEM>
-	  <ITEM>100% HTML 3.2/4.0 output, no Javascript, no Java on the Client side</ITEM>
-	  <ITEM>supports multiple languages, configurable for each user</ITEM>
-	  <ITEM>flexible template system to personalize look and feel and write new language files using XML and 
-	    XSL</ITEM>
-	  <ITEM>runs as Java Servlet in Apache or as a standalone HTTP-server completely written in Java</ITEM>
-	  <ITEM>Improved session management keeps mail connections alive</ITEM>
-	  <ITEM>Improved speed compared to CGI scripts (about factor 5-10, depending on usage)</ITEM>
-	  <ITEM>Usage of JavaMail-API ensures compatibility to many mailstandards 
-	    ("officially" supported and tested: IMAPv4)</ITEM>
-	  <ITEM>Open Source distribution allows easy customization</ITEM>
-	  <ITEM>webbased administration interface</ITEM>
-	  <ITEM>support for multiple virtual user domains</ITEM>
-	  <ITEM>Easily add new features through the WebMail modular plugin concept 
-	    (support for dependencies, hooking into URLs, etc)</ITEM>
-	</LIST>
+        Features include:
+        <LIST>
+          <ITEM>Gives a user full access to his/her IMAP mailbox through a simple-to-use WWW interface</ITEM>
+          <ITEM>Supports multiple folders on multiple hosts, depending on mail protocol used
+            (IMAP supports different folders on the same host, POP doesn't)</ITEM>
+          <ITEM>Sophisticated folder management system</ITEM>
+          <ITEM>100% HTML 3.2/4.0 output, no Javascript, no Java on the Client side</ITEM>
+          <ITEM>supports multiple languages, configurable for each user</ITEM>
+          <ITEM>flexible template system to personalize look and feel and write new language files using XML and
+            XSL</ITEM>
+          <ITEM>runs as Java Servlet in Apache or as a standalone HTTP-server completely written in Java</ITEM>
+          <ITEM>Improved session management keeps mail connections alive</ITEM>
+          <ITEM>Improved speed compared to CGI scripts (about factor 5-10, depending on usage)</ITEM>
+          <ITEM>Usage of JavaMail-API ensures compatibility to many mailstandards
+            ("officially" supported and tested: IMAPv4)</ITEM>
+          <ITEM>Open Source distribution allows easy customization</ITEM>
+          <ITEM>webbased administration interface</ITEM>
+          <ITEM>support for multiple virtual user domains</ITEM>
+          <ITEM>Easily add new features through the WebMail modular plugin concept
+            (support for dependencies, hooking into URLs, etc)</ITEM>
+        </LIST>
       </P>
     </SUBSECTION>
 
     <SUBSECTION name="Whom WebMail is aimed at" id="about:audience">
       <P>
-	Who should use WebMail:<BR/>
-	WebMail's primary goal is to provide ISPs, companies and universities with a 
-	simple and zero-cost solution to give WWW mailaccess to their users.<BR/>
-	Users can read and write their email while they are sitting in an Internet-Cafe,
-	at expositions, etc without having to carry their PC around.<BR/>
-	It is not intended as a replacement for the different personal email clients, 
-	but as a supplement for an existing mail solution.<BR/>
-	The secondary goal is to unify a user's different email accounts under one 
-	interface which is easily accomplished using WebMails folder capability.
+        Who should use WebMail:<BR/>
+        WebMail's primary goal is to provide ISPs, companies and universities with a
+        simple and zero-cost solution to give WWW mailaccess to their users.<BR/>
+        Users can read and write their email while they are sitting in an Internet-Cafe,
+        at expositions, etc without having to carry their PC around.<BR/>
+        It is not intended as a replacement for the different personal email clients,
+        but as a supplement for an existing mail solution.<BR/>
+        The secondary goal is to unify a user's different email accounts under one
+        interface which is easily accomplished using WebMails folder capability.
       </P>
     </SUBSECTION>
   </SECTION>
@@ -80,53 +80,53 @@
       <P>
         There are two different ways to install WebMail, the <EM>standalone installation</EM> and the
         <EM>Java Servlet installation</EM>. Which one you should choose depends on what you plan to do
-	with WebMail:
+        with WebMail:
         <LIST>
           <ITEM>
-	    a <STRONG>standalone server</STRONG> is much easier to install and will allow you to run
-	    WebMail almost immediately without much configuration. This can be used if you want to
+            a <STRONG>standalone server</STRONG> is much easier to install and will allow you to run
+            WebMail almost immediately without much configuration. This can be used if you want to
             evaluate WebMail's capabilities or develop new features/bugfixes. It also makes sense to
             use this for small to medium installations if you don't want to set up a Java Servlet
             capable webserver
           </ITEM>
           <ITEM>
-            a <STRONG>Java Servlet installation</STRONG> is recommended for production use since it 
-	    allows greater performance and scalability. You will need to set up a webserver that is
+            a <STRONG>Java Servlet installation</STRONG> is recommended for production use since it
+            allows greater performance and scalability. You will need to set up a webserver that is
             capable of serving Java Servlets, e.g. Apache. I can't give too detailed instructions here
-            since this depends in large parts on your webserver, but I include a sample Apache 
+            since this depends in large parts on your webserver, but I include a sample Apache
             configuration (the parts relevant to WebMail) in the distribution.<BR/>
-	    The Debian (unstable) and RedHat (6.2) packages will install WebMail as a servlet for these
-	    two systems. This will ease the servlet installation a lot since you need not set up JServ and
-	    WebMail manually, so you should consider using this approach if you have one of those systems.
+            The Debian (unstable) and RedHat (6.2) packages will install WebMail as a servlet for these
+            two systems. This will ease the servlet installation a lot since you need not set up JServ and
+            WebMail manually, so you should consider using this approach if you have one of those systems.
           </ITEM>
         </LIST>
       </P>
 <!--      <P>
-	There are also several ways to store data:
-	<LIST>
-	  <ITEM>
-	    You could use the simple file-based storage which stores configuration data in XML documents 
-	    and is very easy to set up, but perhaps not very fast.
-	  </ITEM>
-	  <ITEM>
-	    The performance method however is to store the configuration in a SQL database. Currently
-	    only MySQL is supported, but it is easy to implement storage on Oracle or PostgreSQL.
-	    Using a SQL database for storage has several advantages which I will describe below.
-	  </ITEM>
-	</LIST>
+        There are also several ways to store data:
+        <LIST>
+          <ITEM>
+            You could use the simple file-based storage which stores configuration data in XML documents
+            and is very easy to set up, but perhaps not very fast.
+          </ITEM>
+          <ITEM>
+            The performance method however is to store the configuration in a SQL database. Currently
+            only MySQL is supported, but it is easy to implement storage on Oracle or PostgreSQL.
+            Using a SQL database for storage has several advantages which I will describe below.
+          </ITEM>
+        </LIST>
       </P>-->
     </SUBSECTION>
 
     <SUBSECTION name="Standalone Server" id="install:standalone">
       <NOTE>On RedHat and Debian Linux systems you will probably first want to have a look at the
-	RedHat and Debian sections in the Servlet installation instructions</NOTE>
+        RedHat and Debian sections in the Servlet installation instructions</NOTE>
 
       <SUBSUBSECTION name="Requirements" id="install:standalone:requirements">
         <P>
-	  To run WebMail properly on your server, you need to have the following software 
-	  installed:
+          To run WebMail properly on your server, you need to have the following software
+          installed:
           <LIST>
-	    <ITEM>Java 1.1.6 or better - see<A href="#java">the Java Section</A> on Java issues</ITEM>
+            <ITEM>Java 1.1.6 or better - see<A href="#java">the Java Section</A> on Java issues</ITEM>
             <ITEM>
               About 20 megs of RAM (minimum) plus additional 80 megs on high load servers
               (these are just recommendations, WebMail will run on any Java-capable server;
@@ -134,9 +134,9 @@
               the startup script called webmail.sh/webmail.bat)
             </ITEM>
             <ITEM>
-	      Using a JIT ("just in time compiler") is greatly recommended! The Solaris and Windows 
-	      JDKs from Sun use a JIT by default (sunwjit). On Linux, the Sun/Blackdown JDK uses a JIT,
-	      however it is not very fast, so you could profit from using a JIT like tya. The IBM Linux 
+              Using a JIT ("just in time compiler") is greatly recommended! The Solaris and Windows
+              JDKs from Sun use a JIT by default (sunwjit). On Linux, the Sun/Blackdown JDK uses a JIT,
+              however it is not very fast, so you could profit from using a JIT like tya. The IBM Linux
               JDK 1.1.8 comes with a very fast JIT (actually the fastest Java platform available).
             </ITEM>
           </LIST>
@@ -151,20 +151,20 @@
           </LIST>
         </P>
         <P>
-	  WebMail will make profit of multiprocessor machines (e.g. Sun Enterprise 450) as
-	  it is multithreaded in large parts.<BR/>
+          WebMail will make profit of multiprocessor machines (e.g. Sun Enterprise 450) as
+          it is multithreaded in large parts.<BR/>
         </P>
       </SUBSUBSECTION>
 
       <SUBSUBSECTION name="Binary Installation" id="install:standalone:binary">
         <P>
           <NLIST>
-	    <ITEM>Change to the prefix where you want to install WebMail (e.g. /usr/local)</ITEM>
+            <ITEM>Change to the prefix where you want to install WebMail (e.g. /usr/local)</ITEM>
             <ITEM>Unpack the tar.gz or zip archive: <CODE>tar xzvf webmail-0.7.0.tar.gz</CODE></ITEM>
             <ITEM>Change to webmail/bin</ITEM>
-	    <ITEM>Edit the file webmail.sh if necessary</ITEM>
-            <ITEM>Start WebMail using the provided script 
-	      <CODE>./webmail.sh >> stdout.log 2>&amp;1 &amp;</CODE></ITEM>
+            <ITEM>Edit the file webmail.sh if necessary</ITEM>
+            <ITEM>Start WebMail using the provided script
+              <CODE>./webmail.sh >> stdout.log 2>&amp;1 &amp;</CODE></ITEM>
             <ITEM>See <A href="#config">Configuration</A> for further steps to take.</ITEM>
           </NLIST>
         </P>
@@ -174,13 +174,13 @@
         <P>
           <NOTE>Source installation will definately only work on Unix systems!</NOTE>
           <NOTE>Source installation is only really useful for developers since you don't need to
-	    (and cannot) adapt the program to your specific system settings in Java and I already
-	    compile with optimization turned on.</NOTE>
-	</P>
+            (and cannot) adapt the program to your specific system settings in Java and I already
+            compile with optimization turned on.</NOTE>
+        </P>
         <P>
-	  Additional requirements:
+          Additional requirements:
           <LIST>
-	    <ITEM>GNU make (Only GNU make will work)</ITEM>
+            <ITEM>GNU make (Only GNU make will work)</ITEM>
             <ITEM>zip/unzip</ITEM>
           </LIST>
         </P>
@@ -189,15 +189,15 @@
           <NLIST>
             <ITEM>Change to the src/ subdirectory</ITEM>
             <ITEM>Set the CLASSPATH environment variable to your classes.zip (JDK 1.1) or
-	      rt.jar (JDK 1.2) archives (on Solaris: /usr/java1.1/lib/classes.zip for
-	      JDK 1.1 and /usr/java1.2/jre/lib/rt.jar for JDK 1.2)
+              rt.jar (JDK 1.2) archives (on Solaris: /usr/java1.1/lib/classes.zip for
+              JDK 1.1 and /usr/java1.2/jre/lib/rt.jar for JDK 1.2)
             </ITEM>
             <ITEM>Have a look at the makefile and edit it if necessary</ITEM>
             <ITEM>
               Call "make" to compile the classfiles and create the archives
-	      (containing classfiles, language dependent HTML templates and images).<BR/>            
-	      You will find the compiled archives in the lib/ directory when the 
-              compilation was successful. 
+              (containing classfiles, language dependent HTML templates and images).<BR/>
+              You will find the compiled archives in the lib/ directory when the
+              compilation was successful.
             </ITEM>
             <ITEM>See steps 3 to 5 from binary installation then</ITEM>
           </NLIST>
@@ -207,200 +207,200 @@
 
     <SUBSECTION name="Servlet Installation" id="install:servlet">
       <P>
-	Running WebMail as a Servlet has several advantages over the standalone installation (and
-	also some disadvantages):
-	<LIST>
-	  <ITEM>you can run (and integrate) WebMail on an already-running webserver</ITEM>
-	  <ITEM>
-	    you can make use of the webserver's fast connection handling and HTTP parsing routines
-	  </ITEM>
-	  <ITEM>
-	    you can e.g. use Apache's load-balancing feature to run WebMail on a whole server cluster
-	    for large installation.
-	  </ITEM>
-	  <ITEM>
-	    installation is however much more complicated (and so it is definately not suited for 
-	    webserver newbies)
-	  </ITEM>
-	</LIST>
+        Running WebMail as a Servlet has several advantages over the standalone installation (and
+        also some disadvantages):
+        <LIST>
+          <ITEM>you can run (and integrate) WebMail on an already-running webserver</ITEM>
+          <ITEM>
+            you can make use of the webserver's fast connection handling and HTTP parsing routines
+          </ITEM>
+          <ITEM>
+            you can e.g. use Apache's load-balancing feature to run WebMail on a whole server cluster
+            for large installation.
+          </ITEM>
+          <ITEM>
+            installation is however much more complicated (and so it is definately not suited for
+            webserver newbies)
+          </ITEM>
+        </LIST>
       </P>
       <P>
-	Before trying this, please ensure that you are familiar with your Webserver's
-	Servlet configuration. I provided a sample zone file for Apache, though (but
-	you will have to do many modifications concerning the initArgs at the end of
-	the file).
+        Before trying this, please ensure that you are familiar with your Webserver's
+        Servlet configuration. I provided a sample zone file for Apache, though (but
+        you will have to do many modifications concerning the initArgs at the end of
+        the file).
       </P>
 
       <SUBSUBSECTION name="General information" id="install:servlet:general">
-	<P>
-	  The WebMail servlet is called <CODE>net.wastl.webmail.servlet.WebMailServlet</CODE>. This
-	  class is contained in the <CODE>webmail-servlet.jar</CODE> Java archive. Usually you will
-	  need all of the provided JAR files except <CODE>webmail-standalone.jar</CODE> to run the
-	  WebMail Servlet.
-	</P>
-	<P>
-	  The WebMail servlet uses the following <CODE>initArgs</CODE>:
-	  <TABLE>
-	    <TR>
-	      <TD><CODE>webmail.plugin.path</CODE></TD>
-	      <TD>Path to the plugin directory</TD>
-	    </TR>
-	    <TR>
-	      <TD><CODE>webmail.auth.path</CODE></TD>
-	      <TD>Path to the authenticator directory </TD>
-	    </TR>
-	    <TR>
-	      <TD><CODE>webmail.data.path</CODE></TD> <TD>Path were data will be stored (this has to be 
-		writeable by the process owner of the webserver)</TD>
-	    </TR>
-	    <TR>
-	      <TD><CODE>webmail.lib.path</CODE></TD>
-	      <TD>Path to WebMail libraries</TD>
-	    </TR>
-	    <TR>
-	      <TD><CODE>webmail.template.path</CODE></TD> 
-	      <TD>Path to language dependent template files</TD>
-	    </TR>
-	    <TR>
-	      <TD><CODE>webmail.storage</CODE></TD>
-	      <TD>Set this to <CODE>net.wastl.webmail.storage.simple.SimpleStorage</CODE> for the simple 
-		storage. Other storage methods might come in the future</TD>
-	    </TR>
-	  </TABLE>
-	</P>
-	<NOTE>
-	  Don't forget to set the correct permissions on the WebMail directory. All
-	  subdirectories must be readable by the user running the Servlet engine. Additionally the
-	  <CODE>webmail.data.path</CODE> directory (usually called <CODE>data/</CODE>) must be
-	  writeable.
-	</NOTE>
+        <P>
+          The WebMail servlet is called <CODE>net.wastl.webmail.servlet.WebMailServlet</CODE>. This
+          class is contained in the <CODE>webmail-servlet.jar</CODE> Java archive. Usually you will
+          need all of the provided JAR files except <CODE>webmail-standalone.jar</CODE> to run the
+          WebMail Servlet.
+        </P>
+        <P>
+          The WebMail servlet uses the following <CODE>initArgs</CODE>:
+          <TABLE>
+            <TR>
+              <TD><CODE>webmail.plugin.path</CODE></TD>
+              <TD>Path to the plugin directory</TD>
+            </TR>
+            <TR>
+              <TD><CODE>webmail.auth.path</CODE></TD>
+              <TD>Path to the authenticator directory </TD>
+            </TR>
+            <TR>
+              <TD><CODE>webmail.data.path</CODE></TD> <TD>Path were data will be stored (this has to be
+                writeable by the process owner of the webserver)</TD>
+            </TR>
+            <TR>
+              <TD><CODE>webmail.lib.path</CODE></TD>
+              <TD>Path to WebMail libraries</TD>
+            </TR>
+            <TR>
+              <TD><CODE>webmail.template.path</CODE></TD>
+              <TD>Path to language dependent template files</TD>
+            </TR>
+            <TR>
+              <TD><CODE>webmail.storage</CODE></TD>
+              <TD>Set this to <CODE>net.wastl.webmail.storage.simple.SimpleStorage</CODE> for the simple
+                storage. Other storage methods might come in the future</TD>
+            </TR>
+          </TABLE>
+        </P>
+        <NOTE>
+          Don't forget to set the correct permissions on the WebMail directory. All
+          subdirectories must be readable by the user running the Servlet engine. Additionally the
+          <CODE>webmail.data.path</CODE> directory (usually called <CODE>data/</CODE>) must be
+          writeable.
+        </NOTE>
       </SUBSUBSECTION>
-      
+
       <SUBSUBSECTION name="Installation for Apache JServ" id="install:servlet:jserv">
-	<P>
-	  JServ is the old Apache Servlet engine for Servlet API 2.0. At the moment, it is probably
-	  the Servlet engine that is most common.
-	</P>
-	<P>
-	  The requirements for the JServ installation are that you have a running Apache together
-	  with a running Apache JServ.
-	</P>
-	<P>
-	  As of WebMail 0.7.5, a generic Apache JServ installation script is 
-	  provided that can be used to add the necessary configuration options to
-	  Apache and JServ. Nonetheless you will need to have a running servlet
-	  environment.
-	</P>
-	<P>
-	  This script is called <CODE>bin/install.sh</CODE>. Just invoke it with no parameters. It
-	  will try to determine your configuration and ask you whether the guessed values are
-	  correct. You will be prompted for confirmation before each step.
-	</P>
+        <P>
+          JServ is the old Apache Servlet engine for Servlet API 2.0. At the moment, it is probably
+          the Servlet engine that is most common.
+        </P>
+        <P>
+          The requirements for the JServ installation are that you have a running Apache together
+          with a running Apache JServ.
+        </P>
+        <P>
+          As of WebMail 0.7.5, a generic Apache JServ installation script is
+          provided that can be used to add the necessary configuration options to
+          Apache and JServ. Nonetheless you will need to have a running servlet
+          environment.
+        </P>
+        <P>
+          This script is called <CODE>bin/install.sh</CODE>. Just invoke it with no parameters. It
+          will try to determine your configuration and ask you whether the guessed values are
+          correct. You will be prompted for confirmation before each step.
+        </P>
       </SUBSUBSECTION>
 
       <SUBSUBSECTION name="Installation for Tomcat" id="install:servlet:tomcat">
-	<P>
-	  <STRONG>Requirements:</STRONG>
-	  <LIST>
-	    <ITEM>Apache webserver</ITEM>
-	    <ITEM>Tomcat from the Apache Jarkarta Project</ITEM>
-	    <ITEM>mod_jk from the Apache Jarkarta Project (mod_jserv will probably work also
-	      with some modifications)</ITEM>
-	  </LIST>
-	</P>
-	<P>
-	  <NLIST>
-	    <ITEM><STRONG>Modify web.xml file</STRONG><BR />
+        <P>
+          <STRONG>Requirements:</STRONG>
+          <LIST>
+            <ITEM>Apache webserver</ITEM>
+            <ITEM>Tomcat from the Apache Jarkarta Project</ITEM>
+            <ITEM>mod_jk from the Apache Jarkarta Project (mod_jserv will probably work also
+              with some modifications)</ITEM>
+          </LIST>
+        </P>
+        <P>
+          <NLIST>
+            <ITEM><STRONG>Modify web.xml file</STRONG><BR />
 
-	      There is a web.xml file already provided for WebMail in the WEB-INF directory.
-	      Please modify the pathnames therein to reasonable values for your configuration.
-	    </ITEM>
+              There is a web.xml file already provided for WebMail in the WEB-INF directory.
+              Please modify the pathnames therein to reasonable values for your configuration.
+            </ITEM>
 
-	    <ITEM><STRONG>Modify Tomcat configuration</STRONG>: In the tomcat server.xml file add
-	      the following entry to the <CODE>&lt;ContextManager&gt;</CODE> element:<BR />
-	      <P>
-		<CODE>
-		  &lt;Context path="/webmail" 
-		  docBase="/path/to/webmail-0.x.x" 
-		  crossContext="true"
-		  debug="0" 
-		  reloadable="false" 
-		  trusted="false" &gt;
-		  &lt;/Context&gt;
-		</CODE>
-	      </P>
-	      <P>
-		Tomcat will create a mod_jk configuration file automatically from this entry.
-		However the generated file is not sufficient for WebMail as WebMail doesn't use
-		the default directory structure proposed by the Servlet API 2.2. Therefore
-		a second modification is necessary:
-	      </P>
-	    </ITEM>
-	    <ITEM><STRONG>Modify Apache configuration</STRONG>: In the httpd.conf file from Apache
-	    add the following two entries after the entry for the JkWorkersFile and the Include for
-	    tomcat's automatic configuration:
-	      <P>
-		<CODE>JkMount /webmail/WebMail ajp12</CODE><BR />
-		<CODE>JkMount /webmail/WebMail/* ajp12</CODE><BR />	      
-	      (if you are using AJP protocol 1.3 please change ajp12 to ajp13)
-	      </P>
-	    </ITEM>
-	    <ITEM><STRONG>Set permissions on WebMail data directory</STRONG>
-	      <P>
-		Please set the permissions on the WebMail <CODE>data/</CODE> directory so that the
-		user running Tomcat has write access to it. It is also possible to specify a 
-		different directory in <CODE>web.xml</CODE>.
-	      </P>
-	    </ITEM>
-	    <ITEM><STRONG>restart Tomcat and Apache</STRONG> and see in Tomcat's stdout.log whether
-	    WebMail is starting.</ITEM>
-	  </NLIST>
-	</P>
+            <ITEM><STRONG>Modify Tomcat configuration</STRONG>: In the tomcat server.xml file add
+              the following entry to the <CODE>&lt;ContextManager&gt;</CODE> element:<BR />
+              <P>
+                <CODE>
+                  &lt;Context path="/webmail"
+                  docBase="/path/to/webmail-0.x.x"
+                  crossContext="true"
+                  debug="0"
+                  reloadable="false"
+                  trusted="false" &gt;
+                  &lt;/Context&gt;
+                </CODE>
+              </P>
+              <P>
+                Tomcat will create a mod_jk configuration file automatically from this entry.
+                However the generated file is not sufficient for WebMail as WebMail doesn't use
+                the default directory structure proposed by the Servlet API 2.2. Therefore
+                a second modification is necessary:
+              </P>
+            </ITEM>
+            <ITEM><STRONG>Modify Apache configuration</STRONG>: In the httpd.conf file from Apache
+            add the following two entries after the entry for the JkWorkersFile and the Include for
+            tomcat's automatic configuration:
+              <P>
+                <CODE>JkMount /webmail/WebMail ajp12</CODE><BR />
+                <CODE>JkMount /webmail/WebMail/* ajp12</CODE><BR />
+              (if you are using AJP protocol 1.3 please change ajp12 to ajp13)
+              </P>
+            </ITEM>
+            <ITEM><STRONG>Set permissions on WebMail data directory</STRONG>
+              <P>
+                Please set the permissions on the WebMail <CODE>data/</CODE> directory so that the
+                user running Tomcat has write access to it. It is also possible to specify a
+                different directory in <CODE>web.xml</CODE>.
+              </P>
+            </ITEM>
+            <ITEM><STRONG>restart Tomcat and Apache</STRONG> and see in Tomcat's stdout.log whether
+            WebMail is starting.</ITEM>
+          </NLIST>
+        </P>
       </SUBSUBSECTION>
 
       <SUBSUBSECTION name="RedHat Installation" id="install:servlet:redhat">
-	<P>
-	  Installation on RedHat systems should be as easy as possible: You need to have a running Apache 
-	  installation. Install the following RPM packages (you can find them on the WebMail homepage at 
-	  <A href="http://jwebmail.sourceforge.net">http://jwebmail.sourceforge.net</A>) in the following order:
-	  <LIST>
-	    <ITEM>JDK 1.2.2 (or greater) - this can be found at the <A href="http://developer.java.sun.com/developer/earlyAccess/j2sdk13/download-linux.html">Sun JDK 1.3 for Linux download page</A></ITEM> 
-	    <ITEM>Apache JServ - an RPM can be found on most RedHat mirrors and on the WebMail homepage</ITEM>
-	    <ITEM>WebMail</ITEM>
-	  </LIST>
-	  You will then have a running WebMail Servlet at <CODE>http://yourhost/webmail/webmail</CODE> when you 
-	  restart your Apache webserver. Please don't forget to change your configuration by going to
-	  <CODE>http://yourhost/webmail/webmail/admin</CODE> and logging in with "Secret" 
-	  (and don't forget to change the password!). 
-	</P>
-	<NOTE>This installation instruction (and the RPMs found on the WebMail homepage) are for RedHat 6.2 only. 
-	  That means they may or may not work on RedHat versions lower or greater than 6.2. If you don't manage to install WebMail with the RPM, please try the binary release and run bin/install.sh for the generic configuration.</NOTE>
+        <P>
+          Installation on RedHat systems should be as easy as possible: You need to have a running Apache
+          installation. Install the following RPM packages (you can find them on the WebMail homepage at
+          <A href="http://jwebmail.sourceforge.net">http://jwebmail.sourceforge.net</A>) in the following order:
+          <LIST>
+            <ITEM>JDK 1.2.2 (or greater) - this can be found at the <A href="http://developer.java.sun.com/developer/earlyAccess/j2sdk13/download-linux.html">Sun JDK 1.3 for Linux download page</A></ITEM>
+            <ITEM>Apache JServ - an RPM can be found on most RedHat mirrors and on the WebMail homepage</ITEM>
+            <ITEM>WebMail</ITEM>
+          </LIST>
+          You will then have a running WebMail Servlet at <CODE>http://yourhost/webmail/webmail</CODE> when you
+          restart your Apache webserver. Please don't forget to change your configuration by going to
+          <CODE>http://yourhost/webmail/webmail/admin</CODE> and logging in with "Secret"
+          (and don't forget to change the password!).
+        </P>
+        <NOTE>This installation instruction (and the RPMs found on the WebMail homepage) are for RedHat 6.2 only.
+          That means they may or may not work on RedHat versions lower or greater than 6.2. If you don't manage to install WebMail with the RPM, please try the binary release and run bin/install.sh for the generic configuration.</NOTE>
       </SUBSUBSECTION>
 
       <SUBSUBSECTION name="Debian Installation" id="install:servlet:debian">
-	<P>
-	  Installation on Debian woody is as simple as on RedHat. You will have to install Apache JServ with 
-	  apt-get (<CODE>apt-get install jserv</CODE> will install the necessary packages) and then install the 
-	  WebMail package (with <CODE>dpkg --install webmail*.deb</CODE>). <BR/>
-	  You will then have a running WebMail Servlet at <CODE>http://yourhost/webmail/webmail</CODE> when you 
-	  restart your Apache webserver. Please don't forget to change your configuration by going to
-	  <CODE>http://yourhost/webmail/webmail/admin</CODE> and logging in with "Secret" 
-	  (and don't forget to change the password!). 
-	</P>
-	<P>
-	  You might want to install a more up-to-date JDK to run WebMail properly, I will try to make a Debian 
-	  package available for JDK 1.2.2, but you can also simply install a tar of the most up-to-date JDK and
-	  update the links in <CODE>/etc/alternatives</CODE>:
-	  <LIST>
-	    <ITEM><CODE>update-alternatives /usr/bin/java java /usr/lib/&lt;YOUR_JDK&gt;/bin/java 130</CODE></ITEM>
-	    <ITEM><CODE>update-alternatives /usr/bin/javac javac /usr/lib/&lt;YOUR_JDK&gt;/bin/javac 130</CODE></ITEM>
-	    <ITEM><CODE>update-alternatives /usr/bin/jar jar /usr/lib/&lt;YOUR_JDK&gt;/bin/jar 130</CODE></ITEM>
-	  </LIST>
-	  Replace &lt;YOUR_JDK&gt; part with the path of your JDK installation (e.g. jdk1.3) and the "130" with
-	  the version information (130 is for jdk 1.3, jdk1.2.2 would get 122).
-	</P>
-	<NOTE>This installation instruction (and the DEBs found on the WebMail homepage) are for Debian woody only. 
-	  That means they may or may not work on Debian potato and slink</NOTE>
+        <P>
+          Installation on Debian woody is as simple as on RedHat. You will have to install Apache JServ with
+          apt-get (<CODE>apt-get install jserv</CODE> will install the necessary packages) and then install the
+          WebMail package (with <CODE>dpkg --install webmail*.deb</CODE>). <BR/>
+          You will then have a running WebMail Servlet at <CODE>http://yourhost/webmail/webmail</CODE> when you
+          restart your Apache webserver. Please don't forget to change your configuration by going to
+          <CODE>http://yourhost/webmail/webmail/admin</CODE> and logging in with "Secret"
+          (and don't forget to change the password!).
+        </P>
+        <P>
+          You might want to install a more up-to-date JDK to run WebMail properly, I will try to make a Debian
+          package available for JDK 1.2.2, but you can also simply install a tar of the most up-to-date JDK and
+          update the links in <CODE>/etc/alternatives</CODE>:
+          <LIST>
+            <ITEM><CODE>update-alternatives /usr/bin/java java /usr/lib/&lt;YOUR_JDK&gt;/bin/java 130</CODE></ITEM>
+            <ITEM><CODE>update-alternatives /usr/bin/javac javac /usr/lib/&lt;YOUR_JDK&gt;/bin/javac 130</CODE></ITEM>
+            <ITEM><CODE>update-alternatives /usr/bin/jar jar /usr/lib/&lt;YOUR_JDK&gt;/bin/jar 130</CODE></ITEM>
+          </LIST>
+          Replace &lt;YOUR_JDK&gt; part with the path of your JDK installation (e.g. jdk1.3) and the "130" with
+          the version information (130 is for jdk 1.3, jdk1.2.2 would get 122).
+        </P>
+        <NOTE>This installation instruction (and the DEBs found on the WebMail homepage) are for Debian woody only.
+          That means they may or may not work on Debian potato and slink</NOTE>
       </SUBSUBSECTION>
     </SUBSECTION>
 
@@ -416,67 +416,67 @@
 <!--      <P>
         A more performant method is WebMail's MySQL storage where the data is stored in a MySQL database
         instead. This has all the advantages of a standardized database management system plus a smaller
-	memory footprint (per session) since data doesn't need to be cached.
+        memory footprint (per session) since data doesn't need to be cached.
       </P>
 
       <SUBSUBSECTION name="Why and when use WebMail with MySQL" id="install:mysql:advantages">
         <P>
-	  Using MySQL to store the WebMail data has several advantages, e.g.:
+          Using MySQL to store the WebMail data has several advantages, e.g.:
           <LIST>
-	    <ITEM>User configuration is compatible over different WebMail versions</ITEM>
+            <ITEM>User configuration is compatible over different WebMail versions</ITEM>
             <ITEM>DBMS allow easy backup and management</ITEM>
-	    <ITEM>DBMS might be faster than file access</ITEM>
-	    <ITEM>You can change the WebMail configuration with any tool you like (you can
-	      edit users even while WebMail is running, changes are active immediately)</ITEM>
-	    <ITEM>you could write simple PHP3 or Perl scripts that perform some kind of user 
-	      creation, perhaps asking the user for extra information like address etc and	
-	      storing that separately</ITEM>
+            <ITEM>DBMS might be faster than file access</ITEM>
+            <ITEM>You can change the WebMail configuration with any tool you like (you can
+              edit users even while WebMail is running, changes are active immediately)</ITEM>
+            <ITEM>you could write simple PHP3 or Perl scripts that perform some kind of user
+              creation, perhaps asking the user for extra information like address etc and
+              storing that separately</ITEM>
           </LIST>
         </P>
         <P>
-	  Clearly, this also has some disadvantages:
+          Clearly, this also has some disadvantages:
           <LIST>
             <ITEM>You will have to do some extra configuration work to set up MySQL as well as
-	      WebMail before you can start</ITEM>
-	    <ITEM>DBMS also might be slower than file access, depending on configuration</ITEM>
+              WebMail before you can start</ITEM>
+            <ITEM>DBMS also might be slower than file access, depending on configuration</ITEM>
           </LIST>
         </P>
         <P>
-	  When you should consider using MySQL:
+          When you should consider using MySQL:
           <LIST>
-	    <ITEM>You have a large userbase</ITEM>
-	    <ITEM>You are running MySQL commercially</ITEM>
-	    <ITEM>You already have a (My)SQL database that stores user data (e.g. addresses, 
-	      passwords, ...) and want to give your users WebMail access</ITEM>
-	    <ITEM>You use WebMail on a load balancing Apache server as servlet. Thus you can set
-	      up an additional MySQL server that stores all the data.</ITEM>
+            <ITEM>You have a large userbase</ITEM>
+            <ITEM>You are running MySQL commercially</ITEM>
+            <ITEM>You already have a (My)SQL database that stores user data (e.g. addresses,
+              passwords, ...) and want to give your users WebMail access</ITEM>
+            <ITEM>You use WebMail on a load balancing Apache server as servlet. Thus you can set
+              up an additional MySQL server that stores all the data.</ITEM>
             <ITEM>etc.</ITEM>
-	  </LIST>
+          </LIST>
         </P>
       </SUBSUBSECTION>
       <SUBSUBSECTION name="Preparing MySQL" id="install:mysql:prepare">
-	<P>
-          This document assumes that you already have a running MySQL server. If you 
-	  don't, please set up MySQL and consult the documents provided with it.
+        <P>
+          This document assumes that you already have a running MySQL server. If you
+          don't, please set up MySQL and consult the documents provided with it.
         </P>
         <P>
           <NLIST>
-	    <ITEM>
-              Set up a user/password for webmail that has access from the host WebMail 
-	      will be running on (don't forget to <CODE>FLUSH PRIVILEGES</CODE> after that).
-	      Give it all privileges (i.e. set everything to 'Y'=). You may change that
-	      to access only the "webmail"-database after the database is set up. 
+            <ITEM>
+              Set up a user/password for webmail that has access from the host WebMail
+              will be running on (don't forget to <CODE>FLUSH PRIVILEGES</CODE> after that).
+              Give it all privileges (i.e. set everything to 'Y'=). You may change that
+              to access only the "webmail"-database after the database is set up.
             </ITEM>
             <ITEM>
-	      In the WebMail contrib directory, have a look at the file mysql_scheme.sql.
-	      This file contains the DDL statements for creating a database called 
-	      "webmail" and creating the necessary tables and relations. You might want
-	      to change the database name to something different than "webmail"
+              In the WebMail contrib directory, have a look at the file mysql_scheme.sql.
+              This file contains the DDL statements for creating a database called
+              "webmail" and creating the necessary tables and relations. You might want
+              to change the database name to something different than "webmail"
             </ITEM>
             <ITEM>
-	      Execute <CODE>mysql -u [webmailuser] -p &lt; mysql_scheme.sql</CODE>.
+              Execute <CODE>mysql -u [webmailuser] -p &lt; mysql_scheme.sql</CODE>.
               Please substitute [webmailuser] with the user you configured in step 1.<BR/>
-              This will first ask you for the password that you gave the webmail user in 
+              This will first ask you for the password that you gave the webmail user in
               step 1 and then execute the DDL statements.
             </ITEM>
           </NLIST>
@@ -487,248 +487,248 @@
       </SUBSUBSECTION>
       <SUBSUBSECTION name="Setting up WebMail for use with MySQL" id="install:mysql:webmail">
         <P>
-	  Setting up WebMail is quite simple. All changes will be done in the startup
-	  script <CODE>webmail.sh</CODE> (or <CODE>webmail.bat</CODE> under Windows or initArgs 
-	  in case of a servlet installation) in the bin/ directory. The corresponding servlet configuration 
-	  options are given in "(" and ")".
+          Setting up WebMail is quite simple. All changes will be done in the startup
+          script <CODE>webmail.sh</CODE> (or <CODE>webmail.bat</CODE> under Windows or initArgs
+          in case of a servlet installation) in the bin/ directory. The corresponding servlet configuration
+          options are given in "(" and ")".
         </P>
         <P>
           <NLIST>
-            <ITEM>Change the value of the <CODE>STORAGE</CODE> variable 
-	      (or <CODE>webmail.storage</CODE> initArg) to 
-	      <CODE>net.wastl.webmail.storage.mysql.MySQLStorage</CODE>
+            <ITEM>Change the value of the <CODE>STORAGE</CODE> variable
+              (or <CODE>webmail.storage</CODE> initArg) to
+              <CODE>net.wastl.webmail.storage.mysql.MySQLStorage</CODE>
             </ITEM>
             <ITEM>
-	      Change the variables <CODE>SQL_LOGIN</CODE> and <CODE>SQL_PASS</CODE> 
+              Change the variables <CODE>SQL_LOGIN</CODE> and <CODE>SQL_PASS</CODE>
               (or <CODE>webmail.storage.sqllogin</CODE> and <CODE> webmail.storage.sqlpass</CODE> initArgs)
-	      to the values you configured in section 4, step 1
+              to the values you configured in section 4, step 1
             </ITEM>
             <ITEM>
-	      Change the <CODE>SQL_HOST</CODE> variable (or the <CODE>webmail.storage.sqlhost</CODE> initArg)
-	      to the DNS name of the MySQL server (most likely <CODE>localhost</CODE> is just fine if 
-	      you only have a single server)
+              Change the <CODE>SQL_HOST</CODE> variable (or the <CODE>webmail.storage.sqlhost</CODE> initArg)
+              to the DNS name of the MySQL server (most likely <CODE>localhost</CODE> is just fine if
+              you only have a single server)
             </ITEM>
             <ITEM>
-	      Possibly change the value of <CODE>SQL_DB</CODE> (or <CODE>webmail.storage.sqldb</CODE>) to 
-	      another database name (whatever you configured in section 4, step 2)
+              Possibly change the value of <CODE>SQL_DB</CODE> (or <CODE>webmail.storage.sqldb</CODE>) to
+              another database name (whatever you configured in section 4, step 2)
             </ITEM>
           </NLIST>
         </P>
         <P>
-	  Now you should be able to start WebMail standalone with "./webmail.sh".
+          Now you should be able to start WebMail standalone with "./webmail.sh".
         </P>
       </SUBSUBSECTION>
       <SUBSUBSECTION name="Further suggestions" id="install:mysql:suggestions">
-	<P>
-	  If you are also running Apache with PHP3 on the same (or a different) host:
+        <P>
+          If you are also running Apache with PHP3 on the same (or a different) host:
           <LIST>
             <ITEM>
-	      Consider fetching "phpMyAdmin" (see freshmeat.net). It gives you a webbased
-  	      interface for changing all kinds of MySQL data, including the WebMail
-   	      configuration
+              Consider fetching "phpMyAdmin" (see freshmeat.net). It gives you a webbased
+              interface for changing all kinds of MySQL data, including the WebMail
+              configuration
             </ITEM>
-	    <ITEM>
-	      If you want to provide some logon scheme for new users to logon, you can 
-	      write that by yourself using PHP3 without too much trouble. 
+            <ITEM>
+              If you want to provide some logon scheme for new users to logon, you can
+              write that by yourself using PHP3 without too much trouble.
             </ITEM>
           </LIST>
         </P>
         <P>
-	  Also, you can write your own set of administration tools in Perl (or other 
-	  languages).
+          Also, you can write your own set of administration tools in Perl (or other
+          languages).
         </P>
       </SUBSUBSECTION>
       <SUBSUBSECTION name="WebMail SQL Scheme" id="install:mysql:sqlscheme">
-	<P>
-	  The WebMail SQL scheme is not yet well documented, but not too difficult to 
-	  understand. It consists of the relations "users2userdata" and "users2mailhosts"
-	  that connect the data tables as well as the data tables "users", "userdata" 
-	  and "mailhosts" containing the real data.
+        <P>
+          The WebMail SQL scheme is not yet well documented, but not too difficult to
+          understand. It consists of the relations "users2userdata" and "users2mailhosts"
+          that connect the data tables as well as the data tables "users", "userdata"
+          and "mailhosts" containing the real data.
         </P>
       </SUBSUBSECTION>-->
-    </SUBSECTION> 
+    </SUBSECTION>
   </SECTION>
 
 
   <SECTION name="Configuration" id="config">
     <P>
-      WebMail has an administration interface which allows you to perform 
+      WebMail has an administration interface which allows you to perform
       several runtime administration tasks, including:
       <LIST>
         <ITEM>Changing all configuration settings</ITEM>
         <ITEM>Shutting down the server properly</ITEM>
         <ITEM>Adding, deleting or editing WebMail virtual domains</ITEM>
-	<ITEM>Adding, deleting or editing WebMail users</ITEM>
-	<ITEM>Getting status information</ITEM>
+        <ITEM>Adding, deleting or editing WebMail users</ITEM>
+        <ITEM>Getting status information</ITEM>
       </LIST>
     </P>
     <SUBSECTION name="WebMail Administrator Plugin" id="config:admin">
       <SUBSUBSECTION name="Connecting" id="config:admin:connecting">
         <P>
-	  You can connect to the administration interface with your browser by simply entering
-	  the URL <CODE>http(s)://webmail_server:port/admin</CODE> in the address field of your browser.
-	  (set http/https and replace webmail_server and port with the correct values; port
-	  is usually port 6789 after the first start on a standalone server; on a servlet installation
+          You can connect to the administration interface with your browser by simply entering
+          the URL <CODE>http(s)://webmail_server:port/admin</CODE> in the address field of your browser.
+          (set http/https and replace webmail_server and port with the correct values; port
+          is usually port 6789 after the first start on a standalone server; on a servlet installation
           you will very likely have to add the WebMail mountpoint before the <CODE>/admin</CODE>).
         </P>
         <P>
-	  You'll be presented the administrator's login screen then. Enter the password there
-          (on first startup the password is "Secret") and click the login button. You should see 
-	  the system settings form then.
+          You'll be presented the administrator's login screen then. Enter the password there
+          (on first startup the password is "Secret") and click the login button. You should see
+          the system settings form then.
         </P>
       </SUBSUBSECTION>
       <SUBSUBSECTION name="System Settings" id="config:admin:system">
         <P>
-	  The first page gives you a list of WebMail system variables and their values. You can
-	  change any variables you like (there is a short description for each of them) and then
-	  hit the submit button on the bottom of the page.
+          The first page gives you a list of WebMail system variables and their values. You can
+          change any variables you like (there is a short description for each of them) and then
+          hit the submit button on the bottom of the page.
         </P>
         <P>
-	  There are basically 4 kinds of input fields (although you will probably only recognize
-	  2 on first look):
+          There are basically 4 kinds of input fields (although you will probably only recognize
+          2 on first look):
           <LIST>
-	    <ITEM>simple text input fields</ITEM>
-	    <ITEM>drop down selects</ITEM>
-	    <ITEM>integer input fields (look like text input fields)</ITEM>
-	    <ITEM>password input fields (look like text input fields and show the encrypted password!)</ITEM>
+            <ITEM>simple text input fields</ITEM>
+            <ITEM>drop down selects</ITEM>
+            <ITEM>integer input fields (look like text input fields)</ITEM>
+            <ITEM>password input fields (look like text input fields and show the encrypted password!)</ITEM>
           </LIST>
         </P>
         <P>
-	  All of these fields will check whether the value entered is (more or less) correct if you submit 
-	  the form.
+          All of these fields will check whether the value entered is (more or less) correct if you submit
+          the form.
         </P>
         <P>
-	  <NOTE>Special note on password fields: The password is shown encrypted (Unix crypt()), but
-	    if you want to change your password, please enter it in plain text. It will then show
-	    up encrypted again, after you hit the submit button (but still be the password you just
-	    entered).</NOTE>
+          <NOTE>Special note on password fields: The password is shown encrypted (Unix crypt()), but
+            if you want to change your password, please enter it in plain text. It will then show
+            up encrypted again, after you hit the submit button (but still be the password you just
+            entered).</NOTE>
         </P>
         <P>
-	  To shutdown or restart the WebMail server, enter the time in seconds until the action
-	  will be performed and hit the appropriate button ("SHUTDOWN" or "REBOOT").
-	  <STRONG>ATTENTION</STRONG>: You will not get anything like an answer after you do this 
-	  (since you are shutting down the server this is quite difficult) and you will not be asked 
-	  whether you really want to do this! Most likely you will get a "connection timed out" or
-	  "document contains no data" dialog.
-	</P>
+          To shutdown or restart the WebMail server, enter the time in seconds until the action
+          will be performed and hit the appropriate button ("SHUTDOWN" or "REBOOT").
+          <STRONG>ATTENTION</STRONG>: You will not get anything like an answer after you do this
+          (since you are shutting down the server this is quite difficult) and you will not be asked
+          whether you really want to do this! Most likely you will get a "connection timed out" or
+          "document contains no data" dialog.
+        </P>
       </SUBSUBSECTION>
       <SUBSUBSECTION name="WebMail Virtual Domain Support" id="config:admin:vdom">
-	<P>
-	  Virtual Domains in WebMail are a quite new concept (thanks to Oswaldo E. Aguirre M. for
-	  the idea).
+        <P>
+          Virtual Domains in WebMail are a quite new concept (thanks to Oswaldo E. Aguirre M. for
+          the idea).
         </P>
-	<P>
-	  They basically provide the following features:
+        <P>
+          They basically provide the following features:
           <LIST>
-	    <ITEM>users are associated to a domain (even if you only have one domain)</ITEM>
-	    <ITEM>each domain can have its own authentication host (if IMAP/POP authentication is used)</ITEM>
-	    <ITEM>the administrator of WebMail can impose certain restrictions on users of a WebMail
-	      domain. e.g. you can restrict the hosts where users may connect to here</ITEM>
-	    <ITEM>each domain has its own default host where the user's primary folder will be found</ITEM>
-	    <ITEM>the user's default email address will be set to "user@domain"</ITEM>
+            <ITEM>users are associated to a domain (even if you only have one domain)</ITEM>
+            <ITEM>each domain can have its own authentication host (if IMAP/POP authentication is used)</ITEM>
+            <ITEM>the administrator of WebMail can impose certain restrictions on users of a WebMail
+              domain. e.g. you can restrict the hosts where users may connect to here</ITEM>
+            <ITEM>each domain has its own default host where the user's primary folder will be found</ITEM>
+            <ITEM>the user's default email address will be set to "user@domain"</ITEM>
           </LIST>
         </P>
         <P>
-	  Naturally, with this concept you will need to have at least one domain even if you don't
-	  plan to use virtual domains really.
+          Naturally, with this concept you will need to have at least one domain even if you don't
+          plan to use virtual domains really.
         </P>
         <P>
-	  The WebMail virtual domain setup form is quite simple and self explanatory, I think.
-	  There is one column where you have to enter the domain name, one where you have to
-	  enter this domain's default host (user's primary folder host), one for the authenti-
-	  cation host (not necessarily the same as the default host), and some fields that
-	  control the restrictions for users of this domain. With the checkbox, you can turn on/off
-	  host restriction completely, in the allowed hosts column, you can enter a comma-separated
-	  list of domains/hosts where users may access IMAP folders (e.g. "wastl.net" would allow 
-	  them to use "mail.wastl.net" and "pop.wastl.net" while setting it to "mail.wastl.net" 
-	  would just allow "mail.wastl.net" (and certainly "imap.mail.watl.net") and so on (suffix 
-	  is matched to say it simple)).
-	</P>
+          The WebMail virtual domain setup form is quite simple and self explanatory, I think.
+          There is one column where you have to enter the domain name, one where you have to
+          enter this domain's default host (user's primary folder host), one for the authenti-
+          cation host (not necessarily the same as the default host), and some fields that
+          control the restrictions for users of this domain. With the checkbox, you can turn on/off
+          host restriction completely, in the allowed hosts column, you can enter a comma-separated
+          list of domains/hosts where users may access IMAP folders (e.g. "wastl.net" would allow
+          them to use "mail.wastl.net" and "pop.wastl.net" while setting it to "mail.wastl.net"
+          would just allow "mail.wastl.net" (and certainly "imap.mail.watl.net") and so on (suffix
+          is matched to say it simple)).
+        </P>
       </SUBSUBSECTION>
       <SUBSUBSECTION name="Editing Users" id="config:admin:users">
         <P>
-	  You can add, edit and delete users from the administration interface (Note that you don't 
-	  have to create users before they may use WebMail since they get default settings when they
-	  first log on authenticating against IMAP, POP or Unix).
-	</P>
-	<P>
-	  To create a user,
-	  <LIST>
-	    <ITEM>enter the user name and the domain in the user field (in the form "user@domain")</ITEM>
-	    <ITEM>optionally change all the other fields from the default settings</ITEM>
-	    <ITEM>hit the create/edit button on the bottom of the page</ITEM>
+          You can add, edit and delete users from the administration interface (Note that you don't
+          have to create users before they may use WebMail since they get default settings when they
+          first log on authenticating against IMAP, POP or Unix).
+        </P>
+        <P>
+          To create a user,
+          <LIST>
+            <ITEM>enter the user name and the domain in the user field (in the form "user@domain")</ITEM>
+            <ITEM>optionally change all the other fields from the default settings</ITEM>
+            <ITEM>hit the create/edit button on the bottom of the page</ITEM>
           </LIST>
         </P>
         <P>
-	  To edit a user,
+          To edit a user,
           <LIST>
-	    <ITEM>select the user in the drop down menu OR enter the user name (with domain) in the short
-	      text field</ITEM>
-	    <ITEM>edit the user settings</ITEM>
-	    <ITEM>hit the create/edit button on the bottom of the page</ITEM>
+            <ITEM>select the user in the drop down menu OR enter the user name (with domain) in the short
+              text field</ITEM>
+            <ITEM>edit the user settings</ITEM>
+            <ITEM>hit the create/edit button on the bottom of the page</ITEM>
           </LIST>
         </P>
         <P>
-	  To delete a user,
+          To delete a user,
           <LIST>
-	    <ITEM>select the user in the drop down menu OR enter the user name (with domain) in the short
-	      text field</ITEM>
-	    <ITEM>Hit the delete button</ITEM>
+            <ITEM>select the user in the drop down menu OR enter the user name (with domain) in the short
+              text field</ITEM>
+            <ITEM>Hit the delete button</ITEM>
           </LIST>
         </P>
       </SUBSUBSECTION>
       <SUBSUBSECTION name="Viewing WebMail Status" id="config:admin:status">
-	<P>
-	  Last but not least you can get an overview of currently active sessions with
-	  the "view sessions" link. You will get some status information there as well as
-	  the possibility to explicitly kill an active session (whatever maybe the reason).
-	  Please be careful however with this feature, as you are very likely to kill a 
-	  session that is currently in use and its user will probably not be very happy about
-	  that. The sessions will expire after a configured time anyway.
-	</P>
-	<P>
-	  The Administrator Interface is currently available in English only, but the 
-	  templates are already prepared for translation The system's default language will then be 
-	  used (determined by the LANG environment setting).
-	</P>
-	<P>
-	  I hope the rest is quite self explanatory at the moment, but I'll add some 
-	  documentation later.
-	</P>
+        <P>
+          Last but not least you can get an overview of currently active sessions with
+          the "view sessions" link. You will get some status information there as well as
+          the possibility to explicitly kill an active session (whatever maybe the reason).
+          Please be careful however with this feature, as you are very likely to kill a
+          session that is currently in use and its user will probably not be very happy about
+          that. The sessions will expire after a configured time anyway.
+        </P>
+        <P>
+          The Administrator Interface is currently available in English only, but the
+          templates are already prepared for translation The system's default language will then be
+          used (determined by the LANG environment setting).
+        </P>
+        <P>
+          I hope the rest is quite self explanatory at the moment, but I'll add some
+          documentation later.
+        </P>
       </SUBSUBSECTION>
     </SUBSECTION>
 
     <SUBSECTION name="File-Based Shutdown" id="config:admin:shutdown">
       <P>
-	You can initiate a WebMail shutdown when you create a file "shutdown"
-	(or whatever you configured) in the data directory with only the 
-	admin password in it. This option can be disabled. It is useful in
-	automatic system startup/shutdown.
+        You can initiate a WebMail shutdown when you create a file "shutdown"
+        (or whatever you configured) in the data directory with only the
+        admin password in it. This option can be disabled. It is useful in
+        automatic system startup/shutdown.
       </P>
     </SUBSECTION>
   </SECTION>
-  
+
 
   <SECTION name="User Authentication" id="auth">
     <P>
-      WebMail supports extended user authentication. At the moment, the 
+      WebMail supports extended user authentication. At the moment, the
       following authentication methods are supported:
       <LIST>
-	<ITEM><STRONG>SIMPLE</STRONG>: Use WebMail's former authentication method. Password is only
-	  checked against the user's configuration. The user may change his password from within WebMail</ITEM>
-	<ITEM><STRONG>IMAP</STRONG>: Check login/password on a remote IMAP host. WebMail tries to
-	  login on a remote IMAP host with the given login and password.<BR/>
-	  If login fails, WebMail doesn't allow access.</ITEM>
-	<ITEM><STRONG>POP</STRONG>: Same for a POP3 server</ITEM>
-	<ITEM><STRONG>UNIX</STRONG>: Check login/password using Unix's login facility.
-	  login/password are checked against the Unix passwd/shadow files.<BR/>
-	  Note: WebMail must be run as user root to use Unix Authentication</ITEM>
+        <ITEM><STRONG>SIMPLE</STRONG>: Use WebMail's former authentication method. Password is only
+          checked against the user's configuration. The user may change his password from within WebMail</ITEM>
+        <ITEM><STRONG>IMAP</STRONG>: Check login/password on a remote IMAP host. WebMail tries to
+          login on a remote IMAP host with the given login and password.<BR/>
+          If login fails, WebMail doesn't allow access.</ITEM>
+        <ITEM><STRONG>POP</STRONG>: Same for a POP3 server</ITEM>
+        <ITEM><STRONG>UNIX</STRONG>: Check login/password using Unix's login facility.
+          login/password are checked against the Unix passwd/shadow files.<BR/>
+          Note: WebMail must be run as user root to use Unix Authentication</ITEM>
       </LIST>
     </P>
     <P>
-      Changing authentication method can be achieved using the Administration 
+      Changing authentication method can be achieved using the Administration
       Interface and changing the "AUTH" variable.
-      For IMAP authentication there is an extra configuration variable called 
+      For IMAP authentication there is an extra configuration variable called
       "AUTHHOST".
     </P>
   </SECTION>
@@ -737,36 +737,36 @@
   <SECTION name="Usage" id="usage">
     <SUBSECTION name="General Usage" id="usage:general">
       <P>
-	The WebMail daemon listens on whatever port you have configure. 
-	Just point your browser´s URL to http://yourhost:yourport/ and see the 
-	login screen.
+        The WebMail daemon listens on whatever port you have configure.
+        Just point your browser´s URL to http://yourhost:yourport/ and see the
+        login screen.
       </P>
       <P>
-	A user will get the password he logs in with the first time. Passwords
-	may be changed by the user in the options dialog.
-	WebMail will try to establish a default connection to the configured 
-	default IMAP host with the user ID and password it was given, so it may
-	be useful to use the same ID and password as on the IMAP host.
+        A user will get the password he logs in with the first time. Passwords
+        may be changed by the user in the options dialog.
+        WebMail will try to establish a default connection to the configured
+        default IMAP host with the user ID and password it was given, so it may
+        be useful to use the same ID and password as on the IMAP host.
       </P>
       <P>
-	For further information, just click on the "?" at the navigation bar.
+        For further information, just click on the "?" at the navigation bar.
       </P>
       <P>
-	WebMail should also work with Proxy Servers and other Clients than 
-	Netscape Communicator.
+        WebMail should also work with Proxy Servers and other Clients than
+        Netscape Communicator.
       </P>
     </SUBSECTION>
 
     <SUBSECTION name="Folders" id="usage:folders">
       <P>
-	WebMail supports as many IMAP folders on as many different hosts you like.
+        WebMail supports as many IMAP folders on as many different hosts you like.
       </P>
       <P>
-	WebMail mailboxes are configured by each user, however the administrator can
-	change the default mailbox for each virtual domain. The default mailbox is the
-	mailbox the user gets on the first login. He can than choose to remove it at any time 
-	and also add other mailboxes (the administrator can restrict that in the virtual
-	domain configuration).	
+        WebMail mailboxes are configured by each user, however the administrator can
+        change the default mailbox for each virtual domain. The default mailbox is the
+        mailbox the user gets on the first login. He can than choose to remove it at any time
+        and also add other mailboxes (the administrator can restrict that in the virtual
+        domain configuration).
       </P>
     </SUBSECTION>
   </SECTION>
@@ -783,27 +783,27 @@
     </P>
   </SECTION>
 
-  
+
   <SECTION name="Notes" id="notes">
     <SUBSECTION name="WebMail Status" id="notes:status">
       <P>
-	WebMail v0.7 is considered BETA, as not all features I want for a "1.0" 
-	are yet included.
+        WebMail v0.7 is considered BETA, as not all features I want for a "1.0"
+        are yet included.
       </P>
       <P>
-	Things I think of are:
+        Things I think of are:
         <LIST>
-	  <ITEM>Different XSL stylesheets to convert the WebMail UI to other formats than HTML 
-	    (perhaps WML for mobile phones)</ITEM>
-	  <ITEM>PGP for users using the Cryptix JCE. (http://www.cryptix.org)</ITEM>
-	  <ITEM>"Extras" like calendar and so on (will be realized as WebMail Plugins)</ITEM>
-	</LIST>
+          <ITEM>Different XSL stylesheets to convert the WebMail UI to other formats than HTML
+            (perhaps WML for mobile phones)</ITEM>
+          <ITEM>PGP for users using the Cryptix JCE. (http://www.cryptix.org)</ITEM>
+          <ITEM>"Extras" like calendar and so on (will be realized as WebMail Plugins)</ITEM>
+        </LIST>
       </P>
     </SUBSECTION>
     <SUBSECTION name="Changes" id="notes:changes">
       <P>
-	See the file "Changes" for a list of changes in the different WebMail
-	releases.
+        See the file "Changes" for a list of changes in the different WebMail
+        releases.
       </P>
     </SUBSECTION>
   </SECTION>
@@ -817,29 +817,29 @@
       Installation is simple:
       <LIST>
         <ITEM>
-	  Fetch the ITI-SSL library from the WebMail homepage for your platform
-	  (if there is no binary for your platform, please fetch the source code at the 
-	  ITI-SSL homepage at http://www-sp.iti.informatik.tu-darmstadt.de/itissl/)
-	</ITEM>
-	<ITEM>
-	  Copy the library "libitissl.so" to the WebMail lib/ directory.
-	</ITEM>
-	<ITEM>
-	  Start WebMail and possibly enable the SSL support in the administration 
-	  interface
-	</ITEM>
+          Fetch the ITI-SSL library from the WebMail homepage for your platform
+          (if there is no binary for your platform, please fetch the source code at the
+          ITI-SSL homepage at http://www-sp.iti.informatik.tu-darmstadt.de/itissl/)
+        </ITEM>
+        <ITEM>
+          Copy the library "libitissl.so" to the WebMail lib/ directory.
+        </ITEM>
+        <ITEM>
+          Start WebMail and possibly enable the SSL support in the administration
+          interface
+        </ITEM>
       </LIST>
     </P>
     <P>
       However, SSL in WebMail has some drawbacks:
       <LIST>
-	<ITEM>only works with JDK >= 1.2 (:-( )</ITEM>
-	<ITEM>is a native library it is no longer platform independent</ITEM>
+        <ITEM>only works with JDK >= 1.2 (:-( )</ITEM>
+        <ITEM>is a native library it is no longer platform independent</ITEM>
       </LIST>
     </P>
     <P>
-      If you compile ITI-SSL yourself, please ensure that you use openssl-0.9.4 for 
-      compilation because Netscape and IE won't work with WebMail SSL with prior 
+      If you compile ITI-SSL yourself, please ensure that you use openssl-0.9.4 for
+      compilation because Netscape and IE won't work with WebMail SSL with prior
       versions.
     </P>
   </SECTION>
@@ -847,158 +847,158 @@
   <SECTION name="JDK Installation And Other Java Issues" id="java">
     <SUBSECTION name="What is Java" id="java:what">
       <P>
-	<NOTE>I'll make it short here as Java is pretty well known and documented.</NOTE>
+        <NOTE>I'll make it short here as Java is pretty well known and documented.</NOTE>
       </P>
       <P>
-	Java is a platform independent, object-oriented (OO) programming language. 
-	Java programs are compiled using the JDK Compiler (javac) or other compilers (e.g. 
-	IBM jikes). The resulting bytecode is optimized for the Java Virtual Machine (JVM)
-	and still platform independent.<BR/>
-	The JVM interpretes the previously compiled bytecode and translates it "on the fly"
-	into platform dependent system calls. Therefore a JVM must exist for your platform
-	in order to run Java programs.<BR/> 
-	You'll obviously recognize that Java is an interpreted language similar to Perl or 
-	Python. The most sigificant difference to the former two is that Java is precompiled.<BR/>
-	So Java is a kind of compromise between purely interpreted languages and languages 
-	that are compiled to machine code which tries to combine the advantages of both
-	(reliability and speed). As far as i know, this principle is derived from PROLOG.
+        Java is a platform independent, object-oriented (OO) programming language.
+        Java programs are compiled using the JDK Compiler (javac) or other compilers (e.g.
+        IBM jikes). The resulting bytecode is optimized for the Java Virtual Machine (JVM)
+        and still platform independent.<BR/>
+        The JVM interpretes the previously compiled bytecode and translates it "on the fly"
+        into platform dependent system calls. Therefore a JVM must exist for your platform
+        in order to run Java programs.<BR/>
+        You'll obviously recognize that Java is an interpreted language similar to Perl or
+        Python. The most sigificant difference to the former two is that Java is precompiled.<BR/>
+        So Java is a kind of compromise between purely interpreted languages and languages
+        that are compiled to machine code which tries to combine the advantages of both
+        (reliability and speed). As far as i know, this principle is derived from PROLOG.
       </P>
     </SUBSECTION>
 
     <SUBSECTION name="Where to obtain Java for your platform" id="java:obtain">
       <P>
-	The main Java distribution site is http://java.sun.com.<BR/>
-	You will get the "officially supported" platforms and lots of documentation and
-	additions there.
+        The main Java distribution site is http://java.sun.com.<BR/>
+        You will get the "officially supported" platforms and lots of documentation and
+        additions there.
       </P>
       <P>
-	Java distributions for the different platforms:
-	<TABLE>
-	  <TR>
-	    <TD>Solaris SPARC and x86</TD><TD>http://java.sun.com</TD>
-	  </TR>
-	  <TR>
-	    <TD>Windows:</TD><TD>http://java.sun.com</TD>
-	  </TR>
-	  <TR>
-	    <TD>Linux/x86:</TD><TD>http://www.ibm.com (IBM JDK 1.1.8 / IBM JDK 1.3)</TD>
-	  </TR>
-	  <TR>
-	    <TD></TD><TD>http://www.blackdown.org (Blackdown port of JDK 1.2)</TD>
-	  </TR>
-	  <TR>
-	    <TD></TD><TD>http://java.sun.com (Sun and Inprise port of JDK 1.2 / JDK 1.3)</TD>
-	  </TR>
-	  <TR>
-	    <TD>Linux/PPC:</TD><TD>http://business.tyler.wm.edu/mklinux/</TD>
-	  </TR>
-	  <TR>
-	    <TD>Linux/Alpha:</TD><TD>http://www.voicenet.com/~gatgul/JDK/java-alpha.html</TD>
-	  </TR>
-	  <TR>
-	    <TD>Linux/SPARC:</TD><TD>http://tinukai.sesuadra.org/~jdk/</TD>
-	  </TR>
-	  <TR>
-	    <TD>AIX:</TD><TD>http://www.ibm.com</TD>
-	  </TR>
-	  <TR>
-	    <TD>Macintosh:</TD><TD>http://applejava.apple.com</TD>
-	  </TR>
-	  <TR>
-	    <TD>OS/2:</TD><TD>http://www.ibm.com</TD>
-	  </TR>
-	  <TR>
-	    <TD>FreeBSD:</TD><TD>http://www.freebsd.org/ports/lang.html</TD>
-	  </TR>
-	</TABLE>
+        Java distributions for the different platforms:
+        <TABLE>
+          <TR>
+            <TD>Solaris SPARC and x86</TD><TD>http://java.sun.com</TD>
+          </TR>
+          <TR>
+            <TD>Windows:</TD><TD>http://java.sun.com</TD>
+          </TR>
+          <TR>
+            <TD>Linux/x86:</TD><TD>http://www.ibm.com (IBM JDK 1.1.8 / IBM JDK 1.3)</TD>
+          </TR>
+          <TR>
+            <TD></TD><TD>http://www.blackdown.org (Blackdown port of JDK 1.2)</TD>
+          </TR>
+          <TR>
+            <TD></TD><TD>http://java.sun.com (Sun and Inprise port of JDK 1.2 / JDK 1.3)</TD>
+          </TR>
+          <TR>
+            <TD>Linux/PPC:</TD><TD>http://business.tyler.wm.edu/mklinux/</TD>
+          </TR>
+          <TR>
+            <TD>Linux/Alpha:</TD><TD>http://www.voicenet.com/~gatgul/JDK/java-alpha.html</TD>
+          </TR>
+          <TR>
+            <TD>Linux/SPARC:</TD><TD>http://tinukai.sesuadra.org/~jdk/</TD>
+          </TR>
+          <TR>
+            <TD>AIX:</TD><TD>http://www.ibm.com</TD>
+          </TR>
+          <TR>
+            <TD>Macintosh:</TD><TD>http://applejava.apple.com</TD>
+          </TR>
+          <TR>
+            <TD>OS/2:</TD><TD>http://www.ibm.com</TD>
+          </TR>
+          <TR>
+            <TD>FreeBSD:</TD><TD>http://www.freebsd.org/ports/lang.html</TD>
+          </TR>
+        </TABLE>
       </P>
     </SUBSECTION>
 
     <SUBSECTION name="How to install Java properly" id="java:install">
       <P>
-	Use your system's standard facility to install the Java packages. Note
-	that the Linux JDK most likely comes as "tar.gz" and not as .rpm or .deb,
-	so you will have to manually install it using tar.
+        Use your system's standard facility to install the Java packages. Note
+        that the Linux JDK most likely comes as "tar.gz" and not as .rpm or .deb,
+        so you will have to manually install it using tar.
       </P>
       <P>
-	On Solaris, the JDK will install in /usr/java1.x/ by default.
-	On Linux, I prefer installing the "tar.gz" in /usr/local and renaming
-	the extracted path to "java1.x". Many distributions, however, will install
-	Java in /usr/lib/java1.x or /usr/lib/jdkxxx.
+        On Solaris, the JDK will install in /usr/java1.x/ by default.
+        On Linux, I prefer installing the "tar.gz" in /usr/local and renaming
+        the extracted path to "java1.x". Many distributions, however, will install
+        Java in /usr/lib/java1.x or /usr/lib/jdkxxx.
       </P>
       <P>
-	Next, link all programs in the bin/ directory to somewhere in your path
-	(e.g. /usr/local/bin) or alternativly add the bin/ directory to your
-	PATH environment.
+        Next, link all programs in the bin/ directory to somewhere in your path
+        (e.g. /usr/local/bin) or alternativly add the bin/ directory to your
+        PATH environment.
       </P>
       <P>
-	Last, set your CLASSPATH environment variable (e.g. in /etc/profile) to
-	<LIST> 
-	  <ITEM>/path/to/java/lib/classes.zip with JDK 1.1.x</ITEM>
-	  <ITEM>/path/to/java/jre/lib/rt.jar with JDK >= 1.2</ITEM>
-	</LIST>
+        Last, set your CLASSPATH environment variable (e.g. in /etc/profile) to
+        <LIST>
+          <ITEM>/path/to/java/lib/classes.zip with JDK 1.1.x</ITEM>
+          <ITEM>/path/to/java/jre/lib/rt.jar with JDK >= 1.2</ITEM>
+        </LIST>
       </P>
       <P>
-	You should have a running system now. Test it by typing "java -version".
+        You should have a running system now. Test it by typing "java -version".
       </P>
       <P>
-	Special note for Linux users: There are problems with earlier versions of the
-	libc6 (aka glibc). Please use glibc 2.1.2 or above to ensure a stable 
-	environment for WebMail.
+        Special note for Linux users: There are problems with earlier versions of the
+        libc6 (aka glibc). Please use glibc 2.1.2 or above to ensure a stable
+        environment for WebMail.
       </P>
     </SUBSECTION>
 
     <SUBSECTION name="Improving speed" id="java:speed">
       <P>
-	To improve Java performance, you will most likely use an JIT (Just in time 
-	compiler) that compiles bytecode to native code on-the-fly (while executing
-	the program). This especially improves speed for routines that are used 
-	frequently, as it is with WebMail. So I strongly recommend using a JIT
-	for WebMail!
+        To improve Java performance, you will most likely use an JIT (Just in time
+        compiler) that compiles bytecode to native code on-the-fly (while executing
+        the program). This especially improves speed for routines that are used
+        frequently, as it is with WebMail. So I strongly recommend using a JIT
+        for WebMail!
       </P>
       <P>
-	If you already have Java 1.2 (aka Java 2) or the IBM JDK 1.1.8 on Linux, you 
-	won't need to get a JIT as it already ships with one.
-	If you still have Java 1.1, it depends on your platform. 
-	<LIST>
-	  <ITEM>On Linux (Blackdown port) you will need to fetch an extra JIT. I recommend 
-	    using TYA, but you can get a list at http://www.blackdown.org</ITEM>
-	  <ITEM>On Solaris, a JIT is already included in the Java 1.1 releases</ITEM>
-	</LIST>
+        If you already have Java 1.2 (aka Java 2) or the IBM JDK 1.1.8 on Linux, you
+        won't need to get a JIT as it already ships with one.
+        If you still have Java 1.1, it depends on your platform.
+        <LIST>
+          <ITEM>On Linux (Blackdown port) you will need to fetch an extra JIT. I recommend
+            using TYA, but you can get a list at http://www.blackdown.org</ITEM>
+          <ITEM>On Solaris, a JIT is already included in the Java 1.1 releases</ITEM>
+        </LIST>
       </P>
       <P>
-	I don't know what it's like for other platforms. You can always try whether
-	you have a JIT or not by setting JAVA_COMPILER to "NONE" and testing whether
-	that affects the execution speed of WebMail. If it is considerably slower,
-	than you most likely already have a JIT.
+        I don't know what it's like for other platforms. You can always try whether
+        you have a JIT or not by setting JAVA_COMPILER to "NONE" and testing whether
+        that affects the execution speed of WebMail. If it is considerably slower,
+        than you most likely already have a JIT.
       </P>
       <!-- Added for JDK 1.3 11.08.2000 -->
       <P>
         The Sun JDK 1.3 (all platforms) includes a new techology called "HotSpot". This can
-	also dramatically improve performance for WebMail. For WebMail to make full use of
-	HotSpot, you should comment out the "HOTSPOT=-server" option in webmail.sh or if you
-	are using the servlet version start JServ with the -server parameter.<BR/>
-	This will produce a high load during the first seconds of startup, but will go down
-	after some time when the HotSpot optimizations are in effect.
+        also dramatically improve performance for WebMail. For WebMail to make full use of
+        HotSpot, you should comment out the "HOTSPOT=-server" option in webmail.sh or if you
+        are using the servlet version start JServ with the -server parameter.<BR/>
+        This will produce a high load during the first seconds of startup, but will go down
+        after some time when the HotSpot optimizations are in effect.
       </P>
     </SUBSECTION>
 
     <SUBSECTION name="Glossary" id="java:glossary">
       <P>
-	<TABLE>
-	  <TR>
-	    <TD>JDK</TD><TD>Java Depelopment Kit - what you need to compile programs</TD>
-	  </TR>
-	  <TR>
-	    <TD>JRE</TD><TD>Java Runtime Environment - what you need to only run programs</TD>
-	  </TR>
-	  <TR>
-	    <TD>JVM</TD><TD>Java Virtual Machine - bytecode interpreter</TD>
-	  </TR>
-	  <TR>
-	    <TD>JIT</TD><TD>Just In Time Compiler - improves execution speed of the JVM</TD>
-	  </TR>
-	</TABLE>
+        <TABLE>
+          <TR>
+            <TD>JDK</TD><TD>Java Depelopment Kit - what you need to compile programs</TD>
+          </TR>
+          <TR>
+            <TD>JRE</TD><TD>Java Runtime Environment - what you need to only run programs</TD>
+          </TR>
+          <TR>
+            <TD>JVM</TD><TD>Java Virtual Machine - bytecode interpreter</TD>
+          </TR>
+          <TR>
+            <TD>JIT</TD><TD>Just In Time Compiler - improves execution speed of the JVM</TD>
+          </TR>
+        </TABLE>
       </P>
     </SUBSECTION>
 
@@ -1023,66 +1023,66 @@
     <P>
       <EM>Contributed Documentation</EM> is documentation that has been provided by people that are not
       core WebMail developers but have managed to run WebMail on different platforms/systems and taken the
-      effort to provide you with some sort of extra documentation (thanks a lot, BTW). I (Sebastian 
+      effort to provide you with some sort of extra documentation (thanks a lot, BTW). I (Sebastian
       Schaffert) have not tested what you will find here.
     </P>
-    
+
     <SUBSECTION name="Installing WebMail on Resin" id="resin">
       <P>
-	<NOTE>
-	  Resin is a framework for websites based on Apache that allows to run Java Servlets among other
-	  things. The following was contributed by Jesper Weissglas, jeppe@shapeshifter.nu.
-	</NOTE>
+        <NOTE>
+          Resin is a framework for websites based on Apache that allows to run Java Servlets among other
+          things. The following was contributed by Jesper Weissglas, jeppe@shapeshifter.nu.
+        </NOTE>
       </P>
       <P>
-	The deployment descriptors of Resin are sort of Servlet API 2.2 compatible, as opposed to the
-	Apache properties files. Here is a skeleton of what will work with Resin 1.1:
+        The deployment descriptors of Resin are sort of Servlet API 2.2 compatible, as opposed to the
+        Apache properties files. Here is a skeleton of what will work with Resin 1.1:
       </P>
       <P>
-	Assuming the webmail binary distribution is unpacked as <CODE>[homedir]/webmail</CODE>
+        Assuming the webmail binary distribution is unpacked as <CODE>[homedir]/webmail</CODE>
       </P>
       <P>
-	<TABLE>
-	  <TR>
-	    <TD>
-	      <CODE>
-		[homedir]/WEB-INF/web.xml
-	      </CODE>
+        <TABLE>
+          <TR>
+            <TD>
+              <CODE>
+                [homedir]/WEB-INF/web.xml
+              </CODE>
             </TD>
-	  </TR>
-	  <TR>
-	    <TD>
-	      <CODE>
-		&lt;web-app&gt;<BR/>
-		&lt;classpath id='WEB-INF/classes' source='WEB-INF/classes'/&gt;<BR/>
-		&lt;classpath id='webmail/lib/webmail-servlet.jar'/&gt;<BR/>
-		&lt;classpath id='webmail/lib/webmail-common.jar'/&gt;<BR/>
-		&lt;classpath id='webmail/lib/authenticators'/&gt;<BR/>
-		&lt;classpath id='webmail/lib/plugins'/&gt;<BR/>
-		<BR/>
-		&lt;error-log id='log/error.log'/&gt;<BR/>
-		<BR/>
-		&lt;servlet-mapping url-pattern='/servlet/*' servlet-name='invoker'/&gt;<BR/>
-		<BR/>
-		&lt;session-config session-max='4096' session-timeout='120'/&gt;<BR/>
-		<BR/>
-		&lt;servlet servlet-name="webmail" servlet-class="net.wastl.webmail.servlet.WebMailServlet"&gt;<BR/>
-		&lt;init-param webmail.plugin.path="[homedir]/webmail/lib/plugins" /&gt;<BR/>
-		&lt;init-param webmail.auth.path="[homedir]/webmail/lib/authenticators" /&gt;<BR/>
-		&lt;init-param webmail.data.path="[homedir]/webmail/data" /&gt;<BR/>
-		&lt;init-param webmail.lib.path="[homedir]/webmail/lib" /&gt;<BR/>
-		&lt;init-param webmail.template.path="[homedir]/webmail/lib/templates" /&gt;<BR/>
-		&lt;init-param webmail.storage="net.wastl.webmail.storage.mysql.MySQLStorage" /&gt;<BR/>
-		&lt;init-param webmail.storage.sqlhost="localhost" /&gt;<BR/>
-		&lt;init-param webmail.storage.sqllogin="" /&gt;<BR/>
-		&lt;init-param webmail.storage.sqlpass="" /&gt;<BR/>
-		&lt;init-param webmail.storage.sqldb="[your_database_name]" /&gt;<BR/>
-		&lt;/servlet&gt;<BR/>
-		&lt;/web-app&gt;<BR/>
-	      </CODE>
-	    </TD>
-	  </TR>
-	</TABLE>
+          </TR>
+          <TR>
+            <TD>
+              <CODE>
+                &lt;web-app&gt;<BR/>
+                &lt;classpath id='WEB-INF/classes' source='WEB-INF/classes'/&gt;<BR/>
+                &lt;classpath id='webmail/lib/webmail-servlet.jar'/&gt;<BR/>
+                &lt;classpath id='webmail/lib/webmail-common.jar'/&gt;<BR/>
+                &lt;classpath id='webmail/lib/authenticators'/&gt;<BR/>
+                &lt;classpath id='webmail/lib/plugins'/&gt;<BR/>
+                <BR/>
+                &lt;error-log id='log/error.log'/&gt;<BR/>
+                <BR/>
+                &lt;servlet-mapping url-pattern='/servlet/*' servlet-name='invoker'/&gt;<BR/>
+                <BR/>
+                &lt;session-config session-max='4096' session-timeout='120'/&gt;<BR/>
+                <BR/>
+                &lt;servlet servlet-name="webmail" servlet-class="net.wastl.webmail.servlet.WebMailServlet"&gt;<BR/>
+                &lt;init-param webmail.plugin.path="[homedir]/webmail/lib/plugins" /&gt;<BR/>
+                &lt;init-param webmail.auth.path="[homedir]/webmail/lib/authenticators" /&gt;<BR/>
+                &lt;init-param webmail.data.path="[homedir]/webmail/data" /&gt;<BR/>
+                &lt;init-param webmail.lib.path="[homedir]/webmail/lib" /&gt;<BR/>
+                &lt;init-param webmail.template.path="[homedir]/webmail/lib/templates" /&gt;<BR/>
+                &lt;init-param webmail.storage="net.wastl.webmail.storage.mysql.MySQLStorage" /&gt;<BR/>
+                &lt;init-param webmail.storage.sqlhost="localhost" /&gt;<BR/>
+                &lt;init-param webmail.storage.sqllogin="" /&gt;<BR/>
+                &lt;init-param webmail.storage.sqlpass="" /&gt;<BR/>
+                &lt;init-param webmail.storage.sqldb="[your_database_name]" /&gt;<BR/>
+                &lt;/servlet&gt;<BR/>
+                &lt;/web-app&gt;<BR/>
+              </CODE>
+            </TD>
+          </TR>
+        </TABLE>
       </P>
     </SUBSECTION>
   </SECTION>
@@ -1095,16 +1095,16 @@
     <P>
       Some, however, I want to mention explicitly:
       <LIST>
-	<ITEM>Devin Kowatch, devink@webengruven.org, for contributing challenge/response authentication</ITEM>
-	<ITEM>Homero Borgo, homero@apoyo.uson.mx, for testing WebMail under rough conditions
-	  and helping much to find bugs in the product.</ITEM>
-	<ITEM>My girlfriend for her patience and the cool icons for WebMail 0.5 and 0.6</ITEM>
-	<ITEM>The people at Bibop in Italy, especially Gianugo Rabellino and Ricardo Rocha for
-	  doing the Bibop Theme and lots of inspirations</ITEM>
-	<ITEM>Sacha Berger, bergers@informatik.uni-muenchen.de, for some very interesting
-	discussions about how to do things right.:-)</ITEM>
-	<ITEM>Jesper Weissglas, jeppe@shapeshifter.nu, for the documentation about how to install 
-	  WebMail on Resin</ITEM>
+        <ITEM>Devin Kowatch, devink@webengruven.org, for contributing challenge/response authentication</ITEM>
+        <ITEM>Homero Borgo, homero@apoyo.uson.mx, for testing WebMail under rough conditions
+          and helping much to find bugs in the product.</ITEM>
+        <ITEM>My girlfriend for her patience and the cool icons for WebMail 0.5 and 0.6</ITEM>
+        <ITEM>The people at Bibop in Italy, especially Gianugo Rabellino and Ricardo Rocha for
+          doing the Bibop Theme and lots of inspirations</ITEM>
+        <ITEM>Sacha Berger, bergers@informatik.uni-muenchen.de, for some very interesting
+        discussions about how to do things right.:-)</ITEM>
+        <ITEM>Jesper Weissglas, jeppe@shapeshifter.nu, for the documentation about how to install
+          WebMail on Resin</ITEM>
       </LIST>
     </P>
     <P>

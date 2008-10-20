@@ -28,8 +28,8 @@ for ($waitedpid = 0; ($paddr=accept(Client,Server)) || $waitedpid; $waitedpid = 
        print "Connection from: $name";
 
        spawn (sub {
-       	  while(<CLIENT>) {
-         	print $_;
+          while(<CLIENT>) {
+            print $_;
           }
        });
 }

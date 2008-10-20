@@ -17,19 +17,19 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author Devin Kowatch
  * @version $Revision$
- * 
+ *
  * Copyright (C) 2000 Devin Kowatch
  */
 /* This program is free software; you can redistribute it and/or
  * modify it under the terms of the Lesser GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * Lesser GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the Lesser GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307,
@@ -63,7 +63,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
         return disp_mngr;
     }
 
-    /** Get this class' version 
+    /** Get this class' version
      * @return A version string for this class
      */
     public String getVersion() {
@@ -84,7 +84,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
          + " users can change passwords");
     }
 
-    /** 
+    /**
      * Get a new challenge for changing the password. This will be
      * displayed on the screen when the user tries to change their
      * password.
@@ -93,7 +93,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
      */
     public String getNewChallenge(UserData udata) throws WebMailException {
         OTPState        [] states = new OTPState[2];
-        OTPState        st, new_st; 
+        OTPState        st, new_st;
         String          chal = null;
         Random          rand = new Random();
         OTPServer       server = null;
@@ -112,7 +112,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
                 st = new OTPState(pData);
             }
             else {
-                // later code expects st to be set 
+                // later code expects st to be set
                 st = new OTPState("","","",DFLT_HASH);
                 newAccount = true;
             }
@@ -140,7 +140,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
                 else {                     // 1 digit only, pad 3
                     newSeed.append("000");
                 }
-                newSeed.append(String.valueOf(randVal)); 
+                newSeed.append(String.valueOf(randVal));
 
                 new_st = new OTPState(st);
                 new_st.seed = newSeed.toString();
@@ -148,7 +148,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
             }
 
             // if this is a new account don't use an instance of OTPServer
-            if (newAccount) { 
+            if (newAccount) {
                 chal=OTPServer.getNewChallenge(new_st.seed,START_SEQ,DFLT_HASH);
             }
             else {
@@ -181,7 +181,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
         OTPState        st;
         OTPServer       server;
         String          pData;
-        
+
         try {
             st = getFromCache(login, CACHE_ACTIVE_ST);
             if (st == null) {
@@ -194,9 +194,9 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
 
             server = new OTPServer(st);
 
-            if (! server.checkOTP(pass)) 
+            if (! server.checkOTP(pass))
                 throw new InvalidPasswordException("bad password");
-            
+
             /* Update the password data so next time we need a new pass */
             st = server.getState();
             ud.setPasswordData(st.getInfoString());
@@ -218,7 +218,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
     }
 
     /** Change the OTP Stream */
-    public void changePassword(UserData ud, String newpass, String vrfy) 
+    public void changePassword(UserData ud, String newpass, String vrfy)
      throws InvalidPasswordException
     {
         String          login = ud.getLogin();
@@ -229,7 +229,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
         st = getFromCache(login, CACHE_NEW_ST);
         if (st == null)
             throw new InvalidPasswordException(
-                "Don't know what challenge the new password is for."); 
+                "Don't know what challenge the new password is for.");
 
         if (! newpass.equalsIgnoreCase(vrfy))
             throw new InvalidPasswordException(
@@ -245,7 +245,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
                 // Get the old OTP first, so that we can compare.
                 server = new OTPServer(new OTPState(pData) );
 
-                if (! server.reinitOTP(st, true)) 
+                if (! server.reinitOTP(st, true))
                     throw new InvalidPasswordException(
                         "The new OTP stream is the same as the old one.");
             }
@@ -270,8 +270,8 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
     }
 
 
-    /** Get the challenge for this authentication.  This will get passed some 
-     * user data and should return the approriate challenge string for that 
+    /** Get the challenge for this authentication.  This will get passed some
+     * user data and should return the approriate challenge string for that
      * user.
      */
     public String getChallenge(UserData ud) throws WebMailException {
@@ -295,7 +295,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
         try {
             server = new OTPServer(st);
             chal = server.getChallenge();
-        } 
+        }
         catch (OTPFormatException e) {
             e.printStackTrace();
             // this should never happen.
@@ -314,7 +314,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
         putIntoCache(login, st, null);
 
         return chal;
-    }        
+    }
 
     /*----------------------- Private Functions -------------------------*/
 
@@ -377,7 +377,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
                 sts[i] = node.new_st;
             }
         }
-    }    
+    }
 
     private OTPState getFromCache(String key, int type) {
         OTPCacheNode    node;
@@ -393,7 +393,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
             else if ( (type & CACHE_NEW_ST) != 0) {
                 rtn = node.new_st;
             }
-        }      
+        }
 
         return rtn;
     }

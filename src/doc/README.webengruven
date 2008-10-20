@@ -15,8 +15,8 @@ with the same command.
 
 The various files inculded in this tar ball are:
 
-webmail-servlet.properties.template.diff -- diff for 
-    webmail/webmail-serverlet.properties.template file.  This tells mod_jserv 
+webmail-servlet.properties.template.diff -- diff for
+    webmail/webmail-serverlet.properties.template file.  This tells mod_jserv
     to look for javaOTP.jar.
 
 webmail.src.net.diff -- The main diff file for the webmail/src/net source
@@ -27,7 +27,7 @@ xsl.diff -- This also contains diffs for files under src/net, but only the
     .xsl files for the classic theme in the english language.  Right now
     that is the only language which I've made the changes too, and thus the
     only one which can really handle OTP's and Challenge/Response
-    authentication in general.  
+    authentication in general.
 
 changepass.xsl -- This file should be moved to
     src/net/wastl/webmail/data/xml/*/*.  It controls some of the look
