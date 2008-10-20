@@ -1,0 +1,21 @@
+$Id$
+
+Do not commit text files with tab characters.  Your editor should have a
+setting to automatically convert tabs to spaces.  If not, then use
+"expand" (available for all UNIXes + Cygwin) or any other home-made or
+off-the-shelf tab-expander.
+
+Don't use liberal import statements.  Include just what you need to
+prevent unnecessary name collisions in the future.
+
+Be conservative with white space.
+
+When making a new file, copy the Copyright (and file Id$) boilerplate from
+an existing file of the same type, and update the Copyright date if necessary.
+
+Use block indents of 2 spaces for all *.xml files (incl. *.xsl and *.dtd),
+and for HTML code in *.html, *.jsp, or fragment files (because of the copious
+nesting of HTML).
+
+Use block indents of 4 for all other computer languages (Javascript, Perl,
+PHP, Java).
