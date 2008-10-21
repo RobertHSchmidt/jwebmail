@@ -1,4 +1,12 @@
+# $Id$
 # changed/fixed, + added, - removed
+
+v1.0a rev. 20
+- Manually reverted from Docuverse/domsdk XPath back to NekoHTML parser,
+  because the obsolete domsk is no longer available.
++ Added back nekohtml.jar (see previous item)
+# Updated code for modern Java SDK's by fixing naming conflicts.
+# Fixed minor build classpath issues.
 
 v0.7.10 => v0.7.11
 # Change XML manipulation to XPath APIs

@@ -179,9 +179,9 @@ public final class XMLCommon  {
                     v.addElement(nl.item(i));
                 }
             }
-            Enumeration enum=v.elements();
-            while(enum.hasMoreElements()) {
-                Node n=(Node)enum.nextElement();
+            Enumeration enumVar=v.elements();
+            while(enumVar.hasMoreElements()) {
+                Node n=(Node)enumVar.nextElement();
                 e.removeChild(n);
             }
         }
@@ -265,9 +265,9 @@ public final class XMLCommon  {
                 }
             }
         }
-        Enumeration enum=parts.elements();
-        while(enum.hasMoreElements()) {
-            parent.removeChild((Node)enum.nextElement());
+        Enumeration enumVar=parts.elements();
+        while(enumVar.hasMoreElements()) {
+            parent.removeChild((Node)enumVar.nextElement());
         }
     }
 

@@ -272,10 +272,10 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         for(int i=0;i<flist.length;i++) {
             String cur_lang=flist[i];
             Locale loc=new Locale(cur_lang,"","");
-            Enumeration enum=available.elements();
+            Enumeration enumVar=available.elements();
             boolean added=false;
-            while(enum.hasMoreElements()) {
-                Locale l=(Locale)enum.nextElement();
+            while(enumVar.hasMoreElements()) {
+                Locale l=(Locale)enumVar.nextElement();
                 if(l.getLanguage().equals(loc.getLanguage())) {
                     s+=l.toString()+" ";
                     count++;
@@ -480,9 +480,9 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         } else {
             if(name != null) {
                 String type="application/unknown";
-                Enumeration enum=mime_types.keys();
-                while(enum.hasMoreElements()) {
-                    String s=(String)enum.nextElement();
+                Enumeration enumVar=mime_types.keys();
+                while(enumVar.hasMoreElements()) {
+                    String s=(String)enumVar.nextElement();
                     if(name.toLowerCase().endsWith(s)) {
                         type= (String)mime_types.get(s);
                     }
@@ -506,16 +506,16 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
 
     public String toString() {
         String s="";
-        Enumeration enum=stylesheet_cache.keys();
-        while(enum.hasMoreElements()) {
-            String name=(String)enum.nextElement();
+        Enumeration enumVar=stylesheet_cache.keys();
+        while(enumVar.hasMoreElements()) {
+            String name=(String)enumVar.nextElement();
             ExpireableCache cache=(ExpireableCache)stylesheet_cache.get(name);
             s+=" - stylesheet cache for "+name+": Capacity "+cache.getCapacity()+", Usage "+cache.getUsage();
             s+=", "+cache.getHits()+" hits, "+cache.getMisses()+" misses\n";
         }
-        enum=binary_cache.keys();
-        while(enum.hasMoreElements()) {
-            String name=(String)enum.nextElement();
+        enumVar=binary_cache.keys();
+        while(enumVar.hasMoreElements()) {
+            String name=(String)enumVar.nextElement();
             ExpireableCache cache=(ExpireableCache)binary_cache.get(name);
             s+=" - binary cache for "+name+": Capacity "+cache.getCapacity()+", Usage "+cache.getUsage();
             s+=", "+cache.getHits()+" hits, "+cache.getMisses()+" misses\n";

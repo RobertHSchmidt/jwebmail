@@ -214,9 +214,9 @@ public class XMLUserModel extends XMLGenericModel {
             for(int i=0;i<nl2.getLength();i++) {
                 v.addElement(nl2.item(i));
             }
-            Enumeration enum=v.elements();
-            while(enum.hasMoreElements()) {
-                work.removeChild((Node)enum.nextElement());
+            Enumeration enumVar=v.elements();
+            while(enumVar.hasMoreElements()) {
+                work.removeChild((Node)enumVar.nextElement());
             }
             invalidateCache();
         }

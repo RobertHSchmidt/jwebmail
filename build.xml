@@ -1,16 +1,33 @@
-<!-- CVS ID: $Id$ -->
+<project name="jwebmail" default="compile">
+<!--
+$Id$
 
-<project default="compile" basedir=".">
+Copyright 2008 by the JWebMail Development Team and Sebastian Schaffert.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+  <property file="local.properties"/> <!-- NON-SHARED build properties -->
 
   <!-- =================================================================== -->
   <!-- Initialization target                                               -->
   <!-- =================================================================== -->
   <target name="init">
     <tstamp/>
+    <property name="Name" value="webmail"/>
     <property name="Name" value="WEBMAIL"/>
-    <property name="name" value="webmail"/>
-    <property name="version" value="0.7.11"/>
-    <property name="year" value="2003"/>
+    <property name="version" value="1.0a"/>
+    <property name="year" value="2008"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
 
@@ -95,7 +112,6 @@
         <available file="${lib.dir}/mail.jar" property="mail.jar.present"/>
         <available file="${lib.dir}/activation.jar" property="jaf.jar.present"/>
         <available file="${lib.dir}/pop3.jar" property="pop3.jar.present"/>
-        <available file="${lib.dir}/domsdk.jar" property="domsdk.jar.present"/>
   </target>
 
   <!-- =================================================================== -->
@@ -138,28 +154,9 @@
   </target>
 
   <!-- =================================================================== -->
-  <!-- Prepare POP3 JAR                                                    -->
-  <!-- =================================================================== -->
-  <target name="prep-domsdk.jar" unless="domsdk.jar.present" depends="prepare">
-
-    <get src="http://www.docuverse.com/downloads/domsdk_a5.zip"
-         dest="${contrib.dir}/domsdk_a5.zip"
-         usetimestamp="true"
-         verbose="true"/>
-    <mkdir dir="${build.src}/temp"/>
-    <unzip src="${contrib.dir}/domsdk_a5.zip" dest="${build.src}/temp" />
-    <copy todir="${lib.dir}" flatten="yes">
-        <fileset dir="${build.src}/temp">
-           <include name="**/domsdk.jar" />
-           <include name="**/w3cdom1.jar" />
-        </fileset>
-    </copy>
-  </target>
-
-  <!-- =================================================================== -->
   <!-- Prepare all JAR files (put in lib dir)                              -->
   <!-- =================================================================== -->
-  <target name="prep-lib" depends="check-jars, prep-mail.jar, prep-activation.jar, prep-pop3.jar, prep-domsdk.jar">
+  <target name="prep-lib" depends="check-jars, prep-mail.jar, prep-activation.jar, prep-pop3.jar">
     <copy todir="${lib.dir}">
         <fileset dir="${contrib.dir}">
            <include name="*.jar" />
@@ -204,7 +201,7 @@
 <!--    <echo message="Compiling net \& org package trees to ${build.dest}"/> -->
     <javac srcdir="${build.src}"
            destdir="${build.dest}"
-           classpath=".:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/domsdk.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar:${lib.dir}/xalan.jar"
+           classpath=".:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar:${lib.dir}/xalan.jar:${contrib.dir}/servlet-2.3.jar:${lib.dir}/nekohtml.jar"
            debug="${debug}"
            optimize="${optimize}"
            deprecation="${deprecation}"
@@ -214,7 +211,7 @@
     <mkdir dir="${build.dest}/plugins" />
     <javac srcdir="${build.src}"
            destdir="${build.dest}/plugins"
-           classpath="${build.dest}:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/domsdk.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar"
+           classpath="${build.dest}:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar:${contrib.dir}/servlet-2.3.jar"
            debug="${debug}"
            optimize="${optimize}"
            deprecation="${deprecation}"
@@ -224,7 +221,7 @@
     <mkdir dir="${build.dest}/authenticators" />
     <javac srcdir="${build.src}"
            destdir="${build.dest}/authenticators"
-           classpath="${build.dest}:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/domsdk.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar"
+           classpath="${build.dest}:${lib.dir}/servlet-2.3.jar:${lib.dir}/mail.jar:${lib.dir}/activation.jar:${lib.dir}/cos.jar:${lib.dir}/xml-apis.jar:${lib.dir}/javaOTP.jar"
            debug="${debug}"
            optimize="${optimize}"
            deprecation="${deprecation}"
