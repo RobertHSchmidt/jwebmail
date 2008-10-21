@@ -22,11 +22,10 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Initialization target                                               -->
   <!-- =================================================================== -->
-  <target name="init">
+  <target name="-init">
     <tstamp/>
-    <property name="Name" value="webmail"/>
-    <property name="Name" value="WEBMAIL"/>
-    <property name="version" value="1.0a"/>
+    <property name="Name" value="JWebMail"/>
+    <property name="version" value="1.0.1a"/>
     <property name="year" value="2008"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
@@ -46,7 +45,7 @@ limitations under the License.
     <property name="build.javadocs" value="./build/apidocs"/>
 
     <property name="dist.root" value="./dist"/>
-    <property name="dist.dir" value="${dist.root}/${name}-${version}"/>
+    <property name="dist.dir" value="${dist.root}/${ant.project.name}-${version}"/>
 
     <filter token="year" value="${year}"/>
     <filter token="version" value="${version}"/>
@@ -59,38 +58,16 @@ limitations under the License.
   </target>
 
   <!-- =================================================================== -->
-  <!-- Help on usage                                                       -->
-  <!-- =================================================================== -->
-  <target name="usage" depends="init">
-    <echo message=""/>
-    <echo message=""/>
-    <echo message="${Name} ${version} Build file"/>
-    <echo message="-------------------------------------------------------------"/>
-    <echo message=""/>
-    <echo message=" available targets are:"/>
-    <echo message=""/>
-    <echo message="   package  --> generates the ${name}.jar file"/>
-    <echo message="   compile  --> compiles the source code (default)"/>
-    <echo message="   javadoc  --> generates the API documentation"/>
-    <echo message="   clean    --> cleans up the directory"/>
-    <echo message=""/>
-    <echo message=" See the comments inside the build.xml file for more details."/>
-    <echo message="-------------------------------------------------------------"/>
-    <echo message=""/>
-    <echo message=""/>
-  </target>
-
-  <!-- =================================================================== -->
   <!-- Prepares the build directory                                        -->
   <!-- =================================================================== -->
-  <target name="prepare" depends="init">
+  <target name="-prepare" depends="-init">
     <mkdir dir="${build.dir}"/>
   </target>
 
   <!-- =================================================================== -->
   <!-- Prepares the source code                                            -->
   <!-- =================================================================== -->
-  <target name="prepare-src" depends="prepare">
+  <target name="-prepare-src" depends="-prepare">
     <!-- create directories -->
     <mkdir dir="${build.src}"/>
     <mkdir dir="${build.dest}"/>
@@ -108,7 +85,7 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Checks to see if JARs available                                     -->
   <!-- =================================================================== -->
-  <target name="check-jars">
+  <target name="-check-jars">
         <available file="${lib.dir}/mail.jar" property="mail.jar.present"/>
         <available file="${lib.dir}/activation.jar" property="jaf.jar.present"/>
         <available file="${lib.dir}/pop3.jar" property="pop3.jar.present"/>
@@ -117,7 +94,7 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Prepare Javamail JAR                                                -->
   <!-- =================================================================== -->
-  <target name="prep-mail.jar" unless="mail.jar.present" depends="prepare">
+  <target name="-prep-mail.jar" unless="mail.jar.present" depends="-prepare">
     <mkdir dir="${build.src}/temp"/>
     <unzip src="${contrib.dir}/javamail-1_3.zip" dest="${build.src}/temp" />
     <copy todir="${lib.dir}" flatten="yes">
@@ -130,7 +107,7 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Prepare JAF JAR                                                     -->
   <!-- =================================================================== -->
-  <target name="prep-activation.jar" unless="jaf.jar.present" depends="prepare">
+  <target name="-prep-activation.jar" unless="jaf.jar.present" depends="-prepare">
     <mkdir dir="${build.src}/temp"/>
     <unzip src="${contrib.dir}/jaf-1_0_2.zip" dest="${build.src}/temp" />
     <copy todir="${lib.dir}" flatten="yes">
@@ -143,7 +120,7 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Prepare POP3 JAR                                                    -->
   <!-- =================================================================== -->
-  <target name="prep-pop3.jar" unless="pop3.jar.present" depends="prepare">
+  <target name="-prep-pop3.jar" unless="pop3.jar.present" depends="-prepare">
     <mkdir dir="${build.src}/temp"/>
     <unzip src="${contrib.dir}/pop31_1_1.zip" dest="${build.src}/temp" />
     <copy todir="${lib.dir}" flatten="yes">
@@ -156,7 +133,7 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Prepare all JAR files (put in lib dir)                              -->
   <!-- =================================================================== -->
-  <target name="prep-lib" depends="check-jars, prep-mail.jar, prep-activation.jar, prep-pop3.jar">
+  <target name="-prep-lib" depends="-check-jars, -prep-mail.jar, -prep-activation.jar, -prep-pop3.jar">
     <copy todir="${lib.dir}">
         <fileset dir="${contrib.dir}">
            <include name="*.jar" />
@@ -170,33 +147,11 @@ limitations under the License.
   </target>
 
   <!-- =================================================================== -->
-  <!-- Creates HTTPParser.java                                             -->
-  <!-- =================================================================== -->
-  <target name="create-HTTPParser">
-    <java classname="JFlex.Main" fork="yes" dir="${build.src}/net/wastl/webmail/standalone/">
-      <arg value="-q" />
-      <arg value="http.lex" />
-      <classpath>
-        <pathelement location="${contrib.dir}/compile/JFlex.jar" />
-      </classpath>
-    </java>
-    <java classname="java_cup.Main" fork="yes" dir="${build.src}/net/wastl/webmail/standalone/">
-      <arg value="-nowarn" />
-      <arg value="-parser" />
-      <arg value="HTTPParser" />
-      <arg value="-specfile" />
-      <arg value="http.cup" />
-      <classpath>
-        <pathelement location="${contrib.dir}/compile/JavaCUP.jar" />
-      </classpath>
-    </java>
-  </target>
-
-  <!-- =================================================================== -->
   <!-- Compiles the source directory                                       -->
   <!-- =================================================================== -->
-<!--  <target name="compile" depends="prepare-src, prep-lib, create-HTTPParser">-->
-  <target name="compile" depends="prepare-src, prep-lib">
+<!--  <target name="compile" depends="-prepare-src, -prep-lib, create-HTTPParser">-->
+  <target name="compile" depends="-prepare-src, -prep-lib"
+          description="Compiles the source code (default)">
 
 <!--    <echo message="Compiling net \& org package trees to ${build.dest}"/> -->
     <javac srcdir="${build.src}"
@@ -232,17 +187,18 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Creates the common, standalone, & server packages                   -->
   <!-- =================================================================== -->
-  <target name="package" depends="compile">
+  <target name="package" depends="compile"
+          description="Generates the ${ant.project.name}.jar file">
     <fixcrlf srcdir="." includes="**/*.bat" eol="crlf"/>
     <fixcrlf srcdir="." includes="**/*.sh" eol="lf"/>
-    <jar jarfile="${lib.dir}/${name}-common.jar"
+    <jar jarfile="${lib.dir}/${ant.project.name}-common.jar"
          basedir="${build.dest}"
          includes="net/**,org/**"
          excludes="**/standalone/**,**/servlet/**" />
-<!--    <jar jarfile="${lib.dir}/${name}-standalone.jar"
+<!--    <jar jarfile="${lib.dir}/${ant.project.name}-standalone.jar"
          basedir="${build.dest}"
          includes="**/standalone/**" /> -->
-<!--    <jar jarfile="${lib.dir}/${name}-servlet.jar"
+<!--    <jar jarfile="${lib.dir}/${ant.project.name}-servlet.jar"
          basedir="${build.dest}"
          includes="**/servlet/**" /> -->
 <!-- rather than copying these to lib/plugins etc. just waiting till tomcat deploy
@@ -259,7 +215,9 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Install all XML XSL DTD's etc.                                      -->
   <!-- =================================================================== -->
-  <target name="copy-xml-files">
+  <target name="-copy-xml-files">
+    <!-- Would it ever be useful to call this externally?
+         If so, remove the leading hyphen from the target name. -->
     <echo message="Installing webmail.xml ..."/>
     <copy todir="data" flatten="yes">
         <fileset dir="${src.dir}">
@@ -395,65 +353,25 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Copies the class files into the webapp dir for Tomcat.              -->
   <!-- =================================================================== -->
-  <target name="install-tomcat" depends="package, copy-xml-files">
-    <echo message="Installing ${name} to Tomcat apps directory ..."/>
-    <mkdir dir="${webapp.home}/${name}"/>
-    <mkdir dir="${webapp.home}/${name}/WEB-INF"/>
-    <copy todir="${webapp.home}/${name}/lib">
+  <target name="install-tomcat" depends="package, -copy-xml-files"
+          description="Build webapp and deploy to Tomcat">
+    <fail unless="webapp.home"
+      message="Property 'webapp.home' is required by target 'install-tomcat'"/>
+    <echo message="Installing ${ant.project.name} to Tomcat apps directory ..."/>
+    <mkdir dir="${webapp.home}/${ant.project.name}"/>
+    <mkdir dir="${webapp.home}/${ant.project.name}/WEB-INF"/>
+    <copy todir="${webapp.home}/${ant.project.name}/lib">
         <fileset dir="${lib.dir}" excludes="**/*.jar" />
     </copy>
-    <copy todir="${webapp.home}/${name}/data">
+    <copy todir="${webapp.home}/${ant.project.name}/data">
         <fileset dir="data"/>
     </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes" flatten="yes">
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes" flatten="yes">
         <fileset dir="${build.dest}">
            <include name="**/plugins/**,**/authenticators/**" />
         </fileset>
     </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/lib">
-        <fileset dir="${lib.dir}">
-           <include name="**/*.jar"/>
-        </fileset>
-    </copy>
-    <!-- Install plugin and authenticator classes -->
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes">
-        <fileset dir="${build.dest}/plugins" />
-    </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes">
-        <fileset dir="${build.dest}/authenticators" />
-    </copy>
-    <filter token="webapp-home" value="${webapp.home}${name}"/>
-    <filter token="plugin-dir" value="WEB-INF/classes"/>
-    <filter token="authenticator-dir" value="WEB-INF/classes"/>
-    <filter token="base-uri" value="/${name}"/>
-    <copy file="WEB-INF/web.xml" todir="${webapp.home}/${name}/WEB-INF/" filtering="true" />
-    <copy todir="${webapp.home}/${name}" filtering="true">
-      <fileset dir="${src.dir}/jsp"/>
-    </copy>
-
-    <war warfile="${webapp.home}/${name}.war" webxml="${webapp.home}/${name}/WEB-INF/web.xml" basedir="${webapp.home}/${name}"/>
-    <!-- Copy images -->
-  </target>
-
-  <!-- =================================================================== -->
-  <!-- Copies the class files into the webapp dir for Catalina.            -->
-  <!-- =================================================================== -->
-  <target name="install-catalina" depends="package, copy-xml-files">
-    <echo message="Installing ${name} to Catalina apps directory ..."/>
-    <mkdir dir="${webapp.home}/${name}"/>
-    <mkdir dir="${webapp.home}/${name}/WEB-INF"/>
-    <copy todir="${webapp.home}/${name}/lib">
-        <fileset dir="${lib.dir}" excludes="**/*.jar" />
-    </copy>
-    <copy todir="${webapp.home}/${name}/data">
-        <fileset dir="data"/>
-    </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes" flatten="yes">
-        <fileset dir="${build.dest}">
-           <include name="**/plugins/**,**/authenticators/**" />
-        </fileset>
-    </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/lib">
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/lib">
         <fileset dir="${lib.dir}">
            <include name="**/*.jar"/>
            <!--<exclude name="mail.jar"/>-->
@@ -463,29 +381,30 @@ limitations under the License.
         </fileset>
     </copy>
     <!-- Install plugin and authenticator classes -->
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes">
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes">
         <fileset dir="${build.dest}/plugins" />
     </copy>
-    <copy todir="${webapp.home}/${name}/WEB-INF/classes">
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes">
         <fileset dir="${build.dest}/authenticators" />
     </copy>
-    <filter token="webapp-home" value="${webapp.home}${name}"/>
+    <filter token="webapp-home" value="${webapp.home}/${ant.project.name}"/>
     <filter token="plugin-dir" value="WEB-INF/classes"/>
     <filter token="authenticator-dir" value="WEB-INF/classes"/>
-    <filter token="base-uri" value="/${name}"/>
-    <copy file="WEB-INF/web.xml" todir="${webapp.home}/${name}/WEB-INF/" filtering="true" />
-    <copy todir="${webapp.home}/${name}" filtering="true">
+    <filter token="base-uri" value="/${ant.project.name}"/>
+    <copy file="WEB-INF/web.xml" todir="${webapp.home}/${ant.project.name}/WEB-INF/" filtering="true" />
+    <copy todir="${webapp.home}/${ant.project.name}" filtering="true">
       <fileset dir="${src.dir}/jsp"/>
     </copy>
 
-    <war warfile="${webapp.home}/${name}.war" webxml="${webapp.home}/${name}/WEB-INF/web.xml" basedir="${webapp.home}/${name}"/>
+    <war warfile="${webapp.home}/${ant.project.name}.war" webxml="${webapp.home}/${ant.project.name}/WEB-INF/web.xml" basedir="${webapp.home}/${ant.project.name}"/>
     <!-- Copy images -->
   </target>
 
   <!-- =================================================================== -->
   <!-- Creates the API documentation                                       -->
   <!-- =================================================================== -->
-  <target name="javadoc" depends="prepare-src">
+  <target name="javadoc" depends="-prepare-src"
+          description="Generates the API documentation">
     <mkdir dir="${build.javadocs}"/>
     <javadoc packagenames="${packages}"
              sourcepath="${build.src}"
@@ -504,21 +423,31 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Clean targets                                                       -->
   <!-- =================================================================== -->
-  <target name="clean" depends="init">
+  <target name="clean" depends="-init" description="Purges derived artifacts">
     <echo message="Deleting ${build.dir} ..."/>
     <delete dir="${build.dir}"/>
     <echo message="Deleting contents of ${lib.dir} ..."/>
-    <delete includeEmptyDirs="true" >
-        <fileset dir="${lib.dir}" />
-    </delete>
+    <delete dir="${lib.dir}" includeEmptyDirs="true"/>
     <delete file="data/webmail.xml"/>
+    <delete file="README.html"/>
   </target>
 
-  <target name="clean-tomcat-app" depends="clean">
-    <deltree dir="${webapp.home}${name}"/>
+  <target name="clean-tomcat-app" depends="clean"
+    description="Clean, plus wipe (possibly live) deployment dir">
+    <fail unless="webapp.home"
+    message="Property 'webapp.home' is required by target 'clean-tomcat-app'"/>
+  <deltree dir="${webapp.home}/${ant.project.name}"/>
   </target>
 
+  <!-- Windows users will have to install Cygwin, or run another XSLT
+       processor -->
+  <target name="generate-readme"
+          description="Generate the 'README.html' file">
+    <exec executable="xsltproc" failonerror="true">
+      <arg value="-o"/>
+      <arg value="README.html"/>
+      <arg file="src/doc/readme/README.xsl"/>
+      <arg file="src/doc/readme/README.xml"/>
+    </exec>
+  </target>
 </project>
-
-<!-- End of file -->
-

@@ -1,3 +1,5 @@
+$Id$
+
 This is a list of known bugs in WebMail. Some of them are bugs that I cannot
 fix, because they are not directly in the WebMail code but in some third party
 library or program:

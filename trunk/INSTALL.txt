@@ -1,5 +1,7 @@
-Installation instructions for WebMail 0.7.10
-============================================
+$Id$
+
+Installation instructions for WebMail
+=====================================
 
 
 I. Requirements

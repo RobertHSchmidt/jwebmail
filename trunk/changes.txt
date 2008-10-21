@@ -1,7 +1,7 @@
 # $Id$
 # changed/fixed, + added, - removed
 
-v1.0a rev. 20
+v1.0.1a rev. 20
 - Manually reverted from Docuverse/domsdk XPath back to NekoHTML parser,
   because the obsolete domsk is no longer available.
 + Added back nekohtml.jar (see previous item)
