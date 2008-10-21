@@ -53,6 +53,7 @@ limitations under the License.
    </xsl:template>
 
   <xsl:template match="SUBSECTION">
+    <xsl:param name="cur_section"/>
     <A NAME="{@id}"/>
     <xsl:variable name="cur_subsection" select="position()"/>
     <H2>
@@ -68,6 +69,8 @@ limitations under the License.
   </xsl:template>
 
   <xsl:template match="SUBSUBSECTION">
+    <xsl:param name="cur_section"/>
+    <xsl:param name="cur_subsection"/>
     <A NAME="{@id}"/>
     <H3><xsl:number value="$cur_section"/>.<xsl:number value="$cur_subsection"/>.<xsl:number value="position()"/>. <xsl:value-of select="@name"/></H3>
     <xsl:apply-templates/>

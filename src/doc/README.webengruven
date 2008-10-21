@@ -51,5 +51,3 @@ org/webengruven/webmail/* -- All the files relating to Challenge/Response
     and OTP authentication, plus a few others that were added while making
     changes.  It is probably best to completely remove the
     org/webengruven/webmail dir that comes with webmail v0.7.4
-
-

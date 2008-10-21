@@ -21,7 +21,7 @@ limitations under the License.
 <!DOCTYPE README SYSTEM "README.dtd">
 
 <README>
-  <TITLE>WebMail v0.7.2</TITLE>
+  <TITLE>WebMail v1.0.1*</TITLE>
   <AUTHOR>Sebastian Schaffert, schaffer@informatik.uni-muenchen.de</AUTHOR>
   <SECTION name="Contents" id="contents"><CONTENTS/></SECTION>
   <SECTION name="What is WebMail" id="about">
@@ -50,7 +50,7 @@ limitations under the License.
           <ITEM>Usage of JavaMail-API ensures compatibility to many mailstandards
             ("officially" supported and tested: IMAPv4)</ITEM>
           <ITEM>Open Source distribution allows easy customization</ITEM>
-          <ITEM>webbased administration interface</ITEM>
+          <ITEM>web-based administration interface</ITEM>
           <ITEM>support for multiple virtual user domains</ITEM>
           <ITEM>Easily add new features through the WebMail modular plugin concept
             (support for dependencies, hooking into URLs, etc)</ITEM>
@@ -158,7 +158,7 @@ limitations under the License.
         <P>
           <NLIST>
             <ITEM>Change to the prefix where you want to install WebMail (e.g. /usr/local)</ITEM>
-            <ITEM>Unpack the tar.gz or zip archive: <CODE>tar xzvf webmail-0.7.0.tar.gz</CODE></ITEM>
+            <ITEM>Unpack the tar.gz or zip archive: <CODE>tar xzvf webmail-1.0.1*.tar.gz</CODE></ITEM>
             <ITEM>Change to webmail/bin</ITEM>
             <ITEM>Edit the file webmail.sh if necessary</ITEM>
             <ITEM>Start WebMail using the provided script
@@ -338,8 +338,8 @@ limitations under the License.
             add the following two entries after the entry for the JkWorkersFile and the Include for
             tomcat's automatic configuration:
               <P>
-                <CODE>JkMount /webmail/WebMail ajp12</CODE><BR />
-                <CODE>JkMount /webmail/WebMail/* ajp12</CODE><BR />
+                <CODE>JkMount /jwebmail/WebMail ajp12</CODE><BR />
+                <CODE>JkMount /jwebmail/WebMail/* ajp12</CODE><BR />
               (if you are using AJP protocol 1.3 please change ajp12 to ajp13)
               </P>
             </ITEM>
@@ -366,9 +366,9 @@ limitations under the License.
             <ITEM>Apache JServ - an RPM can be found on most RedHat mirrors and on the WebMail homepage</ITEM>
             <ITEM>WebMail</ITEM>
           </LIST>
-          You will then have a running WebMail Servlet at <CODE>http://yourhost/webmail/webmail</CODE> when you
+          You will then have a running WebMail Servlet at <CODE>http://yourhost/jwebmail/WebMail</CODE> when you
           restart your Apache webserver. Please don't forget to change your configuration by going to
-          <CODE>http://yourhost/webmail/webmail/admin</CODE> and logging in with "Secret"
+          <CODE>http://yourhost/jwebmail/WebMail/admin</CODE> and logging in with "Secret"
           (and don't forget to change the password!).
         </P>
         <NOTE>This installation instruction (and the RPMs found on the WebMail homepage) are for RedHat 6.2 only.
@@ -380,9 +380,9 @@ limitations under the License.
           Installation on Debian woody is as simple as on RedHat. You will have to install Apache JServ with
           apt-get (<CODE>apt-get install jserv</CODE> will install the necessary packages) and then install the
           WebMail package (with <CODE>dpkg --install webmail*.deb</CODE>). <BR/>
-          You will then have a running WebMail Servlet at <CODE>http://yourhost/webmail/webmail</CODE> when you
+          You will then have a running WebMail Servlet at <CODE>http://yourhost/jwebmail/WebMail</CODE> when you
           restart your Apache webserver. Please don't forget to change your configuration by going to
-          <CODE>http://yourhost/webmail/webmail/admin</CODE> and logging in with "Secret"
+          <CODE>http://yourhost/jwebmail/WebMail/admin</CODE> and logging in with "Secret"
           (and don't forget to change the password!).
         </P>
         <P>
@@ -521,7 +521,7 @@ limitations under the License.
           If you are also running Apache with PHP3 on the same (or a different) host:
           <LIST>
             <ITEM>
-              Consider fetching "phpMyAdmin" (see freshmeat.net). It gives you a webbased
+              Consider fetching "phpMyAdmin" (see freshmeat.net). It gives you a web-based
               interface for changing all kinds of MySQL data, including the WebMail
               configuration
             </ITEM>
@@ -785,7 +785,7 @@ limitations under the License.
   <SECTION name="Notes" id="notes">
     <SUBSECTION name="WebMail Status" id="notes:status">
       <P>
-        WebMail v0.7 is considered BETA, as not all features I want for a "1.0"
+        WebMail Pre-1.0.1 is considered BETA, as not all features I want for a "1.0"
         are yet included.
       </P>
       <P>
