@@ -207,9 +207,9 @@ public class XMLGenericModel extends XMLData {
                     v.addElement(nl.item(i));
                 }
             }
-            Enumeration enum=v.elements();
-            while(enum.hasMoreElements()) {
-                Node n=(Node)enum.nextElement();
+            Enumeration enumVar=v.elements();
+            while(enumVar.hasMoreElements()) {
+                Node n=(Node)enumVar.nextElement();
                 statedata.removeChild(n);
             }
         }

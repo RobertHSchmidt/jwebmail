@@ -75,9 +75,9 @@ public abstract class Storage {
     public void initConfigKeys() {
         // Initialize the configuration file with the default or set parameters
         // needed to complete the XML file
-        Enumeration enum=cs.getPossibleKeys();
-        while(enum.hasMoreElements()) {
-            String key=(String)enum.nextElement();
+        Enumeration enumVar=cs.getPossibleKeys();
+        while(enumVar.hasMoreElements()) {
+            String key=(String)enumVar.nextElement();
             if(!sysdata.isConfigSet(key)) {
                 // We must use the raw method so the input doesn't get filtered.
                 sysdata.setConfig(key,(String)cs.getDefaultValue(key),false,false);
@@ -267,19 +267,19 @@ public abstract class Storage {
     public Enumeration getUsers() {
         final Enumeration domains=getVirtualDomains();
         return new Enumeration() {
-                Enumeration enum=null;
+                Enumeration enumVar=null;
                 public boolean hasMoreElements() {
-                    return (domains.hasMoreElements() || (enum != null && enum.hasMoreElements()));
+                    return (domains.hasMoreElements() || (enumVar != null && enumVar.hasMoreElements()));
                 }
                 public Object nextElement() {
-                    if(enum == null || !enum.hasMoreElements()) {
+                    if(enumVar == null || !enumVar.hasMoreElements()) {
                         if(domains.hasMoreElements()) {
-                            enum=getUsers((String)domains.nextElement());
+                            enumVar=getUsers((String)domains.nextElement());
                         } else {
                             return null;
                         }
                     }
-                    return enum.nextElement();
+                    return enumVar.nextElement();
                 }
             };
     }

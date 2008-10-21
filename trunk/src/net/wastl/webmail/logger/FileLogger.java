@@ -45,8 +45,8 @@ public class FileLogger extends Thread implements ConfigurationListener, Logger 
     protected PrintWriter logout;
     protected int loglevel;
 
-    protected Queue queue;
-    protected Queue time_queue;
+    protected net.wastl.webmail.misc.Queue queue;
+    protected net.wastl.webmail.misc.Queue time_queue;
 
     protected boolean do_shutdown=false;
 
@@ -71,8 +71,8 @@ public class FileLogger extends Thread implements ConfigurationListener, Logger 
                                                           " in seconds. Log messages of level CRIT or"+
                                                           " ERR will be written immediately in any way.");
         initLog();
-        queue=new Queue();
-        time_queue=new Queue();
+        queue=new net.wastl.webmail.misc.Queue();
+        time_queue=new net.wastl.webmail.misc.Queue();
         this.start();
     }
 

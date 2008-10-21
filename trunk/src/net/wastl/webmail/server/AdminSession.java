@@ -273,10 +273,10 @@ public class AdminSession implements HTTPSession {
 
         selected_domain=domain;
 
-        Enumeration enum=parent.getStorage().getUsers(domain);
+        Enumeration enumVar=parent.getStorage().getUsers(domain);
         model.removeAllStateVars("user");
-        while(enum.hasMoreElements()) {
-            model.addStateVar("user",(String)enum.nextElement());
+        while(enumVar.hasMoreElements()) {
+            model.addStateVar("user",(String)enumVar.nextElement());
         }
     }
 

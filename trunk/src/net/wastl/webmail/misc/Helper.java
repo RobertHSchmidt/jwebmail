@@ -790,11 +790,11 @@ public class Helper  {
             String rest="";
             for(int i=0;i<quotelevel;i++) rest+=">";
             rest+=line.substring(breakpos);
-            final Enumeration enum=breakLine(rest,linesize,quotelevel);
+            final Enumeration enumVar=breakLine(rest,linesize,quotelevel);
             return new Enumeration() {
                     int count=0;
                     public boolean hasMoreElements() {
-                        return count < 1 || enum.hasMoreElements();
+                        return count < 1 || enumVar.hasMoreElements();
                     }
 
                     public Object nextElement() {
@@ -802,7 +802,7 @@ public class Helper  {
                         if(count == 1) {
                             return first;
                         } else {
-                            return enum.nextElement();
+                            return enumVar.nextElement();
                         }
                     }
                 };
