@@ -36,6 +36,7 @@ limitations under the License.
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
 
     <property name="debug"              value="false"/>
+    <property name="javac.debug"              value="false"/>
     <property name="optimize"           value="on"/>
     <property name="deprecation"        value="on"/>
 
@@ -146,7 +147,7 @@ limitations under the License.
           description="Compiles the source code (default)">
     <javac srcdir="build/src" destdir="build/classes"
            classpath=".:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:lib/xalan.jar:contrib/servlet-2.3.jar:lib/nekohtml.jar"
-           debug="${debug}"
+           debug="${javac.debug}"
            optimize="${optimize}"
            deprecation="${deprecation}"
            excludes="**/plugins/**,**/authenticators/**" />
@@ -156,7 +157,7 @@ limitations under the License.
     <javac srcdir="build/src"
            destdir="build/classes/plugins"
            classpath="build/classes:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:contrib/servlet-2.3.jar"
-           debug="${debug}"
+           debug="${javac.debug}"
            optimize="${optimize}"
            deprecation="${deprecation}"
            includes="**/plugins/**" />
@@ -166,7 +167,7 @@ limitations under the License.
     <javac srcdir="build/src"
            destdir="build/classes/authenticators"
            classpath="build/classes:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar"
-           debug="${debug}"
+           debug="${javac.debug}"
            optimize="${optimize}"
            deprecation="${deprecation}"
            includes="**/authenticators/**" />
