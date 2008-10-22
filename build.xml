@@ -36,9 +36,9 @@ limitations under the License.
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
 
     <property name="debug"              value="false"/>
-    <property name="javac.debug"              value="false"/>
-    <property name="optimize"           value="on"/>
-    <property name="deprecation"        value="on"/>
+    <property name="javac.debug"        value="false"/>
+    <property name="javac.optimize"     value="on"/>
+    <property name="javac.deprecation"  value="on"/>
 
     <property name="dist.dir" value="dist/${ant.project.name}-${version}"/>
     <filter token="year" value="${year}"/>
@@ -146,30 +146,30 @@ limitations under the License.
   <target name="compile" depends="-prepare-src, -prep-lib, -ivy-setup"
           description="Compiles the source code (default)">
     <javac srcdir="build/src" destdir="build/classes"
-           classpath=".:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:lib/xalan.jar:contrib/servlet-2.3.jar:lib/nekohtml.jar"
+      classpath=".:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:lib/xalan.jar:contrib/servlet-2.3.jar:lib/jdom-1.1.jar"
            debug="${javac.debug}"
-           optimize="${optimize}"
-           deprecation="${deprecation}"
+           optimize="${javac.optimize}"
+           deprecation="${javac.deprecation}"
            excludes="**/plugins/**,**/authenticators/**" />
 
     <echo message="     Compiling plugins"/>
     <mkdir dir="build/classes/plugins" />
     <javac srcdir="build/src"
            destdir="build/classes/plugins"
-           classpath="build/classes:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:contrib/servlet-2.3.jar"
+           classpath="build/classes:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:contrib/servlet-2.3.jar:lib/jdom-1.1.jar"
            debug="${javac.debug}"
-           optimize="${optimize}"
-           deprecation="${deprecation}"
+           optimize="${javac.optimize}"
+           deprecation="${javac.deprecation}"
            includes="**/plugins/**" />
 
     <echo message="     Compiling authenticators"/>
     <mkdir dir="build/classes/authenticators" />
     <javac srcdir="build/src"
            destdir="build/classes/authenticators"
-           classpath="build/classes:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar"
+           classpath="build/classes:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:lib/jdom-1.1.jar"
            debug="${javac.debug}"
-           optimize="${optimize}"
-           deprecation="${deprecation}"
+           optimize="${javac.optimize}"
+           deprecation="${javac.deprecation}"
            includes="**/authenticators/**" />
 
   </target>

@@ -21,16 +21,7 @@ package net.wastl.webmail.server;
 
 import java.net.*;
 import java.io.*;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Vector;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.StringTokenizer;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 import java.text.*;
 import javax.mail.*;
 import javax.mail.event.*;
@@ -50,8 +41,10 @@ import org.w3c.dom.*;
 
 // HTML parser:
 import org.xml.sax.InputSource;
-//import org.cyberneko.html.parsers.DOMParser;
+// import org.apache.xerces.parsers.DOMParser;
+// import org.cyberneko.html.HTMLConfiguration;
 
+import com.docuverse.dom.DOM;
 
 /*
  * WebMailSession.java
@@ -165,10 +158,6 @@ public class WebMailSession implements HTTPSession {
         remote_agent=h.getHeader("User-Agent").replace('\n',' ');
         remote_accepts=h.getHeader("Accept").replace('\n',' ');
         parent.getStorage().log(Storage.LOG_INFO,"WebMail: New Session ("+session_code+")");
-        /* Blaine manually merging code.  Following line replaced by the if-block + user= thereafter.
-         * (Remove this comment when merge verified).
-         * user=WebMailServer.getStorage().getUserData(h.getContent("login"),h.getContent("vdom"),h.getContent("password"),true);
-         */
         if(parent.getStorage().getVirtuals()==true && h.getContent("vdom") != null) {
             domain=h.getContent("vdom");
         } else {
@@ -187,9 +176,9 @@ public class WebMailSession implements HTTPSession {
         /* If the user logs in for the first time we want all folders subscribed */
         /* // Nope, we don't want that!
         if(user.getLoginCount().equals("1")) {
-            Enumeration xenum=user.mailHosts();
-            while(xenum.hasMoreElements()) {
-                String id=(String)xenum.nextElement();
+            Enumeration enumVar=user.mailHosts();
+            while(enumVar.hasMoreElements()) {
+                String id=(String)enumVar.nextElement();
                 if(user.getMailHost(id).getName().equals("Default")) {
                     try {
                         setSubscribedAll(id,true);
@@ -648,7 +637,7 @@ public class WebMailSession implements HTTPSession {
                 //System.err.println("Setting work message!");
                 work=model.setWorkMessage(xml_message);
 
-                String newmsgid=WebMailServer.generateMessageID(user.getUserName());
+String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
                 if(work != null && (mode & GETMESSAGE_MODE_REPLY) == GETMESSAGE_MODE_REPLY) {
                     String from=work.getHeader("FROM");
@@ -691,10 +680,9 @@ public class WebMailSession implements HTTPSession {
     }
 
     /**
-     * Use depth-first search to go through MIME-Parts recursively.
-     *
-     * @param p Part to begin with
-     */
+       Use depth-first search to go through MIME-Parts recursively.
+       @param p Part to begin with
+    */
     protected void parseMIMEContent(Part p, XMLMessagePart parent_part, String msgid) throws MessagingException {
         StringBuffer content=new StringBuffer(1000);
         XMLMessagePart xml_part;
@@ -712,18 +700,37 @@ public class WebMailSession implements HTTPSession {
                 //Tidy tidy=new Tidy();
                 //tidy.setUpperCaseTags(true);
                 //Document htmldoc=tidy.parseDOM(p.getInputStream(),null);
-                org.cyberneko.html.parsers.DOMParser parser =
-                    new org.cyberneko.html.parsers.DOMParser();
-                parser.parse(new InputSource(p.getInputStream()));
-                Document htmldoc = parser.getDocument();
+//              org.cyberneko.html.parsers.DOMParser parser =
+//                  new org.cyberneko.html.parsers.DOMParser();
+//              DOMParser parser = new DOMParser(new HTMLConfiguration());
+//              parser.parse(new InputSource(p.getInputStream()));
+//              Document htmldoc = parser.getDocument();
 
-                //XMLCommon.debugXML(htmldoc);
+
+                // instantiate a DOM implementation
+                DOM dom = new com.docuverse.dom.DOM();
+                // install the SAX driver for Swing HTML parser
+                dom.setProperty("sax.driver", "com.docuverse.html.swing.SAXDriver");
+
+                // install HTML element factory
+                dom.setFactory(new com.docuverse.dom.html.HTMLFactory());
+
+                // now just open the document
+                Document htmldoc = (Document)dom.readDocument(p.getInputStream());
+
+                if(htmldoc == null) {
+                    System.err.println("Document was null!");
+                }
+
+                //dom.writeDocument(htmldoc,"/tmp/test.xml");
 
                 /* Now let's look for all the malicious JavaScript and other <SCRIPT> tags,
                    URLS containing the "javascript:" and tags containing "onMouseOver" and such
                    stuff. */
                 //              if(user.getBoolVar("filter javascript")) new JavaScriptCleaner(htmldoc);
                 new JavaScriptCleaner(htmldoc);
+
+                //dom.writeDocument(htmldoc,"/tmp/test2.xml");
 
                 //XMLCommon.debugXML(htmldoc);
                 /* HTML doesn't allow us to do such fancy stuff like different quote colors,
@@ -812,10 +819,10 @@ public class WebMailSession implements HTTPSession {
                     }
 
                     if(user.wantsBreakLines()) {
-                        Enumeration xenum=Helper.breakLine(token,user.getMaxLineLength(),current_quotelevel);
+                        Enumeration enumVar=Helper.breakLine(token,user.getMaxLineLength(),current_quotelevel);
 
-                        while(xenum.hasMoreElements()) {
-                            String s=(String)xenum.nextElement();
+                        while(enumVar.hasMoreElements()) {
+                            String s=(String)enumVar.nextElement();
                             if(user.wantsShowFancy()) {
                                 content.append(Fancyfier.apply(s)).append("\n");
                             } else {
@@ -989,19 +996,6 @@ public class WebMailSession implements HTTPSession {
                                 name="unknown."+type;
                         }
                 }
-                /* Blaine merging code.  Following looks less capable than previous, but not sure:
-                    name="unknown."+type;
-                // Modified by exce, start
-                 * As described in FileAttacher.java line #95 and
-                 * SendMessage.java line #390, we use MimeUtility.decodeText() to
-                 * decode attachment file name.
-                try {
-                        name = MimeUtility.decodeText(name);
-                } catch (Exception e) {
-                        System.err.println(e);
-                }
-                // Modified by exce, end
-                 */
                 // Eliminate space characters. Should do some more things in the future
                 name=name.replace(' ','_');
                 data.setContentType(p.getContentType());
@@ -1020,9 +1014,6 @@ public class WebMailSession implements HTTPSession {
                 data.setName(name);
                 xml_part.setAttribute("filename",name);
                 // Transcode name into UTF-8 bytes then make a new ISO8859_1 string to encode URL.
-                /* TODO:  Figure out whether this should be encoded or not:
-                xml_part.setAttribute("hrefFileName", URLEncoder.encode(new String(name.getBytes("UTF-8"), "ISO8859_1")));
-                */
                 xml_part.setAttribute("hrefFileName", name);
                 // Modified by exce, end
                 xml_part.setAttribute("size",size+"");
@@ -1052,10 +1043,10 @@ public class WebMailSession implements HTTPSession {
         if(mime_parts_decoded == null) {
             mime_parts_decoded=new Hashtable();
         }
-        Enumeration xenum=mime_parts_decoded.keys();
+        Enumeration enumVar=mime_parts_decoded.keys();
         Vector v=new Vector();
-        while(xenum.hasMoreElements()) {
-            String key=(String)xenum.nextElement();
+        while(enumVar.hasMoreElements()) {
+            String key=(String)enumVar.nextElement();
             if(key.startsWith(msgid)) {
                 v.addElement(key);
             }
@@ -1083,10 +1074,10 @@ public class WebMailSession implements HTTPSession {
 
         String msgid=xml_message.getAttribute("msgid");
 
-        Enumeration xenum=getMimeParts(msgid);
+        Enumeration enumVar=getMimeParts(msgid);
         attachments_size=0;
-        while(xenum.hasMoreElements()) {
-            mime_parts_decoded.remove((String)xenum.nextElement());
+        while(enumVar.hasMoreElements()) {
+            mime_parts_decoded.remove((String)enumVar.nextElement());
         }
     }
 
@@ -1099,9 +1090,9 @@ public class WebMailSession implements HTTPSession {
 
         String msgid=xml_message.getAttribute("msgid");
 
-        Enumeration xenum=getMimeParts(msgid);
-        while(xenum.hasMoreElements()) {
-            String key=(String)xenum.nextElement();
+        Enumeration enumVar=getMimeParts(msgid);
+        while(enumVar.hasMoreElements()) {
+            String key=(String)enumVar.nextElement();
             String filename=key.substring(msgid.length()+1);
             hash.put(filename,mime_parts_decoded.get(key));
         }
@@ -1133,10 +1124,10 @@ public class WebMailSession implements HTTPSession {
 
         bs.setDescription(description);
 
-        Enumeration xenum=getMimeParts(msgid);
+        Enumeration enumVar=getMimeParts(msgid);
         attachments_size=0;
-        while(xenum.hasMoreElements()) {
-            ByteStore b=(ByteStore)mime_parts_decoded.get((String)xenum.nextElement());
+        while(enumVar.hasMoreElements()) {
+            ByteStore b=(ByteStore)mime_parts_decoded.get((String)enumVar.nextElement());
             attachments_size+=b.getSize();
         }
 
@@ -1174,17 +1165,17 @@ public class WebMailSession implements HTTPSession {
 
         mime_parts_decoded.remove(msgid+"/"+name);
 
-        Enumeration xenum=getMimeParts(msgid);
+        Enumeration enumVar=getMimeParts(msgid);
         attachments_size=0;
-        while(xenum.hasMoreElements()) {
-            ByteStore b=(ByteStore)mime_parts_decoded.get((String)xenum.nextElement());
+        while(enumVar.hasMoreElements()) {
+            ByteStore b=(ByteStore)mime_parts_decoded.get((String)enumVar.nextElement());
             attachments_size+=b.getSize();
         }
 
-        xenum=xml_multipart.getParts();
+        enumVar=xml_multipart.getParts();
         XMLMessagePart oldpart=null;
-        while(xenum.hasMoreElements()) {
-            XMLMessagePart tmp=(XMLMessagePart)xenum.nextElement();
+        while(enumVar.hasMoreElements()) {
+            XMLMessagePart tmp=(XMLMessagePart)enumVar.nextElement();
             if(tmp.getAttribute("filename") != null &&
                tmp.getAttribute("filename").equals(name)) {
                 oldpart=tmp;
@@ -1230,10 +1221,10 @@ public class WebMailSession implements HTTPSession {
                 StringTokenizer tok=new StringTokenizer(bodyString,"\n");
                 while(tok.hasMoreTokens()) {
                     String line=tok.nextToken();
-                    Enumeration xenum=Helper.breakLine(line,user.getMaxLineLength(),
+                    Enumeration enumVar=Helper.breakLine(line,user.getMaxLineLength(),
                                                       Helper.getQuoteLevel(line));
-                    while(xenum.hasMoreElements()) {
-                        content.append((String)xenum.nextElement()).append('\n');
+                    while(enumVar.hasMoreElements()) {
+                        content.append((String)enumVar.nextElement()).append('\n');
                     }
                 }
             } else {
@@ -1431,8 +1422,6 @@ public class WebMailSession implements HTTPSession {
 
                 /* Recursiveley add subfolders to the XML model */
                 for(int i=0;i<subfolders.length;i++) {
-                    // System.err.println("Recurse "  + i + '/' + subfolders.length + ":  "
-                    // + folder.getFullName() + " => " + subfolders[i].getFullName());
                     int tree_depth=getFolderTree(subfolders[i],xml_folder,subscribed_only);
                     if(tree_depth>max_tree_depth) {
                         max_tree_depth=tree_depth;
@@ -1506,7 +1495,6 @@ public class WebMailSession implements HTTPSession {
                 } /* If it didn't work it failed in the "if" statement, since "getFolderTree" doesn't throw exceptions
                      so what we want to do is to simply construct the folder tree for INBOX */
                 catch(MessagingException ex) {
-                    //System.err.println("Defaulting to get just 'INBOX'");
                     depth=getFolderTree(cur_folder.getFolder("INBOX"),mailhost, subscribed_only);
                 }
             }
@@ -1515,7 +1503,6 @@ public class WebMailSession implements HTTPSession {
                 mailhost.setAttribute("error",ex.getMessage());
                 parent.getStorage().log(Storage.LOG_WARN,"Error connecting to mailhost ("+url.toString()+"): "+ex.getMessage());
             }
-            //System.err.println("Depths: " + depth + " & " + max_depth);
 
             if(depth>max_depth) {
                 max_depth=depth;
@@ -1675,7 +1662,6 @@ public class WebMailSession implements HTTPSession {
         /* Maybe this is a new store or this store has been disconnected. Reconnect if this is the case. */
         if(!st.isConnected()) {
             try {
-                //st.connect(host,993,login,password);
                 st.connect(host,login,password);
                 parent.getStorage().log(Storage.LOG_INFO,"Mail: Connection to "+st.toString()+".");
             } catch(AuthenticationFailedException ex) {
@@ -1868,9 +1854,9 @@ public class WebMailSession implements HTTPSession {
      */
     public void expungeFolders() {
         if(need_expunge_folders != null) {
-            Enumeration xenum=need_expunge_folders.elements();
-            while(xenum.hasMoreElements()) {
-                String hash=(String)xenum.nextElement();
+            Enumeration enumVar=need_expunge_folders.elements();
+            while(enumVar.hasMoreElements()) {
+                String hash=(String)enumVar.nextElement();
                 if(user.wantsSetFlags()) {
                     Folder f=getFolder(hash);
                     try {
@@ -2058,15 +2044,6 @@ public class WebMailSession implements HTTPSession {
          */
         // user.setSignature(head.getContent("SIGNATURE"));
         // user.setFullName(head.getContent("FULLNAME"));
-        /* Blaine merging.  The UTF-8 encoding block looks older than the following, but do we need this encoding?
-        try {
-                user.setSignature(new String(head.getContent("SIGNATURE").getBytes("ISO8859_1"), "UTF-8"));
-                user.setFullName(new String(head.getContent("FULLNAME").getBytes("ISO8859_1"), "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-                user.setSignature(head.getContent("SIGNATURE"));
-                user.setFullName(head.getContent("FULLNAME"));
-        */
         if(head.isContentSet("ADDNEW")) {
                 if(head.getContent("NEWEMAIL").equals("")) {
                         throw new WebMailException("Can not add empty email!");
@@ -2132,9 +2109,9 @@ public class WebMailSession implements HTTPSession {
                          host_url,
                          login,
                          password);
-        Enumeration xenum=user.mailHosts();
-        while(xenum.hasMoreElements()) {
-            String id=(String)xenum.nextElement();
+        Enumeration enumVar=user.mailHosts();
+        while(enumVar.hasMoreElements()) {
+            String id=(String)enumVar.nextElement();
             if(user.getMailHost(id).getName().equals(name)) {
                 //setSubscribedAll(id,true);
                 setSubscribedDefault(id,true);
