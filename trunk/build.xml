@@ -442,6 +442,11 @@ limitations under the License.
   </target>
 
   <target name="-ivy-setup">
+    <available property="_ivy.present" classname="org.apache.ivy.ant.IvyTask"/>
+    <fail unless="_ivy.present">
+Add Ivy jar file to your Ant CLASSPATH.  Try
+    export ANT_ARGS; ANT_ARGS='-lib bootstrap-libs -noclasspath' (Bourne)
+    SET ANT_ARGS=-lib bootstrap-libs -noclasspath                (CMD)</fail>
     <available property="_ivysettings.present" file="ivysettings.xml"
                type="file"/>
      <antcall target="-ensure-ivysettings"/>
