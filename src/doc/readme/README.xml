@@ -44,7 +44,7 @@ limitations under the License.
           <ITEM>supports multiple languages, configurable for each user</ITEM>
           <ITEM>flexible template system to personalize look and feel and write new language files using XML and
             XSL</ITEM>
-          <ITEM>runs as Java Servlet in Apache or as a standalone HTTP-server completely written in Java</ITEM>
+          <ITEM>runs as Servlet in a Java servlet container</ITEM>
           <ITEM>Improved session management keeps mail connections alive</ITEM>
           <ITEM>Improved speed compared to CGI scripts (about factor 5-10, depending on usage)</ITEM>
           <ITEM>Usage of JavaMail-API ensures compatibility to many mailstandards
@@ -76,28 +76,13 @@ limitations under the License.
   <SECTION name="Installation" id="install">
     <SUBSECTION name="Introduction" id="install:introduction">
       <P>
-        There are two different ways to install JWebMail, the <EM>standalone installation</EM> and the
-        <EM>Java Servlet installation</EM>. Which one you should choose depends on what you plan to do
-        with JWebMail:
-        <LIST>
-          <ITEM>
-            a <STRONG>standalone server</STRONG> is much easier to install and will allow you to run
-            JWebMail almost immediately without much configuration. This can be used if you want to
-            evaluate JWebMail's capabilities or develop new features/bugfixes. It also makes sense to
-            use this for small to medium installations if you don't want to set up a Java Servlet
-            capable webserver
-          </ITEM>
-          <ITEM>
-            a <STRONG>Java Servlet installation</STRONG> is recommended for production use since it
-            allows greater performance and scalability. You will need to set up a webserver that is
+            You will need to set up a webserver that is
             capable of serving Java Servlets, e.g. Apache. I can't give too detailed instructions here
             since this depends in large parts on your webserver, but I include a sample Apache
             configuration (the parts relevant to JWebMail) in the distribution.<BR/>
             The Debian (unstable) and RedHat (6.2) packages will install JWebMail as a servlet for these
             two systems. This will ease the servlet installation a lot since you need not set up JServ and
             JWebMail manually, so you should consider using this approach if you have one of those systems.
-          </ITEM>
-        </LIST>
       </P>
 <!--      <P>
         There are also several ways to store data:
@@ -115,97 +100,9 @@ limitations under the License.
       </P>-->
     </SUBSECTION>
 
-    <SUBSECTION name="Standalone Server" id="install:standalone">
-      <NOTE>On RedHat and Debian Linux systems you will probably first want to have a look at the
-        RedHat and Debian sections in the Servlet installation instructions</NOTE>
-
-      <SUBSUBSECTION name="Requirements" id="install:standalone:requirements">
-        <P>
-          To run JWebMail properly on your server, you need to have the following software
-          installed:
-          <LIST>
-            <ITEM>Java 1.1.6 or better - see<A href="#java">the Java Section</A> on Java issues</ITEM>
-            <ITEM>
-              About 20 megs of RAM (minimum) plus additional 80 megs on high load servers
-              (these are just recommendations, JWebMail will run on any Java-capable server;
-              if you have less than 32 MB RAM, you should try to adjust the settings in
-              the startup script called webmail.sh/webmail.bat)
-            </ITEM>
-            <ITEM>
-              Using a JIT ("just in time compiler") is greatly recommended! The Solaris and Windows
-              JDKs from Sun use a JIT by default (sunwjit). On Linux, the Sun/Blackdown JDK uses a JIT,
-              however it is not very fast, so you could profit from using a JIT like tya. The IBM Linux
-              JDK 1.1.8 comes with a very fast JIT (actually the fastest Java platform available).
-            </ITEM>
-          </LIST>
-        </P>
-        <P>
-          JWebMail has been successfully tested on:
-          <LIST>
-            <ITEM>Solaris x86 and SPARC, JDK 1.1.6 and JDK 1.2</ITEM>
-            <ITEM>Linux x86 (tested: Debian and SuSE), IBM JDK 1.1.8 and Sun/Inprise JDK 1.2.2 (RC3)</ITEM>
-            <ITEM>FreeBSD 3.4 x86, JDK 1.1.8</ITEM>
-            <ITEM>Windows NT/2000 (did not do the tests myself)</ITEM>
-          </LIST>
-        </P>
-        <P>
-          JWebMail will make profit of multiprocessor machines (e.g. Sun Enterprise 450) as
-          it is multithreaded in large parts.<BR/>
-        </P>
-      </SUBSUBSECTION>
-
-      <SUBSUBSECTION name="Binary Installation" id="install:standalone:binary">
-        <P>
-          <NLIST>
-            <ITEM>Change to the prefix where you want to install JWebMail (e.g. /usr/local)</ITEM>
-            <ITEM>Unpack the tar.gz or zip archive: <CODE>tar xzvf webmail-1.0.1*.tar.gz</CODE></ITEM>
-            <ITEM>Change to webmail/bin</ITEM>
-            <ITEM>Edit the file webmail.sh if necessary</ITEM>
-            <ITEM>Start JWebMail using the provided script
-              <CODE>./webmail.sh >> stdout.log 2>&amp;1 &amp;</CODE></ITEM>
-            <ITEM>See <A href="#config">Configuration</A> for further steps to take.</ITEM>
-          </NLIST>
-        </P>
-      </SUBSUBSECTION>
-
-      <SUBSUBSECTION name="Source Installation" id="install:standalone:source">
-        <P>
-          <NOTE>Source installation will definately only work on Unix systems!</NOTE>
-          <NOTE>Source installation is only really useful for developers since you don't need to
-            (and cannot) adapt the program to your specific system settings in Java and I already
-            compile with optimization turned on.</NOTE>
-        </P>
-        <P>
-          Additional requirements:
-          <LIST>
-            <ITEM>GNU make (Only GNU make will work)</ITEM>
-            <ITEM>zip/unzip</ITEM>
-          </LIST>
-        </P>
-        <P>
-          To install the source distribution of JWebMail you will have to take the following steps:
-          <NLIST>
-            <ITEM>Change to the src/ subdirectory</ITEM>
-            <ITEM>Set the CLASSPATH environment variable to your classes.zip (JDK 1.1) or
-              rt.jar (JDK 1.2) archives (on Solaris: /usr/java1.1/lib/classes.zip for
-              JDK 1.1 and /usr/java1.2/jre/lib/rt.jar for JDK 1.2)
-            </ITEM>
-            <ITEM>Have a look at the makefile and edit it if necessary</ITEM>
-            <ITEM>
-              Call "make" to compile the classfiles and create the archives
-              (containing classfiles, language dependent HTML templates and images).<BR/>
-              You will find the compiled archives in the lib/ directory when the
-              compilation was successful.
-            </ITEM>
-            <ITEM>See steps 3 to 5 from binary installation then</ITEM>
-          </NLIST>
-        </P>
-      </SUBSUBSECTION>
-    </SUBSECTION>
-
     <SUBSECTION name="Servlet Installation" id="install:servlet">
       <P>
-        Running JWebMail as a Servlet has several advantages over the standalone installation (and
+        Running JWebMail as a Servlet has several advantages (and
         also some disadvantages):
         <LIST>
           <ITEM>you can run (and integrate) JWebMail on an already-running webserver</ITEM>
@@ -213,18 +110,20 @@ limitations under the License.
             you can make use of the webserver's fast connection handling and HTTP parsing routines
           </ITEM>
           <ITEM>
-            you can e.g. use Apache's load-balancing feature to run JWebMail on a whole server cluster
+            you can e.g. use servlet container load-balancing feature to run JWebMail on a whole server cluster
             for large installation.
           </ITEM>
           <ITEM>
-            installation is however much more complicated (and so it is definately not suited for
-            webserver newbies)
+            you need a dedicated application server or servlet container,
+            or a web server with the ability to serve Java Servlets
+            (perhaps an add-on module).
           </ITEM>
         </LIST>
       </P>
       <P>
-        Before trying this, please ensure that you are familiar with your Webserver's
-        Servlet configuration. I provided a sample zone file for Apache, though (but
+        Before trying this, please ensure that you are familiar with your
+        Webserver/Appserver/Servlet-container's Servlet configuration.
+        I provided a sample zone file for Apache, though (but
         you will have to do many modifications concerning the initArgs at the end of
         the file).
       </P>
@@ -233,7 +132,7 @@ limitations under the License.
         <P>
           The JWebMail servlet is called <CODE>net.wastl.webmail.servlet.WebMailServlet</CODE>. This
           class is contained in the <CODE>webmail-servlet.jar</CODE> Java archive. Usually you will
-          need all of the provided JAR files except <CODE>webmail-standalone.jar</CODE> to run the
+          need all of the provided JAR files.
           JWebMail Servlet.
         </P>
         <P>
@@ -564,10 +463,8 @@ limitations under the License.
       <SUBSUBSECTION name="Connecting" id="config:admin:connecting">
         <P>
           You can connect to the administration interface with your browser by simply entering
-          the URL <CODE>http(s)://webmail_server:port/admin</CODE> in the address field of your browser.
-          (set http/https and replace webmail_server and port with the correct values; port
-          is usually port 6789 after the first start on a standalone server; on a servlet installation
-          you will very likely have to add the JWebMail mountpoint before the <CODE>/admin</CODE>).
+          the URL <CODE>http(s)://webmail_server:port/jwebmail/WebMail/admin</CODE> in the address field of your browser.
+          (set http/https and replace webmail_server and port with the correct values).
         </P>
         <P>
           You'll be presented the administrator's login screen then. Enter the password there
@@ -804,42 +701,6 @@ limitations under the License.
         releases.
       </P>
     </SUBSECTION>
-  </SECTION>
-
-  <SECTION name="SSL Support (standalone installation)" id="ssl">
-    <P>
-      Since JWebMail 0.7.0, there is finally a free SSL implementation available for
-      Java called ITI-SSL.
-    </P>
-    <P>
-      Installation is simple:
-      <LIST>
-        <ITEM>
-          Fetch the ITI-SSL library from the JWebMail homepage for your platform
-          (if there is no binary for your platform, please fetch the source code at the
-          ITI-SSL homepage at http://www-sp.iti.informatik.tu-darmstadt.de/itissl/)
-        </ITEM>
-        <ITEM>
-          Copy the library "libitissl.so" to the JWebMail lib/ directory.
-        </ITEM>
-        <ITEM>
-          Start JWebMail and possibly enable the SSL support in the administration
-          interface
-        </ITEM>
-      </LIST>
-    </P>
-    <P>
-      However, SSL in JWebMail has some drawbacks:
-      <LIST>
-        <ITEM>only works with JDK >= 1.2 (:-( )</ITEM>
-        <ITEM>is a native library it is no longer platform independent</ITEM>
-      </LIST>
-    </P>
-    <P>
-      If you compile ITI-SSL yourself, please ensure that you use openssl-0.9.4 for
-      compilation because Netscape and IE won't work with JWebMail SSL with prior
-      versions.
-    </P>
   </SECTION>
 
   <SECTION name="JDK Installation And Other Java Issues" id="java">
