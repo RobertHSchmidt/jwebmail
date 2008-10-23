@@ -1,0 +1,460 @@
+<project name="jwebmail" default="compile"
+         xmlns:ivy="antlib:org.apache.ivy.ant">
+<!--
+$Id$
+
+Copyright 2008 by the JWebMail Development Team and Sebastian Schaffert.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+  <property file="local.properties"/> <!-- NON-SHARED build properties -->
+
+  <!-- Default build settings.  Override in your own 'local.properties' file.-->
+  <property name="repos.url" value="http://ipub/lib-repos"/>
+  <property name="webapp.home" value="build/webapp"/>
+
+  <!-- =================================================================== -->
+  <!-- Initialization target                                               -->
+  <!-- =================================================================== -->
+  <target name="-init">
+    <tstamp/>
+    <property name="Name" value="JWebMail"/>
+    <property name="version" value="1.0.1a"/>
+    <property name="year" value="2008"/>
+
+    <echo message="----------- ${Name} ${version} [${year}] ------------"/>
+
+    <property name="debug"              value="false"/>
+    <property name="javac.debug"        value="false"/>
+    <property name="javac.optimize"     value="on"/>
+    <property name="javac.deprecation"  value="on"/>
+
+    <property name="dist.dir" value="dist/${ant.project.name}-${version}"/>
+    <filter token="year" value="${year}"/>
+    <filter token="version" value="${version}"/>
+    <filter token="debug" value="${debug}"/>
+    <filter token="date" value="${TODAY}"/>
+    <filter token="log" value="true"/>
+    <filter token="verbose" value="true"/>
+    <filter token="java-version" value="${java.version}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepares the build directory                                        -->
+  <!-- =================================================================== -->
+  <target name="-prepare" depends="-init">
+    <mkdir dir="build"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepares the source code                                            -->
+  <!-- =================================================================== -->
+  <target name="-prepare-src" depends="-prepare">
+    <!-- create directories -->
+    <mkdir dir="build/src"/>
+    <mkdir dir="build/classes"/>
+
+    <!-- copy src files -->
+    <copy todir="build/src" filtering="true">
+        <fileset dir="src">
+           <include name="net/**" />
+           <include name="org/**" />
+           <include name="META-INF/**" />
+        </fileset>
+    </copy>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Checks to see if JARs available                                     -->
+  <!-- =================================================================== -->
+  <target name="-check-jars">
+        <available file="lib/mail.jar" property="mail.jar.present"/>
+        <available file="lib/activation.jar" property="jaf.jar.present"/>
+        <available file="lib/pop3.jar" property="pop3.jar.present"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepare Javamail JAR                                                -->
+  <!-- =================================================================== -->
+  <target name="-prep-mail.jar" unless="mail.jar.present" depends="-prepare">
+    <mkdir dir="build/src/temp"/>
+    <unzip src="contrib/javamail-1_3.zip" dest="build/src/temp" />
+    <copy todir="lib" flatten="yes">
+      <fileset dir="build/src/temp">
+           <include name="**/mail.jar" />
+        </fileset>
+    </copy>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepare JAF JAR                                                     -->
+  <!-- =================================================================== -->
+  <target name="-prep-activation.jar" unless="jaf.jar.present" depends="-prepare">
+    <mkdir dir="build/src/temp"/>
+    <unzip src="contrib/jaf-1_0_2.zip" dest="build/src/temp" />
+    <copy todir="lib" flatten="yes">
+      <fileset dir="build/src/temp">
+           <include name="**/activation.jar" />
+        </fileset>
+    </copy>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepare POP3 JAR                                                    -->
+  <!-- =================================================================== -->
+  <target name="-prep-pop3.jar" unless="pop3.jar.present" depends="-prepare">
+    <mkdir dir="build/src/temp"/>
+    <unzip src="contrib/pop31_1_1.zip" dest="build/src/temp" />
+    <copy todir="lib" flatten="yes">
+      <fileset dir="build/src/temp">
+           <include name="**/pop3.jar" />
+        </fileset>
+    </copy>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepare all JAR files (put in lib dir)                              -->
+  <!-- =================================================================== -->
+  <target name="-prep-lib" depends="-check-jars, -prep-mail.jar, -prep-activation.jar, -prep-pop3.jar">
+    <copy todir="lib">
+        <fileset dir="contrib">
+           <include name="*.jar" />
+           <include name="mime.types" />
+           <exclude name="**/*ant*" />
+           <exclude name="**/*jakarta-regexp*" />
+           <exclude name="**/*servlet*" />
+        </fileset>
+    </copy>
+    <delete dir="build/src/temp"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compiles the source directory                                       -->
+  <!-- =================================================================== -->
+<!--  <target name="compile" depends="-prepare-src, -prep-lib, create-HTTPParser">-->
+  <target name="compile" depends="-prepare-src, -prep-lib, -ivy-setup"
+          description="Compiles the source code (default)">
+    <javac srcdir="build/src" destdir="build/classes"
+      classpath=".:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:lib/xalan.jar:contrib/servlet-2.3.jar:lib/jdom-1.1.jar"
+           debug="${javac.debug}"
+           optimize="${javac.optimize}"
+           deprecation="${javac.deprecation}"
+           excludes="**/plugins/**,**/authenticators/**" />
+
+    <echo message="     Compiling plugins"/>
+    <mkdir dir="build/classes/plugins" />
+    <javac srcdir="build/src"
+           destdir="build/classes/plugins"
+           classpath="build/classes:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:contrib/servlet-2.3.jar:lib/jdom-1.1.jar"
+           debug="${javac.debug}"
+           optimize="${javac.optimize}"
+           deprecation="${javac.deprecation}"
+           includes="**/plugins/**" />
+
+    <echo message="     Compiling authenticators"/>
+    <mkdir dir="build/classes/authenticators" />
+    <javac srcdir="build/src"
+           destdir="build/classes/authenticators"
+           classpath="build/classes:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:lib/jdom-1.1.jar"
+           debug="${javac.debug}"
+           optimize="${javac.optimize}"
+           deprecation="${javac.deprecation}"
+           includes="**/authenticators/**" />
+
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Creates the common, standalone, & server packages                   -->
+  <!-- =================================================================== -->
+  <target name="package" depends="compile"
+          description="Generates the main jar file">
+    <fixcrlf srcdir="." includes="**/*.bat" eol="crlf"/>
+    <fixcrlf srcdir="." includes="**/*.sh" eol="lf"/>
+    <jar jarfile="lib/${ant.project.name}-common.jar"
+         basedir="build/classes"
+         includes="net/**,org/**"
+         excludes="**/standalone/**,**/servlet/**" />
+<!--    <jar jarfile="lib/${ant.project.name}-standalone.jar"
+  basedir="build/classes"
+         includes="**/standalone/**" /> -->
+<!--    <jar jarfile="lib/${ant.project.name}-servlet.jar"
+  basedir="build/classes"
+         includes="**/servlet/**" /> -->
+<!-- rather than copying these to lib/plugins etc. just waiting till tomcat deploy
+     and copy straight from build.dest to WEB-INF/classes -->
+<!--    <copy todir="lib/plugins">
+  <fileset dir="build/classes/plugins" />
+    </copy>
+    <copy todir="lib/authenticators">
+      <fileset dir="build/classes/authenticators" />
+    </copy> -->
+
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Install all XML XSL DTD's etc.                                      -->
+  <!-- =================================================================== -->
+  <target name="-copy-xml-files">
+    <!-- Would it ever be useful to call this externally?
+         If so, remove the leading hyphen from the target name. -->
+    <echo message="Installing webmail.xml ..."/>
+    <copy todir="data" flatten="yes">
+        <fileset dir="src">
+           <include name="**/webmail.xml" />
+        </fileset>
+    </copy>
+    <echo message="Installing XML DTDs ..."/>
+    <copy todir="lib/xml" flatten="yes">
+        <fileset dir="src">
+           <include name="**/data/xml/*.dtd" />
+           <include name="**/data/xml/mysql_statements.xml" />
+           <include name="**/data/xml/userdata.xml" />
+           <include name="**/data/xml/usermodel_template.xml" />
+           <include name="**/data/xml/generic_template.xml" />
+        </fileset>
+    </copy>
+    <echo message="Installing resource.dtd and resources.xml ..."/>
+    <copy todir="lib/templates" flatten="yes">
+        <fileset dir="src">
+           <include name="**/data/xml/resource*" />
+        </fileset>
+    </copy>
+
+    <!-- English -->
+    <echo message="Installing English Language Templates ..."/>
+    <copy todir="lib/templates/en" filtering="true">
+        <fileset dir="src">
+           <include name="**/data/xml/en/**" />
+           <exclude name="**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
+    </copy>
+    <copy todir="lib/templates/en" filtering="false">
+        <fileset dir="src">
+           <include name="**/data/xml/en/**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
+    </copy>
+
+    <!-- Spanish -->
+    <echo message="Installing Spanish Language Templates ..."/>
+    <copy todir="lib/templates/es" filtering="true">
+        <fileset dir="src">
+           <include name="**/data/xml/es/**" />
+           <exclude name="**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
+    </copy>
+    <copy todir="lib/templates/es" filtering="false">
+        <fileset dir="src">
+           <include name="**/data/xml/es/**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
+    </copy>
+
+
+    <!--
+    <echo message="Installing Portugese Language Templates ..."/>
+    <copy todir="lib/templates/pt" filtering="true">
+        <fileset dir="src">
+           <include name="**/data/xml/pt/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/pt/(.*)$$" to="\1" />
+    </copy>
+    -->
+
+    <!-- German -->
+    <echo message="Installing German Language Templates ..."/>
+    <copy todir="lib/templates/de" filtering="true">
+        <fileset dir="src">
+           <include name="**/data/xml/de/**" />
+           <exclude name="**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
+    </copy>
+    <copy todir="lib/templates/de" filtering="false">
+        <fileset dir="src">
+           <include name="**/data/xml/de/**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
+    </copy>
+
+    <!-- French -->
+    <echo message="Installing French Language Templates ..."/>
+    <copy todir="lib/templates/fr" filtering="true">
+        <fileset dir="src">
+           <include name="**/data/xml/fr/**" />
+           <exclude name="**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
+    </copy>
+    <copy todir="lib/templates/fr" filtering="false">
+        <fileset dir="src">
+           <include name="**/data/xml/fr/**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
+    </copy>
+
+    <!-- Hungarian -->
+    <echo message="Installing Hungarian Language Templates ..."/>
+    <copy todir="lib/templates/hu" filtering="true">
+        <fileset dir="src">
+           <include name="**/data/xml/hu/**" />
+           <exclude name="**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
+    </copy>
+    <copy todir="lib/templates/hu" filtering="false">
+        <fileset dir="src">
+           <include name="**/data/xml/hu/**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
+    </copy>
+
+    <!-- Chinese (Taiwan) -->
+    <echo message="Installing Chinese Language Templates ..."/>
+    <copy todir="lib/templates/zh" filtering="true">
+        <fileset dir="src">
+           <include name="**/data/xml/zh/**" />
+           <exclude name="**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
+    </copy>
+    <copy todir="lib/templates/zh" filtering="false">
+        <fileset dir="src">
+           <include name="**/data/xml/zh/**/images/**" />
+        </fileset>
+        <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
+    </copy>
+
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Copies the class files into the webapp dir for Tomcat.              -->
+  <!-- =================================================================== -->
+  <target name="install-tomcat" depends="package, -copy-xml-files"
+          description="Build webapp and deploy to Tomcat">
+    <fail unless="webapp.home"
+      message="Property 'webapp.home' is required by target 'install-tomcat'"/>
+    <echo message="Installing ${ant.project.name} to Tomcat apps directory ..."/>
+    <mkdir dir="${webapp.home}/${ant.project.name}"/>
+    <mkdir dir="${webapp.home}/${ant.project.name}/WEB-INF"/>
+    <copy todir="${webapp.home}/${ant.project.name}/lib">
+        <fileset dir="lib" excludes="**/*.jar" />
+    </copy>
+    <copy todir="${webapp.home}/${ant.project.name}/data">
+        <fileset dir="data"/>
+    </copy>
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes" flatten="yes">
+      <fileset dir="build/classes">
+        <include name="**/plugins/**,**/authenticators/**" />
+        </fileset>
+    </copy>
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/lib">
+        <fileset dir="lib">
+           <include name="**/*.jar"/>
+           <!--<exclude name="mail.jar"/>-->
+           <exclude name="servlet-2.3.jar"/>
+           <exclude name="xercesImpl.jar"/>
+           <!--<exclude name="xalan.jar"/>-->
+        </fileset>
+    </copy>
+    <!-- Install plugin and authenticator classes -->
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes">
+      <fileset dir="build/classes/plugins" />
+    </copy>
+    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes">
+      <fileset dir="build/classes/authenticators" />
+    </copy>
+    <filter token="webapp-home" value="${webapp.home}/${ant.project.name}"/>
+    <filter token="plugin-dir" value="WEB-INF/classes"/>
+    <filter token="authenticator-dir" value="WEB-INF/classes"/>
+    <filter token="base-uri" value="/${ant.project.name}"/>
+    <copy file="WEB-INF/web.xml" todir="${webapp.home}/${ant.project.name}/WEB-INF/" filtering="true" />
+    <copy todir="${webapp.home}/${ant.project.name}" filtering="true">
+      <fileset dir="src/jsp"/>
+    </copy>
+
+    <war warfile="${webapp.home}/${ant.project.name}.war" webxml="${webapp.home}/${ant.project.name}/WEB-INF/web.xml" basedir="${webapp.home}/${ant.project.name}"/>
+    <!-- Copy images -->
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Creates the API documentation                                       -->
+  <!-- =================================================================== -->
+  <target name="javadoc" depends="-prepare-src"
+          description="Generates the API documentation">
+    <mkdir dir="build/apidocs"/>
+    <javadoc packagenames="${packages}"
+             sourcepath="build/src"
+             destdir="build/apidocs"
+             author="true"
+             version="true"
+             use="true"
+             splitindex="true"
+             noindex="false"
+             windowtitle="${Name} API"
+             doctitle="${Name}"
+             bottom="Copyright All Rights Reserved."
+    />
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Clean targets                                                       -->
+  <!-- =================================================================== -->
+  <target name="clean" depends="-init" description="Purges derived artifacts">
+    <echo message="Deleting build ..."/>
+    <delete dir="build"/>
+    <echo message="Deleting contents of lib ..."/>
+    <delete dir="lib" includeEmptyDirs="true"/>
+    <delete file="data/webmail.xml"/>
+    <delete file="README.html"/>
+  </target>
+
+  <target name="clean-tomcat-app" depends="clean"
+    description="Clean, plus wipe (possibly live) deployment dir">
+    <fail unless="webapp.home"
+    message="Property 'webapp.home' is required by target 'clean-tomcat-app'"/>
+  <deltree dir="${webapp.home}/${ant.project.name}"/>
+  </target>
+
+  <!-- Windows users will have to install Cygwin, or run another XSLT
+       processor -->
+  <target name="generate-readme"
+          description="Generate the 'README.html' file">
+    <exec executable="xsltproc" failonerror="true">
+      <arg value="-o"/>
+      <arg value="README.html"/>
+      <arg file="src/doc/readme/README.xsl"/>
+      <arg file="src/doc/readme/README.xml"/>
+    </exec>
+  </target>
+
+  <target name="-ivy-setup">
+    <available property="_ivysettings.present" file="ivysettings.xml"
+               type="file"/>
+     <antcall target="-ensure-ivysettings"/>
+    <fail unless="repos.url"
+          message="Property 'repos.url' is required by the '-ivysetup' target"/>
+    <ivy:settings/>
+  </target>
+
+  <target name="-ensure-ivysettings" unless="_ivysettings.present">
+    <copy file="ivysettings-sample.xml" tofile="ivysettings.xml"/>
+    <echo>Just created a local 'ivysettings.xml' file for you.
+Customize this as you wish and/or set Ivy properties
+(or any other build properties) local properties in
+a 'local.properties' file.</echo>
+  </target>
+</project>

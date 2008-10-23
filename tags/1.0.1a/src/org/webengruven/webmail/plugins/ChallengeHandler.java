@@ -1,0 +1,115 @@
+/*
+ * @(#)$Id$
+ *
+ * Copyright 2008 by the JWebMail Development Team and Sebastian Schaffert.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+/** This is the URLHandler for "/challenge" It shows the user a challenge and
+ *  gets their new password.
+ *
+ * 08/11/2000 Sebastian Schaffert: Modified to fit into WebMail 0.7.2
+ * - added import net.wastl.webmail.exceptions.*;
+ *
+ * @author Devin Kowatch
+ * @version $Revision$
+ * @see net.wastl.webmail.URLHandler
+ */
+
+
+import java.util.*;
+import net.wastl.webmail.server.*;
+import net.wastl.webmail.server.http.*;
+import net.wastl.webmail.xml.*;
+import net.wastl.webmail.ui.html.*;
+import net.wastl.webmail.ui.xml.*;
+import net.wastl.webmail.exceptions.*;
+
+import org.webengruven.webmail.auth.*;
+
+public class ChallengeHandler implements Plugin, URLHandler {
+    public final String VERSION="2.0";
+    public final String URL="/challenge";
+
+    private Storage store;
+
+        public void register(WebMailServer parent) {
+        parent.getURLHandler().registerHandler(URL, this);
+        storage = parent.getStorage();
+        }
+
+        public String getVersion() {
+        return VERSION;
+        }
+
+        public String provides() {
+        return "Authentication Challenge";
+        }
+
+    /* XXX Not sure what, if anything, this should return */
+        public String requires() {
+        return "";
+        }
+
+        public String getURL() {
+        return URL;
+        }
+
+        public String getName() {
+                return "ChallengeHandler";
+        }
+
+        public String getDescription() {
+                return "This URLHandler will show the user a challenge and allow them"
+         + "to respond to it";
+        }
+
+        public HTMLDocument handleURL(String subURL, HTTPSession sess,
+        HTTPRequestHeader h) throws WebMailException
+        {
+        XMLGenericModel model = storage.createXMLGenericModel();
+        HTMLDocument content;
+        XMLUserData ud;
+        CRAuthDisplayMngr adm;
+        String chal_file;
+
+        ud = storage.getUserData(h.getContent("login"), h.getContent("vdom"),"",false);
+
+        try {
+            adm=(CRAuthDisplayMngr)storage.getAuthenticator().getAuthDisplayMngr();
+            adm.setChallengeScreenVars(ud, model);
+            chal_file = adm.getChallengeScreenFile();
+        } catch (ClassCastException e) {
+            throw new WebMailException(
+             "Trying to handle /challenge for a non CRAuthenticator");
+        } catch (Exception e) {
+            throw new WebMailException(e.toString());
+        }
+
+        model.setStateVar("login", h.getContent("login"));
+        model.setStateVar("vdom", h.getContent("vdom"));
+
+        content = new XHTMLDocument(model.getRoot(), storage.getStylesheet(
+         chal_file, Locale.getDefault(), "default"));
+
+        return content;
+    }
+
+    private Storage storage;
+
+
+} /* END class ChallengeHandler */
+
+
