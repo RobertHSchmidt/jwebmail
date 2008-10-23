@@ -114,14 +114,20 @@ public class XMLUserData extends XMLData implements UserData {
 
 
     protected void ensureElement(String tag, String attribute, String att_value) {
-        String xp_query="//"+tag;
+        StringBuffer xp_query = new StringBuffer(tag);
+        /*  Blaine disables this "//" prefix.
+         *  Besides this causing indisputable failures when input tag is
+         *  begins with slash, why would we want to use a wildcard when
+         *  "ensureing" that a specific element exists?
+         * String xp_query="//"+tag;
+         */
         if(attribute != null && att_value != null) {
-            xp_query += "[@"+attribute+"='"+att_value+"']";
+            xp_query.append("[@"+attribute+"='"+att_value+"']");
         } else if(attribute != null) {
-            xp_query += "[@"+attribute+"]";
+            xp_query.append("[@"+attribute+"]");
         }
 
-        Node node=getNodeXPath(xp_query);
+        Node node=getNodeXPath(xp_query.toString());
 
 //      NodeList nl=data.getElementsByTagName(tag);
 //      boolean flag=false;
