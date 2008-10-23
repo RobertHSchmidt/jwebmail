@@ -1,0 +1,39 @@
+$Id$
+
+Ordered short-term TODO list
+============================
+
+Modify Servlet to allow for configs outside of the webapp itself
+(to prevent all configs + data from being LOST upon upgrade).
+Use app name + sys property tactics similar to my Spring-framework-specific
+ExtConfiggableAppContext class (but obviously without any Spring stuff).
+
+Refactor logging infrastructure.  Need good logging system in place to
+facilitate the other immediate work.
+
+Somewhere in the callback thread, log the target document of XPath failures.
+
+Get rid of all of the print statements and use the logging facility!
+
+Resolve NPE being thrown constantly from XMLData.getNodeXPath().
+
+Eliminate libraries now included in JDK 5.  I think xml-apis.jar at least.
+Document requirement for JDK 1.5.
+
+Get Ant entirely out of distro!  DEVELOPERs need to set up Ant and Ivy
+themselves!
+
+Get javamail jars from Ivy.  Get rid of all zip files and streamline build.xml.
+
+Use javax.xml.xpath instead of org.apache.xpath.
+If haven't already, document requirement for JDK 1.5
+(javax.xml.xpath not in 1.4).
+
+Look into nasty threading issue to find out webapp cannot be stopped
+(hard shutdown of Tomcat is required after JWebMail is started).
+
+Fix level-ambiguity in XML processing code.
+FIRST verify my assertion that tree.getElementsBy*() searches for all
+ancestors, not just direct children.
+Do code search for use of getElementsBy...() and change to the less dangerous
+and more efficient getChild*() methods.

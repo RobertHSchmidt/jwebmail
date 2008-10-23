@@ -155,7 +155,9 @@ public class XMLData {
             Node n = xpath_api.selectSingleNode(data,path);
             return n;
         } catch(Exception ex) {
+            System.err.println("XPath query failed (" + path + "): " + ex);
             ex.printStackTrace();
+            // TODO:  Should obviously use Logging facility here.
             return null;
         }
     }

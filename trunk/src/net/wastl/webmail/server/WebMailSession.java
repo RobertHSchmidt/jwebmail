@@ -35,16 +35,7 @@ import net.wastl.webmail.exceptions.*;
 import org.bulbul.webmail.util.TranscodeUtil;
 // Modified by exce, end
 
-//import org.w3c.tidy.Tidy;
-
 import org.w3c.dom.*;
-
-// HTML parser:
-import org.xml.sax.InputSource;
-// import org.apache.xerces.parsers.DOMParser;
-// import org.cyberneko.html.HTMLConfiguration;
-
-import com.docuverse.dom.DOM;
 
 /*
  * WebMailSession.java
@@ -696,7 +687,11 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
                 xml_part=parent_part.createPart("html");
 
-                /* Here we create a DOM tree. */
+                /****************************************************
+                 * LEAVING THESE OLD XML PARSERS COMMENTED OUT
+                 * until know that the new Parser tactic parses HTML properly
+                 * (or adequately).  See the ** comment below.
+                /* Here we create a DOM tree.
                 //Tidy tidy=new Tidy();
                 //tidy.setUpperCaseTags(true);
                 //Document htmldoc=tidy.parseDOM(p.getInputStream(),null);
@@ -706,7 +701,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 //              parser.parse(new InputSource(p.getInputStream()));
 //              Document htmldoc = parser.getDocument();
 
-
                 // instantiate a DOM implementation
                 DOM dom = new com.docuverse.dom.DOM();
                 // install the SAX driver for Swing HTML parser
@@ -714,9 +708,17 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
                 // install HTML element factory
                 dom.setFactory(new com.docuverse.dom.html.HTMLFactory());
+                // ** N.B.  WITH docuverse AND NekoHTML, THE PARSER WAS
+                // HTML-Specific.  We are now using generic XML parser.
+                // Is that adequate?
 
                 // now just open the document
                 Document htmldoc = (Document)dom.readDocument(p.getInputStream());
+*/
+                javax.xml.parsers.DocumentBuilder parser =
+                        javax.xml.parsers.DocumentBuilderFactory.newInstance().
+                                newDocumentBuilder();
+                Document htmldoc = parser.parse(p.getInputStream());
 
                 if(htmldoc == null) {
                     System.err.println("Document was null!");
