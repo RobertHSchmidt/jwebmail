@@ -4,9 +4,10 @@ Ordered short-term TODO list
 ============================
 
 Modify Servlet to allow for configs outside of the webapp itself
-(to prevent all configs + data from being LOST upon upgrade).
+(to prevent needing to modify the DELIVERABLE in order to use modifications,
+such as to save data outside app so it won'te be LOST upon upgrade).
 Use app name + sys property tactics similar to my Spring-framework-specific
-ExtConfiggableAppContext class (but obviously without any Spring stuff).
+ExtConfiggableAppContext class (but obviously without any Spring stuff.
 
 Refactor logging infrastructure.  Need good logging system in place to
 facilitate the other immediate work.
@@ -37,3 +38,5 @@ FIRST verify my assertion that tree.getElementsBy*() searches for all
 ancestors, not just direct children.
 Do code search for use of getElementsBy...() and change to the less dangerous
 and more efficient getChild*() methods.
+
+Get all but bootstrap libs out of the code baseline.  Use Ivy to fetch libs.
