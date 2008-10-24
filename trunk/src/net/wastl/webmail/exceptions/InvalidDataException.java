@@ -29,11 +29,8 @@ package net.wastl.webmail.exceptions;
  *
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class InvalidDataException extends WebMailException {
-
     public InvalidDataException() {
         super();
     }
@@ -42,4 +39,4 @@ public class InvalidDataException extends WebMailException {
     public InvalidDataException(String s) {
         super(s);
     }
-} // InvalidDataException
+}

@@ -21,39 +21,26 @@ package net.wastl.webmail.ui.xml;
 
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
-
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
-
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.stream.StreamResult;
-
-
 import java.io.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
 /**
- * XHTMLDocument.java
- *
- * Created: Mon Mar 27 16:05:52 2000
- */
-
-/**
  * Constructs HTML-Documents using a Stylesheet and a XML Document.
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
     private static Log log = LogFactory.getLog(XHTMLDocument.class);
 
     public XHTMLDocument(Document xml, String xsl) throws WebMailException {
-
         StringWriter writer = new StringWriter();
 
         long start_t=System.currentTimeMillis();
@@ -110,5 +97,4 @@ public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
     public int length() {
         return content.length();
     }
-
-} // XHTMLDocument
+}

@@ -21,31 +21,19 @@ import net.wastl.webmail.server.*;
 import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
-
 import net.wastl.webmail.misc.*;
 import net.wastl.webmail.config.ConfigurationListener;
 import net.wastl.webmail.exceptions.*;
-
 import java.io.*;
 import java.util.*;
 import java.text.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-
-
 import javax.servlet.ServletException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-// Modified by exce, start
 import org.bulbul.webmail.util.TranscodeUtil;
-// Modified by exce, end
 
-/*
- * SendMessage.java
- *
- * Created: Tue Sep  7 13:59:30 1999
- */
 /**
  * Send a message and show a result page.
  *
@@ -53,9 +41,7 @@ import org.bulbul.webmail.util.TranscodeUtil;
  * requires: composer
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
     private static Log log = LogFactory.getLog(SendMessage.class);
 
@@ -69,7 +55,6 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
     Session mailsession;
 
     public SendMessage() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -119,9 +104,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
         UserData user=session.getUser();
         HTMLDocument content;
 
-        // Modified by exce, start
         Locale locale = user.getPreferredLocale();
-        // Modified by exce, end
 
         /* Save message in case there is an error */
         session.storeMessage(head);
@@ -129,12 +112,10 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
         if(head.isContentSet("SEND")) {
             /* The form was submitted, now we will send it ... */
             try {
-
                 MimeMessage msg=new MimeMessage(mailsession);
 
                 Address from[]=new Address[1];
                 try {
-                    // Modified by exce, start
                     /**
                      * Why we need
                      * org.bulbul.util.TranscodeUtil.transcodeThenEncodeByLocale()?
@@ -162,7 +143,6 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                                             TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("FROM"), null, locale),
                                             TranscodeUtil.transcodeThenEncodeByLocale(session.getUser().getFullName(), null, locale)
                                             );
-                    // Modified by exce, end
                 } catch(UnsupportedEncodingException e) {
                     log.warn(
                               "Unsupported Encoding while trying to send message: "+e.getMessage());
@@ -173,14 +153,12 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
 
                 StringTokenizer t;
                 try {
-                    // Modified by exce, start
                     /**
                      * Since data in session.getUser() is read from file, the encoding
                      * should be default encoding.
                      */
                     // t=new StringTokenizer(MimeUtility.encodeText(head.getContent("TO")).trim(),",");
                     t = new StringTokenizer(TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("TO"), null, locale).trim(), ",");
-                    // Modified by exce, end
                 } catch(UnsupportedEncodingException e) {
                     log.warn(
                               "Unsupported Encoding while trying to send message: "+e.getMessage());
@@ -199,14 +177,12 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                 }
 
                 try {
-                    // Modified by exce, start
                     /**
                      * Since data in session.getUser() is read from file, the encoding
                      * should be default encoding.
                      */
                     // t=new StringTokenizer(MimeUtility.encodeText(head.getContent("CC")).trim(),",");
                     t = new StringTokenizer(TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("CC"), null, locale).trim(), ",");
-                    // Modified by exce, end
                 } catch(UnsupportedEncodingException e) {
                     log.warn(
                               "Unsupported Encoding while trying to send message: "+e.getMessage());
@@ -220,14 +196,12 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                 }
 
                 try {
-                    // Modified by exce, start
                     /**
                      * Since data in session.getUser() is read from file, the encoding
                      * should be default encoding.
                      */
                     // t=new StringTokenizer(MimeUtility.encodeText(head.getContent("BCC")).trim(),",");
                     t = new StringTokenizer(TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("BCC"), null, locale).trim(), ",");
-                    // Modified by exce, end
                 } catch(UnsupportedEncodingException e) {
                     log.warn(
                               "Unsupported Encoding while trying to send message: "+e.getMessage());
@@ -260,10 +234,8 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     subject="no subject";
                 } else {
                     try {
-                        // Modified by exce, start
                         // subject=MimeUtility.encodeText(head.getContent("SUBJECT"));
                         subject = TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("SUBJECT"), "ISO8859_1", locale);
-                        // Modified by exce, end
                     } catch(UnsupportedEncodingException e) {
                         log.warn("Unsupported Encoding while trying to send message: "+e.getMessage());
                         subject=head.getContent("SUBJECT");
@@ -273,10 +245,8 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                 msg.addHeader("Subject",subject);
 
                 if(head.isContentSet("REPLY-TO")) {
-                    // Modified by exce, start
                     // msg.addHeader("Reply-To",head.getContent("REPLY-TO"));
                     msg.addHeader("Reply-To", TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("REPLY-TO"), "ISO8859_1", locale));
-                    // Modified by exce, end
                 }
 
                 msg.setSentDate(new Date(System.currentTimeMillis()));
@@ -366,7 +336,6 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                         if(bs.getDescription()!="") {
                         att1.setDescription(bs.getDescription(),"utf-8");
                         }
-                    // Modified by exce, start
                     /**
                      * As described in FileAttacher.java line #95, now we need to
                      * encode the attachment file name.
@@ -384,7 +353,6 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                                 encodedFileName=encodedFileName.replace('=','%');
                                 att1.addHeaderLine("Content-Disposition: attachment; filename*="+localeCharset+"''"+encodedFileName);
                         }
-                    // Modified by exce, end
                     cont.addBodyPart(att1);
                 }
                 msg.setContent(cont);
@@ -470,4 +438,4 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
     public String requires() {
         return "composer";
     }
-} // SendMessage
+}

@@ -21,11 +21,8 @@ package net.wastl.webmail.xml;
 
 import java.util.*;
 import java.io.*;
-
 import javax.xml.parsers.*;
-
 import org.w3c.dom.*;
-
 import net.wastl.webmail.server.*;
 
 /*
@@ -40,11 +37,8 @@ import net.wastl.webmail.server.*;
  * and the system configuration
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class XMLGenericModel extends XMLData {
-
     //protected Document root;
 
     protected Element sysdata;
@@ -59,7 +53,6 @@ public class XMLGenericModel extends XMLData {
 
     public XMLGenericModel(WebMailServer parent, Element rsysdata)
         throws ParserConfigurationException, org.xml.sax.SAXException, java.io.IOException {
-
         super();
         this.parent=parent;
 
@@ -79,7 +72,6 @@ public class XMLGenericModel extends XMLData {
         }
 
         this.sysdata=rsysdata;
-
     }
 
     protected void initRoot() throws org.xml.sax.SAXException, java.io.IOException {
@@ -226,6 +218,4 @@ public class XMLGenericModel extends XMLData {
             return var.getAttribute("value");
         }
     }
-
-
-} // XMLGenericModel
+}

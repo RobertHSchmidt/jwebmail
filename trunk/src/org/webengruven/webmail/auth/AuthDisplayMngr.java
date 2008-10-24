@@ -40,7 +40,6 @@
  * $Id$
  *
  * @author Devin Kowatch
- * @version $Revision$
  * @see net.wastl.webmail.server.Authenticator
  * @see net.wastl.webmail.server.AuthenticatorHandler
  */
@@ -52,7 +51,6 @@ import net.wastl.webmail.server.*;
 import net.wastl.webmail.xml.*;
 
 public class AuthDisplayMngr {
-
     /** Default C'tor */
     public AuthDisplayMngr() { }
 
@@ -92,5 +90,4 @@ public class AuthDisplayMngr {
     public String getPassChangeTmpl() {
         return "normchangepass";
     }
-
 }

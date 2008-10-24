@@ -18,7 +18,6 @@
 
 
 import java.util.*;
-
 import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.server.*;
@@ -26,11 +25,6 @@ import net.wastl.webmail.server.http.HTTPRequestHeader;
 import net.wastl.webmail.misc.*;
 import net.wastl.webmail.exceptions.*;
 
-/*
- * HTMLContentBar.java
- *
- * Created: Wed Sep  1 13:08:11 1999
- */
 /**
  * The content bar on the left.
  *
@@ -38,11 +32,8 @@ import net.wastl.webmail.exceptions.*;
  * requires:
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class NavBar implements Plugin, URLHandler {
-
     public static final String VERSION="2.0";
     public static final String URL="/content";
 
@@ -93,5 +84,4 @@ public class NavBar implements Plugin, URLHandler {
     public String requires() {
         return "";
     }
-
-} // HMTLContentBar
+}

@@ -32,7 +32,6 @@ import net.wastl.webmail.config.ConfigScheme;
  * @see webmail.server.UserData
  */
 public class SimpleAuthenticator extends Authenticator {
-
     public final String VERSION="1.0";
 
     public SimpleAuthenticator() {
@@ -61,4 +60,4 @@ public class SimpleAuthenticator extends Authenticator {
     public void changePassword(UserData udata, String passwd, String verify) throws InvalidPasswordException {
         udata.setPassword(passwd,verify);
     }
-} // SimpleAuthenticator
+}

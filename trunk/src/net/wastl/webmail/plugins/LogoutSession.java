@@ -32,11 +32,6 @@ import java.io.StringReader;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-/*
- * LogoutSession.java
- *
- * Created: Wed Sep  1 16:46:34 1999
- */
 /**
  * Log out a user.
  *
@@ -44,11 +39,8 @@ import javax.xml.parsers.ParserConfigurationException;
  * requires: content bar
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class LogoutSession implements Plugin, URLHandler {
-
     public static final String VERSION="1.3";
     public static final String URL="/logout";
 
@@ -56,7 +48,6 @@ public class LogoutSession implements Plugin, URLHandler {
     private static WebMailServer parent;
 
     public LogoutSession() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -111,4 +102,4 @@ public class LogoutSession implements Plugin, URLHandler {
     public String requires() {
         return "content bar";
     }
-} // LogoutSession
+}

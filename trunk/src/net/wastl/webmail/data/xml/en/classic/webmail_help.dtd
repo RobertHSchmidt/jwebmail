@@ -59,4 +59,3 @@ limitations under the License.
 <!ELEMENT icon EMPTY>
 <!ATTLIST icon
         href            CDATA                           #REQUIRED>
-

@@ -28,7 +28,6 @@
  * $Id$
  *
  * @author Devin Kowatch
- * @version $Revision$
  * @see org.webengruven.auth.CRAuthenticator
  * @see OTPAuthenticator
  */
@@ -36,7 +35,6 @@
 package org.webengruven.webmail.auth;
 
 import org.webengruven.webmail.auth.*;
-
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
 import net.wastl.webmail.xml.*;

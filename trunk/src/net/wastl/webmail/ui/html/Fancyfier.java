@@ -21,12 +21,6 @@ package net.wastl.webmail.ui.html;
 
 import java.util.regex.*;
 
-/*
- * Fancyfier.java
- *
- * Created: Mon Feb 22 14:55:36 1999
- */
-
 /**
  * Do some fancifying with the messages. Also filters JavaScript.
  *
@@ -35,12 +29,9 @@ import java.util.regex.*;
  * Created: Mon Feb 22 14:55:36 1999
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
 public class Fancyfier  {
-
     public Fancyfier() {
-
     }
     private static Pattern[] regs=null;
     private static Pattern uri=null;
@@ -120,5 +111,4 @@ public class Fancyfier  {
         }
         return retval;
     }
-
-} // Fancyfier
+}

@@ -75,7 +75,3 @@ changes the layout of the login screen so that there is no password prompt,
 and sends the user to "/challenge" before authenticating them.  Any
 challenge/response authenticator that needs a custom AuthDisplayMngr should
 probably derive it from CRAuthDisplayMngr.
-
-
-
-

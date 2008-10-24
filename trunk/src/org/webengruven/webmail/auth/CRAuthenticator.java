@@ -39,15 +39,10 @@ import net.wastl.webmail.exceptions.*;
  * Created: Mon Jul 15 20:25
  * Recreated: Sun Sep 24 2000
  *
- * 08/11/2000 Sebastian Schaffert: Modified to fit into WebMail 0.7.2
- *
  * @author Devin Kowatch
- * @version $Revision$
  * @see webmail.server.UserData
  */
-
 public abstract class CRAuthenticator extends Authenticator {
-
     /* dummy c'tor */
     public CRAuthenticator() { }
 
@@ -61,4 +56,4 @@ public abstract class CRAuthenticator extends Authenticator {
      * user.
      */
     public abstract String getChallenge(UserData ud) throws WebMailException;
-} // CRAuthenticator
+}

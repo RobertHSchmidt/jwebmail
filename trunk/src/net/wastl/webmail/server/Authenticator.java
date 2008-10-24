@@ -21,14 +21,8 @@ package net.wastl.webmail.server;
 
 import net.wastl.webmail.config.ConfigScheme;
 import net.wastl.webmail.exceptions.*;
-
 import org.webengruven.webmail.auth.AuthDisplayMngr;
 
-/**
- * Authenticator.java
- *
- * Created: Mon Apr 19 11:01:22 1999
- */
 /**
  * Generic class for user authentication.
  * This class actually doesn't do anything.
@@ -37,12 +31,10 @@ import org.webengruven.webmail.auth.AuthDisplayMngr;
  * @see AuthenticatorHandler
  * @see net.wastl.webmail.storage.simple.SimpleStorage
  */
-/* 9/24/2000 devink -- changed for challenge/response authentication */
 public abstract class Authenticator  {
     protected String key;
 
     public Authenticator() {
-
     }
 
     public String getKey() {
@@ -120,5 +112,4 @@ public abstract class Authenticator  {
 
     public void changePassword(UserData udata,String newpassword,String verify)      throws InvalidPasswordException
     { }
-
-} // Authenticator
+}

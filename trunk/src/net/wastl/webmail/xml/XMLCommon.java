@@ -21,25 +21,16 @@ package net.wastl.webmail.xml;
 
 import org.w3c.dom.*;
 import org.apache.xpath.XPathAPI;
-
 import java.io.*;
 import java.util.*;
 import javax.xml.transform.TransformerException;
-/*
- * XMLCommon.java
- *
- * Created: Sat Mar 11 15:59:22 2000
- */
 /**
  * This class contains some static methods that are used commonly in other WebMail parts.
  *
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public final class XMLCommon  {
-
     static String getParentXPath(String str) {
         int last_slash = str.lastIndexOf("/");
         if(last_slash == -1) {
@@ -227,7 +218,6 @@ public final class XMLCommon  {
     public static void setTagValue(Element e,String tagname, String text,
                                    boolean unique,String errormsg, boolean cdata)
         throws Exception {
-
         if(text == null || tagname == null) throw new NullPointerException("Text or Tagname may not be null!");
 
         Document root=e.getOwnerDocument();
@@ -273,14 +263,12 @@ public final class XMLCommon  {
 
 
     public static void writeXML(Document d, OutputStream os, String sysID) throws IOException {
-        // Modified by exce, start
         /**
          * To support i18n, we have to specify the encoding of
          * output writer to UTF-8 when we writing the XML.
          */
         // PrintWriter out=new PrintWriter(os);
         PrintWriter out = new PrintWriter(new OutputStreamWriter(os, "UTF-8"));
-        // Modified by exce, end
 
         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         out.println();
@@ -429,4 +417,4 @@ public final class XMLCommon  {
             ex.printStackTrace();
         }
     }
-} // XMLCommon
+}

@@ -25,29 +25,19 @@ import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.exceptions.*;
-
 import org.webengruven.webmail.auth.AuthDisplayMngr;
-
 import javax.servlet.ServletException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
-/*
- * ToplevelURLHandler.java
- *
- * Created: Tue Aug 31 17:20:29 1999
- */
 /**
  * Handle URLs. Give them to the appropriate Plugins/Program parts
  *
  * Created: Tue Aug 31 17:20:29 1999
  *
  * @author Sebastian Schaffert
- * @version
  */
-/* 9/24/2000 devink -- changed for challenge/response authentication */
-
 public class ToplevelURLHandler implements URLHandler {
     private static Log log = LogFactory.getLog(ToplevelURLHandler.class);
 
@@ -99,7 +89,6 @@ public class ToplevelURLHandler implements URLHandler {
     }
 
     public HTMLDocument handleURL(String url, HTTPSession session, HTTPRequestHeader header) throws WebMailException, ServletException {
-
         HTMLDocument content;
 
         if(url.equals("/")) {
@@ -115,7 +104,6 @@ public class ToplevelURLHandler implements URLHandler {
             // Let the authenticator setup the loginscreen
             adm.setLoginScreenVars(model);
 
-                // Modified by exce, start.
                 /**
                  * Show login screen depending on WebMailServer's default locale.
                  */
@@ -127,9 +115,7 @@ public class ToplevelURLHandler implements URLHandler {
             content = new XHTMLDocument(model.getRoot(),
                                         parent.getStorage().getStylesheet(adm.getLoginScreenFile(),
                                                                                 parent.getDefaultLocale(),parent.getProperty("webmail.default.theme")));
-                // Modified by exce, end.
         } else if(url.equals("/login")) {
-
             WebMailSession sess=(WebMailSession)session;
             UserData user=sess.getUser();
             content=new XHTMLDocument(session.getModel(),parent.getStorage().getStylesheet("login.xsl",user.getPreferredLocale(),user.getTheme()));
@@ -148,5 +134,4 @@ public class ToplevelURLHandler implements URLHandler {
         }
         return content;
     }
-
-} // URLHandler
+}

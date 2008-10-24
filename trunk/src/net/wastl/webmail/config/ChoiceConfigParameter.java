@@ -21,16 +21,10 @@ package net.wastl.webmail.config;
 
 import java.util.*;
 
-/*
- * ChoiceConfigParameter.java
- *
- * Created: Sep 1999
- */
 /**
  * Scheme of a parameter that can take one of several choices as value
  */
 public class ChoiceConfigParameter extends ConfigParameter {
-
     Hashtable possible_values;
 
     public ChoiceConfigParameter(String name, String desc) {

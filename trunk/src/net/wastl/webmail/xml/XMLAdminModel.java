@@ -21,12 +21,9 @@ package net.wastl.webmail.xml;
 
 import java.io.IOException;
 import java.util.*;
-
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
-
 import net.wastl.webmail.server.*;
-
 import javax.xml.parsers.ParserConfigurationException;
 
 /*
@@ -40,11 +37,8 @@ import javax.xml.parsers.ParserConfigurationException;
  * Used to represent an Admin's state model
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class XMLAdminModel extends XMLGenericModel {
-
     public XMLAdminModel(WebMailServer parent, Element rsysdata) throws ParserConfigurationException, SAXException, IOException {
         super(parent,rsysdata);
     }
@@ -73,5 +67,4 @@ public class XMLAdminModel extends XMLGenericModel {
     public synchronized void clearUserData() {
         XMLCommon.genericRemoveAll(statedata,"USERDATA");
     }
-
-} // XMLAdminModel
+}

@@ -23,20 +23,12 @@ import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
 import net.wastl.webmail.misc.ByteStore;
 import java.util.Locale;
-/*
- * HTMLImage.java
- *
- * Created: Wed Feb  3 18:23:28 1999
- */
 /**
  * A HTML Document that is actually an image.:-)
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-
 public class HTMLImage extends HTMLDocument {
-
     public ByteStore cont;
 
 
@@ -69,5 +61,4 @@ public class HTMLImage extends HTMLDocument {
     public byte[] toBinary() {
         return cont.getBytes();
     }
-
-} // HTMLImage
+}

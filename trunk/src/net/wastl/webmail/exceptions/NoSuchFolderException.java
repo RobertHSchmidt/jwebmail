@@ -20,17 +20,10 @@
 package net.wastl.webmail.exceptions;
 
 /**
- * NoSuchFolderException.java
- *
- * Created: Sun Feb  7 18:14:25 1999
- */
-/**
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
 public class NoSuchFolderException extends Exception {
-
     public NoSuchFolderException() {
         super();
     }
@@ -38,4 +31,4 @@ public class NoSuchFolderException extends Exception {
     public NoSuchFolderException(String msg) {
         super(msg);
     }
-} // NoSuchFolderException
+}

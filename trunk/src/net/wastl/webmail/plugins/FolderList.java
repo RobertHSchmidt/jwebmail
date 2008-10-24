@@ -26,11 +26,6 @@ import java.util.*;
 import java.text.*;
 
 
-/*
- * FolderList.java
- *
- * Created: Thu Sep  2 12:59:16 1999
- */
 /**
  * List the messages in a folder.
  *
@@ -38,11 +33,8 @@ import java.text.*;
  * requires: mailbox list
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class FolderList implements Plugin, URLHandler {
-
     public static final String VERSION="1.5";
     public static final String URL="/folder/list";
 
@@ -51,7 +43,6 @@ public class FolderList implements Plugin, URLHandler {
     WebMailServer parent;
 
     public FolderList() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -114,4 +105,4 @@ public class FolderList implements Plugin, URLHandler {
     public String requires() {
         return "mailbox list";
     }
-} // FolderList
+}

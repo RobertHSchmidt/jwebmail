@@ -19,24 +19,16 @@
 
 package net.wastl.webmail.server;
 
-/*
- * TimeableConnection.java
- *
- * Created: Tue Feb  2 12:36:39 1999
- */
 /**
  *
  *
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
 public interface TimeableConnection  {
-
     public long getLastAccess();
 
     public void timeoutOccured();
 
     public long getTimeout();
-
-} // TimeableConnection
+}

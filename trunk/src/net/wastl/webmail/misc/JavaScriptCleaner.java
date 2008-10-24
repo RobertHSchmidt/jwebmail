@@ -22,12 +22,6 @@ package net.wastl.webmail.misc;
 import org.w3c.dom.*;
 import org.w3c.dom.html.*;
 
-/*
- * JavaScriptCleaner.java
- *
- * Created: Mon Jan  1 15:20:54 2001
- */
-
 /**
  * JavaScriptCleaner.java
  *
@@ -39,11 +33,8 @@ import org.w3c.dom.html.*;
  * Created: Mon Jan  1 15:20:54 2001
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class JavaScriptCleaner  {
-
     Document d;
 
     public JavaScriptCleaner(Document d) {
@@ -53,20 +44,15 @@ public class JavaScriptCleaner  {
     }
 
     protected void walkTree(Node node) {
-
-
-
         /* First we check for element types that shouldn't be sent to the user.
            For that, we add an attribute "malicious" that can be handled by the XSLT
            stylesheets that display the message.
          */
         if(node instanceof HTMLScriptElement) {
-
             ((Element)node).setAttribute("malicious","Marked malicious because of potential JavaScript abuse");
         }
 
         if(node instanceof HTMLImageElement) {
-
             ((Element)node).setAttribute("malicious","Marked malicious because of potential Image/CGI abuse");
         }
 
@@ -107,5 +93,4 @@ public class JavaScriptCleaner  {
             }
         }
     }
-
-} // JavaScriptCleaner
+}

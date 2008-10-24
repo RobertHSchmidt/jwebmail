@@ -19,21 +19,13 @@
 
 package net.wastl.webmail.misc;
 
-/*
- * StringHeap.java
- *
- * Created: Mon Oct  4 13:28:09 1999
- */
 /**
  * This class is a simple heap structure for sorting Strings lexicographically.
  * It is mainly used in WebMail for generating a sorted output of Hashkeys.
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class StringHeap  {
-
     int num_entries;
     String[] keys;
 
@@ -116,5 +108,4 @@ public class StringHeap  {
             cur_pos=lesser_son;
         }
     }
-
-} // StringHeap
+}

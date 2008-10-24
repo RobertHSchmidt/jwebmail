@@ -19,21 +19,13 @@
 
 package net.wastl.webmail.exceptions;
 
-/*
- * WebMailException.java
- *
- * Created: Thu Feb  4 16:55:06 1999
- */
 /**
  * An error occured while creating the userdata for a user.
  *
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-
 public class CreateUserDataException extends UserDataException {
-
     public CreateUserDataException() {
         super();
     }
@@ -41,5 +33,4 @@ public class CreateUserDataException extends UserDataException {
     public CreateUserDataException(String s, String user, String domain) {
         super(s,user,domain);
     }
-
-} // InvalidPasswordException
+}

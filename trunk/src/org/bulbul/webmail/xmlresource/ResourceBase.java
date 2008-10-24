@@ -24,13 +24,9 @@ package org.bulbul.webmail.xmlresource;
 
 import java.io.IOException;
 import java.util.*;
-
-
 import org.w3c.dom.*;
 import org.xml.sax.*;
-
 import javax.xml.parsers.*;
-
 import net.wastl.webmail.server.WebMailServer;
 
 /**
@@ -169,4 +165,3 @@ public abstract class ResourceBase extends ResourceBundle {
         return null;
     }
 }
-

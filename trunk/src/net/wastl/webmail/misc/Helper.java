@@ -25,24 +25,15 @@ import java.math.*;
 import java.util.*;
 import net.wastl.webmail.server.http.HTTPRequestHeader;
 
-/*
- * Helper.java
- *
- * Created: Tue Sep  7 13:03:44 1999
- */
 /**
  * Miscellaneous helper routines.
  *
  * Created: Tue Sep  7 13:03:44 1999
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class Helper  {
-
     public Helper() {
-
     }
 
 
@@ -808,6 +799,4 @@ public class Helper  {
                 };
         }
     }
-
-
-} // Helper
+}

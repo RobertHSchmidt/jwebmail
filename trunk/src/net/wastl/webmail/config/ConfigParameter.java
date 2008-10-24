@@ -21,11 +21,6 @@ package net.wastl.webmail.config;
 
 import java.util.*;
 
-/*
- * ConfigParameter.java
- *
- * Created: Sep 1999
- */
 /**
  * An abstraction for a configuration parameter.
  * Subclasses must implement a method that checks whether a specific value is correct for this
@@ -131,4 +126,3 @@ public abstract class ConfigParameter {
         return group;
     }
 }
-

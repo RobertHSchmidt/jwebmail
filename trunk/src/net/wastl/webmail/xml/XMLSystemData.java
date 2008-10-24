@@ -21,19 +21,11 @@ package net.wastl.webmail.xml;
 
 import net.wastl.webmail.config.*;
 import net.wastl.webmail.server.*;
-
 import java.util.*;
-
-
 import org.w3c.dom.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-/*
- * XMLSystemData.java
- *
- * Created: Sat Mar  4 16:07:30 2000
- */
 /**
  *
  *
@@ -42,9 +34,7 @@ import org.apache.commons.logging.LogFactory;
  *
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-
 public class XMLSystemData extends ConfigStore {
     private static Log log = LogFactory.getLog(ConfigStore.class);
 
@@ -330,7 +320,6 @@ public class XMLSystemData extends ConfigStore {
         if(j<nodel.getLength() && elem != null) {
             final Element domain=elem;
             return new WebMailVirtualDomain() {
-
                     public String getDomainName() {
                         String value=XMLCommon.getTagValue(domain,"NAME");
                         return value==null?"unknown":value;
@@ -462,5 +451,4 @@ public class XMLSystemData extends ConfigStore {
         XMLCommon.setTagValue(domain,"ALLOWED_HOST","localhost");
         log.info("XMLSystemData: Created WebMail virtual domain "+name);
     }
-
-} // XMLSystemData
+}

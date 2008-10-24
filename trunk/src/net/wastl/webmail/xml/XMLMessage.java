@@ -20,7 +20,6 @@
 package net.wastl.webmail.xml;
 
 import java.util.*;
-
 import org.w3c.dom.*;
 
 
@@ -36,7 +35,6 @@ import org.w3c.dom.*;
  * @see XMLUserModel
  */
 public class XMLMessage extends XMLMessagePart {
-
     protected Element message;
 
     public XMLMessage(Element message) {
@@ -57,7 +55,6 @@ public class XMLMessage extends XMLMessagePart {
 
     public void prepareReply(String prefix_subject, String postfix_subject,
                              String prefix_message, String postfix_message) {
-
         String subject=getHeader("SUBJECT");
         // Test whether this is already a reply (prefixed with RE or AW)
         if(!isReply(subject)) {
@@ -83,7 +80,6 @@ public class XMLMessage extends XMLMessagePart {
 
     public void prepareForward(String prefix_subject, String postfix_subject,
                                String prefix_message, String postfix_message) {
-
         String subject=getHeader("SUBJECT");
         subject=prefix_subject+" "
             +getHeader("SUBJECT")+" "
@@ -164,12 +160,10 @@ public class XMLMessage extends XMLMessagePart {
 
     protected Element getFirstMessageTextPart(Element parent) {
         NodeList nl=parent.getChildNodes();
-        // Modified by exce, start
         /**
          * Maybe here we should modify the algorithm:
          * If no appropriate text/plain is found, try to search for text/html.
          */
-        // Modified by exce, end
         for(int i=0;i<nl.getLength();i++) {
             Element elem=(Element)nl.item(i);
             if(elem.getTagName().equals("PART")) {
@@ -183,7 +177,6 @@ public class XMLMessage extends XMLMessagePart {
                 }
             }
         }
-        // Modified by exce, start
         for(int i=0;i<nl.getLength();i++) {
             Element elem=(Element)nl.item(i);
             if(elem.getTagName().equals("PART")) {
@@ -197,7 +190,6 @@ public class XMLMessage extends XMLMessagePart {
                 }
             }
         }
-        // Modified by exce, end
         return null;
     }
 
@@ -217,6 +209,4 @@ public class XMLMessage extends XMLMessagePart {
         }
         return null;
     }
-
-
-} // XMLMessage
+}

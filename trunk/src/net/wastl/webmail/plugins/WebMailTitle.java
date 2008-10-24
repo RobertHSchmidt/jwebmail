@@ -24,28 +24,19 @@ import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
 
 /**
- * WebMailTitle.java
- *
- * Created: Wed Sep  1 16:34:55 1999
- */
-/**
  * Show WebMail title.
  *
  * provides: title
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class WebMailTitle implements Plugin, URLHandler {
-
     public static final String VERSION="1.1";
     public static final String URL="/title";
 
     Storage store;
 
     public WebMailTitle() {
-
     }
     public void register(WebMailServer parent) {
         parent.getURLHandler().registerHandler(URL,this);
@@ -85,5 +76,4 @@ public class WebMailTitle implements Plugin, URLHandler {
     public String requires() {
         return "";
     }
-
-} // WebMailTitle
+}

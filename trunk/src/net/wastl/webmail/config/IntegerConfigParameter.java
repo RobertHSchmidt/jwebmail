@@ -19,19 +19,11 @@
 
 package net.wastl.webmail.config;
 
-/*
- * ConfigIntegerParameter.java
- *
- * Created: Sun Oct  3 17:45:08 1999
- */
 /**
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class IntegerConfigParameter extends ConfigParameter {
-
     public IntegerConfigParameter(String name, String def, String desc) {
         super(name,def,desc);
     }
@@ -48,4 +40,4 @@ public class IntegerConfigParameter extends ConfigParameter {
     public String getType() {
         return "integer";
     }
-} // ConfigIntegerParameter
+}

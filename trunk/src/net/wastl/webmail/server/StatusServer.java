@@ -27,14 +27,10 @@ package net.wastl.webmail.server;
  * Created: Sun Dec 31 16:07:04 2000
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public interface StatusServer  {
-
     /**
      * Return a status message.
      */
     public String getStatus();
-
-} // StatusServer
+}

@@ -21,21 +21,13 @@ package net.wastl.webmail.config;
 
 import java.util.*;
 
-/*
- * ConfigStore.java
- *
- * Created: Tue Oct 19 11:54:12 1999
- */
 /**
  * This class is a generic storage for configuration parameters.
  * Subclasses must implement setConfigRaw and getConfigRaw.
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public abstract class ConfigStore  {
-
     protected ConfigScheme scheme;
 
     public ConfigStore(ConfigScheme cs) {
@@ -117,6 +109,4 @@ public abstract class ConfigStore  {
     public void addConfigurationListener(String key, ConfigurationListener l) {
         scheme.addConfigurationListener(key,l);
     }
-
-
-} // ConfigStore
+}

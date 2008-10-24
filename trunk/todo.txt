@@ -7,17 +7,6 @@ IMPORTANT:  DO NOT FORGET
 If do not hear back from Kevin Excellent Lee, then revert the org.bulbul
 classes back to GPL.  (Already have perm from Kowatch for webengruven).
 
-Get rid of Garbage non-code:
-    IDE garbage header /* FileName.java... Created: */
-    blank lines and comments among imports.
-    "Modified by" comments.
-    * @version
-    } // comment
-    blank lines before closing }
-    RCS keywords and HISTORY
-    Other licenses
-    * deink dev history
-
 Get rid of all of the print statements  and printStackTraces,
 and use the logging facility!
 

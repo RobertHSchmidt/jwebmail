@@ -22,20 +22,12 @@ package net.wastl.webmail.ui.html;
 import net.wastl.webmail.server.Storage;
 import java.util.*;
 
-/*
- * HTMLDocument.java
- *
- * Created: Wed Feb  3 16:13:20 1999
- */
-
 /**
  * WebMail's class for representing HTML Documents.
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
 public class HTMLDocument {
-
     protected String content;
     protected HTMLHeader header;
 
@@ -110,4 +102,4 @@ public class HTMLDocument {
     public int length() {
                 return header.toString().length()+1+content.length();
     }
-} // HTMLDocument
+}

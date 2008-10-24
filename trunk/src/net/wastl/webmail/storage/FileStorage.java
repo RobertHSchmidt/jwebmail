@@ -31,16 +31,9 @@ import net.wastl.webmail.server.*;
 import net.wastl.webmail.config.*;
 import net.wastl.webmail.misc.*;
 import net.wastl.webmail.xml.*;
-
 import javax.xml.transform.*;
 import javax.xml.transform.stream.*;
 import javax.xml.transform.dom.*;
-
-/**
- * FileStorage.java
- *
- * Created: Jan 2000
- */
 
 /**
  * This is the FileStorage class is common to all other storage classes in WebMail
@@ -301,11 +294,9 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
             return ((ResourceBundle)resources.get(locale.getLanguage())).getString(key);
         } else {
             try {
-            // Modified by exce, start.
                 // ResourceBundle rc=XMLResourceBundle.getBundle("resources",locale,null);
                 System.err.println("Loading locale");
                 ResourceBundle rc = ResourceBundle.getBundle("org.bulbul.webmail.xmlresource.Resources", locale);
-                // Modified by exce, end.
                 resources.put(locale.getLanguage(),rc);
                 return rc.getString(key);
             } catch(Exception e) {
@@ -467,6 +458,4 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         }
         return s;
     }
-
-
 }

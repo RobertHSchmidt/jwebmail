@@ -21,28 +21,18 @@ package net.wastl.webmail.ui.html;
 
 import java.util.regex.*;
 
-/*
- * JavaScriptFilter.java
- *
- * Created: Thu Oct 14 12:08:28 1999
- */
-
 /**
  * Filter JavaScript content from HTML messages to avoid security problems.
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class JavaScriptFilter  {
-
     private static Pattern[] filter = new Pattern[3];
     private static String[] substitution = new String[3];
 
     private static boolean initialized=false;
 
     public JavaScriptFilter() {
-
     }
 
     public static void init() {
@@ -73,5 +63,4 @@ public class JavaScriptFilter  {
         }
         return retval;
     }
-
-} // JavaScriptFilter
+}

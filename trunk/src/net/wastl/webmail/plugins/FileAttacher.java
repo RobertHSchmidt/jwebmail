@@ -29,11 +29,6 @@ import javax.mail.*;
 import net.wastl.webmail.misc.*;
 
 /**
- * FileAttacher.java
- *
- * Created: Tue Sep  7 16:45:21 1999
- */
-/**
  * This plugin shows the Form for attaching files to a message as well as does
  * the actual attaching to a WebMailSession
  *
@@ -41,18 +36,14 @@ import net.wastl.webmail.misc.*;
  * requires: composer
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class FileAttacher implements URLHandler, Plugin {
-
     public static final String VERSION="1.00";
     public static final String URL="/compose/attach";
 
     Storage store;
 
     public FileAttacher() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -92,7 +83,6 @@ public class FileAttacher implements URLHandler, Plugin {
                     description=new String(((ByteStore)head.getObjContent("DESCRIPTION")).getBytes());
                 }
                 //System.err.println("Description: "+description);
-                // Modified by exce, start
                 /**
                  * It seems that IE will use its browser encoding setting to
                  * encode the file name that sent to us. Hence we have to
@@ -130,7 +120,6 @@ public class FileAttacher implements URLHandler, Plugin {
                 // Transcode decription
                 if ((description != null) && (!description.equals("")))
                         description = new String(description.getBytes("ISO8859_1"), "UTF-8");
-                // Modified by exce, end
                 if(bs!=null && bs.getSize() >0 ) {
                     session.addWorkAttachment(bs.getName(),bs,description);
                 }
@@ -140,7 +129,6 @@ public class FileAttacher implements URLHandler, Plugin {
             }
         } else if(head.isContentSet("DELETE") && head.isContentSet("ATTACHMENTS")) {
                 try {
-                        // Modified by exce, Start
                         /**
                          * Since attachmentName comes from HTTPRequestHeader, we have to
                          * transcode it.
@@ -151,7 +139,6 @@ public class FileAttacher implements URLHandler, Plugin {
                         attachmentName = new String(attachmentName.getBytes("ISO8859_1"), "UTF-8");
                 System.err.println("Removing " + attachmentName);
                     session.removeWorkAttachment(attachmentName);
-                        // Modified by exce, end
                 } catch (Exception e) {
                         e.printStackTrace();
                         throw new DocumentNotFoundException("Could not remove attachment. (Reason: "+e.getMessage()+")");
@@ -170,4 +157,4 @@ public class FileAttacher implements URLHandler, Plugin {
     public String requires() {
         return "composer";
     }
-} // FileAttacher
+}

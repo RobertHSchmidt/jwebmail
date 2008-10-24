@@ -20,23 +20,13 @@
 package net.wastl.webmail.server;
 
 import net.wastl.webmail.exceptions.*;
-
 import java.util.*;
 
 /**
- * UserData.java
- *
- * Created: Wed Mar 24 1999
- */
-/**
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-/* 9/25/2000 devink -- changed for new challenge/response authentication */
 public interface UserData {
-
-
     public void login();
     public void logout();
 

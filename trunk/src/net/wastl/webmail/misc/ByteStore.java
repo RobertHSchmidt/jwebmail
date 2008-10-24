@@ -20,7 +20,6 @@
 package net.wastl.webmail.misc;
 
 import java.io.*;
-
 import net.wastl.webmail.server.*;
 
 /*
@@ -32,10 +31,8 @@ import net.wastl.webmail.server.*;
 /**
  *
  * @author Sebastian Schaffert
- * @version
  */
 public class ByteStore implements Serializable {
-
     byte[] bytes;
 
     String content_type=null;
@@ -130,4 +127,4 @@ public class ByteStore implements Serializable {
             return null;
         }
     }
-} // ByteStore
+}

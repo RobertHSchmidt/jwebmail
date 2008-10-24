@@ -19,21 +19,14 @@
 
 package net.wastl.webmail.server;
 
-/*
- * Plugin.java
- *
- * Created: Sep 1999
- */
 /**
  *
  *
  * This provides a generic interface for WebMail Plugins
  *
  * @author Sebastian Schaffert
- * @version $Revision$
 */
 public interface Plugin {
-
     /**
      * Register this plugin with a WebMailServer
      * The plugin thus has access to most WebMail objects.
@@ -68,5 +61,4 @@ public interface Plugin {
      * @see provides
      */
     public String requires();
-
 }

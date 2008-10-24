@@ -27,16 +27,10 @@ import java.util.*;
 import javax.servlet.UnavailableException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import javax.xml.transform.Templates;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
-/*
- * Storage.java
- *
- * Created: Feb 1999
- */
 /**
  *
  *
@@ -45,9 +39,7 @@ import org.xml.sax.SAXException;
  *
  * @see net.wastl.webmail.storage.simple.SimpleStorage
  * @author Sebastian Schaffert
- * @version $Revision$
 */
-/* 9/24/2000 devink - updated for new challenge/response authentication */
 public abstract class Storage {
     private static Log log = LogFactory.getLog(Storage.class);
 
@@ -66,7 +58,6 @@ public abstract class Storage {
         this.parent=parent;
         cs=parent.getConfigScheme();
         cs.configRegisterYesNoKey("FOLDER TRY LOGIN PASSWORD","Try to connect folders with the user's login password if authentication fails");
-
     }
 
     public void initConfigKeys() {
@@ -113,7 +104,6 @@ public abstract class Storage {
      * @param value value to set
       */
     public void setConfig(String key, String value) throws IllegalArgumentException {
-    // Modified by exce, start
     /**
      * Maybe here is a bug.
      *
@@ -130,7 +120,6 @@ public abstract class Storage {
      * if statement. However, this may be a performance issue, so I don't
      * modify the code.
      */
-    // Modified by exce, end
         if(!value.equals(getConfig(key))) {
             log.debug("Storage API: Setting configuration for '"+key+"' to '"+value+"'.");
             sysdata.setConfig(key,value);
@@ -286,9 +275,6 @@ public abstract class Storage {
      * @param user Name of the user
      * @param domain Virtual Domain name of the user
      * @param passwd Password that the user provided
-     *
-     * devink 7/15/2000 - deprecated, but left in for backwards compat.
-     * devink 9/24/2000 - not deprecated any more
      * XXX should passwd be a parameter?
      */
     public XMLUserData getUserData(String user, String domain,String passwd)
@@ -300,10 +286,7 @@ public abstract class Storage {
      * get the userdata for the specified user.
      * Should do some sort of authentication if authentication is set. See
      * Authenticator class for example.
-     *
-     * devink 7/15/2000 - depreciated, and is no longer abstract, so there is
      * no requirement to implement it.
-     * devink 9/24/2000 - not depreciated, and is now abstract
      */
     public abstract XMLUserData getUserData(String user, String domain,
      String password, boolean authenticate)
@@ -440,5 +423,4 @@ public abstract class Storage {
         }
         return content_type;
     }
-
 }

@@ -117,7 +117,6 @@ import java.math.*;
 * @author Translated by Michael Lecuyer (mjl@theorem.com) from the C Language.
 * @since JDK1.1
 */
-
 public class TEA
 {
    private int _key[];  // The 128 bit key.
@@ -471,5 +470,4 @@ public class TEA
 
       return r.toString();
    }
-
 }

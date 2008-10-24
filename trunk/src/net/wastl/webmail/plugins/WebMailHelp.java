@@ -23,16 +23,9 @@ import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.misc.*;
 import net.wastl.webmail.exceptions.*;
-
 import org.w3c.dom.*;
-
 import javax.xml.parsers.*;
 
-/*
- * WebMailHelp.java
- *
- * Created: Wed Sep  1 16:23:14 1999
- */
 /**
  * Show WebMail help file
  *
@@ -40,11 +33,8 @@ import javax.xml.parsers.*;
  * requires: content bar
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class WebMailHelp implements Plugin, URLHandler {
-
     public static final String VERSION="2.0";
     public static final String URL="/help";
 
@@ -53,7 +43,6 @@ public class WebMailHelp implements Plugin, URLHandler {
     Storage store;
 
     public WebMailHelp() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -127,4 +116,4 @@ public class WebMailHelp implements Plugin, URLHandler {
     public String requires() {
         return "content bar";
     }
-} // WebMailHelp
+}

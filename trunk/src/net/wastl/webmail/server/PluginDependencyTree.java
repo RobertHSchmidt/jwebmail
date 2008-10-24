@@ -21,19 +21,11 @@ package net.wastl.webmail.server;
 
 import java.util.*;
 
-/*
- * PluginDependencyTree.java
- *
- * Created: Sat Sep 11 14:52:22 1999
- */
 /**
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class PluginDependencyTree {
-
     protected Plugin node;
     protected String meprovides;
 
@@ -98,5 +90,4 @@ public class PluginDependencyTree {
             p.register(parent);
         }
     }
-
-} // PluginDependencyTree
+}

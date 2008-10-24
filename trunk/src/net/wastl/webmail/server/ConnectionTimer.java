@@ -23,20 +23,13 @@ import java.util.*;
 import net.wastl.webmail.debug.ErrorHandler;
 import net.wastl.webmail.exceptions.*;
 
-/*
- * ConnectionTimer.java
- *
- * Created: Tue Feb  2 12:27:43 1999
- */
 /**
  *
  *
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
 public class ConnectionTimer extends Thread {
-
     private Vector connections;
     private static final long sleep_interval=1000;
 
@@ -87,4 +80,4 @@ public class ConnectionTimer extends Thread {
             try { this.sleep(sleep_interval); } catch(InterruptedException ex) { new ErrorHandler(ex); }
         }
     }
-} // ConnectionTimer
+}

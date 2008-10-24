@@ -20,20 +20,12 @@
 package net.wastl.webmail.exceptions;
 
 /**
- * InvalidPasswordException.java
- *
- * Created: Thu Feb  4 16:55:06 1999
- */
-/**
  *
  *
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-
 public class InvalidPasswordException extends WebMailException {
-
     public InvalidPasswordException() {
         super();
     }
@@ -41,5 +33,4 @@ public class InvalidPasswordException extends WebMailException {
     public InvalidPasswordException(String s) {
         super(s);
     }
-
-} // InvalidPasswordException
+}

@@ -24,15 +24,9 @@ import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
 import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.server.http.*;
-
 import javax.servlet.ServletException;
 
 
-/**
- * URLHandler.java
- *
- * Created: Aug 1999
- */
 /**
  * Classes that want to register for handling URLs must implement this.
  *
@@ -40,11 +34,9 @@ import javax.servlet.ServletException;
  * @versin $Revision$
 */
 public interface URLHandler extends URLHandlerTreeNode {
-
     public String getName();
 
     public String getDescription();
 
     public HTMLDocument handleURL(String suburl, HTTPSession session, HTTPRequestHeader header) throws WebMailException, ServletException;
-
 }

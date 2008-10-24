@@ -20,16 +20,10 @@
 package net.wastl.webmail.config;
 
 
-/*
- * StringConfigParameter.java
- *
- * Created: Sep 1999
- */
 /**
  * Scheme of a parameter that can take String values
  */
 public class StringConfigParameter extends ConfigParameter {
-
     public StringConfigParameter(String name, String def, String desc) {
         super(name,def,desc);
     }

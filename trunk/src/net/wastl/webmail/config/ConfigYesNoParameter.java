@@ -28,11 +28,8 @@ package net.wastl.webmail.config;
 /**
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class ConfigYesNoParameter extends ChoiceConfigParameter {
-
     public ConfigYesNoParameter(String name, String desc) {
         super(name,desc);
         addChoice("YES","Enabled.");
@@ -42,4 +39,4 @@ public class ConfigYesNoParameter extends ChoiceConfigParameter {
     public String getType() {
         return "bool";
     }
-} // ConfigYesNoParameter
+}

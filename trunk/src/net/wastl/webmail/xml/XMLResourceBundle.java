@@ -20,27 +20,16 @@
 package net.wastl.webmail.xml;
 
 import java.util.*;
-
 import javax.xml.parsers.*;
-
 import org.w3c.dom.*;
-
 import net.wastl.webmail.server.WebMailServer;
 
-/*
- * XMLResourceBundle.java
- *
- * Created: Sun Mar  5 17:59:33 2000
- */
 /**
  * A ResourceBundle implementation that uses a XML file to store the resources.
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class XMLResourceBundle extends ResourceBundle {
-
     protected boolean debug=false;
 
     protected Document root;
@@ -122,7 +111,6 @@ public class XMLResourceBundle extends ResourceBundle {
     }
 
     public Enumeration getKeys() {
-
         Hashtable prop=new Hashtable();
 
         if(elem_common != null) {
@@ -143,7 +131,6 @@ public class XMLResourceBundle extends ResourceBundle {
         ResourceBundle ret=null;
 
         try {
-
             ret=new XMLResourceBundle(WebMailServer.getServer().getProperty("webmail.template.path")+
                                       System.getProperty("file.separator")+name+".xml",lang);
         } catch(Exception ex) {
@@ -153,5 +140,4 @@ public class XMLResourceBundle extends ResourceBundle {
 
         return ret;
     }
-
-} // XMLResourceBundle
+}

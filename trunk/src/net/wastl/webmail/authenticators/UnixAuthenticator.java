@@ -23,7 +23,6 @@ import java.io.*;
 import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import net.wastl.webmail.misc.*;
 import net.wastl.webmail.config.ConfigScheme;
 
@@ -34,9 +33,7 @@ import net.wastl.webmail.config.ConfigScheme;
  * Created: Mon Apr 19 13:43:48 1999
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class UnixAuthenticator extends Authenticator {
     private static Log log = LogFactory.getLog(UnixAuthenticator.class);
 
@@ -108,4 +105,4 @@ public class UnixAuthenticator extends Authenticator {
     public boolean canChangePassword() {
         return false;
     }
-} // UnixAuthenticator
+}

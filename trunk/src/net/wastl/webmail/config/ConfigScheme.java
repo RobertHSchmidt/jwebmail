@@ -21,11 +21,6 @@ package net.wastl.webmail.config;
 
 import java.util.*;
 
-/*
- * ConfigScheme.java
- *
- * Created: 31.08.99
- */
 /**
  * This class contains a scheme for WebMail configuration data.
  *
@@ -35,10 +30,8 @@ import java.util.*;
  * Created: 31.08.99
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
 public class ConfigScheme {
-
     protected Hashtable config_scheme;
 
     public ConfigScheme() {
@@ -250,4 +243,3 @@ public class ConfigScheme {
         }
     }
 }
-
