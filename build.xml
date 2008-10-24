@@ -23,6 +23,7 @@ limitations under the License.
   <!-- Default build settings.  Override in your own 'local.properties' file.-->
   <property name="repos.url" value="http://ipub/lib-repos"/>
   <property name="webapp.home" value="build/webapp"/>
+  <property name="contextxml.path" value="config/context.xml"/>
 
   <!-- =================================================================== -->
   <!-- Initialization target                                               -->
@@ -381,12 +382,17 @@ limitations under the License.
     <filter token="plugin-dir" value="WEB-INF/classes"/>
     <filter token="authenticator-dir" value="WEB-INF/classes"/>
     <filter token="base-uri" value="/${ant.project.name}"/>
-    <copy file="WEB-INF/web.xml" todir="${webapp.home}/${ant.project.name}/WEB-INF/" filtering="true" />
+    <copy file="config/web.xml" filtering="true"
+          todir="${webapp.home}/${ant.project.name}/WEB-INF/"/>
     <copy todir="${webapp.home}/${ant.project.name}" filtering="true">
       <fileset dir="src/jsp"/>
     </copy>
 
-    <war warfile="${webapp.home}/${ant.project.name}.war" webxml="${webapp.home}/${ant.project.name}/WEB-INF/web.xml" basedir="${webapp.home}/${ant.project.name}"/>
+    <war warfile="${webapp.home}/${ant.project.name}.war"
+         webxml="${webapp.home}/${ant.project.name}/WEB-INF/web.xml"
+         basedir="${webapp.home}/${ant.project.name}">
+      <metainf file="${contextxml.path}"/>
+     </war>
     <!-- Copy images -->
   </target>
 

@@ -1,0 +1,15 @@
+<Context>
+<!--
+$Id$
+Tomcat-specific deployment settings.
+-->
+
+  <!--  To build a default name into your app.
+        This default will override a defaultRtAppName set in web.xml.
+  <Environment name="rtAppName" type="java.lang.String" value="jwebmail-webapp"/>
+
+  DATA SOURCE NOT USED YET:
+  <ResourceLink name="db/sales" global="jdbc/globalSalesDs"
+                type="javax.sql.DataSource"/>
+  -->
+</Context>

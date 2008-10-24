@@ -40,3 +40,11 @@ Do code search for use of getElementsBy...() and change to the less dangerous
 and more efficient getChild*() methods.
 
 Get all but bootstrap libs out of the code baseline.  Use Ivy to fetch libs.
+
+Get rid of the many dependencies upon ServletContext.getRealPath(), so we
+can distribute a portable .war file that will run on any popular app server.
+
+Stop loading resources directly from the application through the FS.
+Load delivered resources through classpath.  Can load generated data from FS,
+but through indirection so user has an opportunity to disassociate this data
+from the application.
