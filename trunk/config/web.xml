@@ -28,7 +28,16 @@ limitations under the License.
 -->
 
 <web-app>
-  <display-name>WebMail/Java - WWW access to your mail</display-name>
+  <display-name>JWebMail - WWW access to your mail</display-name>
+
+  <context-param>
+    <param-name>defaultRtAppName</param-name>
+    <param-value>jwebmail</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>net.wastl.webmail.config.ExtConfigListener</listener-class>
+  </listener>
 
   <servlet>
 

@@ -71,14 +71,19 @@ public class WebMailServlet extends WebMailServer implements Servlet {
     }
 
     public void init(ServletConfig config) throws ServletException {
-        System.err.println("Init");
+        ServletContext sc = config.getServletContext();
+        sc.log("Init");
+        String appName = (String) sc.getAttribute("app.name");
+        File rtConfigDir = (File) sc.getAttribute("rtconfig.dir");
+        Properties p = (Properties) sc.getAttribute("meta.properties");
+        sc.log("RT configs retrieved");
         srvlt_config=config;
         this.config=new Properties();
         Enumeration enumVar=config.getInitParameterNames();
         while(enumVar.hasMoreElements()) {
             String s=(String)enumVar.nextElement();
             this.config.put(s,config.getInitParameter(s));
-            System.err.println(s+": "+config.getInitParameter(s));
+            sc.log(s+": "+config.getInitParameter(s));
         }
 
         /*
@@ -86,13 +91,13 @@ public class WebMailServlet extends WebMailServer implements Servlet {
          * not set.
          */
         if(config.getInitParameter("webmail.basepath")==null) {
-            config.getServletContext().log("Warning: webmail.basepath initArg should be set to the WebMail Servlet's base path");
+            sc.log("Warning: webmail.basepath initArg should be set to the WebMail Servlet's base path");
             basepath="";
         } else {
             basepath = config.getInitParameter("webmail.basepath");
         }
         if(config.getInitParameter("webmail.imagebase") == null) {
-            config.getServletContext().log("Error: webmail.basepath initArg should be set to the WebMail Servlet's base path");
+            sc.log("Error: webmail.basepath initArg should be set to the WebMail Servlet's base path");
             imgbase="";
         } else {
             imgbase = config.getInitParameter("webmail.imagebase");
@@ -103,16 +108,16 @@ public class WebMailServlet extends WebMailServer implements Servlet {
          * in the initargs.
          */
         if(config.getInitParameter("webmail.data.path") == null) {
-            this.config.put("webmail.data.path",getServletContext().getRealPath("/data"));
+            this.config.put("webmail.data.path", sc.getRealPath("/data"));
         }
         if(config.getInitParameter("webmail.lib.path") == null) {
-            this.config.put("webmail.lib.path",getServletContext().getRealPath("/lib"));
+            this.config.put("webmail.lib.path", sc.getRealPath("/lib"));
         }
         if(config.getInitParameter("webmail.template.path") == null) {
-            this.config.put("webmail.template.path",getServletContext().getRealPath("/lib/templates"));
+            this.config.put("webmail.template.path", sc.getRealPath("/lib/templates"));
         }
         if(config.getInitParameter("webmail.xml.path") == null) {
-            this.config.put("webmail.xml.path",getServletContext().getRealPath("/lib/xml"));
+            this.config.put("webmail.xml.path", sc.getRealPath("/lib/xml"));
         }
         if(config.getInitParameter("webmail.log.facility") == null) {
             this.config.put("webmail.log.facility","net.wastl.webmail.logger.ServletLogger");
