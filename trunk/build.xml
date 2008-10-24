@@ -77,68 +77,18 @@ limitations under the License.
   </target>
 
   <!-- =================================================================== -->
-  <!-- Checks to see if JARs available                                     -->
-  <!-- =================================================================== -->
-  <target name="-check-jars">
-        <available file="lib/mail.jar" property="mail.jar.present"/>
-        <available file="lib/activation.jar" property="jaf.jar.present"/>
-        <available file="lib/pop3.jar" property="pop3.jar.present"/>
-  </target>
-
-  <!-- =================================================================== -->
-  <!-- Prepare Javamail JAR                                                -->
-  <!-- =================================================================== -->
-  <target name="-prep-mail.jar" unless="mail.jar.present" depends="-prepare">
-    <mkdir dir="build/src/temp"/>
-    <unzip src="contrib/javamail-1_3.zip" dest="build/src/temp" />
-    <copy todir="lib" flatten="yes">
-      <fileset dir="build/src/temp">
-           <include name="**/mail.jar" />
-        </fileset>
-    </copy>
-  </target>
-
-  <!-- =================================================================== -->
-  <!-- Prepare JAF JAR                                                     -->
-  <!-- =================================================================== -->
-  <target name="-prep-activation.jar" unless="jaf.jar.present" depends="-prepare">
-    <mkdir dir="build/src/temp"/>
-    <unzip src="contrib/jaf-1_0_2.zip" dest="build/src/temp" />
-    <copy todir="lib" flatten="yes">
-      <fileset dir="build/src/temp">
-           <include name="**/activation.jar" />
-        </fileset>
-    </copy>
-  </target>
-
-  <!-- =================================================================== -->
-  <!-- Prepare POP3 JAR                                                    -->
-  <!-- =================================================================== -->
-  <target name="-prep-pop3.jar" unless="pop3.jar.present" depends="-prepare">
-    <mkdir dir="build/src/temp"/>
-    <unzip src="contrib/pop31_1_1.zip" dest="build/src/temp" />
-    <copy todir="lib" flatten="yes">
-      <fileset dir="build/src/temp">
-           <include name="**/pop3.jar" />
-        </fileset>
-    </copy>
-  </target>
-
-  <!-- =================================================================== -->
   <!-- Prepare all JAR files (put in lib dir)                              -->
   <!-- =================================================================== -->
-  <target name="-prep-lib" depends="-check-jars, -prep-mail.jar, -prep-activation.jar, -prep-pop3.jar, -ivy-setup">
+  <target name="-prep-lib" depends="-ivy-setup">
     <ivy:cachefileset conf="bundle" setid="bundle.refid"/>
     <copy todir="lib">
         <fileset dir="contrib">
            <include name="*.jar" />
            <include name="mime.types" />
            <exclude name="**/*jakarta-regexp*" />
-           <exclude name="**/*servlet*" />
         </fileset>
         <fileset refid="bundle.refid"/>
     </copy>
-    <delete dir="build/src/temp"/>
   </target>
 
   <!-- =================================================================== -->
