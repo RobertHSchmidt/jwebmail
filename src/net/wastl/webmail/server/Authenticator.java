@@ -34,7 +34,6 @@ import org.webengruven.webmail.auth.AuthDisplayMngr;
  * This class actually doesn't do anything.
  *
  * @author Sebastian Schaffert
- * @version 1.0
  * @see AuthenticatorHandler
  * @see net.wastl.webmail.storage.simple.SimpleStorage
  */

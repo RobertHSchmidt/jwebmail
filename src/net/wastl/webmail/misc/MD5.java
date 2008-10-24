@@ -20,25 +20,8 @@
 package net.wastl.webmail.misc;
 
 /*
- * $Header: /cvsroot/jwebmail/jwebmail-0.7/src/net/wastl/webmail/misc/MD5.java,v 1.1.1.1 2002/11/21 21:20:20 wastl Exp $
- *
  * MD5 in Java JDK Beta-2
  * written Santeri Paavolainen, Helsinki Finland 1996
- * (c) Santeri Paavolainen, Helsinki Finland 1996
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the Free
- * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  * See http://www.cs.hut.fi/~santtu/java/ for more information on this
  * class.
@@ -48,42 +31,8 @@ package net.wastl.webmail.misc;
  *
  * Passes MD5 test suite as defined in RFC1321.
  *
- *
  * This Java class has been derived from the RSA Data Security, Inc. MD5
  * Message-Digest Algorithm and its reference implementation.
- *
- *
- * $Log: MD5.java,v $
- * Revision 1.1.1.1  2002/11/21 21:20:20  wastl
- * Initial import.
- *
- * Revision 1.1.1.1  2002/10/02 18:42:49  wastl
- *
- *
- * Revision 1.1.1.1  2002/09/30 19:30:11  wastl
- *
- *
- * Revision 1.2  2001/11/18 16:42:20  wastl
- * *** empty log message ***
- *
- * Revision 1.1  2000/09/13 12:47:50  wastl
- * *** empty log message ***
- *
- * Revision 1.5  1996/12/12 10:47:02  santtu
- * Changed GPL to LGPL
- *
- * Revision 1.4  1996/12/12 10:30:02  santtu
- * Some typos, State -> MD5State etc.
- *
- * Revision 1.3  1996/04/15 07:28:09  santtu
- * Added GPL statemets, and RSA derivate stametemetsnnts.
- *
- * Revision 1.2  1996/03/04 08:05:48  santtu
- * Added offsets to Update method
- *
- * Revision 1.1  1996/01/07 20:51:59  santtu
- * Initial revision
- *
  */
 
 /**

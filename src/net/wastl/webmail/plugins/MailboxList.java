@@ -19,7 +19,6 @@
 
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.server.http.*;
-// import net.wastl.webmail.ui.ContentProvider;
 import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;

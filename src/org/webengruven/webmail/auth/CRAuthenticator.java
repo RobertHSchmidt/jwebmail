@@ -40,8 +40,6 @@ import net.wastl.webmail.exceptions.*;
  * Recreated: Sun Sep 24 2000
  *
  * 08/11/2000 Sebastian Schaffert: Modified to fit into WebMail 0.7.2
- * - added import net.wastl.webmail.exceptions.*;
- *
  *
  * @author Devin Kowatch
  * @version $Revision$

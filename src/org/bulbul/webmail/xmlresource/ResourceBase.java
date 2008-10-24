@@ -52,7 +52,6 @@ import net.wastl.webmail.server.WebMailServer;
  * must returns only filename without pathname)
  *
  * @author        Steve Excellent Lee
- * @version      1.0 2001
  */
 public abstract class ResourceBase extends ResourceBundle {
     protected boolean debug = false;

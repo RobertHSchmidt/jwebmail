@@ -29,7 +29,6 @@ import net.wastl.webmail.config.ConfigScheme;
  * Created: Mon Apr 19 11:17:03 1999
  *
  * @author Sebastian Schaffert
- * @version 1.0
  * @see webmail.server.UserData
  */
 public class SimpleAuthenticator extends Authenticator {

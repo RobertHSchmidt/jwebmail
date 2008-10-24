@@ -30,7 +30,6 @@ import javax.mail.internet.MimeUtility;
  * Provides transcoding utilities.
  *
  * @author              Steve Excellent Lee.
- * @version             1.0 2000
  */
 public class TranscodeUtil {
     /**
