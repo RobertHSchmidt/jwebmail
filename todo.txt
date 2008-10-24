@@ -3,6 +3,11 @@ $Id$
 Ordered short-term TODO list
 ============================
 
+Use javax.xml.xpath instead of org.apache.xpath. in xlan.jar.
+
+Determine exactly what the app writes to at runtime.
+Have it use a working-directory instead of writing into the deliverable.
+
 IMPORTANT:  DO NOT FORGET
 If do not hear back from Kevin Excellent Lee, then revert the org.bulbul
 classes back to GPL.  (Already have perm from Kowatch for webengruven).
@@ -10,12 +15,6 @@ classes back to GPL.  (Already have perm from Kowatch for webengruven).
 Somewhere in the callback thread, log the target document of XPath failures.
 
 Resolve NPE being thrown constantly from XMLData.getNodeXPath().
-
-Updated cos.jar  to the latest (2003/11/05) cut.
-Get updated javaOTP.jar w/ webengruven OTP auth.  Version???
-mbox.jar seems to be v. 1.3.3 of the obsolete knife mbox provider.
-
-Use javax.xml.xpath instead of org.apache.xpath. in xlan.jar.
 
 If haven't already, document requirement for JDK 1.5
 (javax.xml.xpath not in 1.4).
