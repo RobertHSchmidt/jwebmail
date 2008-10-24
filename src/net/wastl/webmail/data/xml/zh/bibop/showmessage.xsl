@@ -162,13 +162,11 @@
 
   <xsl:template match="PART">
     <xsl:choose>
-        <!-- Modified by exce, start -->
         <!--
       <xsl:when test="@type='text'">
         -->
         <xsl:when test="@type='text' and @hidden='true'" />
       <xsl:when test="@type='text' and not(@hidden='true')">
-        <!-- Modified by exce, end -->
         <PRE>
           <xsl:for-each select="*">
             <xsl:apply-templates select="."/>
@@ -182,17 +180,13 @@
       </xsl:when>
       <xsl:when test="@type='multi'">
         <xsl:for-each select="PART">
-        <!-- Modified by exce, start -->
         <xsl:choose>
         <xsl:when test="@hidden='true'" />
         <xsl:otherwise>
-        <!-- Modified by exce, end -->
           <CENTER><P class="testoGrande">MIME part</P></CENTER><BR/>
           <xsl:apply-templates select="."/>
-        <!-- Modified by exce, start -->
         </xsl:otherwise>
         </xsl:choose>
-        <!-- Modified by exce, end -->
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>

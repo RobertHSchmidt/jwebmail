@@ -21,20 +21,12 @@ package net.wastl.webmail.server;
 
 import java.util.*;
 
-/*
- * URLHandlerTree.java
- *
- * Created: Thu Sep  2 13:20:23 199
- */
 /**
  * A tree structure to improve (speed up) access to URLs
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class URLHandlerTree implements URLHandlerTreeNode {
-
     URLHandler handler;
 
     String url;
@@ -99,5 +91,4 @@ public class URLHandlerTree implements URLHandlerTreeNode {
     public String toString() {
         return nodes.toString();
     }
-
-} // URLHandlerTree
+}

@@ -23,31 +23,22 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 import java.lang.reflect.*;
-
 import javax.mail.Session;
 import javax.mail.Provider;
 import javax.servlet.UnavailableException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import net.wastl.webmail.debug.ErrorHandler;
 import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.config.ConfigScheme;
 import net.wastl.webmail.misc.Helper;
 import net.wastl.webmail.exceptions.*;
 
-/*
- * WebMailServer.java
- *
- * Created: Tue Feb  2 12:07:25 1999
- */
 /**
  * This is WebMails main server. From here most parts will be administered.
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-/* 9/24/2000 devink - Updated for new challenge/response auth */
 public abstract class WebMailServer  {
     private static Log log = LogFactory.getLog(WebMailServer.class);
 
@@ -76,12 +67,10 @@ public abstract class WebMailServer  {
 
     protected Properties config;
 
-    // Modified by exce, start.
     /**
      * Webmail default locale setting.
      */
     protected static Locale defaultLocale = null;
-    // Modified by exce, end.
 
     protected static String defaultTheme = null;
 
@@ -130,7 +119,6 @@ public abstract class WebMailServer  {
         new SystemCheck(this);
 
         initConfig();
-        // Modified by exce, start
         /**
          * Initialize the default locale for webmail.
          */
@@ -143,7 +131,6 @@ public abstract class WebMailServer  {
                                        config.getProperty("webmail.default.locale.country")
                                        );
         System.err.println("- Default Locale: " + defaultLocale.getDisplayName());
-        // Modified by exce, end
 
         /*
          * Set the default theme to the parameter given in webmail.default.theme
@@ -188,7 +175,6 @@ public abstract class WebMailServer  {
         log.fatal("WebMail/Java Server "+VERSION+" initialization completed.");
         System.err.println("Initalization complete.");
         start_time=System.currentTimeMillis();
-
     }
 
     protected void initStorage()
@@ -227,7 +213,6 @@ public abstract class WebMailServer  {
         config_scheme.configRegisterCryptedStringKey("ADMIN PASSWORD","Secret",
                                                      "Password for administrator connections. Shown encrypted, but enter"+
                                                      " plain password to change.");
-
     }
 
 
@@ -365,7 +350,6 @@ public abstract class WebMailServer  {
         return defaultTheme;
     }
 
-    // Modified by exce, start
     /**
      * Return default locale.
      *
@@ -382,7 +366,6 @@ public abstract class WebMailServer  {
     public static Locale getDefaultLocale() {
         return defaultLocale;
     }
-    // Modified by exce, end
 
     public void setProperty(String name, String value) {
         config.put(name,value);
@@ -478,5 +461,4 @@ public abstract class WebMailServer  {
     public Enumeration getSessions() {
         return sessions.keys();
     }
-
-} // WebMailServer
+}

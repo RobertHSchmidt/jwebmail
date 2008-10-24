@@ -22,24 +22,15 @@ import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
-
 import java.util.Locale;
 
-/*
- * ImageHandler.java
- *
- * Created: Mon Mar 27 23:15:41 2000
- */
 /**
  * This plugin passes through data without doing any processing. It can be used for images
  * or other binary/text data by calling http://yourhost/mountpoint/webmail/passthrough/<file>
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class PassThroughPlugin implements Plugin, URLHandler  {
-
     public static final String VERSION="1.0";
     public static final String URL="/passthrough";
 
@@ -47,7 +38,6 @@ public class PassThroughPlugin implements Plugin, URLHandler  {
     WebMailServer parent;
 
     public PassThroughPlugin() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -78,7 +68,6 @@ public class PassThroughPlugin implements Plugin, URLHandler  {
         if(session == null || session instanceof AdminSession) {
             //throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
             //System.err.println("Sending "+suburl.substring(1)+" to unknown user ");
-            // Modified by exce, start
             /**
              * If we just use JVM's default locale, no matter what user's locale
              * is, we always send webmail.css of JVM's default locale.
@@ -89,7 +78,6 @@ public class PassThroughPlugin implements Plugin, URLHandler  {
              */
             // return new HTMLImage(store,suburl.substring(1),Locale.getDefault(),"default");
             return new HTMLImage(store, suburl.substring(1), WebMailServer.getDefaultLocale(), parent.getProperty("webmail.default.theme"));
-            // Modified by exce, end
         } else {
             UserData data=((WebMailSession)session).getUser();
             //System.err.println("Sending "+suburl.substring(1)+" to user "+data.getLogin());
@@ -104,5 +92,4 @@ public class PassThroughPlugin implements Plugin, URLHandler  {
     public String requires() {
         return "";
     }
-
-} // ImageHandler
+}

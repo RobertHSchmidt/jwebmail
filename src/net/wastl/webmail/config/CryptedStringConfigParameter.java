@@ -21,19 +21,11 @@ package net.wastl.webmail.config;
 
 import net.wastl.webmail.misc.Helper;
 
-/*
- * CryptedStringConfigParameter.java
- *
- * Created: Mon Sep 13 12:49:42 1999
- */
 /**
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class CryptedStringConfigParameter extends StringConfigParameter {
-
     public CryptedStringConfigParameter(String name, String def, String desc) {
         super(name,Helper.crypt("AA",def),desc);
     }
@@ -46,4 +38,4 @@ public class CryptedStringConfigParameter extends StringConfigParameter {
     public String getType() {
         return "crypted";
     }
-} // CryptedStringConfigParameter
+}

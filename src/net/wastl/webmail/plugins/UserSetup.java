@@ -23,15 +23,9 @@ import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
-
 import org.webengruven.webmail.auth.*;
 
 
-/*
- * UserSetup.java
- *
- * Created: Wed Sep  8 14:07:36 1999
- */
 /**
  * Show a form to change user settings and actually perform them.
  *
@@ -39,19 +33,14 @@ import org.webengruven.webmail.auth.*;
  * requires: content bar
  *
  * @author Sebastian Schaffert
- * @version
  */
-/* 9/24/2000 devink - changed for new challenge/response auth */
-
 public class UserSetup implements Plugin, URLHandler {
-
     public static final String VERSION="1.3";
     public static final String URL="/setup";
 
     Storage store;
 
     public UserSetup() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -86,7 +75,6 @@ public class UserSetup implements Plugin, URLHandler {
         HTMLDocument content;
     AuthDisplayMngr adm=store.getAuthenticator().getAuthDisplayMngr();
 
-    /* 9/24/2000 devink - set up password change stuff */
     adm.setPassChangeVars(user, session.getUserModel());
     session.getUserModel().setStateVar(
         "pass change tmpl", adm.getPassChangeTmpl());
@@ -113,4 +101,4 @@ public class UserSetup implements Plugin, URLHandler {
     public String requires() {
         return "content bar";
     }
-} // UserSetup
+}

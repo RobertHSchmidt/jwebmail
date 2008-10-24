@@ -30,18 +30,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * AdminPlugin.java
- *
- * Created: Thu Sep  9 16:52:36 1999
- */
-/**
  *
  *
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class AdminPlugin implements Plugin, URLHandler {
     private static Log log = LogFactory.getLog(AdminPlugin.class);
 
@@ -120,7 +113,6 @@ public class AdminPlugin implements Plugin, URLHandler {
                                       parent.getStorage().getStylesheet("admin-navigation.xsl",
                                                                         parent.getDefaultLocale(),
                                                                         parent.getProperty("webmail.default.theme")));
-            // Modified by exce, end
         } else if(suburl.startsWith("/control")) {
             if(suburl.startsWith("/control/kill")) {
                 String sid=header.getContent("kill");
@@ -154,7 +146,6 @@ public class AdminPlugin implements Plugin, URLHandler {
 
         } else if(suburl.startsWith("/domain")) {
             if(suburl.startsWith("/domain/set")) {
-
                 try {
                     Enumeration enumVar=parent.getStorage().getVirtualDomains();
                     while(enumVar.hasMoreElements()) {
@@ -211,7 +202,6 @@ public class AdminPlugin implements Plugin, URLHandler {
                (header.isContentSet("edit") || header.isContentSet("change"))) {
                 if(header.isContentSet("user")) {
                     ((AdminSession)session).selectUser(header.getContent("user"));
-            /* 10/22/2000 devink -- setup new password changing stuff */
             ((AdminSession)session).setupUserEdit();
 
                     if(header.isContentSet("change")) {
@@ -260,7 +250,6 @@ public class AdminPlugin implements Plugin, URLHandler {
 
 
     protected class ShutdownThread extends Thread {
-
         protected WebMailServer parent;
 
         protected int time;
@@ -296,5 +285,4 @@ public class AdminPlugin implements Plugin, URLHandler {
             }
         }
     }
-
-} // AdminPlugin
+}

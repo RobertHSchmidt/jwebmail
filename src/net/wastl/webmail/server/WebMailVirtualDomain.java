@@ -21,11 +21,6 @@ package net.wastl.webmail.server;
 
 import java.util.*;
 
-/*
- * WebMailVirtualDomain.java
- *
- * Created: Sat Jan 15 14:08:30 2000
- */
 /**
  * Represents a virtual domain in WebMail.
  * A virtual domain in WebMail allows the following things
@@ -35,11 +30,8 @@ import java.util.*;
  *   are allowed to connect to.
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public interface WebMailVirtualDomain  {
-
     /**
      * Return the name of this domain. This will be appended to a new users email address
      * and will be used in the login screen
@@ -91,5 +83,4 @@ public interface WebMailVirtualDomain  {
     public void setHostsRestricted(boolean b);
 
     public boolean getHostsRestricted();
-
-} // WebMailVirtualDomain
+}

@@ -33,17 +33,8 @@ import net.wastl.webmail.xml.*;
 import net.wastl.webmail.ui.html.Fancyfier;
 import net.wastl.webmail.server.http.HTTPRequestHeader;
 import net.wastl.webmail.exceptions.*;
-// Modified by exce, start
 import org.bulbul.webmail.util.TranscodeUtil;
-// Modified by exce, end
-
 import org.w3c.dom.*;
-
-/*
- * WebMailSession.java
- *
- * Created: Thu Feb  4 12:59:30 1999
- */
 
 /**
  * A user session for WebMail.
@@ -52,9 +43,7 @@ import org.w3c.dom.*;
  *
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-/* 9/24/2000 devink - updated for challenge/response auth */
 public class WebMailSession implements HTTPSession {
     private static Log log = LogFactory.getLog(WebMailSession.class);
 
@@ -134,14 +123,10 @@ public class WebMailSession implements HTTPSession {
             session_code=Helper.calcSessionCode(remote,h);
         }
         doInit(parent,h);
-
     }
 
     /**
      * This method does the actual initialisation
-     *
-     * devink 7/15/2000 - added TwoPassAuthenticationException
-     * devink 9/24/2000 - reverted back to old getUserData call
      */
     protected void doInit(WebMailServer parent, HTTPRequestHeader h)
          throws UserDataException, InvalidPasswordException, WebMailException {
@@ -258,14 +243,12 @@ public class WebMailSession implements HTTPSession {
      */
     public void createMessageList(String folderhash,int list_part)
         throws NoSuchFolderException {
-
         long time_start=System.currentTimeMillis();
         TimeZone tz=TimeZone.getDefault();
         DateFormat df=DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT, user.getPreferredLocale());
         df.setTimeZone(tz);
 
         try {
-
             Folder folder=getFolder(folderhash);
             Element xml_folder=model.getFolder(folderhash);
             Element xml_current=model.setCurrentFolder(folderhash);
@@ -426,9 +409,7 @@ public class WebMailSession implements HTTPSession {
                 /* Set all of what we found into the DOM */
                 xml_message.setHeader("FROM",from);
                 try {
-                        // Modified by exce, start.
                         // hmm, why decode subject twice? Though it doesn't matter..
-                        // Modified by exce, end.
                     xml_message.setHeader("SUBJECT",MimeUtility.decodeText(subject));
                 } catch(UnsupportedEncodingException e) {
                         xml_message.setHeader("SUBJECT",subject);
@@ -841,10 +822,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                     }
                 }
                 xml_part.addContent(content.toString(),old_quotelevel);
-                // Modified by exce, start
                 // Why the following code???
                 content=new StringBuffer(1000);
-                // Modified by exce, end.
             } else if(p.getContentType().toUpperCase().startsWith("MULTIPART/ALTERNATIVE")) {
                 /* This is a multipart/alternative part. That means that we should pick one of
                    the formats and display it for this part. Our current precedence list is
@@ -856,7 +835,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 // Walk though our preferred list of encodings. If we have found a fitting part,
                 // decode it and replace it for the parent (this is what we really want with an
                 // alternative!)
-                // Modified by exce, start
                 /**
             findalt: while(!found && alt < preferred.length) {
                 for(int i=0;i<m.getCount();i++) {
@@ -923,7 +901,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                     }
                     alt++;
                 }
-                // Modified by exce, end
                 if(!found) {
                     // If we didn't find one of our preferred encodings, choose the first one
                     // simply pass the parent part because replacement is what we really want with
@@ -1005,7 +982,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 data.setContentEncoding("BINARY");
                 mime_parts_decoded.put(msgid+"/"+name,data);
 
-                // Modified by exce, start
                 /**
                  * For multibytes language system, we have to separate filename into
                  * 2 format: one for display (UTF-8 encoded), another for encode the
@@ -1018,7 +994,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 xml_part.setAttribute("filename",name);
                 // Transcode name into UTF-8 bytes then make a new ISO8859_1 string to encode URL.
                 xml_part.setAttribute("hrefFileName", name);
-                // Modified by exce, end
                 xml_part.setAttribute("size",size+"");
                 String description=p.getDescription()==null?"":p.getDescription();
                 xml_part.setAttribute("description",description);
@@ -1202,7 +1177,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         /* Store the already typed message if necessary/possible */
         if(head.isContentSet("BODY")) {
             StringBuffer content=new StringBuffer();
-                // Modified by exce, start
                 /**
                  * Because the data transfered through HTTP should be ISO8859_1,
                  * HTTPRequestHeader is also ISO8859_1 encoded. Furthermore, the
@@ -1233,7 +1207,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             } else {
                 // content.append(head.getContent("BODY"));
                 content.append(bodyString);
-                // Modified by exce, end
             }
             xml_textpart.removeAllContent();
             xml_textpart.addContent(content.toString(),0);
@@ -1247,7 +1220,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 }
         }
         if(head.isContentSet("TO")) {
-                // Modified by exce, start
             // xml_message.setHeader("TO",head.getContent("TO"));
             try {
                         xml_message.setHeader("TO", new String(head.getContent("TO").getBytes("ISO8859_1"), "UTF-8"));
@@ -1255,10 +1227,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                         e.printStackTrace();
                         xml_message.setHeader("TO",head.getContent("TO"));
                 }
-                // Modified by exce, end
         }
         if(head.isContentSet("CC")) {
-            // Modified by exce, start
             // xml_message.setHeader("CC",head.getContent("CC"));
             try {
                 xml_message.setHeader("CC", new String(head.getContent("CC").getBytes("ISO8859_1"), "UTF-8"));
@@ -1266,10 +1236,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 e.printStackTrace();
                 xml_message.setHeader("CC",head.getContent("CC"));
             }
-            // Modified by exce, end
         }
         if(head.isContentSet("BCC")) {
-            // Modified by exce, start
             // xml_message.setHeader("BCC",head.getContent("BCC"));
             try {
                 xml_message.setHeader("BCC", new String(head.getContent("BCC").getBytes("ISO8859_1"), "UTF-8"));
@@ -1277,10 +1245,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 e.printStackTrace();
                 xml_message.setHeader("BCC",head.getContent("BCC"));
             }
-            // Modified by exce, end
         }
         if(head.isContentSet("REPLY-TO")) {
-            // Modified by exce, start
             // xml_message.setHeader("REPLY-TO",head.getContent("REPLY-TO"));
             try {
                 xml_message.setHeader("REPLY-TO", new String(head.getContent("REPLY-TO").getBytes("ISO8859_1"), "UTF-8"));
@@ -1288,10 +1254,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 e.printStackTrace();
                 xml_message.setHeader("REPLY-TO",head.getContent("REPLY-TO"));
             }
-                // Modified by exce, end
         }
         if(head.isContentSet("SUBJECT")) {
-            // Modified by exce, start
             // xml_message.setHeader("SUBJECT",head.getContent("SUBJECT"));
             try {
                 xml_message.setHeader("SUBJECT", new String(head.getContent("SUBJECT").getBytes("ISO8859_1"), "UTF-8"));
@@ -1299,7 +1263,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 e.printStackTrace();
                 xml_message.setHeader("SUBJECT",head.getContent("SUBJECT"));
             }
-            // Modified by exce, end
         }
         setEnv();
     }
@@ -1383,7 +1346,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         try {
             /* This folder can contain messages */
             if(holds_messages) {
-
                 Element messagelist=model.createMessageList();
 
                 int total_messages=folder.getMessageCount();
@@ -1467,7 +1429,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             int depth=0;
 
             try {
-
                 cur_folder=getRootFolder(cur_mh_id);
 
 
@@ -1512,7 +1473,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             }
 
             model.addMailhost(mailhost);
-
         }
 
         model.setStateVar("max folder depth",(1+max_depth)+"");
@@ -1546,7 +1506,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 xml_folder.setAttribute("error",ex.getMessage());
             }
         }
-
     }
 
     /**
@@ -1610,7 +1569,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
      */
     public void setSubscribedDefault(String id, boolean subscribed)
         throws MessagingException {
-
         Folder folder=getRootFolder(id);
         folder.setSubscribed(subscribed);
     }
@@ -1886,13 +1844,11 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
     */
     public void setFlags(String folderhash, HTTPRequestHeader head) throws MessagingException {
-
         if(head.isContentSet("copymovemsgs") && head.getContent("COPYMOVE").equals("COPY")) {
             copyMoveMessage(folderhash,head.getContent("TO"),head,false);
         } else if(head.isContentSet("copymovemsgs") && head.getContent("COPYMOVE").equals("MOVE")) {
             copyMoveMessage(folderhash,head.getContent("TO"),head,true);
         } else if(head.isContentSet("flagmsgs")) {
-
             System.err.println("setting message flags");
             Folder folder=getFolder(folderhash);
 
@@ -1950,7 +1906,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
             folder.open(Folder.READ_WRITE);
             refreshFolderInformation(folderhash);
-
         }
     }
 
@@ -2021,7 +1976,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
      * but in a plugin or something; this is very hacky).
      */
     public void changeSetup(HTTPRequestHeader head) throws WebMailException {
-
         Enumeration contentkeys=head.getContentKeys();
         user.resetBoolVars();
         while(contentkeys.hasMoreElements()) {
@@ -2039,7 +1993,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             }
         }
 
-        // Modified by exce, start
         /**
          * As described in line #1088, we have to transcode these strings.
          * We only allow SIGNATURE and FULLNAME to contain locale-specific
@@ -2069,7 +2022,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                         user.setSignature(head.getContent("SIGNATURE"));
                         user.setFullName(head.getContent("FULLNAME"));
                 }
-                // Modified by exce, end
 
                 if(!head.getContent("PASSWORD").equals("")) {
                         net.wastl.webmail.server.Authenticator auth=parent.getStorage().getAuthenticator();
@@ -2141,7 +2093,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
     public void addFolder(String toid, String name, boolean holds_messages, boolean holds_folders)
         throws MessagingException {
-
         Folder parent=getFolder(toid);
         Folder folder=parent.getFolder(name);
         if(!folder.exists()) {
@@ -2261,5 +2212,4 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         model.setStateVar("invalid addresses",Helper.joinAddress(e.getInvalidAddresses()));
         sent=true;
     }
-
-} // WebMailSession
+}

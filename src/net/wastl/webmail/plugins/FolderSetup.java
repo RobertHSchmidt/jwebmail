@@ -22,14 +22,8 @@ import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
-
 import java.util.Enumeration;
 
-/*
- * FolderSetup.java
- *
- * Created: Tue Sep  7 18:45:11 1999
- */
 /**
  * Show the folder setup form and handle changes (except deletion).
  *
@@ -39,19 +33,14 @@ import java.util.Enumeration;
  * Created: Tue Sep  7 18:45:11 1999
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class FolderSetup implements Plugin, URLHandler {
-
-
     public static final String VERSION="1.3";
     public static final String URL="/folder/setup";
 
     Storage store;
 
     public FolderSetup() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -89,7 +78,6 @@ public class FolderSetup implements Plugin, URLHandler {
             if(header.isContentSet("remove")) {
                 session.removeMailbox(header.getContent("remove"));
             } else if(header.isContentSet("add")) {
-
                 try {
                     session.addMailbox(header.getContent("mbox_name"),
                                        header.getContent("mbox_proto"),
@@ -156,7 +144,6 @@ public class FolderSetup implements Plugin, URLHandler {
                                       store.getStylesheet("foldersetup-folders-add.xsl",
                                                           user.getPreferredLocale(),user.getTheme()));
         } else {
-
             content=new XHTMLDocument(session.getModel(),
                                       store.getStylesheet("foldersetup.xsl",
                                                           user.getPreferredLocale(),user.getTheme()));
@@ -171,4 +158,4 @@ public class FolderSetup implements Plugin, URLHandler {
     public String requires() {
         return "content bar";
     }
-} // FolderSetup
+}

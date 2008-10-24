@@ -24,7 +24,6 @@ import net.wastl.webmail.server.http.*;
 import java.net.*;
 import java.util.*;
 import net.wastl.webmail.exceptions.*;
-
 import org.w3c.dom.Document;
 
 /*
@@ -36,11 +35,8 @@ import org.w3c.dom.Document;
 /**
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public interface HTTPSession extends TimeableConnection {
-
     public void login(HTTPRequestHeader h) throws InvalidPasswordException;
 
     public void login();
@@ -70,5 +66,4 @@ public interface HTTPSession extends TimeableConnection {
     public boolean isLoggedOut();
 
     public void setException(Exception ex);
-
-} // HTTPSession
+}

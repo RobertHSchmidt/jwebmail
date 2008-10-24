@@ -24,29 +24,19 @@ import net.wastl.webmail.misc.*;
 import net.wastl.webmail.config.*;
 import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.exceptions.*;
-
 import java.net.*;
 import java.util.*;
 import javax.mail.*;
 import javax.servlet.http.*;
-
 import org.w3c.dom.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.webengruven.webmail.auth.*;
 
 /**
- * AdminSession.java
- *
- * Created: Thu Sep  9 18:24:05 1999
- */
-/**
  *
  * @author Sebastian Schaffert
- * @version
  */
-/* 9/24/2000 devink -- updated for new challenge/response authentication */
 public class AdminSession implements HTTPSession {
     private static Log log = LogFactory.getLog(AdminSession.class);
 
@@ -99,7 +89,6 @@ public class AdminSession implements HTTPSession {
             session_code=Helper.calcSessionCode(remote,h);
         }
         doInit(parent,h);
-
     }
 
     protected void doInit(WebMailServer parent, HTTPRequestHeader h)
@@ -193,7 +182,6 @@ public class AdminSession implements HTTPSession {
         selectDomain(selected_domain);
     }
 
-    /* 10/22/2000 devink -- added to suport new authentication changes. */
     /** This does all the necessary setup to edit the currently selected
      * user.
      */
@@ -251,12 +239,10 @@ public class AdminSession implements HTTPSession {
             }
             catch (InvalidPasswordException e) {
                 /* XXX Not sure this is the right exception */
-                            // Modified by exce, start
                             /**
                 throw new InvalidDataException(parent.getStorage().getStringResource("EX NO CHANGE PASSWORD", Locale.getDefault()));
                                 **/
                                 throw new InvalidDataException(parent.getStorage().getStringResource("EX NO CHANGE PASSWORD", parent.getDefaultLocale()));
-                            // Modified by exce, end
             }
             } else {
                 throw new InvalidDataException(parent.getStorage().getStringResource("EX NO CHANGE PASSWORD",Locale.getDefault()));
@@ -268,7 +254,6 @@ public class AdminSession implements HTTPSession {
 
         selectUser(selected_user);
         selectDomain(selected_domain);
-
     }
 
     public void selectDomain(String domain) {
@@ -348,7 +333,6 @@ public class AdminSession implements HTTPSession {
                     sess_elem.appendChild(model.createTextElement("SESS_ADDRESS",h.getRemoteAddress().toString()));
                     sess_elem.appendChild(model.createTextElement("SESS_CODE",h.getSessionCode()));
                     sess_elem.appendChild(model.createStateVar("idle time",(System.currentTimeMillis()-h.getLastAccess())/1000+""));
-
                 }
             }
         }
@@ -367,7 +351,6 @@ public class AdminSession implements HTTPSession {
         for(int i=0; i<stores.length; i++) {
             model.addStateVar("protocol",stores[i].getProtocol());
         }
-
     }
 
 
@@ -390,4 +373,4 @@ public class AdminSession implements HTTPSession {
     public Document getModel() {
         return model.getRoot();
     }
-} // AdminSession
+}

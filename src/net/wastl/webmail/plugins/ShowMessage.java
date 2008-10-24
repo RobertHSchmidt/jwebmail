@@ -24,11 +24,6 @@ import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.exceptions.*;
 import java.util.*;
 
-/*
- * ShowMessage.java
- *
- * Created: Thu Sep  2 16:57:54 1999
- */
 /**
  * Show a message.
  *
@@ -36,18 +31,14 @@ import java.util.*;
  * requires: message list
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class ShowMessage implements Plugin, URLHandler {
-
     public static final String VERSION="1.3";
     public static final String URL="/folder/showmsg";
 
     Storage store;
 
     public ShowMessage() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -111,4 +102,4 @@ public class ShowMessage implements Plugin, URLHandler {
     public String requires() {
         return "message list";
     }
-} // ShowMessage
+}

@@ -24,7 +24,6 @@
  * authenticators directory, and that just creates problems.
  *
  * @author Devin Kowatch
- * @version $Revision$
  * @see OTPAuthenticator
  */
 package org.webengruven.webmail.auth;
@@ -48,5 +47,3 @@ public class OTPCacheNode {
         new_st = nw;
     }
 };
-
-

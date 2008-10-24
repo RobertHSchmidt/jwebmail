@@ -23,11 +23,6 @@ import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
 
-/*
- * MailboxList.java
- *
- * Created: Thu Sep  2 12:00:38 1999
- */
 /**
  * Show a list of user mailboxes.
  *
@@ -37,18 +32,14 @@ import net.wastl.webmail.exceptions.*;
  * Created: Thu Sep  2 12:00:38 1999
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class MailboxList implements Plugin, URLHandler {
-
     public static final String VERSION="1.3";
     public static final String URL="/mailbox";
 
     Storage store;
 
     public MailboxList() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -96,4 +87,4 @@ public class MailboxList implements Plugin, URLHandler {
     public String requires() {
         return "content bar";
     }
-} // MailboxList
+}

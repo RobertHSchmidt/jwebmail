@@ -24,7 +24,6 @@
  * member of any package (due to being a plugin) and as such,
  * OTPAuthDisplayMngr has no access to it, or it's specific methods.
  *
- * @version $Revision$
  * @author Devin Kowatch
  * @see OTPAuthenticator
  * @see OTPAuthDisplayMngr

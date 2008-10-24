@@ -20,10 +20,7 @@
 /** This is the URLHandler for "/challenge" It shows the user a challenge and
  *  gets their new password.
  *
- * 08/11/2000 Sebastian Schaffert: Modified to fit into WebMail 0.7.2
- *
  * @author Devin Kowatch
- * @version $Revision$
  * @see net.wastl.webmail.URLHandler
  */
 
@@ -35,7 +32,6 @@ import net.wastl.webmail.xml.*;
 import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
-
 import org.webengruven.webmail.auth.*;
 
 public class ChallengeHandler implements Plugin, URLHandler {
@@ -110,5 +106,3 @@ public class ChallengeHandler implements Plugin, URLHandler {
 
 
 } /* END class ChallengeHandler */
-
-

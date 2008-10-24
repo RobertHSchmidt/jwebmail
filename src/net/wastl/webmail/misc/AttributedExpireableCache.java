@@ -29,10 +29,8 @@ import java.util.*;
  * Created: Tue Apr 25 14:57:22 2000
  *
  * @author Sebastian Schaffert
- * @version
  */
 public class AttributedExpireableCache extends ExpireableCache {
-
     protected Hashtable attributes;
 
     public AttributedExpireableCache(int capacity, float expire_factor) {
@@ -58,4 +56,4 @@ public class AttributedExpireableCache extends ExpireableCache {
         attributes.remove(key);
         super.remove(key);
     }
-} // AttributedExpireableCache
+}

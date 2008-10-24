@@ -31,11 +31,8 @@ import net.wastl.webmail.misc.ByteStore;
  * Created: Tue Feb  2 15:25:48 1999
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class HTTPRequestHeader  {
-
     private Hashtable content;
 
     private Hashtable headers;
@@ -146,6 +143,4 @@ public class HTTPRequestHeader  {
         }
         return s;
     }
-
-
-} // HTTPHeader
+}

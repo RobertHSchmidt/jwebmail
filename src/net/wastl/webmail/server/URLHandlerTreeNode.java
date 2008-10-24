@@ -19,16 +19,9 @@
 
 package net.wastl.webmail.server;
 
-/*
- * URLHandlerTreeNode.java
- *
- * Created: Sep 1999
- */
 /**
  * This is an interface just to ensure that the URLHandlerTree gets correct data.
  */
 public interface URLHandlerTreeNode {
-
     public String getURL();
-
 }

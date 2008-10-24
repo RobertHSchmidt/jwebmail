@@ -25,18 +25,10 @@ import java.io.*;
 import java.util.*;
 
 /**
- * AuthenticatorHandler.java
- *
- * Created: Wed Sep  1 15:04:04 1999
- */
-/**
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class AuthenticatorHandler  {
-
     WebMailServer parent;
 
     Hashtable authenticators;
@@ -86,6 +78,4 @@ public class AuthenticatorHandler  {
     public Authenticator getAuthenticator(String key) {
         return (Authenticator)authenticators.get(key);
     }
-
-
-} // AuthenticatorHandler
+}

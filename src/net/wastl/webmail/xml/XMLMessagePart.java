@@ -20,7 +20,6 @@
 package net.wastl.webmail.xml;
 
 import java.util.*;
-
 import org.w3c.dom.*;
 
 
@@ -35,7 +34,6 @@ import org.w3c.dom.*;
  * A message part object for an XML message
  */
 public class XMLMessagePart  {
-
     protected Document root;
     protected Element part;
 
@@ -176,5 +174,4 @@ public class XMLMessagePart  {
     public void removeAllParts() {
         XMLCommon.genericRemoveAll(part,"PART");
     }
-
-} // XMLMessagePart
+}

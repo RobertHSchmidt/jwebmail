@@ -24,20 +24,12 @@ import java.util.regex.*;
 import net.wastl.webmail.exceptions.*;
 
 /**
- * SystemCheck.java
- *
- * Created: Tue Aug 31 15:40:57 1999
- */
-/**
  *
  *
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class SystemCheck  {
-
     public SystemCheck(WebMailServer parent) throws WebMailException {
         System.err.println("- Checking Java Virtual Machine ... ");
         System.err.print("  * Version: "+System.getProperty("java.version")+" ... ");
@@ -130,5 +122,4 @@ public class SystemCheck  {
             parent.setProperty(property,f.getAbsolutePath());
         }
     }
-
-} // SystemCheck
+}

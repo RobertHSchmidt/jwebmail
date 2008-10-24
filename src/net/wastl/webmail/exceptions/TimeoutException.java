@@ -19,23 +19,14 @@
 
 package net.wastl.webmail.exceptions;
 
-/*
- * TimeoutException.java
- *
- * Created: Wed Feb  3 08:03:03 1999
- */
 /**
  *
  *
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-
 public class TimeoutException extends Exception {
-
     public TimeoutException() {
         super();
     }
-
-} // TimeoutException
+}

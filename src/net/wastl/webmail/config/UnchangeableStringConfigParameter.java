@@ -19,22 +19,14 @@
 
 package net.wastl.webmail.config;
 
-/*
- * UnchangeableStringConfigParameter.java
- *
- * Created: Tue Oct 19 16:16:18 1999
- */
 /**
  * This is a parameter that cannot be changed.
  *
  * Created: Tue Oct 19 16:16:18 1999
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class UnchangeableStringConfigParameter extends StringConfigParameter {
-
     public UnchangeableStringConfigParameter(String name, String def, String desc) {
         super(name,def,desc);
     }
@@ -46,4 +38,4 @@ public class UnchangeableStringConfigParameter extends StringConfigParameter {
     public String getType() {
         return "unchangeable";
     }
-} // UnchangeableStringConfigParameter
+}

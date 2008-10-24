@@ -23,10 +23,8 @@ package net.wastl.webmail.xml;
  * @author <a href="mailto:wastl@wastl.net">Sebastian Schaffert</a>
  */
 import org.w3c.dom.*;
-
 import org.apache.xpath.*;
 import javax.xml.transform.TransformerException;
-
 import net.wastl.webmail.exceptions.WebMailException;
 
 /**
@@ -34,7 +32,6 @@ import net.wastl.webmail.exceptions.WebMailException;
  * retrieve data based on XPath expressions.
  */
 public class XMLData {
-
     protected Document root;
     protected Element data;
     protected CachedXPathAPI xpath_api;
@@ -173,5 +170,4 @@ public class XMLData {
     protected void invalidateCache() {
         xpath_api=new CachedXPathAPI();
     }
-
-}// XMLData
+}

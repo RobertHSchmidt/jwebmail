@@ -22,7 +22,6 @@ import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
 import javax.mail.*;
 import net.wastl.webmail.config.*;
-
 import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,10 +33,7 @@ import org.apache.commons.logging.LogFactory;
  * Created: Mon Apr 19 12:03:53 1999
  *
  * @author Sebastian Schaffert
- * @version
- * devink 7/15/2000 - changed some leftover "imap" strings to "pop"
  */
-
 public class POPAuthenticator extends net.wastl.webmail.server.Authenticator {
     private static Log log = LogFactory.getLog(POPAuthenticator.class);
 
@@ -93,5 +89,4 @@ public class POPAuthenticator extends net.wastl.webmail.server.Authenticator {
     public boolean canChangePassword() {
         return false;
     }
-
-} // POPAuthenticator
+}

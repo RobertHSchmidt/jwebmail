@@ -26,20 +26,12 @@ import net.wastl.webmail.exceptions.*;
 import java.util.*;
 
 /**
- * ErrorHandler.java
- *
- * Created: Wed Jul 19 2000
- */
-/**
  * This URLHandler handles error messages.
  *
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class ErrorHandler implements Plugin, URLHandler {
-
     public static final String VERSION="1.00";
     public static final String URL="/error";
 
@@ -48,7 +40,6 @@ public class ErrorHandler implements Plugin, URLHandler {
     Storage store;
 
     public ErrorHandler() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -92,5 +83,4 @@ public class ErrorHandler implements Plugin, URLHandler {
     public String requires() {
         return "";
     }
-
-} // About
+}

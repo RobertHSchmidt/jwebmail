@@ -23,32 +23,18 @@ import net.wastl.webmail.config.*;
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.misc.*;
 import net.wastl.webmail.exceptions.*;
-
 import java.util.*;
 import java.text.*;
-
-
 import org.w3c.dom.*;
 
-
-/**
- * XMLUserData.java
- *
- * Created: Fri Mar 10 16:17:28 2000
- */
 
 /**
  *
  *
  *
  * @author Sebastian Schaffert
- * @version
  */
-/* 9/25/2000 devink -- modified for challenge/response authentication */
-
 public class XMLUserData extends XMLData implements UserData {
-
-
     protected boolean debug;
 
     protected long login_time;
@@ -176,9 +162,7 @@ public class XMLUserData extends XMLData implements UserData {
     public void logout() {
         if(logged_in) {
             setIntVar("last login",login_time);
-            // Modified by exce, start
             logged_in = false;
-            // Modified by exce, end
         } else {
             System.err.println("Err: Logging out a user that wasn't logged in.");
         }
@@ -229,7 +213,6 @@ public class XMLUserData extends XMLData implements UserData {
         //final Element mailhost=XMLCommon.getElementByAttribute(data,"MAILHOST","id",id);
         final Element mailhost=(Element)getNodeXPath("/USERDATA/MAILHOST[@id='"+id+"']");
         return new MailHostData() {
-
                 public String getPassword() {
                     return Helper.decryptTEA(XMLCommon.getValueXPath(mailhost,"MH_PASSWORD/text()"));
                 }
@@ -593,7 +576,6 @@ public class XMLUserData extends XMLData implements UserData {
             e.setAttribute("value",value?"yes":"no");
             invalidateCache();
         }
-
     }
 
     protected boolean getBoolVarWrapper(String var) {
@@ -614,5 +596,4 @@ public class XMLUserData extends XMLData implements UserData {
         }
         invalidateCache();
     }
-
-} // XMLUserData
+}

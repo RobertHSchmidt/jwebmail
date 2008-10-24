@@ -33,11 +33,8 @@ import net.wastl.webmail.exceptions.*;
  * Created: Tue Feb  2 15:25:48 1999
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-
 public class HTTPResponseHeader  {
-
     private String status;
     private int response_code;
     private String http_version="HTTP/1.1";
@@ -97,5 +94,4 @@ public class HTTPResponseHeader  {
         s+="\r\n";
         return s;
     }
-
-} // HTTPHeader
+}

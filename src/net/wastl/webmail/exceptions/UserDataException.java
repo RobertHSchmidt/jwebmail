@@ -19,21 +19,13 @@
 
 package net.wastl.webmail.exceptions;
 
-/*
- * WebMailException.java
- *
- * Created: Thu Feb  4 16:55:06 1999
- */
 /**
  * An error corresponding to some user's data
  *
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-
 public class UserDataException extends WebMailException {
-
     String user;
     String domain;
 
@@ -54,5 +46,4 @@ public class UserDataException extends WebMailException {
     public String getDomain() {
         return domain;
     }
-
-} // InvalidPasswordException
+}

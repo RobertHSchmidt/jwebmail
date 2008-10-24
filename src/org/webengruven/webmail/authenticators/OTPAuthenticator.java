@@ -20,10 +20,8 @@
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
 import net.wastl.webmail.config.ConfigScheme;
-
 import org.webengruven.javaOTP.*;
 import org.webengruven.webmail.auth.*;
-
 import java.util.*;
 import java.security.NoSuchAlgorithmException;
 
@@ -34,9 +32,7 @@ import java.security.NoSuchAlgorithmException;
  * authentication based on RFC1938 one time passes.
  *
  * @author Devin Kowatch
- * @version $Revision$
  */
-
 public class OTPAuthenticator extends OTPAuthenticatorIface {
     /** The version of OTPAuthenticator */
     public final String     VERSION = "1.2";
@@ -122,7 +118,6 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
         try {
             // setup the new seed and seq.
             if (new_st == null) {
-
                 // Get a random value between (0, 10000], and pad to 4 chars.
                 int             randVal = rand.nextInt() % 9999;
                 StringBuffer    newSeed = new StringBuffer(10);
@@ -401,4 +396,4 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
 
     private Hashtable           cache;
     private OTPAuthDisplayMngr  disp_mngr;
-} // OTPAuthenticator
+}

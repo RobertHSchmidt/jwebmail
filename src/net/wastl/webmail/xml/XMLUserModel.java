@@ -20,10 +20,8 @@
 package net.wastl.webmail.xml;
 
 import java.util.*;
-
 import org.w3c.dom.*;
 import javax.xml.parsers.ParserConfigurationException;
-
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
 
@@ -44,11 +42,8 @@ import net.wastl.webmail.exceptions.*;
  * Threads access the model are rare anyway
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class XMLUserModel extends XMLGenericModel {
-
     protected Element usermodel;
 
     protected Element userdata;
@@ -56,7 +51,6 @@ public class XMLUserModel extends XMLGenericModel {
 
     public XMLUserModel(WebMailServer parent, Element rsysdata, Element ruserdata)
         throws ParserConfigurationException, org.xml.sax.SAXException, java.io.IOException {
-
         super(parent,rsysdata);
 
         usermodel=root.getDocumentElement();
@@ -317,5 +311,4 @@ public class XMLUserModel extends XMLGenericModel {
     public Element getCurrentFolder(String id) {
         return getCurrent("folder",id);
     }
-
-} // XMLUserModel
+}

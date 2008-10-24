@@ -24,11 +24,6 @@ import net.wastl.webmail.server.*;
 import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.exceptions.*;
 
-/*
- * Composer.java
- *
- * Created: Tue Sep  7 12:46:08 1999
- */
 /**
  * Compose a message. This plugin will show the compose form and fill in
  * the necessary fields if this is a continued message
@@ -41,18 +36,14 @@ import net.wastl.webmail.exceptions.*;
  * Created: Tue Sep  7 12:46:08 1999
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class Composer implements Plugin, URLHandler {
-
     public static final String VERSION="1.3";
     public static final String URL="/compose";
 
     Storage store;
 
     public Composer() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -86,7 +77,6 @@ public class Composer implements Plugin, URLHandler {
 
         /* We were not continuing to edit a message, so we should delete the current draft! */
         if(!header.isContentSet("continue")) {
-
             session.clearAttachments();
             session.clearWork();
 
@@ -138,4 +128,4 @@ public class Composer implements Plugin, URLHandler {
     public String requires() {
         return "content bar";
     }
-} // Composer
+}

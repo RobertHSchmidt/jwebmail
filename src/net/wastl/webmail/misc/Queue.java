@@ -22,18 +22,10 @@ package net.wastl.webmail.misc;
 import java.util.*;
 
 /**
- * Queue.java
- *
- * Created: Sat Sep 11 16:43:06 1999
- */
-/**
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class Queue  {
-
     Vector contents;
 
     public Queue() {
@@ -54,4 +46,4 @@ public class Queue  {
         contents.removeElementAt(0);
         return o;
     }
-} // Queue
+}

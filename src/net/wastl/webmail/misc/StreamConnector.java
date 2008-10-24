@@ -23,18 +23,11 @@ import net.wastl.webmail.server.*;
 import java.io.*;
 
 /**
- * StreamConnector.java
- *
- * Created: Tue Sep  7 14:47:10 1999
- */
-/**
  * Used to write to a OutputStream in a separate Thread to avoid blocking.
  *
  * @author Sebastian Schaffert
- * @version
  */
 public class StreamConnector extends Thread {
-
     InputStream in;
     ByteStore b;
     int size;
@@ -64,5 +57,4 @@ public class StreamConnector extends Thread {
         System.err.println();
         return b;
     }
-
-} // StreamConnector
+}

@@ -23,7 +23,6 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 import java.lang.reflect.*;
-
 import javax.mail.Session;
 import javax.mail.Provider;
 import net.wastl.webmail.server.http.*;
@@ -31,19 +30,11 @@ import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.exceptions.*;
 import net.wastl.webmail.misc.ByteStore;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import com.oreilly.servlet.multipart.*;
-
-/*
- * WebMailServer.java
- *
- * Created: Oct 1999
- */
 
 /**
  * This is WebMails main server. From here most parts will be administered.
@@ -52,12 +43,6 @@ import com.oreilly.servlet.multipart.*;
  * Created: Tue Feb  2 12:07:25 1999
  *
  * @author Sebastian Schaffert
- * @version $Revision$
- */
-
-/* devink 7/15/2000 - service() now handles a TwoPassAuthenticationException,
- * as does newSession()
- * devink 9/24/2000 - remove TwoPassAuthenticationException stuff
  */
 public class WebMailServlet extends WebMailServer implements Servlet {
     private static Log log = LogFactory.getLog(WebMailServer.class);
@@ -154,7 +139,6 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             e.printStackTrace();
             throw new ServletException("Could not intialize: "+e.getMessage(),e);
         }
-
     }
 
     public ServletConfig getServletConfig() {
@@ -221,7 +205,6 @@ public class WebMailServlet extends WebMailServer implements Servlet {
            the content ourself anyway.
         */
         try {
-
             BufferedOutputStream out=new BufferedOutputStream(res.getOutputStream());
 
 
@@ -258,8 +241,6 @@ public class WebMailServlet extends WebMailServer implements Servlet {
 
             if(req.getContentType() != null &&
                req.getContentType().toUpperCase().startsWith("MULTIPART/FORM-DATA")) {
-
-
                 int size=Integer.parseInt(WebMailServer.getStorage().getConfig("max attach size"));
                 MultipartParser mparser = new MultipartParser(req,size);
                 Part p;
@@ -279,7 +260,6 @@ public class WebMailServlet extends WebMailServer implements Servlet {
 
                     //log.info("Parameter "+p.getName());
                 }
-
             }
 
 
@@ -301,7 +281,6 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                     if(sess==null && (!url.equals("/") && !url.startsWith("/passthrough") && !url.startsWith("/admin"))) {
                             content=getURLHandler().handleURL("/logout",sess,http_header);
                     } else {
-
                     /* Ensure that the session state is up-to-date */
                     if(sess != null) sess.setEnv();
 
@@ -519,5 +498,4 @@ public class WebMailServlet extends WebMailServer implements Servlet {
     public static String getVersion() {
         return "WebMail/Java Servlet v"+VERSION;
     }
-
-} // WebMailServer
+}

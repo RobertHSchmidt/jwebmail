@@ -24,27 +24,18 @@ import net.wastl.webmail.exceptions.*;
 import java.util.Enumeration;
 
 /**
- * About.java
- *
- * Created: Wed Sep  1 17:16:06 1999
- */
-/**
  *
  *
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class About implements Plugin, URLHandler {
-
     public static final String VERSION="1.00";
     public static final String URL="/about";
 
     WebMailServer parent;
 
     public About() {
-
     }
 
     public void register(WebMailServer parent) {
@@ -96,5 +87,4 @@ public class About implements Plugin, URLHandler {
     public String requires() {
         return "";
     }
-
-} // About
+}

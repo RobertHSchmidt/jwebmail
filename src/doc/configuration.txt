@@ -27,4 +27,3 @@ Currently there are three types of Configuration Parameters:
 Each configuration parameter must be registered with a unique String key
 (name of the parameter), a short description to be used as help text in the
 administration interface and with a default value if not yet set by the user.
-

@@ -25,7 +25,6 @@
  * $Id$
  *
  * @author Devin Kowatch
- * @version $Revision$
  * @see org.webengruven.webmail.auth.AuthDisplayMngr
  */
 
@@ -36,7 +35,6 @@ import net.wastl.webmail.xml.*;
 import net.wastl.webmail.exceptions.*;
 
 public class CRAuthDisplayMngr extends AuthDisplayMngr {
-
     /** Default C'tor. This c'tor isn't very useful, so don't use it.  */
     public CRAuthDisplayMngr() { }
 
@@ -76,5 +74,4 @@ public class CRAuthDisplayMngr extends AuthDisplayMngr {
     }
 
     protected CRAuthenticator auth;
-
-}   // END class CRAuthDisplayMngr
+}

@@ -20,19 +20,12 @@
 package net.wastl.webmail.ui.html;
 
 
-/*
- * HTMLHeader.java
- *
- * Created: Wed Feb  3 12:29:44 1999
- */
 /**
  * A HTML header used by HTMLDocument.
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
 public class HTMLHeader  {
-
     private String title;
 
     public HTMLHeader(String title) {
@@ -47,4 +40,4 @@ public class HTMLHeader  {
         s += "  </HEAD>\n";
         return s;
     }
-} // HTMLHeader
+}

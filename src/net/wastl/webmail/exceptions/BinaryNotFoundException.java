@@ -26,11 +26,8 @@ package net.wastl.webmail.exceptions;
  * Created: Thu May  4 15:38:04 2000
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class BinaryNotFoundException extends WebMailException {
-
     public BinaryNotFoundException() {
         super();
     }
@@ -38,5 +35,4 @@ public class BinaryNotFoundException extends WebMailException {
     public BinaryNotFoundException(String s) {
         super(s);
     }
-
-} // BinaryNotFoundException
+}

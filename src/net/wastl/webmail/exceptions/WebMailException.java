@@ -20,21 +20,13 @@
 package net.wastl.webmail.exceptions;
 
 import java.io.*;
-/*
- * WebMailException.java
- *
- * Created: Thu Feb  4 16:55:06 1999
- */
 /**
  * This is a generic WebMail Exception.
  *
  *
  * @author Sebastian Schaffert
- * @version $Revision$
  */
-
 public class WebMailException extends Exception {
-
     Exception nested;
 
     public WebMailException() {
@@ -69,5 +61,4 @@ public class WebMailException extends Exception {
             nested.printStackTrace(ps);
         }
     }
-
-} // InvalidPasswordException
+}

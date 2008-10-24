@@ -38,7 +38,6 @@ package net.wastl.webmail.misc;
 /**
  * Contains internal state of the MD5 class
  */
-
 class MD5State {
   /**
    * 128-byte state
@@ -91,7 +90,6 @@ class MD5State {
  * @version     $Revision$
  * @author      Santeri Paavolainen <sjpaavol@cc.helsinki.fi>
  */
-
 public class MD5 {
   /**
    * MD5 state

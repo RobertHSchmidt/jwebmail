@@ -32,21 +32,9 @@ import net.wastl.webmail.config.*;
 import net.wastl.webmail.misc.*;
 import net.wastl.webmail.xml.*;
 import net.wastl.webmail.exceptions.*;
-
-
 import org.w3c.dom.*;
-
 import javax.xml.parsers.*;
-
-// Modified by exce, start
 import org.xml.sax.InputSource;
-// Modified by exce, end
-
-/**
- * SimpleStorage.java
- *
- * Created:  Feb 1999
- */
 
 /**
  * This is the SimpleStorage class for the non-enterprise edition of WebMail.
@@ -87,7 +75,6 @@ public class SimpleStorage extends FileStorage {
         loadXMLSysData();
 
         System.err.println("successfully parsed XML configuration file.");
-
     }
 
     protected void loadXMLSysData()
@@ -108,8 +95,6 @@ public class SimpleStorage extends FileStorage {
             ex.printStackTrace();
             throw new UnavailableException(ex.getMessage());
         }
-
-
     }
 
     protected void saveXMLSysData() {
@@ -241,9 +226,6 @@ public class SimpleStorage extends FileStorage {
 
     /**
      * @see net.wastl.webmail.server.Storage.getUserData()
-     *
-     * devink 7/15/2000 - Added TwoPassAuthenticationException
-     * 9/24/2000        - reverted to old getUserData for new cr auth
      */
     public XMLUserData getUserData(String user, String domain, String password, boolean authenticate)
          throws UserDataException, InvalidPasswordException
@@ -320,7 +302,6 @@ public class SimpleStorage extends FileStorage {
 
     public void saveUserData(String user, String domain) {
         try {
-
             String path=parent.getProperty("webmail.data.path")+
                 System.getProperty("file.separator")+domain;
             File p=new File(path);
@@ -381,7 +362,4 @@ public class SimpleStorage extends FileStorage {
         s+=", "+user_cache.getHits()+" hits, "+user_cache.getMisses()+" misses\n";
         return s;
     }
-
 }
-
-

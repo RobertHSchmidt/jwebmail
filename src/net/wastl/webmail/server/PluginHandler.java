@@ -39,9 +39,7 @@ import org.apache.commons.logging.LogFactory;
  *
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class PluginHandler  {
     private static Log log = LogFactory.getLog(PluginHandler.class);
 
@@ -135,5 +133,4 @@ public class PluginHandler  {
             }
         }
     }
-
-} // PluginHandler
+}

@@ -21,21 +21,13 @@ package net.wastl.webmail.misc;
 
 import java.util.*;
 
-/*
- * ExpireableCache.java
- *
- * Created: Fri Sep 17 09:43:10 1999
- */
 /**
  * This class represents a cache that automatically expires objects when a certain fillness
  * factor is reached.
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class ExpireableCache extends Thread {
-
     protected Hashtable cache;
     protected MyHeap timestamps;
 
@@ -228,6 +220,5 @@ public class ExpireableCache extends Thread {
                 cur_pos=lesser_son;
             }
         }
-
     }
-} // ExpireableCache
+}

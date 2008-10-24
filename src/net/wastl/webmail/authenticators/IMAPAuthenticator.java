@@ -22,7 +22,6 @@ import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
 import javax.mail.*;
 import net.wastl.webmail.config.*;
-
 import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,9 +33,7 @@ import org.apache.commons.logging.LogFactory;
  * Created: Mon Apr 19 12:03:53 1999
  *
  * @author Sebastian Schaffert
- * @version
  */
-
 public class IMAPAuthenticator extends net.wastl.webmail.server.Authenticator {
     private static Log log = LogFactory.getLog(IMAPAuthenticator.class);
 
@@ -92,5 +89,4 @@ public class IMAPAuthenticator extends net.wastl.webmail.server.Authenticator {
     public boolean canChangePassword() {
         return false;
     }
-
-} // IMAPAuthenticator
+}
