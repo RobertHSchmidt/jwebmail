@@ -7,13 +7,11 @@ This file will work with any directory on any web server which
 holds the plain jar files with names like BASENAME-VERSION.jar.
 -->
 
-  <caches default="default-cache" checkUpToDate="false">
-    <!-- According to the docs, "default-cache" is supposed to be the
-         default value.  It doesn't work, however -->
-    <cache name="default-cache" basedir="${user.home}/.ivycache"
-            ivyPattern="[module]-[revision].xml"
-            artifactPattern="../lib-repos/[artifact]-[revision].[ext]"/>
-  </caches>
+  <caches checkUpToDate="false" resolutionCacheDir="${user.home}/.ivycache"
+          ivyPattern="[module]-[revision].xml"
+          defaultCacheDir="${user.home}/.ivycache"
+          repositoryCacheDir="${user.home}/lib-repos"
+          artifactPattern="[artifact]-[revision].[ext]"/>
   <settings defaultResolver="default"/>
   <resolvers>
     <url name="default">
