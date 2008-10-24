@@ -680,12 +680,26 @@ public class Helper  {
         return temp;
     }
 
+    /**
+     * Unit test.
+     */
     public static void main(String[] args) {
-        System.err.println(Helper.crypt("AA",args[1]));
-        String crypted=encryptTEA(args[1]);
-        System.err.println("DES-Crypted: "+crypted);
-        System.err.println("DES-Decrypted: "+decryptTEA(crypted));
-    }
+        if (args.length != 1)
+            throw new IllegalArgumentException(
+                "SYNTAX:  " + Helper.class.getName()
+                + " 'string to en/decode'");
+         String input = args[0];
+         //System.err.println(Helper.crypt("AA",args[1]));
+         String crypted = encryptTEA(input);
+         //System.err.println("DES-Crypted: "+crypted);
+         //System.err.println("DES-Decrypted: "+decryptTEA(crypted));
+         String output = decryptTEA(crypted);
+         if (input.equals(output)) System.exit(0);
+         throw new RuntimeException(
+                     "Input of (" + input + "), length " + input.length()
+                     + ", encrypted then decrypted into (" + output
+                     + "), length " + output.length() + '.');
+     }
 
 
     private static String str_key="39e858f86df9b909a8c87cb8d9ad599";
@@ -703,7 +717,7 @@ public class Helper  {
             s+=Integer.toHexString((byte)(enc[i] >>> 8)+128).toUpperCase()+":";
             s+=Integer.toHexString((byte)(enc[i])+128).toUpperCase()+":";
         }
-//      System.err.println("encryptTEA: Returning "+s);
+        // log.debug("encryptTEA: Returning "+s);
         return s;
     }
 
@@ -717,12 +731,13 @@ public class Helper  {
             try {
                 inb[i]=(byte)(Integer.parseInt(s,16)-128);
             } catch(NumberFormatException ex) {
-                System.err.println("Could not convert string '"+s+"' to byte.");
+                throw new NumberFormatException(
+                        "Could not convert string '"+s+"' to byte.");
             }
         }
         byte dec[] = tea.decode(inb,inb.length);
         String s=new String(dec);
-//      System.err.println("encryptTEA: Returning "+s);
+        // log.debug("encryptTEA: Returning "+s);
         return s;
     }
 
