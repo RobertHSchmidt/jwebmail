@@ -10,8 +10,8 @@ the jar file in the bootstrap-libs subdirectory in the CLASSPATH.
 Non-IDE developers need Java and Ant, and the supplied Ivy jar file 
 in your CLASSPATH, in order to bootstrap everything else.
 Briefly
-    + Install a Java JDK and set the JAVA_HOME variable to the JDK
-      installation root directory
+    + Install a Java JDK 1.5 or laterand set the JAVA_HOME variable to
+      the JDK installation root directory
     + Install Ant and make sure ant (or ant.bat) is in your search path
     + When you run an Ant target which needs Ivy to find libraries,
       instructions will be displayed for a single command to tell Ant

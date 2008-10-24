@@ -21,7 +21,7 @@ limitations under the License.
   <property file="local.properties"/> <!-- NON-SHARED build properties -->
 
   <!-- Default build settings.  Override in your own 'local.properties' file.-->
-  <property name="repos.url" value="http://ipub/lib-repos"/>
+  <property name="repos.url" value="http://pub.admc.com/lib-repos"/>
   <property name="webapp.home" value="build/webapp"/>
   <property name="contextxml.path" value="config/context.xml"/>
 
@@ -97,7 +97,7 @@ limitations under the License.
           description="Compiles the source code (default)">
     <ivy:cachepath conf="build" pathid="build.refid"/>
     <javac srcdir="build/src" destdir="build/classes"
-           classpath="lib/cos.jar:lib/javaOTP.jar:lib/xalan.jar"
+           classpath="lib/xalan.jar"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
            deprecation="${javac.deprecation}"
@@ -107,7 +107,7 @@ limitations under the License.
     <mkdir dir="build/classes/plugins" />
     <javac srcdir="build/src"
            destdir="build/classes/plugins"
-           classpath="build/classes:lib/cos.jar:lib/javaOTP.jar"
+           classpath="build/classes"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
            deprecation="${javac.deprecation}"
@@ -117,7 +117,7 @@ limitations under the License.
     <mkdir dir="build/classes/authenticators" />
     <javac srcdir="build/src"
            destdir="build/classes/authenticators"
-           classpath="build/classes:lib/cos.jar:lib/javaOTP.jar"
+           classpath="build/classes"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
            deprecation="${javac.deprecation}"
@@ -306,15 +306,10 @@ limitations under the License.
     <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes" flatten="yes">
       <fileset dir="build/classes">
         <include name="**/plugins/**,**/authenticators/**" />
-        </fileset>
+      </fileset>
     </copy>
     <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/lib">
-        <fileset dir="lib">
-           <include name="**/*.jar"/>
-           <!--<exclude name="mail.jar"/>-->
-           <exclude name="servlet-2.3.jar"/>
-           <!--<exclude name="xalan.jar"/>-->
-        </fileset>
+      <fileset dir="lib" includes="**/*.jar"/>
     </copy>
     <!-- Install plugin and authenticator classes -->
     <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes">

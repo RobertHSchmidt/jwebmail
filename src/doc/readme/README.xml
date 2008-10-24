@@ -76,13 +76,9 @@ limitations under the License.
   <SECTION name="Installation" id="install">
     <SUBSECTION name="Introduction" id="install:introduction">
       <P>
-            You will need to set up a webserver that is
-            capable of serving Java Servlets, e.g. Apache. I can't give too detailed instructions here
-            since this depends in large parts on your webserver, but I include a sample Apache
-            configuration (the parts relevant to JWebMail) in the distribution.<BR/>
-            The Debian (unstable) and RedHat (6.2) packages will install JWebMail as a servlet for these
-            two systems. This will ease the servlet installation a lot since you need not set up JServ and
-            JWebMail manually, so you should consider using this approach if you have one of those systems.
+        You will need to set up a Java Servlet container.
+        This may be anything from a web server with a Java Servlet module
+        or option, to a commercial application server.
       </P>
 <!--      <P>
         There are also several ways to store data:
@@ -135,6 +131,13 @@ limitations under the License.
           need all of the provided JAR files.
           JWebMail Servlet.
         </P>
+        <NOTE>
+          JWebMail is being redesigned to entirely separate configuration data
+          from the application.
+          Be aware that if you change init parameters, or anything else in
+          the application itself, those changes will be lost if you ever
+          redeploy or upgrade the application.
+        </NOTE>
         <P>
           The JWebMail servlet uses the following <CODE>initArgs</CODE>:
           <TABLE>
@@ -170,6 +173,9 @@ limitations under the License.
           subdirectories must be readable by the user running the Servlet engine. Additionally the
           <CODE>webmail.data.path</CODE> directory (usually called <CODE>data/</CODE>) must be
           writeable.
+          We are right now working on eliminating this constraint.
+          You are advised to use a webmail.data.path outside of the
+          application directory structure.
         </NOTE>
       </SUBSUBSECTION>
 
@@ -208,6 +214,7 @@ limitations under the License.
         <P>
           <NLIST>
             <ITEM><STRONG>Modify web.xml file</STRONG><BR />
+              <NOTE>You are advised to not modify the web.xml file.</NOTE>
 
               There is a web.xml file already provided for JWebMail in the WEB-INF directory.
               Please modify the pathnames therein to reasonable values for your configuration.
@@ -237,9 +244,8 @@ limitations under the License.
             add the following two entries after the entry for the JkWorkersFile and the Include for
             tomcat's automatic configuration:
               <P>
-                <CODE>JkMount /jwebmail/WebMail ajp12</CODE><BR />
-                <CODE>JkMount /jwebmail/WebMail/* ajp12</CODE><BR />
-              (if you are using AJP protocol 1.3 please change ajp12 to ajp13)
+                <CODE>JkMount /jwebmail/WebMail ajp13</CODE><BR />
+                <CODE>JkMount /jwebmail/WebMail/* ajp13</CODE><BR />
               </P>
             </ITEM>
             <ITEM><STRONG>Set permissions on JWebMail data directory</STRONG>
@@ -248,56 +254,13 @@ limitations under the License.
                 user running Tomcat has write access to it. It is also possible to specify a
                 different directory in <CODE>web.xml</CODE>.
               </P>
+              <NOTE>You are advised to set a data directory out of the
+                application directory structure.</NOTE>
             </ITEM>
             <ITEM><STRONG>restart Tomcat and Apache</STRONG> and see in Tomcat's stdout.log whether
             JWebMail is starting.</ITEM>
           </NLIST>
         </P>
-      </SUBSUBSECTION>
-
-      <SUBSUBSECTION name="RedHat Installation" id="install:servlet:redhat">
-        <P>
-          Installation on RedHat systems should be as easy as possible: You need to have a running Apache
-          installation. Install the following RPM packages (you can find them on the JWebMail homepage at
-          <A href="http://jwebmail.sourceforge.net">http://jwebmail.sourceforge.net</A>) in the following order:
-          <LIST>
-            <ITEM>JDK 1.2.2 (or greater) - this can be found at the <A href="http://developer.java.sun.com/developer/earlyAccess/j2sdk13/download-linux.html">Sun JDK 1.3 for Linux download page</A></ITEM>
-            <ITEM>Apache JServ - an RPM can be found on most RedHat mirrors and on the JWebMail homepage</ITEM>
-            <ITEM>WebMail</ITEM>
-          </LIST>
-          You will then have a running JWebMail Servlet at <CODE>http://yourhost/jwebmail/WebMail</CODE> when you
-          restart your Apache webserver. Please don't forget to change your configuration by going to
-          <CODE>http://yourhost/jwebmail/WebMail/admin</CODE> and logging in with "Secret"
-          (and don't forget to change the password!).
-        </P>
-        <NOTE>This installation instruction (and the RPMs found on the JWebMail homepage) are for RedHat 6.2 only.
-          That means they may or may not work on RedHat versions lower or greater than 6.2. If you don't manage to install JWebMail with the RPM, please try the binary release and run bin/install.sh for the generic configuration.</NOTE>
-      </SUBSUBSECTION>
-
-      <SUBSUBSECTION name="Debian Installation" id="install:servlet:debian">
-        <P>
-          Installation on Debian woody is as simple as on RedHat. You will have to install Apache JServ with
-          apt-get (<CODE>apt-get install jserv</CODE> will install the necessary packages) and then install the
-          JWebMail package (with <CODE>dpkg --install webmail*.deb</CODE>). <BR/>
-          You will then have a running JWebMail Servlet at <CODE>http://yourhost/jwebmail/WebMail</CODE> when you
-          restart your Apache webserver. Please don't forget to change your configuration by going to
-          <CODE>http://yourhost/jwebmail/WebMail/admin</CODE> and logging in with "Secret"
-          (and don't forget to change the password!).
-        </P>
-        <P>
-          You might want to install a more up-to-date JDK to run JWebMail properly, I will try to make a Debian
-          package available for JDK 1.2.2, but you can also simply install a tar of the most up-to-date JDK and
-          update the links in <CODE>/etc/alternatives</CODE>:
-          <LIST>
-            <ITEM><CODE>update-alternatives /usr/bin/java java /usr/lib/&lt;YOUR_JDK&gt;/bin/java 130</CODE></ITEM>
-            <ITEM><CODE>update-alternatives /usr/bin/javac javac /usr/lib/&lt;YOUR_JDK&gt;/bin/javac 130</CODE></ITEM>
-            <ITEM><CODE>update-alternatives /usr/bin/jar jar /usr/lib/&lt;YOUR_JDK&gt;/bin/jar 130</CODE></ITEM>
-          </LIST>
-          Replace &lt;YOUR_JDK&gt; part with the path of your JDK installation (e.g. jdk1.3) and the "130" with
-          the version information (130 is for jdk 1.3, jdk1.2.2 would get 122).
-        </P>
-        <NOTE>This installation instruction (and the DEBs found on the JWebMail homepage) are for Debian woody only.
-          That means they may or may not work on Debian potato and slink</NOTE>
       </SUBSUBSECTION>
     </SUBSECTION>
 
@@ -724,55 +687,6 @@ limitations under the License.
       </P>
     </SUBSECTION>
 
-    <SUBSECTION name="Where to obtain Java for your platform" id="java:obtain">
-      <P>
-        The main Java distribution site is http://java.sun.com.<BR/>
-        You will get the "officially supported" platforms and lots of documentation and
-        additions there.
-      </P>
-      <P>
-        Java distributions for the different platforms:
-        <TABLE>
-          <TR>
-            <TD>Solaris SPARC and x86</TD><TD>http://java.sun.com</TD>
-          </TR>
-          <TR>
-            <TD>Windows:</TD><TD>http://java.sun.com</TD>
-          </TR>
-          <TR>
-            <TD>Linux/x86:</TD><TD>http://www.ibm.com (IBM JDK 1.1.8 / IBM JDK 1.3)</TD>
-          </TR>
-          <TR>
-            <TD></TD><TD>http://www.blackdown.org (Blackdown port of JDK 1.2)</TD>
-          </TR>
-          <TR>
-            <TD></TD><TD>http://java.sun.com (Sun and Inprise port of JDK 1.2 / JDK 1.3)</TD>
-          </TR>
-          <TR>
-            <TD>Linux/PPC:</TD><TD>http://business.tyler.wm.edu/mklinux/</TD>
-          </TR>
-          <TR>
-            <TD>Linux/Alpha:</TD><TD>http://www.voicenet.com/~gatgul/JDK/java-alpha.html</TD>
-          </TR>
-          <TR>
-            <TD>Linux/SPARC:</TD><TD>http://tinukai.sesuadra.org/~jdk/</TD>
-          </TR>
-          <TR>
-            <TD>AIX:</TD><TD>http://www.ibm.com</TD>
-          </TR>
-          <TR>
-            <TD>Macintosh:</TD><TD>http://applejava.apple.com</TD>
-          </TR>
-          <TR>
-            <TD>OS/2:</TD><TD>http://www.ibm.com</TD>
-          </TR>
-          <TR>
-            <TD>FreeBSD:</TD><TD>http://www.freebsd.org/ports/lang.html</TD>
-          </TR>
-        </TABLE>
-      </P>
-    </SUBSECTION>
-
     <SUBSECTION name="How to install Java properly" id="java:install">
       <P>
         Use your system's standard facility to install the Java packages. Note
@@ -780,7 +694,7 @@ limitations under the License.
         so you will have to manually install it using tar.
       </P>
       <P>
-        On Solaris, the JDK will install in /usr/java1.x/ by default.
+        On Solaris, the JDK will install in /usr/java*/ by default.
         On Linux, I prefer installing the "tar.gz" in /usr/local and renaming
         the extracted path to "java1.x". Many distributions, however, will install
         Java in /usr/lib/java1.x or /usr/lib/jdkxxx.
@@ -791,54 +705,7 @@ limitations under the License.
         PATH environment.
       </P>
       <P>
-        Last, set your CLASSPATH environment variable (e.g. in /etc/profile) to
-        <LIST>
-          <ITEM>/path/to/java/lib/classes.zip with JDK 1.1.x</ITEM>
-          <ITEM>/path/to/java/jre/lib/rt.jar with JDK >= 1.2</ITEM>
-        </LIST>
-      </P>
-      <P>
         You should have a running system now. Test it by typing "java -version".
-      </P>
-      <P>
-        Special note for Linux users: There are problems with earlier versions of the
-        libc6 (aka glibc). Please use glibc 2.1.2 or above to ensure a stable
-        environment for JWebMail.
-      </P>
-    </SUBSECTION>
-
-    <SUBSECTION name="Improving speed" id="java:speed">
-      <P>
-        To improve Java performance, you will most likely use an JIT (Just in time
-        compiler) that compiles bytecode to native code on-the-fly (while executing
-        the program). This especially improves speed for routines that are used
-        frequently, as it is with JWebMail. So I strongly recommend using a JIT
-        for JWebMail!
-      </P>
-      <P>
-        If you already have Java 1.2 (aka Java 2) or the IBM JDK 1.1.8 on Linux, you
-        won't need to get a JIT as it already ships with one.
-        If you still have Java 1.1, it depends on your platform.
-        <LIST>
-          <ITEM>On Linux (Blackdown port) you will need to fetch an extra JIT. I recommend
-            using TYA, but you can get a list at http://www.blackdown.org</ITEM>
-          <ITEM>On Solaris, a JIT is already included in the Java 1.1 releases</ITEM>
-        </LIST>
-      </P>
-      <P>
-        I don't know what it's like for other platforms. You can always try whether
-        you have a JIT or not by setting JAVA_COMPILER to "NONE" and testing whether
-        that affects the execution speed of JWebMail. If it is considerably slower,
-        than you most likely already have a JIT.
-      </P>
-      <!-- Added for JDK 1.3 11.08.2000 -->
-      <P>
-        The Sun JDK 1.3 (all platforms) includes a new techology called "HotSpot". This can
-        also dramatically improve performance for JWebMail. For JWebMail to make full use of
-        HotSpot, you should comment out the "HOTSPOT=-server" option in webmail.sh or if you
-        are using the servlet version start JServ with the -server parameter.<BR/>
-        This will produce a high load during the first seconds of startup, but will go down
-        after some time when the HotSpot optimizations are in effect.
       </P>
     </SUBSECTION>
 
