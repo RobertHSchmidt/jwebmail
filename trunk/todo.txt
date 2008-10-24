@@ -3,12 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Modify Servlet to allow for configs outside of the webapp itself
-(to prevent needing to modify the DELIVERABLE in order to use modifications,
-such as to save data outside app so it won'te be LOST upon upgrade).
-Use app name + sys property tactics similar to my Spring-framework-specific
-ExtConfiggableAppContext class (but obviously without any Spring stuff.
-
 Refactor logging infrastructure.  Need good logging system in place to
 facilitate the other immediate work.
 
@@ -30,8 +24,10 @@ Use javax.xml.xpath instead of org.apache.xpath.
 If haven't already, document requirement for JDK 1.5
 (javax.xml.xpath not in 1.4).
 
-Look into nasty threading issue to find out webapp cannot be stopped
-(hard shutdown of Tomcat is required after JWebMail is started).
+EGAD FIXME:  This webapp kills the entire servlet container when you
+try to stop the webapp from running.  Worse than that, it doesn't
+even shut down the container cleanly but leaves it stuck so you have
+to kill it violently.
 
 Fix level-ambiguity in XML processing code.
 FIRST verify my assertion that tree.getElementsBy*() searches for all
@@ -48,3 +44,5 @@ Stop loading resources directly from the application through the FS.
 Load delivered resources through classpath.  Can load generated data from FS,
 but through indirection so user has an opportunity to disassociate this data
 from the application.
+
+Copy default data to webmail.data.dir upon startup, if it is present but empty.

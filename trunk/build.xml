@@ -31,7 +31,7 @@ limitations under the License.
   <target name="-init">
     <tstamp/>
     <property name="Name" value="JWebMail"/>
-    <property name="version" value="1.0.1a"/>
+    <property name="version" value="1.0.1b"/>
     <property name="year" value="2008"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>

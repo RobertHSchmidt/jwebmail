@@ -71,11 +71,15 @@ public class WebMailServlet extends WebMailServer implements Servlet {
     }
 
     public void init(ServletConfig config) throws ServletException {
+        /*
+         * Egad, are variable names so sparse that we must have a
+         * "config" parameter and a "this.config"???
+         */
         ServletContext sc = config.getServletContext();
         sc.log("Init");
         String appName = (String) sc.getAttribute("app.name");
         File rtConfigDir = (File) sc.getAttribute("rtconfig.dir");
-        Properties p = (Properties) sc.getAttribute("meta.properties");
+        Properties rtProps = (Properties) sc.getAttribute("meta.properties");
         sc.log("RT configs retrieved");
         srvlt_config=config;
         this.config=new Properties();
@@ -122,6 +126,20 @@ public class WebMailServlet extends WebMailServer implements Servlet {
         if(config.getInitParameter("webmail.log.facility") == null) {
             this.config.put("webmail.log.facility","net.wastl.webmail.logger.ServletLogger");
         }
+
+        // Override settings with webmail.* meta.properties
+        Enumeration rte = rtProps.propertyNames();
+        int overrides = 0;
+        String k;
+        while (rte.hasMoreElements()) {
+            k = (String) rte.nextElement();
+            if (!k.startsWith("webmail.")) continue;
+            overrides++;
+            this.config.put(k, rtProps.getProperty(k));
+        }
+        sc.log(Integer.toString(overrides)
+                + " settings passed to WebMailServer, out of "
+                + rtProps.size() + " RT properties");
 
         /*
          * Call the WebMailServer's initialization method
