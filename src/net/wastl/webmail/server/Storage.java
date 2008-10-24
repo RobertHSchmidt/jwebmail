@@ -43,8 +43,6 @@ import org.xml.sax.SAXException;
 public abstract class Storage {
     private static Log log = LogFactory.getLog(Storage.class);
 
-    protected static boolean debug;
-
     protected WebMailServer parent;
 
     protected ConfigScheme cs;
@@ -54,7 +52,6 @@ public abstract class Storage {
     protected XMLGenericModel generic_model;
 
     public Storage(WebMailServer parent) {
-        debug=WebMailServer.getDebug();
         this.parent=parent;
         cs=parent.getConfigScheme();
         cs.configRegisterYesNoKey("FOLDER TRY LOGIN PASSWORD","Try to connect folders with the user's login password if authentication fails");
@@ -72,15 +69,6 @@ public abstract class Storage {
             }
         }
         saveXMLSysData();
-    }
-
-
-    public void setDebug(boolean b) {
-        debug=b;
-    }
-
-    public boolean getDebug() {
-        return debug;
     }
 
     /**
@@ -164,7 +152,7 @@ public abstract class Storage {
                            System.getProperty("file.separator")+parent.getDefaultLocale().getLanguage());
             f=new File(language_path);
             if(!f.exists()) {
-                System.err.println("Storage::getBasePath: Default Language templates not found \n(tried path: "+language_path+")");
+                log.error("Storage::getBasePath: Default Language templates not found \n(tried path: "+language_path+")");
             }
         }
         String theme_path=language_path+System.getProperty("file.separator")+theme;
@@ -179,7 +167,7 @@ public abstract class Storage {
             }
             f=new File(theme_path);
             if(!f.exists()) {
-                System.err.println("Storage::getBasePath: Theme could not be found; probably a problem with your\n installation. Please check the lib/templates/bibop directory and the \nwebmail.default.theme property");
+                log.error("Storage::getBasePath: Theme could not be found; probably a problem with your\n installation. Please check the lib/templates/bibop directory and the \nwebmail.default.theme property");
             }
         }
         String basepath=theme_path+System.getProperty("file.separator");

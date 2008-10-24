@@ -21,19 +21,14 @@ package net.wastl.webmail.xml;
 
 import java.util.*;
 import org.w3c.dom.*;
-
-
-/*
- * XMLMessagePart.java
- *
- * Created: Tue Apr 18 14:08:56 2000
- *
- */
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * A message part object for an XML message
  */
 public class XMLMessagePart  {
+    private static Log log = LogFactory.getLog(XMLMessagePart.class);
     protected Document root;
     protected Element part;
 
@@ -95,12 +90,14 @@ public class XMLMessagePart  {
         /* Find all <BODY> elements and add the child nodes to the content */
         for(int count=0; count < 2; count++) {
             NodeList nl=content.getDocumentElement().getElementsByTagName(count==0?"BODY":"body");
-            System.err.println("While parsing HTML content: Found "+nl.getLength()+" body elements");
+            log.debug("While parsing HTML content: Found "+nl.getLength()
+                    +" body elements");
             for(int i=0; i<nl.getLength();i++) {
                 NodeList nl2=nl.item(i).getChildNodes();
-                System.err.println("While parsing HTML content: Found "+nl2.getLength()+" child elements");
+                log.debug("While parsing HTML content: Found "
+                        +nl2.getLength()+" child elements");
                 for(int j=0;j<nl2.getLength();j++) {
-                    System.err.println("Element: "+j);
+                    log.debug("Element: "+j);
                     content_elem.appendChild(XMLCommon.importNode(root,nl2.item(j),true));
                 }
             }

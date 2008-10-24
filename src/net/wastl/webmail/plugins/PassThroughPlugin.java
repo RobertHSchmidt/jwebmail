@@ -64,10 +64,10 @@ public class PassThroughPlugin implements Plugin, URLHandler  {
 
 
     public HTMLDocument handleURL(String suburl, HTTPSession session, HTTPRequestHeader header) throws WebMailException {
-        //System.err.println(header);
+        //log.debug(header);
         if(session == null || session instanceof AdminSession) {
             //throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
-            //System.err.println("Sending "+suburl.substring(1)+" to unknown user ");
+            //log.debug("Sending "+suburl.substring(1)+" to unknown user ");
             /**
              * If we just use JVM's default locale, no matter what user's locale
              * is, we always send webmail.css of JVM's default locale.
@@ -80,7 +80,7 @@ public class PassThroughPlugin implements Plugin, URLHandler  {
             return new HTMLImage(store, suburl.substring(1), WebMailServer.getDefaultLocale(), parent.getProperty("webmail.default.theme"));
         } else {
             UserData data=((WebMailSession)session).getUser();
-            //System.err.println("Sending "+suburl.substring(1)+" to user "+data.getLogin());
+            //log.debug("Sending "+suburl.substring(1)+" to user "+data.getLogin());
             return new HTMLImage(store,suburl.substring(1),data.getPreferredLocale(),data.getTheme());
         }
     }

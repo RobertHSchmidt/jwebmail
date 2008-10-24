@@ -19,19 +19,21 @@
 
 package net.wastl.webmail.xml;
 
-/**
- * @author <a href="mailto:wastl@wastl.net">Sebastian Schaffert</a>
- */
 import org.w3c.dom.*;
 import org.apache.xpath.*;
 import javax.xml.transform.TransformerException;
 import net.wastl.webmail.exceptions.WebMailException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * A generic class for holding some XML data. This class provides means to
  * retrieve data based on XPath expressions.
+ *
+ * @author <a href="mailto:wastl@wastl.net">Sebastian Schaffert</a>
  */
 public class XMLData {
+    private static Log log = LogFactory.getLog(XMLData.class);
     protected Document root;
     protected Element data;
     protected CachedXPathAPI xpath_api;
@@ -131,9 +133,9 @@ public class XMLData {
             Node n = xpath_api.selectSingleNode(data,path);
             return n;
         } catch(Exception ex) {
-            System.err.println("XPath query failed (" + path + "): " + ex);
-            ex.printStackTrace();
-            // TODO:  Should obviously use Logging facility here.
+            log.error("XPath query failed (" + path + ")", ex);
+            // Should we not throw here so us developers will see and
+            // fix the problem? - blaine
             return null;
         }
     }

@@ -46,7 +46,7 @@ public class ToplevelURLHandler implements URLHandler {
     URLHandlerTree urlhandlers;
 
     public ToplevelURLHandler(WebMailServer parent) {
-        System.err.println("- Initializing WebMail URL Handler ... done.");
+        log.info("Initializing WebMail URL Handler ... done.");
         urlhandlers=new URLHandlerTree("/");
         urlhandlers.addHandler("/",this);
         this.parent=parent;
@@ -55,7 +55,7 @@ public class ToplevelURLHandler implements URLHandler {
     public void registerHandler(String url, URLHandler handler) {
         //urlhandlers.put(url,handler);
         urlhandlers.addHandler(url,handler);
-        //System.err.println("Tree changed: "+urlhandlers.toString());
+        //log.debug("Tree changed: "+urlhandlers.toString());
     }
 
     public String getURL() {
@@ -125,7 +125,7 @@ public class ToplevelURLHandler implements URLHandler {
             URLHandler uh=urlhandlers.getHandler(url);
 
             if(uh != null && uh != this) {
-                // System.err.println("Handler: "+uh.getName()+" ("+uh.getURL()+")");
+                // log.debug("Handler: "+uh.getName()+" ("+uh.getURL()+")");
                 String suburl=url.substring(uh.getURL().length(),url.length());
                 content=uh.handleURL(suburl,session,header);
             } else {

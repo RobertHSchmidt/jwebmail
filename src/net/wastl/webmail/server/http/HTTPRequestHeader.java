@@ -27,7 +27,6 @@ import net.wastl.webmail.misc.ByteStore;
 /**
  * HTTPHeader.java
  *
- *
  * Created: Tue Feb  2 15:25:48 1999
  *
  * @author Sebastian Schaffert

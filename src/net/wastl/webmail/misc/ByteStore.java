@@ -21,18 +21,18 @@ package net.wastl.webmail.misc;
 
 import java.io.*;
 import net.wastl.webmail.server.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /*
  * ByteStore.java
  *
- *
  * Created: Sun Sep 19 17:22:13 1999
- */
-/**
  *
  * @author Sebastian Schaffert
  */
 public class ByteStore implements Serializable {
+    private static Log log = LogFactory.getLog(ByteStore.class);
     byte[] bytes;
 
     String content_type=null;
@@ -97,30 +97,29 @@ public class ByteStore implements Serializable {
         byte[] s=new byte[nr_bytes_to_read+100];
         int count=0;
         int lastread=0;
-        // System.err.print("Reading ... ");
+        // log.debug("Reading ... ");
         if(in != null) {
             synchronized(in) {
                 while(count < s.length) {
                     try {
                         lastread=in.read(s,count,nr_bytes_to_read-count);
                     } catch(EOFException ex) {
-                        System.err.println(ex.getMessage());
+                        log.error(ex);
                         lastread=0;
                     } catch(Exception z) {
-                        System.err.println(z.getMessage());
+                        log.error(z.getMessage());
                         lastread=0;
                     }
                     count+=lastread;
-                    // System.err.print(lastread+" ");
+                    // log.debug(lastread+" ");
                     if(lastread < 1) break;
                 }
             }
-            // System.err.println();
             byte[] s2=new byte[count+1];
             for(int i=0; i<count+1;i++) {
                 s2[i]=s[i];
             }
-            //System.err.println("new byte-array, size "+s2.length);
+            // log.debug("new byte-array, size "+s2.length);
             ByteStore d=new ByteStore(s2);
             return d;
         } else {

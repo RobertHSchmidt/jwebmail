@@ -22,7 +22,6 @@ package net.wastl.webmail.exceptions;
 /**
  * StylesheetNotFoundException.java
  *
- *
  * Created: Thu May  4 15:37:15 2000
  *
  * @author Sebastian Schaffert

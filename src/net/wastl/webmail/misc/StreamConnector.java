@@ -32,6 +32,11 @@ public class StreamConnector extends Thread {
     ByteStore b;
     int size;
     boolean ready=false;
+    boolean verbose = false;
+
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
+    }
 
     public StreamConnector(InputStream sin, int size) {
         super();
@@ -50,11 +55,11 @@ public class StreamConnector extends Thread {
         while(!ready) {
             try {
                 sleep(500);
-                System.err.print(".");
+                if (verbose) System.err.print(".");
             } catch(InterruptedException ex) {
             }
         }
-        System.err.println();
+        if (verbose) System.err.println();
         return b;
     }
 }

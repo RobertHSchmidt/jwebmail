@@ -61,7 +61,7 @@ public class ChoiceConfigParameter extends ConfigParameter {
                 flag=true;
                 break;
             }
-            //System.err.println((String)value + " <> " + (String)o);
+            //log.debug(String)value + " <> " + (String)o);
         }
         return flag;
     }

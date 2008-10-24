@@ -24,13 +24,16 @@ import org.apache.xpath.XPathAPI;
 import java.io.*;
 import java.util.*;
 import javax.xml.transform.TransformerException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * This class contains some static methods that are used commonly in other WebMail parts.
- *
  *
  * @author Sebastian Schaffert
  */
 public final class XMLCommon  {
+    private static Log log = LogFactory.getLog(XMLCommon.class);
     static String getParentXPath(String str) {
         int last_slash = str.lastIndexOf("/");
         if(last_slash == -1) {
@@ -137,7 +140,9 @@ public final class XMLCommon  {
         e.normalize();
         NodeList nl=e.getChildNodes();
         if(nl.getLength() <= 0) {
-            System.err.println("Elements: "+nl.getLength());
+            log.error("Elements: "+nl.getLength());
+            // Should we not throw here so us developers will see and
+            // fix the problem? - blaine
             return "";
         } else {
             String s="";
@@ -234,7 +239,7 @@ public final class XMLCommon  {
         NodeList namel=e.getElementsByTagName(tagname);
         Element elem;
         if(namel.getLength()<=0) {
-            System.err.println("Creating Element "+tagname+"; will set to "+text);
+            log.debug("Creating Element "+tagname+"; will set to "+text);
             elem=root.createElement(tagname);
             e.appendChild(elem);
         } else {
@@ -282,10 +287,8 @@ public final class XMLCommon  {
     }
 
     protected static void writeXMLwalkTree(Node node, int indent, PrintWriter out) {
-        if(node == null) {
-            System.err.println("??? Node was null ???");
-            return;
-        }
+        if (node == null) throw new NullPointerException(
+                "Null node passed to writeXMLwalkTree()");
         if(node.hasChildNodes()) {
             if(node instanceof Element) {
                 Element elem=(Element)node;

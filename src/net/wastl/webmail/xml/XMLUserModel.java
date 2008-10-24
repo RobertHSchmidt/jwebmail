@@ -24,13 +24,8 @@ import org.w3c.dom.*;
 import javax.xml.parsers.ParserConfigurationException;
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
-
-/*
- * XMLUserModel.java
- *
- * Created: Tue Mar 21 15:08:18 2000
- *
- */
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
@@ -44,6 +39,7 @@ import net.wastl.webmail.exceptions.*;
  * @author Sebastian Schaffert
  */
 public class XMLUserModel extends XMLGenericModel {
+    private static Log log = LogFactory.getLog(XMLUserModel.class);
     protected Element usermodel;
 
     protected Element userdata;
@@ -67,8 +63,9 @@ public class XMLUserModel extends XMLGenericModel {
             root = parser.parse("file://"+parent.getProperty("webmail.xml.path")+
                                 System.getProperty("file.separator")+"usermodel_template.xml");
         } catch(Exception ex) {
-            System.err.println("Error parsing WebMail UserModel template "+ex.getMessage());
-            ex.printStackTrace();
+            log.error("Error parsing WebMail UserModel template"
+                    + ex.getMessage(), ex);
+            // Should this not throw?
         }
     }
 
@@ -81,9 +78,9 @@ public class XMLUserModel extends XMLGenericModel {
             usermodel.replaceChild(root.importNode(userdata,true),nl.item(0));
             invalidateCache();
         } catch(ArrayIndexOutOfBoundsException ex) {
-            System.err.println("The WebMail UserModel template file didn't contain a USERDATA tag.");
+            log.error("The WebMail UserModel template file didn't contain a USERDATA tag.");
         } catch(DOMException ex) {
-            System.err.println("Something went wrong with the XML user model.");
+            log.error("Something went wrong with the XML user model", ex);
         }
     }
 

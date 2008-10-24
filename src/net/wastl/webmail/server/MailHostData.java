@@ -23,10 +23,7 @@ import java.util.*;
 /**
  * MailHostData.java
  *
- *
  * Created: Sun Feb  7 15:56:39 1999
- */
-/**
  *
  * @author Sebastian Schaffert
  */

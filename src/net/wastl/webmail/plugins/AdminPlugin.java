@@ -83,7 +83,7 @@ public class AdminPlugin implements Plugin, URLHandler {
         if(session == null && !(suburl.equals("/") || suburl.equals(""))) {
             throw new DocumentNotFoundException("Could not continue as there was no session id submitted");
         } else if(suburl.startsWith("/login")) {
-            System.err.println("Admin login ... ");
+            log.info("Admin login ... ");
             content=new XHTMLDocument(session.getModel(),
                                       parent.getStorage().getStylesheet("admin-frame.xsl",
                                                                         parent.getDefaultLocale(),
@@ -96,7 +96,7 @@ public class AdminPlugin implements Plugin, URLHandler {
                 while(enumVar.hasMoreElements()) {
                     String ckey=(String)enumVar.nextElement();
                     if(header.isContentSet(ckey)) {
-//                      System.err.println(ckey+" = "+header.getContent(ckey));
+//                      log.debug(ckey+" = "+header.getContent(ckey));
                         sysdata.setConfig(ckey,header.getContent(ckey));
                     }
                 }
@@ -265,17 +265,16 @@ public class AdminPlugin implements Plugin, URLHandler {
         public void run() {
             String action=reboot?"reboot":"shutdown";
             if(time >=0) {
-                System.err.println("\n*** WebMail "+action+" in "+time+" seconds! ***\n");
-                log.fatal("*** WebMail "+action+" in "+time+" seconds! ***");
+                log.info("WebMail "+action+" in "+time+" seconds!");
                 try {
                     Thread.sleep(time*1000);
                 } catch(InterruptedException ex) {}
-                System.err.println("\n*** WebMail "+action+" NOW! ***\n");
+                log.info("WebMail "+action+" NOW!");
                 if(reboot) {
                         try {
                                 parent.restart();
                         } catch(UnavailableException ue) {
-                                log.fatal("Unable to restart, UnavailableException caught!");
+                                log.fatal("Unable to restart, UnavailableException caught!", ue);
                                 // Is it good for us?
                                 parent.shutdown();
                         }

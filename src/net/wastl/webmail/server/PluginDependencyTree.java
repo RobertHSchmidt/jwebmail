@@ -77,8 +77,7 @@ public class PluginDependencyTree {
 
     public void register(WebMailServer parent) {
         if(node!=null) {
-            //System.err.print(node.getName()+" ");
-            //System.err.flush();
+            //log.debugnode.getName()+" ");
             node.register(parent);
         }
 

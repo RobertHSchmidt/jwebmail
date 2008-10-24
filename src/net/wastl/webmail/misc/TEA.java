@@ -143,8 +143,6 @@ public class TEA
       byte dec[] = t.decode(enc);
       String output = new String(dec);
       if (input.equals(output)) System.exit(0);
-      System.out.println("L1" + input.length());
-      System.out.println("L2" + output.length());
       throw new RuntimeException(
               "Input of (" + input + "), length " + input.length()
               + ", encrypted then decrypted into (" + output + "), length "

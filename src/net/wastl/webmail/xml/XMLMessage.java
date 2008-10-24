@@ -25,13 +25,10 @@ import org.w3c.dom.*;
 
 /*
  * XMLMessage.java
+ * Represents an XML message object (part of the XMLUserModel)
  *
  * Created: Tue Apr 18 14:02:30 2000
  *
- */
-
-/**
- * Represents an XML message object (part of the XMLUserModel)
  * @see XMLUserModel
  */
 public class XMLMessage extends XMLMessagePart {

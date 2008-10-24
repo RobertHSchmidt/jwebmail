@@ -33,10 +33,6 @@ import org.apache.commons.logging.LogFactory;
  * Handle WebMail Plugins
  *
  * Created: Tue Aug 31 15:28:45 1999
- */
-/**
- *
- *
  *
  * @author Sebastian Schaffert
  */
@@ -90,8 +86,7 @@ public class PluginHandler  {
                     Plugin p=(Plugin) c.newInstance();
                     q.queue(p);
                     plugins.addElement(p);
-                    //System.err.print(p.getName()+" ");
-                    //System.err.flush();
+                    //log.debug(p.getName()+" ");
                     count++;
                 }
             } catch(Exception ex) {

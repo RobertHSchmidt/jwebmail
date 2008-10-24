@@ -453,20 +453,16 @@ public class WebMailServlet extends WebMailServer implements Servlet {
 
 
     /** Overwrite the old session handling methods */
-
     public WebMailSession newSession(InetAddress a,HTTPRequestHeader h) throws InvalidPasswordException {
-        System.err.println("newSession invalid call");
-        return null;
+        throw new RuntimeException("newSession invalid call");
     }
 
     public AdminSession newAdminSession(InetAddress a,HTTPRequestHeader h) throws InvalidPasswordException {
-        System.err.println("newAdminSession invalid call");
-        return null;
+        throw new RuntimeException("newAdminSession invalid call");
     }
 
     public HTTPSession getSession(String sessionid, InetAddress a,HTTPRequestHeader h) throws InvalidPasswordException {
-        System.err.println("getSession invalid call");
-        return null;
+        throw new RuntimeException("getSession invalid call");
     }
 
     public Enumeration getServers() {

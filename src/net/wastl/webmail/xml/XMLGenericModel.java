@@ -24,13 +24,8 @@ import java.io.*;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import net.wastl.webmail.server.*;
-
-/*
- * XMLGenericModel.java
- *
- * Created: Thu May  4 15:53:12 2000
- *
- */
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * A generic representation of WebMail data. Contains mainly state information
@@ -39,6 +34,7 @@ import net.wastl.webmail.server.*;
  * @author Sebastian Schaffert
  */
 public class XMLGenericModel extends XMLData {
+    private static Log log = LogFactory.getLog(XMLGenericModel.class);
     //protected Document root;
 
     protected Element sysdata;
@@ -65,7 +61,7 @@ public class XMLGenericModel extends XMLData {
         NodeList nl=getNodeListXPath("//STATEDATA");
 
         if(nl != null && nl.getLength() > 0) {
-            System.err.println("*** Warning: Webmail usermodel template contained a STATEDATA tag, although this should only be created at runtime!");
+            log.warn("Webmail usermodel template contained a STATEDATA tag, although this should only be created at runtime!");
             root.getDocumentElement().replaceChild(statedata,nl.item(0));
         } else {
             root.getDocumentElement().appendChild(statedata);
@@ -109,7 +105,7 @@ public class XMLGenericModel extends XMLData {
             root.getDocumentElement().replaceChild(root.importNode(sysdata,true),n);
 
         } catch(DOMException ex) {
-            System.err.println("Something went wrong with the XML generic model.");
+            log.error("Something went wrong with the XML generic model", ex);
         }
     }
 

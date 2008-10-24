@@ -24,8 +24,6 @@ import java.util.regex.*;
 /**
  * Do some fancifying with the messages. Also filters JavaScript.
  *
- *
- *
  * Created: Mon Feb 22 14:55:36 1999
  *
  * @author Sebastian Schaffert

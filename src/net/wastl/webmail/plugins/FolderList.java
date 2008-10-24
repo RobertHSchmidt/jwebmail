@@ -24,7 +24,8 @@ import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
 import java.util.*;
 import java.text.*;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * List the messages in a folder.
@@ -35,6 +36,7 @@ import java.text.*;
  * @author Sebastian Schaffert
  */
 public class FolderList implements Plugin, URLHandler {
+    private static Log log = LogFactory.getLog(FolderList.class);
     public static final String VERSION="1.5";
     public static final String URL="/folder/list";
 
@@ -79,7 +81,7 @@ public class FolderList implements Plugin, URLHandler {
             try {
                 session.setFlags(hashcode,header);
             } catch(Exception ex) {
-                if(WebMailServer.getDebug()) ex.printStackTrace();
+                log.error(ex);
                 throw new WebMailException(ex.getMessage());
             }
         }

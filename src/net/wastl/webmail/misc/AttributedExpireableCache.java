@@ -25,7 +25,6 @@ import java.util.*;
 /**
  * AttributedExpireableCache.java
  *
- *
  * Created: Tue Apr 25 14:57:22 2000
  *
  * @author Sebastian Schaffert

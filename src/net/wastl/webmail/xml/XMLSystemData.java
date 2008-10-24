@@ -98,7 +98,7 @@ public class XMLSystemData extends ConfigStore {
     public void setConfigRaw(String groupname,String key, String value, String type) {
         String curval=getConfigRaw(key);
         if(curval == null || !curval.equals(value)) {
-//          System.err.println("XMLSystemData: "+groupname+"/"+key+" = "+value);
+            log.debug("XMLSystemData: "+groupname+"/"+key+" = "+value);
             /* Find all GROUP elements */
             NodeList groupl=sysdata.getElementsByTagName("GROUP");
             int i=0;
@@ -420,7 +420,8 @@ public class XMLSystemData extends ConfigStore {
      * It should be removed ASAP
      */
     public void setVirtualDomain(String name,WebMailVirtualDomain domain) {
-        System.err.println("Called useless net.wastl.webmail.xml.XMLSystemData::setVirtualDomain/2");
+        log.fatal("Called useless net.wastl.webmail.xml.XMLSystemData::setVirtualDomain/2");
+        // TODO: Throw here, so we will be confident this is not used
     }
 
     public void deleteVirtualDomain(String name) {

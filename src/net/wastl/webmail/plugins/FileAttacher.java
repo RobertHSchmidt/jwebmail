@@ -27,6 +27,8 @@ import java.text.*;
 import java.io.*;
 import javax.mail.*;
 import net.wastl.webmail.misc.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * This plugin shows the Form for attaching files to a message as well as does
@@ -38,6 +40,7 @@ import net.wastl.webmail.misc.*;
  * @author Sebastian Schaffert
  */
 public class FileAttacher implements URLHandler, Plugin {
+    private static Log log = LogFactory.getLog(FileAttacher.class);
     public static final String VERSION="1.00";
     public static final String URL="/compose/attach";
 
@@ -82,7 +85,7 @@ public class FileAttacher implements URLHandler, Plugin {
                 if(head.isContentSet("DESCRIPTION")) {
                     description=new String(((ByteStore)head.getObjContent("DESCRIPTION")).getBytes());
                 }
-                //System.err.println("Description: "+description);
+                //log.debug("Description: "+description);
                 /**
                  * It seems that IE will use its browser encoding setting to
                  * encode the file name that sent to us. Hence we have to
@@ -133,11 +136,11 @@ public class FileAttacher implements URLHandler, Plugin {
                          * Since attachmentName comes from HTTPRequestHeader, we have to
                          * transcode it.
                          */
-                    // System.err.println("Removing "+head.getContent("ATTACHMENTS"));
+                    // log.debug("Removing "+head.getContent("ATTACHMENTS"));
                     // session.removeWorkAttachment(head.getContent("ATTACHMENTS"));
                         String attachmentName = head.getContent("ATTACHMENTS");
                         attachmentName = new String(attachmentName.getBytes("ISO8859_1"), "UTF-8");
-                System.err.println("Removing " + attachmentName);
+                    log.info("Removing " + attachmentName);
                     session.removeWorkAttachment(attachmentName);
                 } catch (Exception e) {
                         e.printStackTrace();

@@ -23,6 +23,8 @@ import java.util.*;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import net.wastl.webmail.server.WebMailServer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * A ResourceBundle implementation that uses a XML file to store the resources.
@@ -30,8 +32,7 @@ import net.wastl.webmail.server.WebMailServer;
  * @author Sebastian Schaffert
  */
 public class XMLResourceBundle extends ResourceBundle {
-    protected boolean debug=false;
-
+    private static Log log = LogFactory.getLog(XMLResourceBundle.class);
     protected Document root;
     protected String language;
 
@@ -55,7 +56,8 @@ public class XMLResourceBundle extends ResourceBundle {
         elem_default=null;
         /* Now the locale specific stuff; fallback to default if not possbile */
         String default_lang=root.getDocumentElement().getAttribute("default");
-        if(debug) System.err.println("XMLResourceBundle ("+resourcefile+"): Default language '"+default_lang+"'.");
+        log.debug("XMLResourceBundle ("+resourcefile
+                +"): Default language '"+default_lang+"'.");
         nl=root.getElementsByTagName("LOCALE");
         for(int i=0;i<nl.getLength();i++) {
             Element e=(Element)nl.item(i);
@@ -76,7 +78,8 @@ public class XMLResourceBundle extends ResourceBundle {
                 String s="";
                 NodeList textl=e.getChildNodes();
                 for(int j=0;j<textl.getLength();j++) {
-                    if(debug) System.err.println("XMLResourceBundle ("+key+"): Type "+textl.item(j).getNodeName());
+                    log.debug("XMLResourceBundle ("+key
+                            +"): Type "+textl.item(j).getNodeName());
                     if(textl.item(j).getNodeName().equals("#text") ||
                        textl.item(j).getNodeName().equals("#cdata-section")) {
                         s+=textl.item(j).getNodeValue();
@@ -99,7 +102,7 @@ public class XMLResourceBundle extends ResourceBundle {
         if(retval == null && elem_common != null) {
             retval=getResult(elem_common,key);
         }
-        if(debug) System.err.println("XMLResourceBundle: "+key+" = "+retval);
+        log.debug("XMLResourceBundle: "+key+" = "+retval);
         return retval;
     }
 
