@@ -85,7 +85,6 @@ limitations under the License.
         <fileset dir="contrib">
            <include name="*.jar" />
            <include name="mime.types" />
-           <exclude name="**/*jakarta-regexp*" />
         </fileset>
         <fileset refid="bundle.refid"/>
     </copy>
@@ -98,7 +97,7 @@ limitations under the License.
           description="Compiles the source code (default)">
     <ivy:cachepath conf="build" pathid="build.refid"/>
     <javac srcdir="build/src" destdir="build/classes"
-      classpath=".:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:lib/xalan.jar:contrib/servlet-2.3.jar:lib/jdom-1.1.jar"
+           classpath="lib/cos.jar:lib/javaOTP.jar:lib/xalan.jar"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
            deprecation="${javac.deprecation}"
@@ -108,7 +107,7 @@ limitations under the License.
     <mkdir dir="build/classes/plugins" />
     <javac srcdir="build/src"
            destdir="build/classes/plugins"
-           classpath="build/classes:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:contrib/servlet-2.3.jar:lib/jdom-1.1.jar"
+           classpath="build/classes:lib/cos.jar:lib/javaOTP.jar"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
            deprecation="${javac.deprecation}"
@@ -118,12 +117,11 @@ limitations under the License.
     <mkdir dir="build/classes/authenticators" />
     <javac srcdir="build/src"
            destdir="build/classes/authenticators"
-           classpath="build/classes:lib/servlet-2.3.jar:lib/mail.jar:lib/activation.jar:lib/cos.jar:lib/xml-apis.jar:lib/javaOTP.jar:lib/jdom-1.1.jar"
+           classpath="build/classes:lib/cos.jar:lib/javaOTP.jar"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
            deprecation="${javac.deprecation}"
            includes="**/authenticators/**" />
-
   </target>
 
   <!-- =================================================================== -->
@@ -315,7 +313,6 @@ limitations under the License.
            <include name="**/*.jar"/>
            <!--<exclude name="mail.jar"/>-->
            <exclude name="servlet-2.3.jar"/>
-           <exclude name="xercesImpl.jar"/>
            <!--<exclude name="xalan.jar"/>-->
         </fileset>
     </copy>

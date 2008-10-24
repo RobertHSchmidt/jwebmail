@@ -11,12 +11,12 @@ Somewhere in the callback thread, log the target document of XPath failures.
 
 Resolve NPE being thrown constantly from XMLData.getNodeXPath().
 
-Eliminate libraries now included in JDK 5.  I think xml-apis.jar at least.
-Document requirement for JDK 1.5.
+Updated cos.jar  to the latest (2003/11/05) cut.
+Get updated javaOTP.jar w/ webengruven OTP auth.  Version???
+mbox.jar seems to be v. 1.3.3 of the obsolete knife mbox provider.
 
-Get javamail jars from Ivy.  Get rid of all zip files and streamline build.xml.
+Use javax.xml.xpath instead of org.apache.xpath. in xlan.jar.
 
-Use javax.xml.xpath instead of org.apache.xpath.
 If haven't already, document requirement for JDK 1.5
 (javax.xml.xpath not in 1.4).
 

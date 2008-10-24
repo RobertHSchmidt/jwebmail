@@ -17,11 +17,9 @@
                 transitive="false" conf="build->default"/>
     <dependency name="mailapi" rev="1.4.1"
                 transitive="false" conf="build->default"/>
-    <dependency name="smtp" rev="1.4.1"
-                transitive="false" conf="bundle->default"/>
     <dependency name="pop3" rev="1.4.1"
-                transitive="false" conf="build,bundle->default"/>
+                transitive="false" conf="bundle->default"/>
     <dependency name="imap" rev="1.4.1"
-                transitive="false" conf="build,bundle->default"/>
+                transitive="false" conf="bundle->default"/>
   </dependencies>
 </ivy-module>
