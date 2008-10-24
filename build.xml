@@ -133,7 +133,6 @@ limitations under the License.
         <fileset dir="contrib">
            <include name="*.jar" />
            <include name="mime.types" />
-           <exclude name="**/*ant*" />
            <exclude name="**/*jakarta-regexp*" />
            <exclude name="**/*servlet*" />
         </fileset>
@@ -188,21 +187,18 @@ limitations under the License.
          basedir="build/classes"
          includes="net/**,org/**"
          excludes="**/standalone/**,**/servlet/**" />
-<!--    <jar jarfile="lib/${ant.project.name}-standalone.jar"
-  basedir="build/classes"
-         includes="**/standalone/**" /> -->
-<!--    <jar jarfile="lib/${ant.project.name}-servlet.jar"
-  basedir="build/classes"
-         includes="**/servlet/**" /> -->
-<!-- rather than copying these to lib/plugins etc. just waiting till tomcat deploy
-     and copy straight from build.dest to WEB-INF/classes -->
-<!--    <copy todir="lib/plugins">
-  <fileset dir="build/classes/plugins" />
-    </copy>
-    <copy todir="lib/authenticators">
-      <fileset dir="build/classes/authenticators" />
-    </copy> -->
-
+       <!--
+            Leaving here in case this helps to reverse engineer
+            plugin installation:
+            Rather than copying these to lib/plugins etc. just waiting till
+            tomcat deploy and copy straight from build.dest to WEB-INF/classes
+            <copy todir="lib/plugins">
+              <fileset dir="build/classes/plugins" />
+            </copy>
+            <copy todir="lib/authenticators">
+              <fileset dir="build/classes/authenticators" />
+            </copy>
+        -->
   </target>
 
   <!-- =================================================================== -->
@@ -452,9 +448,15 @@ limitations under the License.
   <target name="-ivy-setup">
     <available property="_ivy.present" classname="org.apache.ivy.ant.IvyTask"/>
     <fail unless="_ivy.present">
-Add Ivy jar file to your Ant CLASSPATH.  Try
-    export ANT_ARGS; ANT_ARGS='-lib bootstrap-libs -noclasspath' (Bourne)
-    SET ANT_ARGS=-lib bootstrap-libs -noclasspath                (CMD)</fail>
+Add Ivy jar file to Ant CLASSPATH.
+Copy-and-paste this for any Bourne shell (inc. Bash):
+
+    export ANT_ARGS; ANT_ARGS='-lib bootstrap-libs -noclasspath'
+
+OR copy-and-paste this for any CMD-like Windows shell:
+
+    SET ANT_ARGS=-lib bootstrap-libs -noclasspath</fail>
+
     <available property="_ivysettings.present" file="ivysettings.xml"
                type="file"/>
      <antcall target="-ensure-ivysettings"/>
