@@ -34,7 +34,6 @@ import net.wastl.webmail.xml.*;
 import net.wastl.webmail.exceptions.*;
 
 
-//import org.apache.xml.serialize.*;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.*;
@@ -244,8 +243,6 @@ public class SimpleStorage extends FileStorage {
      * @see net.wastl.webmail.server.Storage.getUserData()
      *
      * devink 7/15/2000 - Added TwoPassAuthenticationException
-     *                  - changed to doAuth*UserData()
-     *                  - Added challenged arg.
      * 9/24/2000        - reverted to old getUserData for new cr auth
      */
     public XMLUserData getUserData(String user, String domain, String password, boolean authenticate)

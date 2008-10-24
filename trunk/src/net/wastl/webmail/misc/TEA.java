@@ -115,7 +115,6 @@ import java.math.*;
 * </PRE>
 *
 * @author Translated by Michael Lecuyer (mjl@theorem.com) from the C Language.
-* @version 1.0 Sep 8, 1998
 * @since JDK1.1
 */
 

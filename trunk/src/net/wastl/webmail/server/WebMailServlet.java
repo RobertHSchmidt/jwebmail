@@ -166,7 +166,9 @@ public class WebMailServlet extends WebMailServer implements Servlet {
     }
 
     public String getServletInfo() {
-        return getVersion()+"\n(c)2002 by Sebastian Schaffert\nThis software is distributed under the GNU General Public License (GPL)";
+        return getVersion()
+         +"\n(c)2008 by the JWebMail Development Team and Sebastian Schaffert\n"
+         + "This software is distributed under the Apache 2.0 License";
     }
 
     public void destroy() {

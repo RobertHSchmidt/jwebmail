@@ -26,7 +26,6 @@ package org.bulbul.webmail.xmlresource;
  * Deafult resource.
  *
  * @author        Steve Excellent Lee
- * @version      1.0 2001
  */
 public class Resources_zh_TW extends ResourceBase {
         protected String getXmlResourceFilename() {

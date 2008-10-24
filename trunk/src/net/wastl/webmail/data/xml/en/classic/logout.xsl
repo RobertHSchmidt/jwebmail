@@ -44,8 +44,8 @@ limitations under the License.
           <CENTER>
             <FONT SIZE="-1">
               <EMPH>
-                WebMail is (c)1998-2000 by <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>.
-                It is distributed under the terms of the GNU General Public License (LGPL).
+                WebMail ist (c)2008 von JWebMail Development Team und Sebastian Schaffert.
+                Es steht unter den Bedingungen der Apache 2.0 License.
               </EMPH>
             </FONT>
           </CENTER>

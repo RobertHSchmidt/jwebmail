@@ -8,7 +8,24 @@ off-the-shelf tab-expander.
 Don't use liberal import statements.  Include just what you need to
 prevent unnecessary name collisions in the future.
 
-Be conservative with white space.
+Be conservative with white space.  E.g., don't ever put white space where
+it is totally useless, like blank spaces at ends of lines; or blank
+lines at the very beginning of a file, the very end of a file, or
+right after "{" or right before "}".
+
+Be conservative with comments.  Do not write your development history
+in the source code.  That is what we use Subversion for.
+
+Don't let your IDE clutter our source code with garbage.  If your IDE
+writes template stuff which is not exactly right and which you do not
+manually correct, then change your IDE setup to not write those templates.
+
+Don't mis-use RCS keywords.  Whether using IDE templating or not, don't
+use RCS keywords in JavaDoc elements @author, @since, @version.  For
+the first two, Subversion (or CVS for that matter) will keep updating
+these values, but their only purpose is to record the static values at
+edit time.  For the latst (@version), what the reader will want to
+know is the "release version", not the change-control revision.
 
 When making a new file, copy the Copyright (and file Id$) boilerplate from
 an existing file of the same type, and update the Copyright date if necessary.

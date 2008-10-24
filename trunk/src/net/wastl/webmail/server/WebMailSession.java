@@ -141,7 +141,6 @@ public class WebMailSession implements HTTPSession {
      * This method does the actual initialisation
      *
      * devink 7/15/2000 - added TwoPassAuthenticationException
-     *                  - updated call to getUserData(), to use my new one.
      * devink 9/24/2000 - reverted back to old getUserData call
      */
     protected void doInit(WebMailServer parent, HTTPRequestHeader h)

@@ -21,7 +21,6 @@
  *  gets their new password.
  *
  * 08/11/2000 Sebastian Schaffert: Modified to fit into WebMail 0.7.2
- * - added import net.wastl.webmail.exceptions.*;
  *
  * @author Devin Kowatch
  * @version $Revision$
