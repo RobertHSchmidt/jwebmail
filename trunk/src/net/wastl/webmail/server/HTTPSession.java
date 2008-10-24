@@ -29,10 +29,7 @@ import org.w3c.dom.Document;
 /*
  * HTTPSession.java
  *
- *
  * Created: Thu Sep  9 17:20:37 1999
- */
-/**
  *
  * @author Sebastian Schaffert
  */

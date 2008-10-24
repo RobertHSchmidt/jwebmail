@@ -23,12 +23,15 @@ import net.wastl.webmail.config.*;
 import net.wastl.webmail.exceptions.WebMailException;
 import java.io.*;
 import java.util.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
  * @author Sebastian Schaffert
  */
 public class AuthenticatorHandler  {
+    private static Log log = LogFactory.getLog(AuthenticatorHandler.class);
     WebMailServer parent;
 
     Hashtable authenticators;
@@ -54,7 +57,7 @@ public class AuthenticatorHandler  {
      * Initialize and register WebMail Authenticators.
      */
     public void registerAuthenticators() {
-        System.err.println("- Initializing WebMail Authenticator Plugins ...");
+        log.info("Initializing WebMail Authenticator Plugins ...");
 
         StringTokenizer tok=new StringTokenizer(authenticator_list,":;, ");
 
@@ -66,13 +69,13 @@ public class AuthenticatorHandler  {
                 Authenticator a=(Authenticator) c.newInstance();
                 a.register(parent.getConfigScheme());
                 authenticators.put(a.getKey(),a);
-                System.err.println("  * registered authenticator plugin \""+c.getName()+"\"");
+                log.info("Registered authenticator plugin \""+c.getName()+"\"");
             } catch(Exception ex) {
-                System.err.println("  * Error: could not register \""+name+"\" ("+ex.getMessage()+")!");
+                log.error("Could not register \""+name+"\" ("+ex.getMessage()+")!");
                 //ex.printStackTrace();
             }
         }
-        System.err.println("  done!");
+        log.info("Done initializing Authenticator Plugins");
     }
 
     public Authenticator getAuthenticator(String key) {

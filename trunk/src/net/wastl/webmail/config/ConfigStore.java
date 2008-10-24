@@ -86,9 +86,9 @@ public abstract class ConfigStore  {
     public void setConfig(String key, String value, boolean filter, boolean notify) throws IllegalArgumentException {
         if(!scheme.isValid(key,value)) throw new IllegalArgumentException();
         if(!(isConfigSet(key) && getConfigRaw(key).equals(value))) {
-//          System.err.println("Key: "+key);
-//          System.err.println("Value old: |"+getConfigRaw(key)+"|");
-//          System.err.println("Value new: |"+value+"|");
+//          log.debug("Key: "+key);
+//          log.debug("Value old: |"+getConfigRaw(key)+"|");
+//          log.debug("Value new: |"+value+"|");
 
             setConfigRaw(scheme.getConfigParameterGroup(key),
                          key,

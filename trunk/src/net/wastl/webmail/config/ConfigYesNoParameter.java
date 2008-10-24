@@ -22,10 +22,7 @@ package net.wastl.webmail.config;
 /**
  * ConfigYesNoParameter.java
  *
- *
  * Created: Wed Sep  8 16:49:22 1999
- */
-/**
  *
  * @author Sebastian Schaffert
  */

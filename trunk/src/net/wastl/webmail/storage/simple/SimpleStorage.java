@@ -68,13 +68,12 @@ public class SimpleStorage extends FileStorage {
         saveXMLSysData();
     }
 
-    protected void initConfig()
-        throws UnavailableException {
-        System.err.print("  * Configuration ... ");
+    protected void initConfig() throws UnavailableException {
+        log.info("Configuration ... ");
 
         loadXMLSysData();
 
-        System.err.println("successfully parsed XML configuration file.");
+        log.info("successfully parsed XML configuration file.");
     }
 
     protected void loadXMLSysData()
@@ -87,7 +86,7 @@ public class SimpleStorage extends FileStorage {
         try {
             DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             root=parser.parse(file);
-            if(debug) System.err.println("\nConfiguration file parsed, document: "+root);
+            log.debug("Configuration file parsed, document: "+root);
             sysdata=new XMLSystemData(root,cs);
             log.debug( "SimpleStorage: WebMail configuration loaded.");
         } catch(Exception ex) {
@@ -215,9 +214,7 @@ public class SimpleStorage extends FileStorage {
                              vdom.getDefaultServer(),user,password);
 
         } catch(Exception ex) {
-            log.warn("SimpleStorage: User configuration template ("+template+") exists but could not be parsed");
-            log.warn(ex);
-            if(debug) ex.printStackTrace();
+            log.warn("SimpleStorage: User configuration template ("+template+") exists but could not be parsed", ex);
             throw new CreateUserDataException("User configuration template ("+template+") exists but could not be parsed",user,domain);
         }
         return data;
@@ -256,12 +253,11 @@ public class SimpleStorage extends FileStorage {
 //                  Document root = parser.parse(new InputSource(new InputStreamReader(new FileInputStream(f.getAbsolutePath()), "UTF-8")));
 
                     data=new XMLUserData(root);
-                    if(debug) System.err.println("SimpleStorage: Parsed Document "+root);
+                    log.debug("SimpleStorage: Parsed Document "+root);
                     error=false;
                 } catch(Exception ex) {
                     log.warn("SimpleStorage: User configuration for "+user+
-                        " exists but could not be parsed ("+ex.getMessage()+")");
-                    if(debug) ex.printStackTrace();
+                        " exists but could not be parsed ("+ex.getMessage()+")", ex);
                     error=true;
                 }
                 long t_end=System.currentTimeMillis();
@@ -333,8 +329,7 @@ public class SimpleStorage extends FileStorage {
             }
         } catch(Exception ex) {
             log.error("SimpleStorage: Unexpected error while trying to save user configuration "+
-                "for user "+user+"("+ex.getMessage()+").");
-            if(debug) ex.printStackTrace();
+                "for user "+user+"("+ex.getMessage()+").", ex);
         }
     }
 

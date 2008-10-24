@@ -23,12 +23,10 @@ import java.io.*;
 import java.util.*;
 import java.text.*;
 import net.wastl.webmail.server.WebMailServer;
-import net.wastl.webmail.debug.ErrorHandler;
 import net.wastl.webmail.exceptions.*;
 
 /**
  * HTTPHeader.java
- *
  *
  * Created: Tue Feb  2 15:25:48 1999
  *

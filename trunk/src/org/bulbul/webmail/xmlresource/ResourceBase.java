@@ -28,6 +28,8 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 import javax.xml.parsers.*;
 import net.wastl.webmail.server.WebMailServer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * A ResourceBundle implementation that uses a XML file to store the resources.
@@ -50,8 +52,7 @@ import net.wastl.webmail.server.WebMailServer;
  * @author        Steve Excellent Lee
  */
 public abstract class ResourceBase extends ResourceBundle {
-    protected boolean debug = false;
-
+    private static Log log = LogFactory.getLog(ResourceBase.class);
     protected Document xmlRoot = null;
 
     protected Element elementBundle = null;     // The <BUNDLE> element of resource xml file
@@ -91,10 +92,7 @@ public abstract class ResourceBase extends ResourceBundle {
         if ((retval == null) && (elem_common != null)) {
             retval = getResult(elem_common,key);
         }
-
-        if (debug)
-            System.err.println("XMLResourceBundle: "+key+" = "+retval);
-
+        log.debug("XMLResourceBundle: "+key+" = "+retval);
         return retval;
     }
 
@@ -106,7 +104,7 @@ public abstract class ResourceBase extends ResourceBundle {
     protected void loadXmlResourceFile() {
         try {
             DocumentBuilder parser=DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            System.err.println("file://" +
+            log.info("file://" +
                                WebMailServer.getServer().getProperty("webmail.template.path") +
                                System.getProperty("file.separator") +
                                getXmlResourceFilename());
@@ -125,16 +123,13 @@ public abstract class ResourceBase extends ResourceBundle {
             if (nl.getLength() > 0) {
                 elementBundle = (Element)nl.item(0);
             }
-        }
-        catch (IOException e) {
-            System.err.println(e);
-        }
-        catch (SAXException e) {
-            System.err.println(e);
-        }
-        catch (ParserConfigurationException e) {
-            System.err.println(e);
-        }
+        } catch (IOException e) {
+            log.error(e);
+        } catch (SAXException e) {
+            log.error(e);
+        } catch (ParserConfigurationException e) {
+            log.error(e);
+        }  // We don't want to throw for these exceptions?
     }
 
     protected void getKeys(Element element, Hashtable hash) {
@@ -152,8 +147,7 @@ public abstract class ResourceBase extends ResourceBundle {
                 String s="";
                 NodeList textl = e.getChildNodes();
                 for (int j=0; j < textl.getLength(); j++) {
-                    if (debug)
-                        System.err.println("XMLResourceBundle ("+key+"): Type "+textl.item(j).getNodeName());
+                    log.debug("XMLResourceBundle ("+key+"): Type "+textl.item(j).getNodeName());
                     if (textl.item(j).getNodeName().equals("#text") ||
                         textl.item(j).getNodeName().equals("#cdata-section")) {
                         s += textl.item(j).getNodeValue();

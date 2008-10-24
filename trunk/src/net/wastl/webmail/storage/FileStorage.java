@@ -139,22 +139,22 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
     }
 
     protected void initAuth() {
-        System.err.print("  * Authenticator ... ");
+        log.info("Authenticator ... ");
         Authenticator a=parent.getAuthenticatorHandler().getAuthenticator(getConfig("AUTH"));
         if(a!=null) {
             // IMAP level authentication
             auth=a;
             auth.init(this);
-            System.err.println("ok. Using "+auth.getClass().getName()+" (v"+auth.getVersion()+") for authentication.");
+            log.info("ok. Using "+auth.getClass().getName()+" (v"+auth.getVersion()+") for authentication.");
         } else {
-            System.err.println("error. Could not initalize any authenticator. Users will not be able to log on.");
+            log.fatal("Could not initalize any authenticator. Users will not be able to log on.");
             auth=null;
         }
     }
 
 
     protected void initMIME() {
-        System.err.print("  * MIME types ... ");
+        log.info("Initializing MIME types ... ");
         if(getConfig("mime types") != null) {
             try {
                 File f=new File(getConfig("mime types"));
@@ -170,27 +170,27 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
                                 while(tok.hasMoreTokens()) {
                                     String key=tok.nextToken();
                                     mime_types.put(key,type);
-                                    //System.err.println(key+" -> "+type);
+                                    log.debug(key+" -> "+type);
                                 }
                             }
                         }
                         line=in.readLine();
                     }
                     in.close();
-                    System.err.println(" loaded from "+getConfig("mime types")+".");
+                    log.info("Mime Types loaded from "+getConfig("mime types")+".");
                 } else {
-                    System.err.println(" could not find "+getConfig("mime types")+". Will use standard MIME types.");
+                    log.info("Could not find "+getConfig("mime types")+". Will use standard MIME types.");
                 }
             } catch(IOException ex) {
-                System.err.println(" could not find "+getConfig("mime types")+". Will use standard MIME types.");
+                log.error("Could not find "+getConfig("mime types")+". Will use standard MIME types.");
             }
         } else {
-            System.err.println(" not configured. Will use standard MIME types.");
+            log.error("Mime Types not configured. Will use standard MIME types.");
         }
     }
 
     protected void initLanguages() {
-        System.err.print("  * Available languages ... ");
+        log.info("Initializing available languages ... ");
         File f=new File(parent.getProperty("webmail.template.path")+System.getProperty("file.separator"));
         String[] flist=f.list(new FilenameFilter() {
                 public boolean accept(File myf, String s) {
@@ -212,7 +212,7 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
                 ObjectInputStream in=new ObjectInputStream(new FileInputStream(cached));
                 available1=(Locale[])in.readObject();
                 in.close();
-                System.err.print(" using disk cache ... ");
+                log.info("Using disk cache for langs... ");
             } catch(Exception ex) {
                 exists=false;
             }
@@ -255,7 +255,7 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
                 count++;
             }
         }
-        System.err.println(count+" languages initialized.");
+        log.info(count+" languages initialized.");
         cs.configRegisterStringKey(this,"LANGUAGES",s,"Languages available in WebMail");
         setConfig("LANGUAGES",s);
 
@@ -295,7 +295,7 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         } else {
             try {
                 // ResourceBundle rc=XMLResourceBundle.getBundle("resources",locale,null);
-                System.err.println("Loading locale");
+                log.info("Loading locale");
                 ResourceBundle rc = ResourceBundle.getBundle("org.bulbul.webmail.xmlresource.Resources", locale);
                 resources.put(locale.getLanguage(),rc);
                 return rc.getString(key);
@@ -341,7 +341,7 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
                 cache.put(name,stylesheet, new Long(f.lastModified()));
                 cache.miss();
             } catch(Exception ex) {
-                //System.err.println("Error while compiling stylesheet "+name+", language="+locale.getLanguage()+", theme="+theme+".");
+                //log.error("Error while compiling stylesheet "+name+", language="+locale.getLanguage()+", theme="+theme+".");
                 throw new WebMailException("Error while compiling stylesheet "+name+", language="+locale.getLanguage()+", theme="+theme+":\n"+ex.toString());
             }
             return stylesheet;
@@ -432,7 +432,6 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
 
     public void notifyConfigurationChange(String key) {
         log.debug("FileStorage: Configuration change notify for key "+key+".");
-        System.err.println("- Configuration changed: ");
         if(key.toUpperCase().startsWith("AUTH")) {
             initAuth();
         } else if(key.toUpperCase().startsWith("MIME")) {

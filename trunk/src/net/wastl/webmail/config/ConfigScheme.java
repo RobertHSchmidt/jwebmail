@@ -20,6 +20,8 @@
 package net.wastl.webmail.config;
 
 import java.util.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * This class contains a scheme for WebMail configuration data.
@@ -32,12 +34,13 @@ import java.util.*;
  * @author Sebastian Schaffert
  */
 public class ConfigScheme {
+    private static Log log = LogFactory.getLog(ConfigScheme.class);
     protected Hashtable config_scheme;
 
     public ConfigScheme() {
-        System.err.print("- Configuration Scheme Handler ... ");
+        log.info("Configuration Scheme Handler ... ");
         config_scheme=new Hashtable();
-        System.err.println("done!");
+        log.info("Done setting up Config Scheme Handler!");
     }
 
     /**
@@ -209,14 +212,14 @@ public class ConfigScheme {
     }
 
     public void notifyConfigurationChange(String key) {
-//      System.err.println("NOTIFY: "+key);
+        log.debug("NOTIFY: "+key);
         ConfigParameter parm=getConfigParameter(key);
         if(parm!=null) {
             Enumeration enumVar=parm.getConfigurationListeners();
 
             while(enumVar.hasMoreElements()) {
                 ConfigurationListener l=(ConfigurationListener)enumVar.nextElement();
-//              System.err.println(l);
+                // log.debug(l);
                 try {
                     l.notifyConfigurationChange(key);
                 } catch(Exception e) {

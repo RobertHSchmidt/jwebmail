@@ -56,12 +56,10 @@ public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
             //processor.setDiagnosticsOutput(System.err);
             processor.transform(msg_xml,msg_result);
         } catch(Exception ex) {
-            System.err.println("Error transforming XML with "+xsl+" to XHTML.");
-            log.info("Error transforming XML with "+xsl+" to XHTML.");
+            log.error("Error transforming XML with "+xsl+" to XHTML.");
             throw new WebMailException(ex.getMessage());
         }
         long end_t=System.currentTimeMillis();
-        //System.err.println("Transformation XML --> XHTML took "+(end_t-start_t)+" ms.");
         log.debug("Transformation XML --> XHTML took "+(end_t-start_t)+" ms.");
 
         content=writer.toString();
@@ -78,12 +76,10 @@ public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
             Transformer processor = stylesheet.newTransformer();
             processor.transform(msg_xml,msg_result);
         } catch(Exception ex) {
-            System.err.println("Error transforming XML to XHTML.");
-            ex.printStackTrace();
+            log.error("Error transforming XML to XHTML.", ex);
             throw new WebMailException(ex.toString());
         }
         long end_t=System.currentTimeMillis();
-        //System.err.println("Transformation (with precompiled stylesheet) XML --> XHTML took "+(end_t-start_t)+" ms.");
         log.debug("Transformation (with precompiled stylesheet) XML --> XHTML took "+(end_t-start_t)+" ms.");
 
         content=writer.toString();

@@ -275,7 +275,7 @@ public class WebMailSession implements HTTPSession {
             xml_messagelist.setAttribute("total",total_messages+"");
             xml_messagelist.setAttribute("new",new_messages+"");
 
-//          System.err.println("Total: "+total_messages);
+            log.debug("Total: "+total_messages);
 
             /* Handle small messagelists correctly */
             if(total_messages < show_msgs) {
@@ -305,9 +305,9 @@ public class WebMailSession implements HTTPSession {
             fp.add(FetchProfile.Item.ENVELOPE);
             fp.add(FetchProfile.Item.FLAGS);
             fp.add(FetchProfile.Item.CONTENT_INFO);
-//          System.err.println("Last: "+last+", first: "+first);
+            log.debug("Last: "+last+", first: "+first);
             Message[] msgs=folder.getMessages(first,last);
-            //System.err.println(msgs.length + " messages fetching...");
+            log.debug(msgs.length + " messages fetching...");
             folder.fetch(msgs,fp);
             long fetch_stop=System.currentTimeMillis();
 
@@ -582,7 +582,6 @@ public class WebMailSession implements HTTPSession {
 
                 } catch(UnsupportedEncodingException e) {
                     log.warn("Unsupported Encoding in parseMIMEContent: "+e.getMessage());
-                    System.err.println("Unsupported Encoding in parseMIMEContent: "+e.getMessage());
                 }
             }
             /* Set seen flag (Maybe make that threaded to improve performance) */
@@ -607,7 +606,7 @@ public class WebMailSession implements HTTPSession {
             XMLMessage work=null;
             if((mode & GETMESSAGE_MODE_REPLY) == GETMESSAGE_MODE_REPLY ||
                (mode & GETMESSAGE_MODE_FORWARD) == GETMESSAGE_MODE_FORWARD) {
-                //System.err.println("Setting work message!");
+                log.debug("Setting work message!");
                 work=model.setWorkMessage(xml_message);
 
 String newmsgid=WebMailServer.generateMessageID(user.getUserName());
@@ -703,7 +702,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 Document htmldoc = parser.parse(p.getInputStream());
 
                 if(htmldoc == null) {
-                    System.err.println("Document was null!");
+                    log.error("Document was null!");
+                    // Why not throwing?
                 }
 
                 //dom.writeDocument(htmldoc,"/tmp/test.xml");
@@ -734,7 +734,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
                 xml_part=parent_part.createPart("text");
                 // TODO:
-                System.err.println("text hit");
+                log.debug("text hit");
 
                 BufferedReader in;
                 if(p instanceof MimeBodyPart) {
@@ -754,7 +754,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 }
 
 
-                //System.err.println("Content-Type: "+p.getContentType());
+                log.debug("Content-Type: "+p.getContentType());
 
                 String token="";
                 int quote_level=0, old_quotelevel=0;
@@ -872,7 +872,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                     for(int i=0;i<m.getCount();i++) {
                         Part p2=m.getBodyPart(i);
                         if(p2.getContentType().toUpperCase().startsWith(preferred[alt])) {
-                            System.err.println("Processing: " + p2.getContentType());
+                            log.debug("Processing: " + p2.getContentType());
                             parseMIMEContent(p2,parent_part,msgid);
                             found=true;
                             break;
@@ -939,7 +939,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 int size=p.getSize();
                 if(p instanceof MimeBodyPart) {
                     MimeBodyPart mpb=(MimeBodyPart)p;
-                    System.err.println("MIME Body part (image), Encoding: "+mpb.getEncoding());
+                    log.debug("MIME Body part (image), Encoding: "+mpb.getEncoding());
                     InputStream is=mpb.getInputStream();
 
                     /* Workaround for Java or Javamail Bug */
@@ -950,7 +950,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                     size=in.available();
 
                 } else {
-                    //System.err.println("*** No MIME Body part!! ***");
+                    log.warn("No MIME Body part!!");
+                    // Is this unexpected?  Consider changing log level.
                     in=p.getInputStream();
                 }
 
@@ -1377,7 +1378,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                     try {
                         subfolders=folder.listSubscribed();
                     } catch(MessagingException ex) {
-                        System.err.println("Subscribe not supported");
+                        log.warn("Subscribe not supported");
                         subfolders=folder.list();
                     }
                 } else {
@@ -1518,7 +1519,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         try {
             folder.setSubscribed(true);
         } catch(MessagingException ex) {
-            //System.err.println("Folder subscription not supported");
+            log.warn("Folder subscription not supported");
         }
     }
 
@@ -1532,7 +1533,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         try {
             folder.setSubscribed(false);
         } catch(MessagingException ex) {
-            //System.err.println("Folder subscription not supported");
+            log.warn("Folder subscription not supported");
         }
     }
 
@@ -1648,7 +1649,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
         Store st=connectStore(url.getHost(),url.getProtocol(),m.getLogin(),m.getPassword());
 
-        //System.err.println("Default folder: "+st.getDefaultFolder().toString());
+        log.debug("Default folder: "+st.getDefaultFolder().toString());
 
         Folder f=st.getDefaultFolder();
         connections.put(name,f);
@@ -1710,7 +1711,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 parent.removeSession(this);
             }
         } else {
-            System.err.println("WARNING: Session was already logged out. Ignoring logout request.");
+            log.warn("Session was already logged out. Ignoring logout request.");
         }
     }
 
@@ -1746,7 +1747,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
      */
     public void setLastAccess() {
         last_access=System.currentTimeMillis();
-        //System.err.println("Setting last access to session: "+last_access);
+        log.debug("Setting last access to session: "+last_access);
     }
 
     /**
@@ -1782,7 +1783,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
 
     protected static int[] getSelectedMessages(HTTPRequestHeader head, int max) {
-        //      System.err.print(" - select messages...");
+        // log.debug("select messages...");
 
         Enumeration e=head.getContent().keys();
         int _msgs[]=new int[max];
@@ -1793,14 +1794,13 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             if(s.startsWith("CH") && head.getContent(s).equals("on")) {
                 try {
                     _msgs[j]=Integer.parseInt(s.substring(3));
-                    //    System.err.print(_msgs[j]+" ");
+                    //    log.debug(_msgs[j]+" ");
                     j++;
                 } catch(NumberFormatException ex) {
                     ex.printStackTrace();
                 }
             }
         }
-        //System.err.println();
 
         int msgs[]=new int[j];
         for(int i=0;i<j;i++) {
@@ -1849,16 +1849,16 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         } else if(head.isContentSet("copymovemsgs") && head.getContent("COPYMOVE").equals("MOVE")) {
             copyMoveMessage(folderhash,head.getContent("TO"),head,true);
         } else if(head.isContentSet("flagmsgs")) {
-            System.err.println("setting message flags");
+            log.debug("setting message flags");
             Folder folder=getFolder(folderhash);
 
 
-            //System.err.println("Processing Request Header...");
+            //log.debug("Processing Request Header...");
 
             /* Get selected messages */
             int msgs[]=getSelectedMessages(head,folder.getMessageCount());
 
-            //System.err.println(" - get flags...");
+            //log.debug("get flags...");
 
             /* Get selected flags */
             Flags fl=new Flags(Flags.Flag.USER);
@@ -1883,8 +1883,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 value=false;
             }
 
-            //System.err.println("Done!");
-            //System.err.println("Setting flags...");
+            //log.debug("Done!");
+            //log.debug("Setting flags...");
 
             if(user.wantsSetFlags()) {
                 if(folder.isOpen() && folder.getMode()==Folder.READ_ONLY) {
@@ -1985,7 +1985,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                     long value=Long.parseLong(head.getContent(key));
                     user.setIntVar(key.substring(7),value);
                 } catch(NumberFormatException ex) {
-                    System.err.println("Warning: Remote provided illegal intvar in request header: \n("+key+","+head.getContent(key)+")");
+                    log.warn("Remote provided illegal intvar in request header: \n("+key+","+head.getContent(key)+")");
                 }
             } else if(key.startsWith("boolvar")) {
                 boolean value=head.getContent(key).toUpperCase().equals("ON");
@@ -2034,7 +2034,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 user.setPreferredLocale(head.getContent("LANGUAGE"));
                 user.setTheme(head.getContent("THEME"));
                 if(head.isContentSet("SENTFOLDER")) {
-                        System.err.println("SENTFOLDER="+head.getContent("SENTFOLDER"));
+                        log.debug("SENTFOLDER="+head.getContent("SENTFOLDER"));
                         user.setSentFolder(head.getContent("SENTFOLDER"));
                 }
         }

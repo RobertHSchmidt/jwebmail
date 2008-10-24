@@ -23,21 +23,23 @@ import net.wastl.webmail.ui.*;
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.exceptions.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Compose a message. This plugin will show the compose form and fill in
  * the necessary fields if this is a continued message
- *
- * @see FileAttacher
  *
  * provides: composer
  * requires: content bar
  *
  * Created: Tue Sep  7 12:46:08 1999
  *
+ * @see FileAttacher
  * @author Sebastian Schaffert
  */
 public class Composer implements Plugin, URLHandler {
+    private static Log log = LogFactory.getLog(Composer.class);
     public static final String VERSION="1.3";
     public static final String URL="/compose";
 
@@ -96,7 +98,7 @@ public class Composer implements Plugin, URLHandler {
         if(mode>0) {
             if(!header.isContentSet("folder-id") || !header.isContentSet("message-nr")) {
                 /// XXX error handler TBD here!
-                System.err.println("Error: no folder-id or message-nr in request for reply or forward!");
+                log.error("no folder-id or message-nr in request for reply or forward!");
             } else {
                 String folderhash=header.getContent("folder-id");
                 int msgnr=0;
@@ -104,7 +106,7 @@ public class Composer implements Plugin, URLHandler {
                     msgnr=Integer.parseInt(header.getContent("message-nr"));
                 } catch(NumberFormatException ex) {
                     /// XXX error handler TBD here!
-                    System.err.println("MSGNR wrong in forward/reply!");
+                    log.error("wrong in forward/reply!");
                 }
 
                 try {

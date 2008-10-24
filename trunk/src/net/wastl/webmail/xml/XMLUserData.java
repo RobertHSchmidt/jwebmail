@@ -26,6 +26,8 @@ import net.wastl.webmail.exceptions.*;
 import java.util.*;
 import java.text.*;
 import org.w3c.dom.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 /**
@@ -35,16 +37,16 @@ import org.w3c.dom.*;
  * @author Sebastian Schaffert
  */
 public class XMLUserData extends XMLData implements UserData {
-    protected boolean debug;
-
+    private static Log log = LogFactory.getLog(XMLUserData.class);
     protected long login_time;
     protected boolean logged_in;
 
     public XMLUserData(Document d) {
         super(d);
-        debug=WebMailServer.getDebug();
         if(data==null) {
-            System.err.println("Data was null ???");
+            // Should we not throw here so us developers will see and
+            // fix the problem? - blaine
+            log.error("Data was null ???");
             data=root.createElement("USERDATA");
             root.appendChild(data);
         }
@@ -155,7 +157,7 @@ public class XMLUserData extends XMLData implements UserData {
             login_time=System.currentTimeMillis();
             logged_in=true;
         } else {
-            System.err.println("Err: Trying to log in a second time for user "+getLogin());
+            log.error("Trying to log in a second time for user "+getLogin());
         }
     }
 
@@ -164,7 +166,7 @@ public class XMLUserData extends XMLData implements UserData {
             setIntVar("last login",login_time);
             logged_in = false;
         } else {
-            System.err.println("Err: Logging out a user that wasn't logged in.");
+            log.error("Logging out a user that wasn't logged in.");
         }
     }
 
@@ -172,7 +174,7 @@ public class XMLUserData extends XMLData implements UserData {
         // First, check whether a mailhost with this name already exists.
         // Delete, if yes.
         try {
-            //System.err.println("Adding mailhost "+name);
+            log.debug("Adding mailhost "+name);
             if(getMailHost(name) != null) {
                 removeMailHost(name);
             }
@@ -193,7 +195,7 @@ public class XMLUserData extends XMLData implements UserData {
             mailhost.appendChild(mh_uri);
 
             data.appendChild(mailhost);
-            //System.err.println("Done mailhost "+name);
+            log.debug("Done with mailhost "+name);
             //XMLCommon.writeXML(root,System.err,"");
             invalidateCache();
         } catch(Exception ex) {
@@ -437,7 +439,7 @@ public class XMLUserData extends XMLData implements UserData {
                 // This has to be some integer between 46 and 127 for the Helper
                 // class
                 String seed=(char)(r.nextInt(80)+46) + "" + (char)(r.nextInt(80)+46);
-                System.err.println("Seed: "+seed);
+                log.debug("Seed: "+seed); // Probably need to comment out
                 crypted=Helper.crypt(seed,newpasswd);
             }
             setValueXPath("/USERDATA/PASSWORD/text()",crypted);
@@ -560,8 +562,10 @@ public class XMLUserData extends XMLData implements UserData {
             //r=Long.parseLong(e.getAttribute("value"));
             r = Long.parseLong(getValueXPath("/USERDATA/INTVAR[@name='"+var+"']/@value"));
         } catch(NumberFormatException ex) {
-            System.err.println("Warning: Not a valid number in '"+var+"' for user "+
-                               getUserName()+"@"+getDomain());
+            log.warn("Not a valid number in '"+var+"' for user "+
+                   getUserName()+"@"+getDomain());
+            // Should we not throw here so us developers will see and
+            // fix the problem? - blaine
         }
         return r;
     }

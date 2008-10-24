@@ -30,7 +30,6 @@ import javax.xml.parsers.ParserConfigurationException;
  * XMLAdminModel.java
  *
  * Created: Thu May 18 14:48:21 2000
- *
  */
 
 /**

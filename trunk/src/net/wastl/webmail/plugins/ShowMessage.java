@@ -23,6 +23,8 @@ import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.exceptions.*;
 import java.util.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Show a message.
@@ -33,6 +35,7 @@ import java.util.*;
  * @author Sebastian Schaffert
  */
 public class ShowMessage implements Plugin, URLHandler {
+    private static Log log = LogFactory.getLog(ShowMessage.class);
     public static final String VERSION="1.3";
     public static final String URL="/folder/showmsg";
 
@@ -75,7 +78,7 @@ public class ShowMessage implements Plugin, URLHandler {
             try {
                 session.setFlags(folderhash,header);
             } catch(Exception ex) {
-                if(WebMailServer.getDebug()) ex.printStackTrace();
+                log.error(ex);
                 throw new WebMailException(ex.getMessage());
             }
         }

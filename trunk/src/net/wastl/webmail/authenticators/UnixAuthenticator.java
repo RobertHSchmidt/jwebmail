@@ -29,7 +29,6 @@ import net.wastl.webmail.config.ConfigScheme;
 /**
  * UnixAuthenticator.java
  *
- *
  * Created: Mon Apr 19 13:43:48 1999
  *
  * @author Sebastian Schaffert
@@ -94,7 +93,7 @@ public class UnixAuthenticator extends Authenticator {
             log.info("UnixAuthentication: user "+login+
                                            " authenticated successfully.");
         } catch(IOException ex) {
-            System.err.println("*** Cannot use UnixAuthentication and shadow passwords if WebMail is not executed as user 'root'! ***");
+            log.error("Cannot use UnixAuthentication and shadow passwords if WebMail is not executed as user 'root'!");
             throw new InvalidPasswordException("User login denied due to configuration error (contact system administrator)");
         }
     }

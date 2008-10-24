@@ -29,7 +29,6 @@ import org.apache.commons.logging.LogFactory;
 /**
  * IMAPAuthenticator.java
  *
- *
  * Created: Mon Apr 19 12:03:53 1999
  *
  * @author Sebastian Schaffert

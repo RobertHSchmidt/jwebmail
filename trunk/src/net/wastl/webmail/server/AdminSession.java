@@ -112,7 +112,7 @@ public class AdminSession implements HTTPSession {
             throw new InvalidPasswordException();
         }
         login();
-        System.err.println("Ok");
+        log.info("Ok");
     }
 
     public void login() {

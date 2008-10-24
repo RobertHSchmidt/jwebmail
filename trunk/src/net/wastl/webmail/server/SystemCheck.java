@@ -22,6 +22,8 @@ package net.wastl.webmail.server;
 import java.io.*;
 import java.util.regex.*;
 import net.wastl.webmail.exceptions.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
@@ -30,35 +32,35 @@ import net.wastl.webmail.exceptions.*;
  * @author Sebastian Schaffert
  */
 public class SystemCheck  {
+    private static Log log = LogFactory.getLog(SystemCheck.class);
     public SystemCheck(WebMailServer parent) throws WebMailException {
-        System.err.println("- Checking Java Virtual Machine ... ");
-        System.err.print("  * Version: "+System.getProperty("java.version")+" ... ");
+        log.info("Checking Java Virtual Machine ... ");
+        log.info("Version: "+System.getProperty("java.version")+" ... ");
 
         /* Test if the Java version might cause trouble */
-        if(System.getProperty("java.version").compareTo("1.4")>=0) {
-            System.err.println("ok.");
+        if(System.getProperty("java.version").compareTo("1.5")>=0) {
+            log.info("JDK version ok.");
         } else {
-            System.err.println("warn. At least Java 1.4 is required for WebMail.");
-            //System.exit(1);
+            log.warn("At least Java 1.5 is required for WebMail.");
         }
 
         /* Test if the operating system is supported */
-        System.err.print("  * Operating System: "+System.getProperty("os.name")+"/"+System.getProperty("os.arch")+" "+System.getProperty("os.version")+" ... ");
+        log.info("Operating System: "+System.getProperty("os.name")+"/"+System.getProperty("os.arch")+" "+System.getProperty("os.version")+" ... ");
         if(System.getProperty("os.name").equals("SunOS") ||
-           System.getProperty("os.name").equals("Solaris") ||
-           System.getProperty("os.name").equals("Linux")) {
-            System.err.println("ok.");
+            System.getProperty("os.name").equals("Solaris") ||
+            System.getProperty("os.name").equals("Linux")) {
+            log.info("OS variant Ok");
         } else {
-            System.err.println("warning. WebMail was only tested\n   on Solaris, HP-UX and Linux and may cause problems on your platform.");
+            log.warn("WebMail was only tested\n   on Solaris, HP-UX and Linux and may cause problems on your platform.");
         }
 
         /* Check if we are running as root and issue a warning */
         try {
-            System.err.print("  * User name: "+System.getProperty("user.name")+" ... ");
+            log.info("User name: "+System.getProperty("user.name")+" ... ");
             if(!System.getProperty("user.name").equals("root")) {
-                System.err.println("ok.");
+                log.info("User ok.");
             } else {
-                System.err.println("warning. You are running WebMail as root. This may be a potential security problem.");
+                log.warn("warning. You are running WebMail as root. This may be a potential security problem.");
             }
         } catch(Exception ex) {
             // Security restriction prohibit reading the username, then we do not need to
@@ -66,16 +68,16 @@ public class SystemCheck  {
         }
 
         /* Check whether all WebMail system properties are defined */
-        System.err.print("  * WebMail System Properties: ");
+        log.info("WebMail System Properties: ");
         //checkPathProperty(parent,"webmail.plugin.path");
         //checkPathProperty(parent,"webmail.auth.path");
         checkPathProperty(parent,"webmail.lib.path");
         checkPathProperty(parent,"webmail.template.path");
         checkPathProperty(parent,"webmail.data.path");
         checkPathProperty(parent,"webmail.xml.path");
-        System.err.println("ok!");
+        log.info("WebMail System Properties ok!");
 
-        System.err.print("  * Setting DTD-path in webmail.xml ... ");
+        log.info("Setting DTD-path in webmail.xml ... ");
         File f1=new File(parent.getProperty("webmail.data.path")+System.getProperty("file.separator")+"webmail.xml");
         File f2=new File(parent.getProperty("webmail.data.path")+System.getProperty("file.separator")+"webmail.xml."+Long.toHexString(System.currentTimeMillis()));
 
@@ -95,7 +97,7 @@ public class SystemCheck  {
 //                                                parent.getProperty("webmail.xml.path")+
 //                                                System.getProperty("file.separator")+
 //                                                "sysdata.dtd"+"\">");
-                    //System.err.println(s);
+                    //log.debug(s);
                     file2.println(s);
                     line=file1.readLine();
                 }
@@ -104,19 +106,16 @@ public class SystemCheck  {
             file2.close();
             file1.close();
         } catch(Exception ex) {
-            //ex.printStackTrace();
-            //throw new WebMailException("Error parsing webmail.xml!");
             throw new WebMailException(ex);
         }
         f2.renameTo(f1);
-        System.err.println("done!");
+        log.info("Done checking system!");
     }
 
     protected static void checkPathProperty(WebMailServer parent,String property) throws WebMailException {
         if(parent.getProperty(property) == null ||
            parent.getProperty(property).equals("")) {
-            System.err.println("fatal error. "+property+" not defined.");
-            throw new WebMailException();
+            throw new WebMailException("fatal error. "+property+" not defined.");
         } else {
             File f=new File(parent.getProperty(property));
             parent.setProperty(property,f.getAbsolutePath());

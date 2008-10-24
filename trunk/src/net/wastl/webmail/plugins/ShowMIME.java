@@ -69,20 +69,20 @@ public class ShowMIME implements Plugin, URLHandler {
             throw new WebMailException("No session was given. If you feel this is incorrect, please contact your system administrator");
         }
         WebMailSession session=(WebMailSession)sess;
-        //System.err.println("Fetching MIME part: "+suburl);
+        //log.debug("Fetching MIME part: "+suburl);
         ByteStore b=session.getMIMEPart(header.getContent("msgid"),suburl.substring(1));
         int count=0;
         while(b == null && count <= 10) {
-            //System.err.print(count+" ");
+            //log.debugcount+" ");
             try {
                 Thread.sleep(250);
             } catch(InterruptedException e) {}
             b=session.getMIMEPart(header.getContent("msgid"),suburl.substring(1));
             count++;
         }
-        if(count != 0) { System.err.println(); }
+        //if(count != 0) { System.err.println(); }
         HTMLImage content=new HTMLImage(b);
-        //System.err.println(content.size());
+        //log.debug(content.size());
         return content;
     }
 

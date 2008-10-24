@@ -22,7 +22,6 @@ package net.wastl.webmail.exceptions;
 /**
  * BinaryNotFoundException.java
  *
- *
  * Created: Thu May  4 15:38:04 2000
  *
  * @author Sebastian Schaffert

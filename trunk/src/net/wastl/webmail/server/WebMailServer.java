@@ -28,7 +28,6 @@ import javax.mail.Provider;
 import javax.servlet.UnavailableException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import net.wastl.webmail.debug.ErrorHandler;
 import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.config.ConfigScheme;
 import net.wastl.webmail.misc.Helper;
@@ -49,8 +48,6 @@ public abstract class WebMailServer  {
     protected ToplevelURLHandler uhandler;
 
     protected Hashtable sessions;
-
-    protected static boolean debug=@debug@;
 
     public static final String VERSION="@version@";
 
@@ -77,44 +74,11 @@ public abstract class WebMailServer  {
     public WebMailServer() {
     }
 
-    /**
-     * If debugging is enabled, send the given message to STDERR.
-     *
-     * @param msg The message
-     */
-    public static void debugOut(String msg) {
-        if(getDebug()) {
-            System.err.println("DBG: "+msg);
-        }
-    }
-
-    /**
-     * If debugging is enabled, send the given exception together with an explanatory message
-     * to STDERR.
-     *
-     * @param msg The explanatory message
-     * @param ex The exception
-     */
-    public void debugOut(String msg, Exception ex) {
-        if(getDebug()) {
-            System.err.println("DBG: "+msg);
-            ex.printStackTrace();
-        }
-    }
-
-    public static boolean getDebug() {
-        return debug;
-    }
-
-    public static void setDebug(boolean b) {
-        debug=b;
-    }
-
     protected void doInit() throws UnavailableException, WebMailException {
         server=this;
-        System.err.println("\n\nWebMail/Java Server v"+VERSION+" going up...");
-        System.err.println("=========================================\n");
-        System.err.println("Initalizing...");
+        log.info("WebMail/Java Server v"+VERSION+" going up...");
+        log.info("=========================================");
+        log.info("Initalizing...");
 
         new SystemCheck(this);
 
@@ -130,7 +94,7 @@ public abstract class WebMailServer  {
                                        config.getProperty("webmail.default.locale.language"),
                                        config.getProperty("webmail.default.locale.country")
                                        );
-        System.err.println("- Default Locale: " + defaultLocale.getDisplayName());
+        log.info("Default Locale: " + defaultLocale.getDisplayName());
 
         /*
          * Set the default theme to the parameter given in webmail.default.theme
@@ -141,29 +105,30 @@ public abstract class WebMailServer  {
         } else {
             defaultTheme=config.getProperty("webmail.default.theme");
         }
-        System.err.println("- Default Theme: " + defaultTheme);
+        log.info("Default Theme: " + defaultTheme);
 
         ahandler=new AuthenticatorHandler(this);
 
-        System.err.println("- Storage API ("+System.getProperty("webmail.storage")+
+        log.info("Storage API ("+System.getProperty("webmail.storage")+
                            ") and Configuration ... ");
 
         initStorage();
-        log.fatal("=============================== cut ===============================");
-        log.fatal("Storage initialized.");
+        log.info("=============================== cut ===============================");
+        // "cut"???
+        log.info("Storage initialized.");
 
         timer=new ConnectionTimer();
         sessions=new Hashtable();
 
-        System.err.println("  done!");
+        log.info("Storage initialization done!");
 
         uhandler=new ToplevelURLHandler(this);
 
-        log.fatal("URLHandler initialized.");
+        log.info("URLHandler initialized.");
 
         phandler=new PluginHandler(this);
 
-        log.fatal("Plugins initialized.");
+        log.info("Plugins initialized.");
 
         initProviders();
 
@@ -171,9 +136,10 @@ public abstract class WebMailServer  {
 
         storage.initConfigKeys();
 
-        log.fatal("=============================== cut ===============================");
-        log.fatal("WebMail/Java Server "+VERSION+" initialization completed.");
-        System.err.println("Initalization complete.");
+        log.info("=============================== cut ===============================");
+        // "cut"???
+        log.info("WebMail/Java Server "+VERSION+" initialization completed.");
+        log.info("Initalization complete.");
         start_time=System.currentTimeMillis();
     }
 
@@ -193,14 +159,11 @@ public abstract class WebMailServer  {
             storage=(Storage)cons.newInstance(sargs);
 
         } catch(InvocationTargetException e) {
-            Throwable t=e.getTargetException();
-            System.err.println("Nested exception: ");
-            t.printStackTrace();
-            System.err.println("Fatal error. Could not initialize. Exiting now!");
+            log.fatal("Could not initialize. Exiting now!  Nested exc:",
+                    e.getTargetException());
             throw new UnavailableException(e.getMessage());
         } catch(Exception e) {
-            e.printStackTrace();
-            System.err.println("Fatal error. Could not initialize. Exiting now!");
+            log.fatal("Could not initialize. Exiting now!", e);
             throw new UnavailableException(e.getMessage());
         }
     }
@@ -218,12 +181,12 @@ public abstract class WebMailServer  {
 
     protected void initProviders() {
         possible_providers=Session.getDefaultInstance(System.getProperties(),null).getProviders();
-        System.err.println("- Mail providers:");
+        log.info("Mail providers:");
         config_scheme.configRegisterChoiceKey("DEFAULT PROTOCOL","Protocol to be used as default");
         int p_transport=0;
         int p_store=0;
         for(int i=0; i<possible_providers.length;i++) {
-            System.err.println("  * "+possible_providers[i].getProtocol()+" from "+possible_providers[i].getVendor());
+            log.info(possible_providers[i].getProtocol()+" from "+possible_providers[i].getVendor());
             if(possible_providers[i].getType() == Provider.Type.STORE) {
                 p_store++;
                 config_scheme.configAddChoice("DEFAULT PROTOCOL",possible_providers[i].getProtocol(),"Use "+
@@ -380,21 +343,21 @@ public abstract class WebMailServer  {
 
     public void restart()
         throws UnavailableException {
-        System.err.println("Initiating shutdown for child processes:");
+        log.info("Initiating shutdown for child processes:");
         Enumeration e=sessions.keys();
-        System.err.print("- Removing active WebMail sessions ... ");
+        log.info("Removing active WebMail sessions ... ");
         while(e.hasMoreElements()) {
             HTTPSession w=(HTTPSession)sessions.get(e.nextElement());
             removeSession(w);
         }
-        System.err.println("done!");
+        log.info("Done initializing shutdown for child precesses!");
         shutdownServers();
         try {
             Thread.sleep(5000);
         } catch(Exception ex) {}
-        log.fatal("Shutdown completed successfully. Restarting.");
+        log.info("Shutdown completed successfully. Restarting.");
         storage.shutdown();
-        System.err.println("Garbage collecting ...");
+        log.info("Garbage collecting ...");
         System.gc();
         try {
             doInit();
@@ -404,18 +367,18 @@ public abstract class WebMailServer  {
     }
 
     public void shutdown() {
-        System.err.println("Initiating shutdown for child processes:");
+        log.info("Initiating shutdown for child processes:");
         Enumeration e=sessions.keys();
-        System.err.print("- Removing active WebMail sessions ... ");
+        log.info("Removing active WebMail sessions ... ");
         while(e.hasMoreElements()) {
             HTTPSession w=(HTTPSession)sessions.get(e.nextElement());
             removeSession(w);
         }
-        System.err.println("done!");
+        log.info("Done removing active WebMail sessions!");
         shutdownServers();
-        log.fatal("Shutdown completed successfully. Terminating.");
+        log.info("Shutdown completed successfully. Terminating.");
         storage.shutdown();
-        System.err.println("Shutdown complete! Will return to console now.");
+        log.info("Shutdown complete! Will return to console now.");
         System.exit(0);
     }
 
@@ -444,8 +407,7 @@ public abstract class WebMailServer  {
         return msgid;
     }
 
-    public void removeSession(HTTPSession w) {
-        log.info("Removing session: "+w.getSessionCode());
+    public void removeSession(HTTPSession w) { log.info("Removing session: "+w.getSessionCode());
         timer.removeTimeableConnection(w);
         sessions.remove(w.getSessionCode());
         if(!w.isLoggedOut()) {

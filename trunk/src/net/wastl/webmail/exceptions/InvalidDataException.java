@@ -22,11 +22,7 @@ package net.wastl.webmail.exceptions;
 /*
  * InvalidDataException.java
  *
- *
  * Created: Fri Oct  1 16:13:47 1999
- */
-/**
- *
  *
  * @author Sebastian Schaffert
  */

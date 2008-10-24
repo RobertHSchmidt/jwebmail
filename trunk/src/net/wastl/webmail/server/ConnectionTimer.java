@@ -20,8 +20,9 @@
 package net.wastl.webmail.server;
 
 import java.util.*;
-import net.wastl.webmail.debug.ErrorHandler;
 import net.wastl.webmail.exceptions.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
@@ -30,6 +31,7 @@ import net.wastl.webmail.exceptions.*;
  * @author Sebastian Schaffert
  */
 public class ConnectionTimer extends Thread {
+    private static Log log = LogFactory.getLog(ConnectionTimer.class);
     private Vector connections;
     private static final long sleep_interval=1000;
 
@@ -39,7 +41,7 @@ public class ConnectionTimer extends Thread {
     }
 
     public void printStatus() {
-        System.err.println(" Vulture: "+connections.size()+" connections in queue");
+        log.info("Vulture: "+connections.size()+" connections in queue");
     }
 
     public void addTimeableConnection(TimeableConnection c) {
@@ -77,7 +79,9 @@ public class ConnectionTimer extends Thread {
                     t.timeoutOccured();
                 }
             }
-            try { this.sleep(sleep_interval); } catch(InterruptedException ex) { new ErrorHandler(ex); }
+            try { this.sleep(sleep_interval); } catch(InterruptedException ex) {
+                log.error(ex);
+            }
         }
     }
 }

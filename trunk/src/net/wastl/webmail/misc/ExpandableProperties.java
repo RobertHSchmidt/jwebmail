@@ -135,7 +135,7 @@ public class ExpandableProperties extends Properties {
         } while (m.find());
         sb.append(origVal.substring(afterLast));
         if (origVal.equals(sb.toString())) return null;
-System.err.println("Val change (" + origVal + ") to (" + sb + ')');
+        // System.out.println("Val change (" + origVal + ") to (" + sb + ')');
         return sb.toString();
     }
 }
