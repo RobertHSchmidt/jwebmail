@@ -29,6 +29,8 @@ import net.wastl.webmail.exceptions.*;
 import org.webengruven.webmail.auth.AuthDisplayMngr;
 
 import javax.servlet.ServletException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 /*
@@ -47,6 +49,7 @@ import javax.servlet.ServletException;
 /* 9/24/2000 devink -- changed for challenge/response authentication */
 
 public class ToplevelURLHandler implements URLHandler {
+    private static Log log = LogFactory.getLog(ToplevelURLHandler.class);
 
     WebMailServer parent;
     //Hashtable urlhandlers;
@@ -89,10 +92,8 @@ public class ToplevelURLHandler implements URLHandler {
             }
             return new XHTMLDocument(session.getModel(),parent.getStorage().getStylesheet("error.xsl",locale,theme));
         } catch(Exception myex) {
-            parent.getStorage().log(Storage.LOG_ERR,"Error while handling exception:");
-            parent.getStorage().log(Storage.LOG_ERR,myex);
-            parent.getStorage().log(Storage.LOG_ERR,"The handled exception was:");
-            parent.getStorage().log(Storage.LOG_ERR,ex);
+            log.error("Error while handling exception:", myex);
+            log.error("The handled exception was:", ex);
             throw new ServletException(ex);
         }
     }

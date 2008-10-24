@@ -24,12 +24,13 @@ import java.text.*;
 import java.util.*;
 import java.util.zip.*;
 import javax.servlet.UnavailableException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import net.wastl.webmail.exceptions.*;
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.config.*;
 import net.wastl.webmail.misc.*;
 import net.wastl.webmail.xml.*;
-import net.wastl.webmail.logger.*;
 
 import javax.xml.transform.*;
 import javax.xml.transform.stream.*;
@@ -51,6 +52,7 @@ import javax.xml.transform.dom.*;
  * @versin $Revision$
  */
 public abstract class FileStorage extends Storage implements ConfigurationListener {
+    private static Log log = LogFactory.getLog(FileStorage.class);
 
     protected Hashtable resources;
 
@@ -65,8 +67,6 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
     protected Authenticator auth;
 
     protected static Hashtable mime_types;
-
-    protected Logger logger;
 
     protected static DateFormat df=null;
 
@@ -99,8 +99,6 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         file_resources=new Hashtable();
 
         initCache();
-
-        initLog();
 
         // Now included in configuration:
 //      initVirtualDomains();
@@ -144,29 +142,6 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         while(enum3.hasMoreElements()) {
             ExpireableCache ec=(ExpireableCache)binary_cache.get(enum3.nextElement());
             ec.setCapacity(file_cache_size);
-        }
-    }
-
-    protected void initLog() {
-        if(false) {
-            try {
-                Class logger_class=Class.forName(parent.getProperty("webmail.log.facility"));
-                Class[] argtypes={Class.forName("net.wastl.webmail.server.WebMailServer"),
-                                  Class.forName("net.wastl.webmail.server.Storage")};
-                Object[] args={parent,this};
-                logger=(Logger)logger_class.getConstructor(argtypes).newInstance(args);
-            } catch(Exception ex) {
-                // Print a warning!
-                logger=new FileLogger(parent,this);
-            }
-        } else {
-            try {
-                logger=new ServletLogger(parent,this);
-            } catch(Exception ex) {
-                // Print a warning!
-                logger=new FileLogger(parent,this);
-            }
-
         }
     }
 
@@ -430,35 +405,6 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         return auth;
     }
 
-    /**
-     * Send a message to the logging facility.
-     * @param level severity level of the message
-     * @param message the message
-     */
-    public synchronized void log(int level, String message) {
-        if(logger != null) {
-            logger.log(level,message);
-        } else {
-            System.err.println("LOG("+level+"): "+message);
-        }
-    }
-
-
-    /**
-     * Send a message to the logging facility.
-     * @param level severity level of the message
-     * @param message the message
-     */
-    public synchronized void log(int level, Exception ex) {
-        if(logger != null) {
-            logger.log(level,ex);
-        } else {
-            System.err.println("LOG("+level+"): ");
-            ex.printStackTrace();
-        }
-    }
-
-
     protected String formatDate(long date) {
         if(df==null) {
             TimeZone tz=TimeZone.getDefault();
@@ -470,7 +416,6 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
     }
 
     public void shutdown() {
-        logger.shutdown();
     }
 
 
@@ -495,7 +440,7 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
     }
 
     public void notifyConfigurationChange(String key) {
-        log(Storage.LOG_DEBUG,"FileStorage: Configuration change notify for key "+key+".");
+        log.debug("FileStorage: Configuration change notify for key "+key+".");
         System.err.println("- Configuration changed: ");
         if(key.toUpperCase().startsWith("AUTH")) {
             initAuth();

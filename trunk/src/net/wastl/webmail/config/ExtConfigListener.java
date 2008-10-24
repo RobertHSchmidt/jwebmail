@@ -35,8 +35,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import net.wastl.webmail.misc.ExpandableProperties;
-//import org.apache.commons.logging.Log;
-//import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Purpose<UL>
@@ -80,7 +80,7 @@ import net.wastl.webmail.misc.ExpandableProperties;
  * @author blaine.simpson@admc.com
  */
 public class ExtConfigListener implements ServletContextListener {
-    //private static Log log = LogFactory.getLog(ExtConfiggableAppContext.class);
+    private static Log log = LogFactory.getLog(ExtConfigListener.class);
 
     protected String rtAppName = null;
 
@@ -96,8 +96,7 @@ public class ExtConfigListener implements ServletContextListener {
         try {
             Object o = new InitialContext().lookup("java:comp/env/rtAppName");
             rtAppName = (String) o;
-            //log.debug("'rtAppName' set by webapp env property");
-            sc.log("'rtAppName' set by webapp env property");
+            log.debug("'rtAppName' set by webapp env property");
         } catch (NameNotFoundException nnfe) {
         } catch (NamingException nnfe) {
             throw new RuntimeException(
@@ -107,7 +106,7 @@ public class ExtConfigListener implements ServletContextListener {
             throw new IllegalStateException(
                     "Required property 'rtAppName' is not set as either a app "
                     + "context init parameter, nor as a webapp JNDI env param");
-        sc.log("Initializing configs for runtime app name '"
+        log.info("Initializing configs for runtime app name '"
                 + rtAppName + "'");
         String dirProp = System.getProperty("webapps.rtconfig.dir");
         if (dirProp == null) {
@@ -149,12 +148,12 @@ public class ExtConfigListener implements ServletContextListener {
         sc.setAttribute("rtconfig.dir", rtConfigDir);
         sc.setAttribute("meta.properties", metaProperties);
 
-        sc.log("'app.name', 'rtconfig.dir', 'meta.properties' "
+        log.debug("'app.name', 'rtconfig.dir', 'meta.properties' "
                 + "successfully published to app");
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
-        sce.getServletContext().log("App '" + rtAppName + "' shutting down.\n"
+        log.info("App '" + rtAppName + "' shutting down.\n"
                 + "All Servlets and Filters have been destroyed");
     }
 }

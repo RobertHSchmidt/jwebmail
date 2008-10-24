@@ -32,6 +32,8 @@ import javax.xml.transform.stream.StreamResult;
 
 
 import java.io.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 /**
@@ -48,6 +50,7 @@ import java.io.*;
  */
 
 public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
+    private static Log log = LogFactory.getLog(XHTMLDocument.class);
 
     public XHTMLDocument(Document xml, String xsl) throws WebMailException {
 
@@ -67,12 +70,12 @@ public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
             processor.transform(msg_xml,msg_result);
         } catch(Exception ex) {
             System.err.println("Error transforming XML with "+xsl+" to XHTML.");
-            WebMailServer.getStorage().log(Storage.LOG_INFO,"Error transforming XML with "+xsl+" to XHTML.");
+            log.info("Error transforming XML with "+xsl+" to XHTML.");
             throw new WebMailException(ex.getMessage());
         }
         long end_t=System.currentTimeMillis();
         //System.err.println("Transformation XML --> XHTML took "+(end_t-start_t)+" ms.");
-        WebMailServer.getStorage().log(Storage.LOG_DEBUG,"Transformation XML --> XHTML took "+(end_t-start_t)+" ms.");
+        log.debug("Transformation XML --> XHTML took "+(end_t-start_t)+" ms.");
 
         content=writer.toString();
     }
@@ -94,7 +97,7 @@ public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
         }
         long end_t=System.currentTimeMillis();
         //System.err.println("Transformation (with precompiled stylesheet) XML --> XHTML took "+(end_t-start_t)+" ms.");
-        WebMailServer.getStorage().log(Storage.LOG_DEBUG,"Transformation (with precompiled stylesheet) XML --> XHTML took "+(end_t-start_t)+" ms.");
+        log.debug("Transformation (with precompiled stylesheet) XML --> XHTML took "+(end_t-start_t)+" ms.");
 
         content=writer.toString();
     }

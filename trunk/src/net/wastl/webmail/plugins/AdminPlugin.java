@@ -26,6 +26,8 @@ import net.wastl.webmail.xml.*;
 import net.wastl.webmail.exceptions.*;
 import java.util.*;
 import javax.servlet.UnavailableException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * AdminPlugin.java
@@ -41,6 +43,7 @@ import javax.servlet.UnavailableException;
  */
 
 public class AdminPlugin implements Plugin, URLHandler {
+    private static Log log = LogFactory.getLog(AdminPlugin.class);
 
     public static final String VERSION="1.3";
     public static final String URL="/admin";
@@ -122,7 +125,7 @@ public class AdminPlugin implements Plugin, URLHandler {
             if(suburl.startsWith("/control/kill")) {
                 String sid=header.getContent("kill");
 
-                parent.getStorage().log(Storage.LOG_INFO,"Session "+sid+": removing on administrator request.");
+                log.info("Session "+sid+": removing on administrator request.");
 
                 HTTPSession sess2=parent.getSession(sid);
                 if(sess2 != null) {
@@ -274,7 +277,7 @@ public class AdminPlugin implements Plugin, URLHandler {
             String action=reboot?"reboot":"shutdown";
             if(time >=0) {
                 System.err.println("\n*** WebMail "+action+" in "+time+" seconds! ***\n");
-                parent.getStorage().log(Storage.LOG_CRIT,"*** WebMail "+action+" in "+time+" seconds! ***");
+                log.fatal("*** WebMail "+action+" in "+time+" seconds! ***");
                 try {
                     Thread.sleep(time*1000);
                 } catch(InterruptedException ex) {}
@@ -283,7 +286,7 @@ public class AdminPlugin implements Plugin, URLHandler {
                         try {
                                 parent.restart();
                         } catch(UnavailableException ue) {
-                                parent.getStorage().log(Storage.LOG_CRIT,"Unable to restart, UnavailableException caught!");
+                                log.fatal("Unable to restart, UnavailableException caught!");
                                 // Is it good for us?
                                 parent.shutdown();
                         }

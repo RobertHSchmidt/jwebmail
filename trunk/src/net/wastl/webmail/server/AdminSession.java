@@ -31,6 +31,8 @@ import javax.mail.*;
 import javax.servlet.http.*;
 
 import org.w3c.dom.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.webengruven.webmail.auth.*;
 
@@ -46,6 +48,7 @@ import org.webengruven.webmail.auth.*;
  */
 /* 9/24/2000 devink -- updated for new challenge/response authentication */
 public class AdminSession implements HTTPSession {
+    private static Log log = LogFactory.getLog(AdminSession.class);
 
     /** When has the session been last accessed? */
     private long last_access;
@@ -108,7 +111,7 @@ public class AdminSession implements HTTPSession {
         //env=new Hashtable();
         model=parent.getStorage().createXMLAdminModel();
         login(h);
-        parent.getStorage().log(Storage.LOG_INFO,"WebMail: New Session ("+session_code+")");
+        log.info("WebMail: New Session ("+session_code+")");
 
 
         setEnv();
