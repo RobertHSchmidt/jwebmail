@@ -123,23 +123,32 @@ public class TEA
    private byte _keyBytes[];  // original key as found
    private int _padding;      // amount of padding added in byte --> integer conversion.
 
-   /**
+  /**
    * Encodes and decodes "Hello world!" for your personal pleasure.
+   * Unit test.
+   * A simple test of TEA.
    */
-   public static void main(String args[])
-   {
-      // A simple test of TEA.
-
-      byte key[] = new BigInteger("39e858f86df9b909a8c87cb8d9ad599", 16).toByteArray();
+   public static void main(String args[]) {
+       if (args.length != 1)
+           throw new IllegalArgumentException(
+               "SYNTAX:  " + TEA.class.getName() + " 'string to en/decode'");
+      byte key[] =
+          new BigInteger("39e858f86df9b909a8c87cb8d9ad599", 16).toByteArray();
       TEA t = new TEA(key);
 
-      String src = "hello world!";
-      System.out.println("input = " + src);
-      byte plainSource[] = src.getBytes();
+      String input = args[0];
+      byte plainSource[] = input.getBytes();
       int enc[] = t.encode(plainSource, plainSource.length);
-      System.out.println(t.padding() + " bytes added as padding.");
+      //System.out.println(t.padding() + " bytes added as padding.");
       byte dec[] = t.decode(enc);
-      System.out.println("output = " + new String(dec));
+      String output = new String(dec);
+      if (input.equals(output)) System.exit(0);
+      System.out.println("L1" + input.length());
+      System.out.println("L2" + output.length());
+      throw new RuntimeException(
+              "Input of (" + input + "), length " + input.length()
+              + ", encrypted then decrypted into (" + output + "), length "
+              + output.length() + '.');
    }
 
    /**
