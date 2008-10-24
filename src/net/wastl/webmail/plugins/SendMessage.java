@@ -34,6 +34,8 @@ import javax.mail.internet.*;
 
 
 import javax.servlet.ServletException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 // Modified by exce, start
 import org.bulbul.webmail.util.TranscodeUtil;
@@ -55,6 +57,7 @@ import org.bulbul.webmail.util.TranscodeUtil;
  */
 
 public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
+    private static Log log = LogFactory.getLog(SendMessage.class);
 
     public static final String VERSION="1.8";
     public static final String URL="/send";
@@ -161,7 +164,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                                             );
                     // Modified by exce, end
                 } catch(UnsupportedEncodingException e) {
-                    store.log(Storage.LOG_WARN,
+                    log.warn(
                               "Unsupported Encoding while trying to send message: "+e.getMessage());
                     from[0]=
                         new InternetAddress(head.getContent("FROM"),
@@ -179,7 +182,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     t = new StringTokenizer(TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("TO"), null, locale).trim(), ",");
                     // Modified by exce, end
                 } catch(UnsupportedEncodingException e) {
-                    store.log(Storage.LOG_WARN,
+                    log.warn(
                               "Unsupported Encoding while trying to send message: "+e.getMessage());
                     t=new StringTokenizer(head.getContent("TO").trim(),",;");
                 }
@@ -205,7 +208,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     t = new StringTokenizer(TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("CC"), null, locale).trim(), ",");
                     // Modified by exce, end
                 } catch(UnsupportedEncodingException e) {
-                    store.log(Storage.LOG_WARN,
+                    log.warn(
                               "Unsupported Encoding while trying to send message: "+e.getMessage());
                     t=new StringTokenizer(head.getContent("CC").trim(),",;");
                 }
@@ -226,7 +229,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                     t = new StringTokenizer(TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("BCC"), null, locale).trim(), ",");
                     // Modified by exce, end
                 } catch(UnsupportedEncodingException e) {
-                    store.log(Storage.LOG_WARN,
+                    log.warn(
                               "Unsupported Encoding while trying to send message: "+e.getMessage());
                     t=new StringTokenizer(head.getContent("BCC").trim(),",;");
                 }
@@ -262,7 +265,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                         subject = TranscodeUtil.transcodeThenEncodeByLocale(head.getContent("SUBJECT"), "ISO8859_1", locale);
                         // Modified by exce, end
                     } catch(UnsupportedEncodingException e) {
-                        store.log(Storage.LOG_WARN,"Unsupported Encoding while trying to send message: "+e.getMessage());
+                        log.warn("Unsupported Encoding while trying to send message: "+e.getMessage());
                         subject=head.getContent("SUBJECT");
                     }
                 }
@@ -436,8 +439,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
 //              if(sendsuccess) session.clearWork();
             } catch(Exception e) {
                 e.printStackTrace();
-
-                store.log(Storage.LOG_ERR,e);
+                log.error(e);
                 throw new DocumentNotFoundException("Could not send message. (Reason: "+e.getMessage()+")");
             }
 

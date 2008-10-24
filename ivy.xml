@@ -9,6 +9,9 @@
           extends="baseconf"/>
   </configurations>
   <dependencies>
+    <dependency name="commons-logging" rev="1.1.1"
+                transitive="false" conf="build,bundle->default"/>
+    <!--
     <dependency name="servlet-api" rev="2.4"
                 transitive="false" conf="build->default"/>
     <dependency name="mailapi" rev="1.4.1"
@@ -19,5 +22,6 @@
                 transitive="false" conf="build,bundle->default"/>
     <dependency name="imap" rev="1.4.1"
                 transitive="false" conf="build,bundle->default"/>
+    -->
   </dependencies>
 </ivy-module>

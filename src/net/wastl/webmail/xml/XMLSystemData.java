@@ -26,6 +26,8 @@ import java.util.*;
 
 
 import org.w3c.dom.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /*
  * XMLSystemData.java
@@ -44,6 +46,7 @@ import org.w3c.dom.*;
  */
 
 public class XMLSystemData extends ConfigStore {
+    private static Log log = LogFactory.getLog(ConfigStore.class);
 
     protected Document root;
 
@@ -439,7 +442,7 @@ public class XMLSystemData extends ConfigStore {
                 sysdata.removeChild(nl.item(i).getParentNode());
             }
         }
-        WebMailServer.getStorage().log(Storage.LOG_INFO,"XMLSystemData: Deleted WebMail virtual domain "+name);
+        log.info("XMLSystemData: Deleted WebMail virtual domain "+name);
     }
 
     public void createVirtualDomain(String name) throws Exception {
@@ -457,7 +460,7 @@ public class XMLSystemData extends ConfigStore {
         XMLCommon.setTagValue(domain,"DEFAULT_HOST","localhost");
         XMLCommon.setTagValue(domain,"AUTHENTICATION_HOST","localhost");
         XMLCommon.setTagValue(domain,"ALLOWED_HOST","localhost");
-        WebMailServer.getStorage().log(Storage.LOG_INFO,"XMLSystemData: Created WebMail virtual domain "+name);
+        log.info("XMLSystemData: Created WebMail virtual domain "+name);
     }
 
 } // XMLSystemData

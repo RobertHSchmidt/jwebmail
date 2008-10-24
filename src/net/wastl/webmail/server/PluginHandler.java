@@ -24,6 +24,8 @@ import net.wastl.webmail.misc.*;
 import net.wastl.webmail.exceptions.WebMailException;
 import java.io.*;
 import java.util.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * PluginHandler.java
@@ -41,6 +43,7 @@ import java.util.*;
  */
 
 public class PluginHandler  {
+    private static Log log = LogFactory.getLog(PluginHandler.class);
 
     WebMailServer parent;
     String plugin_list;
@@ -61,7 +64,7 @@ public class PluginHandler  {
      * Initialize and register WebMail Plugins.
      */
     public void registerPlugins() {
-        parent.getStorage().log(Storage.LOG_INFO,"Initializing WebMail Plugins ...");
+        log.info("Initializing WebMail Plugins ...");
         //      System.setProperty("java.class.path",System.getProperty("java.class.path")+System.getProperty("path.separator")+pluginpath);
 
 
@@ -72,7 +75,7 @@ public class PluginHandler  {
         try {
             plugin_class=Class.forName("net.wastl.webmail.server.Plugin");
         } catch(ClassNotFoundException ex) {
-            parent.getStorage().log(Storage.LOG_CRIT,"===> Could not find interface 'Plugin'!!");
+            log.fatal("===> Could not find interface 'Plugin'!!");
             System.exit(1);
         }
 
@@ -94,12 +97,12 @@ public class PluginHandler  {
                     count++;
                 }
             } catch(Exception ex) {
-                parent.getStorage().log(Storage.LOG_ERR,"could not register plugin \""+name+"\"!");
+                log.error("could not register plugin \""+name+"\"!");
                 ex.printStackTrace();
             }
         }
 
-        parent.getStorage().log(Storage.LOG_INFO,count+" plugins loaded correctly.");
+        log.info(count+" plugins loaded correctly.");
 
 
         count=0;
@@ -110,7 +113,7 @@ public class PluginHandler  {
             }
         }
         pt.register(parent);
-        parent.getStorage().log(Storage.LOG_INFO,count+" plugins initialized.");
+        log.info(count+" plugins initialized.");
     };
 
     public Enumeration getPlugins() {

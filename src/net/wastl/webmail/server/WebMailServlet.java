@@ -34,6 +34,8 @@ import net.wastl.webmail.misc.ByteStore;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.oreilly.servlet.multipart.*;
 
@@ -58,6 +60,7 @@ import com.oreilly.servlet.multipart.*;
  * devink 9/24/2000 - remove TwoPassAuthenticationException stuff
  */
 public class WebMailServlet extends WebMailServer implements Servlet {
+    private static Log log = LogFactory.getLog(WebMailServer.class);
 
     ServletConfig srvlt_config;
 
@@ -76,18 +79,18 @@ public class WebMailServlet extends WebMailServer implements Servlet {
          * "config" parameter and a "this.config"???
          */
         ServletContext sc = config.getServletContext();
-        sc.log("Init");
+        log.debug("Init");
         String appName = (String) sc.getAttribute("app.name");
         File rtConfigDir = (File) sc.getAttribute("rtconfig.dir");
         Properties rtProps = (Properties) sc.getAttribute("meta.properties");
-        sc.log("RT configs retrieved");
+        log.debug("RT configs retrieved");
         srvlt_config=config;
         this.config=new Properties();
         Enumeration enumVar=config.getInitParameterNames();
         while(enumVar.hasMoreElements()) {
             String s=(String)enumVar.nextElement();
             this.config.put(s,config.getInitParameter(s));
-            sc.log(s+": "+config.getInitParameter(s));
+            log.debug(s+": "+config.getInitParameter(s));
         }
 
         /*
@@ -95,13 +98,13 @@ public class WebMailServlet extends WebMailServer implements Servlet {
          * not set.
          */
         if(config.getInitParameter("webmail.basepath")==null) {
-            sc.log("Warning: webmail.basepath initArg should be set to the WebMail Servlet's base path");
+            log.warn("webmail.basepath initArg should be set to the WebMail Servlet's base path");
             basepath="";
         } else {
             basepath = config.getInitParameter("webmail.basepath");
         }
         if(config.getInitParameter("webmail.imagebase") == null) {
-            sc.log("Error: webmail.basepath initArg should be set to the WebMail Servlet's base path");
+            log.error("webmail.basepath initArg should be set to the WebMail Servlet's base path");
             imgbase="";
         } else {
             imgbase = config.getInitParameter("webmail.imagebase");
@@ -137,7 +140,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             overrides++;
             this.config.put(k, rtProps.getProperty(k));
         }
-        sc.log(Integer.toString(overrides)
+        log.debug(Integer.toString(overrides)
                 + " settings passed to WebMailServer, out of "
                 + rtProps.size() + " RT properties");
 
@@ -153,13 +156,6 @@ public class WebMailServlet extends WebMailServer implements Servlet {
         }
 
     }
-
-    public void debugOut(String msg, Exception ex) {
-        if(getDebug()) {
-            srvlt_config.getServletContext().log(msg,ex);
-        }
-    }
-
 
     public ServletConfig getServletConfig() {
         return srvlt_config;
@@ -237,7 +233,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             while(enum2.hasMoreElements()) {
                 String s=(String)enum2.nextElement();
                 http_header.setContent(s,req.getParameter(s));
-                //getStorage().log(Storage.LOG_INFO,"Parameter "+s);
+                //log.info("Parameter "+s);
             }
 
             /* Then we set all the headers in http_header */
@@ -252,7 +248,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
 //          enum2=req.getAttributeNames();
 //          while(enum2.hasMoreElements()) {
 //              String s=(String)enum2.nextElement();
-//              getStorage().log(Storage.LOG_INFO,"Attribute "+s);
+//              log.info("Attribute "+s);
 //          }
 
 
@@ -272,14 +268,14 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                         bs.setName(((FilePart)p).getFileName());
                         bs.setContentType(getStorage().getMimeType(((FilePart)p).getFileName()));
                         http_header.setContent(p.getName(),bs);
-                        getStorage().log(Storage.LOG_INFO,"File name "+bs.getName());
-                        getStorage().log(Storage.LOG_INFO,"Type      "+bs.getContentType());
+                        log.info("File name "+bs.getName());
+                        log.info("Type      "+bs.getContentType());
 
                     } else if(p.isParam()) {
                         http_header.setContent(p.getName(),((ParamPart)p).getStringValue());
                     }
 
-                    //getStorage().log(Storage.LOG_INFO,"Parameter "+p.getName());
+                    //log.info("Parameter "+p.getName());
                 }
 
             }
@@ -311,7 +307,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                     content=getURLHandler().handleURL(url,sess,http_header);
                 }
                 } catch(InvalidPasswordException e) {
-                    getStorage().log(Storage.LOG_ERR,"Connection to "+addr.toString()+
+                    log.error("Connection to "+addr.toString()+
                                      ": Authentication failed!");
                     if(url.startsWith("/admin/login")) {
                         content=getURLHandler().handleURL("/admin",null,http_header);
@@ -324,7 +320,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                 } catch(Exception ex) {
                     ex.printStackTrace();
                     content=getURLHandler().handleException(ex,sess,http_header);
-                    debugOut("Some strange error while handling request",ex);
+                    log.debug("Some strange error while handling request",ex);
                 }
 
                 /* Set some HTTP headers: Date is now, the document should expire in 5 minutes,
@@ -383,7 +379,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                     }
                 }
             } catch(DocumentNotFoundException e) {
-                getStorage().log(Storage.LOG_INFO,"Connection to "+addr.toString()+
+                log.info("Connection to "+addr.toString()+
                                  ": Could not handle request ("+err_code+") (Reason: "+e.getMessage()+")");
                 throw new ServletException("Error: "+e.getMessage(),e);
 //              res.setStatus(err_code);
@@ -398,7 +394,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             }
         } catch(Exception e) {
             e.printStackTrace();
-            getStorage().log(Storage.LOG_INFO,"Connection to "+addr.toString()+" closed");
+            log.info("Connection to "+addr.toString()+" closed");
             throw new ServletException("Error: "+e.getMessage(),e);
         }
     }
@@ -430,19 +426,19 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             n.login();
             sess.setAttribute("webmail.session",n);
             sessions.put(sess.getId(),n);
-            debugOut("Created new Session: "+sess.getId());
+            log.debug("Created new Session: "+sess.getId());
             return n;
         } else {
             Object tmp=sess.getAttribute("webmail.session");
             if(tmp instanceof WebMailSession) {
                 WebMailSession n=(WebMailSession)tmp;
                 n.login();
-                debugOut("Using old Session: "+sess.getId());
+                log.debug("Using old Session: "+sess.getId());
                 return n;
             } else {
                 /* If we have an admin session, get rid of it and create a new session */
                 sess.setAttribute("webmail.session",null);
-                debugOut("Reusing old AdminSession: "+sess.getId());
+                log.debug("Reusing old AdminSession: "+sess.getId());
                 return newSession(req,h);
             }
         }
@@ -457,18 +453,18 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             n.login(h);
             sess.setAttribute("webmail.session",n);
             sessions.put(sess.getId(),n);
-            debugOut("Created new Session: "+sess.getId());
+            log.debug("Created new Session: "+sess.getId());
             return n;
         } else {
             Object tmp=sess.getAttribute("webmail.session");
             if(tmp instanceof AdminSession) {
                 AdminSession n=(AdminSession)tmp;
                 n.login(h);
-                debugOut("Using old Session: "+sess.getId());
+                log.debug("Using old Session: "+sess.getId());
                 return n;
             } else {
                 sess.setAttribute("webmail.session",null);
-                debugOut("Reusing old UserSession: "+sess.getId());
+                log.debug("Reusing old UserSession: "+sess.getId());
                 return newAdminSession(req,h);
             }
         }

@@ -26,6 +26,8 @@ import java.text.*;
 import javax.mail.*;
 import javax.mail.event.*;
 import javax.mail.internet.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import net.wastl.webmail.misc.*;
 import net.wastl.webmail.xml.*;
 import net.wastl.webmail.ui.html.Fancyfier;
@@ -54,6 +56,7 @@ import org.w3c.dom.*;
  */
 /* 9/24/2000 devink - updated for challenge/response auth */
 public class WebMailSession implements HTTPSession {
+    private static Log log = LogFactory.getLog(WebMailSession.class);
 
     /** When has the session been last accessed? */
     private long last_access;
@@ -148,7 +151,7 @@ public class WebMailSession implements HTTPSession {
         this.parent=parent;
         remote_agent=h.getHeader("User-Agent").replace('\n',' ');
         remote_accepts=h.getHeader("Accept").replace('\n',' ');
-        parent.getStorage().log(Storage.LOG_INFO,"WebMail: New Session ("+session_code+")");
+        log.info("WebMail: New Session ("+session_code+")");
         if(parent.getStorage().getVirtuals()==true && h.getContent("vdom") != null) {
             domain=h.getContent("vdom");
         } else {
@@ -414,7 +417,7 @@ public class WebMailSession implements HTTPSession {
                         subject=MimeUtility.decodeText(msgs[i].getSubject());
                     } catch(UnsupportedEncodingException ex) {
                                 subject=msgs[i].getSubject();
-                                parent.getStorage().log(Storage.LOG_WARN,"Unsupported Encoding: "+ex.getMessage());
+                                log.warn("Unsupported Encoding: "+ex.getMessage());
                     }
                 }
                 if(subject == null || subject.equals("")) {
@@ -430,8 +433,7 @@ public class WebMailSession implements HTTPSession {
                     xml_message.setHeader("SUBJECT",MimeUtility.decodeText(subject));
                 } catch(UnsupportedEncodingException e) {
                         xml_message.setHeader("SUBJECT",subject);
-                    parent.getStorage().log(Storage.LOG_WARN,
-                                            "Unsupported Encoding: "+e.getMessage());
+                    log.warn("Unsupported Encoding: "+e.getMessage());
                 }
                 xml_message.setHeader("TO",to);
                 xml_message.setHeader("CC",cc);
@@ -451,7 +453,7 @@ public class WebMailSession implements HTTPSession {
                 // XMLCommon.writeXML(model.getRoot(),new FileOutputStream("/tmp/wmdebug"),"");
             // } catch(IOException ex) {}
 
-            parent.getStorage().log(Storage.LOG_DEBUG,"Construction of message list took "+(time_stop-time_start)+" ms. Time for IMAP transfer was "+(fetch_stop-fetch_start)+" ms.");
+            log.debug("Construction of message list took "+(time_stop-time_start)+" ms. Time for IMAP transfer was "+(fetch_stop-fetch_start)+" ms.");
             folder.close(false);
         } catch(NullPointerException e) {
             e.printStackTrace();
@@ -599,7 +601,7 @@ public class WebMailSession implements HTTPSession {
                     parseMIMEContent(m,xml_message,messageid);
 
                 } catch(UnsupportedEncodingException e) {
-                    parent.getStorage().log(Storage.LOG_WARN,"Unsupported Encoding in parseMIMEContent: "+e.getMessage());
+                    log.warn("Unsupported Encoding in parseMIMEContent: "+e.getMessage());
                     System.err.println("Unsupported Encoding in parseMIMEContent: "+e.getMessage());
                 }
             }
@@ -796,14 +798,14 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                     try {
                       token=new String(token.getBytes(),charset);
                     } catch(UnsupportedEncodingException ex1) {
-                      parent.getStorage().log(Storage.LOG_INFO,"Java Engine does not support charset "+charset+". Trying to convert from MIME ...");
+                      log.info("Java Engine does not support charset "+charset+". Trying to convert from MIME ...");
 
                       try {
                         charset=MimeUtility.javaCharset(charset);
                         token=new String(token.getBytes(),charset);
 
                       } catch(UnsupportedEncodingException ex) {
-                      parent.getStorage().log(Storage.LOG_WARN,"Converted charset ("+charset+") does not work. Using default charset (ouput may contain errors)");
+                      log.warn("Converted charset ("+charset+") does not work. Using default charset (ouput may contain errors)");
                         token=new String(token.getBytes());
                       }
                     }
@@ -1137,7 +1139,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         try {
             max_size=Integer.parseInt( parent.getStorage().getConfig("MAX ATTACH SIZE"));
         } catch(NumberFormatException e) {
-            parent.getStorage().log(Storage.LOG_WARN,"Invalid setting for parameter \"MAX ATTACH SIZE\". Must be a number!");
+            log.warn("Invalid setting for parameter \"MAX ATTACH SIZE\". Must be a number!");
         }
 
         if(attachments_size+bs.getSize() > max_size) {
@@ -1503,7 +1505,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             // Here a more serious exception has been caught (Connection failed)
             catch(MessagingException ex) {
                 mailhost.setAttribute("error",ex.getMessage());
-                parent.getStorage().log(Storage.LOG_WARN,"Error connecting to mailhost ("+url.toString()+"): "+ex.getMessage());
+                log.warn("Error connecting to mailhost ("+url.toString()+"): "+ex.getMessage());
             }
 
             if(depth>max_depth) {
@@ -1629,9 +1631,9 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             Store st=(Store)stores.get(name);
             try {
                 st.close();
-                parent.getStorage().log(Storage.LOG_INFO,"Mail: Connection to "+st.toString()+" closed.");
+                log.info("Mail: Connection to "+st.toString()+" closed.");
             } catch(Exception ex) {
-                parent.getStorage().log(Storage.LOG_WARN,"Mail: Failed to close connection to "+st.toString()+". Reason: "+ex.getMessage());
+                log.warn("Mail: Failed to close connection to "+st.toString()+". Reason: "+ex.getMessage());
             }
             stores.remove(name);
         }
@@ -1665,13 +1667,13 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         if(!st.isConnected()) {
             try {
                 st.connect(host,login,password);
-                parent.getStorage().log(Storage.LOG_INFO,"Mail: Connection to "+st.toString()+".");
+                log.info("Mail: Connection to "+st.toString()+".");
             } catch(AuthenticationFailedException ex) {
                 /* If login fails, try the login_password */
                 if(!login_password.equals(password) &&
                    parent.getStorage().getConfig("FOLDER TRY LOGIN PASSWORD").toUpperCase().equals("YES")) {
                     st.connect(host,login,login_password);
-                    parent.getStorage().log(Storage.LOG_INFO,"Mail: Connection to "+st.toString()+", second attempt with login password succeeded.");
+                    log.info("Mail: Connection to "+st.toString()+", second attempt with login password succeeded.");
                 } else {
                     throw ex;
                 }
@@ -1693,7 +1695,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
         Folder f=st.getDefaultFolder();
         connections.put(name,f);
-        parent.getStorage().log(Storage.LOG_INFO,"Mail: Folder "+f.toString()+" opened at store "+st.toString()+".");
+        log.info("Mail: Folder "+f.toString()+" opened at store "+st.toString()+".");
         return f;
     }
 
@@ -1708,9 +1710,9 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 f.close(true);
                 Store st=((Folder)connections.get(name)).getStore();
                 //st.close();
-                parent.getStorage().log(Storage.LOG_INFO,"Mail: Disconnected from folder "+f.toString()+" at store "+st.toString()+".");
+                log.info("Mail: Disconnected from folder "+f.toString()+" at store "+st.toString()+".");
             } else {
-                parent.getStorage().log(Storage.LOG_WARN,"Mail: Folder "+name+" was null???.");
+                log.warn("Mail: Folder "+name+" was null???.");
             }
         } catch(MessagingException ex) {
             // Should not happen
@@ -1736,7 +1738,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             disconnectAll();
             user.logout();
             saveData();
-            parent.getStorage().log(Storage.LOG_INFO,"WebMail: Session "+getSessionCode()+" logout.");
+            log.info("WebMail: Session "+getSessionCode()+" logout.");
             // Make sure the session is invalidated
             if(sess != null) {
                 try {
@@ -1798,7 +1800,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
      * @see logout()
      */
     public void timeoutOccured() {
-        parent.getStorage().log(Storage.LOG_WARN,"WebMail: Session "+getSessionCode()+" timeout.");
+        log.warn("WebMail: Session "+getSessionCode()+" timeout.");
         logout();
     }
 
@@ -2107,10 +2109,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         throws MessagingException {
         disconnectAll();
         String host_url=protocol+"://"+host;
-        user.addMailHost(name,
-                         host_url,
-                         login,
-                         password);
+        user.addMailHost(name, host_url, login, password);
         Enumeration enumVar=user.mailHosts();
         while(enumVar.hasMoreElements()) {
             String id=(String)enumVar.nextElement();

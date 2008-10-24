@@ -27,6 +27,8 @@ import java.lang.reflect.*;
 import javax.mail.Session;
 import javax.mail.Provider;
 import javax.servlet.UnavailableException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import net.wastl.webmail.debug.ErrorHandler;
 import net.wastl.webmail.server.http.*;
@@ -47,6 +49,7 @@ import net.wastl.webmail.exceptions.*;
  */
 /* 9/24/2000 devink - Updated for new challenge/response auth */
 public abstract class WebMailServer  {
+    private static Log log = LogFactory.getLog(WebMailServer.class);
 
     protected ConnectionTimer timer;
 
@@ -159,8 +162,8 @@ public abstract class WebMailServer  {
                            ") and Configuration ... ");
 
         initStorage();
-        storage.log(Storage.LOG_CRIT,"=============================== cut ===============================");
-        storage.log(Storage.LOG_CRIT,"Storage initialized.");
+        log.fatal("=============================== cut ===============================");
+        log.fatal("Storage initialized.");
 
         timer=new ConnectionTimer();
         sessions=new Hashtable();
@@ -169,11 +172,11 @@ public abstract class WebMailServer  {
 
         uhandler=new ToplevelURLHandler(this);
 
-        storage.log(Storage.LOG_CRIT,"URLHandler initialized.");
+        log.fatal("URLHandler initialized.");
 
         phandler=new PluginHandler(this);
 
-        storage.log(Storage.LOG_CRIT,"Plugins initialized.");
+        log.fatal("Plugins initialized.");
 
         initProviders();
 
@@ -181,8 +184,8 @@ public abstract class WebMailServer  {
 
         storage.initConfigKeys();
 
-        storage.log(Storage.LOG_CRIT,"=============================== cut ===============================");
-        storage.log(Storage.LOG_CRIT,"WebMail/Java Server "+VERSION+" initialization completed.");
+        log.fatal("=============================== cut ===============================");
+        log.fatal("WebMail/Java Server "+VERSION+" initialization completed.");
         System.err.println("Initalization complete.");
         start_time=System.currentTimeMillis();
 
@@ -406,7 +409,7 @@ public abstract class WebMailServer  {
         try {
             Thread.sleep(5000);
         } catch(Exception ex) {}
-        storage.log(Storage.LOG_CRIT,"Shutdown completed successfully. Restarting.");
+        log.fatal("Shutdown completed successfully. Restarting.");
         storage.shutdown();
         System.err.println("Garbage collecting ...");
         System.gc();
@@ -427,7 +430,7 @@ public abstract class WebMailServer  {
         }
         System.err.println("done!");
         shutdownServers();
-        storage.log(Storage.LOG_CRIT,"Shutdown completed successfully. Terminating.");
+        log.fatal("Shutdown completed successfully. Terminating.");
         storage.shutdown();
         System.err.println("Shutdown complete! Will return to console now.");
         System.exit(0);
@@ -459,7 +462,7 @@ public abstract class WebMailServer  {
     }
 
     public void removeSession(HTTPSession w) {
-        storage.log(Storage.LOG_INFO,"Removing session: "+w.getSessionCode());
+        log.info("Removing session: "+w.getSessionCode());
         timer.removeTimeableConnection(w);
         sessions.remove(w.getSessionCode());
         if(!w.isLoggedOut()) {

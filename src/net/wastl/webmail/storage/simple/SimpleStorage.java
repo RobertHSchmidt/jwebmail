@@ -24,6 +24,8 @@ import java.text.*;
 import java.util.*;
 import java.util.zip.*;
 import javax.servlet.UnavailableException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import net.wastl.webmail.storage.*;
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.config.*;
@@ -57,6 +59,7 @@ import org.xml.sax.InputSource;
  * @versin $Revision$
  */
 public class SimpleStorage extends FileStorage {
+    private static Log log = LogFactory.getLog(FileStorage.class);
 
     public static final String user_domain_separator="|";
 
@@ -100,9 +103,9 @@ public class SimpleStorage extends FileStorage {
             root=parser.parse(file);
             if(debug) System.err.println("\nConfiguration file parsed, document: "+root);
             sysdata=new XMLSystemData(root,cs);
-            log(Storage.LOG_DEBUG, "SimpleStorage: WebMail configuration loaded.");
+            log.debug( "SimpleStorage: WebMail configuration loaded.");
         } catch(Exception ex) {
-            log(Storage.LOG_ERR, "SimpleStorage: Failed to load WebMail configuration file. Reason: "+ex.getMessage());
+            log.error("SimpleStorage: Failed to load WebMail configuration file. Reason: "+ex.getMessage());
             ex.printStackTrace();
             throw new UnavailableException(ex.getMessage());
         }
@@ -125,9 +128,9 @@ public class SimpleStorage extends FileStorage {
             cfg_out.flush();
             cfg_out.close();
             sysdata.setLoadTime(System.currentTimeMillis());
-            log(Storage.LOG_DEBUG, "SimpleStorage: WebMail configuration saved.");
+            log.debug("SimpleStorage: WebMail configuration saved.");
         } catch(Exception ex) {
-            log(Storage.LOG_ERR,"SimpleStorage: Error while trying to save WebMail configuration ("+ex.getMessage()+").");
+            log.error("SimpleStorage: Error while trying to save WebMail configuration ("+ex.getMessage()+").");
             ex.printStackTrace();
         }
     }
@@ -178,7 +181,7 @@ public class SimpleStorage extends FileStorage {
                     }
                 };
         } else {
-            log(Storage.LOG_WARN,"SimpleStorage: Could not list files in directory "+path);
+            log.warn("SimpleStorage: Could not list files in directory "+path);
             return new Enumeration() {
                     public boolean hasMoreElements() { return false; }
                     public Object nextElement() { return null; }
@@ -194,10 +197,10 @@ public class SimpleStorage extends FileStorage {
 
         File f=new File(template);
         if(!f.exists()) {
-            log(Storage.LOG_WARN,"SimpleStorage: User configuration template ("+template+") doesn't exist!");
+            log.warn("SimpleStorage: User configuration template ("+template+") doesn't exist!");
             throw new CreateUserDataException("User configuration template ("+template+") doesn't exist!",user,domain);
         } else if(!f.canRead()) {
-            log(Storage.LOG_WARN,"SimpleStorage: User configuration template ("+template+") is not readable!");
+            log.warn("SimpleStorage: User configuration template ("+template+") is not readable!");
             throw new CreateUserDataException("User configuration template ("+template+") is not readable!",user,domain);
         }
 
@@ -228,8 +231,8 @@ public class SimpleStorage extends FileStorage {
                              vdom.getDefaultServer(),user,password);
 
         } catch(Exception ex) {
-            log(Storage.LOG_WARN,"SimpleStorage: User configuration template ("+template+") exists but could not be parsed");
-            log(Storage.LOG_WARN,ex);
+            log.warn("SimpleStorage: User configuration template ("+template+") exists but could not be parsed");
+            log.warn(ex);
             if(debug) ex.printStackTrace();
             throw new CreateUserDataException("User configuration template ("+template+") exists but could not be parsed",user,domain);
         }
@@ -265,7 +268,7 @@ public class SimpleStorage extends FileStorage {
             boolean error=true;
             File f=new File(filename);
             if(f.exists() && f.canRead()) {
-                log(Storage.LOG_INFO,"SimpleStorage: Reading user configuration ("+f.getAbsolutePath()+") for "+user);
+                log.info("SimpleStorage: Reading user configuration ("+f.getAbsolutePath()+") for "+user);
 
                 long t_start=System.currentTimeMillis();
                 try {
@@ -277,13 +280,13 @@ public class SimpleStorage extends FileStorage {
                     if(debug) System.err.println("SimpleStorage: Parsed Document "+root);
                     error=false;
                 } catch(Exception ex) {
-                    log(Storage.LOG_WARN,"SimpleStorage: User configuration for "+user+
+                    log.warn("SimpleStorage: User configuration for "+user+
                         " exists but could not be parsed ("+ex.getMessage()+")");
                     if(debug) ex.printStackTrace();
                     error=true;
                 }
                 long t_end=System.currentTimeMillis();
-                log(Storage.LOG_DEBUG,"SimpleStorage: Parsing of XML userdata for "+user+", domain "
+                log.debug("SimpleStorage: Parsing of XML userdata for "+user+", domain "
                     +domain+" took "+(t_end-t_start)+"ms.");
 
                 if(authenticate) {
@@ -292,7 +295,7 @@ public class SimpleStorage extends FileStorage {
             }
 
             if(error && !f.exists()) {
-                log(Storage.LOG_INFO,"UserConfig: Creating user configuration for "+user);
+                log.info("UserConfig: Creating user configuration for "+user);
 
                 data=createUserData(user,domain,password);
 
@@ -303,7 +306,7 @@ public class SimpleStorage extends FileStorage {
                 }
             }
             if(error) {
-                log(Storage.LOG_ERR,"UserConfig: Could not read userdata for "+user+"!");
+                log.error("UserConfig: Could not read userdata for "+user+"!");
                 throw new UserDataException("Could not read userdata!",user,domain);
             }
             user_cache.put(user+user_domain_separator+domain,data);
@@ -341,17 +344,17 @@ public class SimpleStorage extends FileStorage {
                     out.flush();
                     out.close();
                     long t_end=System.currentTimeMillis();
-                    log(Storage.LOG_DEBUG,"SimpleStorage: Serializing userdata for "+user+
+                    log.debug("SimpleStorage: Serializing userdata for "+user+
                         ", domain "+domain+" took "+(t_end-t_start)+"ms.");
                 } else {
-                    log(Storage.LOG_WARN,"SimpleStorage: Could not write userdata ("+f.getAbsolutePath()+") for user "+user);
+                    log.warn("SimpleStorage: Could not write userdata ("+f.getAbsolutePath()+") for user "+user);
                 }
             } else {
-                log(Storage.LOG_ERR,"SimpleStorage: Could not create path "+path+
+                log.error("SimpleStorage: Could not create path "+path+
                     ". Aborting with user "+user);
             }
         } catch(Exception ex) {
-            log(Storage.LOG_ERR,"SimpleStorage: Unexpected error while trying to save user configuration "+
+            log.error("SimpleStorage: Unexpected error while trying to save user configuration "+
                 "for user "+user+"("+ex.getMessage()+").");
             if(debug) ex.printStackTrace();
         }
@@ -368,9 +371,9 @@ public class SimpleStorage extends FileStorage {
             domain+System.getProperty("file.separator")+user+".xml";
         File f=new File(path);
         if(!f.canWrite() || !f.delete()) {
-            log(Storage.LOG_ERR,"SimpleStorage: Could not delete user "+user+" ("+path+")!");
+            log.error("SimpleStorage: Could not delete user "+user+" ("+path+")!");
         } else {
-            log(Storage.LOG_INFO,"SimpleStorage: Deleted user "+user+"!");
+            log.info("SimpleStorage: Deleted user "+user+"!");
         }
         user_cache.remove(user+user_domain_separator+domain);
     }

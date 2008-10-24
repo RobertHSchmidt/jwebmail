@@ -25,6 +25,8 @@ import net.wastl.webmail.exceptions.*;
 import java.io.*;
 import java.util.*;
 import javax.servlet.UnavailableException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import javax.xml.transform.Templates;
 import javax.xml.parsers.ParserConfigurationException;
@@ -47,12 +49,7 @@ import org.xml.sax.SAXException;
 */
 /* 9/24/2000 devink - updated for new challenge/response authentication */
 public abstract class Storage {
-
-    public static final int LOG_DEBUG=10;
-    public static final int LOG_INFO=5;
-    public static final int LOG_WARN=3;
-    public static final int LOG_ERR=1;
-    public static final int LOG_CRIT=0;
+    private static Log log = LogFactory.getLog(Storage.class);
 
     protected static boolean debug;
 
@@ -135,7 +132,7 @@ public abstract class Storage {
      */
     // Modified by exce, end
         if(!value.equals(getConfig(key))) {
-            log(LOG_DEBUG,"Storage API: Setting configuration for '"+key+"' to '"+value+"'.");
+            log.debug("Storage API: Setting configuration for '"+key+"' to '"+value+"'.");
             sysdata.setConfig(key,value);
             saveXMLSysData();
         }
@@ -414,21 +411,6 @@ public abstract class Storage {
      * This is necessary for changing passwords or re-checking authentication.
      */
     public abstract Authenticator getAuthenticator();
-
-    /**
-     * Send a message to the logging facility.
-     * @param level severity level of the message
-     * @param message the message
-     */
-    public abstract void log(int level, String message);
-
-    /**
-     * Send an exception to the logging facility.
-     * @param level severity level of the message
-     * @param message the message
-     */
-    public abstract void log(int level, Exception ex);
-
 
     public abstract void shutdown();
 

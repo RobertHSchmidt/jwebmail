@@ -24,6 +24,8 @@ import javax.mail.*;
 import net.wastl.webmail.config.*;
 
 import java.util.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * IMAPAuthenticator.java
@@ -36,6 +38,7 @@ import java.util.*;
  */
 
 public class IMAPAuthenticator extends net.wastl.webmail.server.Authenticator {
+    private static Log log = LogFactory.getLog(IMAPAuthenticator.class);
 
     public final String VERSION="1.2";
 
@@ -76,10 +79,10 @@ public class IMAPAuthenticator extends net.wastl.webmail.server.Authenticator {
         try {
             st.connect(authhost,user,passwd);
             st.close();
-            storage.log(Storage.LOG_INFO,"IMAPAuthentication: user "+user+
+            log.info("IMAPAuthentication: user "+user+
                         " authenticated successfully (imap host: "+authhost+").");
         } catch(MessagingException e) {
-            storage.log(Storage.LOG_WARN,"IMAPAuthentication: user "+user+
+            log.warn("IMAPAuthentication: user "+user+
                         " authentication failed (imap host: "+authhost+").");
             //e.printStackTrace();
             throw new InvalidPasswordException("IMAP authentication failed!");

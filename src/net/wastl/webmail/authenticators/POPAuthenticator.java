@@ -24,6 +24,8 @@ import javax.mail.*;
 import net.wastl.webmail.config.*;
 
 import java.util.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * POPAuthenticator.java
@@ -37,6 +39,7 @@ import java.util.*;
  */
 
 public class POPAuthenticator extends net.wastl.webmail.server.Authenticator {
+    private static Log log = LogFactory.getLog(POPAuthenticator.class);
 
     public final String VERSION="1.2";
 
@@ -77,10 +80,10 @@ public class POPAuthenticator extends net.wastl.webmail.server.Authenticator {
         try {
             st.connect(authhost,user,passwd);
             st.close();
-            storage.log(Storage.LOG_INFO,"POPAuthentication: user "+user+
+            log.info("POPAuthentication: user "+user+
                         " authenticated successfully (pop host: "+authhost+").");
         } catch(MessagingException e) {
-            storage.log(Storage.LOG_WARN,"POPAuthentication: user "+user+
+            log.warn("POPAuthentication: user "+user+
                         " authentication failed (pop host: "+authhost+").");
             //e.printStackTrace();
             throw new InvalidPasswordException("POP authentication failed!");

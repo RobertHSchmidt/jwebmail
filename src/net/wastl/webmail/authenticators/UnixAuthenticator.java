@@ -21,6 +21,8 @@ import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
 import java.io.*;
 import java.util.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import net.wastl.webmail.misc.*;
 import net.wastl.webmail.config.ConfigScheme;
@@ -36,6 +38,7 @@ import net.wastl.webmail.config.ConfigScheme;
  */
 
 public class UnixAuthenticator extends Authenticator {
+    private static Log log = LogFactory.getLog(UnixAuthenticator.class);
 
     public final String VERSION="1.2";
 
@@ -87,11 +90,11 @@ public class UnixAuthenticator extends Authenticator {
             String password=tok.nextToken();
 
             if(!password.equals(Helper.crypt(password,given_passwd))) {
-                WebMailServer.getStorage().log(Storage.LOG_WARN,"UnixAuthentication: user "+login+
+                log.warn("UnixAuthentication: user "+login+
                                                " authentication failed.");
                 throw new InvalidPasswordException("Unix authentication failed");
             }
-            WebMailServer.getStorage().log(Storage.LOG_INFO,"UnixAuthentication: user "+login+
+            log.info("UnixAuthentication: user "+login+
                                            " authenticated successfully.");
         } catch(IOException ex) {
             System.err.println("*** Cannot use UnixAuthentication and shadow passwords if WebMail is not executed as user 'root'! ***");
