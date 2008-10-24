@@ -48,3 +48,7 @@ but through indirection so user has an opportunity to disassociate this data
 from the application.
 
 Copy default data to webmail.data.dir upon startup, if it is present but empty.
+
+Fix bug in the TEA encryption/decryption routines.  Binary characters are
+getting added to some Strings.  This makes valid passwords fail in some
+cases (probably directly depends on characters in the real password).
