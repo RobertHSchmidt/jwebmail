@@ -86,7 +86,7 @@ The following steps are required (for a quick-start):
 3. You will need Internet access the first time you run the build, so that
    the build process can download the needed third party libraries
    (automatically).
-4. Run 'ant install-tomcat' to build an exploded webapp and a war file in
+4. Run 'ant webapp' to build an exploded webapp and a war file in
    subdirectory "build/webapp".
    If you don't have an Ivy jar file in your CLASSPATH, the Ant command
    above will display the simple command that you can copy-and-paste to your
