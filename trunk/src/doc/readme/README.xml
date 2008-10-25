@@ -76,54 +76,94 @@ limitations under the License.
   <SECTION name="Installation" id="install">
     <SUBSECTION name="Introduction" id="install:introduction">
       <P>
-        You will need to set up a Java Servlet container.
-        This may be anything from a web server with a Java Servlet module
-        or option, to a commercial application server.
+        Read the text file <CODE>INSTALL.txt</CODE> in the root directory
+        of your binary or source distribution.
       </P>
-<!--      <P>
-        There are also several ways to store data:
-        <LIST>
-          <ITEM>
-            You could use the simple file-based storage which stores configuration data in XML documents
-            and is very easy to set up, but perhaps not very fast.
-          </ITEM>
-          <ITEM>
-            The performance method however is to store the configuration in a SQL database. Currently
-            only MySQL is supported, but it is easy to implement storage on Oracle or PostgreSQL.
-            Using a SQL database for storage has several advantages which I will describe below.
-          </ITEM>
-        </LIST>
-      </P>-->
     </SUBSECTION>
-
-    <SUBSECTION name="Servlet Installation" id="install:servlet">
+    <SUBSECTION name="logging" id="install:logging">
       <P>
-        Running JWebMail as a Servlet has several advantages (and
-        also some disadvantages):
-        <LIST>
-          <ITEM>you can run (and integrate) JWebMail on an already-running webserver</ITEM>
-          <ITEM>
-            you can make use of the webserver's fast connection handling and HTTP parsing routines
-          </ITEM>
-          <ITEM>
-            you can e.g. use servlet container load-balancing feature to run JWebMail on a whole server cluster
-            for large installation.
-          </ITEM>
-          <ITEM>
-            you need a dedicated application server or servlet container,
-            or a web server with the ability to serve Java Servlets
-            (perhaps an add-on module).
-          </ITEM>
-        </LIST>
+        Webapp logging is best administered at the container level.
+        Most servlet containers were designed to work this way, and many
+        technology companies expend much effort to defeat Classloader
+        design and manage logging with delivered application artifacts.
+        Remember that logging settings are a runtime consideration which
+        should be modifiable after deployment by operations personnel.
+        JWebMail is exceptional in that it facilitates logging 
+      </P> <P>
+        Webapp bundles just Apache Commons Logging.
+        Commons Logging provides the front end for logging, where the
+        JWebApp application sends log messages.
+        Your servlet container will connect these generated messages to
+        a logging "back end" to write log files, database records, or
+        emails from them.
+        If you have a straight-forward servlet container, and you have
+        not added a logging product to it, then Commons Logging will
+        also handle the back end in the container space, just logging
+        to the console or stdout/stderr log with default settings.
+        But it is very easy to improve on that.
+        Some application servers have logging management utilities,
+        and you can use them to pipe the JWebMail log entries to
+        destinations using Gui tools or text files.
+        You'll have to see your App Server documentation about these
+        tools.
+        Otherwise, you can put text files in container-level classloader
+        directories to easily set up text, HTML, and even email-alert
+        logging.
+      </P> <P>
+        I will explain how to set up really nice JWebMail logs using
+        Log4J as the back end (container-side) logging product on
+        Tomcat.  In my experience, everybody is satisfied with Log4j.
+        The procedure is very much the same to use another logging
+        back end product (see the Commons Logging documentation about
+        how to do it).  The setup procedure is the same for other
+        servlet containers (that don't force their logging management
+        system on you), except you just need to find out where the
+        system classpath directories are (or how to add them).
+      </P> <P>Container logging setup with Log4j and Tomcat<LIST>
+        <ITEM>
+          The default container classpath directory on Tomcat 6.x
+          is CATALINA_HOME/lib by default.  I.e., the "lib" subdirectory
+          of the Tomcat installation root directory.
+          You can put both Jar files and in .class files (in package
+          directory trees) into it.
+          (You can add other classpath directories by changing the
+          setting <CODE>common.loader</CODE> in the file
+          <CODE>conf/catalina.properties</CODE>).
+        </ITEM> <ITEM>
+          Copy a recent version of the file
+          <A HREF="http://pub.admc.com/lib-repos/log4j-1.2.15.jar">
+          log4j.jar</A> into the servlet classpath directory.
+        </ITEM> <ITEM>
+          Copy a recent version of the file
+          <A HREF="http://pub.admc.com/lib-repos/admc-log4j-1.2_2.jar">
+          admc-log4j.jar</A> into the servlet classpath directory.
+        </ITEM> <ITEM>
+          Copy the file <CODE>log4j.xml</CODE> from the samples directory
+          of your JWebMail distribution into the servlet classpath directory.
+        </ITEM> <ITEM>
+          Restart Tomcat.
+        </ITEM>
+      </LIST>
+      If you prefer working with .properties files instead of .xml files,
+      you can make a <CODE>log4j.properties</CODE> file instead.
+      See the Log4j documentation about how to set up email alerts
+      with the SMTP appender, how to log to a database, etc.
       </P>
-      <P>
-        Before trying this, please ensure that you are familiar with your
-        Webserver/Appserver/Servlet-container's Servlet configuration.
-        I provided a sample zone file for Apache, though (but
-        you will have to do many modifications concerning the initArgs at the end of
-        the file).
-      </P>
+    </SUBSECTION>
+  </SECTION>
 
+  <SECTION name="Configuration" id="config">
+    <P>
+      JWebMail has an administration interface which allows you to perform
+      several runtime administration tasks, including:
+      <LIST>
+        <ITEM>Changing all configuration settings</ITEM>
+        <ITEM>Shutting down the server properly</ITEM>
+        <ITEM>Adding, deleting or editing JWebMail virtual domains</ITEM>
+        <ITEM>Adding, deleting or editing JWebMail users</ITEM>
+        <ITEM>Getting status information</ITEM>
+      </LIST>
+    </P>
       <SUBSUBSECTION name="General information" id="install:servlet:general">
         <P>
           The JWebMail servlet is called <CODE>net.wastl.webmail.servlet.WebMailServlet</CODE>. This
@@ -179,91 +219,6 @@ limitations under the License.
         </NOTE>
       </SUBSUBSECTION>
 
-      <SUBSUBSECTION name="Installation for Apache JServ" id="install:servlet:jserv">
-        <P>
-          JServ is the old Apache Servlet engine for Servlet API 2.0. At the moment, it is probably
-          the Servlet engine that is most common.
-        </P>
-        <P>
-          The requirements for the JServ installation are that you have a running Apache together
-          with a running Apache JServ.
-        </P>
-        <P>
-          As of JWebMail 0.7.5, a generic Apache JServ installation script is
-          provided that can be used to add the necessary configuration options to
-          Apache and JServ. Nonetheless you will need to have a running servlet
-          environment.
-        </P>
-        <P>
-          This script is called <CODE>bin/install.sh</CODE>. Just invoke it with no parameters. It
-          will try to determine your configuration and ask you whether the guessed values are
-          correct. You will be prompted for confirmation before each step.
-        </P>
-      </SUBSUBSECTION>
-
-      <SUBSUBSECTION name="Installation for Tomcat" id="install:servlet:tomcat">
-        <P>
-          <STRONG>Requirements:</STRONG>
-          <LIST>
-            <ITEM>Apache webserver</ITEM>
-            <ITEM>Tomcat from the Apache Jarkarta Project</ITEM>
-            <ITEM>mod_jk from the Apache Jarkarta Project (mod_jserv will probably work also
-              with some modifications)</ITEM>
-          </LIST>
-        </P>
-        <P>
-          <NLIST>
-            <ITEM><STRONG>Modify web.xml file</STRONG><BR />
-              <NOTE>You are advised to not modify the web.xml file.</NOTE>
-
-              There is a web.xml file already provided for JWebMail in the WEB-INF directory.
-              Please modify the pathnames therein to reasonable values for your configuration.
-            </ITEM>
-
-            <ITEM><STRONG>Modify Tomcat configuration</STRONG>: In the tomcat server.xml file add
-              the following entry to the <CODE>&lt;ContextManager&gt;</CODE> element:<BR />
-              <P>
-                <CODE>
-                  &lt;Context path="/jwebmail"
-                  docBase="/path/to/jwebmail-0.x.x"
-                  crossContext="true"
-                  debug="0"
-                  reloadable="false"
-                  trusted="false" &gt;
-                  &lt;/Context&gt;
-                </CODE>
-              </P>
-              <P>
-                Tomcat will create a mod_jk configuration file automatically from this entry.
-                However the generated file is not sufficient for JWebMail as JWebMail doesn't use
-                the default directory structure proposed by the Servlet API 2.2. Therefore
-                a second modification is necessary:
-              </P>
-            </ITEM>
-            <ITEM><STRONG>Modify Apache configuration</STRONG>: In the httpd.conf file from Apache
-            add the following two entries after the entry for the JkWorkersFile and the Include for
-            tomcat's automatic configuration:
-              <P>
-                <CODE>JkMount /jwebmail/WebMail ajp13</CODE><BR />
-                <CODE>JkMount /jwebmail/WebMail/* ajp13</CODE><BR />
-              </P>
-            </ITEM>
-            <ITEM><STRONG>Set permissions on JWebMail data directory</STRONG>
-              <P>
-                Please set the permissions on the JWebMail <CODE>data/</CODE> directory so that the
-                user running Tomcat has write access to it. It is also possible to specify a
-                different directory in <CODE>web.xml</CODE>.
-              </P>
-              <NOTE>You are advised to set a data directory out of the
-                application directory structure.</NOTE>
-            </ITEM>
-            <ITEM><STRONG>restart Tomcat and Apache</STRONG> and see in Tomcat's stdout.log whether
-            JWebMail is starting.</ITEM>
-          </NLIST>
-        </P>
-      </SUBSUBSECTION>
-    </SUBSECTION>
-
     <SUBSECTION name="Storage Methods" id="install:mysql">
       <P>
         By default, JWebMail uses a so-called SimpleStorage to store user and system configurations, i.e.
@@ -273,6 +228,20 @@ limitations under the License.
         JWebMail used to have a database storage in a 0.7 prerelease. Unfortunately this has become obsolete
         with the XML user model and needs to be re-implemented. I plan to do this in one of the next releases
       </NOTE>
+<!--      <P>
+        There are also several ways to store data:
+        <LIST>
+          <ITEM>
+            You could use the simple file-based storage which stores configuration data in XML documents
+            and is very easy to set up, but perhaps not very fast.
+          </ITEM>
+          <ITEM>
+            The performance method however is to store the configuration in a SQL database. Currently
+            only MySQL is supported, but it is easy to implement storage on Oracle or PostgreSQL.
+            Using a SQL database for storage has several advantages which I will describe below.
+          </ITEM>
+        </LIST>
+      </P>-->
 <!--      <P>
         A more performant method is JWebMail's MySQL storage where the data is stored in a MySQL database
         instead. This has all the advantages of a standardized database management system plus a smaller
@@ -407,21 +376,7 @@ limitations under the License.
         </P>
       </SUBSUBSECTION>-->
     </SUBSECTION>
-  </SECTION>
 
-
-  <SECTION name="Configuration" id="config">
-    <P>
-      JWebMail has an administration interface which allows you to perform
-      several runtime administration tasks, including:
-      <LIST>
-        <ITEM>Changing all configuration settings</ITEM>
-        <ITEM>Shutting down the server properly</ITEM>
-        <ITEM>Adding, deleting or editing JWebMail virtual domains</ITEM>
-        <ITEM>Adding, deleting or editing JWebMail users</ITEM>
-        <ITEM>Getting status information</ITEM>
-      </LIST>
-    </P>
     <SUBSECTION name="JWebMail Administrator Plugin" id="config:admin">
       <SUBSUBSECTION name="Connecting" id="config:admin:connecting">
         <P>
@@ -651,6 +606,10 @@ limitations under the License.
       <P>
         Things I think of are:
         <LIST>
+          <ITEM>Captcha</ITEM> to prevent robots, trojans, and miners from
+            sapping our servers.
+          <ITEM>JDBC Integration</ITEM>
+          <ITEM>Refactor and modernize the authentication methods</ITEM>
           <ITEM>Different XSL stylesheets to convert the JWebMail UI to other formats than HTML
             (perhaps WML for mobile phones)</ITEM>
           <ITEM>PGP for users using the Cryptix JCE. (http://www.cryptix.org)</ITEM>
@@ -660,76 +619,11 @@ limitations under the License.
     </SUBSECTION>
     <SUBSECTION name="Changes" id="notes:changes">
       <P>
-        See the file "Changes" for a list of changes in the different JWebMail
-        releases.
+        See the file "changes.txt" for a list of changes in the different
+        JWebMail releases.
       </P>
     </SUBSECTION>
   </SECTION>
-
-  <SECTION name="JDK Installation And Other Java Issues" id="java">
-    <SUBSECTION name="What is Java" id="java:what">
-      <P>
-        <NOTE>I'll make it short here as Java is pretty well known and documented.</NOTE>
-      </P>
-      <P>
-        Java is a platform independent, object-oriented (OO) programming language.
-        Java programs are compiled using the JDK Compiler (javac) or other compilers (e.g.
-        IBM jikes). The resulting bytecode is optimized for the Java Virtual Machine (JVM)
-        and still platform independent.<BR/>
-        The JVM interpretes the previously compiled bytecode and translates it "on the fly"
-        into platform dependent system calls. Therefore a JVM must exist for your platform
-        in order to run Java programs.<BR/>
-        You'll obviously recognize that Java is an interpreted language similar to Perl or
-        Python. The most sigificant difference to the former two is that Java is precompiled.<BR/>
-        So Java is a kind of compromise between purely interpreted languages and languages
-        that are compiled to machine code which tries to combine the advantages of both
-        (reliability and speed). As far as i know, this principle is derived from PROLOG.
-      </P>
-    </SUBSECTION>
-
-    <SUBSECTION name="How to install Java properly" id="java:install">
-      <P>
-        Use your system's standard facility to install the Java packages. Note
-        that the Linux JDK most likely comes as "tar.gz" and not as .rpm or .deb,
-        so you will have to manually install it using tar.
-      </P>
-      <P>
-        On Solaris, the JDK will install in /usr/java*/ by default.
-        On Linux, I prefer installing the "tar.gz" in /usr/local and renaming
-        the extracted path to "java1.x". Many distributions, however, will install
-        Java in /usr/lib/java1.x or /usr/lib/jdkxxx.
-      </P>
-      <P>
-        Next, link all programs in the bin/ directory to somewhere in your path
-        (e.g. /usr/local/bin) or alternativly add the bin/ directory to your
-        PATH environment.
-      </P>
-      <P>
-        You should have a running system now. Test it by typing "java -version".
-      </P>
-    </SUBSECTION>
-
-    <SUBSECTION name="Glossary" id="java:glossary">
-      <P>
-        <TABLE>
-          <TR>
-            <TD>JDK</TD><TD>Java Depelopment Kit - what you need to compile programs</TD>
-          </TR>
-          <TR>
-            <TD>JRE</TD><TD>Java Runtime Environment - what you need to only run programs</TD>
-          </TR>
-          <TR>
-            <TD>JVM</TD><TD>Java Virtual Machine - bytecode interpreter</TD>
-          </TR>
-          <TR>
-            <TD>JIT</TD><TD>Just In Time Compiler - improves execution speed of the JVM</TD>
-          </TR>
-        </TABLE>
-      </P>
-    </SUBSECTION>
-
-  </SECTION>
-
 
   <SECTION name="License" id="license">
         <P>
@@ -753,65 +647,6 @@ limitations under the License.
       effort to provide you with some sort of extra documentation (thanks a lot, BTW). I (Sebastian
       Schaffert) have not tested what you will find here.
     </P>
-
-    <SUBSECTION name="Installing JWebMail on Resin" id="resin">
-      <P>
-        <NOTE>
-          Resin is a framework for websites based on Apache that allows to run Java Servlets among other
-          things. The following was contributed by Jesper Weissglas, jeppe@shapeshifter.nu.
-        </NOTE>
-      </P>
-      <P>
-        The deployment descriptors of Resin are sort of Servlet API 2.2 compatible, as opposed to the
-        Apache properties files. Here is a skeleton of what will work with Resin 1.1:
-      </P>
-      <P>
-        Assuming the webmail binary distribution is unpacked as <CODE>[homedir]/webmail</CODE>
-      </P>
-      <P>
-        <TABLE>
-          <TR>
-            <TD>
-              <CODE>
-                [homedir]/WEB-INF/web.xml
-              </CODE>
-            </TD>
-          </TR>
-          <TR>
-            <TD>
-              <CODE>
-                &lt;web-app&gt;<BR/>
-                &lt;classpath id='WEB-INF/classes' source='WEB-INF/classes'/&gt;<BR/>
-                &lt;classpath id='webmail/lib/webmail-servlet.jar'/&gt;<BR/>
-                &lt;classpath id='webmail/lib/webmail-common.jar'/&gt;<BR/>
-                &lt;classpath id='webmail/lib/authenticators'/&gt;<BR/>
-                &lt;classpath id='webmail/lib/plugins'/&gt;<BR/>
-                <BR/>
-                &lt;error-log id='log/error.log'/&gt;<BR/>
-                <BR/>
-                &lt;servlet-mapping url-pattern='/servlet/*' servlet-name='invoker'/&gt;<BR/>
-                <BR/>
-                &lt;session-config session-max='4096' session-timeout='120'/&gt;<BR/>
-                <BR/>
-                &lt;servlet servlet-name="webmail" servlet-class="net.wastl.webmail.servlet.WebMailServlet"&gt;<BR/>
-                &lt;init-param webmail.plugin.path="[homedir]/webmail/lib/plugins" /&gt;<BR/>
-                &lt;init-param webmail.auth.path="[homedir]/webmail/lib/authenticators" /&gt;<BR/>
-                &lt;init-param webmail.data.path="[homedir]/webmail/data" /&gt;<BR/>
-                &lt;init-param webmail.lib.path="[homedir]/webmail/lib" /&gt;<BR/>
-                &lt;init-param webmail.template.path="[homedir]/webmail/lib/templates" /&gt;<BR/>
-                &lt;init-param webmail.storage="net.wastl.webmail.storage.mysql.MySQLStorage" /&gt;<BR/>
-                &lt;init-param webmail.storage.sqlhost="localhost" /&gt;<BR/>
-                &lt;init-param webmail.storage.sqllogin="" /&gt;<BR/>
-                &lt;init-param webmail.storage.sqlpass="" /&gt;<BR/>
-                &lt;init-param webmail.storage.sqldb="[your_database_name]" /&gt;<BR/>
-                &lt;/servlet&gt;<BR/>
-                &lt;/web-app&gt;<BR/>
-              </CODE>
-            </TD>
-          </TR>
-        </TABLE>
-      </P>
-    </SUBSECTION>
   </SECTION>
 
   <SECTION name="Credits" id="credits">

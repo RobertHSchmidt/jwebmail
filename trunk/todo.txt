@@ -3,10 +3,32 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Use javax.xml.xpath instead of org.apache.xpath. in xlan.jar.
+Rename the README doc to something like "userguide" or "manual".
+
+Copy default data to webmail.data.dir upon startup, if it is present but empty.
+
+EGAD FIXME:  This webapp kills the entire servlet container when you
+try to stop the webapp from running.  Worse than that, it doesn't
+even shut down the container cleanly but leaves it stuck so you have
+to kill it violently.
+
+Fix bug in the TEA and Helper encryption/decryption routines.  Binary
+characters are getting added to some Strings.  This makes valid passwords
+fail in some cases (probably directly depends on characters in the real
+password).
+
+Resolve NPE being thrown constantly from XMLData.getNodeXPath().
+
+Stop loading resources directly from the application through the FS.
+Load delivered resources through classpath.  Can load generated data from FS,
+but through indirection so user has an opportunity to disassociate this data
+from the application.
 
 Determine exactly what the app writes to at runtime.
 Have it use a working-directory instead of writing into the deliverable.
+
+Get rid of the many dependencies upon ServletContext.getRealPath(), so we
+can distribute a portable .war file that will run on any popular app server.
 
 IMPORTANT:  DO NOT FORGET
 If do not hear back from Kevin Excellent Lee, then revert the org.bulbul
@@ -14,34 +36,8 @@ classes back to GPL.  (Already have perm from Kowatch for webengruven).
 
 Somewhere in the callback thread, log the target document of XPath failures.
 
-Resolve NPE being thrown constantly from XMLData.getNodeXPath().
-
-If haven't already, document requirement for JDK 1.5
-(javax.xml.xpath not in 1.4).
-
-EGAD FIXME:  This webapp kills the entire servlet container when you
-try to stop the webapp from running.  Worse than that, it doesn't
-even shut down the container cleanly but leaves it stuck so you have
-to kill it violently.
-
 Fix level-ambiguity in XML processing code.
 FIRST verify my assertion that tree.getElementsBy*() searches for all
 ancestors, not just direct children.
 Do code search for use of getElementsBy...() and change to the less dangerous
 and more efficient getChild*() methods.
-
-Get all but bootstrap libs out of the code baseline.  Use Ivy to fetch libs.
-
-Get rid of the many dependencies upon ServletContext.getRealPath(), so we
-can distribute a portable .war file that will run on any popular app server.
-
-Stop loading resources directly from the application through the FS.
-Load delivered resources through classpath.  Can load generated data from FS,
-but through indirection so user has an opportunity to disassociate this data
-from the application.
-
-Copy default data to webmail.data.dir upon startup, if it is present but empty.
-
-Fix bug in the TEA encryption/decryption routines.  Binary characters are
-getting added to some Strings.  This makes valid passwords fail in some
-cases (probably directly depends on characters in the real password).

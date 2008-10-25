@@ -1,76 +1,118 @@
 $Id$
 
-Installation instructions for WebMail
-=====================================
+Installation instructions for JWebMail
+======================================
 
 
 I. Requirements
 ===============
 
-For building/running JWebMail you need the following software:
+For running JWebMail you need the following software:
 
-- JDK 1.4 or greater (get it at http://java.sun.com)
-- a mailserver for sending (SMTP) and receiving (IMAP) mails; by default,
+- A mailserver for sending (SMTP) and receiving (IMAP) mails; by default,
   JWebMail will use "localhost" for both
-- a webapp capable servlet container (e.g. Apache Tomcat, preferably >= 4.1,
-  http://jakarta.apache.org)
+- A webapp-capable servlet container which runs on a Java 1.5 or greater
+  JVM (either JRE or JDK).  Anything from a stripped down servlet-container
+  like Tomcat or Resin, to a J2EE application server like JBoss or
+  WebSphere will work.
+- Your servlet container needs modern versions of the following libraries
+  installed:
+      JavaMail API (typically mailapi-*.jar)
+      JavaMail SMTP provider (typically smtp-*.jar)
+      JAF/Java Activation Framework (not necessary if your servlet container
+               runs Java 1.6, since Java 1.6 includes the activation
+               framework).
 
-In the WebMail contrib/ directory of the source distribution, you can find a
-number of libraries that are needed by WebMail. The required libraries will be
-installed automatically during the build process.
+If you wish to build a custom app, or develop, you will also need a
+standalone Java JDK 1.5 or later, and Ant 6.0 or later, as described below.
+Any or no Java IDE will work.
+
 
 II. Installation
 ================
 
+There are two approaches to installing JWebMail >= 0.7.7, both require a
+servlet container as described above.
 
-There are two approaches to installing WebMail >= 0.7.7, both require the Tomcat
-(or a similar Servlet API 2.[23] + WebApp compatible) server.
-
-
-1. Installation of a pre-compiled WAR-file (Webapp ARchive)
+1. Installation of a pre-compiled WAR-file (Webapp Archive)
 2. Build and install from source
 
 The first installation method is almost always the preferred choice. Building
 from source may be relevant to you if you need to do modifications to the
 source.
 
-1. Installation of a pre-compiled WAR-file
-------------------------------------------
+1. Installation of a pre-built WAR-file
+---------------------------------------
 
 This installation method is very simple:
 
-1. Drop the webmail.war-file in your webapp-home. Under Apache Tomcat, this
-   is usually $CATALINA_HOME/webapps, but you might find it under different
-   locations on your system.
-2. chown www-data.www-data webmail.war, i.e. change the owner of the WAR-file
-   to the WWW-User (the user under which Tomcat is running)
-3. Restart Tomcat (or do any steps required by your servlet engine to deploy
-   the WAR-file)
+Install "jwebmail.war" as you would install any War file.
 
-WebMail is then available by calling http://yourhost/webmail/index.jsp
+With Tomcat, the easiest way is to use the Manager webapp, which servers
+http://localhost:8080/manager/html by default.  Log in and deploy the
+war using the Gui (you can see or add manager accounts in the file
+$CATALINA_BASE/config/tomcat-users.xml).
+
+For every application server that I know of, if you have auto-deploy on
+(usually the default mode) you can become the app-server "owner" (the
+account under which the server process(es) run), and just copy the war
+file into the webapp landing directory.  If you don't have access to that
+account, see your app server docs, because the war file permission
+requirements vary (if you have superuser privileges, you can always
+change the file to be owned by the app-server owner).  Rest assured,
+your app server has several easy ways to deploy war files.
+
+JWebMail is then available by visiting http://yourhost:PORT/jwebmail
+with a web browser.
 
 Please don't forget to visit the administration interface first. You can access
-it by calling http://yourhost/webmail/admin.jsp
+it by calling http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
+is "Secret".
 
+See the document "README.html" in your distribution.  That's the closest
+thing we have to a User's Guide at this point.
 
 
 2. Build and install from source
 --------------------------------
 
-WebMail is compiled by using the Ant build-system. For the installation, you
-will need a running JDK 1.4 (or greater).
+JWebMail is compiled by using the Ant build-system.  You will need Ant
+version 6 or greater and Java JDK 1.5 or greater to build JWebMail.
 
 The following steps are required (for a quick-start):
 1. Set your JAVA_HOME environment variable (to the directory where the JDK is
    installed)
-2. If you do not have TOMCAT_HOME or CATALINA_HOME set, then change the
-   build.sh script such that the SERVLET_CONTAINER is set properly
-3. Run './build.sh install-tomcat' if you have Tomcat installed and
-   './build.sh install-catalina' in case you have Catalina installed to
-   compile and install WebMail in your webapp-home. Make sure you have
-   write-permissions on that directory.
-4. chown -R www-data.www-data the webmail/ directory in the WebApp-home
+2. Make sure that the "bin" directory of your Ant installation is in your
+   search path.  Run "ant -v" to verify.
+3. You will need Internet access the first time you run the build, so that
+   the build process can download the needed third party libraries
+   (automatically).
+4. Run 'ant install-tomcat' to build an exploded webapp and a war file in
+   subdirectory "build/webapp".
+   If you don't have an Ivy jar file in your CLASSPATH, the Ant command
+   above will display the simple command that you can copy-and-paste to your
+   command line to satisfy it.
+5. Deploy the file at build/webapp/jwebpp.jar to your servlet container, as
+   explained in the previous section.
+   Alternatively, you can deploy the exploded web app located at
+   build/webapp/jwebapp.  Since you are building software, we figure you
+   are handy enough to figure this out without further instruction from us.
+6. Run "ant generate-readme" to build the README.html file referred to in
+   the previous section.
 
-Please see build.xml for further possible targets that may be used.
+IDE developers just need to configure their Ant invoker to include
+the jar file in the bootstrap-libs subdirectory in the CLASSPATH.
 
+Run "ant -p" for further possible targets that may be used.
+To customize any Ant properties, create a standard Java properties file in
+this directory with name "local.properties".
 
+The "generate-readme" task requires the program "xsltproc".
+If you don't have "xsltproc", you can generate the README.html file manually
+with your favorite XSLT processor tool and the artifacts in the
+src/doc/readme directory.
+
+The build system uses Apache Ivy to fetch third party libraries.  The
+configuration allows you to change the library repository location by
+editing local.properties and ivy-settings.xml.  See
+http://ant.apache.org/ivy/ for details about Apache Ivy.
