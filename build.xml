@@ -321,6 +321,8 @@ limitations under the License.
     <copy todir="${webapp.home}/${ant.project.name}" filtering="true">
       <fileset dir="src/jsp"/>
     </copy>
+    <zip destfile="${webapp.home}/${ant.project.name}/WEB-INF/classes/data.zip"
+         basedir="${webapp.home}/${ant.project.name}/data"/>
 
     <war warfile="${webapp.home}/${ant.project.name}.war"
          webxml="${webapp.home}/${ant.project.name}/WEB-INF/web.xml"

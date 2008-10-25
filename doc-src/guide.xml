@@ -75,10 +75,146 @@ limitations under the License.
 
   <SECTION name="Installation" id="install">
     <SUBSECTION name="Introduction" id="install:introduction">
-      <P>
-        Read the text file <CODE>INSTALL.txt</CODE> in the root directory
-        of your binary or source distribution.
+      The basic installation instructions here can also be found in plain
+      text format in the file INSTALL.txt in the distribution.
+    </SUBSECTION>
+    <SUBSECTION name="Requirements" id="install:requirements">
+      <P>For running JWebMail you need the following software:
+        <LIST>
+          <ITEM>
+            A mailserver for sending (SMTP) and receiving (IMAP) mails; by default,
+            JWebMail will use "localhost" for both
+          </ITEM> <ITEM>
+            A webapp-capable servlet container which runs on a Java 1.5 or greater
+            JVM (either JRE or JDK).  Anything from a stripped down servlet-container
+            Tomcat or Resin, to a J2EE application server like JBoss or
+            WebSphere will work.
+          </ITEM> <ITEM>
+            Your servlet container needs modern versions of the following libraries
+            installed:
+            <LIST>
+               <ITEM>
+                JavaMail API (typically mailapi-*.jar)
+              </ITEM> <ITEM>
+                JavaMail SMTP provider (typically smtp-*.jar)
+              </ITEM> <ITEM>
+                 JAF/Java Activation Framework (not necessary if your servlet
+                 container runs Java 1.6, since Java 1.6 includes the activation
+                 framework).
+              </ITEM>
+            </LIST>
+          </ITEM>
+        </LIST>
+      </P> <P>
+        If you wish to build a custom app, or develop, you will also need a
+        standalone Java JDK 1.5 or later, and Ant 6.0 or later, as described below.
+        Any or no Java IDE will work.
       </P>
+    </SUBSECTION>
+    <SUBSECTION name="Installing" id="install:installing">
+      <P>
+        There are two approaches to installing JWebMail >= 0.7.7, both require a
+        servlet container as described above.
+        <NLIST>
+          <ITEM>
+            Installation of a pre-compiled WAR-file (Webapp Archive)
+          </ITEM> <ITEM>
+            Build and install from source
+          </ITEM>
+        </NLIST>
+        The first installation method is almost always the preferred choice. Building
+        from source may be relevant to you if you need to do modifications to the
+        source.
+      </P>
+      <P> <NLIST>
+        <ITEM>Installation of a pre-built WAR-file
+          <P>
+            This installation method is very simple:
+          </P> <P>
+            Install "jwebmail.war" as you would install any War file.
+          </P> <P>
+            With Tomcat, the easiest way is to use the Manager webapp, which servers
+            http://localhost:8080/manager/html by default.  Log in and deploy the
+          </P> <P>
+            Install "jwebmail.war" as you would install any War file.
+          </P> <P>
+            With Tomcat, the easiest way is to use the Manager webapp, which servers
+            http://localhost:8080/manager/html by default.  Log in and deploy the
+            war using the Gui (you can see or add manager accounts in the file
+            $CATALINA_BASE/config/tomcat-users.xml).
+          </P> <P>
+            For every application server that I know of, if you have auto-deploy on
+            (usually the default mode) you can become the app-server "owner" (the
+            account under which the server process(es) run), and just copy the war
+            file into the webapp landing directory.  If you don't have access to that
+            account, see your app server docs, because the war file permission
+            requirements vary (if you have superuser privileges, you can always
+            change the file to be owned by the app-server owner).  Rest assured,
+            your app server has several easy ways to deploy war files.
+          </P> <P>
+            JWebMail is then available by visiting http://yourhost:PORT/jwebmail
+            with a web browser.
+          </P> <P>
+            Please don't forget to visit the administration interface first. You can access
+            it by calling http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
+            is "Secret".
+          </P> <P>
+            See the document "jwebapp-guide.html" in your distribution.
+          </P>
+        </ITEM>
+        <ITEM>Build and install from source
+          <P>
+            JWebMail is compiled by using the Ant build-system.  You will need Ant
+            version 6 or greater and Java JDK 1.5 or greater to build JWebMail.
+          </P> <P>
+            The following steps are required (for a quick-start):<NLIST>
+              <ITEM>
+                Set your JAVA_HOME environment variable (to the directory where the JDK is
+                installed)
+              </ITEM> <ITEM>
+                Make sure that the "bin" directory of your Ant installation is in your
+                search path.  Run "ant -v" to verify.
+              </ITEM> <ITEM>
+                You will need Internet access the first time you run the build, so that
+                build process can download the needed third party libraries
+                (automatically).
+              </ITEM> <ITEM>
+                Run 'ant webapp' to build an exploded webapp and a war file in
+                subdirectory "build/webapp".
+                If you don't have an Ivy jar file in your CLASSPATH, the Ant command
+                above will display the simple command that you can copy-and-paste to your
+                command line to satisfy it.
+              </ITEM> <ITEM>
+                Deploy the file at build/webapp/jwebpp.jar to your servlet container, as
+                explained in the previous section.
+                Alternatively, you can deploy the exploded web app located at
+                build/webapp/jwebapp.  Since you are building software, we figure you
+                are handy enough to figure this out without further instruction from us.
+              </ITEM> <ITEM>
+                Run "ant gen-guide" to build the jwebapp-guide.html file referred to in
+                the previous section (it gets written to the "doc" subdirectory).
+              </ITEM>
+            </NLIST>
+          </P> <P>
+            IDE developers just need to configure their Ant invoker to include
+            the jar file in the bootstrap-libs subdirectory in the CLASSPATH.
+          </P> <P>
+            Run "ant -p" for further possible targets that may be used.
+            To customize any Ant properties, create a standard Java properties file in
+            this directory with name "local.properties".
+          </P> <P>
+            The "gen-guide" task requires the program "xsltproc".
+            If you don't have "xsltproc", you can generate the gen-guide.html file manually
+            with your favorite XSLT processor tool and the guide.* artifacts in the
+            doc-src directory.
+          </P> <P>
+            The build system uses Apache Ivy to fetch third party libraries.  The
+            configuration allows you to change the library repository location by
+            editing local.properties and ivy-settings.xml.  See
+            http://ant.apache.org/ivy/ for details about Apache Ivy.
+          </P>
+        </ITEM>
+      </NLIST></P>
     </SUBSECTION>
     <SUBSECTION name="logging" id="install:logging">
       <P>
@@ -178,11 +314,14 @@ limitations under the License.
       several runtime administration tasks, including:
       <LIST>
         <ITEM>Changing all configuration settings</ITEM>
+        <!--  At this time, it does not shut down the server "properly".
         <ITEM>Shutting down the server properly</ITEM>
+        -->
         <ITEM>Adding, deleting or editing JWebMail virtual domains</ITEM>
         <ITEM>Adding, deleting or editing JWebMail users</ITEM>
         <ITEM>Getting status information</ITEM>
       </LIST>
+      See the JWebMail Administrator Plugin section for details.
     </P>
       <SUBSUBSECTION name="General information" id="install:servlet:general">
         <P>
@@ -241,12 +380,15 @@ limitations under the License.
 
     <SUBSECTION name="Storage Methods" id="install:mysql">
       <P>
-        By default, JWebMail uses a so-called SimpleStorage to store user and system configurations, i.e.
-        the data is stored in separate XML-files.
+        By default, when you install the web application, a XML storage
+        are will be set up under the servlet container owner's home
+        directory.
+        The location, and many other things can be changed, but data should
+        not be written under the appication deployment directory.
       </P>
       <NOTE>
-        JWebMail used to have a database storage in a 0.7 prerelease. Unfortunately this has become obsolete
-        with the XML user model and needs to be re-implemented. I plan to do this in one of the next releases
+        A database storage option (JDBC) is planned, but implementation has not
+        yet begun.
       </NOTE>
 <!--      <P>
         There are also several ways to store data:
@@ -436,6 +578,9 @@ limitations under the License.
             up encrypted again, after you hit the submit button (but still be the password you just
             entered).</NOTE>
         </P>
+        <!--  Need to look into it, but Shutdown is badly broken.
+        It could well be that these functions were never intended to work in a
+        servlet container.
         <P>
           To shutdown or restart the JWebMail server, enter the time in seconds until the action
           will be performed and hit the appropriate button ("SHUTDOWN" or "REBOOT").
@@ -444,6 +589,7 @@ limitations under the License.
           whether you really want to do this! Most likely you will get a "connection timed out" or
           "document contains no data" dialog.
         </P>
+        -->
       </SUBSUBSECTION>
       <SUBSUBSECTION name="JWebMail Virtual Domain Support" id="config:admin:vdom">
         <P>
@@ -531,6 +677,7 @@ limitations under the License.
       </SUBSUBSECTION>
     </SUBSECTION>
 
+    <!-- This probably should not work in a Servlet Container:
     <SUBSECTION name="File-Based Shutdown" id="config:admin:shutdown">
       <P>
         You can initiate a JWebMail shutdown when you create a file "shutdown"
@@ -539,6 +686,7 @@ limitations under the License.
         automatic system startup/shutdown.
       </P>
     </SUBSECTION>
+    -->
   </SECTION>
 
 
@@ -571,8 +719,8 @@ limitations under the License.
     <SUBSECTION name="General Usage" id="usage:general">
       <P>
         The JWebMail daemon listens on whatever port you have configure.
-        Just point your browser´s URL to http://yourhost:yourport/ and see the
-        login screen.
+        Just point your browser´s URL to http://yourhost:yourport/jwebmail
+        and see the login screen.
       </P>
       <P>
         A user will get the password he logs in with the first time. Passwords
@@ -620,20 +768,20 @@ limitations under the License.
   <SECTION name="Notes" id="notes">
     <SUBSECTION name="JWebMail Status" id="notes:status">
       <P>
-        JWebMail Pre-1.0.1 is considered BETA, as not all features I want for a "1.0"
-        are yet included.
+        JWebMail Pre-1.0.1 is BETA.
       </P>
       <P>
-        Things I think of are:
+        Some features on the wish-list are
         <LIST>
           <ITEM>Captcha</ITEM> to prevent robots, trojans, and miners from
             sapping our servers.
           <ITEM>JDBC Integration</ITEM>
           <ITEM>Refactor and modernize the authentication methods</ITEM>
-          <ITEM>Different XSL stylesheets to convert the JWebMail UI to other formats than HTML
-            (perhaps WML for mobile phones)</ITEM>
-          <ITEM>PGP for users using the Cryptix JCE. (http://www.cryptix.org)</ITEM>
-          <ITEM>"Extras" like calendar and so on (will be realized as JWebMail Plugins)</ITEM>
+          <ITEM>Different XSL stylesheets to convert the JWebMail UI to other
+            formats than HTML (perhaps WML for mobile phones)</ITEM>
+          <ITEM>PGP</ITEM>
+          <ITEM>"Extras" like calendar and so on
+            (will be realized as JWebMail Plugins)</ITEM>
         </LIST>
       </P>
     </SUBSECTION>
@@ -671,26 +819,26 @@ limitations under the License.
 
   <SECTION name="Credits" id="credits">
     <P>
-      I give my credits to all who reported me bugs and made suggestions to improve
-      JWebMail.
+      I give my credits to all who reported me bugs and made suggestions to
+      improve JWebMail.
     </P>
     <P>
       Some, however, I want to mention explicitly:
       <LIST>
+        <ITEM>Sebastian Schaffert, schaffer@informatik.uni-muenchen.de</ITEM>,
+        who was the project lead before me.
         <ITEM>Devin Kowatch, devink@webengruven.org, for contributing challenge/response authentication</ITEM>
         <ITEM>Homero Borgo, homero@apoyo.uson.mx, for testing JWebMail under rough conditions
           and helping much to find bugs in the product.</ITEM>
-        <ITEM>My girlfriend for her patience and the cool icons for JWebMail 0.5 and 0.6</ITEM>
+        <ITEM>Sebastian's girlfriend for her patience and the cool icons for JWebMail 0.5 and 0.6</ITEM>
         <ITEM>The people at Bibop in Italy, especially Gianugo Rabellino and Ricardo Rocha for
           doing the Bibop Theme and lots of inspirations</ITEM>
         <ITEM>Sacha Berger, bergers@informatik.uni-muenchen.de, for some very interesting
         discussions about how to do things right.:-)</ITEM>
-        <ITEM>Jesper Weissglas, jeppe@shapeshifter.nu, for the documentation about how to install
-          JWebMail on Resin</ITEM>
       </LIST>
     </P>
     <P>
-      <STRONG>Sebastian Schaffert, schaffer@informatik.uni-muenchen.de</STRONG>
+      <STRONG>Blaine Simpson, blaine.simpson@admc.com</STRONG>
     </P>
   </SECTION>
 </GUIDE>
