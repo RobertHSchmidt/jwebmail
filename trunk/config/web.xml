@@ -31,8 +31,12 @@ limitations under the License.
   <display-name>JWebMail - WWW access to your mail</display-name>
 
   <context-param>
-    <param-name>defaultRtAppName</param-name>
+    <param-name>default.contextroot</param-name>
     <param-value>jwebmail</param-value>
+  </context-param>
+  <context-param>
+    <param-name>required.metaprop.keys</param-name>
+    <param-value>webmail.data.path</param-value>
   </context-param>
 
   <listener>
@@ -40,7 +44,6 @@ limitations under the License.
   </listener>
 
   <servlet>
-
     <!-- The servlet's name. Don't change unless you know what you are doing -->
     <servlet-name>
       WebMail
