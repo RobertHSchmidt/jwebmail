@@ -28,7 +28,7 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Initialization target                                               -->
   <!-- =================================================================== -->
-  <target name="-init">
+  <target name="-init" depends="-check-jvm-version">
     <tstamp/>
     <property name="Name" value="JWebMail"/>
     <property name="version" value="1.0.1c"/>
@@ -410,4 +410,14 @@ Customize this as you wish and/or set Ivy properties
 (or any other build properties) local properties in
 a 'local.properties' file.</echo>
   </target>
+
+  <target name="-check-jvm-version">
+   <condition property="_jvm.ok">
+     <matches string="${ant.java.version}">
+       <regexp refid="jvmver.regexp.refid"/>
+     </matches>
+   </condition>
+   <fail unless="_jvm.ok" message="JWebMail requires JVM version 1.5 or later"/>
+  </target>
+  <regexp id="jvmver.regexp.refid" pattern="^1\.[5-9]"/>
 </project>
