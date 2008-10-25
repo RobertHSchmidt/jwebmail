@@ -33,6 +33,9 @@ limitations under the License.
   <context-param>
     <param-name>default.contextroot</param-name>
     <param-value>jwebmail</param-value>
+    <!-- IMPORTANT:  If your runtime context-root differs from the value
+         above, you must set JNDI env param 'app.contextroot' to your
+         real context root for this deployment! -->
   </context-param>
   <context-param>
     <param-name>required.metaprop.keys</param-name>
