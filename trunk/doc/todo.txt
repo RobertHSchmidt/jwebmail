@@ -3,14 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Implement a Filter to validate for the very first request that the
-requests's CR matches app attr app.contextroot.
-
-Enhance app.contextroot design to accommodate ROOT / CR.
-
-Document that user must assign the app.name/context.root to match
-the war file or web app directory name.
-
 Fix up webapp assembly targets to just write the data.zip file and
 not the data directory... for both exploded and .war format...
 forgot about this.
@@ -59,10 +51,13 @@ Load delivered resources through classpath.
     Get rid of the many dependencies upon ServletContext.getRealPath(), so we
     can distribute a portable .war file that will run on any popular app server.
 
-    Get rid of the Ant filtering and use the app.name/context.root from
+    Get rid of the Ant filtering and use the app.name/context.path from
     the listener.
 
-    Verify that after this work, can deploy JWebApp with root context root.
+    Verify that after this work, can deploy JWebApp with root context path.
+
+    Document that user must assign the app.name/context.path to match
+    the war file or web app directory name.
 
 Use container-managed mail providers retrieved through JNDI.
 
