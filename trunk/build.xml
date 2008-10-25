@@ -293,9 +293,6 @@ limitations under the License.
     <copy todir="${webapp.home}/${ant.project.name}/lib">
       <fileset dir="lib" excludes="**/*.jar" />
     </copy>
-    <copy todir="${webapp.home}/${ant.project.name}/data">
-      <fileset dir="data"/>
-    </copy>
     <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes" flatten="yes">
       <fileset dir="build/classes">
         <include name="**/plugins/**,**/authenticators/**" />
@@ -321,7 +318,7 @@ limitations under the License.
       <fileset dir="src/jsp"/>
     </copy>
     <zip destfile="${webapp.home}/${ant.project.name}/WEB-INF/classes/data.zip"
-         basedir="${webapp.home}/${ant.project.name}/data"/>
+         basedir="data"/>
 
     <war warfile="${webapp.home}/${ant.project.name}.war"
          webxml="${webapp.home}/${ant.project.name}/WEB-INF/web.xml"
