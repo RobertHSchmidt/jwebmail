@@ -74,5 +74,6 @@ public class ContextPathValidator implements Filter {
                 req.getContextPath()
                 + "' does match match configured context.path '"
                 + contextPath + "'");
+        validated = true;
     }
 }
