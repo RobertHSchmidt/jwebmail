@@ -82,11 +82,8 @@ limitations under the License.
   <target name="-prep-lib" depends="-ivy-setup">
     <ivy:cachefileset conf="bundle" setid="bundle.refid"/>
     <copy todir="lib">
-        <fileset dir="contrib">
-           <include name="*.jar" />
-           <include name="mime.types" />
-        </fileset>
-        <fileset refid="bundle.refid"/>
+      <fileset file="contrib/mime.types"/>
+      <fileset refid="bundle.refid"/>
     </copy>
   </target>
 
@@ -97,7 +94,6 @@ limitations under the License.
           description="Compiles the source code (default)">
     <ivy:cachepath conf="build" pathid="build.refid"/>
     <javac srcdir="build/src" destdir="build/classes"
-           classpath="lib/xalan.jar"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
            deprecation="${javac.deprecation}"
