@@ -3,8 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Have Ant buildfile validate Java version.
-
 Fix up webapp assembly targets to just write the data.zip file and
 not the data directory... for both exploded and .war format...
 forgot about this.
