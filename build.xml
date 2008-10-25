@@ -125,8 +125,6 @@ limitations under the License.
   <!-- =================================================================== -->
   <target name="package" depends="compile"
           description="Generates the main jar file">
-    <fixcrlf srcdir="." includes="**/*.bat" eol="crlf"/>
-    <fixcrlf srcdir="." includes="**/*.sh" eol="lf"/>
     <jar jarfile="lib/${ant.project.name}-common.jar"
          basedir="build/classes"
          includes="net/**,org/**"
@@ -286,10 +284,10 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Copies the class files into the webapp dir for Tomcat.              -->
   <!-- =================================================================== -->
-  <target name="install-tomcat" depends="package, -copy-xml-files"
-          description="Build webapp and deploy to Tomcat">
+  <target name="webapp" depends="package, -copy-xml-files"
+          description="Build web applicatoin">
     <fail unless="webapp.home"
-      message="Property 'webapp.home' is required by target 'install-tomcat'"/>
+          message="Property 'webapp.home' is required by target 'webapp'"/>
     <echo message="Installing ${ant.project.name} to Tomcat apps directory ..."/>
     <mkdir dir="${webapp.home}/${ant.project.name}"/>
     <mkdir dir="${webapp.home}/${ant.project.name}/WEB-INF"/>
