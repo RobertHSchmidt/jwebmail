@@ -377,9 +377,9 @@ limitations under the License.
           description="Generate the 'README.html' file">
     <exec executable="xsltproc" failonerror="true">
       <arg value="-o"/>
-      <arg value="README.html"/>
-      <arg file="src/doc/readme/README.xsl"/>
-      <arg file="src/doc/readme/README.xml"/>
+      <arg value="doc/jwebapp-guide.html"/>
+      <arg file="doc-src/guide.xsl"/>
+      <arg file="doc-src/guide.xml"/>
     </exec>
   </target>
 
