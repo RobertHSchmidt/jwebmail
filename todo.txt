@@ -3,8 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Rename the README doc to something like "userguide" or "manual".
-
 Copy default data to webmail.data.dir upon startup, if it is present but empty.
 
 EGAD FIXME:  This webapp kills the entire servlet container when you

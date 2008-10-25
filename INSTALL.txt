@@ -69,8 +69,7 @@ Please don't forget to visit the administration interface first. You can access
 it by calling http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
 is "Secret".
 
-See the document "README.html" in your distribution.  That's the closest
-thing we have to a User's Guide at this point.
+See the document "jwebapp-guide.html" in your distribution.
 
 
 2. Build and install from source
@@ -97,8 +96,8 @@ The following steps are required (for a quick-start):
    Alternatively, you can deploy the exploded web app located at
    build/webapp/jwebapp.  Since you are building software, we figure you
    are handy enough to figure this out without further instruction from us.
-6. Run "ant generate-readme" to build the README.html file referred to in
-   the previous section.
+6. Run "ant gen-guide" to build the jwebapp-guide.html file referred to in
+   the previous section (it gets written to the "doc" subdirectory).
 
 IDE developers just need to configure their Ant invoker to include
 the jar file in the bootstrap-libs subdirectory in the CLASSPATH.
@@ -107,10 +106,10 @@ Run "ant -p" for further possible targets that may be used.
 To customize any Ant properties, create a standard Java properties file in
 this directory with name "local.properties".
 
-The "generate-readme" task requires the program "xsltproc".
-If you don't have "xsltproc", you can generate the README.html file manually
-with your favorite XSLT processor tool and the artifacts in the
-src/doc/readme directory.
+The "gen-guide" task requires the program "xsltproc".
+If you don't have "xsltproc", you can generate the gen-guide.html file manually
+with your favorite XSLT processor tool and the guide.* artifacts in the
+doc-src directory.
 
 The build system uses Apache Ivy to fetch third party libraries.  The
 configuration allows you to change the library repository location by
