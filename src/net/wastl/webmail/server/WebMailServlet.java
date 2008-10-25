@@ -65,7 +65,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
          */
         ServletContext sc = config.getServletContext();
         log.debug("Init");
-        String appName = (String) sc.getAttribute("app.name");
+        String contextRoot = (String) sc.getAttribute("app.contextroot");
         File rtConfigDir = (File) sc.getAttribute("rtconfig.dir");
         Properties rtProps = (Properties) sc.getAttribute("meta.properties");
         log.debug("RT configs retrieved");

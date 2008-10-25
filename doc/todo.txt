@@ -3,10 +3,10 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Consider changing appName/app.name to context.root or similar, since
-this must match the context root.
-Must handle CR not matching directory, like for ROOT or specified
-run-directory in context.xml.
+Implement a Filter to validate for the very first request that the
+requests's CR matches app attr app.contextroot.
+
+Enhance app.contextroot design to accommodate ROOT / CR.
 
 Document that user must assign the app.name/context.root to match
 the war file or web app directory name.

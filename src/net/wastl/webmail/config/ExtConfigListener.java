@@ -46,8 +46,10 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Purpose<UL>
- * <LI>Set webapp attribute app.name to a unique application name, even
- *     for multiple deployments of the same application distro.
+ * <LI>Set webapp attribute app.contextroot to the app's unique runtime
+ *     Context Root.
+ *     This will be unique even for multiple deployments of the same
+ *     application distro.
  * <LI>Set webapp attribute rtconfig.dir to the absolute path of a
  *     runtime config directory.  Value is determined dynamically at
  *     runtime, based on the Runtime environment.
@@ -65,8 +67,8 @@ import org.apache.commons.logging.LogFactory;
  * app-instance-specific if the app is to remain portable, since some
  * app servers share one set of System Properties for all web app instances.
  * </P><P>
- * The property or application attribute 'rtAppName' satisfies the need for
- * application-specific switching.
+ * The property contextRoot or application attribute 'context.root'
+ * satisfies the need for application-specific switching.
  * Example config files with webapps.rtconfig.dir set to '/local/configs'<UL>
  *    <LI>/local/configs/appa/meta.properties
  *    <LI>/local/configs/appc/meta.properties
@@ -76,50 +78,64 @@ import org.apache.commons.logging.LogFactory;
  * Since the app also has access to the rt.configdir value, you can put any
  * and all kinds of runtime resources alongside the meta.properties file.
  * <P>
- * The variables ${rt.configdir} and ${app.name} will be expanded if they
+ * The variables ${rt.configdir} and ${app.contextroot} will be expanded if they
  * occur inside a meta.properties file.
  * The latter allows for safely specifying other files
  * alongside the meta.properties file without worrying about the vicissitudes
  * of relative paths.
+ * </P> <P>
+ * One would think that the running app could easily detect its own runtime
+ * context root, but alas, that's impossible to do in a portable way
+ * (until after requests are being served... and that is too late).
+ * </P> <P>
+ * DESIGN not decided upon yet for handling Context Root of "/"
+ * (the default container context root).
  * </P>
  *
  * @author blaine.simpson@admc.com
  */
 public class ExtConfigListener implements ServletContextListener {
+    /* It's very difficult to choose between camelBack and dot.delimited
+     * keys for attributes.  dot.delimited is much more elegant on the
+     * configuration side, in .properties and XML files, but these dots
+     * break the ability for JavaBean tools and utilities to dereference
+     * (e.g. EL, JSTL, Spring).  Also, can't have a getter or setter
+     * with a dot in it.
+     *
+     * Due to the convenience factor, going with dot-delimited until and
+     * if this causes us problems.
+     */
     private static Log log = LogFactory.getLog(ExtConfigListener.class);
 
-    protected String rtAppName = null;
-
-    /**
-     * Use webapp application context attribute instead of this setter
-     * to configure multiple apps in a single app server JVM.
-     */
-    public void setRtAppName(String rtAppName) { this.rtAppName = rtAppName; }
+    /** Corresponds to the context.root setting. */
+    protected String contextRoot = null;
 
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext sc = sce.getServletContext();
-        rtAppName = sc.getInitParameter("defaultRtAppName");
+        contextRoot = sc.getInitParameter("default.contextroot");
         try {
-            Object o = new InitialContext().lookup("java:comp/env/rtAppName");
-            rtAppName = (String) o;
-            log.debug("'rtAppName' set by webapp env property");
+            Object o = new InitialContext().lookup(
+                    "java:comp/env/app.contextroot");
+            contextRoot = (String) o;
+            log.debug("app.contextroot set by webapp env property");
         } catch (NameNotFoundException nnfe) {
         } catch (NamingException nnfe) {
             throw new RuntimeException(
                     "Runtime failure when looking up env property", nnfe);
         }
-        if (rtAppName == null)
+        if (contextRoot == null)
             throw new IllegalStateException(
-                    "Required property 'rtAppName' is not set as either a app "
-                    + "context init parameter, nor as a webapp JNDI env param");
+                    "Required setting 'app.contextroot' is not set as either "
+                    + "a app webapp JNDI env param, nor by default context "
+                    + "init parameter 'default.contextroot'");
         log.info("Initializing configs for runtime app name '"
-                + rtAppName + "'");
+                + contextRoot + "'");
         String dirProp = System.getProperty("webapps.rtconfig.dir");
         if (dirProp == null) {
             dirProp = System.getProperty("user.home");
             System.setProperty("webapps.rtconfig.dir", dirProp);
         }
-        File rtConfigDir = new File(dirProp, rtAppName);
+        File rtConfigDir = new File(dirProp, contextRoot);
         File metaFile = new File(rtConfigDir, "meta.properties");
         if ((!rtConfigDir.isDirectory()) || !metaFile.isFile()) try {
             installXmlStorage(rtConfigDir, metaFile);
@@ -139,10 +155,10 @@ public class ExtConfigListener implements ServletContextListener {
         }
         Properties expandProps = new Properties();
         expandProps.setProperty("rtconfig.dir", rtConfigDir.getAbsolutePath());
-        expandProps.setProperty("app.name", rtAppName);
+        expandProps.setProperty("app.contextroot", contextRoot);
         metaProperties.expand(expandProps); // Expand ${} properties
         String requiredKeysString;
-        requiredKeysString = sc.getInitParameter("requiredMetaPropKeys");
+        requiredKeysString = sc.getInitParameter("required.metaprop.keys");
         if (requiredKeysString != null) {
             Set<String> requiredKeys = new HashSet<String>(
                     Arrays.asList(requiredKeysString.split("\\s*,\\s*", -1)));
@@ -153,16 +169,16 @@ public class ExtConfigListener implements ServletContextListener {
                         + metaFile.getAbsolutePath()
                         + "' missing required property(s): " + requiredKeys);
         }
-        sc.setAttribute("app.name", rtAppName);
+        sc.setAttribute("app.contextroot", contextRoot);
         sc.setAttribute("rtconfig.dir", rtConfigDir);
         sc.setAttribute("meta.properties", metaProperties);
 
-        log.debug("'app.name', 'rtconfig.dir', 'meta.properties' "
+        log.debug("'app.contextroot', 'rtconfig.dir', 'meta.properties' "
                 + "successfully published to app");
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
-        log.info("App '" + rtAppName + "' shutting down.\n"
+        log.info("App '" + contextRoot + "' shutting down.\n"
                 + "All Servlets and Filters have been destroyed");
     }
 
