@@ -398,7 +398,7 @@ limitations under the License.
         are will be set up under the servlet container owner's home
         directory.
         The location, and many other things can be changed, but data should
-        not be written under the appication deployment directory.
+        not be written under the context root (appication deployment directory).
       </P>
       <NOTE>
         A database storage option (JDBC) is planned, but implementation has not

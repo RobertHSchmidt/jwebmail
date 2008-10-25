@@ -22,6 +22,8 @@ package net.wastl.webmail.config;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 import javax.naming.InitialContext;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.util.Properties;
 import java.util.HashSet;
 import java.util.Arrays;
@@ -46,10 +48,11 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Purpose<UL>
- * <LI>Set webapp attribute app.contextroot to the app's unique runtime
- *     Context Root.
+ * <LI>Set webapp attribute app.contextpath to the app's unique runtime
+ *     Context Path.
  *     This will be unique even for multiple deployments of the same
  *     application distro.
+ * <LI>Set webapp attribute deployment.name to a String base on the context path
  * <LI>Set webapp attribute rtconfig.dir to the absolute path of a
  *     runtime config directory.  Value is determined dynamically at
  *     runtime, based on the Runtime environment.
@@ -67,7 +70,7 @@ import org.apache.commons.logging.LogFactory;
  * app-instance-specific if the app is to remain portable, since some
  * app servers share one set of System Properties for all web app instances.
  * </P><P>
- * The property contextRoot or application attribute 'context.root'
+ * The property contextPath or application attribute 'context.path'
  * satisfies the need for application-specific switching.
  * Example config files with webapps.rtconfig.dir set to '/local/configs'<UL>
  *    <LI>/local/configs/appa/meta.properties
@@ -78,18 +81,15 @@ import org.apache.commons.logging.LogFactory;
  * Since the app also has access to the rt.configdir value, you can put any
  * and all kinds of runtime resources alongside the meta.properties file.
  * <P>
- * The variables ${rt.configdir} and ${app.contextroot} will be expanded if they
+ * The variables ${rt.configdir} and ${app.contextpath} will be expanded if they
  * occur inside a meta.properties file.
  * The latter allows for safely specifying other files
  * alongside the meta.properties file without worrying about the vicissitudes
  * of relative paths.
  * </P> <P>
  * One would think that the running app could easily detect its own runtime
- * context root, but alas, that's impossible to do in a portable way
+ * context path, but alas, that's impossible to do in a portable way
  * (until after requests are being served... and that is too late).
- * </P> <P>
- * DESIGN not decided upon yet for handling Context Root of "/"
- * (the default container context root).
  * </P>
  *
  * @author blaine.simpson@admc.com
@@ -107,35 +107,51 @@ public class ExtConfigListener implements ServletContextListener {
      */
     private static Log log = LogFactory.getLog(ExtConfigListener.class);
 
-    /** Corresponds to the context.root setting. */
-    protected String contextRoot = null;
+    /** Corresponds to the context.path setting. */
+    protected String contextPath = null;
+    /** Derived from contextPath. */
+    protected String deploymentName = null;
 
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext sc = sce.getServletContext();
-        contextRoot = sc.getInitParameter("default.contextroot");
+        contextPath = sc.getInitParameter("default.contextpath");
         try {
             Object o = new InitialContext().lookup(
-                    "java:comp/env/app.contextroot");
-            contextRoot = (String) o;
-            log.debug("app.contextroot set by webapp env property");
+                    "java:comp/env/app.contextpath");
+            contextPath = (String) o;
+            log.debug("app.contextpath set by webapp env property");
         } catch (NameNotFoundException nnfe) {
         } catch (NamingException nnfe) {
+            log.fatal("Runtime failure when looking up env property", nnfe);
             throw new RuntimeException(
                     "Runtime failure when looking up env property", nnfe);
         }
-        if (contextRoot == null)
-            throw new IllegalStateException(
-                    "Required setting 'app.contextroot' is not set as either "
+        if (contextPath == null) {
+            log.fatal(
+                    "Required setting 'app.contextpath' is not set as either "
                     + "a app webapp JNDI env param, nor by default context "
-                    + "init parameter 'default.contextroot'");
-        log.info("Initializing configs for runtime app name '"
-                + contextRoot + "'");
+                    + "init parameter 'default.contextpath'");
+            throw new IllegalStateException(
+                    "Required setting 'app.contextpath' is not set as either "
+                    + "a app webapp JNDI env param, nor by default context "
+                    + "init parameter 'default.contextpath'");
+        }
+        if (contextPath.equals("/ROOT")) {
+            log.fatal("Refusing to use context path of '/ROOT' to avoid "
+                    + "ambiguity with default context path");
+            throw new IllegalStateException(
+                    "Refusing to use context path of '/ROOT' to avoid "
+                    + "ambiguity with default context path");
+        }
+        deploymentName = generateDeploymentName();
+        log.info("Initializing configs for runtime deployment name '"
+                + deploymentName + "'");
         String dirProp = System.getProperty("webapps.rtconfig.dir");
         if (dirProp == null) {
             dirProp = System.getProperty("user.home");
             System.setProperty("webapps.rtconfig.dir", dirProp);
         }
-        File rtConfigDir = new File(dirProp, contextRoot);
+        File rtConfigDir = new File(dirProp, deploymentName);
         File metaFile = new File(rtConfigDir, "meta.properties");
         if ((!rtConfigDir.isDirectory()) || !metaFile.isFile()) try {
             installXmlStorage(rtConfigDir, metaFile);
@@ -150,35 +166,52 @@ public class ExtConfigListener implements ServletContextListener {
         try {
             metaProperties.load(new FileInputStream(metaFile));
         } catch (IOException ioe) {
+            log.fatal("Failed to read meta props file '"
+                    + metaFile.getAbsolutePath() + "'", ioe);
             throw new IllegalStateException("Failed to read meta props file '"
                     + metaFile.getAbsolutePath() + "'", ioe);
         }
         Properties expandProps = new Properties();
         expandProps.setProperty("rtconfig.dir", rtConfigDir.getAbsolutePath());
-        expandProps.setProperty("app.contextroot", contextRoot);
-        metaProperties.expand(expandProps); // Expand ${} properties
+        expandProps.setProperty("app.contextpath", contextPath);
+        expandProps.setProperty("deployment.name", deploymentName);
+        try {
+            metaProperties.expand(expandProps); // Expand ${} properties
+        } catch (Throwable t) {
+            log.fatal("Failed to expand properties in meta file '"
+                    + metaFile.getAbsolutePath() + "'", t);
+            throw new IllegalStateException(
+                    "Failed to expand properties in meta file '"
+                    + metaFile.getAbsolutePath() + "'", t);
+        }
         String requiredKeysString;
         requiredKeysString = sc.getInitParameter("required.metaprop.keys");
         if (requiredKeysString != null) {
             Set<String> requiredKeys = new HashSet<String>(
                     Arrays.asList(requiredKeysString.split("\\s*,\\s*", -1)));
             requiredKeys.removeAll(metaProperties.keySet());
-            if (requiredKeys.size() > 0)
+            if (requiredKeys.size() > 0) {
+                log.fatal("Meta properties file '"
+                        + metaFile.getAbsolutePath()
+                        + "' missing required property(s): " + requiredKeys);
                 throw new IllegalStateException(
                         "Meta properties file '"
                         + metaFile.getAbsolutePath()
                         + "' missing required property(s): " + requiredKeys);
+            }
         }
-        sc.setAttribute("app.contextroot", contextRoot);
+        sc.setAttribute("app.contextpath", contextPath);
+        sc.setAttribute("deployment.name", deploymentName);
         sc.setAttribute("rtconfig.dir", rtConfigDir);
         sc.setAttribute("meta.properties", metaProperties);
 
-        log.debug("'app.contextroot', 'rtconfig.dir', 'meta.properties' "
-                + "successfully published to app");
+        log.debug("'app.contextpath', 'rtconfig.dir', 'meta.properties' "
+                + "successfully published to app context for "
+                + deploymentName);
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
-        log.info("App '" + contextRoot + "' shutting down.\n"
+        log.info("App '" + deploymentName + "' shutting down.\n"
                 + "All Servlets and Filters have been destroyed");
     }
 
@@ -191,7 +224,7 @@ public class ExtConfigListener implements ServletContextListener {
             throws IOException {
         File dataDir = new File(baseDir, "data");
         if (dataDir.exists())
-            throw new IOException("Target data root dir already exists: "
+            throw new IOException("Target data path dir already exists: "
                     + dataDir.getAbsolutePath());
         if (!baseDir.isDirectory()) {
             File parentDir = baseDir.getParentFile();
@@ -268,5 +301,16 @@ public class ExtConfigListener implements ServletContextListener {
         } } finally {
             zipStream.close();
         }
+    }
+
+    static Pattern cpPattern = Pattern.compile("/(\\w+)$");
+
+    protected String generateDeploymentName() {
+        if (contextPath == null) return null;
+        if (contextPath.length() == 0) return "ROOT";
+        Matcher m = cpPattern.matcher(contextPath);
+        if (m.matches()) return m.group(1);
+        log.error("Malformatted context path '" + contextPath + "'");
+        return null;
     }
 }

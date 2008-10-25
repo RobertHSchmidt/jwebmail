@@ -13,7 +13,7 @@ Some bug is preventing an attribution on the Bibop login page from displaying.
 
 Non-critical XPath bug(s).  See errors in the application log.
 
-App has compiled-in context root.  The implications of this are:
+App has compiled-in context path.  The implications of this are:
     Needs to be recompiled just to run as the root (/) app in an app server.
     Can't have more than one deployment of JWebApp in a container.
 

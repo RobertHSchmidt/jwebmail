@@ -65,10 +65,11 @@ public class WebMailServlet extends WebMailServer implements Servlet {
          */
         ServletContext sc = config.getServletContext();
         log.debug("Init");
-        String contextRoot = (String) sc.getAttribute("app.contextroot");
+        String depName = (String) sc.getAttribute("deployment.name");
+        String contextPath = (String) sc.getAttribute("app.contextpath");
         File rtConfigDir = (File) sc.getAttribute("rtconfig.dir");
         Properties rtProps = (Properties) sc.getAttribute("meta.properties");
-        log.debug("RT configs retrieved");
+        log.debug("RT configs retrieved for application '" + depName + "'");
         srvlt_config=config;
         this.config=new Properties();
         Enumeration enumVar=config.getInitParameterNames();

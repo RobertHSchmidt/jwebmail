@@ -31,17 +31,26 @@ limitations under the License.
   <display-name>JWebMail - WWW access to your mail</display-name>
 
   <context-param>
-    <param-name>default.contextroot</param-name>
-    <param-value>jwebmail</param-value>
-    <!-- IMPORTANT:  If your runtime context-root differs from the value
-         above, you must set JNDI env param 'app.contextroot' to your
-         real context root for this deployment! -->
+    <param-name>default.contextpath</param-name>
+    <param-value>/jwebmail</param-value>
+    <!-- IMPORTANT:  If your runtime context-path differs from the value
+         above, you must set JNDI env param 'app.contextpath' to your
+         real context path for this deployment!  Set to empty str for
+         ROOT webapp.  -->
   </context-param>
   <context-param>
     <param-name>required.metaprop.keys</param-name>
     <param-value>webmail.data.path</param-value>
   </context-param>
 
+  <filter>
+    <filter-name>contextPathValidator</filter-name>
+    <filter-class>net.wastl.webmail.config.ContextPathValidator</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>contextPathValidator</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <listener>
     <listener-class>net.wastl.webmail.config.ExtConfigListener</listener-class>
   </listener>
