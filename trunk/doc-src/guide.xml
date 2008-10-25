@@ -44,7 +44,7 @@ limitations under the License.
           <ITEM>supports multiple languages, configurable for each user</ITEM>
           <ITEM>flexible template system to personalize look and feel and write new language files using XML and
             XSL</ITEM>
-          <ITEM>runs as Servlet in a Java servlet container</ITEM>
+          <ITEM>runs as a <EM>web application</EM> in a Java servlet container</ITEM>
           <ITEM>Improved session management keeps mail connections alive</ITEM>
           <ITEM>Improved speed compared to CGI scripts (about factor 5-10, depending on usage)</ITEM>
           <ITEM>Usage of JavaMail-API ensures compatibility to many mailstandards
@@ -85,18 +85,18 @@ limitations under the License.
             A mailserver for sending (SMTP) and receiving (IMAP) mails; by default,
             JWebMail will use "localhost" for both
           </ITEM> <ITEM>
-            A webapp-capable servlet container which runs on a Java 1.5 or greater
+            A webapp-capable Java servlet container which runs on a Java 1.5 or greater
             JVM (either JRE or JDK).  Anything from a stripped down servlet-container
-            Tomcat or Resin, to a J2EE application server like JBoss or
-            WebSphere will work.
+            like <A href="http://tomcat.apache.org/">Tomcat</A>,
+            to a J2EE application server like JBoss or WebSphere will work.
           </ITEM> <ITEM>
             Your servlet container needs modern versions of the following libraries
             installed:
             <LIST>
                <ITEM>
-                JavaMail API (typically mailapi-*.jar)
+                 JavaMail API (typically <CODE>mailapi-*.jar</CODE>)
               </ITEM> <ITEM>
-                JavaMail SMTP provider (typically smtp-*.jar)
+                JavaMail SMTP provider (typically <CODE>smtp-*.jar</CODE>)
               </ITEM> <ITEM>
                  JAF/Java Activation Framework (not necessary if your servlet
                  container runs Java 1.6, since Java 1.6 includes the activation
@@ -263,14 +263,14 @@ limitations under the License.
         </ITEM> <ITEM>
           Copy a recent version of the file
           <A HREF="http://pub.admc.com/lib-repos/log4j-1.2.15.jar">
-          log4j.jar</A> into the servlet classpath directory.
+          log4j.jar</A> into the servlet container classpath directory.
         </ITEM> <ITEM>
           Copy a recent version of the file
           <A HREF="http://pub.admc.com/lib-repos/admc-log4j-1.2_2.jar">
-          admc-log4j.jar</A> into the servlet classpath directory.
+          admc-log4j.jar</A> into the servlet container classpath directory.
         </ITEM> <ITEM>
           Copy the file <CODE>log4j.xml</CODE> from the samples directory
-          of your JWebMail distribution into the servlet classpath directory.
+          of your JWebMail distribution into the servlet container classpath directory.
         </ITEM> <ITEM>
           Set the Java System Property <CODE>logdir.common</CODE> for Tomcat.
           Our <CODE>log4j.xml</CODE> file uses this variable to set the
@@ -281,13 +281,13 @@ limitations under the License.
           If you use one of Tomcat's startup scripts directly on the
           command-line, then set the variable according to these samples.
           On Windows,
-          <CODE>
+          <P><CODE>
               CATALINA_OPTS="-Djava.awt.headless=true -Xms512m -Xmx1024m -XX:MaxPermSize=256m -Dlogdir.common=$HOME/logs"
-          </CODE>
+          </CODE></P>
           On Unix,
-          <CODE>
+          <P><CODE>
               set CATALINA_OPTS=-Djava.awt.headless=true -Xms512m -Xmx1024m -XX:MaxPermSize=256m -Dlogdir.common=c:/logs
-          </CODE>
+          </CODE></P>
           The samples shows unrelated settings which are often useful.
           See the Tomcat docs for details about them.
         </ITEM> <ITEM>
@@ -316,7 +316,8 @@ limitations under the License.
         initiated by classes common to more than one webapp.
         This isn't the place to discuss how to route such messages, but
         you generally don't have to worry about it if your app catches all
-        throwables, and you don't deploy the same app more than once,
+        throwables, and you have the same app deployed more than
+        once-at-a-time.
       </P>
     </SUBSECTION>
   </SECTION>
