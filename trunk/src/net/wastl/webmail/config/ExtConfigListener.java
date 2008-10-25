@@ -29,12 +29,18 @@ import java.util.Set;
 import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.InputStream;
 import java.io.IOException;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import net.wastl.webmail.misc.ExpandableProperties;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipEntry;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -114,13 +120,16 @@ public class ExtConfigListener implements ServletContextListener {
             System.setProperty("webapps.rtconfig.dir", dirProp);
         }
         File rtConfigDir = new File(dirProp, rtAppName);
-        if (!rtConfigDir.isDirectory())
-            throw new IllegalStateException("Runtime properties directory '"
-                    + rtConfigDir.getAbsolutePath() + "' not present");
         File metaFile = new File(rtConfigDir, "meta.properties");
-        if (!metaFile.isFile())
-            throw new IllegalStateException("Runtime meta properties file '"
-                    + metaFile.getAbsolutePath() + "' not present");
+        if ((!rtConfigDir.isDirectory()) || !metaFile.isFile()) try {
+            installXmlStorage(rtConfigDir, metaFile);
+            log.warn("New XML storage system successfully loaded.  "
+                    + "Metadata file '" + metaFile.getAbsolutePath() + "'");
+        } catch (IOException e) {
+            log.fatal("Failed to set up a new XML storage system", e);
+            throw new IllegalStateException(
+                    "Failed to set up a new XML storage system", e);
+        }
         ExpandableProperties metaProperties = new ExpandableProperties();
         try {
             metaProperties.load(new FileInputStream(metaFile));
@@ -155,5 +164,93 @@ public class ExtConfigListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         log.info("App '" + rtAppName + "' shutting down.\n"
                 + "All Servlets and Filters have been destroyed");
+    }
+
+    /**
+     * @param baseDir  Parent directory of metaFile
+     * @param metaFile Properties file to be created.  IT CAN NOT EXIST YET!
+     * @throws IOException if fail to create new XML Storage system
+     */
+    protected void installXmlStorage(File baseDir, File metaFile)
+            throws IOException {
+        File dataDir = new File(baseDir, "data");
+        if (dataDir.exists())
+            throw new IOException("Target data root dir already exists: "
+                    + dataDir.getAbsolutePath());
+        if (!baseDir.isDirectory()) {
+            File parentDir = baseDir.getParentFile();
+            if (!parentDir.canWrite())
+                throw new IOException("Cannot create base RT directory '"
+                        + baseDir.getAbsolutePath() + "'");
+            if (!baseDir.mkdir())
+                throw new IOException("Failed to create base RT directory '"
+                        + baseDir.getAbsolutePath() + "'");
+            log.debug("Created base RT dir '"
+                    + baseDir.getAbsolutePath() + "'");
+        }
+        if (!baseDir.canWrite())
+            throw new IOException(
+                    "Do not have privilegest to create meta file '"
+                    + metaFile.getAbsolutePath() + "'");
+        if (!dataDir.mkdir())
+            throw new IOException("Failed to create data directory '"
+                    + dataDir.getAbsolutePath() + "'");
+        log.debug("Created data dir '" + dataDir.getAbsolutePath() + "'");
+        // In my experience, you can't trust the return values of the
+        // File.mkdir() method.  But the file creations or extractions
+        // wild fail below in that case, so that's no problem.
+
+        // Could create a Properties object and save it, but why?
+        PrintWriter pw = new PrintWriter(new FileWriter(metaFile));
+        pw.println("webmail.data.path: ${rtconfig.dir}/data");
+        pw.flush();
+        pw.close();
+
+        InputStream zipFileStream = getClass().getResourceAsStream(
+                "/data.zip");
+        if (zipFileStream == null)
+            throw new IOException(
+                    "Zip file 'data.zip' missing from web application");
+        ZipEntry entry;
+        File newNode;
+        FileOutputStream fileStream;
+        long fileSize, bytesRead;
+        int i;
+        byte[] buffer = new byte[10240];
+        ZipInputStream zipStream = new ZipInputStream(zipFileStream);
+        try { while ((entry = zipStream.getNextEntry()) != null) {
+            newNode = new File(dataDir, entry.getName());
+            if (entry.isDirectory()) {
+                if (!newNode.mkdir())
+                    throw new IOException("Failed to extract dir '"
+                            + entry.getName() + "' from 'data.zip' file");
+                log.debug("Extracted dir '" + entry.getName() + "' to '"
+                        + newNode.getAbsolutePath() + "'");
+                zipStream.closeEntry();
+                continue;
+            }
+            fileSize = entry.getSize();
+            fileStream = new FileOutputStream(newNode);
+            try {
+                bytesRead = 0;
+                while ((i = zipStream.read(buffer)) > 0) {
+                    fileStream.write(buffer, 0, i);
+                    bytesRead += i;
+                }
+                fileStream.flush();
+            } finally {
+                fileStream.close();
+            }
+            zipStream.closeEntry();
+            if (bytesRead != fileSize)
+                throw new IOException("Expected " + fileSize
+                        + " bytes for '" + entry.getName()
+                        + ", but extracted " + bytesRead
+                        + " bytes to '" + newNode.getAbsolutePath() + "'");
+            log.debug("Extracted file '" + entry.getName() + "' to '"
+                    + newNode.getAbsolutePath() + "'");
+        } } finally {
+            zipStream.close();
+        }
     }
 }

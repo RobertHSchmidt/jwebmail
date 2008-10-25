@@ -1,6 +1,17 @@
 # $Id$
 # changed/fixed, + added, - removed
 
+v1.0.1b rev. 54
+# Docs much better.  User's Guide renamed from README.html to
+  jwebmail-guide.html.
+# Much more cleanup of code formatting, comments, whitespace.
+# Updated many license references.
+# Completely refactored logging.
+# The XML Data Store is now store entirely outside of application, by
+  default and automatically.
+# Completely refactored third-party library usage.
+# Updated to newest version of every 3rd-party library we're using.
+
 v1.0.1a rev. 29
 # Now (at very least) builds with Sun JDK 1.4/1.5/1.6, and runs on
   Tomcat with JDK 1.6.

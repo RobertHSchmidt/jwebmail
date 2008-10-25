@@ -3,19 +3,31 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Copy default data to webmail.data.dir upon startup, if it is present but empty.
-
 EGAD FIXME:  This webapp kills the entire servlet container when you
 try to stop the webapp from running.  Worse than that, it doesn't
 even shut down the container cleanly but leaves it stuck so you have
-to kill it violently.
+to kill it violently.  The *Shutdown* method(s) is probably a good
+place to start looking.
 
 Fix bug in the TEA and Helper encryption/decryption routines.  Binary
 characters are getting added to some Strings.  This makes valid passwords
 fail in some cases (probably directly depends on characters in the real
 password).
 
+Fix IMAPS protocol.  Does not list in the authentication pulldown.
+It retrieves mail using imap when I select imaps for the mail (IIRC,
+this is due to somehow getting "imap://" as the protocol header for
+imaps, instead of "imaps://").
+
+Add an IMAPs config setting for alternate mail folder base directory.
+
 Resolve NPE being thrown constantly from XMLData.getNodeXPath().
+
+Somewhere in the callback thread, log the target document of XPath failures.
+
+Make release build targets.
+
+Roll an RC.  1.0.1rc1.
 
 Stop loading resources directly from the application through the FS.
 Load delivered resources through classpath.  Can load generated data from FS,
@@ -31,8 +43,6 @@ can distribute a portable .war file that will run on any popular app server.
 IMPORTANT:  DO NOT FORGET
 If do not hear back from Kevin Excellent Lee, then revert the org.bulbul
 classes back to GPL.  (Already have perm from Kowatch for webengruven).
-
-Somewhere in the callback thread, log the target document of XPath failures.
 
 Fix level-ambiguity in XML processing code.
 FIRST verify my assertion that tree.getElementsBy*() searches for all
