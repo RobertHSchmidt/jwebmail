@@ -3,6 +3,10 @@ $Id$
 Ordered short-term TODO list
 ============================
 
+Fix up webapp assembly targets to just write the data.zip file and
+not the data directory... for both exploded and .war format...
+forgot about this.
+
 EGAD FIXME:  This webapp kills the entire servlet container when you
 try to stop the webapp from running.  Worse than that, it doesn't
 even shut down the container cleanly but leaves it stuck so you have
