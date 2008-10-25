@@ -21,7 +21,7 @@ limitations under the License.
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" indent="yes"/>
 
-  <xsl:template match="README">
+  <xsl:template match="GUIDE">
 
     <HTML>
       <HEAD>
@@ -29,7 +29,7 @@ limitations under the License.
         <META CONTENT="AUTHOR" VALUE="{AUTHOR}"/>
       </HEAD>
       <BODY BGCOLOR="#ffffff">
-        <CENTER><H1>README for <xsl:value-of select="TITLE"/></H1></CENTER>
+        <CENTER><H1>User's Guide for <xsl:value-of select="TITLE"/></H1></CENTER>
         <xsl:apply-templates select="SECTION"/>
       </BODY>
     </HTML>

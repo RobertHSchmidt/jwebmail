@@ -1,4 +1,4 @@
-<!-- DTD for WebMail README -->
+<!-- DTD for JWebMail Users's Guide -->
 
 <!--
 $Id$
@@ -18,7 +18,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<!ELEMENT README (TITLE,AUTHOR,SECTION+)>
+<!ELEMENT GUIDE (TITLE,AUTHOR,SECTION+)>
 <!ELEMENT TITLE (#PCDATA)>
 <!ELEMENT AUTHOR (#PCDATA)>
 <!ELEMENT SECTION (SUBSECTION|P|CONTENTS)*>
