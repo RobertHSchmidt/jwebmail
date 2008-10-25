@@ -1,6 +1,6 @@
 <ivy-module version="2.0">
   <!-- $Id$ -->
-  <info organisation="admc" module="jwebapp"/>
+  <info organisation="admc" module="jwebmail"/>
 
   <configurations>
     <conf name="baseconf" visibility="private"

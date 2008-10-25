@@ -31,7 +31,7 @@ limitations under the License.
   <target name="-init">
     <tstamp/>
     <property name="Name" value="JWebMail"/>
-    <property name="version" value="1.0.1b"/>
+    <property name="version" value="1.0.1c"/>
     <property name="year" value="2008"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
@@ -361,7 +361,7 @@ limitations under the License.
     <echo message="Deleting contents of lib ..."/>
     <delete dir="lib" includeEmptyDirs="true"/>
     <delete file="data/webmail.xml"/>
-    <delete file="doc/jwebapp-guide.html"/>
+    <delete file="doc/jwebmail-guide.html"/>
   </target>
 
   <target name="clean-tomcat-app" depends="clean"
@@ -374,10 +374,10 @@ limitations under the License.
   <!-- Windows users will have to install Cygwin, or run another XSLT
        processor -->
   <target name="gen-guide"
-          description="Generate the 'doc/jwebapp-guide.html' file">
+          description="Generate the 'doc/jwebmail-guide.html' file">
     <exec executable="xsltproc" failonerror="true">
       <arg value="-o"/>
-      <arg value="doc/jwebapp-guide.html"/>
+      <arg value="doc/jwebmail-guide.html"/>
       <arg file="doc-src/guide.xsl"/>
       <arg file="doc-src/guide.xml"/>
     </exec>

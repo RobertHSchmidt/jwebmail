@@ -3,6 +3,10 @@ $Id$
 Ordered short-term TODO list
 ============================
 
+Update docs to  stop referring to the installation as "A Servlet".
+Our distributable is a "web application" which includes a web.xml file
+and a web context listener.  It is not just one or more servlets.
+
 Consider changing appName/app.name to context.root or similar, since
 this must match the context root.
 Must handle CR not matching directory, like for ROOT or specified
@@ -40,9 +44,15 @@ Resolve NPE being thrown constantly from XMLData.getNodeXPath().
 
 Somewhere in the callback thread, log the target document of XPath failures.
 
+Take care of all easy compiler warnings.  All except third-party if time
+permits.
+
+If time permits, turn on lotsa compilation checks with Eclipse and take
+care of the warnings.
+
 Make release build targets.
 
-Roll an RC.  1.0.1rc1.
+Roll an RC.  1.0.1rc1.  (Consider waiting on following super-item).
 
 Stop loading resources directly from the application through the FS.
 Load delivered resources through classpath.
@@ -55,6 +65,10 @@ Load delivered resources through classpath.
 
     Get rid of the Ant filtering and use the app.name/context.root from
     the listener.
+
+    Verify that after this work, can deploy JWebApp with root context root.
+
+Use container-managed mail providers retrieved through JNDI.
 
 IMPORTANT:  DO NOT FORGET
 If do not hear back from Kevin Excellent Lee, then revert the org.bulbul

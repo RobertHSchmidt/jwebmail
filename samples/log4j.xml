@@ -14,6 +14,10 @@
      If you put both the log4j jar file and referenced classes into a
      servlet classloader directory (as suggested in the User's Guide),
      eveything should work great.  - blaine
+
+     Log4j files can use Java System Property references in attribute
+     values like ${this}.  Make sure that the referenced properties
+     are set.
 -->
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">

@@ -158,8 +158,6 @@ limitations under the License.
             Please don't forget to visit the administration interface first. You can access
             it by calling http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
             is "Secret".
-          </P> <P>
-            See the document "jwebapp-guide.html" in your distribution.
           </P>
         </ITEM>
         <ITEM>Build and install from source
@@ -188,11 +186,8 @@ limitations under the License.
                 Deploy the file at build/webapp/jwebpp.jar to your servlet container, as
                 explained in the previous section.
                 Alternatively, you can deploy the exploded web app located at
-                build/webapp/jwebapp.  Since you are building software, we figure you
+                build/webapp/jwebmail.  Since you are building software, we figure you
                 are handy enough to figure this out without further instruction from us.
-              </ITEM> <ITEM>
-                Run "ant gen-guide" to build the jwebapp-guide.html file referred to in
-                the previous section (it gets written to the "doc" subdirectory).
               </ITEM>
             </NLIST>
           </P> <P>
@@ -204,7 +199,7 @@ limitations under the License.
             this directory with name "local.properties".
           </P> <P>
             The "gen-guide" task requires the program "xsltproc".
-            If you don't have "xsltproc", you can generate the gen-guide.html file manually
+            If you don't have "xsltproc", you can generate the jwebmail-guide.html file manually
             with your favorite XSLT processor tool and the guide.* artifacts in the
             doc-src directory.
           </P> <P>
@@ -228,7 +223,7 @@ limitations under the License.
       </P> <P>
         Webapp bundles just Apache Commons Logging.
         Commons Logging provides the front end for logging, where the
-        JWebApp application sends log messages.
+        JWebMail application sends log messages.
         Your servlet container will connect these generated messages to
         a logging "back end" to write log files, database records, or
         emails from them.
@@ -277,6 +272,25 @@ limitations under the License.
           Copy the file <CODE>log4j.xml</CODE> from the samples directory
           of your JWebMail distribution into the servlet classpath directory.
         </ITEM> <ITEM>
+          Set the Java System Property <CODE>logdir.common</CODE> for Tomcat.
+          Our <CODE>log4j.xml</CODE> file uses this variable to set the
+          destination directory for log files independently of where Tomcat
+          is started from.  The best way to set Java System Properties for
+          Tomcat is by setting the environmental variable CATALINA_OPTS.
+          Where to set this variable depends on how you start Tomcat.
+          If you use one of Tomcat's startup scripts directly on the
+          command-line, then set the variable according to these samples.
+          On Windows,
+          <CODE>
+              CATALINA_OPTS="-Djava.awt.headless=true -Xms512m -Xmx1024m -XX:MaxPermSize=256m -Dlogdir.common=$HOME/logs"
+          </CODE>
+          On Unix,
+          <CODE>
+              set CATALINA_OPTS=-Djava.awt.headless=true -Xms512m -Xmx1024m -XX:MaxPermSize=256m -Dlogdir.common=c:/logs
+          </CODE>
+          The samples shows unrelated settings which are often useful.
+          See the Tomcat docs for details about them.
+        </ITEM> <ITEM>
           Restart Tomcat.
         </ITEM>
       </LIST>
@@ -298,12 +312,11 @@ limitations under the License.
         the container.
         You can use package names to route messages to application-specific
         destinations (files, emails, etc.).
-        The only tricky part of this setup is associating log messages
-        initiated by third-party-products with a specific web app.
-        This issue has minimal impact for apps which catch and handle all
-        throwables, like they should.
-        Transport and persistence layer problems can be troubleshot by
-        logging using thread IDs.
+        The only tricky part of container-managed logs is routing messages
+        initiated by classes common to more than one webapp.
+        This isn't the place to discuss how to route such messages, but
+        you generally don't have to worry about it if your app catches all
+        throwables, and you don't deploy the same app more than once,
       </P>
     </SUBSECTION>
   </SECTION>
