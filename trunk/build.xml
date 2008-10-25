@@ -361,7 +361,7 @@ limitations under the License.
     <echo message="Deleting contents of lib ..."/>
     <delete dir="lib" includeEmptyDirs="true"/>
     <delete file="data/webmail.xml"/>
-    <delete file="README.html"/>
+    <delete file="doc/jwebapp-guide.html"/>
   </target>
 
   <target name="clean-tomcat-app" depends="clean"
@@ -373,8 +373,8 @@ limitations under the License.
 
   <!-- Windows users will have to install Cygwin, or run another XSLT
        processor -->
-  <target name="generate-readme"
-          description="Generate the 'README.html' file">
+  <target name="gen-guide"
+          description="Generate the 'doc/jwebapp-guide.html' file">
     <exec executable="xsltproc" failonerror="true">
       <arg value="-o"/>
       <arg value="doc/jwebapp-guide.html"/>

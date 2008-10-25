@@ -18,9 +18,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<!DOCTYPE README SYSTEM "README.dtd">
+<!DOCTYPE GUIDE SYSTEM "guide.dtd">
 
-<README>
+<GUIDE>
   <TITLE>JWebMail v1.0.1*</TITLE>
   <AUTHOR>Sebastian Schaffert, schaffer@informatik.uni-muenchen.de</AUTHOR>
   <SECTION name="Contents" id="contents"><CONTENTS/></SECTION>
@@ -673,4 +673,4 @@ limitations under the License.
       <STRONG>Sebastian Schaffert, schaffer@informatik.uni-muenchen.de</STRONG>
     </P>
   </SECTION>
-</README>
+</GUIDE>
