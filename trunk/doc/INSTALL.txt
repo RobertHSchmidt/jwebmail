@@ -69,7 +69,7 @@ Please don't forget to visit the administration interface first. You can access
 it by calling http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
 is "Secret".
 
-See the document "jwebapp-guide.html" in your distribution.
+See the document "jwebmail-guide.html" in your distribution.
 
 
 2. Build and install from source
@@ -94,9 +94,9 @@ The following steps are required (for a quick-start):
 5. Deploy the file at build/webapp/jwebpp.jar to your servlet container, as
    explained in the previous section.
    Alternatively, you can deploy the exploded web app located at
-   build/webapp/jwebapp.  Since you are building software, we figure you
+   build/webapp/jwebmail.  Since you are building software, we figure you
    are handy enough to figure this out without further instruction from us.
-6. Run "ant gen-guide" to build the jwebapp-guide.html file referred to in
+6. Run "ant gen-guide" to build the jwebmail-guide.html file referred to in
    the previous section (it gets written to the "doc" subdirectory).
 
 IDE developers just need to configure their Ant invoker to include
@@ -107,7 +107,7 @@ To customize any Ant properties, create a standard Java properties file in
 this directory with name "local.properties".
 
 The "gen-guide" task requires the program "xsltproc".
-If you don't have "xsltproc", you can generate the gen-guide.html file manually
+If you don't have "xsltproc", you can generate the jwebmail-guide.html file manually
 with your favorite XSLT processor tool and the guide.* artifacts in the
 doc-src directory.
 

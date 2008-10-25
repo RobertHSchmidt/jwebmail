@@ -3,6 +3,29 @@ $Id$
 This is a list of known bugs in WebMail. Some of them are bugs that I cannot
 fix, because they are not directly in the WebMail code but in some third party
 library or program:
+==============================================================================
+
+After JWebApp runs, you can't stop or undeploy the app without hanging the
+container.
+
+Some bug is preventing an attribution on the Bibop login page from displaying.
+(Just read the text on the Bibop login page).
+
+Non-critical XPath bug(s).  See errors in the application log.
+
+App has compiled-in context root.  The implications of this are:
+    Needs to be recompiled just to run as the root (/) app in an app server.
+    Can't have more than one deployment of JWebApp in a container.
+
+App writes to the deployment directory.  The implications of this are:
+    Will not run in app servers where app does not run directly from
+     an exploded webapp directory tree.
+    If user doesn't change the webmail.data.dir setting, all settings
+     and data will be lost upon upgrade or redeployment.
+
+Imaps protocol is broken.
+
+Some passwords to not work.  The Helper and TEA encrypters have a bug.
 
 Title:
   WU-IMAP server doesn't show recent messages in the message list
