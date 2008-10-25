@@ -144,10 +144,30 @@ limitations under the License.
           Restart Tomcat.
         </ITEM>
       </LIST>
-      If you prefer working with .properties files instead of .xml files,
-      you can make a <CODE>log4j.properties</CODE> file instead.
-      See the Log4j documentation about how to set up email alerts
-      with the SMTP appender, how to log to a database, etc.
+        If you prefer working with .properties files instead of .xml files,
+        you can make a <CODE>log4j.properties</CODE> file instead.
+        See the Log4j documentation about how to set up email alerts
+        with the SMTP appender, how to log to a database, etc.
+      </P> <P>
+        Be aware that the file (<CODE>log4j.xml</CODE> or
+        <CODE>log4j.properties</CODE>) will control all messages which
+        reach Log4j in the container space.
+        If you have three other web apps deployed to this container without
+        log4j jar files bundled, their log messages will also be filtered
+        by this file.
+      </P> <P>
+        Regardless of the container and logging product, if you manage
+        logging at the container level without a Gui, the server classpath
+        file will be the central point of application log management for
+        the container.
+        You can use package names to route messages to application-specific
+        destinations (files, emails, etc.).
+        The only tricky part of this setup is associating log messages
+        initiated by third-party-products with a specific web app.
+        This issue has minimal impact for apps which catch and handle all
+        throwables, like they should.
+        Transport and persistence layer problems can be troubleshot by
+        logging using thread IDs.
       </P>
     </SUBSECTION>
   </SECTION>
