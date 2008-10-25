@@ -19,6 +19,7 @@ limitations under the License.
 -->
 
   <property file="local.properties"/> <!-- NON-SHARED build properties -->
+  <regexp id="jvmver.regexp.refid" pattern="^1\.[5-9]"/>
 
   <!-- Default build settings.  Override in your own 'local.properties' file.-->
   <property name="repos.url" value="http://pub.admc.com/lib-repos"/>
@@ -68,11 +69,11 @@ limitations under the License.
 
     <!-- copy src files -->
     <copy todir="build/src" filtering="true">
-        <fileset dir="src">
-           <include name="net/**" />
-           <include name="org/**" />
-           <include name="META-INF/**" />
-        </fileset>
+      <fileset dir="src">
+        <include name="net/**" />
+        <include name="org/**" />
+        <include name="META-INF/**" />
+      </fileset>
     </copy>
   </target>
 
@@ -151,59 +152,58 @@ limitations under the License.
          If so, remove the leading hyphen from the target name. -->
     <echo message="Installing webmail.xml ..."/>
     <copy todir="data" flatten="yes">
-        <fileset dir="src">
-           <include name="**/webmail.xml" />
-        </fileset>
+      <fileset dir="src">
+        <include name="**/webmail.xml" />
+      </fileset>
     </copy>
     <echo message="Installing XML DTDs ..."/>
     <copy todir="lib/xml" flatten="yes">
-        <fileset dir="src">
-           <include name="**/data/xml/*.dtd" />
-           <include name="**/data/xml/mysql_statements.xml" />
-           <include name="**/data/xml/userdata.xml" />
-           <include name="**/data/xml/usermodel_template.xml" />
-           <include name="**/data/xml/generic_template.xml" />
-        </fileset>
+      <fileset dir="src">
+        <include name="**/data/xml/*.dtd" />
+        <include name="**/data/xml/mysql_statements.xml" />
+        <include name="**/data/xml/userdata.xml" />
+        <include name="**/data/xml/usermodel_template.xml" />
+        <include name="**/data/xml/generic_template.xml" />
+      </fileset>
     </copy>
     <echo message="Installing resource.dtd and resources.xml ..."/>
     <copy todir="lib/templates" flatten="yes">
-        <fileset dir="src">
-           <include name="**/data/xml/resource*" />
-        </fileset>
+      <fileset dir="src">
+        <include name="**/data/xml/resource*" />
+      </fileset>
     </copy>
 
     <!-- English -->
     <echo message="Installing English Language Templates ..."/>
     <copy todir="lib/templates/en" filtering="true">
-        <fileset dir="src">
-           <include name="**/data/xml/en/**" />
-           <exclude name="**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/en/**" />
+        <exclude name="**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
     </copy>
     <copy todir="lib/templates/en" filtering="false">
-        <fileset dir="src">
-           <include name="**/data/xml/en/**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/en/**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
     </copy>
 
     <!-- Spanish -->
     <echo message="Installing Spanish Language Templates ..."/>
     <copy todir="lib/templates/es" filtering="true">
-        <fileset dir="src">
-           <include name="**/data/xml/es/**" />
-           <exclude name="**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/es/**" />
+        <exclude name="**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
     </copy>
     <copy todir="lib/templates/es" filtering="false">
-        <fileset dir="src">
-           <include name="**/data/xml/es/**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/es/**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
     </copy>
-
 
     <!--
     <echo message="Installing Portugese Language Templates ..."/>
@@ -218,67 +218,66 @@ limitations under the License.
     <!-- German -->
     <echo message="Installing German Language Templates ..."/>
     <copy todir="lib/templates/de" filtering="true">
-        <fileset dir="src">
-           <include name="**/data/xml/de/**" />
-           <exclude name="**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/de/**" />
+        <exclude name="**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
     </copy>
     <copy todir="lib/templates/de" filtering="false">
-        <fileset dir="src">
-           <include name="**/data/xml/de/**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/de/**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
     </copy>
 
     <!-- French -->
     <echo message="Installing French Language Templates ..."/>
     <copy todir="lib/templates/fr" filtering="true">
-        <fileset dir="src">
-           <include name="**/data/xml/fr/**" />
-           <exclude name="**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/fr/**" />
+        <exclude name="**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
     </copy>
     <copy todir="lib/templates/fr" filtering="false">
-        <fileset dir="src">
-           <include name="**/data/xml/fr/**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/fr/**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
     </copy>
 
     <!-- Hungarian -->
     <echo message="Installing Hungarian Language Templates ..."/>
     <copy todir="lib/templates/hu" filtering="true">
-        <fileset dir="src">
-           <include name="**/data/xml/hu/**" />
-           <exclude name="**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/hu/**" />
+        <exclude name="**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
     </copy>
     <copy todir="lib/templates/hu" filtering="false">
-        <fileset dir="src">
-           <include name="**/data/xml/hu/**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/hu/**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
     </copy>
 
     <!-- Chinese (Taiwan) -->
     <echo message="Installing Chinese Language Templates ..."/>
     <copy todir="lib/templates/zh" filtering="true">
-        <fileset dir="src">
-           <include name="**/data/xml/zh/**" />
-           <exclude name="**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/zh/**" />
+        <exclude name="**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
     </copy>
     <copy todir="lib/templates/zh" filtering="false">
-        <fileset dir="src">
-           <include name="**/data/xml/zh/**/images/**" />
-        </fileset>
-        <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
+      <fileset dir="src">
+        <include name="**/data/xml/zh/**/images/**" />
+      </fileset>
+      <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
     </copy>
-
   </target>
 
   <!-- =================================================================== -->
@@ -292,10 +291,10 @@ limitations under the License.
     <mkdir dir="${webapp.home}/${ant.project.name}"/>
     <mkdir dir="${webapp.home}/${ant.project.name}/WEB-INF"/>
     <copy todir="${webapp.home}/${ant.project.name}/lib">
-        <fileset dir="lib" excludes="**/*.jar" />
+      <fileset dir="lib" excludes="**/*.jar" />
     </copy>
     <copy todir="${webapp.home}/${ant.project.name}/data">
-        <fileset dir="data"/>
+      <fileset dir="data"/>
     </copy>
     <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes" flatten="yes">
       <fileset dir="build/classes">
@@ -328,7 +327,7 @@ limitations under the License.
          webxml="${webapp.home}/${ant.project.name}/WEB-INF/web.xml"
          basedir="${webapp.home}/${ant.project.name}">
       <metainf file="${contextxml.path}"/>
-     </war>
+    </war>
     <!-- Copy images -->
   </target>
 
@@ -365,10 +364,10 @@ limitations under the License.
   </target>
 
   <target name="clean-tomcat-app" depends="clean"
-    description="Clean, plus wipe (possibly live) deployment dir">
+          description="Clean, plus wipe (possibly live) deployment dir">
     <fail unless="webapp.home"
     message="Property 'webapp.home' is required by target 'clean-tomcat-app'"/>
-  <deltree dir="${webapp.home}/${ant.project.name}"/>
+    <deltree dir="${webapp.home}/${ant.project.name}"/>
   </target>
 
   <!-- Windows users will have to install Cygwin, or run another XSLT
@@ -412,12 +411,12 @@ a 'local.properties' file.</echo>
   </target>
 
   <target name="-check-jvm-version">
-   <condition property="_jvm.ok">
-     <matches string="${ant.java.version}">
-       <regexp refid="jvmver.regexp.refid"/>
-     </matches>
-   </condition>
-   <fail unless="_jvm.ok" message="JWebMail requires JVM version 1.5 or later"/>
+    <condition property="_jvm.ok">
+      <matches string="${ant.java.version}">
+        <regexp refid="jvmver.regexp.refid"/>
+      </matches>
+    </condition>
+    <fail unless="_jvm.ok"
+          message="JWebMail requires JVM version 1.5 or later"/>
   </target>
-  <regexp id="jvmver.regexp.refid" pattern="^1\.[5-9]"/>
 </project>
