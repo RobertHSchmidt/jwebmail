@@ -177,7 +177,7 @@ limitations under the License.
                 build process can download the needed third party libraries
                 (automatically).
               </ITEM> <ITEM>
-                Run 'ant webapp' to build an exploded webapp and a war file in
+                Just run 'ant' to build an exploded webapp and a war file in
                 subdirectory "build/webapp".
                 If you don't have an Ivy jar file in your CLASSPATH, the Ant command
                 above will display the simple command that you can copy-and-paste to your

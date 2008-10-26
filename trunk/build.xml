@@ -1,5 +1,4 @@
-<project name="jwebmail" default="compile"
-         xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="jwebmail" default="webapp" xmlns:ivy="antlib:org.apache.ivy.ant">
 <!--
 $Id$
 
