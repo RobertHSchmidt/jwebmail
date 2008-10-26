@@ -112,6 +112,7 @@ public class ExtConfigListener implements ServletContextListener {
     protected String contextPath = null;
     /** Derived from contextPath. */
     protected String deploymentName = null;
+    protected File lockFile = null;
 
     public void contextInitialized(ServletContextEvent sce) {
         Helper.logThreads("Top of ExtCongigListener.contextInitialized()");
@@ -155,6 +156,25 @@ public class ExtConfigListener implements ServletContextListener {
         }
         File rtConfigDir = new File(dirProp, deploymentName);
         File metaFile = new File(rtConfigDir, "meta.properties");
+        lockFile = new File(rtConfigDir, "lock.txt");
+        if (lockFile.exists()) {
+            log.fatal("Presence of lock file '" + lockFile.getAbsolutePath()
+                    + "' indicates the instance is already running");
+            lockFile = null;
+            throw new IllegalStateException( "Presence of lock file "
+                    + "indicates the instance is already running");
+        }
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter(lockFile));
+            pw.println(deploymentName + " started at " + new java.util.Date());
+            pw.flush();
+            pw.close();
+        } catch (IOException ioe) {
+            log.fatal("Failed to write lock file '"
+                    + lockFile.getAbsolutePath() + "'", ioe);
+            throw new IllegalStateException("Failed to write lock file '"
+                    + lockFile.getAbsolutePath() + "'", ioe);
+        }
         if ((!rtConfigDir.isDirectory()) || !metaFile.isFile()) try {
             installXmlStorage(rtConfigDir, metaFile);
             log.warn("New XML storage system successfully loaded.  "
@@ -215,6 +235,15 @@ public class ExtConfigListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         log.info("App '" + deploymentName + "' shutting down.\n"
                 + "All Servlets and Filters have been destroyed");
+        if (lockFile != null) {
+            if (lockFile.delete())
+            // In my experience, this return status is unreliable.
+                log.info("Lock file '" + lockFile.getAbsolutePath()
+                        + "' removed");
+            else
+                log.error("Failed to remove lock file '"
+                        + lockFile.getAbsolutePath() + "' removed");
+        }
     }
 
     /**
