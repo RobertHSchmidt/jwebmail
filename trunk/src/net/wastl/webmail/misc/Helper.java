@@ -24,6 +24,8 @@ import java.net.*;
 import java.math.*;
 import java.util.*;
 import net.wastl.webmail.server.http.HTTPRequestHeader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Miscellaneous helper routines.
@@ -33,10 +35,8 @@ import net.wastl.webmail.server.http.HTTPRequestHeader;
  * @author Sebastian Schaffert
  */
 public class Helper  {
-    public Helper() {
-    }
-
-
+    private static Log log = LogFactory.getLog(Helper.class);
+    private static Log threadDumperLog = LogFactory.getLog("THREAD.DUMPER");
 
    private static final int ITERATIONS = 16;
 
@@ -813,5 +813,22 @@ public class Helper  {
                     }
                 };
         }
+    }
+
+    static public void logThreads(String label) {
+        ThreadGroup tG = Thread.currentThread().getThreadGroup();
+        // These pointers are cheap.
+        // Since these counts probably don't count nested items, we have
+        // to allocate liberally.
+        Thread[] threads = new Thread[tG.activeCount() * 10];
+        ThreadGroup[] threadGroups = new ThreadGroup[tG.activeGroupCount() * 10];
+        int tCount = tG.enumerate(threads, true);
+        int tgCount = tG.enumerate(threadGroups, true);
+        threadDumperLog.debug(label + ".  Recursive counts.  ThreadGroups: "
+                + tgCount + ", Threads: " + tCount);
+        for (int i = 0; i < tCount; i++)
+            threadDumperLog.debug(threads[i].toString());
+        for (int i = 0; i < tgCount; i++)
+            threadDumperLog.debug(threadGroups[i].toString());
     }
 }

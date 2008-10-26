@@ -77,7 +77,6 @@ public abstract class WebMailServer  {
     protected void doInit() throws UnavailableException, WebMailException {
         server=this;
         log.info("WebMail/Java Server v"+VERSION+" going up...");
-        log.info("=========================================");
         log.info("Initalizing...");
 
         new SystemCheck(this);
@@ -113,8 +112,6 @@ public abstract class WebMailServer  {
                            ") and Configuration ... ");
 
         initStorage();
-        log.info("=============================== cut ===============================");
-        // "cut"???
         log.info("Storage initialized.");
 
         timer=new ConnectionTimer();
@@ -136,8 +133,6 @@ public abstract class WebMailServer  {
 
         storage.initConfigKeys();
 
-        log.info("=============================== cut ===============================");
-        // "cut"???
         log.info("WebMail/Java Server "+VERSION+" initialization completed.");
         log.info("Initalization complete.");
         start_time=System.currentTimeMillis();
@@ -341,8 +336,7 @@ public abstract class WebMailServer  {
         return storage.getConfig(key);
     }
 
-    public void restart()
-        throws UnavailableException {
+    public void restart() throws UnavailableException {
         log.info("Initiating shutdown for child processes:");
         Enumeration e=sessions.keys();
         log.info("Removing active WebMail sessions ... ");
@@ -367,6 +361,8 @@ public abstract class WebMailServer  {
     }
 
     public void shutdown() {
+        /* This method gets invoked upon webap "stop" and "undeploy",
+         * only after the WebMail servlet runs. */
         log.info("Initiating shutdown for child processes:");
         Enumeration e=sessions.keys();
         log.info("Removing active WebMail sessions ... ");
@@ -378,8 +374,9 @@ public abstract class WebMailServer  {
         shutdownServers();
         log.info("Shutdown completed successfully. Terminating.");
         storage.shutdown();
-        log.info("Shutdown complete! Will return to console now.");
-        System.exit(0);
+        log.info("Shutdown complete!  JWebApp threads should all be stopped.");
+        Helper.logThreads("Bottom of WebMailServer.shutdown()");
+        //Used to System.exit() here!
     }
 
     public long getUptime() {

@@ -6,12 +6,6 @@ Ordered short-term TODO list
 Write a lock-file or somehow prevent two instances from using the
 date store at the same time.
 
-EGAD FIXME:  This webapp kills the entire servlet container when you
-try to stop the webapp from running.  Worse than that, it doesn't
-even shut down the container cleanly but leaves it stuck so you have
-to kill it violently.  The *Shutdown* method(s) is probably a good
-place to start looking.
-
 Fix bug in the TEA and Helper encryption/decryption routines.  Binary
 characters are getting added to some Strings.  This makes valid passwords
 fail in some cases (probably directly depends on characters in the real
@@ -27,6 +21,12 @@ Add an IMAPs config setting for alternate mail folder base directory.
 Resolve NPE being thrown constantly from XMLData.getNodeXPath().
 
 Somewhere in the callback thread, log the target document of XPath failures.
+
+Fix bug preventing an attribution on the Bibop login page from displaying.
+Says "BiBop WebMail is base on"... and nothing.
+
+Code up a stopper for the ConnectionTimer thread which continues running
+after app shutdown.
 
 Take care of all easy compiler warnings.  All except third-party if time
 permits.

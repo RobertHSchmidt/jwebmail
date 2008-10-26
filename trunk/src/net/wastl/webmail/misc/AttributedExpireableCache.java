@@ -34,11 +34,13 @@ public class AttributedExpireableCache extends ExpireableCache {
 
     public AttributedExpireableCache(int capacity, float expire_factor) {
         super(capacity,expire_factor);
+        setName("AttributedExpireableCache");
         attributes=new Hashtable(capacity);
     }
 
     public AttributedExpireableCache(int capacity) {
         super(capacity);
+        setName("AttributedExpireableCache");
         attributes=new Hashtable(capacity);
     }
 

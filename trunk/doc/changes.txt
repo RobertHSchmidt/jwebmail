@@ -1,6 +1,12 @@
 # $Id$
 # changed/fixed, + added, - removed
 
+v1.0.1b rev. 67
+# Fixed terrible bug where Webapp should not be stopped without hanging
+  the servlet container.  Removed all System.exit()s from code which
+  can be run by Servlet Container.
+# Added thread tracking and logging infrastructure.
+
 v1.0.1b rev. 54
 # Docs much better.  User's Guide renamed from README.html to
   jwebmail-guide.html.

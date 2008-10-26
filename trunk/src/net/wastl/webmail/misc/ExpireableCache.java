@@ -20,6 +20,8 @@
 package net.wastl.webmail.misc;
 
 import java.util.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * This class represents a cache that automatically expires objects when a certain fillness
@@ -28,6 +30,8 @@ import java.util.*;
  * @author Sebastian Schaffert
  */
 public class ExpireableCache extends Thread {
+    private static Log threadLog = LogFactory.getLog("THREAD.ExpireableCache");
+
     protected Hashtable cache;
     protected MyHeap timestamps;
 
@@ -123,12 +127,13 @@ public class ExpireableCache extends Thread {
     }
 
     public void run() {
-        while(!shutdown) {
+        threadLog.info("Starting " + getName());
+        try { while(!shutdown) {
             try {
                 wait(10000);
             } catch(InterruptedException e) {}
             expireOver();
-        }
+        } } finally { threadLog.info("Exiting " + getName()); }
     }
 
     /**

@@ -70,8 +70,14 @@ public class AdminPlugin implements Plugin, URLHandler {
         return URL;
     }
 
+    /**
+     * @deprecated
+     * Should never System.exit() in a servlet container.
+     */
     protected void reqShutdown(int time, boolean reboot) {
-        new ShutdownThread(time,reboot,parent);
+        //new ShutdownThread(time,reboot,parent);
+        log.fatal("Obsolete method reqShutdown() called");
+        throw new RuntimeException("reqShutdown purposefully disabled");
     }
 
     public HTMLDocument handleURL(String suburl, HTTPSession session, HTTPRequestHeader header) throws WebMailException {
@@ -256,6 +262,8 @@ public class AdminPlugin implements Plugin, URLHandler {
         protected boolean reboot;
 
         ShutdownThread(int time, boolean restart, WebMailServer parent) {
+            log.fatal("Aborting ShutdownThread instantiation.  Obsolete.");
+            if (true) throw new RuntimeException("ShutdownThread obsoleted");
             this.parent=parent;
             this.time=time;
             this.reboot=restart;

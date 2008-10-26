@@ -21,6 +21,8 @@ package net.wastl.webmail.misc;
 
 import net.wastl.webmail.server.*;
 import java.io.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Used to write to a OutputStream in a separate Thread to avoid blocking.
@@ -28,6 +30,8 @@ import java.io.*;
  * @author Sebastian Schaffert
  */
 public class StreamConnector extends Thread {
+    private static Log threadLog = LogFactory.getLog("THREAD.StreamConnector");
+
     InputStream in;
     ByteStore b;
     int size;
@@ -39,7 +43,7 @@ public class StreamConnector extends Thread {
     }
 
     public StreamConnector(InputStream sin, int size) {
-        super();
+        super("StreamConnector");
         in=sin;
         this.size=size;
         b=null;
@@ -47,8 +51,13 @@ public class StreamConnector extends Thread {
     }
 
     public void run() {
-        b=ByteStore.getBinaryFromIS(in,size);
-        ready=true;
+        threadLog.info("Starting " + getName());
+        try {
+            b=ByteStore.getBinaryFromIS(in,size);
+            ready=true;
+        } finally {
+            threadLog.info("Exiting " + getName());
+        }
     }
 
     public ByteStore getResult() {

@@ -9,7 +9,7 @@ After JWebApp runs, you can't stop or undeploy the app without hanging the
 container.
 
 Some bug is preventing an attribution on the Bibop login page from displaying.
-(Just read the text on the Bibop login page).
+Says "BiBop WebMail is base on"... and nothing.
 
 Non-critical XPath bug(s).  See errors in the application log.
 

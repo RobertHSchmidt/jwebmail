@@ -57,11 +57,9 @@ public class PluginHandler  {
      /**
      * Initialize and register WebMail Plugins.
      */
-    public void registerPlugins() {
+    public void registerPlugins() throws WebMailException {
         log.info("Initializing WebMail Plugins ...");
         //      System.setProperty("java.class.path",System.getProperty("java.class.path")+System.getProperty("path.separator")+pluginpath);
-
-
 
         StringTokenizer tok=new StringTokenizer(plugin_list,":;, ");
 
@@ -69,8 +67,9 @@ public class PluginHandler  {
         try {
             plugin_class=Class.forName("net.wastl.webmail.server.Plugin");
         } catch(ClassNotFoundException ex) {
-            log.fatal("===> Could not find interface 'Plugin'!!");
-            System.exit(1);
+            log.fatal("Could not find interface 'Plugin'", ex);
+            throw new WebMailException("Could not find inteface 'Plugin'");
+            // Used to System.exit() here.
         }
 
         PluginDependencyTree pt=new PluginDependencyTree("");
