@@ -17,7 +17,6 @@
  */
 
 
-
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
 import javax.mail.*;
@@ -38,9 +37,9 @@ public class POPAuthenticator extends net.wastl.webmail.server.Authenticator {
 
     public final String VERSION="1.2";
 
-    private Store st;
+    protected Store st;
 
-    private Storage storage;
+    protected Storage storage;
 
     public POPAuthenticator() {
         super();

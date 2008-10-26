@@ -3,10 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Add a POPS Authenticator.  Just get it to compile and list at this point.
-
-Test POP protocols.
-
 Add an IMAPs config setting for alternate mail folder base directory.
 
 Get JSPs out of Java source directory branch.
@@ -29,7 +25,7 @@ Sentence is incomplete, and I have no idea what the intended sentence was.
 Remove the interaction widgets in the Admin Plugin for the disabled
 shutdown actions.
 
-Fix overzealous saving of mail hosts.  Either do not store mail hosts
+Fix overzealous retension of mail hosts.  Either do not store mail hosts
 details per user, or remove them when Admin changes protocol settings
 (talking about folder access, not authentication).  At the very least,
 allow the Admin Plugin to view and change the user's data (it's stored

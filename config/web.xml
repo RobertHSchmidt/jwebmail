@@ -104,6 +104,7 @@ limitations under the License.
         IMAPAuthenticator,
         IMAPSAuthenticator,
         POPAuthenticator,
+        POPSAuthenticator,
         OTPAuthenticator,
         SimpleAuthenticator,
         UnixAuthenticator
