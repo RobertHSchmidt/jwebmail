@@ -58,7 +58,7 @@ public class AuthenticatorHandler  {
      */
     public void registerAuthenticators() {
         String[] authenticatorStrings =
-                authenticator_list.trim().split("\\s*,\\s", -1);
+                authenticator_list.trim().split("\\s*,\\s*", -1);
         log.info("Initializing " + authenticatorStrings.length
                 + " WebMail Authenticator Plugins ...");
 
@@ -68,7 +68,7 @@ public class AuthenticatorHandler  {
             Authenticator a=(Authenticator) c.newInstance();
             a.register(parent.getConfigScheme());
             authenticators.put(a.getKey(),a);
-            log.debug("Registered authenticator plugin \""+c.getName()+"\"");
+            log.debug("Registered authenticator plugin '"+c.getName()+"'");
         } catch(Exception ex) {
             log.error("Failed to register Auth. plugin '" + authString + "'",
                     ex);
