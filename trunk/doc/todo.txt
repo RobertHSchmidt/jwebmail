@@ -9,6 +9,12 @@ Test POP protocols.
 
 Add an IMAPs config setting for alternate mail folder base directory.
 
+Get JSPs out of Java source directory branch.
+
+Use packages for all classes.
+Classes in */webmail/plugins and */webmail/authenticator now use default
+package, which conflicts with *.java directory locations.
+
 Resolve NPE being thrown constantly from XMLData.getNodeXPath().
 
 Somewhere in the callback thread, log the target document of XPath failures.

@@ -34,6 +34,7 @@ public class Queue  {
 
 
     public void queue(Object o) {
+        // Would be very intuitive if this method were named "push". 
         contents.addElement(o);
     }
 
@@ -42,6 +43,8 @@ public class Queue  {
     }
 
     public Object next() {
+        // Would be very intuitive if this method were named "pop". 
+        // "next" gives no indication that caller is changing the set contents.
         Object o=contents.firstElement();
         contents.removeElementAt(0);
         return o;
