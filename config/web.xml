@@ -71,7 +71,27 @@ limitations under the License.
     -->
     <init-param>
       <param-name>webmail.plugins</param-name>
-      <param-value>About:AdminPlugin:ChallengeHandler:Composer:ErrorHandler:FileAttacher:FolderList:FolderSetup:NavBar:ImageHandler:LogoutSession:MailboxList:PassThroughPlugin:SendMessage:ShowMessage:ShowMIME:UserSetup:WebMailHelp:WebMailTitle</param-value>
+      <param-value>
+        About,
+        AdminPlugin,
+        ChallengeHandler,
+        Composer,
+        ErrorHandler,
+        FileAttacher,
+        FolderList,
+        FolderSetup,
+        NavBar,
+        ImageHandler,
+        LogoutSession,
+        MailboxList,
+        PassThroughPlugin,
+        SendMessage,
+        ShowMessage,
+        ShowMIME,
+        UserSetup,
+        WebMailHelp,
+        WebMailTitle
+      </param-value>
     </init-param>
 
     <!-- WebMail's Authenticator Plugins
@@ -80,7 +100,14 @@ limitations under the License.
     -->
     <init-param>
       <param-name>webmail.authenticators</param-name>
-      <param-value>IMAPAuthenticator:IMAPSAuthenticator:POPAuthenticator:OTPAuthenticator:SimpleAuthenticator:UnixAuthenticator</param-value>
+      <param-value>
+        IMAPAuthenticator,
+        IMAPSAuthenticator,
+        POPAuthenticator,
+        OTPAuthenticator,
+        SimpleAuthenticator,
+        UnixAuthenticator
+      </param-value>
     </init-param>
 
 

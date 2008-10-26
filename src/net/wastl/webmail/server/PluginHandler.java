@@ -40,12 +40,12 @@ public class PluginHandler  {
     private static Log log = LogFactory.getLog(PluginHandler.class);
 
     WebMailServer parent;
-    String plugin_list;
+    String plugin_list = null;
     Vector plugins;
 
     public PluginHandler(WebMailServer parent) throws WebMailException {
         this.parent=parent;
-        this.plugin_list=parent.getProperty("webmail.plugins");
+        plugin_list=parent.getProperty("webmail.plugins");
         if(plugin_list == null) {
             throw new WebMailException("Error: No Plugins defined (Property webmail.plugins).");
         }
@@ -58,10 +58,10 @@ public class PluginHandler  {
      * Initialize and register WebMail Plugins.
      */
     public void registerPlugins() throws WebMailException {
-        log.info("Initializing WebMail Plugins ...");
+        String[] pluginStrings = plugin_list.trim().split("\\s*,\\s", -1);
+        log.info("Initializing " + pluginStrings.length
+                + " WebMail Plugins ...");
         //      System.setProperty("java.class.path",System.getProperty("java.class.path")+System.getProperty("path.separator")+pluginpath);
-
-        StringTokenizer tok=new StringTokenizer(plugin_list,":;, ");
 
         Class plugin_class=null;
         try {
@@ -75,37 +75,29 @@ public class PluginHandler  {
         PluginDependencyTree pt=new PluginDependencyTree("");
         net.wastl.webmail.misc.Queue q=new net.wastl.webmail.misc.Queue();
 
-        int count=0;
-
-        while(tok.hasMoreTokens()) {
-            String name=(String)tok.nextToken();
-            try {
-                Class c=Class.forName(name);
-                if(plugin_class.isAssignableFrom(c)) {
-                    Plugin p=(Plugin) c.newInstance();
-                    q.queue(p);
-                    plugins.addElement(p);
-                    //log.debug(p.getName()+" ");
-                    count++;
-                }
-            } catch(Exception ex) {
-                log.error("could not register plugin \""+name+"\"!");
-                ex.printStackTrace();
+        for (String pluginString : pluginStrings) try {
+            Class c=Class.forName(pluginString);
+            if (!plugin_class.isAssignableFrom(c)) {
+                log.warn("Requested plugin '" + pluginString
+                        + "' not a plugin_class.getName().  Skipping.");
+                continue;
             }
+            Plugin p=(Plugin) c.newInstance();
+            q.queue(p);
+            plugins.addElement(p);
+            log.debug("Registered plugin \""+c.getName()+"\"");
+        } catch(Exception ex) {
+            log.error("Failed to register plugin '" + pluginString + "'",
+                    ex);
         }
+        log.info(Integer.toString(plugins.size()) + " plugins loaded");
 
-        log.info(count+" plugins loaded correctly.");
-
-
-        count=0;
         while(!q.isEmpty()) {
             Plugin p=(Plugin)q.next();
-            if(!pt.addPlugin(p)) {
-                q.queue(p);
-            }
+            if(!pt.addPlugin(p)) q.queue(p);
         }
         pt.register(parent);
-        log.info(count+" plugins initialized.");
+        log.info(Integer.toString(plugins.size()) + " plugins initialized");
     };
 
     public Enumeration getPlugins() {

@@ -36,7 +36,7 @@ public class AuthenticatorHandler  {
 
     Hashtable authenticators;
 
-    String authenticator_list;
+    String authenticator_list = null;
 
     public AuthenticatorHandler(WebMailServer parent) throws WebMailException {
         this.parent=parent;
@@ -57,25 +57,24 @@ public class AuthenticatorHandler  {
      * Initialize and register WebMail Authenticators.
      */
     public void registerAuthenticators() {
-        log.info("Initializing WebMail Authenticator Plugins ...");
-
-        StringTokenizer tok=new StringTokenizer(authenticator_list,":;, ");
+        String[] authenticatorStrings =
+                authenticator_list.trim().split("\\s*,\\s", -1);
+        log.info("Initializing " + authenticatorStrings.length
+                + " WebMail Authenticator Plugins ...");
 
         authenticators=new Hashtable();
-        while(tok.hasMoreTokens()) {
-            String name=(String)tok.nextToken();
-            try {
-                Class c=Class.forName(name);
-                Authenticator a=(Authenticator) c.newInstance();
-                a.register(parent.getConfigScheme());
-                authenticators.put(a.getKey(),a);
-                log.info("Registered authenticator plugin \""+c.getName()+"\"");
-            } catch(Exception ex) {
-                log.error("Could not register \""+name+"\" ("+ex.getMessage()+")!");
-                //ex.printStackTrace();
-            }
+        for (String authString : authenticatorStrings) try {
+            Class c=Class.forName(authString);
+            Authenticator a=(Authenticator) c.newInstance();
+            a.register(parent.getConfigScheme());
+            authenticators.put(a.getKey(),a);
+            log.debug("Registered authenticator plugin \""+c.getName()+"\"");
+        } catch(Exception ex) {
+            log.error("Failed to register Auth. plugin '" + authString + "'",
+                    ex);
         }
-        log.info("Done initializing Authenticator Plugins");
+        log.info("Initialized " + authenticators.size()
+                + " Authenticator Plugins");
     }
 
     public Authenticator getAuthenticator(String key) {
