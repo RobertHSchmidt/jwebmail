@@ -46,6 +46,15 @@
       </layout>
     </appender>
 
+    <appender name="thread_ap" class="org.apache.log4j.FileAppender">
+      <param name="Append" value="false"/>
+      <param name="Threshold" value="info"/> <!-- turn down to debug threads -->
+      <param name="File" value="${logdir.common}/thread.html"/>
+      <layout class="com.admc.log4j.ClockTimeHTMLLayout">
+        <param name="Title" value="Global Thread Log"/>
+      </layout>
+    </appender>
+
     <appender name="error_ap" class="org.apache.log4j.FileAppender">
       <param name="Append" value="false"/>
       <param name="Threshold" value="error"/>
@@ -67,6 +76,11 @@
       <level value='debug'/>
     </logger>
     <logger name='org.webengruven'>
+      <level value='debug'/>
+    </logger>
+
+    <logger name="THREAD" additivity="false">
+      <appender-ref ref="thread_ap"/>
       <level value='debug'/>
     </logger>
 
