@@ -161,20 +161,15 @@ public class ExtConfigListener implements ServletContextListener {
             log.fatal("Presence of lock file '" + lockFile.getAbsolutePath()
                     + "' indicates the instance is already running");
             lockFile = null;
-            throw new IllegalStateException( "Presence of lock file "
+            throw new IllegalStateException("Presence of lock file "
                     + "indicates the instance is already running");
         }
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter(lockFile));
-            pw.println(deploymentName + " started at " + new java.util.Date());
-            pw.flush();
-            pw.close();
-        } catch (IOException ioe) {
-            log.fatal("Failed to write lock file '"
-                    + lockFile.getAbsolutePath() + "'", ioe);
-            throw new IllegalStateException("Failed to write lock file '"
-                    + lockFile.getAbsolutePath() + "'", ioe);
-        }
+        // From this point on, we know that:
+        //   IF LOCK FILE EXISTS, we have created it and all is well
+        //   IF LOCK FILE DOES NOT EXIST, we need to create it ASAP
+        if (rtConfigDir.isDirectory()) mkLockFile();
+          // We create lock file as early as possible.
+          // If we can't make it here, it will be created in installXmlStorage.
         if ((!rtConfigDir.isDirectory()) || !metaFile.isFile()) try {
             installXmlStorage(rtConfigDir, metaFile);
             log.warn("New XML storage system successfully loaded.  "
@@ -183,6 +178,15 @@ public class ExtConfigListener implements ServletContextListener {
             log.fatal("Failed to set up a new XML storage system", e);
             throw new IllegalStateException(
                     "Failed to set up a new XML storage system", e);
+        }
+        if (!lockFile.exists()) {
+            // Being extra safe
+            log.fatal("Assertion failed.  Internal locking error in "
+                    + getClass().getName() + '.');
+            lockFile = null;
+            throw new IllegalStateException(
+                    "Assertion failed.  Internal locking error in "
+                    + getClass().getName() + '.');
         }
         ExpandableProperties metaProperties = new ExpandableProperties();
         try {
@@ -267,6 +271,7 @@ public class ExtConfigListener implements ServletContextListener {
                         + baseDir.getAbsolutePath() + "'");
             log.debug("Created base RT dir '"
                     + baseDir.getAbsolutePath() + "'");
+            mkLockFile();
         }
         if (!baseDir.canWrite())
             throw new IOException(
@@ -282,9 +287,12 @@ public class ExtConfigListener implements ServletContextListener {
 
         // Could create a Properties object and save it, but why?
         PrintWriter pw = new PrintWriter(new FileWriter(metaFile));
-        pw.println("webmail.data.path: ${rtconfig.dir}/data");
-        pw.flush();
-        pw.close();
+        try {
+            pw.println("webmail.data.path: ${rtconfig.dir}/data");
+            pw.flush();
+        } finally {
+            pw.close();
+        }
 
         InputStream zipFileStream = getClass().getResourceAsStream(
                 "/data.zip");
@@ -343,5 +351,24 @@ public class ExtConfigListener implements ServletContextListener {
         if (m.matches()) return m.group(1);
         log.error("Malformatted context path '" + contextPath + "'");
         return null;
+    }
+
+    protected void mkLockFile() {
+        if (lockFile.exists())
+            throw new IllegalStateException(
+                    "Attempting to create Lock file, but it already exists");
+        PrintWriter pw = null;
+        try {
+            pw = new PrintWriter(new FileWriter(lockFile));
+            pw.println(deploymentName + " started at " + new java.util.Date());
+            pw.flush();
+        } catch (IOException ioe) {
+            log.fatal("Failed to write lock file '"
+                    + lockFile.getAbsolutePath() + "'", ioe);
+            throw new IllegalStateException("Failed to write lock file '"
+                    + lockFile.getAbsolutePath() + "'", ioe);
+        } finally {
+            if (pw != null) pw.close();
+        }
     }
 }
