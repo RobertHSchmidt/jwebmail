@@ -58,7 +58,7 @@ public class PluginHandler  {
      * Initialize and register WebMail Plugins.
      */
     public void registerPlugins() throws WebMailException {
-        String[] pluginStrings = plugin_list.trim().split("\\s*,\\s", -1);
+        String[] pluginStrings = plugin_list.trim().split("\\s*,\\s*", -1);
         log.info("Initializing " + pluginStrings.length
                 + " WebMail Plugins ...");
         //      System.setProperty("java.class.path",System.getProperty("java.class.path")+System.getProperty("path.separator")+pluginpath);
@@ -85,7 +85,7 @@ public class PluginHandler  {
             Plugin p=(Plugin) c.newInstance();
             q.queue(p);
             plugins.addElement(p);
-            log.debug("Registered plugin \""+c.getName()+"\"");
+            log.debug("Registered plugin '"+c.getName()+"'");
         } catch(Exception ex) {
             log.error("Failed to register plugin '" + pluginString + "'",
                     ex);
