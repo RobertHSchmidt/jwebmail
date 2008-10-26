@@ -35,6 +35,7 @@ import javax.servlet.http.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.oreilly.servlet.multipart.*;
+import net.wastl.webmail.misc.Helper;
 
 /**
  * This is WebMails main server. From here most parts will be administered.
@@ -140,6 +141,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             e.printStackTrace();
             throw new ServletException("Could not intialize: "+e.getMessage(),e);
         }
+        Helper.logThreads("Bottom of WebMailServlet.init()");
     }
 
     public ServletConfig getServletConfig() {

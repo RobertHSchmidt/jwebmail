@@ -51,6 +51,7 @@ limitations under the License.
     <filter-name>contextPathValidator</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
   <listener>
     <listener-class>net.wastl.webmail.config.ExtConfigListener</listener-class>
   </listener>

@@ -25,17 +25,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- *
- *
- *
  * @author Sebastian Schaffert
  */
 public class ConnectionTimer extends Thread {
+    /* TODO:  One of these thread remains running after a webapp shutdown.
+     * Fix that! */
     private static Log log = LogFactory.getLog(ConnectionTimer.class);
+    private static Log threadLog = LogFactory.getLog("THREAD.ConnectionTimer");
     private Vector connections;
     private static final long sleep_interval=1000;
 
     public ConnectionTimer() {
+        super("ConnectionTimer");
         connections=new Vector();
         this.start();
     }
@@ -68,8 +69,10 @@ public class ConnectionTimer extends Thread {
     }
 
     public void run() {
+        /** See TODO impl. note at top of this file. */
         Enumeration e;
-        while(true) {
+        threadLog.info("Starting " + getName());
+        try { while(true) {
             synchronized(connections) {
                 e=connections.elements();
             }
@@ -82,6 +85,6 @@ public class ConnectionTimer extends Thread {
             try { this.sleep(sleep_interval); } catch(InterruptedException ex) {
                 log.error(ex);
             }
-        }
+        } } finally { threadLog.info("Exiting " + getName()); }
     }
 }

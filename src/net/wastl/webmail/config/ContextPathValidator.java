@@ -63,6 +63,7 @@ public class ContextPathValidator implements Filter {
         }
         HttpServletRequest req = (HttpServletRequest) genReq;
         if (contextPath.equals(req.getContextPath())){
+            validated = true;
             log.info("Context root validated");
             chain.doFilter(req, genResp);
             return;
@@ -74,6 +75,5 @@ public class ContextPathValidator implements Filter {
                 req.getContextPath()
                 + "' does match match configured context.path '"
                 + contextPath + "'");
-        validated = true;
     }
 }

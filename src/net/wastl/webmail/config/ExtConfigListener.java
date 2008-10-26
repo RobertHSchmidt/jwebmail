@@ -45,6 +45,7 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import net.wastl.webmail.misc.Helper;
 
 /**
  * Purpose<UL>
@@ -113,6 +114,7 @@ public class ExtConfigListener implements ServletContextListener {
     protected String deploymentName = null;
 
     public void contextInitialized(ServletContextEvent sce) {
+        Helper.logThreads("Top of ExtCongigListener.contextInitialized()");
         ServletContext sc = sce.getServletContext();
         contextPath = sc.getInitParameter("default.contextpath");
         try {
