@@ -11,6 +11,12 @@ container.
 Some bug is preventing an attribution on the Bibop login page from displaying.
 Says "BiBop WebMail is base on"... and nothing.
 
+Mail hosts are saved, per-user, when they access a mail host (either first
+time or every time).  At least when the Domains feature is used, there is
+no way to update this.  E.g., I use Admin Plugin to change from imap to
+imaps protocol and change the mail host.  There is no way for existing
+JWebMail users to use the new host or protocol.
+
 Non-critical XPath bug(s).  See errors in the application log.
 
 App has compiled-in context path.  The implications of this are:

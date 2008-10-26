@@ -3,6 +3,10 @@ $Id$
 Ordered short-term TODO list
 ============================
 
+Add a POPS Authenticator.  Just get it to compile and list at this point.
+
+Test POP protocols.
+
 Add an IMAPs config setting for alternate mail folder base directory.
 
 Resolve NPE being thrown constantly from XMLData.getNodeXPath().
@@ -42,6 +46,9 @@ Load delivered resources through classpath.
     Document that user must assign the app.name/context.path to match
     the war file or web app directory name.
 
+Fix bug where existing Virtual Domain never see changes made to the
+Virtual Domain config.
+
 Use container-managed mail providers retrieved through JNDI.
 
 IMPORTANT:  DO NOT FORGET
@@ -54,6 +61,4 @@ ancestors, not just direct children.
 Do code search for use of getElementsBy...() and change to the less dangerous
 and more efficient getChild*() methods.
 
-Get POPS protocol working.
-
-Get switching of protocols working reliably.
+Test POPS protocols.
