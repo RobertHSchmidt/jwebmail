@@ -15,6 +15,9 @@ Use packages for all classes.
 Classes in */webmail/plugins and */webmail/authenticator now use default
 package, which conflicts with *.java directory locations.
 
+Resolve "Not a valid number" warnings in log, from XMLUserData (at least
+upon imap login).
+
 Resolve NPE being thrown constantly from XMLData.getNodeXPath().
 
 Somewhere in the callback thread, log the target document of XPath failures.
@@ -22,6 +25,15 @@ Somewhere in the callback thread, log the target document of XPath failures.
 Get rid of lines like "BiBo... is based on" in
 src/net/wastl/webmail/data/xml/*/bibop/logout.xsl, DITTO/loinscreen.xsl.
 Sentence is incomplete, and I have no idea what the intended sentence was.
+
+Remove the interaction widgets in the Admin Plugin for the disabled
+shutdown actions.
+
+Fix overzealous saving of mail hosts.  Either do not store mail hosts
+details per user, or remove them when Admin changes protocol settings
+(talking about folder access, not authentication).  At the very least,
+allow the Admin Plugin to view and change the user's data (it's stored
+in the user's XML file, but not presented in the Admin gui).
 
 More branding updates.
     Search for '\<WebMail\>' and change all but Servlet name references
@@ -36,14 +48,14 @@ More branding updates.
           (these last seem to be a mistake.  Image has nothing to do with
           "java powered", like the corresopnding classic theme image does).
 
-Code up a stopper for the ConnectionTimer thread which continues running
-after app shutdown.
-
 Take care of all easy compiler warnings.  All except third-party if time
 permits.
 
 If time permits, turn on lotsa compilation checks with Eclipse and take
 care of the warnings.
+
+Fix googfy HTML password form behavior and have it not show encrypted
+passwords.
 
 Make release build targets.
 
@@ -65,6 +77,9 @@ Load delivered resources through classpath.
 
     Document that user must assign the app.name/context.path to match
     the war file or web app directory name.
+
+Code up a stopper for the ConnectionTimer thread which continues running
+after app shutdown.
 
 Fix bug where existing Virtual Domain never see changes made to the
 Virtual Domain config.
