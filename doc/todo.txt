@@ -19,8 +19,16 @@ Resolve NPE being thrown constantly from XMLData.getNodeXPath().
 
 Somewhere in the callback thread, log the target document of XPath failures.
 
-Fix bug preventing an attribution on the Bibop login page from displaying.
-Says "BiBop WebMail is base on"... and nothing.
+Get rid of lines like "BiBo... is based on" in
+src/net/wastl/webmail/data/xml/*/bibop/logout.xsl, DITTO/loinscreen.xsl.
+Sentence is incomplete, and I have no idea what the intended sentence was.
+
+More branding updates.
+    Search for '\<WebMail\>' and change all but Servlet name references
+    to JWebMail.  (I know of src/net/wastl/webmail/ata/xml/en/bibop/loginscr*)
+    Review image for old version number and "WebMail" text.  I know of:
+        src/net/wastl/webmail/data/xml/*/bibop/images/webmailtitle.gif
+          (all of these are the same image)
 
 Code up a stopper for the ConnectionTimer thread which continues running
 after app shutdown.
