@@ -681,6 +681,7 @@ public class Helper  {
     }
 
     /**
+     * Encodes and decodes any String given on the command-line.
      * Unit test.
      */
     public static void main(String[] args) {
@@ -721,6 +722,9 @@ public class Helper  {
         return s;
     }
 
+    static private java.util.regex.Pattern nonGraphPattern =
+            java.util.regex.Pattern.compile("[^\\p{Graph}].*");
+
     public static String decryptTEA(String src) {
         StringTokenizer tok=new StringTokenizer(src,": ");
         byte[] key=new BigInteger(str_key, 16).toByteArray();
@@ -738,7 +742,15 @@ public class Helper  {
         byte dec[] = tea.decode(inb,inb.length);
         String s=new String(dec);
         // log.debug("encryptTEA: Returning "+s);
-        return s;
+        java.util.regex.Matcher m = nonGraphPattern.matcher(s);
+        if (!m.find()) return s;
+        log.warn("Executed work-around for TEA decryption bug");
+        String fixedS = m.replaceFirst("");
+        if (s.equals(fixedS))
+            log.warn("The TEA work-around was not needed in this case");
+        // I believe the rot of the bug is with padding in the TEA.decode()
+        // method(s).  I do not have time to fix the real problem there.
+        return fixedS;
     }
 
     /**

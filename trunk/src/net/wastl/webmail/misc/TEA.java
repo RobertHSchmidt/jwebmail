@@ -124,7 +124,7 @@ public class TEA
    private int _padding;      // amount of padding added in byte --> integer conversion.
 
   /**
-   * Encodes and decodes "Hello world!" for your personal pleasure.
+   * Encodes and decodes any String given on the command-line.
    * Unit test.
    * A simple test of TEA.
    */
@@ -425,10 +425,15 @@ public class TEA
    * Decode an integer array.
    * There may be some padding at the end of the byte array from
    * the previous encode operation.
+   * <P>
+   * This extra padding makes the resulting Strings not accurately represent
+   * the input.  IMO, this is a critical bug.
+   * See the cheap workaround in Helper.decryptTEA().
+   * </P>
    *
+   * @see Helper#decryptTEA(String)
    * @param b bytes to decode
    * @param count number of bytes in the array to decode
-   *
    * @return <code>byte</code> array of decoded bytes.
    */
    public byte [] decode(int b[])
