@@ -3,11 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Fix bug in the TEA and Helper encryption/decryption routines.  Binary
-characters are getting added to some Strings.  This makes valid passwords
-fail in some cases (probably directly depends on characters in the real
-password).
-
 Fix IMAPS protocol.  Does not list in the authentication pulldown.
 It retrieves mail using imap when I select imaps for the mail (IIRC,
 this is due to somehow getting "imap://" as the protocol header for
