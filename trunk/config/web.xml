@@ -80,7 +80,7 @@ limitations under the License.
     -->
     <init-param>
       <param-name>webmail.authenticators</param-name>
-      <param-value>IMAPAuthenticator:POPAuthenticator:OTPAuthenticator:SimpleAuthenticator:UnixAuthenticator</param-value>
+      <param-value>IMAPAuthenticator:IMAPSAuthenticator:POPAuthenticator:OTPAuthenticator:SimpleAuthenticator:UnixAuthenticator</param-value>
     </init-param>
 
 
