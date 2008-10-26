@@ -69,9 +69,10 @@ limitations under the License.
     <!-- copy src files -->
     <copy todir="build/src" filtering="true">
       <fileset dir="src">
-        <include name="net/**" />
-        <include name="org/**" />
-        <include name="META-INF/**" />
+        <exclude name="**/.*"/>
+        <include name="net/**"/>
+        <include name="org/**"/>
+        <include name="META-INF/**"/>
       </fileset>
     </copy>
   </target>
@@ -151,13 +152,12 @@ limitations under the License.
          If so, remove the leading hyphen from the target name. -->
     <echo message="Installing webmail.xml ..."/>
     <copy todir="data" flatten="yes">
-      <fileset dir="src">
-        <include name="**/webmail.xml" />
-      </fileset>
+      <fileset dir="src" includes="**/webmail.xml"/>
     </copy>
     <echo message="Installing XML DTDs ..."/>
     <copy todir="lib/xml" flatten="yes">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/*.dtd" />
         <include name="**/data/xml/mysql_statements.xml" />
         <include name="**/data/xml/userdata.xml" />
@@ -168,6 +168,7 @@ limitations under the License.
     <echo message="Installing resource.dtd and resources.xml ..."/>
     <copy todir="lib/templates" flatten="yes">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/resource*" />
       </fileset>
     </copy>
@@ -176,6 +177,7 @@ limitations under the License.
     <echo message="Installing English Language Templates ..."/>
     <copy todir="lib/templates/en" filtering="true">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/en/**" />
         <exclude name="**/images/**" />
       </fileset>
@@ -183,6 +185,7 @@ limitations under the License.
     </copy>
     <copy todir="lib/templates/en" filtering="false">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/en/**/images/**" />
       </fileset>
       <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
@@ -192,6 +195,7 @@ limitations under the License.
     <echo message="Installing Spanish Language Templates ..."/>
     <copy todir="lib/templates/es" filtering="true">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/es/**" />
         <exclude name="**/images/**" />
       </fileset>
@@ -199,6 +203,7 @@ limitations under the License.
     </copy>
     <copy todir="lib/templates/es" filtering="false">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/es/**/images/**" />
       </fileset>
       <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
@@ -218,6 +223,7 @@ limitations under the License.
     <echo message="Installing German Language Templates ..."/>
     <copy todir="lib/templates/de" filtering="true">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/de/**" />
         <exclude name="**/images/**" />
       </fileset>
@@ -225,6 +231,7 @@ limitations under the License.
     </copy>
     <copy todir="lib/templates/de" filtering="false">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/de/**/images/**" />
       </fileset>
       <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
@@ -234,6 +241,7 @@ limitations under the License.
     <echo message="Installing French Language Templates ..."/>
     <copy todir="lib/templates/fr" filtering="true">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/fr/**" />
         <exclude name="**/images/**" />
       </fileset>
@@ -241,6 +249,7 @@ limitations under the License.
     </copy>
     <copy todir="lib/templates/fr" filtering="false">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/fr/**/images/**" />
       </fileset>
       <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
@@ -250,6 +259,7 @@ limitations under the License.
     <echo message="Installing Hungarian Language Templates ..."/>
     <copy todir="lib/templates/hu" filtering="true">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/hu/**" />
         <exclude name="**/images/**" />
       </fileset>
@@ -257,6 +267,7 @@ limitations under the License.
     </copy>
     <copy todir="lib/templates/hu" filtering="false">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/hu/**/images/**" />
       </fileset>
       <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
@@ -266,6 +277,7 @@ limitations under the License.
     <echo message="Installing Chinese Language Templates ..."/>
     <copy todir="lib/templates/zh" filtering="true">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/zh/**" />
         <exclude name="**/images/**" />
       </fileset>
@@ -273,6 +285,7 @@ limitations under the License.
     </copy>
     <copy todir="lib/templates/zh" filtering="false">
       <fileset dir="src">
+        <exclude name="**/.*"/>
         <include name="**/data/xml/zh/**/images/**" />
       </fileset>
       <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
@@ -290,7 +303,7 @@ limitations under the License.
     <mkdir dir="${webapp.home}/${ant.project.name}"/>
     <mkdir dir="${webapp.home}/${ant.project.name}/WEB-INF"/>
     <copy todir="${webapp.home}/${ant.project.name}/lib">
-      <fileset dir="lib" excludes="**/*.jar" />
+      <fileset dir="lib" excludes="**/.*, **/*.jar" />
     </copy>
     <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes" flatten="yes">
       <fileset dir="build/classes">
@@ -298,7 +311,7 @@ limitations under the License.
       </fileset>
     </copy>
     <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/lib">
-      <fileset dir="lib" includes="**/*.jar"/>
+      <fileset dir="lib" excludes="**/.*" includes="**/*.jar"/>
     </copy>
     <!-- Install plugin and authenticator classes -->
     <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes">
@@ -314,7 +327,7 @@ limitations under the License.
     <copy file="config/web.xml" filtering="true"
           todir="${webapp.home}/${ant.project.name}/WEB-INF/"/>
     <copy todir="${webapp.home}/${ant.project.name}" filtering="true">
-      <fileset dir="src/jsp"/>
+      <fileset dir="src/jsp" excludes="**/.*"/>
     </copy>
     <zip destfile="${webapp.home}/${ant.project.name}/WEB-INF/classes/data.zip"
          basedir="data"/>
