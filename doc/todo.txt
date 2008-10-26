@@ -3,11 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Fix IMAPS protocol.  Does not list in the authentication pulldown.
-It retrieves mail using imap when I select imaps for the mail (IIRC,
-this is due to somehow getting "imap://" as the protocol header for
-imaps, instead of "imaps://").
-
 Add an IMAPs config setting for alternate mail folder base directory.
 
 Resolve NPE being thrown constantly from XMLData.getNodeXPath().
@@ -58,3 +53,7 @@ FIRST verify my assertion that tree.getElementsBy*() searches for all
 ancestors, not just direct children.
 Do code search for use of getElementsBy...() and change to the less dangerous
 and more efficient getChild*() methods.
+
+Get POPS protocol working.
+
+Get switching of protocols working reliably.
