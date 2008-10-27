@@ -45,3 +45,9 @@ nesting of HTML).
 
 Use block indents of 4 for all other computer languages (Javascript, Perl,
 PHP, Java, CSS).
+
+Miminize nesting.  Unnecessary nesting makes code more complex and more
+difficult to understand for no reason (not to mention highly nested code
+doesn't fit in the width of a normal editor).  Detect exceptional cases early
+then handle and throw/return/continue/break and be-done-with-it, instead
+of making a large if/then or if/then/else structure.
