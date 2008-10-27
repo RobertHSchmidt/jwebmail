@@ -6,6 +6,10 @@ Ordered short-term TODO list
 Try to warn where now silently fails to setSubscribe(true) on
 WU mbox DIRECTORIES.
 
+Either do not display the Imap/mbox folder-containing Folders on the
+Subscription-management screen, or at least tell the user when 
+their Subscription action has no effect.
+
 Folders in source folder are hidden for some reason, after copying to
 another folder.  E.g. is tasy "Showing messages 1 to 2", but only 1
 message is shown.
