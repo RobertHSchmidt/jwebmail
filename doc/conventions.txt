@@ -12,6 +12,15 @@ Be conservative with white space.  E.g., don't ever put white space where
 it is totally useless, like blank spaces at ends of lines; or blank
 lines at the very beginning of a file, the very end of a file, or
 right after "{" or right before "}".
+NOTE:  Don't think that I'm discouraging standard use of whitespace where
+it is required to discern the tokens.  This happens a lot in this code-base,
+but it is not my doing:
+BAD:  int tree_depth=getFolderTree(subfolders[i],xml_folder,subscribed_only);
+GOOD: int tree_depth = getFolderTree(subfolders[i], xml_folder, subscribedOnly);
+
+Unless there is a good design reason (and sometimes there are), use camelBack
+variable and member naming.  This is a JAVA product, so try to code like a
+Java developer:  "subscribedOnly", not "subscribed_only".
 
 Be conservative with comments.  Do not write your development history
 in the source code.  That is what we use Subversion for.
