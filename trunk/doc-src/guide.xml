@@ -22,53 +22,76 @@ limitations under the License.
 
 <GUIDE>
   <TITLE>JWebMail v1.0.1*</TITLE>
-  <AUTHOR>Sebastian Schaffert, schaffer@informatik.uni-muenchen.de</AUTHOR>
+  <AUTHOR>Blaine Simpson, blaine.simpson@admc.com</AUTHOR>
   <SECTION name="Contents" id="contents"><CONTENTS/></SECTION>
   <SECTION name="What is JWebMail" id="about">
     <P>
-      JWebMail is a server application that allows ISPs to provide a WWW interface
-      for each user to his mailbox(es) (similar to the programs YahooMail or HotMail
-      use). JWebMail should scale well enough to support large userbases and
-      should be easy enough to be used in a home LAN.
+      JWebMail is a <A href="http://en.wikipedia.org/wiki/Web_mail">web mail</A>
+      server.
+      Web mail allows an organization to provide a WWW interface for each user
+      to his mailbox(es).
+      Unlike Yahoo Mail, Hotmail, and Gmail, JWebMail presents a web interface
+      to traditional email accounts which you or somebody else provide.
+      (The target email account servers may, of course, be restricted by
+      JWebMail).
+    </P> <P>
+      By virtue of JWebMail being a pure Java appplication, it has excellent
+      portability, scalability, and performance.
+      We have designed JWebMail so that it works out-of-the-box for a home
+      LAN setup by just dropping the .war file into your servlet container
+      (which includes all modern application servers).
     </P>
+    <SUBSECTION name="Use Cases" id="about:usecases">
+      <P>Common use-cases
+        <LIST>
+          <ITEM>
+            Serve JWebMail on the same host that your traditional email
+            server runs on, to provide web access in addition to dedicated
+            email client access.
+          </ITEM>
+          <ITEM>
+            Run JWebMail to provide members Internet web access to their email
+            accounts on an internal mail server.
+          </ITEM>
+          <ITEM>
+            Run a single JWebMail server to allow for a single, unified
+            interface to all of the email accounts for your users, whether
+            the target email accounts are internal organizational accounts
+            and/or external accounts.
+          </ITEM>
+        </LIST>
+      </P>
+    </SUBSECTION>
 
     <SUBSECTION name="Features" id="about:features">
       <P>
         Features include:
         <LIST>
+          <ITEM>Product is independent of the target email account
+            <EM>provider(s)</EM>.</ITEM>
           <ITEM>Gives a user full access to his/her IMAP mailbox through a simple-to-use WWW interface</ITEM>
           <ITEM>Supports multiple folders on multiple hosts, depending on mail protocol used
             (IMAP supports different folders on the same host, POP doesn't)</ITEM>
+          <ITEM>Supports SSL protocols <CODE>imaps</CODE> and <CODE>pop3s</CODE>.</ITEM>
           <ITEM>Sophisticated folder management system</ITEM>
           <ITEM>100% HTML 3.2/4.0 output, no Javascript, no Java on the Client side</ITEM>
-          <ITEM>supports multiple languages, configurable for each user</ITEM>
-          <ITEM>flexible template system to personalize look and feel and write new language files using XML and
+          <ITEM>Supports multiple languages, configurable for each user</ITEM>
+          <ITEM>Flexible template system to personalize look and feel and write new language files using XML and
             XSL</ITEM>
-          <ITEM>runs as a <EM>web application</EM> in a Java servlet container</ITEM>
+          <ITEM>Runs as a <EM>web application</EM> in a Java servlet container</ITEM>
           <ITEM>Improved session management keeps mail connections alive</ITEM>
-          <ITEM>Improved speed compared to CGI scripts (about factor 5-10, depending on usage)</ITEM>
-          <ITEM>Usage of JavaMail-API ensures compatibility to many mailstandards
-            ("officially" supported and tested: IMAPv4)</ITEM>
+          <ITEM>Performance, scalability, and portability
+                of a pure Java application</ITEM>
+          <ITEM>Usage of JavaMail-API ensures compatibility to many mail
+                standards</ITEM>
           <ITEM>Open Source distribution allows easy customization</ITEM>
-          <ITEM>web-based administration interface</ITEM>
-          <ITEM>support for multiple virtual user domains</ITEM>
+          <ITEM>Web-based administration interface</ITEM>
+          <ITEM>Support for multiple virtual user domains</ITEM>
           <ITEM>Easily add new features through the JWebMail modular plugin concept
             (support for dependencies, hooking into URLs, etc)</ITEM>
+          <ITEM>Application/Data separation allows for redeployments and
+            upgrades without losing any configuration or user data.</ITEM>
         </LIST>
-      </P>
-    </SUBSECTION>
-
-    <SUBSECTION name="Whom JWebMail is aimed at" id="about:audience">
-      <P>
-        Who should use JWebMail:<BR/>
-        JWebMail's primary goal is to provide ISPs, companies and universities with a
-        simple and zero-cost solution to give WWW mailaccess to their users.<BR/>
-        Users can read and write their email while they are sitting in an Internet-Cafe,
-        at expositions, etc without having to carry their PC around.<BR/>
-        It is not intended as a replacement for the different personal email clients,
-        but as a supplement for an existing mail solution.<BR/>
-        The secondary goal is to unify a user's different email accounts under one
-        interface which is easily accomplished using WebMails folder capability.
       </P>
     </SUBSECTION>
   </SECTION>
@@ -85,22 +108,35 @@ limitations under the License.
             A mailserver for sending (SMTP) and receiving (IMAP) mails; by default,
             JWebMail will use "localhost" for both
           </ITEM> <ITEM>
-            A webapp-capable Java servlet container which runs on a Java 1.5 or greater
-            JVM (either JRE or JDK).  Anything from a stripped down servlet-container
+            A webapp-capable Java servlet container which runs on a Java 1.5 or
+            greater JVM (either JRE or JDK).
+            Anything from a stripped down servlet-container
             like <A href="http://tomcat.apache.org/">Tomcat</A>,
-            to a J2EE application server like JBoss or WebSphere will work.
+            to a J2EE application server like
+            <A href="http://www.jboss.org/jbossas">JBoss</A> or
+            <A href="http://www.ibm.com/software/webservers/appserv/was/">
+              WebSphere</A> will work.
           </ITEM> <ITEM>
             Your servlet container needs modern versions of the following libraries
             installed:
             <LIST>
-               <ITEM>
-                 JavaMail API (typically <CODE>mailapi-*.jar</CODE>)
+              <ITEM>
+                JavaMail API (typically <CODE>mailapi-*.jar</CODE>)
+                You can download
+                <A href="http://pub.admc.com/lib-repos/mailapi-1.4.1.jar">
+                   version 1.4.1 of the JavaMail API library here</A>.
               </ITEM> <ITEM>
-                JavaMail SMTP provider (typically <CODE>smtp-*.jar</CODE>)
+                JavaMail SMTP provider (typically <CODE>smtp-*.jar</CODE>).
+                You can download
+                <A href="http://pub.admc.com/lib-repos/smtp-1.4.1.jar">
+                  version 1.4.1 of the SMTP library here</A>.
               </ITEM> <ITEM>
-                 JAF/Java Activation Framework (not necessary if your servlet
-                 container runs Java 1.6, since Java 1.6 includes the activation
-                 framework).
+                JAF/Java Activation Framework
+                (<EM>not necessary if your servlet container uses Java 1.6</EM>,
+                since Java 1.6 includes the activation framework).
+                Java 1.5-users can download
+                <A href="http://pub.admc.com/lib-repos/jaf-1.1.1.jar">
+                version 1.1.1 of JAF library here</A>.
               </ITEM>
             </LIST>
           </ITEM>
@@ -162,8 +198,10 @@ limitations under the License.
         </ITEM>
         <ITEM>Build and install from source
           <P>
-            JWebMail is compiled by using the Ant build-system.  You will need Ant
-            version 6 or greater and Java JDK 1.5 or greater to build JWebMail.
+            JWebMail is compiled by using the Ant build-system.  You will need
+            <A href="http://ant.apache.org/">Ant</A> version 6 or greater and
+            <A href="http://java.sun.com/javase/">Java JDK 1.5 or greater</A>
+            to build JWebMail.
           </P> <P>
             The following steps are required (for a quick-start):<NLIST>
               <ITEM>
@@ -179,7 +217,9 @@ limitations under the License.
               </ITEM> <ITEM>
                 Just run 'ant' to build an exploded webapp and a war file in
                 subdirectory "build/webapp".
-                If you don't have an Ivy jar file in your CLASSPATH, the Ant command
+                If you don't have an
+                <A href="http://ant.apache.org/ivy/">Ivy</A>
+                jar file in your CLASSPATH, the Ant command
                 above will display the simple command that you can copy-and-paste to your
                 command line to satisfy it.
               </ITEM> <ITEM>
@@ -203,10 +243,13 @@ limitations under the License.
             with your favorite XSLT processor tool and the guide.* artifacts in the
             doc-src directory.
           </P> <P>
-            The build system uses Apache Ivy to fetch third party libraries.  The
-            configuration allows you to change the library repository location by
-            editing local.properties and ivy-settings.xml.  See
-            http://ant.apache.org/ivy/ for details about Apache Ivy.
+            The build system uses
+            <A href="http://ant.apache.org/ivy/">Apache Ivy</A>
+            to fetch third party libraries.  The configuration allows you to
+            change the library repository location by editing local.properties
+            and ivy-settings.xml.  See
+            <A href="http://ant.apache.org/ivy/">http://ant.apache.org/ivy/</A>
+            for details about Apache Ivy.
           </P>
         </ITEM>
       </NLIST></P>
