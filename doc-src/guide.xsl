@@ -30,6 +30,7 @@ limitations under the License.
       </HEAD>
       <BODY BGCOLOR="#ffffff">
         <CENTER><H1>User's Guide for <xsl:value-of select="TITLE"/></H1></CENTER>
+        <CENTER><H4>$Revision$</H4></CENTER>
         <xsl:apply-templates select="SECTION"/>
       </BODY>
     </HTML>
