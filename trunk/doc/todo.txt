@@ -3,13 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Try to warn where now silently fails to setSubscribe(true) on
-WU mbox DIRECTORIES.
-
-Either do not display the Imap/mbox folder-containing Folders on the
-Subscription-management screen, or at least tell the user when 
-their Subscription action has no effect.
-
 Folders in source folder are hidden for some reason, after copying to
 another folder.  E.g. is tasy "Showing messages 1 to 2", but only 1
 message is shown.
@@ -33,12 +26,6 @@ Sentence is incomplete, and I have no idea what the intended sentence was.
 
 Remove the interaction widgets in the Admin Plugin for the disabled
 shutdown actions.
-
-Fix overzealous retension of mail hosts.  Either do not store mail hosts
-details per user, or remove them when Admin changes protocol settings
-(talking about folder access, not authentication).  At the very least,
-allow the Admin Plugin to view and change the user's data (it's stored
-in the user's XML file, but not presented in the Admin gui).
 
 More branding updates.
     Search for '\<WebMail\>' and change all but Servlet name references
@@ -86,8 +73,11 @@ Load delivered resources through classpath.
 Code up a stopper for the ConnectionTimer thread which continues running
 after app shutdown.
 
-Fix bug where existing Virtual Domain never see changes made to the
-Virtual Domain config.
+Have Domains protocol settings (non-auth) constrain user MAILHOST settings
+at MAILHOST usage time, not just at creation.
+At the very least, allow the Admin Plugin to view and change the user's
+data (it's stored in the user's XML file, but not presented in the
+user-admin section of the Admin gui).
 
 Use container-managed mail providers retrieved through JNDI.
 
@@ -101,6 +91,10 @@ ancestors, not just direct children.
 Do code search for use of getElementsBy...() and change to the less dangerous
 and more efficient getChild*() methods.
 
-Test POPS protocols.
+Test POPS protocol.
 
 When create Folders, they should automatically be subscribed to.
+
+Either do not display the change link on (!HOLD_MESSAGES) Folders on the
+Subscription-management screen, or at least tell the user when their
+Subscription action has no effect.
