@@ -211,7 +211,8 @@ public class SimpleStorage extends FileStorage {
             data.setTheme(parent.getDefaultTheme());
             WebMailVirtualDomain vdom=getVirtualDomain(domain);
             data.addMailHost("Default",getConfig("DEFAULT PROTOCOL")+"://"+
-                             vdom.getDefaultServer(),user,password);
+                             vdom.getDefaultServer(),user,password,
+                             vdom.getImapBasedir());
 
         } catch(Exception ex) {
             log.warn("SimpleStorage: User configuration template ("+template+") exists but could not be parsed", ex);

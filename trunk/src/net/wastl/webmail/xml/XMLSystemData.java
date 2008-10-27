@@ -258,6 +258,9 @@ public class XMLSystemData extends ConfigStore {
                         return "localhost";
                     }
                     public void setDomainName(String name) throws Exception {
+                        log.error(
+                                "Ignoring DefaultDomain.setDomainName().  "
+                                + "Should not call this method.");
                     }
 
                     public String getDefaultServer() {
@@ -265,6 +268,9 @@ public class XMLSystemData extends ConfigStore {
                     }
 
                     public void setDefaultServer(String name) {
+                        log.error(
+                                "Ignoring DefaultDomain.setDomainServer().  "
+                                + "Should not call this method.");
                     }
 
                     public String getAuthenticationHost() {
@@ -272,6 +278,9 @@ public class XMLSystemData extends ConfigStore {
                     }
 
                     public void setAuthenticationHost(String name) {
+                        log.error(
+                            "Ignoring DefaultDomain.setAuthenticationHost().  "
+                                + "Should not call this method.");
                     }
 
                     public boolean isAllowedHost(String host) {
@@ -279,6 +288,9 @@ public class XMLSystemData extends ConfigStore {
                     }
 
                     public void setAllowedHosts(String hosts) {
+                        log.error(
+                                "Ignoring DefaultDomain.setAllowedHosts().  "
+                                + "Should not call this method.");
                     }
 
                     public Enumeration getAllowedHosts() {
@@ -296,10 +308,17 @@ public class XMLSystemData extends ConfigStore {
                     }
 
                     public void setHostsRestricted(boolean b) {
+                        log.error(
+                                "Ignoring DefaultDomain.setHostsRestricted().  "
+                                + "Should not call this method.");
                     }
 
                     public boolean getHostsRestricted() {
                         return false;
+                    }
+
+                    public String getImapBasedir() {
+                        return null;
                     }
             };
         }
@@ -330,6 +349,13 @@ public class XMLSystemData extends ConfigStore {
 
                     public String getDefaultServer() {
                         String value=XMLCommon.getTagValue(domain,"DEFAULT_HOST");
+                        return value==null?"unknown":value;
+                    }
+
+                    /* Override the IMAP base directory for this domain,
+                     * for imap and imaps protocols */
+                    public String getImapBaseDir() {
+                        String value=XMLCommon.getTagValue(domain,"IMAP_BASEDIR");
                         return value==null?"unknown":value;
                     }
 
@@ -408,6 +434,13 @@ public class XMLSystemData extends ConfigStore {
                     public boolean getHostsRestricted() {
                         NodeList nl=domain.getElementsByTagName("RESTRICTED");
                         return nl.getLength()>0;
+                    }
+
+                    public String getImapBasedir() {
+                        NodeList nl=domain.getElementsByTagName("IMAP_BASEDIR");
+                        return ((nl.getLength() > 0) ?
+                                XMLCommon.getElementTextValue(
+                                        (Element) nl.item(0)) : null);
                     }
                 };
         } else {

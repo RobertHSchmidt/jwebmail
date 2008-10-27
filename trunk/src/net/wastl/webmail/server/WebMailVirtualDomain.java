@@ -83,4 +83,6 @@ public interface WebMailVirtualDomain  {
     public void setHostsRestricted(boolean b);
 
     public boolean getHostsRestricted();
+
+    public String getImapBasedir();
 }
