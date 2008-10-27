@@ -1314,98 +1314,153 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
 
     /**
-     * Construct the folder subtree for the given folder and append it to xml_parent.
+     * Construct the folder subtree for the given folder and append it to
+     * xml_parent.
+     *
+     * N.b. this method does not necessarily create a new XML Folder Element.
+     * If called with subscribed_only and the target Folder (and in some
+     * cases its descendants) are not subscribed, no Element will be created
+     * and 0 will be returned.
+     * <P>
+     * Pop servers don't support nesting at all, so you'll just get a single
+     * level out of this method.
+     * <P>
+     * There is a critical subscribed_only difference in behavior between
+     * Maildir and mbox type mail servers.
+     * Maildir folders are all HOLDS_MESSAGES, whether empty or not, and
+     * these folders have a subscribed attribute which the user can set,
+     * and which we honor.
+     * mbox folders, on the other hand, have no subscribed attribute for
+     * their !HOLDS_MESSAGE folders, so we must recurse to all of the
+     * descendant HOLDS_MESSAGE folders to see if we should show.
      *
      * @param folder the folder where we begin
-     * @param xml_parent the XML Element where the gathered information will be appended
-     * @param subscribed_only Only list subscribed folders
-     * @returns maximum depth of the folder tree (needed to calculate the necessary columns in a table)
+     * @param xml_parent XML Element where the gathered information will be
+     *                   appended
+     * @param subscribed_only Only add 'subscribed' folders
+     * @returns maximum depth of the folder tree (needed to calculate the
+     *     necessary columns in a table).  Returns 0 if no XML elements added.
      */
     protected int getFolderTree(Folder folder, Element xml_parent, boolean subscribed_only) {
-        int depth=1;
+        boolean doCount = true;
+log.fatal("Make 'doCount' into a getFolderTree parameter!");
+        int generatedDepth = 0;
 
-        String id=generateFolderHash(folder);
-
-        boolean holds_folders=false,holds_messages=false;
+        int folderType;
         Element xml_folder;
         try {
-            holds_folders=(folder.getType() & Folder.HOLDS_FOLDERS) == Folder.HOLDS_FOLDERS;
-            holds_messages=(folder.getType() & Folder.HOLDS_MESSAGES) == Folder.HOLDS_MESSAGES;
-            xml_folder=model.createFolder(id,folder.getName(),holds_folders,holds_messages);
-            xml_folder.setAttribute("subscribed",
-                    (folder.isSubscribed() ? "true" : "false"));
+            folderType = folder.getType();
         } catch(MessagingException ex) {
-            xml_folder=model.createFolder(id,folder.getName(),holds_folders,holds_messages);
+            log.error("Can't get enough info from server to even make Gui node",
+                    ex);
+            xml_parent.setAttribute("error",
+                    "For child '" + folder.getName() + ":  " + ex.getMessage());
+            return 0;
+        }
+        boolean holds_folders = (folderType & Folder.HOLDS_FOLDERS) != 0;
+        boolean holds_messages = (folderType & Folder.HOLDS_MESSAGES) != 0;
+        // Sanity check:
+        if ((!holds_folders) && !holds_messages) {
+            log.fatal("Folder can hold neither folders nor messages: "
+                    + folder.getFullName());
+            throw new RuntimeException(
+                    "Folder can hold neither folders nor messages: "
+                    + folder.getFullName());
+        }
+        if (subscribed_only && holds_messages && !folder.isSubscribed())
+            return generatedDepth; // Return right away and save a LOT OF WORK
+            // N.b. we honor folder.isSubscribed() only for holds_message
+            // folders.  That means all Maildir server folders, and all
+            // mbox server folders except for mbox directories.  In this
+            // last case, we must recurse to determine whether to show folder.
+        String id=generateFolderHash(folder);
+        xml_folder=model.createFolder(id,folder.getName(),holds_folders,holds_messages);
+        // XMLUserModel.createFolder() declares no throws.  If any Exceptions
+        // are expected from it, move the statement above into the try block.
+        // The xml_folder Element here will be orphaned and GC'd if we don't
+        // appendChild (in which case we return 0).
+
+        if (doCount && holds_messages) try {
+            // this folder will definitely be added!
+            /* This folder can contain messages */
+            Element messagelist=model.createMessageList();
+
+            int total_messages=folder.getMessageCount();
+            int new_messages=folder.getNewMessageCount();
+
+            if (total_messages == -1 || new_messages == -1 || !folder.isOpen()) {
+                folder.open(Folder.READ_ONLY);
+                total_messages=folder.getMessageCount();
+                new_messages=folder.getNewMessageCount();
+            }
+            if(folder.isOpen()) folder.close(false);
+
+            messagelist.setAttribute("total",total_messages+"");
+            messagelist.setAttribute("new",new_messages+"");
+            //xml_folder.appendChild(messagelist);
+            //  Remove this comment and previous line once we've verified that
+            //  the previous line double posts this folder.
+        } catch(MessagingException ex) {
+            log.warn("Failed to count messages in folder '"
+                    + folder.getFullName() + "'");
             xml_folder.setAttribute("error",ex.getMessage());
         }
 
+        int descendantDepth = 0;
+        if (holds_folders) try {
+            Set<String> fullNameSet = new HashSet<String>();
 
+            /* Recursively add subfolders to the XML model */
+            // DO NOT USE listSubscribed(), because with !HOLDS_MESSAGE
+            // folders, that skips non-Message Folders which may contain
+            // subscribed descendants!
+            for (Folder f : folder.list()) {
+                if (!fullNameSet.add(f.getFullName())) {
+                    log.warn("Skipping duplicate subfolder returned by mail"
+                            + " server:  " + f.getFullName());
+                    continue;
+                }
+                if (subscribed_only &&
+                        (f.getType() & Folder.HOLDS_MESSAGES) != 0
+                        && !f.isSubscribed()) continue;
+                        /* If we recursed here, the getFolderTree() would
+                         * just return 0 and no harm done.
+                         * Just helping performance by preventing a recursion
+                         * here.
+                         * For comment on the logic here, see the same test
+                         * towards the top of this method (before recursion).
+                         */
+                int depth  = getFolderTree(f,xml_folder,subscribed_only);
+                if (depth > descendantDepth ) descendantDepth = depth;
+            }
+            generatedDepth += descendantDepth ;
+        } catch(MessagingException ex) {
+            xml_folder.setAttribute("error", ex.getMessage());
+        }
+
+        // We've already validated that if subscribed_only and holds_message
+        //  then folder is subcribed.  Also verified either holds_m or holds_f.
+        //  Only have to check the !holds_message case.
+        if (subscribed_only && (!holds_messages) && descendantDepth < 1) {
+            xml_folder = null;
+            // Unnecessary, but may encourage GC
+            return generatedDepth;
+        }
+
+        /* We ALWAYS return only subscribed folders except for these two
+         * distinct cases: */
+        xml_folder.setAttribute("subscribed", (
+            (holds_messages && !folder.isSubscribed())
+            || ((!holds_messages) && descendantDepth < 1)
+        ) ? "false" : "true");
+        // N.b. our Element's "subscribed" element does not correspond 1:1
+        // to Folder.isSubscribed(), since non-message-holding Folders have
+        // no "subscribed" attribute.
         folders.put(id,folder);
 
-
-        try {
-            /* This folder can contain messages */
-            if(holds_messages) {
-                Element messagelist=model.createMessageList();
-
-                int total_messages=folder.getMessageCount();
-                int new_messages=folder.getNewMessageCount();
-
-                if((total_messages == -1 || new_messages == -1) || !folder.isOpen()) {
-                    folder.open(Folder.READ_ONLY);
-                    total_messages=folder.getMessageCount();
-                    new_messages=folder.getNewMessageCount();
-                }
-                if(folder.isOpen()) folder.close(false);
-
-                messagelist.setAttribute("total",total_messages+"");
-                messagelist.setAttribute("new",new_messages+"");
-                xml_folder.appendChild(messagelist);
-            }
-        } catch(MessagingException ex) {
-            xml_folder.setAttribute("error",ex.getMessage());
-        }
-
-        try {
-            /* There are subfolders, get them! */
-            if(holds_folders) {
-                Folder[] subfolders;
-
-                /* If the user only wanted to see subscribed folders, call listSubscribed
-                   otherwise call list() */
-                if(subscribed_only) {
-                    try {
-                        subfolders=folder.listSubscribed();
-                    } catch(MessagingException ex) {
-                        log.warn("Subscribe not supported");
-                        subfolders=folder.list();
-                    }
-                } else {
-                    subfolders=folder.list();
-                }
-                int max_tree_depth=0;
-
-                Set<String> fullNameSet = new HashSet<String>();
-                /* Recursiveley add subfolders to the XML model */
-                for(int i=0;i<subfolders.length;i++) {
-                    if (!fullNameSet.add(subfolders[i].getFullName())) {
-                        log.warn("Skipping duplicate subfolder returned by mail"
-                                + " server:  " + subfolders[i].getFullName());
-                        continue;
-                    }
-                    int tree_depth=getFolderTree(subfolders[i],xml_folder,subscribed_only);
-                    if(tree_depth>max_tree_depth) {
-                        max_tree_depth=tree_depth;
-                    }
-                }
-                depth+=max_tree_depth;
-            }
-        } catch(MessagingException ex) {
-            xml_folder.setAttribute("error",ex.getMessage());
-        }
-
         xml_parent.appendChild(xml_folder);
-        return depth;
+        generatedDepth++;  // Add the count for xml_folder
+        return generatedDepth;
     }
 
     public void refreshFolderInformation() {
@@ -1423,6 +1478,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         String cur_mh_id="";
         Enumeration mailhosts=user.mailHosts();
         int max_depth=0;
+        int folderType;
 
         while(mailhosts.hasMoreElements()) {
             cur_mh_id=(String)mailhosts.nextElement();
@@ -1438,11 +1494,13 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             try {
                 rootFolder = getRootFolder(cur_mh_id);
 
-                /* Cannot unsubscribe root folder! */
                 try {
                     rootFolder.setSubscribed(true);
                 } catch(MessagingException ex) {
                     // Only IMAP supports subscription
+                    log.warn("Folder.setSubscribed failed.  "
+                            + "Probably a non-supporting mail service: "
+                            + ex);
                 }
             } catch (MessagingException ex) {
                 mailhost.setAttribute("error", ex.getMessage());
@@ -1464,12 +1522,16 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 log.debug("Trying extra base dir "
                         + nonInboxBase.getFullName());
                 if (nonInboxBase.exists()) {
-                    nonInboxBase.setSubscribed(true);
-                    if (!nonInboxBase.isSubscribed())
-                        log.error("A bug in JavaMail or in the server is "
-                                + "preventing subscription to '"
-                                + nonInboxBase.getFullName() + "' on '"
-                                + url + "'.  Folders will not be visible.");
+                    folderType = nonInboxBase.getType();
+                    if ((folderType & Folder.HOLDS_MESSAGES) != 0) {
+                        // Can only Subscribe to Folders which may hold Msgs.
+                        nonInboxBase.setSubscribed(true);
+                        if (!nonInboxBase.isSubscribed())
+                            log.error("A bug in JavaMail or in the server is "
+                                    + "preventing subscription to '"
+                                    + nonInboxBase.getFullName() + "' on '"
+                                    + url + "'.  Folders will not be visible.");
+                    }
                     int extraDepth = extraDepth =
                         getFolderTree(nonInboxBase, mailhost, subscribed_only);
                     if (extraDepth > depth) depth = extraDepth;
@@ -1478,7 +1540,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                             + " with max depth of " + extraDepth);
                 }
             } catch (Exception ex) {
-                mailhost.setAttribute("error", ex.getMessage());
+                if (!url.getProtocol().startsWith("pop"))
+                    mailhost.setAttribute("error", ex.getMessage());
                 log.warn("Failed to fetch child folders from ("
                         + url + ')', ex);
             }

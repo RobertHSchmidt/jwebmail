@@ -22,6 +22,9 @@ Non-critical XPath bug(s).  See errors in the application log.
 
 Graceless handling of session timeouts.  Get exception stack traces in
 browser if a session times out... at least for an Admin session.
+I believe there is also a hardcoded reference to the old context-path
+of "/webmail" somewhere, because I am sometimes redirected to
+http://hostname:PORT/webmail/... after a timeout.
 
 App has compiled-in context path.  The implications of this are:
     Needs to be recompiled just to run as the root (/) app in an app server.

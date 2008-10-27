@@ -195,7 +195,9 @@ public class XMLUserData extends XMLData implements UserData {
             XMLCommon.setElementTextValue(mh_uri,host);
             mailhost.appendChild(mh_uri);
 
-log.fatal("Implement persistence of MH_IMAP_BASEDIR");
+            if (imapBaseDir != null)
+                log.fatal("Implement persistence of MH_IMAP_BASEDIR.  "
+                        + "Ignoring setting for now");
 
             data.appendChild(mailhost);
             log.debug("Done with mailhost "+name);
