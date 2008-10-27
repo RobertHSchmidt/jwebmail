@@ -93,6 +93,8 @@ public class WebMailSession implements HTTPSession {
 
     protected Vector need_expunge_folders;
 
+    protected String imapBasedir = null;
+
     protected boolean is_logged_out=false;
 
     public WebMailSession(WebMailServer parent,Object parm,HTTPRequestHeader h)
@@ -1330,11 +1332,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             holds_folders=(folder.getType() & Folder.HOLDS_FOLDERS) == Folder.HOLDS_FOLDERS;
             holds_messages=(folder.getType() & Folder.HOLDS_MESSAGES) == Folder.HOLDS_MESSAGES;
             xml_folder=model.createFolder(id,folder.getName(),holds_folders,holds_messages);
-            if(folder.isSubscribed()) {
-                xml_folder.setAttribute("subscribed","true");
-            } else {
-                xml_folder.setAttribute("subscribed","false");
-            }
+            xml_folder.setAttribute("subscribed",
+                    (folder.isSubscribed() ? "true" : "false"));
         } catch(MessagingException ex) {
             xml_folder=model.createFolder(id,folder.getName(),holds_folders,holds_messages);
             xml_folder.setAttribute("error",ex.getMessage());
@@ -1386,8 +1385,14 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 }
                 int max_tree_depth=0;
 
+                Set<String> fullNameSet = new HashSet<String>();
                 /* Recursiveley add subfolders to the XML model */
                 for(int i=0;i<subfolders.length;i++) {
+                    if (!fullNameSet.add(subfolders[i].getFullName())) {
+                        log.warn("Skipping duplicate subfolder returned by mail"
+                                + " server:  " + subfolders[i].getFullName());
+                        continue;
+                    }
                     int tree_depth=getFolderTree(subfolders[i],xml_folder,subscribed_only);
                     if(tree_depth>max_tree_depth) {
                         max_tree_depth=tree_depth;
@@ -1414,10 +1419,11 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
     public void refreshFolderInformation(boolean subscribed_only) {
         setEnv();
         if(folders==null) folders=new Hashtable();
-        Folder cur_folder=null;
+        Folder rootFolder = null;
         String cur_mh_id="";
         Enumeration mailhosts=user.mailHosts();
         int max_depth=0;
+
         while(mailhosts.hasMoreElements()) {
             cur_mh_id=(String)mailhosts.nextElement();
 
@@ -1430,52 +1436,55 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             int depth=0;
 
             try {
-                cur_folder=getRootFolder(cur_mh_id);
-
+                rootFolder = getRootFolder(cur_mh_id);
 
                 /* Cannot unsubscribe root folder! */
                 try {
-                    cur_folder.setSubscribed(true);
+                    rootFolder.setSubscribed(true);
                 } catch(MessagingException ex) {
                     // Only IMAP supports subscription
                 }
+            } catch (MessagingException ex) {
+                mailhost.setAttribute("error", ex.getMessage());
+                log.warn("Failed to connect and get Root folder from ("
+                        + url + ')', ex);
+                return;
+            }
 
-                /* Here we try to determine the remote IMAP or POP host. There is no problem if this fails
-                   (it will most likely for POP3), so the exception is caught and not handled */
-                try {
-                    // Washington University
-                    if(cur_folder.getFolder("~"+mhd.getLogin()+"/mail").exists()) {
-                        /* Washington University stores user mailboxes as
-                         * ~user/mail/... */
-                        depth=getFolderTree(cur_folder.getFolder("INBOX"),mailhost, subscribed_only);
-                        if(depth>max_depth) {
-                            max_depth=depth;
-                        }
-                        depth=getFolderTree(cur_folder.getFolder("~"+mhd.getLogin()+"/mail"),mailhost, subscribed_only);
-                    }
-                    /* Cyrus, Courier & Co have their folders beneath the INBOX */
-                    else if(cur_folder.getFolder("INBOX").exists()) {
-                        depth=getFolderTree(cur_folder.getFolder("INBOX"),mailhost, subscribed_only);
-                    }
-                } /* If it didn't work it failed in the "if" statement, since "getFolderTree" doesn't throw exceptions
-                     so what we want to do is to simply construct the folder tree for INBOX */
-                catch(MessagingException ex) {
-                    depth=getFolderTree(cur_folder.getFolder("INBOX"),mailhost, subscribed_only);
+            try {
+                depth=getFolderTree(rootFolder.getFolder("INBOX"),
+                        mailhost, subscribed_only);
+                log.debug("Loaded INBOX folders below Root to a depth of "
+                        + depth);
+                String extraFolderPath =
+                        ((imapBasedir == null) ? "~" : imapBasedir)
+                        + mhd.getLogin();
+                //String extraFolderPath = "/home/" + mhd.getLogin();
+                Folder nonInboxBase = rootFolder.getFolder(extraFolderPath);
+                log.debug("Trying extra base dir "
+                        + nonInboxBase.getFullName());
+                if (nonInboxBase.exists()) {
+                    nonInboxBase.setSubscribed(true);
+                    if (!nonInboxBase.isSubscribed())
+                        log.error("A bug in JavaMail or in the server is "
+                                + "preventing subscription to '"
+                                + nonInboxBase.getFullName() + "' on '"
+                                + url + "'.  Folders will not be visible.");
+                    int extraDepth = extraDepth =
+                        getFolderTree(nonInboxBase, mailhost, subscribed_only);
+                    if (extraDepth > depth) depth = extraDepth;
+                    log.debug("Loaded additional folders from below "
+                            + nonInboxBase.getFullName()
+                            + " with max depth of " + extraDepth);
                 }
+            } catch (Exception ex) {
+                mailhost.setAttribute("error", ex.getMessage());
+                log.warn("Failed to fetch child folders from ("
+                        + url + ')', ex);
             }
-            // Here a more serious exception has been caught (Connection failed)
-            catch(MessagingException ex) {
-                mailhost.setAttribute("error",ex.getMessage());
-                log.warn("Error connecting to mailhost ("+url.toString()+"): "+ex.getMessage());
-            }
-
-            if(depth>max_depth) {
-                max_depth=depth;
-            }
-
+            if(depth>max_depth) max_depth=depth;
             model.addMailhost(mailhost);
         }
-
         model.setStateVar("max folder depth",(1+max_depth)+"");
     }
 
@@ -1613,6 +1622,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         if(!vdom.isAllowedHost(host)) {
             throw new MessagingException("You are not allowed to connect to this host");
         }
+        imapBasedir = vdom.getImapBasedir();
 
         /* Check if this host is already connected. Use connection if true, create a new one if false. */
         Store st=(Store)stores.get(host+"-"+protocol);
@@ -1649,11 +1659,10 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
         Store st=connectStore(url.getHost(),url.getProtocol(),m.getLogin(),m.getPassword());
 
-        log.debug("Default folder: "+st.getDefaultFolder().toString());
-
         Folder f=st.getDefaultFolder();
         connections.put(name,f);
-        log.info("Mail: Folder "+f.toString()+" opened at store "+st.toString()+".");
+        log.info("Mail: Default folder '" + f.getFullName() +
+                "' retrieved from store " + st + '.');
         return f;
     }
 
@@ -2060,7 +2069,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         throws MessagingException {
         disconnectAll();
         String host_url=protocol+"://"+host;
-        user.addMailHost(name, host_url, login, password);
+        user.addMailHost(name, host_url, login, password, null);
         Enumeration enumVar=user.mailHosts();
         while(enumVar.hasMoreElements()) {
             String id=(String)enumVar.nextElement();

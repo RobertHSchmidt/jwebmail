@@ -170,7 +170,8 @@ public class XMLUserData extends XMLData implements UserData {
         }
     }
 
-    public void addMailHost(String name, String host, String login, String password) {
+    public void addMailHost(String name, String host, String login,
+            String password, String imapBaseDir) {
         // First, check whether a mailhost with this name already exists.
         // Delete, if yes.
         try {
@@ -193,6 +194,8 @@ public class XMLUserData extends XMLData implements UserData {
             Element mh_uri=root.createElement("MH_URI");
             XMLCommon.setElementTextValue(mh_uri,host);
             mailhost.appendChild(mh_uri);
+
+log.fatal("Implement persistence of MH_IMAP_BASEDIR");
 
             data.appendChild(mailhost);
             log.debug("Done with mailhost "+name);

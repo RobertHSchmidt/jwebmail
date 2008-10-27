@@ -41,7 +41,8 @@ public interface UserData {
      * @param login The login name used for the host
      * @param password The corresponding password
      */
-    public void addMailHost(String name, String host, String login, String password);
+    public void addMailHost(String name, String host, String login,
+            String password, String imapBasedir);
 
     /**
      * Remove the mailhost with the given name.
