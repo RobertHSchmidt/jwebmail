@@ -17,6 +17,7 @@
  */
 
 
+package net.wastl.webmail.authenticators;
 
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;

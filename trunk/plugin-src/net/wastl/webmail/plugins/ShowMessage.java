@@ -17,6 +17,8 @@
  */
 
 
+package net.wastl.webmail.plugins;
+
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.server.http.*;
 import net.wastl.webmail.ui.xml.*;

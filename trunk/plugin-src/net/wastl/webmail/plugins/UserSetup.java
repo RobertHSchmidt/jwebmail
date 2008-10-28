@@ -17,6 +17,7 @@
  */
 
 
+package net.wastl.webmail.plugins;
 
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.server.http.*;
@@ -24,7 +25,6 @@ import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
 import org.webengruven.webmail.auth.*;
-
 
 /**
  * Show a form to change user settings and actually perform them.

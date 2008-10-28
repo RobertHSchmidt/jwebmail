@@ -17,6 +17,8 @@
  */
 
 
+package org.webengruven.webmail.authenticators;
+
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
 import net.wastl.webmail.config.ConfigScheme;

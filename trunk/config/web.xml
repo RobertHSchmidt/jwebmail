@@ -72,25 +72,25 @@ limitations under the License.
     <init-param>
       <param-name>webmail.plugins</param-name>
       <param-value>
-        About,
-        AdminPlugin,
-        ChallengeHandler,
-        Composer,
-        ErrorHandler,
-        FileAttacher,
-        FolderList,
-        FolderSetup,
-        NavBar,
-        ImageHandler,
-        LogoutSession,
-        MailboxList,
-        PassThroughPlugin,
-        SendMessage,
-        ShowMessage,
-        ShowMIME,
-        UserSetup,
-        WebMailHelp,
-        WebMailTitle
+        net.wastl.webmail.plugins.About,
+        net.wastl.webmail.plugins.AdminPlugin,
+        org.webengruven.webmail.plugins.ChallengeHandler,
+        net.wastl.webmail.plugins.Composer,
+        net.wastl.webmail.plugins.ErrorHandler,
+        net.wastl.webmail.plugins.FileAttacher,
+        net.wastl.webmail.plugins.FolderList,
+        net.wastl.webmail.plugins.FolderSetup,
+        net.wastl.webmail.plugins.NavBar,
+        net.wastl.webmail.plugins.ImageHandler,
+        net.wastl.webmail.plugins.LogoutSession,
+        net.wastl.webmail.plugins.MailboxList,
+        net.wastl.webmail.plugins.PassThroughPlugin,
+        net.wastl.webmail.plugins.SendMessage,
+        net.wastl.webmail.plugins.ShowMessage,
+        net.wastl.webmail.plugins.ShowMIME,
+        net.wastl.webmail.plugins.UserSetup,
+        net.wastl.webmail.plugins.WebMailHelp,
+        net.wastl.webmail.plugins.WebMailTitle
       </param-value>
     </init-param>
 
@@ -101,13 +101,13 @@ limitations under the License.
     <init-param>
       <param-name>webmail.authenticators</param-name>
       <param-value>
-        IMAPAuthenticator,
-        IMAPSAuthenticator,
-        POPAuthenticator,
-        POPSAuthenticator,
-        OTPAuthenticator,
-        SimpleAuthenticator,
-        UnixAuthenticator
+        net.wastl.webmail.authenticators.IMAPAuthenticator,
+        net.wastl.webmail.authenticators.IMAPSAuthenticator,
+        net.wastl.webmail.authenticators.POPAuthenticator,
+        net.wastl.webmail.authenticators.POPSAuthenticator,
+        org.webengruven.webmail.authenticators.OTPAuthenticator,
+        net.wastl.webmail.authenticators.SimpleAuthenticator,
+        net.wastl.webmail.authenticators.UnixAuthenticator
       </param-value>
     </init-param>
 

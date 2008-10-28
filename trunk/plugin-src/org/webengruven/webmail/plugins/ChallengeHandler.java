@@ -17,13 +17,7 @@
  */
 
 
-/** This is the URLHandler for "/challenge" It shows the user a challenge and
- *  gets their new password.
- *
- * @author Devin Kowatch
- * @see net.wastl.webmail.URLHandler
- */
-
+package org.webengruven.webmail.plugins;
 
 import java.util.*;
 import net.wastl.webmail.server.*;
@@ -34,6 +28,12 @@ import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
 import org.webengruven.webmail.auth.*;
 
+/** This is the URLHandler for "/challenge" It shows the user a challenge and
+ *  gets their new password.
+ *
+ * @author Devin Kowatch
+ * @see net.wastl.webmail.URLHandler
+ */
 public class ChallengeHandler implements Plugin, URLHandler {
     public final String VERSION="2.0";
     public final String URL="/challenge";

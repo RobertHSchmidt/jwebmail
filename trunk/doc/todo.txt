@@ -3,10 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Use packages for all classes.
-Classes in */webmail/plugins and */webmail/authenticator now use default
-package, which conflicts with *.java directory locations.
-
 Somewhere in the callback thread, log the target document of XPath failures.
 
 Resolve "Not a valid number" warnings in log, from XMLUserData (at least
