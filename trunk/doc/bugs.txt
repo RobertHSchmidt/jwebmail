@@ -5,6 +5,11 @@ fix, because they are not directly in the WebMail code but in some third party
 library or program:
 ==============================================================================
 
+Whereas a single JWebMail user can manage multiple target email accounts,
+it fails terribly to manage two target email accounts if they are served
+from the same target email server.  The problem is not recognized by
+JWebMail and the user is presented with misleading results and errors.
+
 Mail hosts are saved, per-user, when they access a mail host (either first
 time or every time).  At least when the Domains feature is used, there is
 no way to update this.  E.g., when allowing only one folder access protocol
@@ -18,6 +23,13 @@ WORK-AROUND:
 Unfortunately, just removing the <MAILHOST> element from the XML file doesn't
 work.  Removing the whole file will probably lose all the users' preferences.
 
+After removing a "Mailbox" (target email account) from a JWebMail account,
+the old tree of folders from that account keeps showing up in folder listings.
+I have verified that the MAILHOST_MODEL has been removed from the
+XMLUserModel, and that these nodes are not being updated by future
+WebMailSession.refreshFolderInformation(boolean, boolean)s.  Could the
+style sheet or Servlet post-processing be caching it somehow?
+  
 Non-critical XPath bug(s).  See errors in the application log.
 
 Graceless handling of session timeouts.  Get exception stack traces in
@@ -35,6 +47,9 @@ App writes to the deployment directory.  The implications of this are:
      an exploded webapp directory tree.
     If user doesn't change the webmail.data.dir setting, all settings
      and data will be lost upon upgrade or redeployment.
+
+Domain enforcement rules are rudimentary.  Really not up to restricting
+a set of users to a set of hosts and protocols.
 
 Title:
   WU-IMAP server doesn't show recent messages in the message list

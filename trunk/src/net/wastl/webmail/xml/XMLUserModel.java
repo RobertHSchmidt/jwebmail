@@ -235,8 +235,6 @@ public class XMLUserModel extends XMLGenericModel {
         return new XMLMessage(newmessage);
     }
 
-
-
     public synchronized Element createMailhost(String name, String id,String url) {
         Element mh=root.createElement("MAILHOST_MODEL");
         mh.setAttribute("name",name);

@@ -225,7 +225,7 @@ public class WebMailSession implements HTTPSession {
     public void login() {
         setLastAccess();
         setEnv();
-        connectAll();
+        refreshFolderInformation(false, false);
     }
 
     /**
@@ -1271,15 +1271,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
     }
 
     /**
-     * Connect to all Mailhosts
-     * @deprecated Should use refreshFolderInformation now.
-     */
-    public void connectAll() {
-        refreshFolderInformation();
-    }
-
-
-    /**
        Get a childfolder of a rootfolder for a specified hash value
     */
     public Folder getChildFolder(Folder root, String folderhash) {
@@ -1338,16 +1329,17 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
      * @param xml_parent XML Element where the gathered information will be
      *                   appended
      * @param subscribed_only Only add 'subscribed' folders
+     * @param doCount Whether to generate message counts for Elements
+     *                corresponding to HOLDS_MESSAGE folders.
      * @returns maximum depth of the folder tree (needed to calculate the
      *     necessary columns in a table).  Returns 0 if no XML elements added.
      */
-    protected int getFolderTree(Folder folder, Element xml_parent, boolean subscribed_only) {
-        boolean doCount = true;
-log.fatal("Make 'doCount' into a getFolderTree parameter!");
+    protected int getFolderTree(Folder folder, Element xml_parent,
+            boolean subscribed_only, boolean doCount) {
         int generatedDepth = 0;
-
         int folderType;
         Element xml_folder;
+
         try {
             folderType = folder.getType();
         } catch(MessagingException ex) {
@@ -1397,12 +1389,12 @@ log.fatal("Make 'doCount' into a getFolderTree parameter!");
 
             messagelist.setAttribute("total",total_messages+"");
             messagelist.setAttribute("new",new_messages+"");
-            //xml_folder.appendChild(messagelist);
-            //  Remove this comment and previous line once we've verified that
-            //  the previous line double posts this folder.
+            log.debug("Counted " + new_messages + '/' + total_messages
+                    + " for folder " + folder.getFullName());
+            xml_folder.appendChild(messagelist);
         } catch(MessagingException ex) {
             log.warn("Failed to count messages in folder '"
-                    + folder.getFullName() + "'");
+                    + folder.getFullName() + "'", ex);
             xml_folder.setAttribute("error",ex.getMessage());
         }
 
@@ -1430,7 +1422,7 @@ log.fatal("Make 'doCount' into a getFolderTree parameter!");
                          * For comment on the logic here, see the same test
                          * towards the top of this method (before recursion).
                          */
-                int depth  = getFolderTree(f,xml_folder,subscribed_only);
+                int depth = getFolderTree(f,xml_folder,subscribed_only, doCount);
                 if (depth > descendantDepth ) descendantDepth = depth;
             }
             generatedDepth += descendantDepth ;
@@ -1463,15 +1455,21 @@ log.fatal("Make 'doCount' into a getFolderTree parameter!");
         return generatedDepth;
     }
 
-    public void refreshFolderInformation() {
-        refreshFolderInformation(false);
-    }
-
     /**
      * Refresh Information about folders.
      * Tries to connect folders that are not yet connected.
+     *
+     * @doCount display message counts for user
      */
-    public void refreshFolderInformation(boolean subscribed_only) {
+    public void refreshFolderInformation(
+            boolean subscribed_only, boolean doCount) {
+        /* Right now, doCount corresponds exactly to subscribed_only.
+         * When we add a user preference setting or one-time action,
+         * to present messages from all folders, we will have
+         * subscribed_only false and doCount true. */
+
+        //log.fatal("Invoking refreshFolderInformation(boolean, boolean)",
+            //new Throwable("Thread Dump"));  FOR DEBUGGING
         setEnv();
         if(folders==null) folders=new Hashtable();
         Folder rootFolder = null;
@@ -1511,7 +1509,7 @@ log.fatal("Make 'doCount' into a getFolderTree parameter!");
 
             try {
                 depth=getFolderTree(rootFolder.getFolder("INBOX"),
-                        mailhost, subscribed_only);
+                        mailhost, subscribed_only, doCount);
                 log.debug("Loaded INBOX folders below Root to a depth of "
                         + depth);
                 String extraFolderPath =
@@ -1532,8 +1530,8 @@ log.fatal("Make 'doCount' into a getFolderTree parameter!");
                                     + nonInboxBase.getFullName() + "' on '"
                                     + url + "'.  Folders will not be visible.");
                     }
-                    int extraDepth = extraDepth =
-                        getFolderTree(nonInboxBase, mailhost, subscribed_only);
+                    int extraDepth = extraDepth = getFolderTree(nonInboxBase,
+                            mailhost, subscribed_only, doCount);
                     if (extraDepth > depth) depth = extraDepth;
                     log.debug("Loaded additional folders from below "
                             + nonInboxBase.getFullName()
@@ -2086,29 +2084,34 @@ log.fatal("Make 'doCount' into a getFolderTree parameter!");
                 user.removeEmail(head.getContent("EMAIL"));
         }
         if(!head.isContentSet("ADDNEW") && !head.isContentSet("SETDEFAULT") && !head.isContentSet("DELETEEMAIL")) {
-                try {
-                        user.setSignature(new String(head.getContent("SIGNATURE").getBytes("ISO8859_1"), "UTF-8"));
-                        user.setFullName(new String(head.getContent("FULLNAME").getBytes("ISO8859_1"), "UTF-8"));
-                } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                        user.setSignature(head.getContent("SIGNATURE"));
-                        user.setFullName(head.getContent("FULLNAME"));
-                }
+            try {
+                user.setSignature(new String(head.getContent("SIGNATURE").getBytes("ISO8859_1"), "UTF-8"));
+                user.setFullName(new String(head.getContent("FULLNAME").getBytes("ISO8859_1"), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                user.setSignature(head.getContent("SIGNATURE"));
+                user.setFullName(head.getContent("FULLNAME"));
+            }
 
-                if(!head.getContent("PASSWORD").equals("")) {
-                        net.wastl.webmail.server.Authenticator auth=parent.getStorage().getAuthenticator();
-                        if(auth.canChangePassword()) {
-                                auth.changePassword(user,head.getContent("PASSWORD"),head.getContent("VERIFY"));
-                        } else {
-                                throw new InvalidDataException(getStringResource("EX NOCHANGE PASSWORD"));
-                        }
+            if(!head.getContent("PASSWORD").equals("")) {
+                net.wastl.webmail.server.Authenticator auth=parent.getStorage().getAuthenticator();
+                if(auth.canChangePassword()) {
+                    auth.changePassword(user,head.getContent("PASSWORD"),head.getContent("VERIFY"));
+                } else {
+                    log.fatal("Skipping password change since "
+                            + "authenicator doesn't permit it:  FIX THIS!");
+                    //throw new InvalidDataException(getStringResource("EX NOCHANGE PASSWORD"));
+                    //Can't throw when the HTML we generates sends a non-empty
+                    //password when the user types nothing.
+                    // TODO:  Fixme
                 }
-                user.setPreferredLocale(head.getContent("LANGUAGE"));
-                user.setTheme(head.getContent("THEME"));
-                if(head.isContentSet("SENTFOLDER")) {
-                        log.debug("SENTFOLDER="+head.getContent("SENTFOLDER"));
-                        user.setSentFolder(head.getContent("SENTFOLDER"));
-                }
+            }
+            user.setPreferredLocale(head.getContent("LANGUAGE"));
+            user.setTheme(head.getContent("THEME"));
+            if(head.isContentSet("SENTFOLDER")) {
+                    log.debug("SENTFOLDER="+head.getContent("SENTFOLDER"));
+                    user.setSentFolder(head.getContent("SENTFOLDER"));
+            }
         }
 
         // Not sure if this is really necessary:
@@ -2153,6 +2156,13 @@ log.fatal("Make 'doCount' into a getFolderTree parameter!");
      */
     public void removeMailbox(String name) {
         disconnectAll();
+        // TODO:  Fix bug here.
+        // When removing a mailbox, the XMLUserModel MAILHOST_MODEL element
+        // has definitely been removed right at this point; and this mailhost
+        // is not traversed during future refreshFolderInformation(bool,bools)s,
+        // yet the node tree for the removed host persist on screens until the
+        // user logs out.  Is it somehow cached in the Style Sheet invoked
+        // in FolderSetup.handleURL()???
         user.removeMailHost(name);
         model.update();
         // Should be called from FolderSetup Plugin

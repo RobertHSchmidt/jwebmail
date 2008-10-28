@@ -3,29 +3,36 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Folders in source folder are hidden for some reason, after copying to
-another folder.  E.g. is tasy "Showing messages 1 to 2", but only 1
-message is shown.
-
 Get JSPs out of Java source directory branch.
 
 Use packages for all classes.
 Classes in */webmail/plugins and */webmail/authenticator now use default
 package, which conflicts with *.java directory locations.
 
+Somewhere in the callback thread, log the target document of XPath failures.
+
 Resolve "Not a valid number" warnings in log, from XMLUserData (at least
 upon imap login).
 
 Resolve NPE being thrown constantly from XMLData.getNodeXPath().
 
-Somewhere in the callback thread, log the target document of XPath failures.
-
 Get rid of lines like "BiBo... is based on" in
-src/net/wastl/webmail/data/xml/*/bibop/logout.xsl, DITTO/loinscreen.xsl.
+src/net/wastl/webmail/data/xml/*/bibop/logout.xsl, DITTO/loginscreen.xsl.
 Sentence is incomplete, and I have no idea what the intended sentence was.
 
-Remove the interaction widgets in the Admin Plugin for the disabled
-shutdown actions.
+Widget fixes
+    Remove the interaction widgets in the Admin Plugin for the disabled
+    shutdown actions.
+
+    Remove password field widgets of User Setup screen if the user's
+    Authenticator does not allow changing passwords.
+
+    Pulldown list on Create Folder screen should either not offer folder
+    types not supported by the server, or detect failures to create
+    unsupported folder types (or create a type that was not selected).
+
+    Fix goofy HTML password form behavior and have it not show encrypted
+    passwords.
 
 More branding updates.
     Search for '\<WebMail\>' and change all but Servlet name references
@@ -46,12 +53,13 @@ permits.
 If time permits, turn on lotsa compilation checks with Eclipse and take
 care of the warnings.
 
-Fix googfy HTML password form behavior and have it not show encrypted
-passwords.
-
 Make release build targets.
 
 Roll an RC.  1.0.1rc1.  (Consider waiting on following super-item).
+
+-------------------------------------------
+TAKE A DEEP BREATH
+-------------------------------------------
 
 Stop loading resources directly from the application through the FS.
 Load delivered resources through classpath.
@@ -69,6 +77,10 @@ Load delivered resources through classpath.
 
     Document that user must assign the app.name/context.path to match
     the war file or web app directory name.
+
+Folders in source folder are hidden for some reason, after copying to
+another folder.  E.g. is tasy "Showing messages 1 to 2", but only 1
+message is shown.
 
 Code up a stopper for the ConnectionTimer thread which continues running
 after app shutdown.

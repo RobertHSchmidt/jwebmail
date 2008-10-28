@@ -77,6 +77,7 @@ public class FolderSetup implements Plugin, URLHandler {
         if(header.isContentSet("method") && header.getContent("method").equals("mailbox")) {
             if(header.isContentSet("remove")) {
                 session.removeMailbox(header.getContent("remove"));
+                session.refreshFolderInformation(true, true);
             } else if(header.isContentSet("add")) {
                 try {
                     session.addMailbox(header.getContent("mbox_name"),
@@ -87,9 +88,8 @@ public class FolderSetup implements Plugin, URLHandler {
                 } catch(Exception ex) {
                     throw new WebMailException(ex);
                 }
+                session.refreshFolderInformation(true, true);
             }
-
-            session.refreshFolderInformation(false);
 
             content=new XHTMLDocument(session.getModel(),
                                       store.getStylesheet("foldersetup-mailbox.xsl",
@@ -130,14 +130,15 @@ public class FolderSetup implements Plugin, URLHandler {
                 session.subscribeFolder(header.getContent("unhide"));
             }
 
-            // We want to see all folders in the folder overview
-            session.refreshFolderInformation(false);
+            // We want to see all folders but no counts in the folder overview
+            session.refreshFolderInformation(false, false);
 
             content=new XHTMLDocument(session.getModel(),
                                       store.getStylesheet("foldersetup-folders.xsl",
                                                           user.getPreferredLocale(),user.getTheme()));
-            // but we want only to see some in the mailbox overview
-            session.refreshFolderInformation(true);
+            // but we want only to see some in the mailbox overview,
+            // but with counts
+            session.refreshFolderInformation(true, true);
         } else if(header.isContentSet("method") && header.getContent("method").equals("folderadd")) {
             session.setAddToFolder(header.getContent("addto"));
             content=new XHTMLDocument(session.getModel(),
