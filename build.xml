@@ -18,7 +18,7 @@ limitations under the License.
 -->
 
   <property file="local.properties"/> <!-- NON-SHARED build properties -->
-  <regexp id="jvmver.regexp.refid" pattern="^1\.[5-9]"/>
+  <regexp id="jvmver.regexp.refid" pattern="^(?:1\.[5-9])|(?:[2-3]\.)"/>
 
   <!-- Default build settings.  Override in your own 'local.properties' file.-->
   <property name="repos.url" value="http://pub.admc.com/lib-repos"/>
@@ -28,7 +28,7 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Initialization target                                               -->
   <!-- =================================================================== -->
-  <target name="-init" depends="-check-jvm-version">
+  <target name="-init" depends="-check-tool-versions">
     <tstamp/>
     <property name="Name" value="JWebMail"/>
     <property name="version" value="1.0.1c"/>
@@ -391,7 +391,25 @@ Customize this as you wish and/or set Ivy properties
 a 'local.properties' file.</echo>
   </target>
 
-  <target name="-check-jvm-version">
+  <regexp id="antver.regexp.refid" pattern="(?: |^)(?:[2-9]\.)|(?:1\.[7-9])"/>
+
+  <target name="-check-tool-versions">
+    <!-- No good way to check Ant version, since ant.version is not formatted
+         as a number of any type, and the regexp and antversion tasks aren't
+         available until 1.7... and the last doesn't even WORK with 1.7. -->
+    <condition property="_ant.ok">
+      <matches string="${ant.version}">
+        <regexp refid="antver.regexp.refid"/>
+      </matches>
+    </condition>
+    <fail unless="_ant.ok"
+          message="JWebMail requires Ant version 1.7 or later"/>
+
+    <!-- This is supposed to work with 1.7, but even if it did, the test
+         would only work for negative cases.
+    <antversion property="_ant.ok" atleast="1.7"/>
+    -->
+
     <condition property="_jvm.ok">
       <matches string="${ant.java.version}">
         <regexp refid="jvmver.regexp.refid"/>

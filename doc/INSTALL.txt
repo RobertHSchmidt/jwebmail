@@ -24,7 +24,7 @@ For running JWebMail you need the following software:
                framework).
 
 If you wish to build a custom app, or develop, you will also need a
-standalone Java JDK 1.5 or later, and Ant 6.0 or later, as described below.
+standalone Java JDK 1.5 or later, and Ant 1.7 or later, as described below.
 Any or no Java IDE will work.
 
 
@@ -76,7 +76,7 @@ See the document "jwebmail-guide.html" in your distribution.
 --------------------------------
 
 JWebMail is compiled by using the Ant build-system.  You will need Ant
-version 6 or greater and Java JDK 1.5 or greater to build JWebMail.
+version 1.7 or greater and Java JDK 1.5 or greater to build JWebMail.
 
 The following steps are required (for a quick-start):
 1. Set your JAVA_HOME environment variable (to the directory where the JDK is
@@ -90,6 +90,8 @@ The following steps are required (for a quick-start):
    If you don't have an Ivy jar file in your CLASSPATH, the Ant command
    above will display the simple command that you can copy-and-paste to your
    command line to satisfy it.
+   An error message like '...doesn't support the nested "matches" element...'
+   means you need to upgrade Ant to 1.7 or later.
 5. Deploy the file at build/jwebpp.jar to your servlet container, as
    explained in the previous section.
    Alternatively, you set Ant property 'exploded.dir'
