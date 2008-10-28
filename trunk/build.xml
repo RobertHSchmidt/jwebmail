@@ -56,12 +56,7 @@ limitations under the License.
   <!-- =================================================================== -->
   <target name="-prepare-src" depends="-init">
     <copy todir="build/src" filtering="true">
-      <fileset dir="src">
-        <exclude name="**/.*"/>
-        <include name="net/**"/>
-        <include name="org/**"/>
-        <include name="META-INF/**"/>
-      </fileset>
+      <fileset dir="src" excludes="**/.*"/>
     </copy>
   </target>
 
@@ -271,13 +266,21 @@ limitations under the License.
 
     <ivy:cachefileset conf="bundle" setid="bundle.refid"/>
     <!-- Install plugin and authenticator classes -->
-    <filter token="base-uri" value="/${ant.project.name}"/>
-    <!-- TODO:  Eliminate.
-         This base-uri in our code base makes our webapp non-portable. -->
-    <copy file="config/web.xml" filtering="true" todir="build/stage/"/>
+    <copy file="config/web.xml" todir="build/stage/">
+      <filterset>
+        <filter token="base-uri" value="/${ant.project.name}"/>
+      </filterset>
+      <!-- TODO:  Eliminate.
+           This base-uri in our code base makes our webapp non-portable. -->
+    </copy>
     <copy tofile="build/stage/mimetypes.txt" file="contrib/mime.types"/>
-    <copy todir="build/stage/content" filtering="true">
-      <fileset dir="src/jsp" excludes="**/.*"/>
+    <copy todir="build/stage/content">
+      <fileset dir="jsp-src" excludes="**/.*"/>
+      <filterset>
+        <filter token="base-uri" value="/${ant.project.name}"/>
+      </filterset>
+      <!-- TODO:  Eliminate.
+           This base-uri in our code base makes our webapp non-portable. -->
     </copy>
     <zip destfile="build/stage/data.zip" basedir="data"/>
 
