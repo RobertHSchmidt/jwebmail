@@ -231,8 +231,13 @@ limitations under the License.
               </ITEM>
             </NLIST>
           </P> <P>
-            IDE developers just need to configure their Ant invoker to include
+            IDE developers need to configure their Ant invoker to include
             the jar file in the bootstrap-libs subdirectory in the CLASSPATH.
+            And, until we change-control IDE configs, you will need to
+            manually download the jar files referenced in the ivy.xml file
+            from <A href="http://pub.admc.com/lib-repos">
+            http://pub.admc.com/lib-repos</A>, and add them to your IDE's
+            compilation classpath.
           </P> <P>
             Run "ant -p" for further possible targets that may be used.
             To customize any Ant properties, create a standard Java properties file in
