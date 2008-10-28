@@ -78,11 +78,11 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         initConfig();
 
         cs.addConfigurationListener("AUTH",this);
-        cs.configRegisterStringKey(this,"MIME TYPES",parent.getProperty("webmail.lib.path")+
-                                   System.getProperty("file.separator")+"mime.types",
-                                   "File with mime type information.");
-
-
+        String mimetypesSetting = parent.getProperty(
+                "webmail.mimetypes.filepath");
+        if (mimetypesSetting != null)
+            cs.configRegisterStringKey(this, "MIME TYPES", mimetypesSetting,
+                   "File with mime type information.");
         cs.configRegisterYesNoKey("SHOW ADVERTISEMENTS","Whether or not to include the WebMail advertisement "+
                                   "messages in default user signatures and HTTP response headers");
         cs.setDefaultValue("SHOW ADVERTISEMENTS","NO");
@@ -155,37 +155,45 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
 
     protected void initMIME() {
         log.info("Initializing MIME types ... ");
-        if(getConfig("mime types") != null) {
-            try {
-                File f=new File(getConfig("mime types"));
-                if(f.exists() && f.canRead()) {
-                    mime_types=new Hashtable();
-                    BufferedReader in=new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-                    String line=in.readLine();
-                    while(line != null) {
-                        if(!line.startsWith("#")) {
-                            StringTokenizer tok=new StringTokenizer(line);
-                            if(tok.hasMoreTokens()) {
-                                String type=tok.nextToken();
-                                while(tok.hasMoreTokens()) {
-                                    String key=tok.nextToken();
-                                    mime_types.put(key,type);
-                                    log.debug(key+" -> "+type);
-                                }
-                            }
+        if(getConfig("mime types") == null) {
+            log.warn("Mime Types not configured. Will use standard MIME types.");
+            return;
+        }
+        File f=new File(getConfig("mime types"));
+        if (!f.canRead()) {
+            log.warn("Could not find "+getConfig("mime types")
+                    + ". Will use standard MIME types.");
+            return;
+        }
+        BufferedReader in = null;
+        try {
+            mime_types=new Hashtable();
+            in=new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+            String line=in.readLine();
+            while(line != null) {
+                if(!line.startsWith("#")) {
+                    StringTokenizer tok=new StringTokenizer(line);
+                    if(tok.hasMoreTokens()) {
+                        String type=tok.nextToken();
+                        while(tok.hasMoreTokens()) {
+                            String key=tok.nextToken();
+                            mime_types.put(key,type);
+                            log.debug(key+" -> "+type);
                         }
-                        line=in.readLine();
                     }
-                    in.close();
-                    log.info("Mime Types loaded from "+getConfig("mime types")+".");
-                } else {
-                    log.info("Could not find "+getConfig("mime types")+". Will use standard MIME types.");
                 }
-            } catch(IOException ex) {
-                log.error("Could not find "+getConfig("mime types")+". Will use standard MIME types.");
+                line=in.readLine();
             }
-        } else {
-            log.error("Mime Types not configured. Will use standard MIME types.");
+            log.info("Mime Types loaded from "+getConfig("mime types")+".");
+        } catch(IOException ex) {
+            log.error("Could not find "+getConfig("mime types")+". Will use standard MIME types.");
+        } finally {
+            if (in != null) try {
+                in.close();
+            } catch (IOException ioe) {
+                log.error("Failed to close mime types file '"
+                        + f.getAbsolutePath() + "'");
+            }
         }
     }
 
@@ -411,23 +419,15 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
 
 
     public String getMimeType(String name) {
-        if(mime_types == null) {
-            return super.getMimeType(name);
-        } else {
-            if(name != null) {
-                String type="application/unknown";
-                Enumeration enumVar=mime_types.keys();
-                while(enumVar.hasMoreElements()) {
-                    String s=(String)enumVar.nextElement();
-                    if(name.toLowerCase().endsWith(s)) {
-                        type= (String)mime_types.get(s);
-                    }
-                }
-                return type;
-            } else {
-                return "UNKNOWN";
-            }
+        if (mime_types == null) return super.getMimeType(name);
+        if (name == null) return "UNKNOWN";
+        String type="application/unknown";
+        Enumeration enumVar=mime_types.keys();
+        while(enumVar.hasMoreElements()) {
+            String s=(String)enumVar.nextElement();
+            if(name.toLowerCase().endsWith(s)) type= (String)mime_types.get(s);
         }
+        return type;
     }
 
     public void notifyConfigurationChange(String key) {

@@ -289,6 +289,8 @@ public class ExtConfigListener implements ServletContextListener {
         PrintWriter pw = new PrintWriter(new FileWriter(metaFile));
         try {
             pw.println("webmail.data.path: ${rtconfig.dir}/data");
+            pw.println("webmail.mimetypes.filepath: "
+                    + "${rtconfig.dir}/mimetypes.txt");
             pw.flush();
         } finally {
             pw.close();
@@ -299,12 +301,29 @@ public class ExtConfigListener implements ServletContextListener {
         if (zipFileStream == null)
             throw new IOException(
                     "Zip file 'data.zip' missing from web application");
+        InputStream mimeInStream = getClass().getResourceAsStream(
+                "/mimetypes.txt");
+        if (mimeInStream == null)
+            throw new IOException(
+                "Mime-types file 'mimetypes.txt' missing from web application");
         ZipEntry entry;
         File newNode;
         FileOutputStream fileStream;
         long fileSize, bytesRead;
         int i;
         byte[] buffer = new byte[10240];
+
+        FileOutputStream mimeOutStream =
+                new FileOutputStream(new File(baseDir, "mimetypes.txt"));
+        try {
+            while ((i = mimeInStream.read(buffer)) > 0)
+                mimeOutStream.write(buffer, 0, i);
+            mimeOutStream.flush();
+        } finally {
+            mimeOutStream.close();
+        }
+        log.debug("Extracted mime types file");
+
         ZipInputStream zipStream = new ZipInputStream(zipFileStream);
         try { while ((entry = zipStream.getNextEntry()) != null) {
             newNode = new File(dataDir, entry.getName());

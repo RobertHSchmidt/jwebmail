@@ -168,74 +168,11 @@ limitations under the License.
       <param-value>@base-uri@/lib/templates</param-value>
     </init-param>
 
-
-    <!-- The following path names are real path names of the operating system.
-         WebMail tries to use reasonable defaults if you have a default
-         installation, by using ServletContext.getRealPath(...) .
-         You might want to set explicit paths however, if you move around the
-         WebMail directory structure -->
-
-    <!-- WebMail Data Path. Points to the directory where WebMail configuration
-         files will be placed. Must be owned by the user running WebMail
-         If you move the data directory to a more secure place, please enter
-         the full system path to this directory here
-    -->
-    <!--
-    <init-param>
-      <param-name>webmail.data.path</param-name>
-      <param-value>@webapp-home@/data</param-value>
-    </init-param>
-    -->
-
-    <!-- WebMail Library Path. Contains the libraries needed for WebMail
-         Usually it is not necessary to move this directory away from the
-         WebMail apphome.
-         Only set this if you know what you are doing, WebMail tries to use
-         reasonable defaults
-    -->
-    <!--
-    <init-param>
-      <param-name>webmail.lib.path</param-name>
-      <param-value>@webapp-home@/lib</param-value>
-    </init-param>
-    -->
-
-    <!-- WebMail Template Path. Contains the XSL stylesheets for the user
-         interfaces.
-         Usually it is not necessary to move this directory away from the
-         WebMail apphome.
-         Only set this if you know what you are doing, WebMail tries to use
-         reasonable defaults
-    -->
-    <!--
-    <init-param>
-      <param-name>webmail.template.path</param-name>
-      <param-value>@webapp-home@/lib/templates</param-value>
-    </init-param>
-    -->
-
-    <!-- WebMail XML Path. Contains DTDs and dummy files for WebMail's internal
-         data model.
-         Usually it is not necessary to move this directory away from the
-         WebMail apphome.
-         Only set this if you know what you are doing, WebMail tries to use
-         reasonable defaults
-    -->
-    <!--
-    <init-param>
-      <param-name>webmail.xml.path</param-name>
-      <param-value>@webapp-home@/lib/xml</param-value>
-    </init-param>
-    -->
-
-
     <!-- WebMail should be loaded on startup as it needs quite some time for
          initialization. The order doesn't matter, however.
          Also, please ensure that reloading of the servlet classes is disabled
          for WebMail -->
-    <load-on-startup>
-      -2147483646
-    </load-on-startup>
+    <load-on-startup>10</load-on-startup>
 
   </servlet>
 

@@ -48,7 +48,7 @@ This installation method is very simple:
 
 Install "jwebmail.war" as you would install any War file.
 
-With Tomcat, the easiest way is to use the Manager webapp, which servers
+With Tomcat, the easiest way is to use the Manager webapp, which serves
 http://localhost:8080/manager/html by default.  Log in and deploy the
 war using the Gui (you can see or add manager accounts in the file
 $CATALINA_BASE/config/tomcat-users.xml).
@@ -66,7 +66,7 @@ JWebMail is then available by visiting http://yourhost:PORT/jwebmail
 with a web browser.
 
 Please don't forget to visit the administration interface first. You can access
-it by calling http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
+it by browsing http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
 is "Secret".
 
 See the document "jwebmail-guide.html" in your distribution.
@@ -86,15 +86,15 @@ The following steps are required (for a quick-start):
 3. You will need Internet access the first time you run the build, so that
    the build process can download the needed third party libraries
    (automatically).
-4. Just run 'ant' to build an exploded webapp and a war file in
-   subdirectory "build/webapp".
+4. Just run 'ant' to build a war file in subdirectory "build".
    If you don't have an Ivy jar file in your CLASSPATH, the Ant command
    above will display the simple command that you can copy-and-paste to your
    command line to satisfy it.
-5. Deploy the file at build/webapp/jwebpp.jar to your servlet container, as
+5. Deploy the file at build/jwebpp.jar to your servlet container, as
    explained in the previous section.
-   Alternatively, you can deploy the exploded web app located at
-   build/webapp/jwebmail.  Since you are building software, we figure you
+   Alternatively, you set Ant property 'exploded.dir'
+   and deploy the exploded webapp to a live deployment directory.
+   Since you are building software, we figure you
    are handy enough to figure this out without further instruction from us.
 6. Run "ant gen-guide" to build the jwebmail-guide.html file referred to in
    the previous section (it gets written to the "doc" subdirectory).
