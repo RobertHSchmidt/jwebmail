@@ -3,6 +3,9 @@ $Id$
 Ordered short-term TODO list
 ============================
 
+Add a new properties setting like webmail.demo or webmail.noxmit, to prevent
+sending messages from the JWebMail server.
+
 Get JSPs out of Java source directory branch.
 
 Use packages for all classes.
@@ -56,6 +59,8 @@ care of the warnings.
 Make release build targets.
 
 Roll an RC.  1.0.1rc1.  (Consider waiting on following super-item).
+
+Host a demo site at jwebmail.admc.com.
 
 -------------------------------------------
 TAKE A DEEP BREATH
