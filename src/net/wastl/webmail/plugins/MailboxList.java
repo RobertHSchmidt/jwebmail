@@ -74,7 +74,7 @@ public class MailboxList implements Plugin, URLHandler {
         /* If the user requests the folder overview, try to fetch new information */
         /* Do so only, if this is forced, to save the time! */
         if(header.isContentSet("force-refresh")) {
-            session.refreshFolderInformation(true);
+            session.refreshFolderInformation(true, true);
         }
         content=new XHTMLDocument(session.getModel(),store.getStylesheet("mailbox.xsl",user.getPreferredLocale(),user.getTheme()));
         return content;

@@ -79,9 +79,8 @@ public class UserSetup implements Plugin, URLHandler {
     session.getUserModel().setStateVar(
         "pass change tmpl", adm.getPassChangeTmpl());
 
-        session.refreshFolderInformation();
-
         if(suburl.startsWith("/submit")) {
+            session.refreshFolderInformation(true, true);
             try {
                 session.changeSetup(header);
                 content=new XHTMLDocument(session.getModel(),store.getStylesheet("setup.xsl",user.getPreferredLocale(),user.getTheme()));
