@@ -103,7 +103,7 @@ public class FolderSetup implements Plugin, URLHandler {
                 try {
                     session.removeFolder(header.getContent("remove"),header.isContentSet("recurse"));
                 } catch(Exception ex) {
-                    ex.printStackTrace();
+                    log.error("Error while removing folders", ex);
                     throw new WebMailException("Error while removing folders");
                 }
             } else if(header.isContentSet("addto")) {

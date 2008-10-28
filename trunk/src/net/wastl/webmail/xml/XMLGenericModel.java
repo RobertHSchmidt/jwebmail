@@ -24,6 +24,7 @@ import java.io.*;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import net.wastl.webmail.server.*;
+import javax.xml.transform.TransformerException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -97,13 +98,19 @@ public class XMLGenericModel extends XMLData {
                     System.getProperty("java.vm.name")+" "+System.getProperty("java.version"));
     }
 
+    /**
+     * Insert the sysdata and userdata objects into the usermodel tree
+     */
     public void update() {
-        // Insert the sysdata and userdata objects into the usermodel tree
+        Node n = null;
         try {
-            Node n = getNodeXPath("//SYSDATA");
-            // If the node does not exist, this is always failure!
+            n = getNodeXPath("//SYSDATA");
+        } catch (TransformerException te) {
+            log.error("Failed to get extract node for XPath '//SYSDATA'");
+            XMLCommon.dumpXML(log, "//SYSDATA", root);
+        }
+        try {
             root.getDocumentElement().replaceChild(root.importNode(sysdata,true),n);
-
         } catch(DOMException ex) {
             log.error("Something went wrong with the XML generic model", ex);
         }
@@ -150,8 +157,26 @@ public class XMLGenericModel extends XMLData {
      * We need to synchronize that to avoid problems, but this should be fast anyway
      */
     public synchronized void setStateVar(String name, String value) {
-        Element var=(Element)getNodeXPath("//STATEDATA/VAR[@name='"+name+"']");
-            //XMLCommon.getElementByAttribute(statedata,"VAR","name",name);
+        Element var= null;
+        String xPathString = "//STATEDATA/VAR[@name='"+name+"']";
+        //XMLCommon.getElementByAttribute(statedata,"VAR","name",name);
+        try {
+            var = (Element) getNodeXPath(xPathString);
+        } catch (TransformerException te) {
+            log.warn("'" + xPathString + "' query threw, "
+                    + "but it's probably an XPath library bug.  "
+                    + "Continuing as if node just not found.");
+            /*
+            For some reason, the XML lib is throwing when it should just
+            return null, according to Xalan API spec.
+            Parent node is present, but child is not...
+            so it should return null.  JDom returns null.
+            TODO:  Do some testing directly with the XML lib.
+            log.error("Failed to get extract node for XPath '"
+                    + xPathString + "'", te);
+            XMLCommon.dumpXML(log, xPathString, root);
+            */
+        }
         if(var == null) {
             var=root.createElement("VAR");
             var.setAttribute("name",name);
@@ -206,12 +231,16 @@ public class XMLGenericModel extends XMLData {
 
 
     public String getStateVar(String name) {
-        Element var=(Element)getNodeXPath("//STATEDATA/VAR[@name='"+name+"']");
-            //XMLCommon.getElementByAttribute(statedata,"VAR","name",name);
-        if(var == null) {
-            return "";
-        } else {
-            return var.getAttribute("value");
+        Element var = null;
+        String xPathString = "//STATEDATA/VAR[@name='"+name+"']";
+        //XMLCommon.getElementByAttribute(statedata,"VAR","name",name);
+        try {
+            var = (Element) getNodeXPath(xPathString);
+        } catch (TransformerException te) {
+            log.error("Failed to get extract node for XPath '"
+                    + xPathString + "'", te);
+            XMLCommon.dumpXML(log, xPathString, root);
         }
+        return (var == null) ? "" : var.getAttribute("value");
     }
 }

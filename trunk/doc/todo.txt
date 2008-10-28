@@ -3,12 +3,12 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Somewhere in the callback thread, log the target document of XPath failures.
+Get rid of all stdout/stderr thread methods being called.
+
+Resolve bug where failing to remove folders.
 
 Resolve "Not a valid number" warnings in log, from XMLUserData (at least
 upon imap login).
-
-Resolve NPE being thrown constantly from XMLData.getNodeXPath().
 
 Get rid of lines like "BiBo... is based on" in
 src/net/wastl/webmail/data/xml/*/bibop/logout.xsl, DITTO/loginscreen.xsl.
