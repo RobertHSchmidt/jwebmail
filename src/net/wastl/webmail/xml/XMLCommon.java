@@ -26,6 +26,8 @@ import java.util.*;
 import javax.xml.transform.TransformerException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.impl.SimpleLog;
+import static org.apache.commons.logging.impl.SimpleLog.*;
 
 /**
  * This class contains some static methods that are used commonly in other WebMail parts.
@@ -397,27 +399,59 @@ public final class XMLCommon  {
         return r;
     }
 
-    public static synchronized void debugXML(Document d) {
+    /**
+     * Logs a XML dump to the specified Log instanance.
+     *
+     * <P>For brevity and simplicity, callers may want to import level
+     * constants like this so they can juse use like "LOG_LEVEL_DEBUG":
+import static org.apache.commons.logging.impl.SimpleLog.*;
+     * </P>
+     *
+     * @param log  Target Log instance
+     * @param label Leading log message
+     * @param level A org.apache.commons.logging.impl.SimpleLog constant.
+     *              I don't know why Commons doesn't have a simple log()
+     *              method and Log.X constants like Log4j does.  :(
+     * @param doc The XML document to dump
+     */
+    public static synchronized void dumpXML(
+            Log log, int level, String label, Document doc) {
+        String methodName = null;
+        switch (level) {
+            case LOG_LEVEL_DEBUG:
+                methodName = "debug";
+                break;
+            case LOG_LEVEL_ERROR:
+                methodName = "error";
+                break;
+            case LOG_LEVEL_FATAL:
+                methodName = "fatal";
+                break;
+            case LOG_LEVEL_INFO:
+                methodName = "info";
+                break;
+            case LOG_LEVEL_TRACE:
+                methodName = "trace";
+                break;
+            case LOG_LEVEL_WARN:
+                methodName = "warn";
+                break;
+        }
+        if (methodName == null)
+            throw new IllegalArgumentException(
+                    "Unexpected level specification " + level
+                    + "\nSee API spec document for "
+                    + SimpleLog.class.getName());
         try {
-            FileOutputStream fout=new FileOutputStream("/tmp/webmail.xml."+System.currentTimeMillis());
-            PrintWriter out=new PrintWriter(fout);
-            out.println("Debugging XML:");
-            out.println("==============================================================");
-
-            writeXML(d,fout,"test");
-//          OutputFormat of=new OutputFormat(Method.XML,"ISO-8859-1",true);
-//          of.setIndenting(true);
-//          of.setIndent(2);
-//          of.setDoctype(null,d.getDoctype().getName());
-//          of.setStandalone(false);
-//          System.err.println("Doctype system:"+of.getDoctypeSystem());
-//          XMLSerializer ser=new XMLSerializer(System.out,of);
-//          ser.serialize(d.getDocumentElement());
-            out.println("==============================================================");
-            fout.flush();
-            fout.close();
+            java.lang.reflect.Method logMethod =
+                    Log.class.getMethod(methodName, Object.class);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                writeXML(doc, baos, "test");
+                baos.flush();
+            logMethod.invoke(log, label + "\n" + baos);
         } catch(Exception ex) {
-            ex.printStackTrace();
+            log.fatal("Failed to log XML document details", ex);
+            return;
         }
     }
 }
