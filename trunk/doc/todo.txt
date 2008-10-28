@@ -3,9 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Add a new properties setting like webmail.demo or webmail.noxmit, to prevent
-sending messages from the JWebMail server.
-
 Get JSPs out of Java source directory branch.
 
 Use packages for all classes.
@@ -53,8 +50,15 @@ More branding updates.
 Take care of all easy compiler warnings.  All except third-party if time
 permits.
 
+Change-control an Eclipse config.
+
 If time permits, turn on lotsa compilation checks with Eclipse and take
 care of the warnings.
+
+Add a new properties setting like webmail.demo or webmail.noxmit, to prevent
+sending messages from the JWebMail server.  And a expiration for user accounts
+Will need to keep a emailaddr/host list, because users could just sign up with
+different JWebMail user name.
 
 Make release build targets.
 
