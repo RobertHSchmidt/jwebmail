@@ -70,28 +70,25 @@ limitations under the License.
     <javac srcdir="build/src" destdir="build/classes"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
-           deprecation="${javac.deprecation}"
-           excludes="**/plugins/**,**/authenticators/**" />
+           deprecation="${javac.deprecation}"/>
 
     <echo message="     Compiling plugins"/>
-    <mkdir dir="build/classes/plugins" />
-    <javac srcdir="build/src"
-           destdir="build/classes/plugins"
+    <mkdir dir="build/plugin-classes" />
+    <javac srcdir="plugin-src"
+           destdir="build/plugin-classes"
            classpath="build/classes"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
-           deprecation="${javac.deprecation}"
-           includes="**/plugins/**" />
+           deprecation="${javac.deprecation}"/>
 
     <echo message="     Compiling authenticators"/>
-    <mkdir dir="build/classes/authenticators" />
-    <javac srcdir="build/src"
-           destdir="build/classes/authenticators"
+    <mkdir dir="build/authenticator-classes" />
+    <javac srcdir="authenticator-src"
+           destdir="build/authenticator-classes"
            classpath="build/classes"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
-           deprecation="${javac.deprecation}"
-           includes="**/authenticators/**" />
+           deprecation="${javac.deprecation}"/>
   </target>
 
        <!--
@@ -265,7 +262,6 @@ limitations under the License.
          war after there is a build failure. -->
 
     <ivy:cachefileset conf="bundle" setid="bundle.refid"/>
-    <!-- Install plugin and authenticator classes -->
     <copy file="config/web.xml" todir="build/stage/">
       <filterset>
         <filter token="base-uri" value="/${ant.project.name}"/>
@@ -287,8 +283,8 @@ limitations under the License.
     <war warfile="build/${ant.project.name}.war"
          webxml="build/stage/web.xml" basedir="build/stage/content">
       <classes dir="build/stage" includes="data.zip, mimetypes.txt"/>
-      <classes dir="build/classes/plugins"/>
-      <classes dir="build/classes/authenticators"/>
+      <classes dir="build/plugin-classes"/>
+      <classes dir="build/authenticator-classes"/>
       <classes dir="build/classes" excludes="plugins/**, authenticators/**"/>
       <zipfileset dir="build/stage" prefix="lib"
                   includes="xml/**, templates/**"/>
@@ -330,8 +326,8 @@ This behavior is designed to facilitate in-place app serving.</echo>
   <target name="javadoc" depends="-prepare-src"
           description="Generates the API documentation">
     <mkdir dir="build/apidocs"/>
-    <javadoc packagenames="${packages}"
-             sourcepath="build/src"
+    <javadoc packagenames="net.wastl.*, org.webengruven.*"
+             sourcepath="build/src:plugin-src:authenticator-src"
              destdir="build/apidocs"
              author="true"
              version="true"
@@ -340,8 +336,7 @@ This behavior is designed to facilitate in-place app serving.</echo>
              noindex="false"
              windowtitle="${Name} API"
              doctitle="${Name}"
-             bottom="Copyright All Rights Reserved."
-    />
+             bottom="Apache 2.0 License"/>
   </target>
 
   <!-- =================================================================== -->
@@ -421,4 +416,7 @@ a 'local.properties' file.</echo>
     <fail unless="_jvm.ok"
           message="JWebMail requires JVM version 1.5 or later"/>
   </target>
+
+  <target name="all" depends="clean, gen-guide, javadoc, webapp"
+       description="(Re)build everything from scratch"/>
 </project>
