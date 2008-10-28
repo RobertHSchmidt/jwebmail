@@ -127,17 +127,8 @@ public class XMLData {
         }
     }
 
-
-    public Node getNodeXPath(String path) {
-        try {
-            Node n = xpath_api.selectSingleNode(data,path);
-            return n;
-        } catch(Exception ex) {
-            log.error("XPath query failed (" + path + ")", ex);
-            // Should we not throw here so us developers will see and
-            // fix the problem? - blaine
-            return null;
-        }
+    public Node getNodeXPath(String path) throws TransformerException {
+        return xpath_api.selectSingleNode(data,path);
     }
 
     /**

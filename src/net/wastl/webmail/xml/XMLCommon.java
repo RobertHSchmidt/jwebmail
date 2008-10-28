@@ -406,6 +406,9 @@ public final class XMLCommon  {
      * constants like this so they can juse use like "LOG_LEVEL_DEBUG":
 import static org.apache.commons.logging.impl.SimpleLog.*;
      * </P>
+     * N.b. the calling method and location can't be identified by this
+     * method.  If you need that kind of detail, make a direct log call
+     * before calling this method.
      *
      * @param log  Target Log instance
      * @param label Leading log message
@@ -453,5 +456,18 @@ import static org.apache.commons.logging.impl.SimpleLog.*;
             log.fatal("Failed to log XML document details", ex);
             return;
         }
+    }
+
+    /**
+     * Convenience wrapper to simplify input params.
+     * This method logs at Debug level, so if the caller has detected any
+     * problem, they should log at a higher level before calling this method.
+     *
+     * @see #dumpXML(Log, int, label, Document)
+     */
+    public static synchronized void dumpXML(
+            Log log, String keyCause, Document doc) {
+        XMLCommon.dumpXML(log, LOG_LEVEL_DEBUG, "'" + keyCause
+                + "' failed somewhere within", doc);
     }
 }

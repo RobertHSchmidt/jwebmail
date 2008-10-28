@@ -26,6 +26,7 @@ import net.wastl.webmail.exceptions.*;
 import java.util.*;
 import java.text.*;
 import org.w3c.dom.*;
+import javax.xml.transform.TransformerException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -100,8 +101,17 @@ public class XMLUserData extends XMLData implements UserData {
         return df;
     }
 
-
+    /**
+     * Create specified element if it doesn't exist already.
+     */
     protected void ensureElement(String tag, String attribute, String att_value) {
+        /* TODO:  Fix behavior of this method.
+         * If it is really an ERROR for element to be missing, then this
+         * method should throw if it's missing.
+         * If it is not an error, then this method should be a boolean
+         * getter, not a validator void method.
+         */
+
         StringBuffer xp_query = new StringBuffer(tag);
         /*  Blaine disables this "//" prefix.
          *  Besides this causing indisputable failures when input tag is
@@ -115,7 +125,13 @@ public class XMLUserData extends XMLData implements UserData {
             xp_query.append("[@"+attribute+"]");
         }
 
-        Node node=getNodeXPath(xp_query.toString());
+        try {
+            if (getNodeXPath(xp_query.toString()) != null) return;
+        } catch (TransformerException te) {
+            log.warn("Got an exception instead of a null return from XPath "
+                    + "for '" + xp_query.toString() + "'.  Continuing.", te);
+            return;
+        }
 
 //      NodeList nl=data.getElementsByTagName(tag);
 //      boolean flag=false;
@@ -136,17 +152,12 @@ public class XMLUserData extends XMLData implements UserData {
 //              break;
 //          }
 //      }
-        if(node == null) {
-            Element elem=root.createElement(tag);
-            if(attribute != null) {
-                elem.setAttribute(attribute,att_value==null?"":att_value);
-            }
-            if(tag.equalsIgnoreCase("BOOLVAR")) {
-                elem.setAttribute("value", "no");
-            }
-            data.appendChild(elem);
-            invalidateCache();
-        }
+        Element elem=root.createElement(tag);
+         if(attribute != null)
+            elem.setAttribute(attribute,att_value==null?"":att_value);
+        if (tag.equalsIgnoreCase("BOOLVAR")) elem.setAttribute("value", "no");
+        data.appendChild(elem);
+        invalidateCache();
     }
 
     public void login() {
@@ -209,16 +220,32 @@ public class XMLUserData extends XMLData implements UserData {
     }
 
     public void removeMailHost(String id) {
-        Element n=(Element)getNodeXPath("/USERDATA/MAILHOST[@id='"+id+"']");
-        if(n!=null) {
-            data.removeChild(n);
-            invalidateCache();
+        Element n = null;
+        String xPathString = "/USERDATA/MAILHOST[@id='"+id+"']";
+        try {
+            n = (Element) getNodeXPath(xPathString);
+        } catch (TransformerException te) {
+            log.error("Failed to get extract node for XPath '"
+                    + xPathString + "'", te);
+            XMLCommon.dumpXML(log, xPathString, root);
         }
+        if (n == null) return;
+        data.removeChild(n);
+        invalidateCache();
     }
 
     public MailHostData getMailHost(String id) {
         //final Element mailhost=XMLCommon.getElementByAttribute(data,"MAILHOST","id",id);
-        final Element mailhost=(Element)getNodeXPath("/USERDATA/MAILHOST[@id='"+id+"']");
+        String xPathString = "/USERDATA/MAILHOST[@id='"+id+"']";
+        Element e = null;
+        try {
+            e = (Element) getNodeXPath(xPathString);
+        } catch (TransformerException te) {
+            log.error("Failed to get extract node for XPath '"
+                    + xPathString + "'.  Continuing with null mailhost.", te);
+            XMLCommon.dumpXML(log, xPathString, root);
+        }
+        final Element mailhost = e;
         return new MailHostData() {
                 public String getPassword() {
                     return Helper.decryptTEA(XMLCommon.getValueXPath(mailhost,"MH_PASSWORD/text()"));
@@ -331,7 +358,15 @@ public class XMLUserData extends XMLData implements UserData {
 
 
     public void addEmail(String s) {
-        Element email=(Element)getNodeXPath("/USERDATA/EMAIL");
+        Element email = null;
+        try {
+            email = (Element)getNodeXPath("/USERDATA/EMAIL");
+        } catch (TransformerException te) {
+            log.error(
+                    "Failed to get extract node for XPath '/USERDATA/EMAIL'",
+                    te);
+            XMLCommon.dumpXML(log, "/USERDATA/EMAIL", root);
+        }
         Element addy=root.createElement("ADDY");
         XMLCommon.setElementTextValue(addy,s);
         email.appendChild(addy);
@@ -362,8 +397,9 @@ public class XMLUserData extends XMLData implements UserData {
         invalidateCache();
     }
 
-
-
+    /**
+     * Does nothing in case of failure.
+     */
     public void setDefaultEmail(String s) {
         NodeList nl=getNodeListXPath("/USERDATA/EMAIL/ADDY");
         for(int i=0;i<nl.getLength();i++) {
@@ -372,7 +408,16 @@ public class XMLUserData extends XMLData implements UserData {
             email.removeAttribute("default");
         }
 
-        Element email=(Element)getNodeXPath("/USERDATA/EMAIL/ADDY[./text() = '"+s+"']");
+        Element email = null;
+        String xPathString = "/USERDATA/EMAIL/ADDY[./text() = '"+s+"']";
+        try {
+            email = (Element)getNodeXPath(xPathString);
+        } catch (TransformerException te) {
+            log.error("Failed to get extract node for XPath '"
+                    + xPathString + "'", te);
+            XMLCommon.dumpXML(log, xPathString, root);
+            return;
+        }
         email.setAttribute("default","yes");
         invalidateCache();
     }
@@ -549,15 +594,25 @@ public class XMLUserData extends XMLData implements UserData {
     }
 
     /**
-     * Wrapper method for setting all bool vars
+     * Wrapper method for setting all int vars.
+     *
+     * Does nothing but log in case of failure.
      */
     protected void setIntVarWrapper(String var, long value) {
-        if(getIntVarWrapper(var) != value) {
-            ensureElement("INTVAR","name",var);
-            Element e=(Element)getNodeXPath("/USERDATA/INTVAR[@name='"+var+"']");
-            e.setAttribute("value",value+"");
-            invalidateCache();
+        if (getIntVarWrapper(var) == value) return;
+        ensureElement("INTVAR","name",var);
+        Element e = null;
+        String xPathString = "/USERDATA/INTVAR[@name='"+var+"']";
+        try {
+            e=(Element)getNodeXPath("/USERDATA/INTVAR[@name='"+var+"']");
+        } catch (TransformerException te) {
+            log.error("Failed to get extract node for XPath '"
+                    + xPathString + "'", te);
+            XMLCommon.dumpXML(log, xPathString, root);
+            return;
         }
+        e.setAttribute("value",value+"");
+        invalidateCache();
     }
 
     protected long getIntVarWrapper(String var) {
@@ -576,15 +631,25 @@ public class XMLUserData extends XMLData implements UserData {
     }
 
     /**
-     * Wrapper method for setting all bool vars
+     * Wrapper method for setting all bool vars.
+     *
+     * Does nothing but log in case of failure.
      */
     protected void setBoolVarWrapper(String var, boolean value) {
-        if(getBoolVarWrapper(var) != value) {
-            ensureElement("BOOLVAR","name",var);
-            Element e=(Element)getNodeXPath("/USERDATA/BOOLVAR[@name='"+var+"']");
-            e.setAttribute("value",value?"yes":"no");
-            invalidateCache();
+        if (getBoolVarWrapper(var) == value) return;
+        ensureElement("BOOLVAR","name",var);
+        String xPathString = "/USERDATA/BOOLVAR[@name='"+var+"']";
+        Element e = null;
+        try {
+            e=(Element)getNodeXPath(xPathString);
+        } catch (TransformerException te) {
+            log.error("Failed to get extract node for XPath '"
+                    + xPathString + "'.  Ignoring Boolean set request", te);
+            XMLCommon.dumpXML(log, xPathString, root);
+            return;
         }
+        e.setAttribute("value",value?"yes":"no");
+        invalidateCache();
     }
 
     protected boolean getBoolVarWrapper(String var) {
