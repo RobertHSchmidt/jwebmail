@@ -143,7 +143,7 @@ limitations under the License.
         </LIST>
       </P> <P>
         If you wish to build a custom app, or develop, you will also need a
-        standalone Java JDK 1.5 or later, and Ant 6.0 or later, as described below.
+        standalone Java JDK 1.5 or later, and Ant 1.7 or later, as described below.
         Any or no Java IDE will work.
       </P>
     </SUBSECTION>
@@ -194,7 +194,7 @@ limitations under the License.
         <ITEM>Build and install from source
           <P>
             JWebMail is compiled by using the Ant build-system.  You will need
-            <A href="http://ant.apache.org/">Ant</A> version 6 or greater and
+            <A href="http://ant.apache.org/">Ant</A> version 1.7 or greater and
             <A href="http://java.sun.com/javase/">Java JDK 1.5 or greater</A>
             to build JWebMail.
           </P> <P>
@@ -217,6 +217,10 @@ limitations under the License.
                 jar file in your CLASSPATH, the Ant command
                 above will display the simple command that you can copy-and-paste to your
                 command line to satisfy it.
+                <NOTE>
+                  An error message like
+                  <CODE>...doesn't support the nested "matches" element...</CODE>
+                  means you need to upgrade Ant to 1.7 or later.</NOTE>
               </ITEM> <ITEM>
                 Deploy the file at <CODE>build/jwebpp.jar</CODE> to your servlet container, as
                 explained in the previous section.
