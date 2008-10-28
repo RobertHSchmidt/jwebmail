@@ -446,8 +446,8 @@ import static org.apache.commons.logging.impl.SimpleLog.*;
             java.lang.reflect.Method logMethod =
                     Log.class.getMethod(methodName, Object.class);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                writeXML(doc, baos, "test");
-                baos.flush();
+            writeXML(doc, baos, "test");
+            baos.flush();
             logMethod.invoke(log, label + "\n" + baos);
         } catch(Exception ex) {
             log.fatal("Failed to log XML document details", ex);
