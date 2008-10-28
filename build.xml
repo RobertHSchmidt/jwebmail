@@ -1,4 +1,4 @@
-<project name="jwebmail" default="webapp" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="jwebmail" default="war" xmlns:ivy="antlib:org.apache.ivy.ant">
 <!--
 $Id$
 
@@ -22,7 +22,7 @@ limitations under the License.
 
   <!-- Default build settings.  Override in your own 'local.properties' file.-->
   <property name="repos.url" value="http://pub.admc.com/lib-repos"/>
-  <property name="webapp.home" value="build/webapp"/>
+  <property name="exploded.dir" value="build/webapp"/>
   <property name="contextxml.path" value="config/context.xml"/>
 
   <!-- =================================================================== -->
@@ -52,21 +52,9 @@ limitations under the License.
   </target>
 
   <!-- =================================================================== -->
-  <!-- Prepares the build directory                                        -->
-  <!-- =================================================================== -->
-  <target name="-prepare" depends="-init">
-    <mkdir dir="build"/>
-  </target>
-
-  <!-- =================================================================== -->
   <!-- Prepares the source code                                            -->
   <!-- =================================================================== -->
-  <target name="-prepare-src" depends="-prepare">
-    <!-- create directories -->
-    <mkdir dir="build/src"/>
-    <mkdir dir="build/classes"/>
-
-    <!-- copy src files -->
+  <target name="-prepare-src" depends="-init">
     <copy todir="build/src" filtering="true">
       <fileset dir="src">
         <exclude name="**/.*"/>
@@ -78,22 +66,12 @@ limitations under the License.
   </target>
 
   <!-- =================================================================== -->
-  <!-- Prepare all JAR files (put in lib dir)                              -->
-  <!-- =================================================================== -->
-  <target name="-prep-lib" depends="-ivy-setup">
-    <ivy:cachefileset conf="bundle" setid="bundle.refid"/>
-    <copy todir="lib">
-      <fileset file="contrib/mime.types"/>
-      <fileset refid="bundle.refid"/>
-    </copy>
-  </target>
-
-  <!-- =================================================================== -->
   <!-- Compiles the source directory                                       -->
   <!-- =================================================================== -->
-  <target name="compile" depends="-prepare-src, -prep-lib, -ivy-setup"
+  <target name="compile" depends="-prepare-src, -ivy-setup"
           description="Compiles the source code (default)">
     <ivy:cachepath conf="build" pathid="build.refid"/>
+    <mkdir dir="build/classes" />
     <javac srcdir="build/src" destdir="build/classes"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
@@ -121,15 +99,6 @@ limitations under the License.
            includes="**/authenticators/**" />
   </target>
 
-  <!-- =================================================================== -->
-  <!-- Creates the common, standalone, & server packages                   -->
-  <!-- =================================================================== -->
-  <target name="package" depends="compile"
-          description="Generates the main jar file">
-    <jar jarfile="lib/${ant.project.name}-common.jar"
-         basedir="build/classes"
-         includes="net/**,org/**"
-         excludes="**/standalone/**,**/servlet/**" />
        <!--
             Leaving here in case this helps to reverse engineer
             plugin installation:
@@ -142,20 +111,18 @@ limitations under the License.
               <fileset dir="build/classes/authenticators" />
             </copy>
         -->
-  </target>
 
   <!-- =================================================================== -->
   <!-- Install all XML XSL DTD's etc.                                      -->
   <!-- =================================================================== -->
-  <target name="-copy-xml-files">
-    <!-- Would it ever be useful to call this externally?
-         If so, remove the leading hyphen from the target name. -->
+  <target name="-stage-xml-and-templates">
+    <!-- Populates build/stage/xml and build/stage/templates -->
     <echo message="Installing webmail.xml ..."/>
-    <copy todir="data" flatten="yes">
-      <fileset dir="src" includes="**/webmail.xml"/>
-    </copy>
+    <copy todir="data" flatten="yes"
+          file="src/net/wastl/webmail/data/xml/webmail.xml"/>
     <echo message="Installing XML DTDs ..."/>
-    <copy todir="lib/xml" flatten="yes">
+
+    <copy todir="build/stage/xml" flatten="yes">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/*.dtd" />
@@ -166,7 +133,7 @@ limitations under the License.
       </fileset>
     </copy>
     <echo message="Installing resource.dtd and resources.xml ..."/>
-    <copy todir="lib/templates" flatten="yes">
+    <copy todir="build/stage/templates" flatten="yes">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/resource*" />
@@ -175,7 +142,7 @@ limitations under the License.
 
     <!-- English -->
     <echo message="Installing English Language Templates ..."/>
-    <copy todir="lib/templates/en" filtering="true">
+    <copy todir="build/stage/templates/en" filtering="true">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/en/**" />
@@ -183,7 +150,7 @@ limitations under the License.
       </fileset>
       <mapper type="regexp" from="^.*/en/(.*)$$" to="\1" />
     </copy>
-    <copy todir="lib/templates/en" filtering="false">
+    <copy todir="build/stage/templates/en" filtering="false">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/en/**/images/**" />
@@ -193,7 +160,7 @@ limitations under the License.
 
     <!-- Spanish -->
     <echo message="Installing Spanish Language Templates ..."/>
-    <copy todir="lib/templates/es" filtering="true">
+    <copy todir="build/stage/templates/es" filtering="true">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/es/**" />
@@ -201,7 +168,7 @@ limitations under the License.
       </fileset>
       <mapper type="regexp" from="^.*/es/(.*)$$" to="\1" />
     </copy>
-    <copy todir="lib/templates/es" filtering="false">
+    <copy todir="build/stage/templates/es" filtering="false">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/es/**/images/**" />
@@ -211,7 +178,7 @@ limitations under the License.
 
     <!--
     <echo message="Installing Portugese Language Templates ..."/>
-    <copy todir="lib/templates/pt" filtering="true">
+    <copy todir="build/stage/templates/pt" filtering="true">
         <fileset dir="src">
            <include name="**/data/xml/pt/**" />
         </fileset>
@@ -221,7 +188,7 @@ limitations under the License.
 
     <!-- German -->
     <echo message="Installing German Language Templates ..."/>
-    <copy todir="lib/templates/de" filtering="true">
+    <copy todir="build/stage/templates/de" filtering="true">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/de/**" />
@@ -229,7 +196,7 @@ limitations under the License.
       </fileset>
       <mapper type="regexp" from="^.*/de/(.*)$$" to="\1" />
     </copy>
-    <copy todir="lib/templates/de" filtering="false">
+    <copy todir="build/stage/templates/de" filtering="false">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/de/**/images/**" />
@@ -239,7 +206,7 @@ limitations under the License.
 
     <!-- French -->
     <echo message="Installing French Language Templates ..."/>
-    <copy todir="lib/templates/fr" filtering="true">
+    <copy todir="build/stage/templates/fr" filtering="true">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/fr/**" />
@@ -247,7 +214,7 @@ limitations under the License.
       </fileset>
       <mapper type="regexp" from="^.*/fr/(.*)$$" to="\1" />
     </copy>
-    <copy todir="lib/templates/fr" filtering="false">
+    <copy todir="build/stage/templates/fr" filtering="false">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/fr/**/images/**" />
@@ -257,7 +224,7 @@ limitations under the License.
 
     <!-- Hungarian -->
     <echo message="Installing Hungarian Language Templates ..."/>
-    <copy todir="lib/templates/hu" filtering="true">
+    <copy todir="build/stage/templates/hu" filtering="true">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/hu/**" />
@@ -265,7 +232,7 @@ limitations under the License.
       </fileset>
       <mapper type="regexp" from="^.*/hu/(.*)$$" to="\1" />
     </copy>
-    <copy todir="lib/templates/hu" filtering="false">
+    <copy todir="build/stage/templates/hu" filtering="false">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/hu/**/images/**" />
@@ -275,7 +242,7 @@ limitations under the License.
 
     <!-- Chinese (Taiwan) -->
     <echo message="Installing Chinese Language Templates ..."/>
-    <copy todir="lib/templates/zh" filtering="true">
+    <copy todir="build/stage/templates/zh" filtering="true">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/zh/**" />
@@ -283,7 +250,7 @@ limitations under the License.
       </fileset>
       <mapper type="regexp" from="^.*/zh/(.*)$$" to="\1" />
     </copy>
-    <copy todir="lib/templates/zh" filtering="false">
+    <copy todir="build/stage/templates/zh" filtering="false">
       <fileset dir="src">
         <exclude name="**/.*"/>
         <include name="**/data/xml/zh/**/images/**" />
@@ -295,49 +262,63 @@ limitations under the License.
   <!-- =================================================================== -->
   <!-- Copies the class files into the webapp dir for Tomcat.              -->
   <!-- =================================================================== -->
-  <target name="webapp" depends="package, -copy-xml-files"
-          description="Build web applicatoin">
-    <fail unless="webapp.home"
-          message="Property 'webapp.home' is required by target 'webapp'"/>
-    <echo message="Installing ${ant.project.name} to Tomcat apps directory ..."/>
-    <mkdir dir="${webapp.home}/${ant.project.name}"/>
-    <mkdir dir="${webapp.home}/${ant.project.name}/WEB-INF"/>
-    <copy todir="${webapp.home}/${ant.project.name}/lib">
-      <fileset dir="lib" excludes="**/.*, **/*.jar" />
-    </copy>
-    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes" flatten="yes">
-      <fileset dir="build/classes">
-        <include name="**/plugins/**,**/authenticators/**" />
-      </fileset>
-    </copy>
-    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/lib">
-      <fileset dir="lib" excludes="**/.*" includes="**/*.jar"/>
-    </copy>
+  <target name="war" depends="compile, -stage-xml-and-templates"
+          description="Build .war file in 'build' subdirectory">
+    <delete file="build/${ant.project.name}.war"/>
+    <!-- This delete behavior is a safe-guard.
+         This makes sure the developer never accidentally re-deploys an old
+         war after there is a build failure. -->
+
+    <ivy:cachefileset conf="bundle" setid="bundle.refid"/>
     <!-- Install plugin and authenticator classes -->
-    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes">
-      <fileset dir="build/classes/plugins" />
-    </copy>
-    <copy todir="${webapp.home}/${ant.project.name}/WEB-INF/classes">
-      <fileset dir="build/classes/authenticators" />
-    </copy>
-    <filter token="webapp-home" value="${webapp.home}/${ant.project.name}"/>
-    <filter token="plugin-dir" value="WEB-INF/classes"/>
-    <filter token="authenticator-dir" value="WEB-INF/classes"/>
     <filter token="base-uri" value="/${ant.project.name}"/>
-    <copy file="config/web.xml" filtering="true"
-          todir="${webapp.home}/${ant.project.name}/WEB-INF/"/>
-    <copy todir="${webapp.home}/${ant.project.name}" filtering="true">
+    <!-- TODO:  Eliminate.
+         This base-uri in our code base makes our webapp non-portable. -->
+    <copy file="config/web.xml" filtering="true" todir="build/stage/"/>
+    <copy tofile="build/stage/mimetypes.txt" file="contrib/mime.types"/>
+    <copy todir="build/stage/content" filtering="true">
       <fileset dir="src/jsp" excludes="**/.*"/>
     </copy>
-    <zip destfile="${webapp.home}/${ant.project.name}/WEB-INF/classes/data.zip"
-         basedir="data"/>
+    <zip destfile="build/stage/data.zip" basedir="data"/>
 
-    <war warfile="${webapp.home}/${ant.project.name}.war"
-         webxml="${webapp.home}/${ant.project.name}/WEB-INF/web.xml"
-         basedir="${webapp.home}/${ant.project.name}">
+    <war warfile="build/${ant.project.name}.war"
+         webxml="build/stage/web.xml" basedir="build/stage/content">
+      <classes dir="build/stage" includes="data.zip, mimetypes.txt"/>
+      <classes dir="build/classes/plugins"/>
+      <classes dir="build/classes/authenticators"/>
+      <classes dir="build/classes" excludes="plugins/**, authenticators/**"/>
+      <zipfileset dir="build/stage" prefix="lib"
+                  includes="xml/**, templates/**"/>
       <metainf file="${contextxml.path}"/>
+      <lib refid="bundle.refid"/>
     </war>
     <!-- Copy images -->
+    <echo message="War file built at 'build/${ant.project.name}.war'"/>
+  </target>
+
+  <target name="clean-webapp"
+          description="Wipes out exploded webapp directory">
+    <fail unless="exploded.dir"
+          message="Property 'exploded.dir' is required by target 'webapp'"/>
+    <delete dir="${exploded.dir}"/>
+  </target>
+
+  <target name="webapp" depends="war"
+          description="Updates (or creates) exploded webapp">
+    <available property="exploded_dir_preexist" file="${exploded.dir}"/>
+    <fail unless="exploded.dir"
+          message="Property 'exploded.dir' is required by target 'webapp'"/>
+    <unzip src="build/${ant.project.name}.war" dest="${exploded.dir}"/>
+    <echo>
+Exploded web app generated at '${exploded.dir}'.</echo>
+    <antcall target="-warn-if-edir"/>
+  </target>
+
+  <target name="-warn-if-edir" if="exploded_dir_preexist">
+    <echo>
+This target UPDATES (a.o.t. replaces), so, to remove artifacts from your web
+app, you must run 'ant clean-webapp webapp' instead of just 'ant webapp'.
+This behavior is designed to facilitate in-place app serving.</echo>
   </target>
 
   <!-- =================================================================== -->
@@ -366,17 +347,8 @@ limitations under the License.
   <target name="clean" depends="-init" description="Purges derived artifacts">
     <echo message="Deleting build ..."/>
     <delete dir="build"/>
-    <echo message="Deleting contents of lib ..."/>
-    <delete dir="lib" includeEmptyDirs="true"/>
     <delete file="data/webmail.xml"/>
     <delete file="doc/jwebmail-guide.html"/>
-  </target>
-
-  <target name="clean-tomcat-app" depends="clean"
-          description="Clean, plus wipe (possibly live) deployment dir">
-    <fail unless="webapp.home"
-    message="Property 'webapp.home' is required by target 'clean-tomcat-app'"/>
-    <deltree dir="${webapp.home}/${ant.project.name}"/>
   </target>
 
   <!-- Windows users will have to install Cygwin, or run another XSLT

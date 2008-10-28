@@ -106,7 +106,7 @@ limitations under the License.
         <LIST>
           <ITEM>
             A mailserver for sending (SMTP) and receiving (IMAP) mails; by default,
-            JWebMail will use "localhost" for both
+            JWebMail will use <CODE>localhost</CODE> for both
           </ITEM> <ITEM>
             A webapp-capable Java servlet container which runs on a Java 1.5 or
             greater JVM (either JRE or JDK).
@@ -165,22 +165,17 @@ limitations under the License.
       <P> <NLIST>
         <ITEM>Installation of a pre-built WAR-file
           <P>
-            This installation method is very simple:
+            This installation is very simple:
           </P> <P>
-            Install "jwebmail.war" as you would install any War file.
+            Install <CODE>jwebmail.war</CODE> as you would install any War file.
           </P> <P>
-            With Tomcat, the easiest way is to use the Manager webapp, which servers
-            http://localhost:8080/manager/html by default.  Log in and deploy the
-          </P> <P>
-            Install "jwebmail.war" as you would install any War file.
-          </P> <P>
-            With Tomcat, the easiest way is to use the Manager webapp, which servers
+            With Tomcat, the easiest way is to use the Manager webapp, which serves
             http://localhost:8080/manager/html by default.  Log in and deploy the
             war using the Gui (you can see or add manager accounts in the file
             $CATALINA_BASE/config/tomcat-users.xml).
           </P> <P>
             For every application server that I know of, if you have auto-deploy on
-            (usually the default mode) you can become the app-server "owner" (the
+            (usually the default mode) you can become the app-server <EM>owner</EM> (the
             account under which the server process(es) run), and just copy the war
             file into the webapp landing directory.  If you don't have access to that
             account, see your app server docs, because the war file permission
@@ -192,8 +187,8 @@ limitations under the License.
             with a web browser.
           </P> <P>
             Please don't forget to visit the administration interface first. You can access
-            it by calling http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
-            is "Secret".
+            it by browsing http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
+            is <CODE>Secret</CODE>.
           </P>
         </ITEM>
         <ITEM>Build and install from source
@@ -208,25 +203,26 @@ limitations under the License.
                 Set your JAVA_HOME environment variable (to the directory where the JDK is
                 installed)
               </ITEM> <ITEM>
-                Make sure that the "bin" directory of your Ant installation is in your
-                search path.  Run "ant -v" to verify.
+                Make sure that the <CODE>bin</CODE> directory of your Ant installation is in your
+                search path.  Run "<CODE>ant -v</CODE>" to verify.
               </ITEM> <ITEM>
                 You will need Internet access the first time you run the build, so that
                 build process can download the needed third party libraries
                 (automatically).
               </ITEM> <ITEM>
-                Just run 'ant' to build an exploded webapp and a war file in
-                subdirectory "build/webapp".
+                Just run 'ant' to build an war file in subdirectory
+                <CODE>build/webapp</CODE>.
                 If you don't have an
                 <A href="http://ant.apache.org/ivy/">Ivy</A>
                 jar file in your CLASSPATH, the Ant command
                 above will display the simple command that you can copy-and-paste to your
                 command line to satisfy it.
               </ITEM> <ITEM>
-                Deploy the file at build/webapp/jwebpp.jar to your servlet container, as
+                Deploy the file at <CODE>build/jwebpp.jar</CODE> to your servlet container, as
                 explained in the previous section.
-                Alternatively, you can deploy the exploded web app located at
-                build/webapp/jwebmail.  Since you are building software, we figure you
+                Alternatively, you set Ant property <CODE>exploded.dir</CODE>
+                and deploy the exploded webapp to a live deployment directory.
+                Since you are building software, we figure you
                 are handy enough to figure this out without further instruction from us.
               </ITEM>
             </NLIST>
@@ -239,11 +235,11 @@ limitations under the License.
             http://pub.admc.com/lib-repos</A>, and add them to your IDE's
             compilation classpath.
           </P> <P>
-            Run "ant -p" for further possible targets that may be used.
+            Run "<CODE>ant -p</CODE>" for further possible targets that may be used.
             To customize any Ant properties, create a standard Java properties file in
-            this directory with name "local.properties".
+            this directory with name <CODE>local.properties</CODE>.
           </P> <P>
-            The "gen-guide" task requires the program "xsltproc".
+            The <CODE>gen-guide</CODE> task requires the program "xsltproc".
             If you don't have "xsltproc", you can generate the jwebmail-guide.html file manually
             with your favorite XSLT processor tool and the guide.* artifacts in the
             doc-src directory.
@@ -273,7 +269,7 @@ limitations under the License.
         Commons Logging provides the front end for logging, where the
         JWebMail application sends log messages.
         Your servlet container will connect these generated messages to
-        a logging "back end" to write log files, database records, or
+        a logging <EM>back end</EM> to write log files, database records, or
         emails from them.
         If you have a straight-forward servlet container, and you have
         not added a logging product to it, then Commons Logging will
@@ -301,7 +297,8 @@ limitations under the License.
       </P> <P>Container logging setup with Log4j and Tomcat<LIST>
         <ITEM>
           The default container classpath directory on Tomcat 6.x
-          is CATALINA_HOME/lib by default.  I.e., the "lib" subdirectory
+          is <CODE>CATALINA_HOME/lib</CODE> by default.
+          I.e., the "lib" subdirectory
           of the Tomcat installation root directory.
           You can put both Jar files and in .class files (in package
           directory trees) into it.
@@ -666,7 +663,8 @@ limitations under the License.
             <ITEM>the administrator of JWebMail can impose certain restrictions on users of a JWebMail
               domain. e.g. you can restrict the hosts where users may connect to here</ITEM>
             <ITEM>each domain has its own default host where the user's primary folder will be found</ITEM>
-            <ITEM>the user's default email address will be set to "user@domain"</ITEM>
+            <ITEM>the user's default email address will be set to
+              "<CODE>user@domain</CODE>"</ITEM>
           </LIST>
         </P>
         <P>
@@ -695,7 +693,7 @@ limitations under the License.
         <P>
           To create a user,
           <LIST>
-            <ITEM>enter the user name and the domain in the user field (in the form "user@domain")</ITEM>
+            <ITEM>enter the user name and the domain in the user field (in the form "<CODE>user@domain</CODE>")</ITEM>
             <ITEM>optionally change all the other fields from the default settings</ITEM>
             <ITEM>hit the create/edit button on the bottom of the page</ITEM>
           </LIST>
@@ -770,9 +768,9 @@ limitations under the License.
     </P>
     <P>
       Changing authentication method can be achieved using the Administration
-      Interface and changing the "AUTH" variable.
+      Interface and changing the <CODE>AUTH</CODE> variable.
       For IMAP authentication there is an extra configuration variable called
-      "AUTHHOST".
+      <CODE>AUTHHOST</CODE>.
     </P>
   </SECTION>
 
@@ -842,14 +840,14 @@ limitations under the License.
           <ITEM>Different XSL stylesheets to convert the JWebMail UI to other
             formats than HTML (perhaps WML for mobile phones)</ITEM>
           <ITEM>PGP</ITEM>
-          <ITEM>"Extras" like calendar and so on
+          <ITEM><EM>Extras</EM> like calendar and so on
             (will be realized as JWebMail Plugins)</ITEM>
         </LIST>
       </P>
     </SUBSECTION>
     <SUBSECTION name="Changes" id="notes:changes">
       <P>
-        See the file "changes.txt" for a list of changes in the different
+        See the file <CODE>changes.txt</CODE> for a list of changes in the different
         JWebMail releases.
       </P>
     </SUBSECTION>
@@ -881,14 +879,14 @@ limitations under the License.
 
   <SECTION name="Credits" id="credits">
     <P>
-      I give my credits to all who reported me bugs and made suggestions to
+      Appreciation to all who reported bugs and made suggestions to
       improve JWebMail.
     </P>
     <P>
       Some, however, I want to mention explicitly:
       <LIST>
-        <ITEM>Sebastian Schaffert, schaffer@informatik.uni-muenchen.de</ITEM>,
-        who was the project lead before me.
+        <ITEM>Sebastian Schaffert, schaffer@informatik.uni-muenchen.de,
+        who was the project lead before me.</ITEM>
         <ITEM>Devin Kowatch, devink@webengruven.org, for contributing challenge/response authentication</ITEM>
         <ITEM>Homero Borgo, homero@apoyo.uson.mx, for testing JWebMail under rough conditions
           and helping much to find bugs in the product.</ITEM>

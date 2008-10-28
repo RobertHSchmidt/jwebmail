@@ -112,6 +112,11 @@ ancestors, not just direct children.
 Do code search for use of getElementsBy...() and change to the less dangerous
 and more efficient getChild*() methods.
 
+Test the Knife mbox provider.  The setup for it was wrong, so it's quite
+possible that it hasn't been working for 8 years now.  Since support and
+update are unavailable, if it doesn't work, just drop it until have time
+to test a modern (open source) mbox provider product.
+
 Test POPS protocol.
 
 When create Folders, they should automatically be subscribed to.
