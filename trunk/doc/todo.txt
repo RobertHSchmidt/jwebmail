@@ -108,6 +108,8 @@ Widget fixes
     the widgets on this page are generated dynamically from the list of
     settings.
 
+Consider adding proxy support.
+
 ======================================================
 
 Trying to emulate the Bibop text images with Gimp.
