@@ -18,8 +18,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<!ELEMENT GUIDE (TITLE,AUTHOR,SECTION+)>
+<!ELEMENT GUIDE (TITLE,REVISION,AUTHOR,SECTION+)>
 <!ELEMENT TITLE (#PCDATA)>
+<!ELEMENT REVISION (#PCDATA)>
 <!ELEMENT AUTHOR (#PCDATA)>
 <!ELEMENT SECTION (SUBSECTION|P|CONTENTS)*>
 <!ELEMENT CONTENTS (#PCDATA)>
