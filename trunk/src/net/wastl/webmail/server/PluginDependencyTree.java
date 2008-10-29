@@ -22,7 +22,6 @@ package net.wastl.webmail.server;
 import java.util.*;
 
 /**
- *
  * @author Sebastian Schaffert
  */
 public class PluginDependencyTree {

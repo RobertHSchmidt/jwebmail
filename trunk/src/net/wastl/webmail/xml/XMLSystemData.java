@@ -27,11 +27,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- *
- *
  * This class represents methods for accessing WebMail's system configuration in a
  * XML tree.
- *
  *
  * @author Sebastian Schaffert
  */

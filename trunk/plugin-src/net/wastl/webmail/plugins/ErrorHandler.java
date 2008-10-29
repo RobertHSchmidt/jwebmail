@@ -29,7 +29,6 @@ import java.util.*;
 /**
  * This URLHandler handles error messages.
  *
- *
  * @author Sebastian Schaffert
  */
 public class ErrorHandler implements Plugin, URLHandler {

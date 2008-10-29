@@ -32,8 +32,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 /**
- *
- *
  * This provides a generic interface for getting and setting stored
  * data in WebMail.
  *

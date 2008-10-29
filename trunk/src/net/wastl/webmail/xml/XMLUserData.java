@@ -32,9 +32,6 @@ import org.apache.commons.logging.LogFactory;
 
 
 /**
- *
- *
- *
  * @author Sebastian Schaffert
  */
 public class XMLUserData extends XMLData implements UserData {
@@ -665,7 +662,6 @@ public class XMLUserData extends XMLData implements UserData {
 
     /**
      * Set all boolvars to "false".
-     *
      */
     public void resetBoolVars() {
         NodeList nl=getNodeListXPath("/USERDATA/BOOLVAR");

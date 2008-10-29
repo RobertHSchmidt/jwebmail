@@ -28,7 +28,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- *
  * Mainly consists of a DOM that represents all of the data in the user's session.
  * On subtrees, there are the SYSDATA and the USERDATA DOM trees (among other stuff like folder list,
  * message list, etc)

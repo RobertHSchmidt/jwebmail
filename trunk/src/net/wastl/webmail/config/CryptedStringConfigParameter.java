@@ -22,7 +22,6 @@ package net.wastl.webmail.config;
 import net.wastl.webmail.misc.Helper;
 
 /**
- *
  * @author Sebastian Schaffert
  */
 public class CryptedStringConfigParameter extends StringConfigParameter {

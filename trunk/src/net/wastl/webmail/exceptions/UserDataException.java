@@ -22,7 +22,6 @@ package net.wastl.webmail.exceptions;
 /**
  * An error corresponding to some user's data
  *
- *
  * @author Sebastian Schaffert
  */
 public class UserDataException extends WebMailException {

@@ -22,7 +22,6 @@ package net.wastl.webmail.misc;
 import java.util.*;
 
 /**
- *
  * @author Sebastian Schaffert
  */
 public class Queue  {

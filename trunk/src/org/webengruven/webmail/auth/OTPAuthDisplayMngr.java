@@ -24,7 +24,6 @@
  * serevr.  Thus there needs to be a challenge used in changing the
  * password.
  *
- *
  * $Id$
  *
  * @author Devin Kowatch

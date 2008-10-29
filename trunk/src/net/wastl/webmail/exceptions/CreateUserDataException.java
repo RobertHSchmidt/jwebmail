@@ -22,7 +22,6 @@ package net.wastl.webmail.exceptions;
 /**
  * An error occured while creating the userdata for a user.
  *
- *
  * @author Sebastian Schaffert
  */
 public class CreateUserDataException extends UserDataException {

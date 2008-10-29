@@ -27,7 +27,6 @@ import net.wastl.webmail.exceptions.*;
 import java.util.Locale;
 
 /**
- *
  * @author Sebastian Schaffert
  */
 public class ImageHandler implements Plugin, URLHandler  {
