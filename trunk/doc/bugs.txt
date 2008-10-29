@@ -29,7 +29,7 @@ I have verified that the MAILHOST_MODEL has been removed from the
 XMLUserModel, and that these nodes are not being updated by future
 WebMailSession.refreshFolderInformation(boolean, boolean)s.  Could the
 style sheet or Servlet post-processing be caching it somehow?
-  
+
 Non-critical XPath bug(s).  See errors in the application log.
 
 Graceless handling of session timeouts.  Get exception stack traces in
