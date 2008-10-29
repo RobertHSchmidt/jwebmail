@@ -24,7 +24,6 @@ limitations under the License.
 <!DOCTYPE help SYSTEM "../../../xml/webmail_help.dtd">
 
 
-
 <help>
   <helptopic id="mailbox" title="Dossier-Boîte aux Lettres WebMail - Vue d'ensemble">
     <icon href="btn-mailbox.png"/>

@@ -130,7 +130,6 @@ public final class XMLCommon  {
     }
 
 
-
     /**
      * @deprecated use getXPath instead!
      */

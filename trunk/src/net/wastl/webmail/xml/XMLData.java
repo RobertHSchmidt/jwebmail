@@ -72,8 +72,6 @@ public class XMLData {
     }
 
 
-
-
     /* -------------------------- Access Members ------------------------- */
 
     protected String getParentXPath(String str) {

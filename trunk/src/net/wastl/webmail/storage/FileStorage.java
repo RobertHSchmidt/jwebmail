@@ -410,7 +410,6 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
     }
 
 
-
     public Authenticator getAuthenticator() {
         return auth;
     }

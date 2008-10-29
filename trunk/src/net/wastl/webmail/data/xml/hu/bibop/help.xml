@@ -25,7 +25,6 @@
 <!DOCTYPE help SYSTEM "../../../xml/webmail_help.dtd">
 
 
-
 <help>
   <helptopic id="mailbox" title="WebMail Mailbox/Folder Overview">
     <icon href="icona_mail2.gif"/>

@@ -26,7 +26,6 @@
 <!DOCTYPE help SYSTEM "../../../xml/webmail_help.dtd">
 
 
-
 <help>
   <helptopic id="mailbox" title="Dossier-Boîte aux Lettres WebMail - Vue d'ensemble">
     <icon href="icona_mail2.gif"/>

@@ -299,7 +299,6 @@ public abstract class WebMailServer  {
     }
 
 
-
     public String getProperty(String name) {
         return config.getProperty(name);
     }

@@ -335,7 +335,6 @@ public class SimpleStorage extends FileStorage {
     }
 
 
-
     /**
      * Delete a WebMail user
      * @param user Name of the user to delete
