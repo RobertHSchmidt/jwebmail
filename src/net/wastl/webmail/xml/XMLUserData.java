@@ -357,7 +357,6 @@ public class XMLUserData extends XMLData implements UserData {
     }
 
 
-
     public void addEmail(String s) {
         Element email = null;
         try {
@@ -434,8 +433,6 @@ public class XMLUserData extends XMLData implements UserData {
             return v;
         }
     }
-
-
 
 
     public String getTheme() {

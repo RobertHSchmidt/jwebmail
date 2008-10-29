@@ -17,7 +17,6 @@
  */
 
 
-
 package net.wastl.webmail.misc;
 
 import java.util.*;

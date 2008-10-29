@@ -1855,7 +1855,6 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
     }
 
 
-
     protected static int[] getSelectedMessages(HTTPRequestHeader head, int max) {
         // log.debug("select messages...");
 
