@@ -51,3 +51,10 @@ difficult to understand for no reason (not to mention highly nested code
 doesn't fit in the width of a normal editor).  Detect exceptional cases early
 then handle and throw/return/continue/break and be-done-with-it, instead
 of making a large if/then or if/then/else structure.
+
+Do not System.exit() except in main() methods that will never be executed
+by our running app.  Do not write to System.out or System.err.  Do not
+use Thread.printStackTrace(*), which amounts to the same thing.  We have
+a logging facility that makes it easy to write messages and stack traces.
+NOTE:  log.*(Throwable) just logs the Throwable.toString(), but
+log.*(String, Throwable) logs the stack trace.

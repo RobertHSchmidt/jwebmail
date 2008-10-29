@@ -20,6 +20,8 @@
 package net.wastl.webmail.ui.html;
 
 import java.util.regex.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Filter JavaScript content from HTML messages to avoid security problems.
@@ -27,6 +29,8 @@ import java.util.regex.*;
  * @author Sebastian Schaffert
  */
 public class JavaScriptFilter  {
+    private static Log log = LogFactory.getLog(JavaScriptFilter.class);
+
     private static Pattern[] filter = new Pattern[3];
     private static String[] substitution = new String[3];
 
@@ -48,7 +52,7 @@ public class JavaScriptFilter  {
             //uri=new RE("http\\:\\/\\/(.+)(html|\\/)(\\S|\\-|\\+|\\.|\\\|\\:)");
             initialized=true;
         } catch(Exception e) {
-            e.printStackTrace();
+            log.fatal("Failed to clinit static objects", e);
         }
     }
 

@@ -57,7 +57,7 @@ public class IMAPAuthenticator extends net.wastl.webmail.server.Authenticator {
         try {
             st=session.getStore("imap");
         } catch(NoSuchProviderException e) {
-            e.printStackTrace();
+            log.error("Initialization failed", e);
         }
     }
 
@@ -79,9 +79,8 @@ public class IMAPAuthenticator extends net.wastl.webmail.server.Authenticator {
             log.info("IMAPAuthentication: user "+user+
                         " authenticated successfully (imap host: "+authhost+").");
         } catch(MessagingException e) {
-            log.warn("IMAPAuthentication: user "+user+
-                        " authentication failed (imap host: "+authhost+").");
-            //e.printStackTrace();
+            log.error("IMAPAuthentication: user "+user+
+                        " authentication failed (imap host: "+authhost+").", e);
             throw new InvalidPasswordException("IMAP authentication failed!");
         }
     }

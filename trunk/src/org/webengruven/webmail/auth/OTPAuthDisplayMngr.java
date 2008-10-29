@@ -38,8 +38,12 @@ import org.webengruven.webmail.auth.*;
 import net.wastl.webmail.server.*;
 import net.wastl.webmail.exceptions.*;
 import net.wastl.webmail.xml.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class OTPAuthDisplayMngr extends CRAuthDisplayMngr {
+    private static Log log = LogFactory.getLog(OTPAuthDisplayMngr.class);
+
     /* the length of the passwords */
     private int     PASS_LEN = 30;
 
@@ -67,7 +71,8 @@ public class OTPAuthDisplayMngr extends CRAuthDisplayMngr {
             model.setStateVar("pass len", String.valueOf(PASS_LEN));
         }
         catch (ClassCastException e) {
-            e.printStackTrace();
+            log.error( "tried to use OTPAuthDisplayMngr"
+             + " with an Authenticator other than OTPAuthenticator", e);
             throw new WebMailException( "tried to use OTPAuthDisplayMngr"
              + " with an Authenticator other than OTPAuthenticator");
         }

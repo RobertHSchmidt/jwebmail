@@ -60,7 +60,8 @@ public final class XMLCommon  {
                 return null;
             }
         } catch(Exception ex) {
-            ex.printStackTrace();
+            log.error("Xpath query failed.  Continuing as if no node found.",
+                    ex);
             return null;
         }
     }
@@ -80,7 +81,9 @@ public final class XMLCommon  {
         } catch(TransformerException ex) {
             addNodeXPath(root,getParentXPath(path),root.getOwnerDocument().createTextNode(value));
         } catch(Exception ex) {
-            ex.printStackTrace();
+            log.error("Failed to set value '" + value + "' for path '"
+                    + path + "'.  Continuing, but should not.", ex);
+            // TODO:  Throw here.
         }
     }
 
@@ -90,9 +93,12 @@ public final class XMLCommon  {
             Node n = XPathAPI.selectSingleNode(root,path);
             return n;
         } catch(Exception ex) {
-            ex.printStackTrace();
-            return null;
+            log.error("XPath query '" + path
+                    + "' failed, but behaving as if node not found", ex);
+            // Can easily dumpXML here if that is useful.
+            // TODO:  Throw here.
         }
+        return null;
     }
 
     /**
@@ -103,7 +109,9 @@ public final class XMLCommon  {
             Node n = XPathAPI.selectSingleNode(root,path);
             n.appendChild(child);
         } catch(Exception ex) {
-            ex.printStackTrace();
+            log.error("Failed to add nod for path '"
+                    + path + "'.  Continuing, but should not.", ex);
+            // TODO:  Throw here.
         }
     }
 
@@ -113,9 +121,12 @@ public final class XMLCommon  {
             NodeList n = XPathAPI.selectNodeList(root,path);
             return n;
         } catch(Exception ex) {
-            ex.printStackTrace();
-            return null;
+            log.error("XPath query '" + path
+                    + "' failed, but behaving as if no nodes found", ex);
+            // Can easily dumpXML here if that is useful.
+            // TODO:  Throw here.
         }
+        return null;
     }
 
 

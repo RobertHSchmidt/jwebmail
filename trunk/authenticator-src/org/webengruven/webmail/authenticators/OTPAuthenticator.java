@@ -26,6 +26,8 @@ import org.webengruven.javaOTP.*;
 import org.webengruven.webmail.auth.*;
 import java.util.*;
 import java.security.NoSuchAlgorithmException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * OTPAuthenticator.java -- this class is an Authenticator for
@@ -36,6 +38,8 @@ import java.security.NoSuchAlgorithmException;
  * @author Devin Kowatch
  */
 public class OTPAuthenticator extends OTPAuthenticatorIface {
+    private static Log log = LogFactory.getLog(OTPAuthenticator.class);
+
     /** The version of OTPAuthenticator */
     public final String     VERSION = "1.2";
     /** The default starting sequence for an OTP */
@@ -154,7 +158,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
                 chal = server.getNewChallenge(new_st.seed, START_SEQ);
             }
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            log.error("bad hash algorithm for new OTP.", e);
             throw new WebMailException("bad hash algorithm for new OTP.");
         }
 
@@ -295,11 +299,11 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
             chal = server.getChallenge();
         }
         catch (OTPFormatException e) {
-            e.printStackTrace();
+            log.fatal(e);
             // this should never happen.
         }
         catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            log.fatal(e);
             // this either
         }
 

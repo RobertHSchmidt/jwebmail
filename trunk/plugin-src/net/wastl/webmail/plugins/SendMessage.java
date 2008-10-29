@@ -408,8 +408,7 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
                                                               user.getPreferredLocale(),user.getTheme()));
 //              if(sendsuccess) session.clearWork();
             } catch(Exception e) {
-                e.printStackTrace();
-                log.error(e);
+                log.error("Could not send messsage", e);
                 throw new DocumentNotFoundException("Could not send message. (Reason: "+e.getMessage()+")");
             }
 

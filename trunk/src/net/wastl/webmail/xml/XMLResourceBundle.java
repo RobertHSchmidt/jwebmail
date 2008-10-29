@@ -137,7 +137,7 @@ public class XMLResourceBundle extends ResourceBundle {
             ret=new XMLResourceBundle(WebMailServer.getServer().getProperty("webmail.template.path")+
                                       System.getProperty("file.separator")+name+".xml",lang);
         } catch(Exception ex) {
-            ex.printStackTrace();
+            log.error("Resource not found: " + name, ex);
             throw new MissingResourceException("Resource not found",name,"");
         }
 

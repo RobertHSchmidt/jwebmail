@@ -27,6 +27,8 @@ import net.wastl.webmail.misc.*;
 import net.wastl.webmail.exceptions.*;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Show WebMail help file
@@ -37,6 +39,8 @@ import javax.xml.parsers.*;
  * @author Sebastian Schaffert
  */
 public class WebMailHelp implements Plugin, URLHandler {
+    private static Log log = LogFactory.getLog(WebMailHelp.class);
+
     public static final String VERSION="2.0";
     public static final String URL="/help";
 
@@ -81,7 +85,7 @@ public class WebMailHelp implements Plugin, URLHandler {
                 DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 helpdoc=parser.parse(helpdocpath);
             } catch(Exception ex) {
-                ex.printStackTrace();
+                log.error("Could not parse "+helpdocpath, ex);
                 throw new WebMailException("Could not parse "+helpdocpath);
             }
 

@@ -223,7 +223,7 @@ public class ConfigScheme {
                 try {
                     l.notifyConfigurationChange(key);
                 } catch(Exception e) {
-                    e.printStackTrace();
+                    log.error("Failed to notify of cofnig change", e);
                 }
             }
         }

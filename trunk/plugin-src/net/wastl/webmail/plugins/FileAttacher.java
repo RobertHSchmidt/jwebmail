@@ -129,7 +129,7 @@ public class FileAttacher implements URLHandler, Plugin {
                     session.addWorkAttachment(bs.getName(),bs,description);
                 }
             } catch(Exception e) {
-                e.printStackTrace();
+                log.error("Could not attach file", e);
                 throw new DocumentNotFoundException("Could not attach file. (Reason: "+e.getMessage()+")");
             }
         } else if(head.isContentSet("DELETE") && head.isContentSet("ATTACHMENTS")) {
@@ -145,8 +145,8 @@ public class FileAttacher implements URLHandler, Plugin {
                     log.info("Removing " + attachmentName);
                     session.removeWorkAttachment(attachmentName);
                 } catch (Exception e) {
-                        e.printStackTrace();
-                        throw new DocumentNotFoundException("Could not remove attachment. (Reason: "+e.getMessage()+")");
+                    log.error("Could not remove attachment", e);
+                    throw new DocumentNotFoundException("Could not remove attachment. (Reason: "+e.getMessage()+")");
                 }
         }
 

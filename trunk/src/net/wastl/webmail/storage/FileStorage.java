@@ -228,12 +228,18 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         if(!exists) {
             // We should cache this on disk since it is so slow!
             available1=Collator.getAvailableLocales();
+            ObjectOutputStream os = null;
             try {
-                ObjectOutputStream os=new ObjectOutputStream(new FileOutputStream(cached));
+                os=new ObjectOutputStream(new FileOutputStream(cached));
                 os.writeObject(available1);
-                os.close();
-            } catch(Exception ex) {
-                ex.printStackTrace();
+            } catch(IOException ioe) {
+                log.error("Failed to write to storage", ioe);
+            } finally {
+                try {
+                    os.close();
+                } catch(IOException ioe) {
+                    log.error("Failed to close stream", ioe);
+                }
             }
         }
 
@@ -308,7 +314,9 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
                 resources.put(locale.getLanguage(),rc);
                 return rc.getString(key);
             } catch(Exception e) {
-                e.printStackTrace();
+                log.error("Failed to load resource bundle '"
+                        + "org.bulb.webmail.xmlresource.Resources' for locale '"
+                        + locale + "'.  Continuing without handling?");
                 return "";
             }
         }
@@ -387,7 +395,10 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         } else {
             try {
                 bs=ByteStore.getBinaryFromIS(new FileInputStream(f),(int)f.length());
-            } catch(IOException ex) { ex.printStackTrace(); }
+            } catch(IOException ex) {
+                log.error("Failed to get load bytes from file '"
+                        + f.getAbsolutePath() + "'", ex);
+            }
             cache.put(name,bs,new Long(f.lastModified()));
 
             if(bs != null) {

@@ -92,17 +92,15 @@ public class XMLData {
      */
     public String getValueXPath(String path) {
         data.normalize();
+        Node n = null;
         try {
-            Node n = xpath_api.selectSingleNode(data,path);
-            if(n != null) {
-                return n.getNodeValue();
-            } else {
-                return null;
-            }
+            n = xpath_api.selectSingleNode(data,path);
         } catch(Exception ex) {
-            ex.printStackTrace();
-            return null;
+            log.error("XPath failure for path '" + path
+                    + "'.  Continuing as if path not found.");
+            // TODO:  throw
         }
+        return (n == null) ? null : n.getNodeValue();
     }
 
     /**
@@ -123,7 +121,9 @@ public class XMLData {
         } catch(TransformerException ex) {
             addNodeXPath(getParentXPath(path),root.createTextNode(value));
         } catch(Exception ex) {
-            ex.printStackTrace();
+            log.error("XML error when trying to set value '"
+                    + value + "' for path '" + path + "'");
+            // TODO:  throw
         }
     }
 
@@ -140,7 +140,15 @@ public class XMLData {
             n.appendChild(child);
             invalidateCache();
         } catch(Exception ex) {
-            ex.printStackTrace();
+            // We get here SOMETIMES if there is no Sent folder to add
+            // sent mail to.
+            log.error("XPath threw for path '" + path + "', or adding to it.  "
+                    + "'" + path + " is probably just missing though.  "
+                    + "Continuing without adding the child");
+            // Log the Exception if there is more going on than missing Sent
+            // folder.
+            //XMLCommon.dumpXML(log, path, root);
+            //TODO: throw
         }
     }
 
@@ -150,9 +158,11 @@ public class XMLData {
             NodeList n = xpath_api.selectNodeList(data,path);
             return n;
         } catch(Exception ex) {
-            ex.printStackTrace();
-            return null;
+            log.warn("'" + path + "' query threw, "
+                    + "but it's probably an XPath library bug.  "
+                    + "Continuing as if no node found.");
         }
+        return null;
     }
 
 

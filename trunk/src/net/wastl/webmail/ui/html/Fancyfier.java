@@ -20,6 +20,8 @@
 package net.wastl.webmail.ui.html;
 
 import java.util.regex.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Do some fancifying with the messages. Also filters JavaScript.
@@ -29,6 +31,8 @@ import java.util.regex.*;
  * @author Sebastian Schaffert
  */
 public class Fancyfier  {
+    private static Log log = LogFactory.getLog(Fancyfier.class);
+
     public Fancyfier() {
     }
     private static Pattern[] regs=null;
@@ -93,7 +97,7 @@ public class Fancyfier  {
             //uri=new RE("http\\:\\/\\/(.+)(html|\\/)(\\S|\\-|\\+|\\.|\\\|\\:)");
 
         } catch(Exception e) {
-            e.printStackTrace();
+            log.fatal("Failed to clinit static objects", e);
         }
     }
 
