@@ -67,7 +67,7 @@
                             Login&#160;&#160;
                           </TD>
                           <TD height="25" bgcolor="#FFFFFF" width="190" class="testo">
-                            <INPUT TYPE="text" NAME="login" SIZE="15" class="testo"/>
+                            <INPUT ID="loginId" TYPE="text" NAME="login" SIZE="15" class="testo"/>
                           </TD>
                         </TR>
                         <TR>
@@ -110,9 +110,8 @@
                           <TD width="25" bgcolor="#7B889F" height="50" class="testo">&#160;</TD>
                         </TR>
                         <TR>
-                          <TD colspan="4" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center"><SPAN class="bold">BiBop
-              WebMail </SPAN>is based on<BR/>
-              WebMail is &#169; 1999-@year@ by Sebastian Schaffert</TD>
+                          <TD colspan="4" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center"><SPAN class="bold">BiBop Theme</SPAN> by BiBop research int.<BR/>
+              JWebMail &#169; 1999-@year@ by JWebMail Dev Team &amp; Sebastian Schaffert</TD>
                         </TR>
                       </TABLE>
                     </TD>
@@ -129,6 +128,9 @@
           </xsl:if>
 
       </BODY>
+      <SCRIPT type="text/javascript">
+        document.getElementById("loginId").focus();
+      </SCRIPT>
     </HTML>
   </xsl:template>
 </xsl:stylesheet>

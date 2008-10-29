@@ -83,18 +83,6 @@
               </xsl:choose>
 
           </xsl:for-each>
-
-          <TR bgcolor="#dddddd">
-            <TD COLSPAN="3" ALIGN="center"><FONT SIZE="+1"><STRONG>Shutdown/Restart</STRONG></FONT></TD>
-          </TR>
-          <TR>
-            <FORM ACTION="{$base}/admin/control?session-id={$session-id}" METHOD="POST">
-              <TD><STRONG>Shutdown/Restart system</STRONG></TD>
-              <TD>after <INPUT TYPE="text" SIZE="4" NAME="SHUTDOWN SECONDS" VALUE="0"/> seconds</TD>
-              <TD><INPUT TYPE="submit" name="REBOOT" value="Restart"/><INPUT TYPE="submit" name="SHUTDOWN" value="Shutdown"/></TD>
-            </FORM>
-          </TR>
-
         </TABLE>
       </BODY>
 

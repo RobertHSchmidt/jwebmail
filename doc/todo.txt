@@ -3,31 +3,28 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Get anti-JS text out of docs.
+Take care of all easy compiler warnings.  All except third-party if time
+permits.
 
-Put in JS to fucus on input field on both login screens.
+Change-control an Eclipse config.
 
-Put link to home page from Admin login page.
+If time permits, turn on lotsa compilation checks with Eclipse and take
+care of the warnings.
 
-Update BiBop's webmail copyright message.
+Make release build targets.
 
-Get rid of lines like "BiBop... is based on" in
-src/net/wastl/webmail/data/xml/*/bibop/logout.xsl, DITTO/loginscreen.xsl.
-Sentence is incomplete, and I have no idea what the intended sentence was.
+Roll an RC.  1.0.1rc1.  (Consider waiting on following super-item).
 
-Widget fixes
-    Remove the interaction widgets in the Admin Plugin for the disabled
-    shutdown actions.
+Add a new properties setting like webmail.demo or webmail.noxmit, to prevent
+sending messages from the JWebMail server.  And a expiration for user accounts
+Will need to keep a emailaddr/host list, because users could just sign up with
+different JWebMail user name.
 
-    Remove password field widgets of User Setup screen if the user's
-    Authenticator does not allow changing passwords.
+Host a demo site at jwebmail.admc.com.
 
-    Pulldown list on Create Folder screen should either not offer folder
-    types not supported by the server, or detect failures to create
-    unsupported folder types (or create a type that was not selected).
-
-    Fix goofy HTML password form behavior and have it not show encrypted
-    passwords.
+-------------------------------------------
+TAKE A DEEP BREATH
+-------------------------------------------
 
 More branding updates.
     Search for '\<WebMail\>' and change all but Servlet name references
@@ -41,29 +38,6 @@ More branding updates.
           (all of these are the same)
           (these last seem to be a mistake.  Image has nothing to do with
           "java powered", like the corresopnding classic theme image does).
-
-Take care of all easy compiler warnings.  All except third-party if time
-permits.
-
-Change-control an Eclipse config.
-
-If time permits, turn on lotsa compilation checks with Eclipse and take
-care of the warnings.
-
-Add a new properties setting like webmail.demo or webmail.noxmit, to prevent
-sending messages from the JWebMail server.  And a expiration for user accounts
-Will need to keep a emailaddr/host list, because users could just sign up with
-different JWebMail user name.
-
-Make release build targets.
-
-Roll an RC.  1.0.1rc1.  (Consider waiting on following super-item).
-
-Host a demo site at jwebmail.admc.com.
-
--------------------------------------------
-TAKE A DEEP BREATH
--------------------------------------------
 
 Stop loading resources directly from the application through the FS.
 Load delivered resources through classpath.
@@ -119,3 +93,32 @@ When create Folders, they should automatically be subscribed to.
 Either do not display the change link on (!HOLD_MESSAGES) Folders on the
 Subscription-management screen, or at least tell the user when their
 Subscription action has no effect.
+
+Widget fixes
+    Remove password field widgets of User Setup screen if the user's
+    Authenticator does not allow changing passwords.
+
+    Pulldown list on Create Folder screen should either not offer folder
+    types not supported by the server, or detect failures to create
+    unsupported folder types (or create a type that was not selected).
+
+    Fix goofy HTML password form behavior and have it not show encrypted
+    passwords.
+    Turns out to be more difficult than editing XSL or JSP, because
+    the widgets on this page are generated dynamically from the list of
+    settings.
+
+======================================================
+
+Trying to emulate the Bibop text images with Gimp.
+Reason is the change the text from "WebMail" to "JWebMail".
+My text always comes out "skippy".  I even made at 2x size then
+reduced at the end.  ALWAYS SKIPPY.
+
+For emulating Bibop images, try DejaVu Sans Semi-Condensed font.
+Documenting how creating image in Gimp:
+    #2b4165 darker blue
+    #8995aa lighter blue-gray
+    font above, size 30 px
+    Gave a drop shadow with X offset, Y offset, blur radius 2, black
+     opacity 80, no allow resizing

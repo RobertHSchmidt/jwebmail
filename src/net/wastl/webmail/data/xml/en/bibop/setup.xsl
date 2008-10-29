@@ -57,7 +57,7 @@
               <TD bgcolor="#E2E6F0" class="testoNero">Full Name:</TD>
               <TD class="testoNero" bgcolor="#D1D7E7"><INPUT TYPE="TEXT" NAME="FULLNAME" VALUE="{normalize-space(/USERMODEL/USERDATA/FULL_NAME)}" class="testoNero" size="15"/></TD>
               <TD class="testoNero" bgcolor="#E2E6F0">Password:</TD>
-              <TD class="testoNero" bgcolor="#D1D7E7"><INPUT TYPE="PASSWORD" NAME="PASSWORD" class="testoNero" size="15"/></TD>
+              <TD class="testoNero" bgcolor="#D1D7E7"><INPUT TYPE="PASSWORD" NAME="PASSWORD" class="testoNero" size="15" id="passwordId"/></TD>
             </TR>
             <TR>
               <TD bgcolor="#E2E6F0" class="testoNero">Language:</TD>
@@ -76,7 +76,7 @@
                 </SELECT>
               </TD>
               <TD class="testoNero" bgcolor="#E2E6F0">Verify:</TD>
-              <TD class="testoNero" bgcolor="#D1D7E7"><INPUT TYPE="PASSWORD" NAME="VERIFY" class="testoNero" size="15"/></TD>
+              <TD class="testoNero" bgcolor="#D1D7E7"><INPUT TYPE="PASSWORD" NAME="VERIFY" class="testoNero" size="15" id="verifyId"/></TD>
             </TR>
             <TR>
               <TD class="testoNero">Theme:</TD>
@@ -249,6 +249,13 @@
         </FORM>
 
       </BODY>
+      <SCRIPT type="text/javascript">
+        function clearPwdFields() {
+            document.getElementById("passwordId").value = "";
+            document.getElementById("verifyId").value = "";
+        }
+        setTimeout("clearPwdFields();", 500);
+      </SCRIPT>
 
     </HTML>
   </xsl:template>
@@ -256,6 +263,4 @@
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
   </xsl:template>
-
-
 </xsl:stylesheet>

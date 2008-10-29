@@ -32,14 +32,20 @@
       </HEAD>
 
       <BODY bgcolor="#ffffff">
-        <TABLE WIDTH="100%">
+        <TABLE CELLSPACING="0" STYLE="border:0; padding:0; margin:50px;">
           <TR>
-            <TD COLSPAN="3" ALIGN="CENTER" HEIGHT="70">
+            <!-- The java_powerd.png icon is completely incongruous with
+                 the login widget, and with the Bibop theme
+                 (not that these other two items are complementary
+                 with each other). -->
+            <TD STYLE="padding:20px; border:0; margin:0; text-align:center;">
+              <A href="../" title="JWebMail Home Page">
+                <IMG STYLE="margin:20px; border:0; padding:0;"
+                     SRC="{$imgbase}/images/homefolders-icon.png"
+                     ALT="JWebMail Home Page"/>
+              </A>
             </TD>
-          </TR>
-          <TR>
-            <TD WIDTH="20%" VALIGN="TOP"><IMG SRC="{$imgbase}/images/java_powered.png" ALT="Java powered"/></TD>
-            <TD WIDTH="60%" ALIGN="CENTER">
+            <TD STYLE="padding:20px; border:0; margin:0; text-align:center;">
               <FORM ACTION="{$base}/admin/login" METHOD="POST" NAME="loginForm">
                 <TABLE CELLSPACING="0" CELLPADDING="20" BORDER="4" bgcolor="#ff0000">
                   <TR>
@@ -55,7 +61,7 @@
                         </TR>
                         <TR>
                           <TD WIDTH="50%" ALIGN="RIGHT"><STRONG>Password:</STRONG></TD>
-                          <TD WIDTH="50%"><INPUT TYPE="password" NAME="password" SIZE="15"/></TD>
+                          <TD WIDTH="50%"><INPUT ID="passwordId" TYPE="password" NAME="password" SIZE="15"/></TD>
                         </TR>
                         <TR>
                           <TD ALIGN="CENTER"><INPUT TYPE="submit" value="Login"/></TD>
@@ -67,13 +73,11 @@
                 </TABLE>
               </FORM>
             </TD>
-            <TD WIDTH="20%">
-            </TD>
           </TR>
           <xsl:if test="/GENERICMODEL/STATEDATA/VAR[@name='invalid password']/@value = 'yes'">
             <!-- START invalid pass -->
             <TR>
-              <TD COLSPAN="3" ALIGN="CENTER">
+              <TD COLSPAN="2" ALIGN="CENTER">
                 <FONT COLOR="red" SIZE="+1">
                   Login incorrect. The passwords did not match or the name/password field was empty! Attempt will be logged.
                 </FONT>
@@ -84,5 +88,8 @@
         </TABLE>
       </BODY>
     </HTML>
+    <SCRIPT type="text/javascript">
+      document.getElementById("passwordId").focus();
+    </SCRIPT>
   </xsl:template>
 </xsl:stylesheet>

@@ -31,7 +31,7 @@ limitations under the License.
   <target name="-init" depends="-check-tool-versions">
     <tstamp/>
     <property name="Name" value="JWebMail"/>
-    <property name="version" value="1.0.1d"/>
+    <property name="version" value="1.0.1e"/>
     <property name="year" value="2008"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
@@ -270,18 +270,9 @@ limitations under the License.
            This base-uri in our code base makes our webapp non-portable. -->
     </copy>
     <copy tofile="build/stage/mimetypes.txt" file="contrib/mime.types"/>
-    <copy todir="build/stage/content">
-      <fileset dir="jsp-src" excludes="**/.*"/>
-      <filterset>
-        <filter token="base-uri" value="/${ant.project.name}"/>
-      </filterset>
-      <!-- TODO:  Eliminate.
-           This base-uri in our code base makes our webapp non-portable. -->
-    </copy>
     <zip destfile="build/stage/data.zip" basedir="data"/>
 
-    <war warfile="build/${ant.project.name}.war"
-         webxml="build/stage/web.xml" basedir="build/stage/content">
+    <war warfile="build/${ant.project.name}.war" webxml="build/stage/web.xml">
       <classes dir="build/stage" includes="data.zip, mimetypes.txt"/>
       <classes dir="build/plugin-classes"/>
       <classes dir="build/authenticator-classes"/>

@@ -74,7 +74,7 @@ limitations under the License.
             (IMAP supports different folders on the same host, POP doesn't)</ITEM>
           <ITEM>Supports SSL protocols <CODE>imaps</CODE> and <CODE>pop3s</CODE>.</ITEM>
           <ITEM>Sophisticated folder management system</ITEM>
-          <ITEM>100% HTML 3.2/4.0 output, no Javascript, no Java on the Client side</ITEM>
+          <ITEM>100% HTML 3.2/4.0 output, no Java on the Client side</ITEM>
           <ITEM>Supports multiple languages, configurable for each user</ITEM>
           <ITEM>Flexible template system to personalize look and feel and write new language files using XML and
             XSL</ITEM>
@@ -108,8 +108,8 @@ limitations under the License.
             A mailserver for sending (SMTP) and receiving (IMAP) mails; by default,
             JWebMail will use <CODE>localhost</CODE> for both
           </ITEM> <ITEM>
-            A webapp-capable Java servlet container which runs on a Java 1.5 or
-            greater JVM (either JRE or JDK).
+            A Java servlet container which supports the 2.4 servlet spec,
+            and runs on a Java 1.5 or greater JVM (either JRE or JDK).
             Anything from a stripped down servlet-container
             like <A href="http://tomcat.apache.org/">Tomcat</A>,
             to a J2EE application server like
