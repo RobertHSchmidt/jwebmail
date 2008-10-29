@@ -33,8 +33,8 @@ limitations under the License.
       to his mailbox(es).
       Unlike Yahoo Mail, Hotmail, and Gmail, JWebMail presents a web interface
       to traditional email accounts which you or somebody else provide.
-      (The target email account servers may, of course, be restricted by
-      JWebMail).
+      The target email account servers may be restricted by
+      JWebMail.
     </P> <P>
       By virtue of JWebMail being a pure Java appplication, it has excellent
       portability, scalability, and performance.
