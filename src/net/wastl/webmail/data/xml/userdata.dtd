@@ -66,7 +66,7 @@ limitations under the License.
                       value (yes|no)    #IMPLIED>
 
 <!-- Currently (0.7) the following INTVARs are used in WebMail:
-"first login"           - The first login of a user in seconds since 1.1.1970 (for a formated string see statedata.dtd)
+"first login"           - The first login of a user in seconds since 1.1.1970 (for a formatted string see statedata.dtd)
 "last login"            - The last login of the user in seconds since 1.1.1970
 "login count"           - The number of logins this user already had
 "max show messages"     - The number of messages to show on a page in the message list

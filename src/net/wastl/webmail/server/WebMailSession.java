@@ -663,7 +663,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         XMLMessagePart xml_part;
         try {
             if(p.getContentType().toUpperCase().startsWith("TEXT/HTML")) {
-                /* The part is a text in HTML format. We will try to use "Tidy" to create a well-formated
+                /* The part is a text in HTML format. We will try to use "Tidy" to create a well-formatted
                    XHTML DOM from it and then remove JavaScript and other "evil" stuff.
                    For replying to such a message, it will be useful to just remove all of the tags and display
                    only the text.

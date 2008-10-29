@@ -79,8 +79,8 @@ public class IMAPAuthenticator extends net.wastl.webmail.server.Authenticator {
             log.info("IMAPAuthentication: user "+user+
                         " authenticated successfully (imap host: "+authhost+").");
         } catch(MessagingException e) {
-            log.error("IMAPAuthentication: user "+user+
-                        " authentication failed (imap host: "+authhost+").", e);
+            log.warn("IMAPAuthentication: user "+user+
+                        " authentication failed (imap host: "+authhost+").");
             throw new InvalidPasswordException("IMAP authentication failed!");
         }
     }

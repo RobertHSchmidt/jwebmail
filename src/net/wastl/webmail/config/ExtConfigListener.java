@@ -257,6 +257,7 @@ public class ExtConfigListener implements ServletContextListener {
      */
     protected void installXmlStorage(File baseDir, File metaFile)
             throws IOException {
+        log.warn("Will attempt install a brand new data store");
         File dataDir = new File(baseDir, "data");
         if (dataDir.exists())
             throw new IOException("Target data path dir already exists: "
