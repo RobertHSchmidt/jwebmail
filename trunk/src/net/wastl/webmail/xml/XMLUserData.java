@@ -616,15 +616,22 @@ public class XMLUserData extends XMLData implements UserData {
         invalidateCache();
     }
 
+    /**
+     * @returns 0 if no element for specified variable.
+     */
     protected long getIntVarWrapper(String var) {
         ensureElement("INTVAR","name",var);
         long r=0;
+        String xPathString = "/USERDATA/INTVAR[@name='"+var+"']/@value";
+        String attValue = null;
         try {
             //r=Long.parseLong(e.getAttribute("value"));
-            r = Long.parseLong(getValueXPath("/USERDATA/INTVAR[@name='"+var+"']/@value"));
+            attValue = getValueXPath(xPathString);
+            if (attValue == null) return 0;
+            r = Long.parseLong(attValue);
         } catch(NumberFormatException ex) {
-            log.warn("Not a valid number in '"+var+"' for user "+
-                   getUserName()+"@"+getDomain());
+            log.warn("Value '" + attValue + "', from XPath '" + xPathString
+                    + "' is not a well-formatted integer");
             // Should we not throw here so us developers will see and
             // fix the problem? - blaine
         }

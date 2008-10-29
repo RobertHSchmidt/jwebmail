@@ -79,8 +79,8 @@ public class POPAuthenticator extends net.wastl.webmail.server.Authenticator {
             log.info("POPAuthentication: user "+user+
                         " authenticated successfully (pop host: "+authhost+").");
         } catch(MessagingException e) {
-            log.error("POPAuthentication: user "+user+
-                        " authentication failed (pop host: "+authhost+").", e);
+            log.warn("POPAuthentication: user "+user+
+                        " authentication failed (pop host: "+authhost+").");
             throw new InvalidPasswordException("POP authentication failed!");
         }
     }

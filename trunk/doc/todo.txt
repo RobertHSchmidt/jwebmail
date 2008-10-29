@@ -3,8 +3,11 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Resolve "Not a valid number" warnings in log, from XMLUserData (at least
-upon imap login).
+Get anti-JS text out of docs.
+
+Put in JS to fucus on input field on both login screens.
+
+Put link to home page from Admin login page.
 
 Update BiBop's webmail copyright message.
 

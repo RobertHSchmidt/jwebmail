@@ -31,7 +31,7 @@ limitations under the License.
   <target name="-init" depends="-check-tool-versions">
     <tstamp/>
     <property name="Name" value="JWebMail"/>
-    <property name="version" value="1.0.1c"/>
+    <property name="version" value="1.0.1d"/>
     <property name="year" value="2008"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
