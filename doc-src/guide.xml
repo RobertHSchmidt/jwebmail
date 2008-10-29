@@ -268,7 +268,7 @@ limitations under the License.
         design and manage logging with delivered application artifacts.
         Remember that logging settings are a runtime consideration which
         should be modifiable after deployment by operations personnel.
-        JWebMail is exceptional in that it facilitates logging 
+        JWebMail is exceptional in that it facilitates logging
       </P> <P>
         Webapp bundles just Apache Commons Logging.
         Commons Logging provides the front end for logging, where the

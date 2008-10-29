@@ -71,7 +71,7 @@ public class ContextPathValidator implements Filter {
         log.fatal("Request context path '" + req.getContextPath()
                 + "' does match match configured context.path '"
                 + contextPath + "'");
-        throw new ServletException("Request context path '" + 
+        throw new ServletException("Request context path '" +
                 req.getContextPath()
                 + "' does match match configured context.path '"
                 + contextPath + "'");
