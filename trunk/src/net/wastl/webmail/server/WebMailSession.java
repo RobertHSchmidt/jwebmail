@@ -2102,9 +2102,11 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 if(auth.canChangePassword()) {
                     auth.changePassword(user,head.getContent("PASSWORD"),head.getContent("VERIFY"));
                 } else {
+                    /*
                     log.fatal("Skipping password change since "
                             + "authenicator doesn't permit it:  FIX THIS!");
-                    //throw new InvalidDataException(getStringResource("EX NOCHANGE PASSWORD"));
+                    */
+                    throw new InvalidDataException(getStringResource("EX NOCHANGE PASSWORD"));
                     //Can't throw when the HTML we generates sends a non-empty
                     //password when the user types nothing.
                     // TODO:  Fixme

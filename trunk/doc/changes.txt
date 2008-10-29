@@ -1,6 +1,21 @@
 # $Id$
 # changed/fixed, + added, - removed
 
+v1.0.1e rev. 105
+# Removed tons of printStackTrace commands.  I think all stdout/stderr
+  usage is finally gone.
+  Fixed folder removal but.
+  Improved error-handling and diagnostics for XPath problems.
+  Generally adjusted error messages so useful messages make it to logs and
+   user where possible, short warnings given where a work-around is invoked,
+   and details logged in the few cases where the problem needs more work.
+  All Java classes now have proper classes.
+  Separate directory branches for source with different build needs.
+  Added nice logging method for dumping given problematic XML doc to log file.
+  Major fixes for mbox IMAP server support.
+  Significant performance improvement by counting messages in a folder only
+   when necessary.
+
 v1.0.1b rev. 67
 # Fixed terrible bug where Webapp should not be stopped without hanging
   the servlet container.  Removed all System.exit()s from code which

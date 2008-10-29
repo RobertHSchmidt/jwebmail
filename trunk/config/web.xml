@@ -180,4 +180,9 @@ limitations under the License.
     <servlet-name>WebMail</servlet-name>
     <url-pattern>/WebMail/*</url-pattern>
   </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>WebMail</welcome-file>
+    <!-- This usage REQUIRES Servlet spec 2.4! -->
+  </welcome-file-list>
 </web-app>

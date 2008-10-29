@@ -11,7 +11,8 @@ For running JWebMail you need the following software:
 
 - A mailserver for sending (SMTP) and receiving (IMAP) mails; by default,
   JWebMail will use "localhost" for both
-- A webapp-capable Java servlet container which runs on a Java 1.5 or greater
+- A Java servlet container which supports the 2.4 servlet spec. and
+  runs on a Java 1.5 or greater
   JVM (either JRE or JDK).  Anything from a stripped down servlet-container
   like Tomcat, to a J2EE application server like JBoss or
   WebSphere will work.

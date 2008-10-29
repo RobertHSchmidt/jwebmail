@@ -77,7 +77,8 @@ public class XHTMLDocument extends net.wastl.webmail.ui.html.HTMLDocument {
             processor.transform(msg_xml,msg_result);
         } catch(Exception ex) {
             log.error("Error transforming XML to XHTML.", ex);
-            throw new WebMailException(ex.toString());
+            throw new WebMailException("Error transforming XML to XHTML: "
+                    + ex);
         }
         long end_t=System.currentTimeMillis();
         log.debug("Transformation (with precompiled stylesheet) XML --> XHTML took "+(end_t-start_t)+" ms.");
