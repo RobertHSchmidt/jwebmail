@@ -356,7 +356,7 @@ public abstract class WebMailServer  {
         try {
             doInit();
         } catch(WebMailException ex) {
-            ex.printStackTrace();
+            log.error("Server initialization failed", ex);
         }
     }
 

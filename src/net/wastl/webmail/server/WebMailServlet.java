@@ -138,7 +138,7 @@ public class WebMailServlet extends WebMailServer implements Servlet {
         try {
             doInit();
         } catch(Exception e) {
-            e.printStackTrace();
+            log.error("Could not intialize", e);
             throw new ServletException("Could not intialize: "+e.getMessage(),e);
         }
         Helper.logThreads("Bottom of WebMailServlet.init()");
@@ -302,7 +302,6 @@ public class WebMailServlet extends WebMailServer implements Servlet {
                         throw new ServletException("Invalid URL called!");
                     }
                 } catch(Exception ex) {
-                    ex.printStackTrace();
                     content=getURLHandler().handleException(ex,sess,http_header);
                     log.debug("Some strange error while handling request",ex);
                 }
@@ -377,9 +376,9 @@ public class WebMailServlet extends WebMailServer implements Servlet {
 //              out.close();
             }
         } catch(Exception e) {
-            e.printStackTrace();
-            log.info("Connection to "+addr.toString()+" closed");
-            throw new ServletException("Error: "+e.getMessage(),e);
+            log.info("Connection to "+addr.toString()+" closed unexpectedly",
+                    e);
+            throw new ServletException(e.getMessage());
         }
     }
 

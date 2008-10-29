@@ -90,8 +90,8 @@ public class SimpleStorage extends FileStorage {
             sysdata=new XMLSystemData(root,cs);
             log.debug( "SimpleStorage: WebMail configuration loaded.");
         } catch(Exception ex) {
-            log.error("SimpleStorage: Failed to load WebMail configuration file. Reason: "+ex.getMessage());
-            ex.printStackTrace();
+            log.error("SimpleStorage: Failed to load WebMail configuration file",
+                    ex);
             throw new UnavailableException(ex.getMessage());
         }
     }
@@ -113,8 +113,8 @@ public class SimpleStorage extends FileStorage {
             sysdata.setLoadTime(System.currentTimeMillis());
             log.debug("SimpleStorage: WebMail configuration saved.");
         } catch(Exception ex) {
-            log.error("SimpleStorage: Error while trying to save WebMail configuration ("+ex.getMessage()+").");
-            ex.printStackTrace();
+            log.error("SimpleStorage: Error while trying to save WebMail configuration",
+                    ex);
         }
     }
 

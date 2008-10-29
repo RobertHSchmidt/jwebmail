@@ -215,7 +215,8 @@ public class XMLUserData extends XMLData implements UserData {
             //XMLCommon.writeXML(root,System.err,"");
             invalidateCache();
         } catch(Exception ex) {
-            ex.printStackTrace();
+            log.error("Failed to add mailhost.  Just aborting and continuing.",
+                    ex);
         }
     }
 

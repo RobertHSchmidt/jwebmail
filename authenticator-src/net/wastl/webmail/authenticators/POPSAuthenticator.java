@@ -39,7 +39,7 @@ public class POPSAuthenticator extends POPAuthenticator {
         try {
             st=session.getStore("pop3s");
         } catch(NoSuchProviderException e) {
-            e.printStackTrace();
+            log.error("Initialization for 'pop3s' failed", e);
         }
     }
 

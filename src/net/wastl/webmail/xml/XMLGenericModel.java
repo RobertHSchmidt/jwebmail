@@ -104,15 +104,27 @@ public class XMLGenericModel extends XMLData {
     public void update() {
         Node n = null;
         try {
-            n = getNodeXPath("//SYSDATA");
+             n = getNodeXPath("//SYSDATA");
         } catch (TransformerException te) {
-            log.error("Failed to get extract node for XPath '//SYSDATA'");
+            log.error("Failed to extract node for XPath '//SYSDATA'.  "
+                    + "Aborting update");
             XMLCommon.dumpXML(log, "//SYSDATA", root);
+            // TODO:  throw here instead of silently failing (from
+            //        user's perspective).
         }
+        if (n == null) return;
+        log.debug("Got a '//SYSDATA' node");
         try {
-            root.getDocumentElement().replaceChild(root.importNode(sysdata,true),n);
+            root.getDocumentElement().replaceChild(
+                    root.importNode(sysdata,true), n);
         } catch(DOMException ex) {
-            log.error("Something went wrong with the XML generic model", ex);
+            log.error(
+                "Failed to replace //SYSDATA Element in the XML generic model",
+                ex);
+            XMLCommon.dumpXML(log, "//SYSDATA", root);
+            // There is a real bug that manifests here.
+            // Occurs when logging into Admin Plugin (or when it brings
+            // up the main System Configuration page the first time).
         }
     }
 

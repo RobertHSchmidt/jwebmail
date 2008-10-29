@@ -438,10 +438,11 @@ public class WebMailSession implements HTTPSession {
             log.debug("Construction of message list took "+(time_stop-time_start)+" ms. Time for IMAP transfer was "+(fetch_stop-fetch_start)+" ms.");
             folder.close(false);
         } catch(NullPointerException e) {
-            e.printStackTrace();
+            log.error("Failed to construct message list", e);
             throw new NoSuchFolderException(folderhash);
         } catch(MessagingException ex) {
-            ex.printStackTrace();
+            log.error("Failed to construct message list.  "
+                    + "For some reason, contuing anyways.", ex);
         }
     }
 
@@ -649,7 +650,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 prepareCompose();
             }
         } catch(MessagingException ex) {
-            ex.printStackTrace();
+            log.error("Failed to get message.  Doing nothing instead.", ex);
         }
     }
 
@@ -1004,11 +1005,11 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 xml_part.setAttribute("content-type",tok.nextToken().toLowerCase());
             }
         } catch(java.io.IOException ex) {
-            ex.printStackTrace();
+            log.error("Failed to parse mime content", ex);
         } catch(MessagingException ex) {
-            throw ex;
+            log.error("Failed to parse mime content", ex);
         } catch(Exception ex) {
-            ex.printStackTrace();
+            log.error("Failed to parse mime content", ex);
         }
     }
 
@@ -1189,10 +1190,10 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                  */
                 String bodyString;
                 try {
-                        bodyString = new String(head.getContent("BODY").getBytes("ISO8859_1"), "UTF-8");
+                    bodyString = new String(head.getContent("BODY").getBytes("ISO8859_1"), "UTF-8");
                 } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                        bodyString = head.getContent("BODY");
+                    log.fatal("Failed to encode to UTF-8?  Continuing", e);
+                    bodyString = head.getContent("BODY");
                 }
 
             // If the user enabled "break line", then do it!
@@ -1218,8 +1219,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 try {
                         xml_message.setHeader("FROM", new String(head.getContent("FROM").getBytes("ISO8859_1"), "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                        xml_message.setHeader("FROM",head.getContent("FROM"));
+                    log.fatal("Failed to encode to UTF-8?  Continuing", e);
+                    xml_message.setHeader("FROM",head.getContent("FROM"));
                 }
         }
         if(head.isContentSet("TO")) {
@@ -1227,8 +1228,8 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             try {
                         xml_message.setHeader("TO", new String(head.getContent("TO").getBytes("ISO8859_1"), "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                        xml_message.setHeader("TO",head.getContent("TO"));
+                    log.fatal("Failed to encode to UTF-8?  Continuing", e);
+                    xml_message.setHeader("TO",head.getContent("TO"));
                 }
         }
         if(head.isContentSet("CC")) {
@@ -1236,7 +1237,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             try {
                 xml_message.setHeader("CC", new String(head.getContent("CC").getBytes("ISO8859_1"), "UTF-8"));
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                log.fatal("Failed to encode to UTF-8?  Continuing", e);
                 xml_message.setHeader("CC",head.getContent("CC"));
             }
         }
@@ -1245,7 +1246,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             try {
                 xml_message.setHeader("BCC", new String(head.getContent("BCC").getBytes("ISO8859_1"), "UTF-8"));
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                log.fatal("Failed to encode to UTF-8?  Continuing", e);
                 xml_message.setHeader("BCC",head.getContent("BCC"));
             }
         }
@@ -1254,7 +1255,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             try {
                 xml_message.setHeader("REPLY-TO", new String(head.getContent("REPLY-TO").getBytes("ISO8859_1"), "UTF-8"));
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                log.fatal("Failed to encode to UTF-8?  Continuing", e);
                 xml_message.setHeader("REPLY-TO",head.getContent("REPLY-TO"));
             }
         }
@@ -1263,7 +1264,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             try {
                 xml_message.setHeader("SUBJECT", new String(head.getContent("SUBJECT").getBytes("ISO8859_1"), "UTF-8"));
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                log.fatal("Failed to encode to UTF-8?  Continuing", e);
                 xml_message.setHeader("SUBJECT",head.getContent("SUBJECT"));
             }
         }
@@ -1744,10 +1745,11 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             }
         } catch(MessagingException ex) {
             // Should not happen
-            ex.printStackTrace();
+            log.fatal("Unexpected failure to disconnect", ex);
         } catch(NullPointerException ex) {
             // This happens when deleting a folder with an error
-            ex.printStackTrace();
+            log.fatal("Failed to disconnect after deleting folder?  " + ex);
+            // Log exception too if the comment above is wrong
         } finally {
             connections.remove(name);
         }
@@ -1837,7 +1839,9 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         try {
             i=Long.parseLong(parent.getStorage().getConfig("session timeout"));
         } catch(NumberFormatException ex) {
-            ex.printStackTrace();
+            log.error("Stored 'session timeout' value ("
+                    + parent.getStorage().getConfig("session tmeout")
+                    + "' malformatted", ex);
         }
         return i;
     }
@@ -1867,7 +1871,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                     //    log.debug(_msgs[j]+" ");
                     j++;
                 } catch(NumberFormatException ex) {
-                    ex.printStackTrace();
+                    log.error("Value '" + s + "' malformatted?", ex);
                 }
             }
         }
@@ -1902,7 +1906,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                         f.close(true);
                     } catch(MessagingException ex) {
                         // XXXX
-                        ex.printStackTrace();
+                        log.error("Failed to expunge folders", ex);
                     }
                 }
             }
@@ -2088,7 +2092,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 user.setSignature(new String(head.getContent("SIGNATURE").getBytes("ISO8859_1"), "UTF-8"));
                 user.setFullName(new String(head.getContent("FULLNAME").getBytes("ISO8859_1"), "UTF-8"));
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                log.fatal("Failed to encode to UTF-8?  Continuing", e);
                 user.setSignature(head.getContent("SIGNATURE"));
                 user.setFullName(head.getContent("FULLNAME"));
             }

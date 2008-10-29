@@ -190,7 +190,8 @@ public class AdminPlugin implements Plugin, URLHandler {
                         parent.getStorage().setVirtualDomain(header.getContent("NEW DOMAIN"),vd);
                     }
                 } catch(Exception ex) {
-                    ex.printStackTrace();
+                    log.error("Failed to serve /domain/set URL.  "
+                        + "Shouldn't we NOT save?  Continuing anyways.", ex);
                 }
                 parent.getStorage().save();
                 session.setEnv();

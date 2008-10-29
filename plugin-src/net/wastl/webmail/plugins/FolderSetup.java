@@ -25,6 +25,8 @@ import net.wastl.webmail.ui.html.*;
 import net.wastl.webmail.ui.xml.*;
 import net.wastl.webmail.exceptions.*;
 import java.util.Enumeration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Show the folder setup form and handle changes (except deletion).
@@ -37,6 +39,8 @@ import java.util.Enumeration;
  * @author Sebastian Schaffert
  */
 public class FolderSetup implements Plugin, URLHandler {
+    private static Log log = LogFactory.getLog(FolderSetup.class);
+
     public static final String VERSION="1.3";
     public static final String URL="/folder/setup";
 
@@ -123,7 +127,7 @@ public class FolderSetup implements Plugin, URLHandler {
                                       holds_folders);
 
                 } catch(Exception ex) {
-                    ex.printStackTrace();
+                    log.error("Error while adding folders", ex);
                     throw new WebMailException("Error while adding folders");
                 }
             } else if(header.isContentSet("hide")) {

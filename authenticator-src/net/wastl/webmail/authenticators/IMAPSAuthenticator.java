@@ -39,7 +39,7 @@ public class IMAPSAuthenticator extends IMAPAuthenticator {
         try {
             st=session.getStore("imaps");
         } catch(NoSuchProviderException e) {
-            e.printStackTrace();
+            log.error("Initialization for 'imaps' failed", e);
         }
     }
 

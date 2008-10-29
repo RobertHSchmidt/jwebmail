@@ -57,7 +57,7 @@ public class POPAuthenticator extends net.wastl.webmail.server.Authenticator {
         try {
             st=session.getStore("pop3");
         } catch(NoSuchProviderException e) {
-            e.printStackTrace();
+            log.error("Initialization failed", e);
         }
     }
 
@@ -79,9 +79,8 @@ public class POPAuthenticator extends net.wastl.webmail.server.Authenticator {
             log.info("POPAuthentication: user "+user+
                         " authenticated successfully (pop host: "+authhost+").");
         } catch(MessagingException e) {
-            log.warn("POPAuthentication: user "+user+
-                        " authentication failed (pop host: "+authhost+").");
-            //e.printStackTrace();
+            log.error("POPAuthentication: user "+user+
+                        " authentication failed (pop host: "+authhost+").", e);
             throw new InvalidPasswordException("POP authentication failed!");
         }
     }

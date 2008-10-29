@@ -40,66 +40,49 @@ public class HTMLDocument {
     }
 
     public HTMLDocument(String title, String content) {
-                header=new HTMLHeader(title);
-                this.content=content;
+        header=new HTMLHeader(title);
+        this.content=content;
     }
 
     public HTMLDocument(String title, String cont, String basepath) {
-                this(title,cont);
-
-//              try {
-//                      RE regexp2=new RE("<<BASE>>",RE.REG_ICASE & RE.REG_MULTILINE);
-//                      content=regexp2.substituteAll(content,basepath);
-//              } catch(Exception e) {
-//                      e.printStackTrace();
-//              }
+        this(title,cont);
     }
 
-//     public HTMLDocument(String title,Storage loader, String docname) {
-//              this(title,loader.getTextFile(loader.getStringResource(docname,Locale.getDefault()),Locale.getDefault()));
-//     }
-
-//     public HTMLDocument(String title,Storage loader, String docname, String basepath) {
-//              this(title,loader.getTextFile(loader.getStringResource(docname,Locale.getDefault()),Locale.getDefault()),basepath);
-//     }
-
     public void addHTTPHeader(String key, String value) {
-                if(httpheaders==null) {
-                        httpheaders=new Hashtable(5);
-                }
-                httpheaders.put(key,value);
+        if(httpheaders==null) httpheaders=new Hashtable(5);
+        httpheaders.put(key,value);
     }
 
     public Enumeration getHTTPHeaderKeys() {
-                return httpheaders.keys();
+        return httpheaders.keys();
     }
 
     public String getHTTPHeader(String key) {
-                return (String)httpheaders.get(key);
+        return (String)httpheaders.get(key);
     }
 
     public boolean hasHTTPHeader() {
-                return (httpheaders!=null) && !httpheaders.isEmpty();
+        return (httpheaders!=null) && !httpheaders.isEmpty();
     }
 
     public int getReturnCode() {
-                return returncode;
+        return returncode;
     }
 
     public String getReturnStatus() {
-                return returnstatus;
+        return returnstatus;
     }
 
     public void setStatus(int code, String status) {
-                returncode=code;
-                returnstatus=status;
+        returncode=code;
+        returnstatus=status;
     }
 
     public String toString() {
-                return header.toString()+"\r\n"+content;
+        return header.toString()+"\r\n"+content;
     }
 
     public int length() {
-                return header.toString().length()+1+content.length();
+        return header.toString().length()+1+content.length();
     }
 }

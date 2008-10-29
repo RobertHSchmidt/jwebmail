@@ -19,6 +19,9 @@
 
 package net.wastl.webmail.misc;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /*
  * MD5 in Java JDK Beta-2
  * written Santeri Paavolainen, Helsinki Finland 1996
@@ -91,6 +94,7 @@ class MD5State {
  * @author      Santeri Paavolainen <sjpaavol@cc.helsinki.fi>
  */
 public class MD5 {
+    private static Log log = LogFactory.getLog(MD5.class);
   /**
    * MD5 state
    */
@@ -403,7 +407,7 @@ public class MD5 {
         chars = s.getBytes("UTF-8");
     } catch(java.io.UnsupportedEncodingException ex) {
         // Should never happen
-        ex.printStackTrace();
+        log.fatal("Failed to decode UTF-8?  Continuing", ex);
         chars = new byte[1];
     }
 
