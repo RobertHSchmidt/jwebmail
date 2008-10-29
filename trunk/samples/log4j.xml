@@ -90,5 +90,5 @@
         <appender-ref ref="error_ap"/>
         <appender-ref ref="console_ap"/>
         <appender-ref ref="html_ap"/>
-    </root>  
+    </root>
 </log4j:configuration>
