@@ -8,7 +8,9 @@ Resolve bug where failing to remove folders.
 Resolve "Not a valid number" warnings in log, from XMLUserData (at least
 upon imap login).
 
-Get rid of lines like "BiBo... is based on" in
+Update BiBop's webmail copyright message.
+
+Get rid of lines like "BiBop... is based on" in
 src/net/wastl/webmail/data/xml/*/bibop/logout.xsl, DITTO/loginscreen.xsl.
 Sentence is incomplete, and I have no idea what the intended sentence was.
 
