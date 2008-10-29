@@ -20,9 +20,6 @@
 package net.wastl.webmail.server;
 
 /**
- *
- *
- *
  * @author Sebastian Schaffert
  */
 public interface TimeableConnection  {

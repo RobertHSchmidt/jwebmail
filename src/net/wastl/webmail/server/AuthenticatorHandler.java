@@ -27,7 +27,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- *
  * @author Sebastian Schaffert
  */
 public class AuthenticatorHandler  {

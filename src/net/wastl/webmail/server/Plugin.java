@@ -20,8 +20,6 @@
 package net.wastl.webmail.server;
 
 /**
- *
- *
  * This provides a generic interface for WebMail Plugins
  *
  * @author Sebastian Schaffert

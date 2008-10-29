@@ -23,7 +23,6 @@ import net.wastl.webmail.exceptions.*;
 import java.util.*;
 
 /**
- *
  * @author Sebastian Schaffert
  */
 public interface UserData {

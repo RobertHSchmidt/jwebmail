@@ -20,7 +20,6 @@
 package net.wastl.webmail.config;
 
 /**
- *
  * @author Sebastian Schaffert
  */
 public class IntegerConfigParameter extends ConfigParameter {

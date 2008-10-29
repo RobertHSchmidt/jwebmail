@@ -23,7 +23,6 @@ import java.io.*;
 /**
  * This is a generic WebMail Exception.
  *
- *
  * @author Sebastian Schaffert
  */
 public class WebMailException extends Exception {

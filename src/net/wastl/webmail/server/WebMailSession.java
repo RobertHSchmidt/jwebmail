@@ -41,7 +41,6 @@ import org.w3c.dom.*;
  * Contains the state of the actual user (loads it from disk).
  * Has a unique session-ID.
  *
- *
  * @author Sebastian Schaffert
  */
 public class WebMailSession implements HTTPSession {

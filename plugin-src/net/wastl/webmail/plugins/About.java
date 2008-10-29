@@ -26,9 +26,6 @@ import net.wastl.webmail.exceptions.*;
 import java.util.Enumeration;
 
 /**
- *
- *
- *
  * @author Sebastian Schaffert
  */
 public class About implements Plugin, URLHandler {

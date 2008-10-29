@@ -34,7 +34,6 @@ import org.apache.commons.logging.LogFactory;
 import org.webengruven.webmail.auth.*;
 
 /**
- *
  * @author Sebastian Schaffert
  */
 public class AdminSession implements HTTPSession {

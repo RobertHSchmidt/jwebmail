@@ -20,9 +20,6 @@
 package net.wastl.webmail.exceptions;
 
 /**
- *
- *
- *
  * @author Sebastian Schaffert
  */
 public class InvalidPasswordException extends WebMailException {
