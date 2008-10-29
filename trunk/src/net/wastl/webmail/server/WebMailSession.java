@@ -2198,7 +2198,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
     public void removeFolder(String id, boolean recurse) throws MessagingException {
         Folder folder=getFolder(id);
-        folder.close(false);
+        if (folder.isOpen()) folder.close(false);
         folder.delete(recurse);
 
         // Should be called from FolderSetup Plugin
