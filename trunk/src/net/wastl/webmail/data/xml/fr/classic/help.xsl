@@ -65,7 +65,6 @@ limitations under the License.
           </TABLE>
         </P>
       </BODY>
-
     </HTML>
   </xsl:template>
 
@@ -161,5 +160,4 @@ limitations under the License.
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-
 </xsl:stylesheet>

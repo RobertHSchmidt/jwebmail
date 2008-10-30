@@ -93,6 +93,4 @@ limitations under the License.
       </BODY>
     </HTML>
   </xsl:template>
-
-
 </xsl:stylesheet>

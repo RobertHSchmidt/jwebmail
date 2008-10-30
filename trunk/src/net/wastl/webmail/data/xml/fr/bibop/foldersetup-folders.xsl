@@ -62,10 +62,7 @@
         <P class="testoChiaro">
           <SPAN class="testoRosso">Attention!</SPAN> si vous effacez un dossier, tous les messages (et sous-dossiers) seront <SPAN class="testoRosso">effacés</SPAN> non seulement de WebMail mais aussi <SPAN class="testoRosso">physiquement de l'hôte serveur de messagerie!</SPAN> Ceci est dangereux et ne pourra être défait!
         </P>
-
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -171,5 +168,4 @@
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

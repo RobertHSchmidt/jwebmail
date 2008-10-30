@@ -51,9 +51,6 @@ limitations under the License.
           </CENTER>
         </P>
       </BODY>
-
     </HTML>
   </xsl:template>
-
-
 </xsl:stylesheet>

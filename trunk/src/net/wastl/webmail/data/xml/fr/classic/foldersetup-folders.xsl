@@ -60,10 +60,7 @@ limitations under the License.
         <P>
           <FONT color="red"><STRONG>Attention!</STRONG></FONT> si vous effacez un dossier, tous les messages (et sous-dossiers) seront <FONT color="red">effacés</FONT> non seulement de WebMail mais aussi <FONT color="red">physiquement de l'hôte serveur de messagerie!</FONT> Ceci est dangereux et ne pourra être défait!
         </P>
-
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -164,5 +161,4 @@ limitations under the License.
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

@@ -68,6 +68,4 @@ tp://xml.apache.org/xslt" version="1.0">
       </BODY>
     </HTML>
   </xsl:template>
-
-
 </xsl:stylesheet>

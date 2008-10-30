@@ -39,7 +39,5 @@
     <RESOURCE name="forward subject postfix">]</RESOURCE>
     <RESOURCE name="forward message prefix">================== továbbított levél kezdete ==================</RESOURCE>
     <RESOURCE name="forward message postfix">=================== továbbított levél vége ====================</RESOURCE>
-
   </LOCALE>
-
 </BUNDLE>

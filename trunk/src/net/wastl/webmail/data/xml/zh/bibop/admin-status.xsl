@@ -81,7 +81,6 @@
                   </TR>
                 </xsl:otherwise>
               </xsl:choose>
-
           </xsl:for-each>
 
           <TR bgcolor="#dddddd">
@@ -94,12 +93,9 @@
               <TD><INPUT TYPE="submit" name="REBOOT" value="重新啟動"/><INPUT TYPE="submit" name="SHUTDOWN" value="關閉系統"/></TD>
             </FORM>
           </TR>
-
         </TABLE>
       </BODY>
-
     </HTML>
-
   </xsl:template>
 
   <xsl:template match="SESSION">
@@ -130,5 +126,4 @@
       </TD>
     </FORM>
   </xsl:template>
-
 </xsl:stylesheet>

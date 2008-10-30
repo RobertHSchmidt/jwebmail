@@ -60,10 +60,6 @@
           </TR>
         </TABLE>
       </BODY>
-
-
     </HTML>
   </xsl:template>
-
-
 </xsl:stylesheet>

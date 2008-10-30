@@ -38,6 +38,5 @@
         <FRAME NAME="Main"   SRC="{$base}/admin/system?session-id={$session-id}" scrolling="auto"/>
       </FRAMESET>
     </HTML>
-
   </xsl:template>
 </xsl:stylesheet>

@@ -223,15 +223,11 @@ limitations under the License.
             </TR>
           </TABLE>
         </FORM>
-
       </BODY>
-
     </HTML>
   </xsl:template>
 
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
   </xsl:template>
-
-
 </xsl:stylesheet>

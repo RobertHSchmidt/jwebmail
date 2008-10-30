@@ -95,8 +95,6 @@ limitations under the License.
           </TABLE>
         </FORM>
       </BODY>
-
     </HTML>
-
   </xsl:template>
 </xsl:stylesheet>

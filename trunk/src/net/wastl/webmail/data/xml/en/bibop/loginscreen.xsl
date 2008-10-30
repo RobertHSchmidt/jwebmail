@@ -126,7 +126,6 @@
             <P align="center">&#160;</P>
             <!-- END invalid pass -->
           </xsl:if>
-
       </BODY>
       <SCRIPT type="text/javascript">
         document.getElementById("loginId").focus();

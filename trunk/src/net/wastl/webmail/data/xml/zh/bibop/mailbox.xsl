@@ -47,8 +47,6 @@
               </xsl:for-each>
             </TABLE>
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -135,5 +133,4 @@
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

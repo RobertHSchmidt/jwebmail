@@ -63,8 +63,6 @@ limitations under the License.
           </TR>
         </TABLE>
       </BODY>
-
     </HTML>
-
   </xsl:template>
 </xsl:stylesheet>

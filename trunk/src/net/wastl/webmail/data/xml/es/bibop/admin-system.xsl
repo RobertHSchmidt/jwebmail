@@ -68,9 +68,7 @@
           </TABLE>
         </FORM>
       </BODY>
-
     </HTML>
-
   </xsl:template>
 
   <xsl:template name="row">

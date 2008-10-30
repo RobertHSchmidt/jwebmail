@@ -61,10 +61,7 @@
         <P class="testoChiaro">
           <SPAN class="testoRosso">&#161;Advertencia!</SPAN> &#161;Si borras una carpeta, todos los mensajes (y subcarpetas) en ella ser&#225;n <SPAN class="testoRosso">borrados</SPAN>, no s&#243;lo de WebMail sino tambi&#233;n <SPAN class="testoRosso">f&#237;sicamente del servidor de correo</SPAN>! &#161;Esto es peligroso y no puede deshacerse!
         </P>
-
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -170,5 +167,4 @@
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

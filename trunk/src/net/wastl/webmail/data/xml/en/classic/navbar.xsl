@@ -47,10 +47,6 @@ limitations under the License.
         <BR/><A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ContentProvider plugin that closes an active WebMail session.';"><IMG SRC="{$imgbase}/images/btn-logout.png" BORDER="0" ALT="LogoutSession" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
         <BR/>
       </BODY>
-
-
     </HTML>
   </xsl:template>
-
-
 </xsl:stylesheet>

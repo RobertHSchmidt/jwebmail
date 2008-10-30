@@ -39,7 +39,6 @@ limitations under the License.
         New Challenge:
         <xsl:value-of select='$sd[@name="new challenge"]/@value'/>
       </xsl:when>
-
     </xsl:choose>
   </xsl:template>
 
@@ -59,8 +58,6 @@ limitations under the License.
       <xsl:when test="$cptmpl = 'otpchangepass'">
         <INPUT TYPE="TEXT" NAME="{$tag}" SIZE="{$plen}"/>
       </xsl:when>
-
     </xsl:choose>
   </xsl:template>
-
 </xsl:stylesheet>
