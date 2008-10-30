@@ -26,6 +26,8 @@ import java.io.*;
  * @author Sebastian Schaffert
  */
 public class WebMailException extends Exception {
+    static final long serialVersionUID = 5926913608449675598L;
+
     Exception nested;
 
     public WebMailException() {

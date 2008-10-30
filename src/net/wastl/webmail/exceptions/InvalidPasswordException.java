@@ -23,6 +23,8 @@ package net.wastl.webmail.exceptions;
  * @author Sebastian Schaffert
  */
 public class InvalidPasswordException extends WebMailException {
+    static final long serialVersionUID = -6963040547455634026L;
+
     public InvalidPasswordException() {
         super();
     }

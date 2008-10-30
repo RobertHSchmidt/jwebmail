@@ -3,9 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Take care of all easy compiler warnings.  All except third-party if time
-permits.
-
 Change-control an Eclipse config.
 
 If time permits, turn on lotsa compilation checks with Eclipse and take

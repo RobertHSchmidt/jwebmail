@@ -28,6 +28,8 @@ package net.wastl.webmail.exceptions;
  * @author Sebastian Schaffert
  */
 public class DocumentNotFoundException extends WebMailException {
+    static final long serialVersionUID = 1601183573411460007L;
+
     public DocumentNotFoundException() {
         super();
     }

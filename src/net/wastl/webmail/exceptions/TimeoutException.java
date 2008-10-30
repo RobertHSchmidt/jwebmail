@@ -23,6 +23,8 @@ package net.wastl.webmail.exceptions;
  * @author Sebastian Schaffert
  */
 public class TimeoutException extends Exception {
+    static final long serialVersionUID = 8696384102060450380L;
+
     public TimeoutException() {
         super();
     }

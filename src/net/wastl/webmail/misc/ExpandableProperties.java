@@ -27,8 +27,9 @@ import java.util.HashSet;
 import java.util.Enumeration;
 
 public class ExpandableProperties extends Properties {
-    Pattern propVarPattern = Pattern.compile("\\Q${\\E([^}]+?)\\Q}");
+    static final long serialVersionUID = -6501669686410348173L;
 
+    Pattern propVarPattern = Pattern.compile("\\Q${\\E([^}]+?)\\Q}");
     private boolean permitUnset = false;
     private boolean namesToo = false;
     private boolean sysToo = true;

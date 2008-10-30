@@ -32,7 +32,9 @@ import org.apache.commons.logging.LogFactory;
  * @author Sebastian Schaffert
  */
 public class ByteStore implements Serializable {
+    static final long serialVersionUID = 4689743335269719513L;
     private static Log log = LogFactory.getLog(ByteStore.class);
+
     byte[] bytes;
 
     String content_type=null;
