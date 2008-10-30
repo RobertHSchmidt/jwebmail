@@ -35,11 +35,11 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ConfigScheme {
     private static Log log = LogFactory.getLog(ConfigScheme.class);
-    protected Hashtable config_scheme;
+    protected Map<String, ConfigParameter> config_scheme;
 
     public ConfigScheme() {
         log.info("Configuration Scheme Handler ... ");
-        config_scheme=new Hashtable();
+        config_scheme=new Hashtable<String, ConfigParameter>();
         log.info("Done setting up Config Scheme Handler!");
     }
 
@@ -58,7 +58,7 @@ public class ConfigScheme {
     }
 
     public String filter(String key, String value) {
-        ConfigParameter c=(ConfigParameter)config_scheme.get(key);
+        ConfigParameter c = config_scheme.get(key);
         if(c!=null) {
             return c.filter(value);
         } else {
@@ -153,7 +153,7 @@ public class ConfigScheme {
      */
     public void configAddChoice(String key, String choice, String desc) {
         if(config_scheme!=null) {
-            ConfigParameter parm=(ConfigParameter)config_scheme.get(key);
+            ConfigParameter parm = config_scheme.get(key);
             if(parm instanceof ChoiceConfigParameter) {
                 ((ChoiceConfigParameter)parm).addChoice(choice,desc);
             }
@@ -170,7 +170,7 @@ public class ConfigScheme {
     }
 
     public ConfigParameter getConfigParameter(String key) {
-        return (ConfigParameter)config_scheme.get(key);
+        return config_scheme.get(key);
     }
 
     public String getConfigParameterType(String key) {
@@ -182,7 +182,7 @@ public class ConfigScheme {
     }
 
     public Object getDefaultValue(String key) {
-        ConfigParameter cp=(ConfigParameter)config_scheme.get(key);
+        ConfigParameter cp = config_scheme.get(key);
         if(cp!=null) {
             return cp.getDefault();
         } else {
@@ -191,7 +191,7 @@ public class ConfigScheme {
     }
 
     public void setDefaultValue(String key, Object default_value) {
-        ConfigParameter cp=(ConfigParameter)config_scheme.get(key);
+        ConfigParameter cp = config_scheme.get(key);
         if(cp!=null) {
             cp.setDefault(default_value);
         }
@@ -199,7 +199,7 @@ public class ConfigScheme {
 
 
     public String getDescription(String key) {
-        ConfigParameter cp=(ConfigParameter)config_scheme.get(key);
+        ConfigParameter cp = config_scheme.get(key);
         if(cp!=null) {
             return cp.getDescription();
         } else {
@@ -207,8 +207,8 @@ public class ConfigScheme {
         }
     }
 
-    public Enumeration getPossibleKeys() {
-        return config_scheme.keys();
+    public Set<String> getPossibleKeys() {
+        return config_scheme.keySet();
     }
 
     public void notifyConfigurationChange(String key) {
@@ -230,19 +230,15 @@ public class ConfigScheme {
     }
 
     public void registerConfig(ConfigParameter parm) {
-        if(config_scheme == null) {
-            config_scheme=new Hashtable();
-        }
-        Enumeration e=config_scheme.keys();
+        if(config_scheme == null)
+            config_scheme=new Hashtable<String, ConfigParameter>();
         boolean flag=false;
-        while(e.hasMoreElements()) {
-            if(e.nextElement().equals(parm.getKey())) {
+        for (String schemeKey : config_scheme.keySet()) {
+            if(schemeKey.equals(parm.getKey())) {
                 flag=true;
                 break;
             }
         }
-        if(!flag) {
-            config_scheme.put(parm.getKey(),parm);
-        }
+        if(!flag) config_scheme.put(parm.getKey(),parm);
     }
 }

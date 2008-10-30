@@ -54,7 +54,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
     public OTPAuthenticator() {
         super();
         key = "OTP";
-        cache = new Hashtable();
+        cache = new Hashtable<String, OTPCacheNode>();
     }
 
     /** Get the AuthDisplayMngr for this class */
@@ -126,7 +126,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
             if (new_st == null) {
                 // Get a random value between (0, 10000], and pad to 4 chars.
                 int             randVal = rand.nextInt() % 9999;
-                StringBuffer    newSeed = new StringBuffer(10);
+                StringBuilder    newSeed = new StringBuilder(10);
 
                 newSeed.append(udata.getDomain().substring(0, 2));
 
@@ -179,7 +179,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
      throws InvalidPasswordException
     {
         String          login = ud.getLogin();
-        OTPCacheNode    n = (OTPCacheNode)cache.get(login);
+        OTPCacheNode    n = cache.get(login);
         OTPState        st;
         OTPServer       server;
         String          pData;
@@ -323,7 +323,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
     private void removeFromCache(String key, int type) {
         OTPCacheNode    node;
 
-        node = (OTPCacheNode)cache.get(key);
+        node = cache.get(key);
         if (node == null) {
             node = new OTPCacheNode();
         }
@@ -347,7 +347,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
     private void putIntoCache(String key, OTPState ast, OTPState nst) {
         OTPCacheNode    node;
 
-        node = (OTPCacheNode)cache.get(key);
+        node = cache.get(key);
         if (node == null) {
             node = new OTPCacheNode(ast, nst);
         }
@@ -368,7 +368,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
         OTPCacheNode    node;
         int             i = 0;
 
-        node = (OTPCacheNode)cache.get(key);
+        node = cache.get(key);
 
         if (node != null) {
             if ( (type & CACHE_ACTIVE_ST) != 0) {
@@ -385,7 +385,7 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
         OTPCacheNode    node;
         OTPState        rtn;
 
-        node = (OTPCacheNode)cache.get(key);
+        node = cache.get(key);
         rtn = null;
 
         if (node != null) {
@@ -400,6 +400,6 @@ public class OTPAuthenticator extends OTPAuthenticatorIface {
         return rtn;
     }
 
-    private Hashtable           cache;
+    private Hashtable<String, OTPCacheNode> cache;
     private OTPAuthDisplayMngr  disp_mngr;
 }

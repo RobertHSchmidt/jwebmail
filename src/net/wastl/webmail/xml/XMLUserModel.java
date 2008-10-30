@@ -198,15 +198,15 @@ public class XMLUserModel extends XMLGenericModel {
     public synchronized void clearWork() {
         NodeList nl=usermodel.getElementsByTagName("WORK");
         if(nl.getLength() > 0) {
-            Element work=(Element)nl.item(0);
-            NodeList nl2=work.getChildNodes();
-            Vector v=new Vector();
+            Element work= (Element) nl.item(0);
+            NodeList nl2 = work.getChildNodes();
+            Vector<Node> v = new Vector<Node>();
             for(int i=0;i<nl2.getLength();i++) {
                 v.addElement(nl2.item(i));
             }
-            Enumeration enumVar=v.elements();
+            Enumeration<Node> enumVar=v.elements();
             while(enumVar.hasMoreElements()) {
-                work.removeChild((Node)enumVar.nextElement());
+                work.removeChild(enumVar.nextElement());
             }
             invalidateCache();
         }

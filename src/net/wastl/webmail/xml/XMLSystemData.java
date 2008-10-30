@@ -161,10 +161,8 @@ public class XMLSystemData extends ConfigStore {
     }
 
     public void initChoices() {
-        Enumeration enumVar=getConfigKeys();
-        while(enumVar.hasMoreElements()) {
-            initChoices((String)enumVar.nextElement());
-        }
+        for (String configKey : getConfigKeys())
+            initChoices(configKey);
     }
 
     public void initChoices(String key) {
@@ -255,8 +253,7 @@ public class XMLSystemData extends ConfigStore {
                         return "localhost";
                     }
                     public void setDomainName(String name) throws Exception {
-                        log.error(
-                                "Ignoring DefaultDomain.setDomainName().  "
+                        log.error("Ignoring DefaultDomain.setDomainName().  "
                                 + "Should not call this method.");
                     }
 
@@ -265,8 +262,7 @@ public class XMLSystemData extends ConfigStore {
                     }
 
                     public void setDefaultServer(String name) {
-                        log.error(
-                                "Ignoring DefaultDomain.setDomainServer().  "
+                        log.error("Ignoring DefaultDomain.setDomainServer().  "
                                 + "Should not call this method.");
                     }
 
@@ -285,19 +281,18 @@ public class XMLSystemData extends ConfigStore {
                     }
 
                     public void setAllowedHosts(String hosts) {
-                        log.error(
-                                "Ignoring DefaultDomain.setAllowedHosts().  "
+                        log.error("Ignoring DefaultDomain.setAllowedHosts().  "
                                 + "Should not call this method.");
                     }
 
-                    public Enumeration getAllowedHosts() {
-                        return new Enumeration() {
+                    public Enumeration<String> getAllowedHosts() {
+                        return new Enumeration<String>() {
                                 int i=0;
                                 public boolean hasMoreElements() {
                                     return i<1;
                                 }
 
-                                public Object nextElement() {
+                                public String nextElement() {
                                     i++;
                                     return "localhost";
                                 }
@@ -371,15 +366,15 @@ public class XMLSystemData extends ConfigStore {
 
                     public boolean isAllowedHost(String host) {
                         if(getHostsRestricted()) {
-                            Vector v=new Vector();
+                            Vector<String> v = new Vector<String>();
                             v.addElement(getDefaultServer());
-                            Enumeration e=getAllowedHosts();
+                            Enumeration<String> e=getAllowedHosts();
                             while(e.hasMoreElements()) {
                                 v.addElement(e.nextElement());
                             }
-                            Enumeration enumVar=v.elements();
-                            while(enumVar.hasMoreElements()) {
-                                String next=(String)enumVar.nextElement();
+                            Enumeration<String> enumVar = v.elements();
+                            while (enumVar.hasMoreElements()) {
+                                String next = enumVar.nextElement();
                                 if(host.toUpperCase().endsWith(next.toUpperCase())) {
                                     return true;
                                 }
@@ -403,19 +398,19 @@ public class XMLSystemData extends ConfigStore {
                         }
                     }
 
-                    public Enumeration getAllowedHosts() {
+                    public Enumeration<String> getAllowedHosts() {
                         final NodeList nl=domain.getElementsByTagName("ALLOWED_HOST");
-                        return new Enumeration() {
-                                int i=0;
-                                public boolean hasMoreElements() {
-                                    return i<nl.getLength();
-                                }
+                        return new Enumeration<String>() {
+                            int i=0;
+                            public boolean hasMoreElements() {
+                                return i<nl.getLength();
+                            }
 
-                                public Object nextElement() {
-                                    String value=XMLCommon.getElementTextValue((Element)nl.item(i++));
-                                    return value==null?"error":value;
-                                }
-                            };
+                            public String nextElement() {
+                                String value=XMLCommon.getElementTextValue((Element)nl.item(i++));
+                                return value==null?"error":value;
+                            }
+                        };
                     }
 
                     public void setHostsRestricted(boolean b) {

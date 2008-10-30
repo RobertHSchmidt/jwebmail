@@ -41,7 +41,7 @@ public class PluginHandler  {
 
     WebMailServer parent;
     String plugin_list = null;
-    Vector plugins;
+    Vector<Plugin> plugins;
 
     public PluginHandler(WebMailServer parent) throws WebMailException {
         this.parent=parent;
@@ -49,7 +49,7 @@ public class PluginHandler  {
         if(plugin_list == null) {
             throw new WebMailException("Error: No Plugins defined (Property webmail.plugins).");
         }
-        plugins=new Vector();
+        plugins = new Vector<Plugin>();
         registerPlugins();
     }
 
@@ -57,6 +57,7 @@ public class PluginHandler  {
      /**
      * Initialize and register WebMail Plugins.
      */
+    @SuppressWarnings("unchecked")
     public void registerPlugins() throws WebMailException {
         String[] pluginStrings = plugin_list.trim().split("\\s*,\\s*", -1);
         log.info("Initializing " + pluginStrings.length
@@ -76,7 +77,7 @@ public class PluginHandler  {
         net.wastl.webmail.misc.Queue q=new net.wastl.webmail.misc.Queue();
 
         for (String pluginString : pluginStrings) try {
-            Class c=Class.forName(pluginString);
+            Class c = Class.forName(pluginString);
             if (!plugin_class.isAssignableFrom(c)) {
                 log.warn("Requested plugin '" + pluginString
                         + "' not a plugin_class.getName().  Skipping.");

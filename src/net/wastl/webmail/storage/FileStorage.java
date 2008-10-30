@@ -47,19 +47,17 @@ import javax.xml.transform.dom.*;
 public abstract class FileStorage extends Storage implements ConfigurationListener {
     private static Log log = LogFactory.getLog(FileStorage.class);
 
-    protected Hashtable resources;
+    protected Map<String, ResourceBundle> resources;
 
-    protected Hashtable file_resources;
-
-    protected Hashtable stylesheet_cache;
-    protected Hashtable binary_cache;
+    protected Map<String, AttributedExpireableCache> stylesheet_cache;
+    protected Map<String, AttributedExpireableCache> binary_cache;
 
     /** Stores Locale/ExpireableCache pairs */
     //protected Hashtable file_cache;;
 
     protected Authenticator auth;
 
-    protected static Hashtable mime_types;
+    protected static Map<String,String> mime_types;
 
     protected static DateFormat df=null;
 
@@ -88,8 +86,7 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         cs.setDefaultValue("SHOW ADVERTISEMENTS","NO");
         cs.configRegisterStringKey("ADVERTISEMENT MESSAGE","JWebMail "+parent.getVersion()+" WWW to Mail Gateway", "Advertisement to attach to user signatures");
 
-        resources=new Hashtable();
-        file_resources=new Hashtable();
+        resources = new Hashtable<String, ResourceBundle>();
 
         initCache();
 
@@ -118,24 +115,16 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         } catch(NumberFormatException e) {}
 
         // Now the same for the stylesheet cache
-        if(stylesheet_cache == null) {
-            stylesheet_cache = new Hashtable(10);
-        }
-        Enumeration enum2=stylesheet_cache.keys();
-        while(enum2.hasMoreElements()) {
-            ExpireableCache ec=(ExpireableCache)stylesheet_cache.get(enum2.nextElement());
-            ec.setCapacity(file_cache_size);
-        }
+        if(stylesheet_cache == null)
+            stylesheet_cache = new Hashtable<String, AttributedExpireableCache>(10);
+        for (ExpireableCache eCache : stylesheet_cache.values())
+            eCache.setCapacity(file_cache_size);
 
         // And for binary files
-        if(binary_cache == null) {
-            binary_cache = new Hashtable(10);
-        }
-        Enumeration enum3=binary_cache.keys();
-        while(enum3.hasMoreElements()) {
-            ExpireableCache ec=(ExpireableCache)binary_cache.get(enum3.nextElement());
-            ec.setCapacity(file_cache_size);
-        }
+        if(binary_cache == null)
+            binary_cache = new Hashtable<String, AttributedExpireableCache>(10);
+        for (ExpireableCache eCache : binary_cache.values())
+            eCache.setCapacity(file_cache_size);
     }
 
     protected void initAuth() {
@@ -167,7 +156,7 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         }
         BufferedReader in = null;
         try {
-            mime_types=new Hashtable();
+            mime_types=new Hashtable<String, String>();
             in=new BufferedReader(new InputStreamReader(new FileInputStream(f)));
             String line=in.readLine();
             while(line != null) {
@@ -245,7 +234,7 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
 
         // Do this manually, as it is not JDK 1.1 compatible ...
         //Vector available=new Vector(Arrays.asList(available1));
-        Vector available=new Vector(available1.length);
+        Vector<Locale> available = new Vector<Locale>(available1.length);
         for(int i=0; i<available1.length; i++) {
             available.addElement(available1[i]);
         }
@@ -254,7 +243,7 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         for(int i=0;i<flist.length;i++) {
             String cur_lang=flist[i];
             Locale loc=new Locale(cur_lang,"","");
-            Enumeration enumVar=available.elements();
+            Enumeration<Locale> enumVar=available.elements();
             boolean added=false;
             while(enumVar.hasMoreElements()) {
                 Locale l=(Locale)enumVar.nextElement();
@@ -304,8 +293,8 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
      */
     public String getStringResource(String key, Locale locale) {
         if(resources.get(locale.getLanguage()) != null) {
-                String s = ((ResourceBundle)resources.get(locale.getLanguage())).getString(key);
-            return ((ResourceBundle)resources.get(locale.getLanguage())).getString(key);
+                String s = resources.get(locale.getLanguage()).getString(key);
+            return resources.get(locale.getLanguage()).getString(key);
         } else {
             try {
                 // ResourceBundle rc=XMLResourceBundle.getBundle("resources",locale,null);
@@ -329,10 +318,10 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
     public Templates getStylesheet(String name, Locale locale, String theme) throws WebMailException {
         String key = locale.getLanguage()+"/"+theme;
 
-        AttributedExpireableCache cache=(AttributedExpireableCache)stylesheet_cache.get(key);
+        AttributedExpireableCache cache = stylesheet_cache.get(key);
 
         if(cache == null) {
-            cache=new AttributedExpireableCache(file_cache_size);
+            cache = new AttributedExpireableCache(file_cache_size);
             stylesheet_cache.put(key,cache);
         }
 
@@ -372,9 +361,9 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
     public synchronized byte[] getBinaryFile(String name, Locale locale, String theme) throws BinaryNotFoundException {
         String key = locale.getLanguage()+"/"+theme;
 
-        AttributedExpireableCache cache=(AttributedExpireableCache)binary_cache.get(key);
+        AttributedExpireableCache cache = binary_cache.get(key);
 
-        if(cache == null) {
+        if (cache == null) {
             cache=new AttributedExpireableCache(file_cache_size);
             binary_cache.put(key,cache);
         }
@@ -432,11 +421,8 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
         if (mime_types == null) return super.getMimeType(name);
         if (name == null) return "UNKNOWN";
         String type="application/unknown";
-        Enumeration enumVar=mime_types.keys();
-        while(enumVar.hasMoreElements()) {
-            String s=(String)enumVar.nextElement();
-            if(name.toLowerCase().endsWith(s)) type= (String)mime_types.get(s);
-        }
+        for (Map.Entry<String, String> e : mime_types.entrySet())
+            if (name.toLowerCase().endsWith(e.getKey())) return e.getValue();
         return type;
     }
 
@@ -450,21 +436,24 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
     }
 
     public String toString() {
-        String s="";
-        Enumeration enumVar=stylesheet_cache.keys();
-        while(enumVar.hasMoreElements()) {
-            String name=(String)enumVar.nextElement();
-            ExpireableCache cache=(ExpireableCache)stylesheet_cache.get(name);
-            s+=" - stylesheet cache for "+name+": Capacity "+cache.getCapacity()+", Usage "+cache.getUsage();
-            s+=", "+cache.getHits()+" hits, "+cache.getMisses()+" misses\n";
+        StringBuilder sb = new StringBuilder();
+        ExpireableCache cache;
+        for (Map.Entry<String, AttributedExpireableCache> e :
+                stylesheet_cache.entrySet()) {
+            cache = e.getValue();
+            sb.append(" - stylesheet cache for " + e.getKey() + ": Capacity "
+                    + cache.getCapacity() +", Usage " + cache.getUsage()
+                    + ", " + cache.getHits() + " hits, " + cache.getMisses()
+                    + " misses\n");
         }
-        enumVar=binary_cache.keys();
-        while(enumVar.hasMoreElements()) {
-            String name=(String)enumVar.nextElement();
-            ExpireableCache cache=(ExpireableCache)binary_cache.get(name);
-            s+=" - binary cache for "+name+": Capacity "+cache.getCapacity()+", Usage "+cache.getUsage();
-            s+=", "+cache.getHits()+" hits, "+cache.getMisses()+" misses\n";
+        for (Map.Entry<String, AttributedExpireableCache> e :
+                binary_cache.entrySet()) {
+            cache = e.getValue();
+            sb.append(" - binary cache for " + e.getKey() + ": Capacity "
+                    + cache.getCapacity() + ", Usage " + cache.getUsage()
+                    + ", " + cache.getHits() + " hits, " + cache.getMisses()
+                    +" misses\n");
         }
-        return s;
+        return sb.toString();
     }
 }

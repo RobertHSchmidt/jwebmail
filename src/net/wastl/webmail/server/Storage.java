@@ -58,9 +58,7 @@ public abstract class Storage {
     public void initConfigKeys() {
         // Initialize the configuration file with the default or set parameters
         // needed to complete the XML file
-        Enumeration enumVar=cs.getPossibleKeys();
-        while(enumVar.hasMoreElements()) {
-            String key=(String)enumVar.nextElement();
+        for (String key :  cs.getPossibleKeys()) {
             if(!sysdata.isConfigSet(key)) {
                 // We must use the raw method so the input doesn't get filtered.
                 sysdata.setConfig(key,(String)cs.getDefaultValue(key),false,false);
@@ -72,7 +70,7 @@ public abstract class Storage {
     /**
      * Fetch all keys of the current configuration.
      */
-    public Enumeration getConfigKeys() {
+    public Set<String> getConfigKeys() {
         return cs.getPossibleKeys();
     }
 
@@ -236,6 +234,7 @@ public abstract class Storage {
     /**
      * @deprecated Use getUsers(String domain) instead
      */
+    @Deprecated
     public Enumeration getUsers() {
         final Enumeration domains=getVirtualDomains();
         return new Enumeration() {
@@ -297,6 +296,7 @@ public abstract class Storage {
      * @param userdata Data to store
      * @deprecated use saveUserData instead.
      */
+    @Deprecated
     public void setUserData(String user, UserData userdata) {
         // Call saveUserData, do nothing with "userdata"
         StringTokenizer tok=new StringTokenizer(user,"@");
@@ -320,6 +320,7 @@ public abstract class Storage {
      * @param user Name of the user to delete
      * @deprecated use deleteUserData(String user, String domain) instead.
      */
+    @Deprecated
     public void deleteUserData(String user) {
         StringTokenizer tok=new StringTokenizer(user,"@");
         String login=tok.nextToken();

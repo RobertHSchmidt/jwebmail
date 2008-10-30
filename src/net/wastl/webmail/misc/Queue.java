@@ -25,10 +25,10 @@ import java.util.*;
  * @author Sebastian Schaffert
  */
 public class Queue  {
-    Vector contents;
+    Vector<Object> contents;
 
     public Queue() {
-        contents=new Vector();
+        contents = new Vector<Object>();
     }
 
 

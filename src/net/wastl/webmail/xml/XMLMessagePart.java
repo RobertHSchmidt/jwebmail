@@ -63,7 +63,7 @@ public class XMLMessagePart  {
 
     public void quoteContent() {
         NodeList nl=part.getChildNodes();
-        StringBuffer text=new StringBuffer();
+        StringBuilder text=new StringBuilder();
         for(int i=0;i<nl.getLength();i++) {
             Element elem=(Element)nl.item(i);
             if(elem.getNodeName().equals("CONTENT")) {
@@ -151,15 +151,14 @@ public class XMLMessagePart  {
         part.appendChild(childpart.getPartElement());
     }
 
-    public Enumeration getParts() {
+    public Enumeration<XMLMessagePart> getParts() {
         // Sucking NodeList needs a Vector to store Elements that will be removed!
-        Vector v=new Vector();
+        Vector<XMLMessagePart> v = new Vector<XMLMessagePart>();
         NodeList parts=part.getChildNodes();
         for(int j=0;j<parts.getLength();j++) {
             Element elem=(Element)parts.item(j);
-            if(elem.getTagName().equals("PART")) {
+            if(elem.getTagName().equals("PART"))
                 v.addElement(new XMLMessagePart(elem));
-            }
         }
         return v.elements();
     }

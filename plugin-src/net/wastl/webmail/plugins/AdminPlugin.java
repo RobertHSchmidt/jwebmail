@@ -73,6 +73,7 @@ public class AdminPlugin implements Plugin, URLHandler {
      * @deprecated
      * Should never System.exit() in a servlet container.
      */
+    @Deprecated
     protected void reqShutdown(int time, boolean reboot) {
         //new ShutdownThread(time,reboot,parent);
         log.fatal("Obsolete method reqShutdown() called");
@@ -97,9 +98,7 @@ public class AdminPlugin implements Plugin, URLHandler {
         } else if(suburl.startsWith("/system")) {
             if(suburl.startsWith("/system/set")) {
                 XMLSystemData sysdata=parent.getStorage().getSystemData();
-                Enumeration enumVar=sysdata.getConfigKeys();
-                while(enumVar.hasMoreElements()) {
-                    String ckey=(String)enumVar.nextElement();
+                for (String ckey : sysdata.getConfigKeys()) {
                     if(header.isContentSet(ckey)) {
 //                      log.debug(ckey+" = "+header.getContent(ckey));
                         sysdata.setConfig(ckey,header.getContent(ckey));

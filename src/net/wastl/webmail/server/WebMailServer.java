@@ -47,7 +47,7 @@ public abstract class WebMailServer  {
     protected PluginHandler phandler;
     protected ToplevelURLHandler uhandler;
 
-    protected Hashtable sessions;
+    protected Hashtable<String, HTTPSession> sessions;
 
     public static final String VERSION="@version@";
 
@@ -115,7 +115,7 @@ public abstract class WebMailServer  {
         log.info("Storage initialized.");
 
         timer=new ConnectionTimer();
-        sessions=new Hashtable();
+        sessions = new Hashtable<String, HTTPSession>();
 
         log.info("Storage initialization done!");
 
@@ -258,7 +258,7 @@ public abstract class WebMailServer  {
     }
 
     public Provider[] getStoreProviders() {
-        Vector v=new Vector();
+        Vector<Provider> v = new Vector<Provider>();
         for(int i=0;i<store_providers.length;i++) {
             if(storage.getConfig("ENABLE "+store_providers[i].getProtocol().toUpperCase()).equals("YES")) {
                 v.addElement(store_providers[i]);
@@ -331,6 +331,7 @@ public abstract class WebMailServer  {
     /**
        @deprecated Use StorageAPI instead
     */
+    @Deprecated
     public static String getConfig(String key) {
         return storage.getConfig(key);
     }
@@ -340,7 +341,7 @@ public abstract class WebMailServer  {
         Enumeration e=sessions.keys();
         log.info("Removing active WebMail sessions ... ");
         while(e.hasMoreElements()) {
-            HTTPSession w=(HTTPSession)sessions.get(e.nextElement());
+            HTTPSession w = sessions.get(e.nextElement());
             removeSession(w);
         }
         log.info("Done initializing shutdown for child precesses!");
@@ -366,7 +367,7 @@ public abstract class WebMailServer  {
         Enumeration e=sessions.keys();
         log.info("Removing active WebMail sessions ... ");
         while(e.hasMoreElements()) {
-            HTTPSession w=(HTTPSession)sessions.get(e.nextElement());
+            HTTPSession w = sessions.get(e.nextElement());
             removeSession(w);
         }
         log.info("Done removing active WebMail sessions!");
@@ -412,7 +413,7 @@ public abstract class WebMailServer  {
     }
 
     public HTTPSession getSession(String key) {
-        return (HTTPSession)sessions.get(key);
+        return sessions.get(key);
     }
 
 

@@ -109,7 +109,7 @@ public class XMLUserData extends XMLData implements UserData {
          * getter, not a validator void method.
          */
 
-        StringBuffer xp_query = new StringBuffer(tag);
+        StringBuilder xp_query = new StringBuilder(tag);
         /*  Blaine disables this "//" prefix.
          *  Besides this causing indisputable failures when input tag is
          *  begins with slash, why would we want to use a wildcard when
@@ -283,15 +283,15 @@ public class XMLUserData extends XMLData implements UserData {
             };
     }
 
-    public Enumeration mailHosts() {
+    public Enumeration<String> mailHosts() {
         final NodeList nl=getNodeListXPath("//MAILHOST");
-        return new Enumeration() {
+        return new Enumeration<String>() {
                 int i=0;
                 public boolean hasMoreElements() {
                     return i<nl.getLength();
                 }
 
-                public Object nextElement() {
+                public String nextElement() {
                     Element e=(Element)nl.item(i++);
                     return e.getAttribute("id");
                 }

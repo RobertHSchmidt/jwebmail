@@ -31,7 +31,7 @@ public class HTMLDocument {
     protected String content;
     protected HTMLHeader header;
 
-    protected Hashtable httpheaders;
+    protected Hashtable<String, String> httpheaders;
 
     protected int returncode=200;
     protected String returnstatus="OK";
@@ -49,7 +49,7 @@ public class HTMLDocument {
     }
 
     public void addHTTPHeader(String key, String value) {
-        if(httpheaders==null) httpheaders=new Hashtable(5);
+        if(httpheaders==null) httpheaders=new Hashtable<String, String>(5);
         httpheaders.put(key,value);
     }
 

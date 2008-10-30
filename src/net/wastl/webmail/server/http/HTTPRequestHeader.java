@@ -36,14 +36,14 @@ import org.apache.commons.logging.LogFactory;
 public class HTTPRequestHeader  {
     private static Log log = LogFactory.getLog(HTTPRequestHeader.class);
 
-    private Hashtable content;
+    private Hashtable<String, Object> content;
 
-    private Hashtable headers;
+    private Hashtable<String, String> headers;
 
 
     public HTTPRequestHeader() {
-        headers=new Hashtable(10,.9f);
-        content=new Hashtable(5,.9f);
+        headers = new Hashtable<String, String>(10,.9f);
+        content = new Hashtable<String, Object>(5,.9f);
     }
 
     public String getMethod() {
@@ -78,13 +78,13 @@ public class HTTPRequestHeader  {
 
     public void setHeader(String key, String value) {
         if(headers == null) {
-            headers=new Hashtable();
+            headers = new Hashtable<String, String>();
         }
         headers.put(key.toUpperCase(), value);
     }
 
     public String getHeader(String t) {
-        return (String)headers.get(t.toUpperCase());
+        return headers.get(t.toUpperCase());
     }
 
     public Hashtable getContent() {
