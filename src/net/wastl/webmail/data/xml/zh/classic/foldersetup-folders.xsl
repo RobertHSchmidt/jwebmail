@@ -59,10 +59,7 @@ limitations under the License.
         <P>
           <FONT color="red"><STRONG>Warning!</STRONG></FONT> If you delete a folder, all messages (and subfolders) in it will be <FONT color="red">deleted</FONT> not only from WebMail but <FONT color="red">physically from the mailhost</FONT>! This is dangerous and cannot be undone!
         </P>
-
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -163,5 +160,4 @@ limitations under the License.
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

@@ -270,9 +270,7 @@ limitations under the License.
             </TR>
           </TABLE>
         </FORM>
-
       </BODY>
-
     </HTML>
   </xsl:template>
 
@@ -281,6 +279,4 @@ limitations under the License.
   </xsl:template>
 
   <xsl:include href="changepass.xsl"/>
-
-
 </xsl:stylesheet>

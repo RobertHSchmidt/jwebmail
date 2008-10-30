@@ -95,8 +95,6 @@
           </TABLE>
         </FORM>
       </BODY>
-
     </HTML>
-
   </xsl:template>
 </xsl:stylesheet>

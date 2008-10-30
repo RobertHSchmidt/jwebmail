@@ -150,7 +150,6 @@ limitations under the License.
 
 
     <xsl:call-template name="navigation"/>
-
   </xsl:template>
 
   <xsl:template match="PART">
@@ -376,5 +375,4 @@ limitations under the License.
       <xsl:text> </xsl:text><xsl:value-of select="name(.)"/>="<xsl:value-of select="."/>"
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

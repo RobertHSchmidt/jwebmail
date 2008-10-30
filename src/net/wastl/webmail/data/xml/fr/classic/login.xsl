@@ -42,6 +42,5 @@ limitations under the License.
         </FRAMESET>
       </FRAMESET>
     </HTML>
-
   </xsl:template>
 </xsl:stylesheet>

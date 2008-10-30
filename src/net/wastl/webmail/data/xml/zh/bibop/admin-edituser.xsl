@@ -216,12 +216,9 @@
                 <INPUT type="reset" name="reset" value="重填"/>
               </TD>
             </TR>
-
           </TABLE>
         </FORM>
       </BODY>
     </HTML>
-
   </xsl:template>
-
 </xsl:stylesheet>

@@ -149,7 +149,6 @@ limitations under the License.
 
 
     <xsl:call-template name="navigation"/>
-
   </xsl:template>
 
   <xsl:template match="PART">

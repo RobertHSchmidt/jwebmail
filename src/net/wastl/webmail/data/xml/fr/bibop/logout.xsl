@@ -81,9 +81,6 @@
          </TABLE>
          </CENTER>
       </BODY>
-
     </HTML>
   </xsl:template>
-
-
 </xsl:stylesheet>

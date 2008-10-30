@@ -81,13 +81,10 @@
                   </TR>
                 </xsl:otherwise>
               </xsl:choose>
-
           </xsl:for-each>
         </TABLE>
       </BODY>
-
     </HTML>
-
   </xsl:template>
 
   <xsl:template match="SESSION">
@@ -118,5 +115,4 @@
       </TD>
     </FORM>
   </xsl:template>
-
 </xsl:stylesheet>

@@ -173,7 +173,6 @@ limitations under the License.
          Also, please ensure that reloading of the servlet classes is disabled
          for WebMail -->
     <load-on-startup>10</load-on-startup>
-
   </servlet>
 
   <servlet-mapping>

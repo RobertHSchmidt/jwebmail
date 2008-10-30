@@ -112,7 +112,6 @@
       <P class="testoMesg">
         <xsl:apply-templates select="."/>
       </P>
-
     </xsl:for-each>
 
     <TABLE WIDTH="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="A6B1C0">
@@ -156,7 +155,6 @@
 
 
     <xsl:call-template name="navigation"/>
-
   </xsl:template>
 
   <xsl:template match="PART">
@@ -366,5 +364,4 @@
       <xsl:text> </xsl:text><xsl:value-of select="name(.)"/>="<xsl:value-of select="."/>"
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

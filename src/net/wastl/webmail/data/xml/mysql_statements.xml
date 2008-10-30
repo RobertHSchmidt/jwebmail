@@ -130,5 +130,4 @@
       SELECT domain FROM virtual_domains
     </RESOURCE>
   </COMMON>
-
 </BUNDLE>

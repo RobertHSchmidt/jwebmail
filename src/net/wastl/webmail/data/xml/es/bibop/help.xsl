@@ -64,7 +64,6 @@
             </TR>
           </TABLE>
       </BODY>
-
     </HTML>
   </xsl:template>
 
@@ -164,5 +163,4 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-
 </xsl:stylesheet>

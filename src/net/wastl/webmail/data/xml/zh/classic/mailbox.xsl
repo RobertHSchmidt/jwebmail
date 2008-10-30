@@ -61,8 +61,6 @@ limitations under the License.
           </CENTER>
         </P>
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -140,5 +138,4 @@ limitations under the License.
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

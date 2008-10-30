@@ -61,10 +61,7 @@
         <P class="testoChiaro">
           <SPAN class="testoRosso">Figyelmeztetés!</SPAN> Ha töröl egy mappát, minden üzenet (és almappa)  <SPAN class="testoRosso">törlõdik</SPAN>, nem csak a webmailbõl, de <SPAN class="testoRosso">fizikailag is törlõdik a kiszolgálóról</SPAN>! Nem lehet visszavonni az utasítást!
         </P>
-
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -170,5 +167,4 @@
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

@@ -189,8 +189,6 @@
            </TABLE>
           </TD>
         </TR>
-
-
   </xsl:template>
 
   <xsl:template name="headerrow">
@@ -256,5 +254,4 @@
         </xsl:otherwise>
       </xsl:choose>
   </xsl:template>
-
 </xsl:stylesheet>

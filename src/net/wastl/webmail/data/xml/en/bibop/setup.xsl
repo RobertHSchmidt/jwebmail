@@ -247,7 +247,6 @@
             </TR>
           </TABLE>
         </FORM>
-
       </BODY>
       <SCRIPT type="text/javascript">
         function clearPwdFields() {
@@ -256,7 +255,6 @@
         }
         setTimeout("clearPwdFields();", 500);
       </SCRIPT>
-
     </HTML>
   </xsl:template>
 

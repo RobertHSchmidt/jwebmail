@@ -61,10 +61,7 @@ limitations under the License.
         <P>
           <FONT color="red"><STRONG>Achtung!</STRONG></FONT> Wenn Du einen Ordner löschst, werden alle darin enthaltenen Nachrichten und Ordner <FONT color="red">gelöscht</FONT>, und zwar nicht nur aus WebMail, sondern <FONT color="red">physisch auf dem Mailserver</FONT>! Das ist gefährlich und kann nicht rückgängig gemacht werden!
         </P>
-
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -165,5 +162,4 @@ limitations under the License.
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

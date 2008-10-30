@@ -48,10 +48,6 @@ limitations under the License.
         <BR/><A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ferme une session WebMail active.';"><IMG SRC="{$imgbase}/images/btn-logout.png" BORDER="0" ALT="Logout Session" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
         <BR/>
       </BODY>
-
-
     </HTML>
   </xsl:template>
-
-
 </xsl:stylesheet>

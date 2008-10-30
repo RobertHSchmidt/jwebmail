@@ -216,12 +216,9 @@ limitations under the License.
                 <INPUT type="reset" name="reset" value="Reset"/>
               </TD>
             </TR>
-
           </TABLE>
         </FORM>
       </BODY>
     </HTML>
-
   </xsl:template>
-
 </xsl:stylesheet>

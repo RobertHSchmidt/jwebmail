@@ -92,9 +92,7 @@ limitations under the License.
           </xsl:if>
         </TABLE>
       </BODY>
-
     </HTML>
-
   </xsl:template>
 
   <xsl:template match="VAR">
@@ -105,7 +103,5 @@ limitations under the License.
         <INPUT TYPE="submit" name="delete" value="Delete"/>
       </TD>
     </FORM>
-
   </xsl:template>
-
 </xsl:stylesheet>

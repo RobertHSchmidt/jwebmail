@@ -67,6 +67,4 @@
       </BODY>
     </HTML>
   </xsl:template>
-
-
 </xsl:stylesheet>

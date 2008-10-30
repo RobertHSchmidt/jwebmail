@@ -115,13 +115,10 @@
         </FORM>
       </TABLE>
     </BODY>
-
     </HTML>
   </xsl:template>
 
   <xsl:template match="/USERMODEL/STATEDATA/VAR">
     <xsl:value-of select="@value"/>
   </xsl:template>
-
-
 </xsl:stylesheet>

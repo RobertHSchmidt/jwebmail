@@ -61,10 +61,7 @@
         <P class="testoChiaro">
           <SPAN class="testoRosso">Warning!</SPAN> If you delete a folder, all messages (and subfolders) in it will be <SPAN class="testoRosso">deleted</SPAN> not only from WebMail but <SPAN class="testoRosso">physically from the mailhost</SPAN>! This is dangerous and cannot be undone!
         </P>
-
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -170,5 +167,4 @@
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

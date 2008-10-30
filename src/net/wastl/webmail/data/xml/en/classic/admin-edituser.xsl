@@ -74,7 +74,6 @@ limitations under the License.
                   </xsl:otherwise>
                 </xsl:choose>
               </TD>
-
             </TR>
 
             <TR>
@@ -239,14 +238,11 @@ limitations under the License.
                 <INPUT type="reset" name="reset" value="Reset"/>
               </TD>
             </TR>
-
           </TABLE>
         </FORM>
       </BODY>
     </HTML>
-
   </xsl:template>
 
   <xsl:include href="changepass.xsl"/>
-
 </xsl:stylesheet>

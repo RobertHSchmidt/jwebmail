@@ -61,10 +61,7 @@
         <P class="testoChiaro">
           <SPAN class="testoRosso">警告！</SPAN>如果您刪除了一個子收信匣，所有在該收信匣中的信件（與子收信匣），不僅僅是 WebMail 系統，甚至是 <SPAN class="testoRosso">實際的電子郵件伺服器</SPAN>，都會被 <SPAN class="testoRosso">刪除</SPAN>！這是相當危險而且無法還原的動作！
         </P>
-
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -170,5 +167,4 @@
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>

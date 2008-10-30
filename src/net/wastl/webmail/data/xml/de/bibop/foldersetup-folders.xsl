@@ -61,10 +61,7 @@
         <P class="testoChiaro">
           <SPAN class="testoRosso">Achtung!</SPAN> Wenn Du einen Ordner löschst, werden alle darin enthaltenen Nachrichten und Ordner <SPAN class="testoRosso">gelöscht</SPAN>, und zwar nicht nur aus WebMail, sondern <SPAN class="testoRosso">physisch auf dem Mailserver</SPAN>! Das ist gefährlich und kann nicht rückgängig gemacht werden!
         </P>
-
       </BODY>
-
-
     </HTML>
   </xsl:template>
 
@@ -170,5 +167,4 @@
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-
 </xsl:stylesheet>
