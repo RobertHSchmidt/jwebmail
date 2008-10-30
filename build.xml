@@ -422,4 +422,24 @@ a 'local.properties' file.</echo>
 
   <target name="all" depends="clean, gen-guide, javadoc, webapp"
        description="(Re)build everything from scratch"/>
+
+  <target name="eclipse-setup"
+    description="Tells you how to set up Eclipse IDE for JWebMail development">
+    <echo>
+With a JDT variant of Eclipse v. 3.4.1 or later, use
+pulldown menu Window / Prefrences.  In the tree,
+navigate to Java / Build Path / Classpath Variables.
+Hit the 'New...' button.
+For 'Name' enter "EXTLIB_CACHE".
+For "Path", paste the following value exactly:
+
+    ${user.home}/lib-repos
+
+(If you have customized the config file
+'ivysettings.xml', set the value of EXTLIB_CACHE to
+match the value of the 'repositoryCacheDir' setting).
+
+See the JWebMail User's Guide for more details about
+IDE integration.</echo>
+  </target>
 </project>
