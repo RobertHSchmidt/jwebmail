@@ -427,7 +427,7 @@ a 'local.properties' file.</echo>
     description="Tells you how to set up Eclipse IDE for JWebMail development">
     <echo>
 With a JDT variant of Eclipse v. 3.4.1 or later, use
-pulldown menu Window / Prefrences.  In the tree,
+pulldown menu Window / Preferences.  In the tree,
 navigate to Java / Build Path / Classpath Variables.
 Hit the 'New...' button.
 For 'Name' enter "EXTLIB_CACHE".
