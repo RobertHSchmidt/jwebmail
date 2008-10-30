@@ -25,11 +25,11 @@ import java.util.*;
  * Scheme of a parameter that can take one of several choices as value
  */
 public class ChoiceConfigParameter extends ConfigParameter {
-    Hashtable possible_values;
+    Hashtable<Object, String> possible_values;
 
     public ChoiceConfigParameter(String name, String desc) {
         super(name, null, desc);
-        possible_values=new Hashtable();
+        possible_values = new Hashtable<Object, String>();
     }
 
     public void addChoice(Object choice, String desc) {

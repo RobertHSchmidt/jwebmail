@@ -23,6 +23,8 @@ import java.io.*;
 import java.util.*;
 import java.net.URLDecoder;
 import net.wastl.webmail.misc.ByteStore;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * HTTPHeader.java
@@ -32,6 +34,8 @@ import net.wastl.webmail.misc.ByteStore;
  * @author Sebastian Schaffert
  */
 public class HTTPRequestHeader  {
+    private static Log log = LogFactory.getLog(HTTPRequestHeader.class);
+
     private Hashtable content;
 
     private Hashtable headers;
@@ -55,7 +59,12 @@ public class HTTPRequestHeader  {
     }
 
     public void setPath(String s) {
-        setHeader("PATH",URLDecoder.decode(s));
+        try {
+            setHeader("PATH",URLDecoder.decode(s, "UTF-8"));
+        } catch (UnsupportedEncodingException uee) {
+            log.fatal("Unable to dedode UTF-8", uee);
+            throw new RuntimeException("Unable to dedode UTF-8", uee);
+        }
     }
 
     public void setMethod(String s) {

@@ -39,7 +39,7 @@ public abstract class ConfigParameter {
     protected String key;
     protected Object def_value;
     protected String desc;
-    protected Vector listeners;
+    protected Vector<ConfigurationListener> listeners;
 
     protected String group;
 
@@ -54,7 +54,7 @@ public abstract class ConfigParameter {
         this.def_value=def;
         this.desc=desc;
         group="default";
-        listeners=new Vector();
+        listeners = new Vector<ConfigurationListener>();
     }
 
     public void setGroup(String g) {
