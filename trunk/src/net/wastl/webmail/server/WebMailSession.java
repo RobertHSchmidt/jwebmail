@@ -58,10 +58,10 @@ public class WebMailSession implements HTTPSession {
     private XMLUserModel model;
 
     /** Connections to Mailboxes */
-    private Hashtable connections;
+    private Map<String, Folder> connections;
 
     /** Connections to hosts */
-    private Hashtable stores;
+    private Map<String, Store> stores;
 
     /** javax.mail Mailsession */
     private Session mailsession;
@@ -70,7 +70,7 @@ public class WebMailSession implements HTTPSession {
 
     /* Files attached to messages will be stored here. We will have to take care of
        possible memory problems! */
-    private Hashtable mime_parts_decoded;
+    private Map<String, ByteStore> mime_parts_decoded;
 
     private boolean sent;
 
@@ -88,9 +88,9 @@ public class WebMailSession implements HTTPSession {
 
     private Object sess=null;
 
-    private Hashtable folders;
+    private Map<String, Folder> folders;
 
-    protected Vector need_expunge_folders;
+    protected Vector<String> need_expunge_folders;
 
     protected String imapBasedir = null;
 
@@ -147,9 +147,9 @@ public class WebMailSession implements HTTPSession {
         user.login();
         login_password=h.getContent("password");
         model=parent.getStorage().createXMLUserModel(user);
-        connections=new Hashtable();
-        stores=new Hashtable();
-        folders=new Hashtable();
+        connections = new Hashtable<String, Folder>();
+        stores = new Hashtable<String, Store>();
+        folders = new Hashtable<String, Folder>();
         mailsession=Session.getDefaultInstance(System.getProperties(),null);
 
         /* If the user logs in for the first time we want all folders subscribed */
@@ -211,6 +211,7 @@ public class WebMailSession implements HTTPSession {
      * @param h RequestHeader with content from Login-POST operation.
      * @deprecated Use login() instead, no need for parameters and exception handling
      */
+    @Deprecated
     public void login(HTTPRequestHeader h) throws InvalidPasswordException {
         //user.login(h.getContent("password"));
         login();
@@ -312,7 +313,7 @@ public class WebMailSession implements HTTPSession {
             folder.fetch(msgs,fp);
             long fetch_stop=System.currentTimeMillis();
 
-            Hashtable header=new Hashtable(15);
+            Map header=new Hashtable(15);
 
             Flags.Flag[] sf;
             String from,to,cc,bcc,replyto,subject;
@@ -633,9 +634,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                                         getStringResource("forward message postfix"));
 
                     /* Copy all references to MIME parts to the new message id */
-                    Enumeration attids=getMimeParts(work.getAttribute("msgid"));
-                    while(attids.hasMoreElements()) {
-                        String key=(String)attids.nextElement();
+                    for (String key : getMimeParts(work.getAttribute("msgid"))){
                         StringTokenizer tok2=new StringTokenizer(key,"/");
                         tok2.nextToken();
                         String newkey=tok2.nextToken();
@@ -658,7 +657,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
        @param p Part to begin with
     */
     protected void parseMIMEContent(Part p, XMLMessagePart parent_part, String msgid) throws MessagingException {
-        StringBuffer content=new StringBuffer(1000);
+        StringBuilder content=new StringBuilder(1000);
         XMLMessagePart xml_part;
         try {
             if(p.getContentType().toUpperCase().startsWith("TEXT/HTML")) {
@@ -801,7 +800,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                     if(current_quotelevel != old_quotelevel) {
                         xml_part.addContent(content.toString(),old_quotelevel);
                         old_quotelevel = current_quotelevel;
-                        content=new StringBuffer(1000);
+                        content=new StringBuilder(1000);
                     }
 
                     if(user.wantsBreakLines()) {
@@ -825,7 +824,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 }
                 xml_part.addContent(content.toString(),old_quotelevel);
                 // Why the following code???
-                content=new StringBuffer(1000);
+                content=new StringBuilder(1000);
             } else if(p.getContentType().toUpperCase().startsWith("MULTIPART/ALTERNATIVE")) {
                 /* This is a multipart/alternative part. That means that we should pick one of
                    the formats and display it for this part. Our current precedence list is
@@ -959,7 +958,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
                 ByteStore data=ByteStore.getBinaryFromIS(in,size);
                 if(mime_parts_decoded==null) {
-                    mime_parts_decoded=new Hashtable();
+                    mime_parts_decoded = new HashMap<String, ByteStore>();
                 }
                 String name=p.getFileName();
                 if(name == null || name.equals("")) {
@@ -1014,25 +1013,20 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
     public ByteStore getMIMEPart(String msgid,String name) {
         if(mime_parts_decoded != null) {
-            return (ByteStore)mime_parts_decoded.get(msgid+"/"+name);
+            return mime_parts_decoded.get(msgid+"/"+name);
         } else {
             return null;
         }
     }
 
-    public Enumeration getMimeParts(String msgid) {
+    public List<String> getMimeParts(String msgid) {
+        List<String> parts = new ArrayList<String>();
         if(mime_parts_decoded == null) {
-            mime_parts_decoded=new Hashtable();
+            mime_parts_decoded = new HashMap<String, ByteStore>();
         }
-        Enumeration enumVar=mime_parts_decoded.keys();
-        Vector v=new Vector();
-        while(enumVar.hasMoreElements()) {
-            String key=(String)enumVar.nextElement();
-            if(key.startsWith(msgid)) {
-                v.addElement(key);
-            }
-        }
-        return v.elements();
+        for (String partKey : mime_parts_decoded.keySet())
+            if (partKey.startsWith(msgid)) parts.add(partKey);
+        return parts;
     }
 
     public void clearWork() {
@@ -1055,27 +1049,23 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
         String msgid=xml_message.getAttribute("msgid");
 
-        Enumeration enumVar=getMimeParts(msgid);
         attachments_size=0;
-        while(enumVar.hasMoreElements()) {
-            mime_parts_decoded.remove((String)enumVar.nextElement());
-        }
+        for (String partKey : getMimeParts(msgid))
+            mime_parts_decoded.remove(partKey);
     }
 
     /**
      * This method returns a table of attachments for the current "work" message
      */
-    public Hashtable getAttachments() {
-        Hashtable hash=new Hashtable();
+    public Map<String, ByteStore> getAttachments() {
+        Map<String, ByteStore> hash = new Hashtable<String, ByteStore>();
         XMLMessage xml_message=model.getWorkMessage();
 
         String msgid=xml_message.getAttribute("msgid");
 
-        Enumeration enumVar=getMimeParts(msgid);
-        while(enumVar.hasMoreElements()) {
-            String key=(String)enumVar.nextElement();
-            String filename=key.substring(msgid.length()+1);
-            hash.put(filename,mime_parts_decoded.get(key));
+        for (String partKey : getMimeParts(msgid)) {
+            String filename=partKey.substring(msgid.length()+1);
+            hash.put(filename,mime_parts_decoded.get(partKey));
         }
 
         return hash;
@@ -1105,10 +1095,9 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
         bs.setDescription(description);
 
-        Enumeration enumVar=getMimeParts(msgid);
         attachments_size=0;
-        while(enumVar.hasMoreElements()) {
-            ByteStore b=(ByteStore)mime_parts_decoded.get((String)enumVar.nextElement());
+        for (String partKey : getMimeParts(msgid)) {
+            ByteStore b = mime_parts_decoded.get(partKey);
             attachments_size+=b.getSize();
         }
 
@@ -1146,17 +1135,16 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
         mime_parts_decoded.remove(msgid+"/"+name);
 
-        Enumeration enumVar=getMimeParts(msgid);
         attachments_size=0;
-        while(enumVar.hasMoreElements()) {
-            ByteStore b=(ByteStore)mime_parts_decoded.get((String)enumVar.nextElement());
+        for (String partKey : getMimeParts(msgid)) {
+            ByteStore b = mime_parts_decoded.get(partKey);
             attachments_size+=b.getSize();
         }
 
-        enumVar=xml_multipart.getParts();
+        Enumeration<XMLMessagePart> partEnum = xml_multipart.getParts();
         XMLMessagePart oldpart=null;
-        while(enumVar.hasMoreElements()) {
-            XMLMessagePart tmp=(XMLMessagePart)enumVar.nextElement();
+        while(partEnum.hasMoreElements()) {
+            XMLMessagePart tmp = partEnum.nextElement();
             if(tmp.getAttribute("filename") != null &&
                tmp.getAttribute("filename").equals(name)) {
                 oldpart=tmp;
@@ -1179,7 +1167,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
         /* Store the already typed message if necessary/possible */
         if(head.isContentSet("BODY")) {
-            StringBuffer content=new StringBuffer();
+            StringBuilder content=new StringBuilder();
                 /**
                  * Because the data transfered through HTTP should be ISO8859_1,
                  * HTTPRequestHeader is also ISO8859_1 encoded. Furthermore, the
@@ -1282,7 +1270,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
      * @returns Folder with the given hashvalue
      */
     public Folder getFolder(String folderhash) {
-        return (Folder)folders.get(folderhash);
+        return folders.get(folderhash);
     }
 
     /**
@@ -1471,7 +1459,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         //log.fatal("Invoking refreshFolderInformation(boolean, boolean)",
             //new Throwable("Thread Dump"));  FOR DEBUGGING
         setEnv();
-        if(folders==null) folders=new Hashtable();
+        if(folders==null) folders=new Hashtable<String, Folder>();
         Folder rootFolder = null;
         String cur_mh_id="";
         Enumeration mailhosts=user.mailHosts();
@@ -1615,6 +1603,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
      *             mail directory, which in some cases may be the complete
      *             home directory.
      */
+    @Deprecated
     public void setSubscribedAll(String id, boolean subscribed) throws MessagingException {
         Folder folder=getRootFolder(id);
         net.wastl.webmail.misc.Queue q=new net.wastl.webmail.misc.Queue();
@@ -1648,22 +1637,20 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
        Disconnect from all Mailhosts
     */
     public void disconnectAll() {
-        Enumeration e=user.mailHosts();
+        Enumeration<String> e=user.mailHosts();
         while(e.hasMoreElements()) {
-            String name=(String)e.nextElement();
+            String name = e.nextElement();
             disconnect(name);
         }
-        e=stores.keys();
-        while(e.hasMoreElements()) {
-            String name=(String)e.nextElement();
-            Store st=(Store)stores.get(name);
+        for (Map.Entry<String, Store> storeEntry : stores.entrySet()) {
+            Store st = storeEntry.getValue();
             try {
                 st.close();
                 log.info("Mail: Connection to "+st.toString()+" closed.");
             } catch(Exception ex) {
                 log.warn("Mail: Failed to close connection to "+st.toString()+". Reason: "+ex.getMessage());
             }
-            stores.remove(name);
+            stores.remove(storeEntry.getKey());
         }
         folders=null;
     }
@@ -1671,7 +1658,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
 
     public Folder getRootFolder(String name) throws MessagingException {
         if(connections != null && connections.containsKey(name)) {
-            return (Folder)connections.get(name);
+            return connections.get(name);
         } else {
             return connect(name);
         }
@@ -1686,7 +1673,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         imapBasedir = vdom.getImapBasedir();
 
         /* Check if this host is already connected. Use connection if true, create a new one if false. */
-        Store st=(Store)stores.get(host+"-"+protocol);
+        Store st = stores.get(host+"-"+protocol);
         if(st==null) {
             st=mailsession.getStore(protocol);
             stores.put(host+"-"+protocol,st);
@@ -1733,10 +1720,10 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
     */
     public void disconnect(String name) {
         try {
-            Folder f=(Folder)connections.get(name);
+            Folder f = connections.get(name);
             if(f != null && f.isOpen()) {
                 f.close(true);
-                Store st=((Folder)connections.get(name)).getStore();
+                Store st = connections.get(name).getStore();
                 //st.close();
                 log.info("Mail: Disconnected from folder "+f.toString()+" at store "+st.toString()+".");
             } else {
@@ -1887,7 +1874,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
      */
     public void expungeFolders() {
         if(need_expunge_folders != null) {
-            Enumeration enumVar=need_expunge_folders.elements();
+            Enumeration<String> enumVar=need_expunge_folders.elements();
             while(enumVar.hasMoreElements()) {
                 String hash=(String)enumVar.nextElement();
                 if(user.wantsSetFlags()) {
@@ -1937,7 +1924,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             if(head.getContent("MESSAGE FLAG").equals("DELETED")) {
                 fl=new Flags(Flags.Flag.DELETED);
                 if(need_expunge_folders == null) {
-                    need_expunge_folders=new Vector();
+                    need_expunge_folders=new Vector<String>();
                 }
                 need_expunge_folders.addElement(folderhash);
             } else if(head.getContent("MESSAGE FLAG").equals("SEEN")) {
@@ -2021,7 +2008,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
                 to.close(true);
             } else {
                 if(need_expunge_folders == null) {
-                    need_expunge_folders=new Vector();
+                    need_expunge_folders=new Vector<String>();
                 }
                 need_expunge_folders.addElement(fromfolder);
                 from.close(false);
@@ -2251,9 +2238,9 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         }
 
         model.removeAllStateVars("protocol");
-        Provider[] stores=parent.getStoreProviders();
-        for(int i=0; i<stores.length; i++) {
-            model.addStateVar("protocol",stores[i].getProtocol());
+        Provider[] storeProviders =parent.getStoreProviders();
+        for(int i=0; i<storeProviders .length; i++) {
+            model.addStateVar("protocol",storeProviders [i].getProtocol());
         }
 
         model.setStateVar("themeset","themes_"+user.getPreferredLocale().getLanguage().toLowerCase());
@@ -2271,7 +2258,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         return remote;
     }
 
-    public Hashtable getActiveConnections() {
+    public Map<String, Folder> getActiveConnections() {
         return connections;
     }
 

@@ -317,9 +317,8 @@ public class SendMessage implements Plugin, URLHandler, ConfigurationListener {
 
                     cont.addBodyPart(adv);
                 }
-                Enumeration atts=session.getAttachments().keys();
-                while(atts.hasMoreElements()) {
-                    ByteStore bs=session.getAttachment((String)atts.nextElement());
+                for (String attachmentKey : session.getAttachments().keySet()) {
+                    ByteStore bs=session.getAttachment(attachmentKey);
                     InternetHeaders ih=new InternetHeaders();
                     ih.addHeader("Content-Transfer-Encoding","BASE64");
 

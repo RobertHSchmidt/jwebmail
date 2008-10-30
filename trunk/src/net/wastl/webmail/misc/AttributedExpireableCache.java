@@ -29,18 +29,18 @@ import java.util.*;
  * @author Sebastian Schaffert
  */
 public class AttributedExpireableCache extends ExpireableCache {
-    protected Hashtable attributes;
+    protected Hashtable<Object, Object> attributes;
 
     public AttributedExpireableCache(int capacity, float expire_factor) {
         super(capacity,expire_factor);
         setName("AttributedExpireableCache");
-        attributes=new Hashtable(capacity);
+        attributes = new Hashtable<Object, Object>(capacity);
     }
 
     public AttributedExpireableCache(int capacity) {
         super(capacity);
         setName("AttributedExpireableCache");
-        attributes=new Hashtable(capacity);
+        attributes = new Hashtable<Object, Object>(capacity);
     }
 
     public synchronized void put(Object id, Object object, Object attribs) {

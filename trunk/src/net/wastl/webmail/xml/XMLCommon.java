@@ -133,6 +133,7 @@ public final class XMLCommon  {
     /**
      * @deprecated use getXPath instead!
      */
+    @Deprecated
     public static Element getElementByAttribute(Element root, String tagname, String attribute, String att_value) {
         NodeList nl=root.getElementsByTagName(tagname);
         for(int i=0; i<nl.getLength();i++) {
@@ -148,6 +149,7 @@ public final class XMLCommon  {
     /**
      * @deprecated use getXPath instead!
      */
+    @Deprecated
     public static String getElementTextValue(Element e) {
         e.normalize();
         NodeList nl=e.getChildNodes();
@@ -181,17 +183,10 @@ public final class XMLCommon  {
                I will store all nodes that should be deleted in a Vector and delete them afterwards */
             int length=nl.getLength();
 
-            Vector v=new Vector(nl.getLength());
-            for(int i=0;i<length;i++) {
-                if(nl.item(i) instanceof CharacterData) {
-                    v.addElement(nl.item(i));
-                }
-            }
-            Enumeration enumVar=v.elements();
-            while(enumVar.hasMoreElements()) {
-                Node n=(Node)enumVar.nextElement();
-                e.removeChild(n);
-            }
+            List<Node> v = new ArrayList<Node>(nl.getLength());
+            for(int i=0;i<length;i++)
+                if(nl.item(i) instanceof CharacterData) v.add(nl.item(i));
+            for (Node n : v) e.removeChild(n);
         }
 
         if(cdata) {
@@ -204,6 +199,7 @@ public final class XMLCommon  {
     /**
      * @deprecated use getXPath instead!
      */
+    @Deprecated
     public static String getTagValue(Element e, String tagname) {
         NodeList namel=e.getElementsByTagName(tagname);
         if(namel.getLength()>0) {
@@ -263,19 +259,15 @@ public final class XMLCommon  {
 
     public static void genericRemoveAll(Element parent, String tagname) {
         NodeList nl=parent.getChildNodes();
-        Vector parts=new Vector();
+        List<Element> parts = new ArrayList<Element>();
         for(int i=0;i<nl.getLength();i++) {
             if(nl.item(i) instanceof Element) {
                 Element elem=(Element)nl.item(i);
-                if(elem.getTagName().equals(tagname)) {
-                    parts.addElement(elem);
-                }
+                if(elem.getTagName().equals(tagname))
+                    parts.add(elem);
             }
         }
-        Enumeration enumVar=parts.elements();
-        while(enumVar.hasMoreElements()) {
-            parent.removeChild((Node)enumVar.nextElement());
-        }
+        for (Element part : parts) parent.removeChild(part);
     }
 
 
@@ -347,7 +339,7 @@ public final class XMLCommon  {
                 out.print("<![CDATA["+cdata.getData()+"]]>");
             } else if(node instanceof Text) {
                 Text text=(Text)node;
-                StringBuffer buf=new StringBuffer(text.getData().length());
+                StringBuilder buf=new StringBuilder(text.getData().length());
                 for(int i=0;i<text.getData().length();i++) {
                     if(text.getData().charAt(i) == '\n' ||
                        text.getData().charAt(i) == '\r' ||
@@ -361,7 +353,7 @@ public final class XMLCommon  {
                     }
                 }
                 if(buf.length() > 0 && !buf.toString().equals(" ")) {
-                    StringBuffer buf2=new StringBuffer(buf.length()+indent);
+                    StringBuilder buf2=new StringBuilder(buf.length()+indent);
 //                  for(int j=0;j<indent;j++) {
 //                      buf2.append(' ');
 //                  }

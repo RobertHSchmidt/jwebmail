@@ -226,10 +226,10 @@ public class XMLGenericModel extends XMLData {
             /* This suxx: NodeList Object is changed when removing children !!!
                I will store all nodes that should be deleted in a Vector and delete them afterwards */
             int length=nl.getLength();
-            Vector v=new Vector(nl.getLength());
+            Vector<Element> v = new Vector<Element>(nl.getLength());
             for(int i=0;i<length;i++) {
                 if(((Element)nl.item(i)).getAttribute("name").equals(name)) {
-                    v.addElement(nl.item(i));
+                    v.addElement((Element) nl.item(i));
                 }
             }
             Enumeration enumVar=v.elements();

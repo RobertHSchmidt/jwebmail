@@ -482,7 +482,7 @@ public class MD5 {
    * @return    Generated hex string
    */
   public static String asHex (byte hash[]) {
-    StringBuffer buf = new StringBuffer(hash.length * 2);
+    StringBuilder buf = new StringBuilder(hash.length * 2);
     int i;
 
     for (i = 0; i < hash.length; i++) {

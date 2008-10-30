@@ -28,18 +28,18 @@ public class PluginDependencyTree {
     protected Plugin node;
     protected String meprovides;
 
-    protected Vector children;
+    protected Vector<PluginDependencyTree> children;
 
     public PluginDependencyTree(Plugin p) {
         this.node=p;
         this.meprovides=p.provides();
-        children=new Vector();
+        children = new Vector<PluginDependencyTree>();
     }
 
     public PluginDependencyTree(String s) {
         this.node=null;
         this.meprovides=s;
-        children=new Vector();
+        children = new Vector<PluginDependencyTree>();
     }
 
     public boolean provides(String s) {
@@ -47,13 +47,12 @@ public class PluginDependencyTree {
     }
 
     public String provides() {
-        String s=meprovides;
-        Enumeration e=children.elements();
-        while(e.hasMoreElements()) {
-            PluginDependencyTree p=(PluginDependencyTree)e.nextElement();
-            s+=","+p.provides();
-        }
-        return s;
+        StringBuilder sb = new StringBuilder(meprovides);
+        Enumeration<PluginDependencyTree> e=children.elements();
+        while(e.hasMoreElements())
+            sb.append(","
+                    + ((PluginDependencyTree) e.nextElement()).provides());
+        return sb.toString();
     }
 
 
@@ -63,9 +62,9 @@ public class PluginDependencyTree {
             return true;
         } else {
             boolean flag=false;
-            Enumeration e=children.elements();
+            Enumeration<PluginDependencyTree> e=children.elements();
             while(e.hasMoreElements()) {
-                PluginDependencyTree pt=(PluginDependencyTree)e.nextElement();
+                PluginDependencyTree pt = e.nextElement();
                 flag = flag || pt.addPlugin(p);
             }
             return flag;
@@ -81,9 +80,9 @@ public class PluginDependencyTree {
 
         /* Perform depth-first registraion. Breadth-first would be better, but
            it will work anyway */
-        Enumeration e=children.elements();
+        Enumeration<PluginDependencyTree> e=children.elements();
         while(e.hasMoreElements()) {
-            PluginDependencyTree p=(PluginDependencyTree)e.nextElement();
+            PluginDependencyTree p = e.nextElement();
             p.register(parent);
         }
     }

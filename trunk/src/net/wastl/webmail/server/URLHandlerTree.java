@@ -31,12 +31,12 @@ public class URLHandlerTree implements URLHandlerTreeNode {
 
     String url;
 
-    Hashtable nodes;
+    Hashtable<String, URLHandlerTree> nodes;
 
     StringTokenizer t;
 
     public URLHandlerTree(String url) {
-        nodes=new Hashtable();
+        nodes = new Hashtable<String, URLHandlerTree>();
         this.url=url;
    }
 
@@ -50,7 +50,7 @@ public class URLHandlerTree implements URLHandlerTreeNode {
         } else {
             t=new StringTokenizer(url,"/");
             String subtree_name=t.nextToken();
-            URLHandlerTree subtree=(URLHandlerTree)nodes.get(subtree_name);
+            URLHandlerTree subtree= nodes.get(subtree_name);
             if(subtree == null) {
                 if(this.url.endsWith("/")) {
                     subtree=new URLHandlerTree(this.url+subtree_name);
@@ -70,7 +70,7 @@ public class URLHandlerTree implements URLHandlerTreeNode {
         } else {
             t=new StringTokenizer(url,"/");
             String subtree_name=t.nextToken();
-            URLHandlerTree subtree=(URLHandlerTree)nodes.get(subtree_name);
+            URLHandlerTree subtree = nodes.get(subtree_name);
             if(subtree == null) {
                 /* If there is no subtree, we are the handler! */
                 return handler;

@@ -33,7 +33,7 @@ public class AuthenticatorHandler  {
     private static Log log = LogFactory.getLog(AuthenticatorHandler.class);
     WebMailServer parent;
 
-    Hashtable authenticators;
+    Map<String, Authenticator> authenticators;
 
     String authenticator_list = null;
 
@@ -61,7 +61,7 @@ public class AuthenticatorHandler  {
         log.info("Initializing " + authenticatorStrings.length
                 + " WebMail Authenticator Plugins ...");
 
-        authenticators=new Hashtable();
+        authenticators = new Hashtable<String, Authenticator>();
         for (String authString : authenticatorStrings) try {
             Class c=Class.forName(authString);
             Authenticator a=(Authenticator) c.newInstance();
@@ -77,6 +77,6 @@ public class AuthenticatorHandler  {
     }
 
     public Authenticator getAuthenticator(String key) {
-        return (Authenticator)authenticators.get(key);
+        return authenticators.get(key);
     }
 }

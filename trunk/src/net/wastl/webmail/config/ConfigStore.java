@@ -45,7 +45,7 @@ public abstract class ConfigStore  {
     /**
      * Fetch all keys of the current configuration.
      */
-    public Enumeration getConfigKeys() {
+    public Set<String> getConfigKeys() {
         return scheme.getPossibleKeys();
     }
 

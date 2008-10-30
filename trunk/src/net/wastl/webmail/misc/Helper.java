@@ -590,7 +590,7 @@ public class Helper  {
       while(salt.length() < 2)
          salt += "A";
 
-      StringBuffer buffer = new StringBuffer("             ");
+      StringBuilder buffer = new StringBuilder("             ");
 
       char charZero = salt.charAt(0);
       char charOne  = salt.charAt(1);

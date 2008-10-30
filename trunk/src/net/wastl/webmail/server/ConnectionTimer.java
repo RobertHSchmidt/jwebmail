@@ -32,12 +32,12 @@ public class ConnectionTimer extends Thread {
      * Fix that! */
     private static Log log = LogFactory.getLog(ConnectionTimer.class);
     private static Log threadLog = LogFactory.getLog("THREAD.ConnectionTimer");
-    private Vector connections;
+    private Vector<TimeableConnection> connections;
     private static final long sleep_interval=1000;
 
     public ConnectionTimer() {
         super("ConnectionTimer");
-        connections=new Vector();
+        connections = new Vector<TimeableConnection>();
         this.start();
     }
 

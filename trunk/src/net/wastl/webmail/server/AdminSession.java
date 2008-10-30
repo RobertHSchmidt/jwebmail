@@ -313,14 +313,11 @@ public class AdminSession implements HTTPSession {
                     sess_elem.appendChild(model.createTextElement("SESS_ADDRESS",w.getRemoteAddress().toString()));
                     sess_elem.appendChild(model.createStateVar("idle time",(System.currentTimeMillis()-w.getLastAccess())/1000+""));
 
-                    Enumeration keys=w.getActiveConnections().keys();
-                    while(keys.hasMoreElements()) {
-                        String next=(String)keys.nextElement();
-                        try {
-                            sess_elem.appendChild(model.createTextElement("SESS_CONN",((Folder)w.getActiveConnections().get(next)).getURLName()+""));
-                        } catch(Exception ex) {
-                            sess_elem.appendChild(model.createTextElement("SESS_CONN","Error while fetching connection "+next));
-                        }
+                    for (Map.Entry<String, Folder> connEntry :
+                            w.getActiveConnections().entrySet()) try {
+                        sess_elem.appendChild(model.createTextElement("SESS_CONN",connEntry.getValue().getURLName()+""));
+                    } catch(Exception ex) {
+                        sess_elem.appendChild(model.createTextElement("SESS_CONN","Error while fetching connection "+connEntry.getKey()));
                     }
                     /* If the remote is admin and we are not the remote! */
                     // && !h.getSessionCode().equals(session_code)

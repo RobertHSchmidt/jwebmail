@@ -39,10 +39,10 @@ public class HTTPResponseHeader  {
 
     private String response_line;
 
-    private Hashtable headers;
+    private Map<String, String> headers;
 
     public HTTPResponseHeader(int response_code,String status) {
-        headers=new Hashtable();
+        headers = new Hashtable<String, String>();
         this.response_code=response_code;
         this.status=status;
 
@@ -78,18 +78,14 @@ public class HTTPResponseHeader  {
         headers.remove(key);
     }
 
-    public Enumeration getHeaderKeys() {
-        return headers.keys();
+    public Set<String> getHeaderKeys() {
+        return headers.keySet();
     }
 
     public String toString() {
-        String s=response_line+"\r\n";
-        Enumeration e=headers.keys();
-        while(e.hasMoreElements()) {
-            String h=(String)e.nextElement();
-            s+=h+": "+headers.get(h)+"\r\n";
-        }
-        s+="\r\n";
-        return s;
+        StringBuilder sb = new StringBuilder(response_line + "\r\n");
+        for (Map.Entry<String, String> e : headers.entrySet())
+            sb.append(e.getKey() + ": " + e.getValue() + "\r\n");
+        return sb.toString() + "\r\n";
     }
 }

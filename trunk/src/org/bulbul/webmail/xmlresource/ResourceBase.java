@@ -66,8 +66,8 @@ public abstract class ResourceBase extends ResourceBundle {
     }
 
 
-    public Enumeration getKeys() {
-        Hashtable prop=new Hashtable();
+    public Enumeration<String> getKeys() {
+        Hashtable<String, String> prop=new Hashtable<String, String>();
 
         if(elem_common != null) {
             getKeys(elem_common,prop);
@@ -132,7 +132,7 @@ public abstract class ResourceBase extends ResourceBundle {
         }  // We don't want to throw for these exceptions?
     }
 
-    protected void getKeys(Element element, Hashtable hash) {
+    protected void getKeys(Element element, Hashtable<String, String> hash) {
         NodeList nl = element.getElementsByTagName("RESOURCE");
         for (int i=0; i < nl.getLength(); i++) {
             hash.put(((Element)nl.item(i)).getAttribute("name"), "");

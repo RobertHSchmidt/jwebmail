@@ -32,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
 public class ExpireableCache extends Thread {
     private static Log threadLog = LogFactory.getLog("THREAD.ExpireableCache");
 
-    protected Hashtable cache;
+    protected Hashtable<Object, Object> cache;
     protected MyHeap timestamps;
 
     protected int capacity;
@@ -46,7 +46,7 @@ public class ExpireableCache extends Thread {
     public ExpireableCache(int capacity, float expire_factor) {
         super("ExpireableCache");
         setPriority(MIN_PRIORITY);
-        cache=new Hashtable(capacity);
+        cache = new Hashtable<Object, Object>(capacity);
         timestamps=new MyHeap(capacity);
         this.capacity=capacity;
         this.expire_factor=expire_factor;

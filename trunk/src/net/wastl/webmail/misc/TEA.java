@@ -469,7 +469,7 @@ public class TEA
    //
    private String dumpBytes(byte b[])
    {
-      StringBuffer r = new StringBuffer();
+      StringBuilder r = new StringBuilder();
       final String hex = "0123456789ABCDEF";
 
       for (int i = 0; i < b.length; i++)
