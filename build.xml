@@ -70,7 +70,9 @@ limitations under the License.
     <javac srcdir="build/src" destdir="build/classes"
            debug="${javac.debug}" classpathref="build.refid"
            optimize="${javac.optimize}"
-           deprecation="${javac.deprecation}"/>
+           deprecation="${javac.deprecation}">
+      <compilerarg value="-Xlint"/>
+    </javac>
 
     <echo message="     Compiling plugins"/>
     <mkdir dir="build/plugin-classes" />
