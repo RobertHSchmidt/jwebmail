@@ -27,6 +27,8 @@ package net.wastl.webmail.exceptions;
  * @author Sebastian Schaffert
  */
 public class InvalidDataException extends WebMailException {
+    static final long serialVersionUID = -4485533308402003388L;
+
     public InvalidDataException() {
         super();
     }

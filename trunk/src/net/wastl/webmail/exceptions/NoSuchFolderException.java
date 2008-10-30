@@ -23,6 +23,8 @@ package net.wastl.webmail.exceptions;
  * @author Sebastian Schaffert
  */
 public class NoSuchFolderException extends Exception {
+    static final long serialVersionUID = 7630911148981200127L;
+
     public NoSuchFolderException() {
         super();
     }

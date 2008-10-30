@@ -25,6 +25,8 @@ package net.wastl.webmail.exceptions;
  * @author Sebastian Schaffert
  */
 public class CreateUserDataException extends UserDataException {
+    static final long serialVersionUID = 5214525880288931216L;
+
     public CreateUserDataException() {
         super();
     }

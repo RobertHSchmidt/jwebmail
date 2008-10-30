@@ -27,6 +27,8 @@ package net.wastl.webmail.exceptions;
  * @author Sebastian Schaffert
  */
 public class StylesheetNotFoundException extends WebMailException {
+    static final long serialVersionUID = -59043445711572449L;
+
     public StylesheetNotFoundException() {
         super();
     }

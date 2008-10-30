@@ -25,6 +25,8 @@ package net.wastl.webmail.exceptions;
  * @author Sebastian Schaffert
  */
 public class UserDataException extends WebMailException {
+    static final long serialVersionUID = -1501412363447876868L;
+
     String user;
     String domain;
 

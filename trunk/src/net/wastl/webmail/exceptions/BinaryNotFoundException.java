@@ -27,6 +27,8 @@ package net.wastl.webmail.exceptions;
  * @author Sebastian Schaffert
  */
 public class BinaryNotFoundException extends WebMailException {
+    static final long serialVersionUID = -7512762391532112873L;
+
     public BinaryNotFoundException() {
         super();
     }
