@@ -39,8 +39,7 @@ limitations under the License.
           message="You need to 'export' the project to build src dist"/>
     <zip destfile="dist/${app.basedir}-src.zip">
       <zipfileset prefix="${app.basedir}" dir="."
-  excludes="**/*.class, **/.*swp, **/.*.swo, dist/**, local*/**, ivysettings.xml"
-                  includes=".classpath, .project"/>
+        excludes="**/*.class, **/.*swp, **/.*.swo, dist/**, local*/**, ivysettings.xml"/>
     </zip>
   </target>
 
