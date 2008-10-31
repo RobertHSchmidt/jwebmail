@@ -1,6 +1,20 @@
 # $Id$
 # changed/fixed, + added, - removed
 
+Release tag 1.0.1rc1 = rev. 137
+
+v1.0.1rc1 rev. 136
+# Satisfied all serious compilation warnings.
++ Eclipse integration
+# Many labelling updates, WebMail -> JWebMail
+# Automated product release packaging, incl. verify build Java 1.5-compat
+  binaries.
+# Tested and verified that our app no longer writes under the deployment
+  context root (unless user configures it to do so against our
+  recommendation).
+# Applied workaround to browser-password-caching problem with Classic theme
+  (did same with Bibop theme several revs back).
+
 v1.0.1e rev. 105
 # Removed tons of printStackTrace commands.  I think all stdout/stderr
   usage is finally gone.
@@ -9,11 +23,11 @@ v1.0.1e rev. 105
   Generally adjusted error messages so useful messages make it to logs and
    user where possible, short warnings given where a work-around is invoked,
    and details logged in the few cases where the problem needs more work.
-  All Java classes now have proper classes.
-  Separate directory branches for source with different build needs.
-  Added nice logging method for dumping given problematic XML doc to log file.
-  Major fixes for mbox IMAP server support.
-  Significant performance improvement by counting messages in a folder only
+# All Java classes now have proper classes.
+# Separate directory branches for source with different build needs.
++ Added nice logging method for dumping given problematic XML doc to log file.
+# Major fixes for mbox IMAP server support.
+# Significant performance improvement by counting messages in a folder only
    when necessary.
 
 v1.0.1b rev. 67

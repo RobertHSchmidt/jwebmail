@@ -51,12 +51,12 @@ limitations under the License.
     <xsl:choose>
       <!-- a normal password change box -->
       <xsl:when test="$cptmpl = 'normchangepass'">
-        <INPUT TYPE="PASSWORD" NAME="{$tag}" SIZE="{$plen}"/>
+        <INPUT TYPE="PASSWORD" ID="{$tag}id" NAME="{$tag}" SIZE="{$plen}"/>
       </xsl:when>
 
       <!-- an OTP password change box -->
       <xsl:when test="$cptmpl = 'otpchangepass'">
-        <INPUT TYPE="TEXT" NAME="{$tag}" SIZE="{$plen}"/>
+        <INPUT TYPE="TEXT" ID="{$tag}id" NAME="{$tag}" SIZE="{$plen}"/>
       </xsl:when>
     </xsl:choose>
   </xsl:template>

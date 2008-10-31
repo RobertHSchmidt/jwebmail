@@ -194,7 +194,6 @@ public class WebMailServlet extends WebMailServer implements Servlet {
         final HttpServletResponse res = (HttpServletResponse) res1;
         final HTTPRequestHeader http_header = new HTTPRequestHeader();
 
-log.fatal("servletPath = (" + req.getServletPath() + ')');
         if (req.getServletPath().equals("/admin")) try {
             log.debug("Forwarding /admin request back to self");
             req.getRequestDispatcher("WebMail/admin").forward(req1, res1);

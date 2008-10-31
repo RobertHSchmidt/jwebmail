@@ -3,8 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Make release build targets.
-
 Roll an RC.  1.0.1rc1.  (Consider waiting on following super-item).
 
 Add a new properties setting like webmail.demo or webmail.noxmit, to prevent
@@ -19,8 +17,6 @@ TAKE A DEEP BREATH
 -------------------------------------------
 
 More branding updates.
-    Search for '\<WebMail\>' and change all but Servlet name references
-    to JWebMail.  (I know of src/net/wastl/webmail/ata/xml/en/bibop/loginscr*)
     Review image for old version number and "WebMail" text.  I know of:
         src/net/wastl/webmail/data/xml/??/bibop/images/webmailtitle.gif
           (all of these are the same image)
@@ -34,9 +30,6 @@ More branding updates.
 Stop loading resources directly from the application through the FS.
 Load delivered resources through classpath.
 
-    Determine exactly what the app writes to at runtime.
-    Have it use a working-directory instead of writing into the deliverable.
-
     Get rid of the many dependencies upon ServletContext.getRealPath(), so we
     can distribute a portable .war file that will run on any popular app server.
 
@@ -49,7 +42,7 @@ Load delivered resources through classpath.
     the war file or web app directory name.
 
 Folders in source folder are hidden for some reason, after copying to
-another folder.  E.g. is tasy "Showing messages 1 to 2", but only 1
+another folder.  E.g. is says "Showing messages 1 to 2", but only 1
 message is shown.
 
 Code up a stopper for the ConnectionTimer thread which continues running
@@ -80,7 +73,7 @@ to test a modern (open source) mbox provider product.
 
 Test POPS protocol.
 
-When create Folders, they should automatically be subscribed to.
+When create Folders, they should automatically be subscribed to.  Maybe not?
 
 Either do not display the change link on (!HOLD_MESSAGES) Folders on the
 Subscription-management screen, or at least tell the user when their

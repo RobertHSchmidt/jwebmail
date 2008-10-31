@@ -5,6 +5,10 @@ fix, because they are not directly in the WebMail code but in some third party
 library or program:
 ==============================================================================
 
+Admin's user config screen shows no users.  Maybe this is only supposed
+to show one type of users?  I'd think they should be editable if a
+file for the user shows up in the data store, but no.
+
 Whereas a single JWebMail user can manage multiple target email accounts,
 it fails terribly to manage two target email accounts if they are served
 from the same target email server.  The problem is not recognized by
@@ -30,8 +34,6 @@ XMLUserModel, and that these nodes are not being updated by future
 WebMailSession.refreshFolderInformation(boolean, boolean)s.  Could the
 style sheet or Servlet post-processing be caching it somehow?
 
-Non-critical XPath bug(s).  See errors in the application log.
-
 Graceless handling of session timeouts.  Get exception stack traces in
 browser if a session times out... at least for an Admin session.
 I believe there is also a hardcoded reference to the old context-path
@@ -39,14 +41,13 @@ of "/webmail" somewhere, because I am sometimes redirected to
 http://hostname:PORT/webmail/... after a timeout.
 
 App has compiled-in context path.  The implications of this are:
-    Needs to be recompiled just to run as the root (/) app in an app server.
-    Can't have more than one deployment of JWebMail in a container.
-
-App writes to the deployment directory.  The implications of this are:
-    Will not run in app servers where app does not run directly from
-     an exploded webapp directory tree.
-    If user doesn't change the webmail.data.dir setting, all settings
-     and data will be lost upon upgrade or redeployment.
+Needs to be recompiled just to run as the root (/) app in an app server.
+Can't have more than one deployment of JWebMail in a container.
+(I have already done the main hunk of work to remedy this, stopping
+the app from writing under the deployed context root, and having a way
+to determine (and verify) the context path at runtime.  Just need to
+convert Ant filtering with app name, and uses of ServletContext.getRealPath()
+(and possibly other filesystem-dependent servlet calls).
 
 Domain enforcement rules are rudimentary.  Really not up to restricting
 a set of users to a set of hosts and protocols.

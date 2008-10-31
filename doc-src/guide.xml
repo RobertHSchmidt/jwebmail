@@ -618,15 +618,6 @@ limitations under the License.
             </TR>
           </TABLE>
         </P>
-        <NOTE>
-          Don't forget to set the correct permissions on the JWebMail directory. All
-          subdirectories must be readable by the user running the Servlet engine. Additionally the
-          <CODE>webmail.data.path</CODE> directory (usually called <CODE>data/</CODE>) must be
-          writeable.
-          We are right now working on eliminating this constraint.
-          You are advised to use a webmail.data.path outside of the
-          application directory structure.
-        </NOTE>
       </SUBSUBSECTION>
 
     <SUBSECTION name="Storage Methods" id="install:mysql">

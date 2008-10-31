@@ -34,7 +34,7 @@ limitations under the License.
   <!-- This sets the JRE version which will be required by USERS of
        generated classes! -->
   <property name="Name" value="JWebMail"/>
-  <property name="app.version" value="1.0.1f"/>
+  <property name="app.version" value="1.0.1rc1"/>
   <property name="year" value="2008"/>
 
   <!-- =================================================================== -->
