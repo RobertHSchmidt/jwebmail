@@ -148,119 +148,269 @@ limitations under the License.
         Any or no Java IDE will work.
       </P>
     </SUBSECTION>
-    <SUBSECTION name="Installing" id="install:installing">
+    <SUBSECTION name="Installing" id="install:intro">
       <P>
-        There are two approaches to installing JWebMail >= 0.7.7, both require a
-        servlet container as described above.
-        <NLIST>
+        There are separate sections below, depending on whether you want to
+        just <EM>run</EM> JWebMail, or to build it on the command-line or
+        with an IDE.
+      </P>
+    <SUBSUBSECTION name="Installing Application (binary install)"
+                id="install:binary">
+      <P>
+        This is the preferred installation method if you just want to run
+        JWebApp, and have no need to customize the application iteself.
+      </P> <P>
+        This installation is very simple:
+      </P> <P>
+        Install <CODE>jwebmail.war</CODE> as you would install any War file.
+      </P> <P>
+        With Tomcat, the easiest way is to use the Manager webapp, which serves
+        http://localhost:8080/manager/html by default.  Log in and deploy the
+        war using the Gui (you can see or add manager accounts in the file
+        $CATALINA_BASE/config/tomcat-users.xml).
+      </P> <P>
+        For every application server that I know of, if you have auto-deploy on
+        (usually the default mode) you can become the app-server <EM>owner</EM> (the
+        account under which the server process(es) run), and just copy the war
+        file into the webapp landing directory.  If you don't have access to that
+        account, see your app server docs, because the war file permission
+        requirements vary (if you have superuser privileges, you can always
+        change the file to be owned by the app-server owner).  Rest assured,
+        your app server has several easy ways to deploy war files.
+      </P> <P>
+        JWebMail is then available by visiting http://yourhost:PORT/jwebmail
+        with a web browser.
+      </P> <P>
+        Please don't forget to visit the administration interface first. You can access
+        it by browsing http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
+        is <CODE>Secret</CODE>.
+      </P>
+    </SUBSUBSECTION>
+    <SUBSUBSECTION name="Build and Install from source" id="install:build">
+      <P>
+        JWebMail is compiled by using the Ant build-system.  You will need
+        <A href="http://ant.apache.org/">Ant</A> version 1.7 or greater and
+        <A href="http://java.sun.com/javase/">Java JDK 1.5 or greater</A>
+        to build JWebMail.
+      </P> <P>
+        The following steps are required (for a quick-start):<NLIST>
           <ITEM>
-            Installation of a pre-compiled WAR-file (Webapp Archive)
+            Set your JAVA_HOME environment variable (to the directory where the JDK is
+            installed)
           </ITEM> <ITEM>
-            Build and install from source
+            Make sure that the <CODE>bin</CODE> directory of your Ant installation is in your
+            search path.  Run "<CODE>ant -v</CODE>" to verify.
+          </ITEM> <ITEM>
+            You will need Internet access the first time you run the build, so that
+            build process can download the needed third party libraries
+            (automatically).
+          </ITEM> <ITEM>
+            Just run 'ant' to build an war file in subdirectory
+            <CODE>build/webapp</CODE>.
+            If you don't have an
+            <A href="http://ant.apache.org/ivy/">Ivy</A>
+            jar file in your CLASSPATH, the Ant command
+            above will display the simple command that you can copy-and-paste to your
+            command line to satisfy it.
+            <NOTE>
+              An error message like
+              <CODE>...doesn't support the nested "matches" element...</CODE>
+              means you need to upgrade Ant to 1.7 or later.</NOTE>
+          </ITEM> <ITEM>
+            Deploy the file at <CODE>build/jwebpp.jar</CODE> to your servlet container, as
+            explained in the previous section.
+            Alternatively, you set Ant property <CODE>exploded.dir</CODE>
+            and deploy the exploded webapp to a live deployment directory.
+            Since you are building software, we figure you
+            are handy enough to figure this out without further instruction from us.
           </ITEM>
         </NLIST>
-        The first installation method is almost always the preferred choice. Building
-        from source may be relevant to you if you need to do modifications to the
-        source.
+      </P> <P>
+        Run "<CODE>ant -p</CODE>" for further possible targets that may be used.
+        To customize any Ant properties, create a standard Java properties file in
+        this directory with name <CODE>local.properties</CODE>.
+      </P> <P>
+        The <CODE>gen-guide</CODE> task requires the program "xsltproc".
+        If you don't have "xsltproc", you can generate the jwebmail-guide.html file manually
+        with your favorite XSLT processor tool and the guide.* artifacts in the
+        doc-src directory.
+      </P> <P>
+        The build system uses
+        <A href="http://ant.apache.org/ivy/">Apache Ivy</A>
+        to fetch third party libraries.  The configuration allows you to
+        change the library repository location by editing local.properties
+        and ivy-settings.xml.  See
+        <A href="http://ant.apache.org/ivy/">http://ant.apache.org/ivy/</A>
+        for details about Apache Ivy.
+      </P> <P>
+        Code contributors must read and follow the coding conventions listed
+        in the <CODE>conventions.txt</CODE> file located in the <CODE>doc</CODE>
+        subdirectory.
+        It's important to not submit files which should not be
+        change-controlled, and to set the right Subversion file properties.
+        The easiest way to accomplish this is to put
+        the supplied file <CODE>samples/config-svn.txt</CODE> into
+        place at <CODE>$HOME/.subversion/config</CODE> on UNIX-like OSes,
+        or wherever your Subversion client wants it on Windows.
+        When you submit code, always add a meaningful subversion commit
+        message which very briefly describes what you have changed, added,
+        or removed.
       </P>
-      <P> <NLIST>
-        <ITEM>Installation of a pre-built WAR-file
-          <P>
-            This installation is very simple:
-          </P> <P>
-            Install <CODE>jwebmail.war</CODE> as you would install any War file.
-          </P> <P>
-            With Tomcat, the easiest way is to use the Manager webapp, which serves
-            http://localhost:8080/manager/html by default.  Log in and deploy the
-            war using the Gui (you can see or add manager accounts in the file
-            $CATALINA_BASE/config/tomcat-users.xml).
-          </P> <P>
-            For every application server that I know of, if you have auto-deploy on
-            (usually the default mode) you can become the app-server <EM>owner</EM> (the
-            account under which the server process(es) run), and just copy the war
-            file into the webapp landing directory.  If you don't have access to that
-            account, see your app server docs, because the war file permission
-            requirements vary (if you have superuser privileges, you can always
-            change the file to be owned by the app-server owner).  Rest assured,
-            your app server has several easy ways to deploy war files.
-          </P> <P>
-            JWebMail is then available by visiting http://yourhost:PORT/jwebmail
-            with a web browser.
-          </P> <P>
-            Please don't forget to visit the administration interface first. You can access
-            it by browsing http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
-            is <CODE>Secret</CODE>.
-          </P>
-        </ITEM>
-        <ITEM>Build and install from source
-          <P>
-            JWebMail is compiled by using the Ant build-system.  You will need
-            <A href="http://ant.apache.org/">Ant</A> version 1.7 or greater and
-            <A href="http://java.sun.com/javase/">Java JDK 1.5 or greater</A>
-            to build JWebMail.
-          </P> <P>
-            The following steps are required (for a quick-start):<NLIST>
-              <ITEM>
-                Set your JAVA_HOME environment variable (to the directory where the JDK is
-                installed)
-              </ITEM> <ITEM>
-                Make sure that the <CODE>bin</CODE> directory of your Ant installation is in your
-                search path.  Run "<CODE>ant -v</CODE>" to verify.
-              </ITEM> <ITEM>
-                You will need Internet access the first time you run the build, so that
-                build process can download the needed third party libraries
-                (automatically).
-              </ITEM> <ITEM>
-                Just run 'ant' to build an war file in subdirectory
-                <CODE>build/webapp</CODE>.
-                If you don't have an
-                <A href="http://ant.apache.org/ivy/">Ivy</A>
-                jar file in your CLASSPATH, the Ant command
-                above will display the simple command that you can copy-and-paste to your
-                command line to satisfy it.
-                <NOTE>
-                  An error message like
-                  <CODE>...doesn't support the nested "matches" element...</CODE>
-                  means you need to upgrade Ant to 1.7 or later.</NOTE>
-              </ITEM> <ITEM>
-                Deploy the file at <CODE>build/jwebpp.jar</CODE> to your servlet container, as
-                explained in the previous section.
-                Alternatively, you set Ant property <CODE>exploded.dir</CODE>
-                and deploy the exploded webapp to a live deployment directory.
-                Since you are building software, we figure you
-                are handy enough to figure this out without further instruction from us.
-              </ITEM>
-            </NLIST>
-          </P> <P>
-            IDE developers need to configure their Ant invoker to include
-            the jar file in the bootstrap-libs subdirectory in the CLASSPATH.
-            And, until we change-control IDE configs, you will need to
-            manually download the jar files referenced in the ivy.xml file
-            from <A href="http://pub.admc.com/lib-repos">
-            http://pub.admc.com/lib-repos</A>, and add them to your IDE's
-            compilation classpath.
-          </P> <P>
-            Run "<CODE>ant -p</CODE>" for further possible targets that may be used.
-            To customize any Ant properties, create a standard Java properties file in
-            this directory with name <CODE>local.properties</CODE>.
-          </P> <P>
-            The <CODE>gen-guide</CODE> task requires the program "xsltproc".
-            If you don't have "xsltproc", you can generate the jwebmail-guide.html file manually
-            with your favorite XSLT processor tool and the guide.* artifacts in the
-            doc-src directory.
-          </P> <P>
-            The build system uses
-            <A href="http://ant.apache.org/ivy/">Apache Ivy</A>
-            to fetch third party libraries.  The configuration allows you to
-            change the library repository location by editing local.properties
-            and ivy-settings.xml.  See
-            <A href="http://ant.apache.org/ivy/">http://ant.apache.org/ivy/</A>
-            for details about Apache Ivy.
-          </P>
+    </SUBSUBSECTION>
+    <SUBSUBSECTION name="IDE Setup" id="install:ide">
+      <P>
+        At this point in time, we only have the JWebMail pre-configured for
+        Eclipse.
+        Any developer who has a strong preference for a different IDE should
+        be capable of getting things working in it.
+        If you do this in a way to share the configuration in a fool-proof
+        manner, like we do for Eclipse, please contact me to get these
+        improvements into the code baseline.
+      </P> <P>
+        Here are the steps to start from 0 and get JWebMail building.
+        Most developers will skip many of these steps because they probably
+        already have some of the components in place.
+        <NLIST>
+          <ITEM>Install a 1.5 or later JDK and set a Windows env. variable for
+            JAVA_HOME, with value of the absolute path to your JDK
+            installation root.
+            You can download a JDK from
+            <A href="http://java.sun.com/javase/">Sun</A>.
+          </ITEM> <ITEM>
+            Install or have deployment access to a 2.4-spec-compliant servlet
+            container like
+            <A href="http://tomcat.apache.org/">Tomcat</A> version 6.
+            (Could be installed on a different computer).
+          </ITEM> <ITEM>
+            Install a JDT variant of Eclipse, version 3.4.1 or later.
+            I prefer the plain <EM>Java</EM> package, because it doesn't
+            include tons of stuff that you will never use, like the much
+            larger distributions have.
+            After you extract the distribution, execute the startup binary
+            once with the <CODE>-initialize</CODE> switch.
+          </ITEM> <ITEM>
+            To install Subversive, the Subversion client plugin,
+            use pulldown menu <CODE>Help / Software Updates</CODE> and click
+            the <CODE>Install</CODE> button.
+            Bring up a web browser at the same time and browse to
+            <A href="http://www.polarion.com/products/svn/subversive.php?src=eclipseproject">
+    http://www.polarion.com/products/svn/subversive.php?src=eclipseproject</A>.
+            Back in Eclipse, click the <CODE>Available Software</CODE> tab 
+            and Add the two "required" URLs listed in the "Latest Release"
+            section of that web page.
+            Select the latest available release of each of the four following
+            items and install them.<LIST>
+              <ITEM>SVN Team Provider</ITEM>
+              <ITEM>JDT Ignore Extensions</ITEM>
+              <ITEM>Connectors / Subversive SVN Connectors</ITEM>
+              <ITEM>Connectors / SVNKit</ITEM>
+            </LIST>
+            When done, you will be prompted to restart Eclipse.  Do so.
+          </ITEM> <ITEM>
+            After Eclipse restarts, use pulldown menu <CODE>File / Import</CODE>
+            and import from Subversion.
+            Enter URL of <CODE>https://jwebmail.svn.sourceforge.net/svnroot/jwebmail/trunk</CODE>
+            and no other detals (unless you're a team developer).
+            If it craps out, restart Eclipse and retry... or it could be a
+            bad Internet connection to Sourceforge.
+          </ITEM> <ITEM>
+            Get rid of any Eclipse views that you don't need.
+            Use pulldown <CODE>Window / Show View / Ant</CODE>.
+            Click the target icon in the Ant view toolbar to hide internal
+            Ant targets.
+            Right click in the view and add the Ant build file
+            <CODE>build.xml</CODE> from the root directory of the project.
+            At this point all of the listed Ant targets should work,
+            except for <CODE>gen-guide</CODE> and <CODE>all</CODE>, if you
+            don't have <CODE>xsltproc</CODE> installed.
+            Double click on <CODE>jwebmail</CODE> to execute the default target,
+            which builds the war file.
+          </ITEM> <ITEM>
+            Now you just need to get IDE compilation working, and cooperating
+            with the Ant build.
+            Go to <CODE>Preferences / General / Workspace</CODE> to turn
+            <CODE>Build automatically</CODE> off and <CODE>Refresh</CODE>
+            and <CODE>Save</CODE> on.
+          </ITEM> <ITEM>
+            Use pulldown <CODE>Project / Clean...</CODE> to clean just
+            the <CODE>jwebmail</CODE> project...
+            and turn off the nasty <CODE>Start a build immediately</CODE>
+            button (definitely a bad thing for shared Ant setups).
+          </ITEM> <ITEM>
+            Execute the ant target <CODE>eclipse-setup</CODE> and set the
+            build variable as you instructed in the console output.
+          </ITEM> <ITEM>
+            Anybody who will be contributing code to this project, or to any
+            other project with professional standards should read the next
+            section too.
+          </ITEM>
+        </NLIST>
+      </P>
+    </SUBSUBSECTION>
+    </SUBSECTION>
+
+    <SUBSECTION name="IDE Code Contributors" id="install:ide">
+      <P>
+        People contributing code to the JWebMail project must create code
+        that isn't difficult for other developers to work with, and must
+        commit resources in a way that doesn't clobber other workers.
+        Even if you aren't going to commit code to our project,
+        you're welcome to use these procedures if you just like developing
+        like a professional, or if you are sharing with somebody else.
+      </P> <P> <NLIST>
+        <ITEM>
+          Even though you are a graphical developer, you need to read
+          and understand the development rules above in the
+          <CODE>Build and Install from source</CODE> section bove.
+        </ITEM> <ITEM>
+          Back to eclipse.
+          A general tip is to be liberal with hitting <CODE>Apply</CODE>
+          and <CODE>OK</CODE> when changing Eclipse preferences.
+          It's much better now than with older versions, but Eclipse is known
+          to sometimes <EM>not get</EM> your changes.
+          If that happens, just repeat and make sure you apply.
+          Back to the task at hand, go to
+          <CODE>Windows / Preferences / Team / SVN / Properties Configuration</CODE>
+          and Import the file <CODE>samples/config-svn.txt</CODE>.
+          This file has specifically been massaged to do what it needs to do
+          while accommodating several serious parsing bugs in the Eclipse
+          Subversive plugin.
+        </ITEM> <ITEM>
+          The remaining items all involve importing Eclipse XML Java
+          style profiles.
+          <CODE>Window / Preferences / Java / Code Style</CODE>
+          First, go to the <CODE>Clean Up</CODE> and Import the file
+          <CODE>samples/cleanup-ecpro.xml</CODE>.
+        </ITEM> <ITEM>
+          Go to the <CODE>Formatter</CODE> and Import the file
+          <CODE>samples/formatter-ecpro.xml</CODE>.
+        </ITEM> <ITEM>
+          Finally, go to <CODE>Code Templates</CODE>, but this time don't
+          load the profile at the global level.
+          That's because, whereas the other settings are good for any
+          Java project, these templates may not be appropriate for other
+          Java projects that you may work on in the same Eclipse workspace.
+        </ITEM> <ITEM>
+          Click on the <CODE>Configure Project Specific Settings...</CODE>.
+          Select the <CODE>jwebmail</CODE> project and click <CODE>OK</CODE>.
+          Click the <CODE>Enable project specific settings</CODE> checkbox.
+          Import the file <CODE>samples/codetemplates-ecpro.xml</CODE>.
+        </ITEM> <ITEM>
+          In the upper tree, select <CODE>Comments / Types</CODE> and hit
+          the <CODE>Edit...</CODE> button.
+          (IMO it's rather counterintuitive that the lower box there is not
+          an editable box-- you must hit the <CODE>Edit...</CODE> button to
+          edit.
+          Change the text "Your Name Here" to your name, spelled out and
+          capitalized like that.
+        </ITEM> <ITEM>
+          Before exiting the <CODE>Properties for jwebmail...</CODE> screen,
+          make sure to check the <CODE>Automatically add comments...</CODE>
+          button and click the <CODE>Apply</CODE> and <CODE>OK</CODE> buttons.
         </ITEM>
       </NLIST></P>
     </SUBSECTION>
-    <SUBSECTION name="logging" id="install:logging">
+    <SUBSECTION name="Logging setup" id="install:logging">
       <P>
         Webapp logging is best administered at the container level.
         Most servlet containers were designed to work this way, and many
