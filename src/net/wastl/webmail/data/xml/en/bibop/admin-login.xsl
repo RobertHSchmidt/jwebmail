@@ -39,7 +39,7 @@
                  (not that these other two items are complementary
                  with each other). -->
             <TD STYLE="padding:20px; padding-top:0; border:0; margin:0; text-align:center;">
-              <A href="../" title="Home Page link">
+              <A href="{$base}" title="Home Page link">
                 <IMG STYLE="margin:20px; border:0; padding:0;"
                      SRC="{$imgbase}/images/homefolders-icon.png"
                      ALT="JWebMail Home Page"/>
