@@ -384,12 +384,22 @@ limitations under the License.
         </ITEM> <ITEM>
           Go to the <CODE>Formatter</CODE> and Import the file
           <CODE>samples/formatter-ecpro.xml</CODE>.
+          Note that this formatter disabled word-wrapping, because Eclipse
+          does a truly terrible job at it.  It doesn't even enforce the rules
+          as it explains and exemplifies them.
+          Sorry to say, but after running Eclipse's code formatter, you'll
+          need to apply word-wrapping manually (according to
+          <CODE>doc/conventions.txt</CODE>.
         </ITEM> <ITEM>
           Finally, go to <CODE>Code Templates</CODE>, but this time don't
           load the profile at the global level.
           That's because, whereas the other settings are good for any
           Java project, these templates may not be appropriate for other
           Java projects that you may work on in the same Eclipse workspace.
+          The only known issues with the code templates is that they will
+          insert useless blank Javadoc lines like "    *" if there are no
+          tags for a method, and it will insert a blank line after {'s and
+          before }'s.
         </ITEM> <ITEM>
           Click on the <CODE>Configure Project Specific Settings...</CODE>.
           Select the <CODE>jwebmail</CODE> project and click <CODE>OK</CODE>.
