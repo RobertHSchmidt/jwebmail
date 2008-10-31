@@ -27,7 +27,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> WebMail fiókja: Title Frame</TITLE>
+        <TITLE><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> JWebMail fiókja: Title Frame</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -38,7 +38,7 @@
             <TR>
               <TD width="100%" colspan="4" height="22" class="testoNero">
                 <IMG SRC="{$imgbase}/images/icona_user.gif" align="absmiddle"/>
-              WebMail beállítások <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/FULL_NAME)"/> számára (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=setup">Segítség</A>)
+              JWebMail beállítások <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/FULL_NAME)"/> számára (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=setup">Segítség</A>)
                 </TD>
             </TR>
             <TR>

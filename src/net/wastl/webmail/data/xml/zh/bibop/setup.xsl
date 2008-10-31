@@ -29,7 +29,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>的 WebMail 信箱：標題框</TITLE>
+        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>的 JWebMail 信箱：標題框</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -41,7 +41,7 @@
             <TR>
               <TD width="100%" colspan="4" height="22" class="testoNero">
                 <IMG SRC="{$imgbase}/images/icona_user.gif" align="absmiddle"/>
-              <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/FULL_NAME)"/> 的 WebMail 使用者設定 (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=setup">求救</A>)
+              <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/FULL_NAME)"/> 的 JWebMail 使用者設定 (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=setup">求救</A>)
                 </TD>
             </TR>
             <TR>

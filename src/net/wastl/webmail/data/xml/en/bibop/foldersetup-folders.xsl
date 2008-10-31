@@ -28,9 +28,9 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
+        <TITLE>JWebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
@@ -39,7 +39,7 @@
   <TR>
             <TD colspan="4" height="22" class="testoNero">
               <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-            WebMail Folder Setup for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">Help</A>)
+            JWebMail Folder Setup for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">Help</A>)
     </TD>
            </TR>
            <TR>
@@ -59,7 +59,7 @@
           Folders displayed in <SPAN class="bold">bold</SPAN> can hold subfolders, folders that are displayed normal cannot hold subfolders. Folders displayed in <I>italic</I> are hidden (in the main mailbox view), others are not.
         </P>
         <P class="testoChiaro">
-          <SPAN class="testoRosso">Warning!</SPAN> If you delete a folder, all messages (and subfolders) in it will be <SPAN class="testoRosso">deleted</SPAN> not only from WebMail but <SPAN class="testoRosso">physically from the mailhost</SPAN>! This is dangerous and cannot be undone!
+          <SPAN class="testoRosso">Warning!</SPAN> If you delete a folder, all messages (and subfolders) in it will be <SPAN class="testoRosso">deleted</SPAN> not only from JWebMail but <SPAN class="testoRosso">physically from the mailhost</SPAN>! This is dangerous and cannot be undone!
         </P>
       </BODY>
     </HTML>

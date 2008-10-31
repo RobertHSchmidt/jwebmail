@@ -16,7 +16,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<!-- This is part of the French translation of WebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
+<!-- This is part of the French translation of JWebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" encoding="UTF-8"/>
@@ -29,9 +29,9 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Setup Dossier</TITLE>
+        <TITLE>Boite aux Lettres JWebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Setup Dossier</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
       </HEAD>
 
       <BODY bgcolor="#ffffff">
@@ -58,7 +58,7 @@ limitations under the License.
           Les Dossiers affichés en <STRONG>gras</STRONG> peuvent contenir des sous-dossiers, et les dossiers qui sont affichés normalement ne peuvent contenir de sous-dossiers. Les Dossiers affichés en <I>italique</I> sont masqués (dans la vue principale des boîtes aux lettres), les autres non.
         </P>
         <P>
-          <FONT color="red"><STRONG>Attention!</STRONG></FONT> si vous effacez un dossier, tous les messages (et sous-dossiers) seront <FONT color="red">effacés</FONT> non seulement de WebMail mais aussi <FONT color="red">physiquement de l'hôte serveur de messagerie!</FONT> Ceci est dangereux et ne pourra être défait!
+          <FONT color="red"><STRONG>Attention!</STRONG></FONT> si vous effacez un dossier, tous les messages (et sous-dossiers) seront <FONT color="red">effacés</FONT> non seulement de JWebMail mais aussi <FONT color="red">physiquement de l'hôte serveur de messagerie!</FONT> Ceci est dangereux et ne pourra être défait!
         </P>
       </BODY>
     </HTML>

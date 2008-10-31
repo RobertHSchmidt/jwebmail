@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- This file contains the WebMail help for users, French language -->
+<!-- This file contains the JWebMail help for users, French language -->
 
 <!-- $Id$ -->
 
@@ -21,13 +21,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
-<!-- This is part of the French translation of WebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
+<!-- This is part of the French translation of JWebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
 
 <!DOCTYPE help SYSTEM "../../../xml/webmail_help.dtd">
 
 
 <help>
-  <helptopic id="mailbox" title="Dossier-Boîte aux Lettres WebMail - Vue d'ensemble">
+  <helptopic id="mailbox" title="Dossier-Boîte aux Lettres JWebMail - Vue d'ensemble">
     <icon href="icona_mail2.gif"/>
     <helpdata>
       <p>
@@ -100,7 +100,7 @@
     <helpdata>
       <p>
         Lorsque vous composez un message, vous pouvez attacher des fichiers de votre système local. Ceux-ci
-        seront envoyés au Serveur WebMail et attaché à votre message (ceci peut prendre du temps, notamment
+        seront envoyés au Serveur JWebMail et attaché à votre message (ceci peut prendre du temps, notamment
         pour des connexion Internet lentes de type modem).
       </p>
       <p>
@@ -152,7 +152,7 @@
       </p>
       <warning>
         <p>Les dossiers seront <bold>physiquement effacé de votre serveur de messagerie</bold> (en même temps que tous les messages et
-        sous-dossiers qu'ils contiennent), <bold>et non pas seulement de WebMail</bold>! Ceci est une fonction <bold>dangereuse</bold>
+        sous-dossiers qu'ils contiennent), <bold>et non pas seulement de JWebMail</bold>! Ceci est une fonction <bold>dangereuse</bold>
         et vous ne pourrez plus revenir en arrière !</p>
       </warning>
     </helpdata>
@@ -188,7 +188,7 @@
       <p>
         <ul>
           <li><bold>Nom Complet</bold>: Le nom qui apparaîtra dans les messages sortants et dans les invites Webmail.</li>
-          <li><bold>Langue</bold>: La langue que WebMail utilisera pour l'affichage.</li>
+          <li><bold>Langue</bold>: La langue que JWebMail utilisera pour l'affichage.</li>
           <li><bold>Changer Mot de passe</bold> et <bold>Vérification mot de passe</bold>: Si votre configuration vous permet de changer votre mot de passe, vous pouvez le faire ici (demandez à votre administrateur). Ne pas oublier SVP d'entrer le même mot de passe dans les deux champs.</li>
           <li><bold>Thème</bold>: le style d'affichage utilisé.</li>
         </ul>
@@ -219,7 +219,7 @@
   <helptopic id="logout" title="Logout Session">
     <helpdata>
       <p>
-        Ferme votre session WebMail et provoque la sauvegarde par le serveur de votre configuration utilisateur.
+        Ferme votre session JWebMail et provoque la sauvegarde par le serveur de votre configuration utilisateur.
         Vous devriez avoir à nouveau la fenêtre de connexion après quelques secondes.
         Si vous oubliez de vous déconnecter, votre session sera fermée automatiquement après
         un temps imparti par défaut (Renseignez vous auprès de votre administrateur).

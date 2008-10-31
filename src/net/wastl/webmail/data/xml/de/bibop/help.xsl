@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Briefkasten für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Hilfe</TITLE>
+        <TITLE>JWebMail Briefkasten für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Hilfe</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>

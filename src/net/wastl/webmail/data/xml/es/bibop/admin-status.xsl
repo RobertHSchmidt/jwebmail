@@ -29,7 +29,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Interfaz de administraci&#243;n de WebMail: Estado del sistema</TITLE>
+        <TITLE>Interfaz de administraci&#243;n de JWebMail: Estado del sistema</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 

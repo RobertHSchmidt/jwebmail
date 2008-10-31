@@ -16,7 +16,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<!-- This is part of the French translation of WebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
+<!-- This is part of the French translation of JWebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" encoding="UTF-8"/>
@@ -31,7 +31,7 @@ limitations under the License.
       </HEAD>
 
       <BODY bgcolor="#ffffff">
-        <H1><CENTER>Merci d'utiliser WebMail!</CENTER></H1>
+        <H1><CENTER>Merci d'utiliser JWebMail!</CENTER></H1>
         <H3><CENTER>Préparation du logout de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</CENTER></H3>
         <P>
           <CENTER>
@@ -45,7 +45,7 @@ limitations under the License.
           <CENTER>
             <FONT SIZE="-1">
               <EMPH>
-                WebMail is (c)2008 by the JWebMail Development Team and Sebastian Schaffert.
+                JWebMail is (c)2008 by the JWebMail Development Team and Sebastian Schaffert.
                 It is distributed under the terms of the Apache 2.0 License.
               </EMPH>
             </FONT>

@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Ventana principal/Ayuda</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Ventana principal/Ayuda</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -36,7 +36,7 @@
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
           <TABLE width="100%" border="0" cellspacing="0" cellpadding="4">
             <TR>
-                <TD colspan="2" height="22" class="testoNero"><img src="images/icona_help.gif" align="absmiddle"/>Ayuda de WebMail
+                <TD colspan="2" height="22" class="testoNero"><img src="images/icona_help.gif" align="absmiddle"/>Ayuda de JWebMail
                 </TD>
             </TR>
             <TR>
@@ -59,7 +59,7 @@
                 </TD>
               <TD height="22" class="testo" width="89%" bgcolor="#E2E6F0">
                 Este sistema usa <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR                  [@name='java virtual machine']"/> en <xsl:apply-templates                                       select="/USERMODEL/STATEDATA/VAR[@name='operating system']"/><BR/>
-                WebMail <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='webmail version']"/> (c)1999-2002 por Sebastian Schaffert, schaffer@informatik.uni-muenchen.de
+                JWebMail <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='webmail version']"/> (c)1999-2002 por Sebastian Schaffert, schaffer@informatik.uni-muenchen.de
               </TD>
             </TR>
           </TABLE>

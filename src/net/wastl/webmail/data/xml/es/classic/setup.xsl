@@ -24,7 +24,7 @@ limitations under the License.
   <xsl:template match="/">
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Ventana principal</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Ventana principal</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
       <BODY bgcolor="#ffffff">
@@ -34,7 +34,7 @@ limitations under the License.
               <TD COLSPAN="2" VALIGN="CENTER">
                 <IMG SRC="{$imgbase}/images/btn-setup.png"/>
               </TD>
-              <TD COLSPAN="2" VALIGN="CENTER"><FONT SIZE="+2"><STRONG>Configuraci&#243;n de WebMail para <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/FULL_NAME)"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=setup">Ayuda</A>)<BR/><EM>Nombre de usuario <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/><EM>La cuenta existe desde <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM></TD>
+              <TD COLSPAN="2" VALIGN="CENTER"><FONT SIZE="+2"><STRONG>Configuraci&#243;n de JWebMail para <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/FULL_NAME)"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=setup">Ayuda</A>)<BR/><EM>Nombre de usuario <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/><EM>La cuenta existe desde <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM></TD>
             </TR>
             <TR>
               <TD COLSPAN="4" BGCOLOR="#aaaaaa" ALIGN="CENTER">

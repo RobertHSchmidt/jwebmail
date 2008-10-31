@@ -32,10 +32,10 @@
       <HEAD>
         <xsl:choose>
           <xsl:when test="$ud != ''">
-            <TITLE>WebMail 管理介面：使用者『<xsl:value-of select="$ud/LOGIN"/>』的設定</TITLE>
+            <TITLE>JWebMail 管理介面：使用者『<xsl:value-of select="$ud/LOGIN"/>』的設定</TITLE>
           </xsl:when>
           <xsl:otherwise>
-            <TITLE>WebMail 管理介面：新增使用者</TITLE>
+            <TITLE>JWebMail 管理介面：新增使用者</TITLE>
           </xsl:otherwise>
         </xsl:choose>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>

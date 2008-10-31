@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Abmelden vom System</TITLE>
+        <TITLE>JWebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Abmelden vom System</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
@@ -69,7 +69,7 @@
                 </TR>
                 <TR>
                   <TD colspan="2" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center">
-                    <SPAN class="bold">BiBop WebMail </SPAN>basiert auf<BR/>
+                    <SPAN class="bold">BiBop JWebMail </SPAN>basiert auf<BR/>
                     JWebMail is &#169; 1999/@year@ by Sebastian Schaffert<BR/>
                   </TD>
                 </TR>

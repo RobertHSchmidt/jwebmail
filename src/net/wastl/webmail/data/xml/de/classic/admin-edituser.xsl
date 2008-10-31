@@ -32,10 +32,10 @@ limitations under the License.
       <HEAD>
         <xsl:choose>
           <xsl:when test="$ud != ''">
-            <TITLE>WebMail Administration Interface: User Setup for user <xsl:value-of select="$ud/LOGIN"/></TITLE>
+            <TITLE>JWebMail Administration Interface: User Setup for user <xsl:value-of select="$ud/LOGIN"/></TITLE>
           </xsl:when>
           <xsl:otherwise>
-            <TITLE>WebMail Administration Interface: Creating new user</TITLE>
+            <TITLE>JWebMail Administration Interface: Creating new user</TITLE>
           </xsl:otherwise>
         </xsl:choose>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>

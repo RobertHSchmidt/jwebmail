@@ -26,9 +26,9 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Error Reporting</TITLE>
+        <TITLE>JWebMail Error Reporting</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
       </HEAD>
 
       <BODY bgcolor="#ffffff">

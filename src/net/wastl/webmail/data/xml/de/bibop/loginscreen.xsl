@@ -113,7 +113,7 @@
                         </TR>
                         <TR>
                           <TD colspan="4" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center"><SPAN class="bold">BiBop
-              WebMail </SPAN>basiert auf<BR/>
+              JWebMail </SPAN>basiert auf<BR/>
               JWebMail is &#169; 1999-@year@ by Sebastian Schaffert</TD>
                         </TR>
                       </TABLE>

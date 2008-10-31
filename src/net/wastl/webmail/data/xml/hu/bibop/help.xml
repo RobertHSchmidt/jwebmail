@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-2"?>
 
-<!-- This file contains the WebMail help for users, English language -->
+<!-- This file contains the JWebMail help for users, English language -->
 
 <!-- $Id$ -->
 
@@ -26,7 +26,7 @@
 
 
 <help>
-  <helptopic id="mailbox" title="WebMail Mailbox/Folder Overview">
+  <helptopic id="mailbox" title="JWebMail Mailbox/Folder Overview">
     <icon href="icona_mail2.gif"/>
     <helpdata>
       <p>
@@ -99,7 +99,7 @@
     <helpdata>
       <p>
         While you are composing a message, you can attach files from your local system. These will be sent
-        to the WebMail server and attached to your message (this may take some time, depending on your
+        to the JWebMail server and attached to your message (this may take some time, depending on your
         Internet connection).
       </p>
       <p>
@@ -124,7 +124,7 @@
         or configure folders within existing mailboxes.
       </p>
       <p>
-        <bold>Configuring Mailboxes:</bold> WebMail allows you to access several completely independent mailboxes
+        <bold>Configuring Mailboxes:</bold> JWebMail allows you to access several completely independent mailboxes
         via IMAP or POP3. For each mailbox you will have to provide the mailhost, the protocol and the
         login information.
       </p>
@@ -148,7 +148,7 @@
       </p>
       <warning>
         <p>Folders will be <bold>physically removed from your mailbox</bold> (together with all mail and
-        subfolders in them), <bold>not only from WebMail</bold>! This is a <bold>dangerous</bold>
+        subfolders in them), <bold>not only from JWebMail</bold>! This is a <bold>dangerous</bold>
         option and you cannot undo this step!</p>
       </warning>
     </helpdata>
@@ -157,15 +157,15 @@
   <helptopic id="folder-setup-mailboxes" title="Setting up Mailboxes">
     <helpdata>
       <p>
-        WebMail allows you to access several independent POP3/IMAP mailboxes within one interface. To configure
+        JWebMail allows you to access several independent POP3/IMAP mailboxes within one interface. To configure
         this you can use the <bold>mailbox setup</bold>.
       </p>
       <p>
         In the first part of the screen you have a list of your currently configured mailboxes. You can use
-        the <bold>Remove</bold> link to remove a mailbox from WebMail.
+        the <bold>Remove</bold> link to remove a mailbox from JWebMail.
       </p>
       <note>
-        <p>In contrast to the folder setup, a mailbox will only be removed from WebMail if you click on
+        <p>In contrast to the folder setup, a mailbox will only be removed from JWebMail if you click on
         <bold>Remove</bold> here. You will still be able to access it from other email clients.</p>
       </note>
       <p>
@@ -184,8 +184,8 @@
       </p>
       <p>
         <ul>
-          <li><bold>Full Name</bold>: The name that will appear in outgoing messages and in WebMail greetings.</li>
-          <li><bold>Language</bold>: The language WebMail will use for you.</li>
+          <li><bold>Full Name</bold>: The name that will appear in outgoing messages and in JWebMail greetings.</li>
+          <li><bold>Language</bold>: The language JWebMail will use for you.</li>
           <li><bold>Password</bold> and <bold>Verify</bold>: If your setup allows you to change your password, you can
             do it here (ask your administrator). Please don't forget to enter the same password in both
             fields.</li>

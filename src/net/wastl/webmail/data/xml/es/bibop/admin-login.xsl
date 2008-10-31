@@ -27,7 +27,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Pantalla de entrada del administrador de WebMail</TITLE>
+        <TITLE>Pantalla de entrada del administrador de JWebMail</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
@@ -47,7 +47,7 @@
                       <TABLE CELLSPACING="0" CELLPADDING="10" BORDER="0" bgcolor="#ff0000">
                         <TR>
                           <TD COLSPAN="2" ALIGN="CENTER">
-                            <IMG SRC="{$imgbase}/images/login_title.png" ALT="WebMail login"/></TD>
+                            <IMG SRC="{$imgbase}/images/login_title.png" ALT="JWebMail login"/></TD>
                         </TR>
                         <TR>
                           <TD WIDTH="50%" ALIGN="RIGHT"><STRONG>Usuario:</STRONG></TD>

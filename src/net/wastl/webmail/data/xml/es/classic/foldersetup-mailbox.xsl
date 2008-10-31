@@ -24,9 +24,9 @@ limitations under the License.
   <xsl:template match="/">
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Configuraci&#243;n de buzones</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Configuraci&#243;n de buzones</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
       </HEAD>
       <BODY bgcolor="#ffffff">
         <TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0" WIDTH="100%">
@@ -34,7 +34,7 @@ limitations under the License.
             <TD VALIGN="CENTER">
               <IMG SRC="{$imgbase}/images/btn-folders.png"/>
             </TD>
-            <TD VALIGN="CENTER" COLSPAN="2"><FONT SIZE="+2"><STRONG>Configuraci&#243;n de buzones de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-mailboxes">Ayuda</A>)<BR/><EM>Nombre de usuario <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/><EM>La cuenta existe desde <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM></TD>
+            <TD VALIGN="CENTER" COLSPAN="2"><FONT SIZE="+2"><STRONG>Configuraci&#243;n de buzones de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-mailboxes">Ayuda</A>)<BR/><EM>Nombre de usuario <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/><EM>La cuenta existe desde <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM></TD>
           </TR>
           <TR>
             <TD COLSPAN="3" BGCOLOR="#aaaaaa" ALIGN="CENTER">

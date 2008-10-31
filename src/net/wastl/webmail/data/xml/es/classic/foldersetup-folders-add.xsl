@@ -24,9 +24,9 @@ limitations under the License.
   <xsl:template match="/">
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
       </HEAD>
       <BODY bgcolor="#ffffff">
         <TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0" WIDTH="100%">
@@ -36,7 +36,7 @@ limitations under the License.
             </TD>
             <TD VALIGN="CENTER" COLSPAN="2">
               <FONT SIZE="+2">
-                <STRONG>Configuraci&#243;n de carpetas de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG>
+                <STRONG>Configuraci&#243;n de carpetas de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG>
               </FONT>
               <BR/>
               <EM>Nombre de usuario <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM>

@@ -24,13 +24,13 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Title Frame</TITLE>
+        <TITLE>JWebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Title Frame</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
       </HEAD>
 
       <BODY bgcolor="#ffffff">
-        <H1><CENTER>Thanks for using WebMail!</CENTER></H1>
+        <H1><CENTER>Thanks for using JWebMail!</CENTER></H1>
         <H3><CENTER>Preparing logout for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.</CENTER></H3>
         <P>
           <CENTER>
@@ -44,7 +44,7 @@ limitations under the License.
           <CENTER>
             <FONT SIZE="-1">
               <EMPH>
-                WebMail is (c)2008 by the JWebMail Development Team and Sebastian Schaffert.
+                JWebMail is (c)2008 by the JWebMail Development Team and Sebastian Schaffert.
                 It is distributed under the terms of the Apache 2.0 License.
               </EMPH>
             </FONT>

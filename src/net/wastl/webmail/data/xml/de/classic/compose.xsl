@@ -32,7 +32,7 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Bearbeite Nachricht <xsl:value-of select="/USERMODEL/CURRENT[@type='message']/@id"/></TITLE>
+        <TITLE>JWebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Bearbeite Nachricht <xsl:value-of select="/USERMODEL/CURRENT[@type='message']/@id"/></TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 

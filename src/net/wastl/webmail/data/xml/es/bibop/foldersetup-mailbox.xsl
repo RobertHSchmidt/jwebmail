@@ -28,9 +28,9 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Configuraci&#243;n de buzones</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Configuraci&#243;n de buzones</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
@@ -41,7 +41,7 @@
           <TR>
             <TD colspan="4" height="22" class="testoNero">
               <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-               Configuraci&#243;n de buzones de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-mailboxes">Ayuda</A>)
+               Configuraci&#243;n de buzones de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-mailboxes">Ayuda</A>)
             </TD>
            </TR>
            <TR>

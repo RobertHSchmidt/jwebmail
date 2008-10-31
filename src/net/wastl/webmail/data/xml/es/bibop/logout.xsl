@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Marco de t&#237;tulo</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Marco de t&#237;tulo</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
@@ -56,7 +56,7 @@
                 </TR>
                 <TR>
                   <TD align="center" bgcolor="#FFFFFF" width="315" class="testo">
-                    <BR/><SPAN class="testoGrande">&#161;Gracias por usar WebMail!</SPAN><BR/><BR/>
+                    <BR/><SPAN class="testoGrande">&#161;Gracias por usar JWebMail!</SPAN><BR/><BR/>
                     Preparando desconexi&#243;n para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.<BR/><BR/>
                   </TD>
                 </TR>
@@ -70,8 +70,8 @@
                 </TR>
                 <TR>
                   <TD colspan="2" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center">
-                    <SPAN class="bold">BiBop WebMail </SPAN>est&#225; basado en<BR/>
-                    WebMail es &#169; 1999/@year@ por Sebastian Schaffert<BR/>
+                    <SPAN class="bold">BiBop JWebMail </SPAN>est&#225; basado en<BR/>
+                    JWebMail es &#169; 1999/@year@ por Sebastian Schaffert<BR/>
                   </TD>
                 </TR>
                </TABLE>

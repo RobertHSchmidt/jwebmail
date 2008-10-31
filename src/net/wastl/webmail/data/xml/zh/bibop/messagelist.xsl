@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 信箱：信件清單（收信匣 <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@id"/>）</TITLE>
+        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 JWebMail 信箱：信件清單（收信匣 <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@id"/>）</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>

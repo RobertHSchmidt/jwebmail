@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
-<!-- This is part of the French translation of WebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
+<!-- This is part of the French translation of JWebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xalan="http://xml.apache.org/xslt" version="1.0">
   <xsl:output method="html" indent="yes" xalan:content-handler="org.apache.xml.serializer.ToHTMLStream"/>
@@ -29,7 +29,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page Principale Aide</TITLE>
+        <TITLE>Boite aux Lettres JWebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page Principale Aide</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -37,7 +37,7 @@
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
           <TABLE width="100%" border="0" cellspacing="0" cellpadding="4">
             <TR>
-                <TD colspan="2" height="22" class="testoNero"><img src="images/icona_help.gif" align="absmiddle"/>Aide WebMail</TD>
+                <TD colspan="2" height="22" class="testoNero"><img src="images/icona_help.gif" align="absmiddle"/>Aide JWebMail</TD>
             </TR>
             <TR>
                 <TD colspan="2" height="22" class="testoBianco" bgcolor="#697791">&#160;
@@ -60,7 +60,7 @@
                 </TD>
               <TD height="22" class="testo" width="89%" bgcolor="#E2E6F0">
                 Ce système utilise <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='java virtual machine']"/> sous <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='operating system']"/><BR/>
-                WebMail <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='webmail version']"/> (c)1999-@year@ by Sebastian Schaffert, schaffer@informatik.uni-muenchen.de
+                JWebMail <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='webmail version']"/> (c)1999-@year@ by Sebastian Schaffert, schaffer@informatik.uni-muenchen.de
               </TD>
             </TR>
           </TABLE>

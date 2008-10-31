@@ -29,12 +29,12 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail 管理介面：虛擬網域設定</TITLE>
+        <TITLE>JWebMail 管理介面：虛擬網域設定</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <BODY BGCOLOR="#ffffff">
-        <CENTER><H1>WebMail 虛擬網域設定</H1></CENTER>
+        <CENTER><H1>JWebMail 虛擬網域設定</H1></CENTER>
         <FORM ACTION="{$base}/admin/domain/set?session-id={$session-id}" METHOD="POST">
           <TABLE WIDTH="100%">
                <tr>

@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
-<!-- This is part of the French translation of WebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
+<!-- This is part of the French translation of JWebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xalan="http://xml.apache.org/xslt" version="1.0">
   <xsl:output method="html" indent="yes" xalan:content-handler="org.apache.xml.serializer.ToHTMLStream"/>
@@ -29,9 +29,9 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Setup Dossier</TITLE>
+        <TITLE>Boite aux Lettres JWebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Setup Dossier</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
@@ -40,7 +40,7 @@
   <TR>
             <TD colspan="4" height="22" class="testoNero">
               <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-            Setup Dossier WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">Aide</A>)
+            Setup Dossier JWebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">Aide</A>)
     </TD>
            </TR>
            <TR>
@@ -60,7 +60,7 @@
           Les Dossiers affichés en <SPAN class="bold">gras</SPAN> peuvent contenir des sous-dossiers, et les dossiers qui sont affichés normalement ne peuvent contenir de sous-dossiers. Les Dossiers affichés en <I>italique</I> sont masqués (dans la vue principale des boîtes aux lettres), les autres non.
         </P>
         <P class="testoChiaro">
-          <SPAN class="testoRosso">Attention!</SPAN> si vous effacez un dossier, tous les messages (et sous-dossiers) seront <SPAN class="testoRosso">effacés</SPAN> non seulement de WebMail mais aussi <SPAN class="testoRosso">physiquement de l'hôte serveur de messagerie!</SPAN> Ceci est dangereux et ne pourra être défait!
+          <SPAN class="testoRosso">Attention!</SPAN> si vous effacez un dossier, tous les messages (et sous-dossiers) seront <SPAN class="testoRosso">effacés</SPAN> non seulement de JWebMail mais aussi <SPAN class="testoRosso">physiquement de l'hôte serveur de messagerie!</SPAN> Ceci est dangereux et ne pourra être défait!
         </P>
       </BODY>
     </HTML>

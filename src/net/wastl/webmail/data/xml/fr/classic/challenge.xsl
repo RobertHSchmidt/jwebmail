@@ -31,7 +31,7 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Login Screen</TITLE>
+        <TITLE>JWebMail Login Screen</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
@@ -55,7 +55,7 @@ limitations under the License.
                       <TABLE CELLSPACING="0" CELLPADDING="10" BORDER="0" bgcolor="#ff0000">
                         <TR>
                           <TD COLSPAN="2" ALIGN="CENTER">
-                            <IMG SRC="{$imgbase}/images/login_title.png" ALT="WebMail login"/></TD>
+                            <IMG SRC="{$imgbase}/images/login_title.png" ALT="JWebMail login"/></TD>
                         </TR>
             <TR>
               <TD WIDTH="50%" ALIGN="RIGHT"><STRONG>Login:</STRONG></TD>
@@ -89,13 +89,13 @@ limitations under the License.
           <TR>
             <TD COLSPAN="3" ALIGN="CENTER">
               <FONT SIZE="-1">
-                <EM>WebMail is (c)1999/2000 by <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. It is distributed under the terms of the GNU Public License (GPL).</EM>
+                <EM>JWebMail is (c)1999/2000 by <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. It is distributed under the terms of the GNU Public License (GPL).</EM>
               </FONT>
             </TD>
           </TR>
           <TR>
             <TD COLSPAN="3" ALIGN="CENTER">
-              <FONT SIZE="-1"><EM><STRONG>Version</STRONG>: WebMail <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'webmail version']/@value"/> on "<xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'java virtual machine']/@value"/>", <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'operating system']/@value"/></EM></FONT>
+              <FONT SIZE="-1"><EM><STRONG>Version</STRONG>: JWebMail <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'webmail version']/@value"/> on "<xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'java virtual machine']/@value"/>", <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'operating system']/@value"/></EM></FONT>
             </TD>
           </TR>
           <TR>

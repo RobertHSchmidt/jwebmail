@@ -28,9 +28,9 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Configuraci&#243;n de carpetas</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Configuraci&#243;n de carpetas</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
@@ -40,7 +40,7 @@
           <TR>
             <TD colspan="2" height="22" class="testoNero">
               <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-            Configuraci&#243;n de carpetas de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Ayuda</A>)
+            Configuraci&#243;n de carpetas de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Ayuda</A>)
                 </TD>
             </TR>
            <TR>
@@ -59,7 +59,7 @@
               <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">A&#241;adir/Borrar buz&#243;n</A>
             </TD>
             <TD height="22" class="testoNero" width="77%" bgcolor="#E2E6F0">
-              WebMail te permite tener varios buzones, en servidores IMAP y POP. Puedes a&#241;adir y eliminar esos buzones aqu&#237;.
+              JWebMail te permite tener varios buzones, en servidores IMAP y POP. Puedes a&#241;adir y eliminar esos buzones aqu&#237;.
             </TD>
           </TR>
           <TR>
@@ -67,7 +67,7 @@
               <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">A&#241;adir/Borrar carpetas</A>
             </TD>
             <TD height="22" class="testoNero" width="77%" bgcolor="#D1D7E7">
-              WebMail te mostrar&#225; un &#225;rbol de carpetas para cada buz&#243;n, donde podr&#225;s a&#241;adir o
+              JWebMail te mostrar&#225; un &#225;rbol de carpetas para cada buz&#243;n, donde podr&#225;s a&#241;adir o
               borrar carpetas.
             </TD>
           </TR>

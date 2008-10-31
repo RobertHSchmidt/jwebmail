@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 信箱：標題框</TITLE>
+        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 JWebMail 信箱：標題框</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -40,7 +40,7 @@
                 <IMG SRC="{$imgbase}/images/logo.gif" alt="Logo BiBop"/>
             </TD>
             <TD width="13%" background="{$imgbase}/images/sfondino_grigio.gif">
-                <IMG SRC="{$imgbase}/images/webmail.gif" alt="Logo WebMail BiBop"/>
+                <IMG SRC="{$imgbase}/images/webmail.gif" alt="Logo JWebMail BiBop"/>
             </TD>
             <TD width="2%" background="{$imgbase}/images/sfondino_scuro.gif">
                 <IMG SRC="{$imgbase}/images/spacer.gif" width="15" height="1"/>

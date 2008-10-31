@@ -28,9 +28,9 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Ordnereinstellungen</TITLE>
+        <TITLE>JWebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Ordnereinstellungen</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
@@ -59,7 +59,7 @@
           <STRONG>Fettgedruckte</STRONG> Ordner können Unterordner enthalten, Ordner, die normal angezeigt werden können keine Unterordner enthalten. <EM>Schräggedruckte</EM> Ordner sind versteckt (in der Briefkastenübersicht nicht angezeigt), nicht schräggedruckte nicht.
         </P>
         <P class="testoChiaro">
-          <SPAN class="testoRosso">Achtung!</SPAN> Wenn Du einen Ordner löschst, werden alle darin enthaltenen Nachrichten und Ordner <SPAN class="testoRosso">gelöscht</SPAN>, und zwar nicht nur aus WebMail, sondern <SPAN class="testoRosso">physisch auf dem Mailserver</SPAN>! Das ist gefährlich und kann nicht rückgängig gemacht werden!
+          <SPAN class="testoRosso">Achtung!</SPAN> Wenn Du einen Ordner löschst, werden alle darin enthaltenen Nachrichten und Ordner <SPAN class="testoRosso">gelöscht</SPAN>, und zwar nicht nur aus JWebMail, sondern <SPAN class="testoRosso">physisch auf dem Mailserver</SPAN>! Das ist gefährlich und kann nicht rückgängig gemacht werden!
         </P>
       </BODY>
     </HTML>

@@ -32,10 +32,10 @@
       <HEAD>
         <xsl:choose>
           <xsl:when test="$ud != ''">
-            <TITLE>Interfaz de administraci&#243;n de WebMail: Configuraci&#243;n de usuario para el usuario <xsl:value-of select="$ud/LOGIN"/></TITLE>
+            <TITLE>Interfaz de administraci&#243;n de JWebMail: Configuraci&#243;n de usuario para el usuario <xsl:value-of select="$ud/LOGIN"/></TITLE>
           </xsl:when>
           <xsl:otherwise>
-            <TITLE>Interfaz de administraci&#243;n de WebMail: Creaci&#243;n de un nuevo usuario</TITLE>
+            <TITLE>Interfaz de administraci&#243;n de JWebMail: Creaci&#243;n de un nuevo usuario</TITLE>
           </xsl:otherwise>
         </xsl:choose>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>

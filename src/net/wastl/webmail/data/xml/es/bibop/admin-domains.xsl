@@ -29,12 +29,12 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Interfaz de administraci&#243;n de WebMail: Configuraci&#243;n de dominios virtuales</TITLE>
+        <TITLE>Interfaz de administraci&#243;n de JWebMail: Configuraci&#243;n de dominios virtuales</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <BODY BGCOLOR="#ffffff">
-        <CENTER><H1>Configuraci&#243;n de dominios virtuales de WebMail</H1></CENTER>
+        <CENTER><H1>Configuraci&#243;n de dominios virtuales de JWebMail</H1></CENTER>
         <FORM ACTION="{$base}/admin/domain/set?session-id={$session-id}" METHOD="POST">
           <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
                <tr>

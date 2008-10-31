@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 信箱: 標題框</TITLE>
+        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 JWebMail 信箱: 標題框</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
@@ -57,7 +57,7 @@
                 <TR>
                   <TD align="center" bgcolor="#FFFFFF" width="315" class="testo">
                     <BR/><SPAN class="testoGrande">感謝您使用
-                    WebMail!</SPAN><BR/><BR/> 準備為 <xsl:value-of
+                    JWebMail!</SPAN><BR/><BR/> 準備為 <xsl:value-of
                     select="/USERMODEL/USERDATA/FULL_NAME"/> 登出系統.<BR/><BR/>
                   </TD>
                 </TR>
@@ -70,8 +70,8 @@
                 </TR>
                 <TR>
                   <TD colspan="2" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center">
-                    <SPAN class="bold">BiBop WebMail </SPAN>is based on<BR/>
-                    WebMail is &#169; 1999/@year@ by Sebastian Schaffert<BR/>
+                    <SPAN class="bold">BiBop JWebMail </SPAN>is based on<BR/>
+                    JWebMail is &#169; 1999/@year@ by Sebastian Schaffert<BR/>
                   </TD>
                 </TR>
                </TABLE>

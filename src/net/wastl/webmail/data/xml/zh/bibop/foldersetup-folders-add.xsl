@@ -28,9 +28,9 @@
 
     <HTML>
       <HEAD>
-        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 信箱：收信匣設定</TITLE>
+        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 JWebMail 信箱：收信匣設定</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
       </HEAD>
 
       <BODY bgcolor="#ffffff">
@@ -41,7 +41,7 @@
               <IMG SRC="{$imgbase}/images/btn-folders.png"/>
             </TD>
             <TD VALIGN="CENTER" COLSPAN="2">
-              <FONT SIZE="+2"><STRONG><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 收信匣設定</STRONG></FONT><BR/>
+              <FONT SIZE="+2"><STRONG><xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 JWebMail 收信匣設定</STRONG></FONT><BR/>
               <EM>登入帳號 <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/>
               <EM>此帳號從 <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/> 開始使用</EM>
             </TD>
