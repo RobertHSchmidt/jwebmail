@@ -384,12 +384,14 @@ limitations under the License.
         </ITEM> <ITEM>
           Go to the <CODE>Formatter</CODE> and Import the file
           <CODE>samples/formatter-ecpro.xml</CODE>.
-          Note that this formatter disabled word-wrapping, because Eclipse
-          does a truly terrible job at it.  It doesn't even enforce the rules
-          as it explains and exemplifies them.
+          Note that this formatter disabled word-wrapping for Java files,
+          because Eclipse does a truly terrible job at it.
+          It doesn't even enforce the rules as it explains and exemplifies them.
           Sorry to say, but after running Eclipse's code formatter, you'll
           need to apply word-wrapping manually (according to
           <CODE>doc/conventions.txt</CODE>.
+          (The formatter works perfectly well for Javadoc and non-Javadoc
+          comments).
         </ITEM> <ITEM>
           Finally, go to <CODE>Code Templates</CODE>, but this time don't
           load the profile at the global level.
