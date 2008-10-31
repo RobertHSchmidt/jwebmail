@@ -25,21 +25,25 @@ limitations under the License.
   <property name="exploded.dir" value="build/webapp"/>
   <property name="contextxml.path" value="config/context.xml"/>
 
+  <property name="debug"              value="false"/>
+  <property name="javac.debug"        value="${debug}"/>
+  <property name="javac.optimize"     value="true"/>
+  <property name="javac.deprecation"  value="true"/>
+  <property name="javac.targetver"    value="1.5"/>
+
+  <!-- This sets the JRE version which will be required by USERS of
+       generated classes! -->
+  <property name="Name" value="JWebMail"/>
+  <property name="version" value="1.0.1e"/>
+  <property name="year" value="2008"/>
+
   <!-- =================================================================== -->
   <!-- Initialization target                                               -->
   <!-- =================================================================== -->
   <target name="-init" depends="-check-tool-versions">
     <tstamp/>
-    <property name="Name" value="JWebMail"/>
-    <property name="version" value="1.0.1e"/>
-    <property name="year" value="2008"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
-
-    <property name="debug"              value="false"/>
-    <property name="javac.debug"        value="false"/>
-    <property name="javac.optimize"     value="on"/>
-    <property name="javac.deprecation"  value="on"/>
 
     <property name="dist.dir" value="dist/${ant.project.name}-${version}"/>
     <filter token="year" value="${year}"/>
@@ -69,7 +73,7 @@ limitations under the License.
     <mkdir dir="build/classes" />
     <javac srcdir="build/src" destdir="build/classes"
            debug="${javac.debug}" classpathref="build.refid"
-           optimize="${javac.optimize}"
+           optimize="${javac.optimize}" target="${javac.targetver}"
            deprecation="${javac.deprecation}">
       <!--
       <compilerarg value="-Xlint"/>
@@ -78,12 +82,10 @@ limitations under the License.
 
     <echo message="     Compiling plugins"/>
     <mkdir dir="build/plugin-classes" />
-    <javac srcdir="plugin-src"
-           destdir="build/plugin-classes"
-           classpath="build/classes"
+    <javac srcdir="plugin-src" target="${javac.targetver}"
+           destdir="build/plugin-classes" classpath="build/classes"
            debug="${javac.debug}" classpathref="build.refid"
-           optimize="${javac.optimize}"
-           deprecation="${javac.deprecation}">
+           optimize="${javac.optimize}" deprecation="${javac.deprecation}">
       <!--
       <compilerarg value="-Xlint"/>
       -->
@@ -91,12 +93,10 @@ limitations under the License.
 
     <echo message="     Compiling authenticators"/>
     <mkdir dir="build/authenticator-classes" />
-    <javac srcdir="authenticator-src"
-           destdir="build/authenticator-classes"
-           classpath="build/classes"
+    <javac srcdir="authenticator-src" target="${javac.targetver}"
+           destdir="build/authenticator-classes" classpath="build/classes"
            debug="${javac.debug}" classpathref="build.refid"
-           optimize="${javac.optimize}"
-           deprecation="${javac.deprecation}">
+           optimize="${javac.optimize}" deprecation="${javac.deprecation}">
       <!--
       <compilerarg value="-Xlint"/>
       -->
