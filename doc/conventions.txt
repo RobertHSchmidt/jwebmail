@@ -1,12 +1,31 @@
 $Id$
 
+Your goal should be code that looks like this
+    http://java.sun.com/docs/codeconv/html/CodeConventions.doc10.html#182
+The rest of short file explains slight additions and modifications to
+Sun's code conventions,
+    http://java.sun.com/docs/codeconv/html/CodeConventions.doc.html
+
 Do not commit text files with tab characters.  Your editor should have a
 setting to automatically convert tabs to spaces.  If not, then use
 "expand" (available for all UNIXes + Cygwin) or any other home-made or
 off-the-shelf tab-expander.
 
-Don't use liberal import statements.  Include just what you need to
-prevent unnecessary name collisions in the future.
+Don't use liberal import statements.  Using wild-card imports has indeed
+made much extra work for me when I refactored this project.  Most times
+I have to guess what package an unknown XML or utility class comes from,
+because it would take too much time to search all the libraries.  It has
+also caused otherwise unnecessary name collisions when upgrading or
+switching third party libs, and upgrading the Java JVM.  For the same
+reasons, if you copy and paste a .java file to use as a starting point
+for a new class, at some point review the import statements and remove
+the unnecessary ones (all IDEs can do this for you).
+
+Nobody has ever benefitted by separating groups of import statements by
+blank lines.  If there are 3 java.util imports followed by 2 java.io
+imports followed by 8 net.wast.webapp imports, it couldn't be easier
+to find the group you are looking for.
+Just group imports sequentially (if at all), without the blank lines.
 
 Be conservative with white space.  E.g., don't ever put white space where
 it is totally useless, like blank spaces at ends of lines; or blank
@@ -58,3 +77,16 @@ use Thread.printStackTrace(*), which amounts to the same thing.  We have
 a logging facility that makes it easy to write messages and stack traces.
 NOTE:  log.*(Throwable) just logs the Throwable.toString(), but
 log.*(String, Throwable) logs the stack trace.
+
+Line wrapping convention is a minor adjustment to Sun's recommendation to
+indent the consecutive lines 8 spaces.  Where it matters (screenfuls with
+lots of indenting), this totally defeats the purpose by making a total
+mess where you can't intuitively discern the intended blocking levels.
+The reason Sun doesn't have you indent 2 or 4, is because the continuation
+lines look like a new block nesting level.  To avoid the mess but also
+avoid the ambiguity:
+    Indent "continuation lines" by 2 additional spaces,
+    EXCEPT if the line-to-be-split is a "nesting" line (i.e. is followed
+    by code indented to the next level), then indent by 8 additional spaces.
+If your editor or IDE does your wrapping (or reformats), then just have it
+indent 2 more spaces and we'll live with the minor blocking ambiguity.
