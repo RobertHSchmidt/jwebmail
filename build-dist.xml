@@ -34,9 +34,13 @@ limitations under the License.
   <target name="src-dist" description="Build source distro" depends="clean">
     <mkdir dir="dist"/>
     <property name="app.basedir" value="${ant.project.name}-${app.version}"/>
+    <available property="_svn.exists" file=".svn"/>
+    <fail if="_svn.exists"
+          message="You need to 'export' the project to build src dist"/>
     <zip destfile="dist/${app.basedir}-src.zip">
       <zipfileset prefix="${app.basedir}" dir="."
-                  excludes="**/.*, dist/**, local*/**, ivysettings.xml"/>
+  excludes="**/*.class, **/.*swp, **/.*.swo, dist/**, local*/**, ivysettings.xml"
+                  includes=".classpath, .project"/>
     </zip>
   </target>
 
