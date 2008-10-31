@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- This file contains the WebMail help for users, English language -->
+<!-- This file contains the JWebMail help for users, English language -->
 
 <!-- $Id$ -->
 
@@ -22,12 +22,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 
-<!-- This is part of the German translation of WebMail -->
+<!-- This is part of the German translation of JWebMail -->
 
 <!DOCTYPE help SYSTEM "../../../xml/webmail_help.dtd">
 
 <help>
-  <helptopic id="mailbox" title="WebMail Briefkasten-/Ordnerübersicht">
+  <helptopic id="mailbox" title="JWebMail Briefkasten-/Ordnerübersicht">
     <icon href="icona_mail2.gif"/>
     <helpdata>
       <p>
@@ -103,7 +103,7 @@
     <helpdata>
       <p>
         Während Du eine Nachricht bearbeitest, kannst Du Dateien von Deinem eigenen Rechner anhängen. Diese
-        werden an den WebMail-Server übertragen und an Deine Nachricht angehängt (das kann einige Zeit dauern,
+        werden an den JWebMail-Server übertragen und an Deine Nachricht angehängt (das kann einige Zeit dauern,
         abhängig davon wie groß die Datei ist und wie schnell Deine Verbindung).
       </p>
       <p>
@@ -128,7 +128,7 @@
         Ordnereinstellungen innerhalb eines existierenden Briefkastens zu ändern.
       </p>
       <p>
-        <em>Briefkasten hinzufügen/löschen</em>: WebMail erlaubt es, auf mehrere voneinander unabhängige IMAP oder
+        <em>Briefkasten hinzufügen/löschen</em>: JWebMail erlaubt es, auf mehrere voneinander unabhängige IMAP oder
         POP3 Briefkästen zuzugreifen. Dazu mußt Du den Servernamen, das Protokoll und die Anmeldeinformationen
         angeben.
       </p>
@@ -155,7 +155,7 @@
       </p>
       <warning>
         <strong>Achtung!</strong> Wenn Du einen Ordner löschst, werden alle darin enthaltenen Nachrichten und
-        Ordner <strong>gelöscht</strong>, und zwar nicht nur aus WebMail, sondern <strong>physisch auf dem
+        Ordner <strong>gelöscht</strong>, und zwar nicht nur aus JWebMail, sondern <strong>physisch auf dem
           Mailserver</strong>! Das ist gefährlich und kann nicht rückgängig gemacht werden!
       </warning>
     </helpdata>
@@ -163,15 +163,15 @@
   <helptopic id="folder-setup-mailboxes" title="Briefkästen einrichten">
     <helpdata>
       <p>
-        WebMail gibt Dir die Möglichkeit, mehrere voneinander unabhängige Briefkästen unter einer Oberfläche
+        JWebMail gibt Dir die Möglichkeit, mehrere voneinander unabhängige Briefkästen unter einer Oberfläche
         zu verwalten. Um das zu konfigurieren kannst Du <em>Briefkästen einrichten</em> benutzen.
       </p>
       <p>
         Im ersten Teil Deines Schimrs hast Du eine Liste Deiner momentan eingerichteten Briefkästen. Du kannst den
-        <em>Löschen</em>-Link verwenden um einen Briefkasten aus WebMail zu entfernen.
+        <em>Löschen</em>-Link verwenden um einen Briefkasten aus JWebMail zu entfernen.
       </p>
       <note>
-        Im Gegensatz zu den Ordnereinstellungen wird ein Briefkasten nur aus WebMail entfernt, wenn Du hier auf
+        Im Gegensatz zu den Ordnereinstellungen wird ein Briefkasten nur aus JWebMail entfernt, wenn Du hier auf
         <em>löschen</em> klickst. Du hast weiterhin Zugriff darauf von anderen EMail-Clients aus.
       </note>
       <p>
@@ -190,9 +190,9 @@
       </p>
       <p>
         <ul>
-          <li><em>Vollständiger Name</em>: Der Name, der in ausgehenden Nachrichten und als WebMail-Begrüßung
+          <li><em>Vollständiger Name</em>: Der Name, der in ausgehenden Nachrichten und als JWebMail-Begrüßung
           erscheint</li>
-          <li><em>Sprache</em>: Die Sprache, in der WebMail angezeigt wird</li>
+          <li><em>Sprache</em>: Die Sprache, in der JWebMail angezeigt wird</li>
           <li><em>Passwort</em> und <em>Wiederholung</em>: Wenn die Systemkonfiguration das Ändern des Passworts
             erlaubt (frage Deinen Administrator), dann kannst Du das hier tun. Bitte vergiß nicht, das Passwort in
             beiden Feldern einzutragen.</li>
@@ -207,7 +207,7 @@
           <li><em>Angehängte Bilder zeigen</em>: An Nachrichten angehängte Bilder eingebettet zeigen. Ansonsten
             werden sie wie normale Dateien behandelt.</li>
           <li><em>Schreibmodus</em>: Schreibmodus auf Ordnern aktivieren. Wenn das nicht gesetzt ist, kann man weder
-            Nachrichten löschen noch Markierungen setzen. Allerdings setzt dann WebMail auch nicht automatisch die
+            Nachrichten löschen noch Markierungen setzen. Allerdings setzt dann JWebMail auch nicht automatisch die
             "gelesen" und "beantwortet" Markierung.</li>
           <li><em>Zeilenumbruch</em> und <em>max. Zeilenlänge</em>: Ob und wo ein Zeilenumbruch eingefügt werden
             soll beim Lesen und Bearbeiten von Nachrichten.</li>

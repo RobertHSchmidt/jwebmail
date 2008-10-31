@@ -27,7 +27,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Administrator Login Screen</TITLE>
+        <TITLE>JWebMail Administrator Login Screen</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
@@ -38,12 +38,22 @@
                  the login widget, and with the Bibop theme
                  (not that these other two items are complementary
                  with each other). -->
-            <TD STYLE="padding:20px; border:0; margin:0; text-align:center;">
-              <A href="../" title="JWebMail Home Page">
+            <TD STYLE="padding:20px; padding-top:0; border:0; margin:0; text-align:center;">
+              <A href="../" title="Home Page link">
                 <IMG STYLE="margin:20px; border:0; padding:0;"
                      SRC="{$imgbase}/images/homefolders-icon.png"
                      ALT="JWebMail Home Page"/>
               </A>
+              <DIV style="font:10px sans-serif; padding:0; border:0; margin:0; text-align:center;">
+                <A href="http://admc.com/oss-support" title="Axis support link"
+                   style="text-decoration:none; color:black;">
+                <IMG STYLE="margin:0; border:0; padding:0;"
+                     SRC="{$imgbase}/images/axislogo-x90.png"
+                     ALT="Axis Logo"/><BR/>
+                   <SPAN style="font-variant:small-caps">Professional support available from</SPAN><BR/>
+                   <SPAN style="font-weight:bold;">Axis Data Management Corp</SPAN>
+                </A>
+              </DIV>
             </TD>
             <TD STYLE="padding:20px; border:0; margin:0; text-align:center;">
               <FORM ACTION="{$base}/admin/login" METHOD="POST" NAME="loginForm">
@@ -53,7 +63,7 @@
                       <TABLE CELLSPACING="0" CELLPADDING="10" BORDER="0" bgcolor="#ff0000">
                         <TR>
                           <TD COLSPAN="2" ALIGN="CENTER">
-                            <IMG SRC="{$imgbase}/images/login_title.png" ALT="WebMail login"/></TD>
+                            <IMG SRC="{$imgbase}/images/login_title.png" ALT="JWebMail login"/></TD>
                         </TR>
                         <TR>
                           <TD WIDTH="50%" ALIGN="RIGHT"><STRONG>Login:</STRONG></TD>

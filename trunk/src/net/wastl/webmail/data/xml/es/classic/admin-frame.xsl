@@ -24,7 +24,7 @@ limitations under the License.
   <xsl:template match="/">
     <HTML>
       <HEAD>
-        <TITLE>Interfaz de administraci&#243;n de WebMail</TITLE>
+        <TITLE>Interfaz de administraci&#243;n de JWebMail</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
       <FRAMESET COLS="120,*" border="0">

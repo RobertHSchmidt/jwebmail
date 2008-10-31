@@ -29,7 +29,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail levélfiók <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> számára</TITLE>
+        <TITLE>JWebMail levélfiók <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> számára</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>

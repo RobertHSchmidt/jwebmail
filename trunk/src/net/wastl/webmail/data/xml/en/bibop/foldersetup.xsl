@@ -28,9 +28,9 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
+        <TITLE>JWebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
@@ -40,7 +40,7 @@
           <TR>
             <TD colspan="2" height="22" class="testoNero">
               <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-            WebMail Folder Setup for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Help</A>)
+            JWebMail Folder Setup for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">Help</A>)
                 </TD>
             </TR>
            <TR>
@@ -59,7 +59,7 @@
               <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">Add/Remove Mailbox</A>
             </TD>
             <TD height="22" class="testoNero" width="77%" bgcolor="#E2E6F0">
-              WebMail allows you to have several connections to IMAP and POP hosts. You can add and remove such connections here.
+              JWebMail allows you to have several connections to IMAP and POP hosts. You can add and remove such connections here.
             </TD>
           </TR>
           <TR>
@@ -67,7 +67,7 @@
               <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">Add/Remove Subfolders</A>
             </TD>
             <TD height="22" class="testoNero" width="77%" bgcolor="#D1D7E7">
-              WebMail will display you a tree of folders for each mailbox where you can choose to add or
+              JWebMail will display you a tree of folders for each mailbox where you can choose to add or
               remove individual subfolders.
             </TD>
           </TR>

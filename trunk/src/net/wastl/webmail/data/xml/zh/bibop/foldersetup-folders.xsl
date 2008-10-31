@@ -28,9 +28,9 @@
 
     <HTML>
       <HEAD>
-        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 信箱：收信匣設定</TITLE>
+        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 JWebMail 信箱：收信匣設定</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
@@ -39,7 +39,7 @@
   <TR>
             <TD colspan="4" height="22" class="testoNero">
               <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-            <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 收信匣設定 （<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">求救</A>）
+            <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 JWebMail 收信匣設定 （<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">求救</A>）
     </TD>
            </TR>
            <TR>
@@ -59,7 +59,7 @@
           以 <SPAN class="bold">粗體</SPAN> 表示的是可以包含子收信匣的收信匣，而以正常字體顯示的收信匣則是不能包含子收信匣的收信匣。以 <I>斜體</I> 顯示的則是隱藏的收信匣（在信箱清單的視窗中），其他的則否。
         </P>
         <P class="testoChiaro">
-          <SPAN class="testoRosso">警告！</SPAN>如果您刪除了一個子收信匣，所有在該收信匣中的信件（與子收信匣），不僅僅是 WebMail 系統，甚至是 <SPAN class="testoRosso">實際的電子郵件伺服器</SPAN>，都會被 <SPAN class="testoRosso">刪除</SPAN>！這是相當危險而且無法還原的動作！
+          <SPAN class="testoRosso">警告！</SPAN>如果您刪除了一個子收信匣，所有在該收信匣中的信件（與子收信匣），不僅僅是 JWebMail 系統，甚至是 <SPAN class="testoRosso">實際的電子郵件伺服器</SPAN>，都會被 <SPAN class="testoRosso">刪除</SPAN>！這是相當危險而且無法還原的動作！
         </P>
       </BODY>
     </HTML>

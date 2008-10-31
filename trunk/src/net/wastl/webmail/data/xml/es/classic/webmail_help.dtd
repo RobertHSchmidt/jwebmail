@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- This DTD describes how WebMail help files should be built -->
+<!-- This DTD describes how JWebMail help files should be built -->
 
 <!--
 $Id$
@@ -22,7 +22,7 @@ limitations under the License.
 
 <!ELEMENT help (helptopic*)>
 
-<!-- Each part of WebMail should have at least one helptopic which describes its functionality for
+<!-- Each part of JWebMail should have at least one helptopic which describes its functionality for
      the user.
      A helptopic has a id so it can be referenced.
      In the audience attribute the class of users this section applies to (novice, intermediate or

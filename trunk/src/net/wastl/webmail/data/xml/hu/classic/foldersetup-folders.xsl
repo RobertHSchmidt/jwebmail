@@ -28,9 +28,9 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
+        <TITLE>JWebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Folder Setup</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
       </HEAD>
 
       <BODY bgcolor="#ffffff">
@@ -57,7 +57,7 @@ limitations under the License.
           Folders displayed in <STRONG>bold</STRONG> can hold subfolders, folders that are displayed normal cannot hold subfolders. Folders displayed in <EM>italic</EM> are hidden (in the main mailbox view), others are not.
         </P>
         <P>
-          <FONT color="red"><STRONG>Warning!</STRONG></FONT> If you delete a folder, all messages (and subfolders) in it will be <FONT color="red">deleted</FONT> not only from WebMail but <FONT color="red">physically from the mailhost</FONT>! This is dangerous and cannot be undone!
+          <FONT color="red"><STRONG>Warning!</STRONG></FONT> If you delete a folder, all messages (and subfolders) in it will be <FONT color="red">deleted</FONT> not only from JWebMail but <FONT color="red">physically from the mailhost</FONT>! This is dangerous and cannot be undone!
         </P>
       </BODY>
     </HTML>

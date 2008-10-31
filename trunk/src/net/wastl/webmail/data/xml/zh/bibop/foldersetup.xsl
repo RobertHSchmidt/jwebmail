@@ -28,9 +28,9 @@
 
     <HTML>
       <HEAD>
-        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 信箱：收信匣設定</TITLE>
+        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 JWebMail 信箱：收信匣設定</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
@@ -40,7 +40,7 @@
           <TR>
             <TD colspan="2" height="22" class="testoNero">
               <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-            <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 收信匣設定 （<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">求救</A>）
+            <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 JWebMail 收信匣設定 （<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup">求救</A>）
                 </TD>
             </TR>
            <TR>
@@ -59,7 +59,7 @@
               <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=mailbox">新增/刪除信箱</A>
             </TD>
             <TD height="22" class="testoNero" width="77%" bgcolor="#E2E6F0">
-              WebMail 允許你連線到數個 IMAP 與 POP 主機。在這裡你可以新增與刪除這些連線。
+              JWebMail 允許你連線到數個 IMAP 與 POP 主機。在這裡你可以新增與刪除這些連線。
             </TD>
           </TR>
           <TR>
@@ -67,7 +67,7 @@
               <A HREF="{$base}/folder/setup?session-id={$session-id}&amp;method=folder">新增/刪除子收信匣</A>
             </TD>
             <TD height="22" class="testoNero" width="77%" bgcolor="#D1D7E7">
-              WebMail 會為您的每個信箱顯示出其收信匣的樹狀結構，讓您在這裡選擇新增或刪除個別的子收信匣。
+              JWebMail 會為您的每個信箱顯示出其收信匣的樹狀結構，讓您在這裡選擇新增或刪除個別的子收信匣。
             </TD>
           </TR>
         </TABLE>

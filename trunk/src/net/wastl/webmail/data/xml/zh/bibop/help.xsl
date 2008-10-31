@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 WebMail 信箱：主框/求救</TITLE>
+        <TITLE> <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> 的 JWebMail 信箱：主框/求救</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -36,7 +36,7 @@
       <BODY bgcolor="#B5C1CF" topmargin="5" leftmargin="0" marginwidth="0" marginheight="5">
           <TABLE width="100%" border="0" cellspacing="0" cellpadding="4">
             <TR>
-                <TD colspan="2" height="22" class="testoNero"><img src="images/icona_help.gif" align="absmiddle"/>WebMail 求救手冊
+                <TD colspan="2" height="22" class="testoNero"><img src="images/icona_help.gif" align="absmiddle"/>JWebMail 求救手冊
                 </TD>
             </TR>
             <TR>
@@ -59,7 +59,7 @@
                 </TD>
               <TD height="22" class="testo" width="89%" bgcolor="#E2E6F0">
                 本系統使用 <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='java virtual machine']"/> 於 <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='operating system']"/><BR/>
-                WebMail 系統 <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='webmail version']"/> (c)1999-2001 by Sebastian Schaffert, schaffer@informatik.uni-muenchen.de
+                JWebMail 系統 <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='webmail version']"/> (c)1999-2001 by Sebastian Schaffert, schaffer@informatik.uni-muenchen.de
               </TD>
             </TR>
           </TABLE>

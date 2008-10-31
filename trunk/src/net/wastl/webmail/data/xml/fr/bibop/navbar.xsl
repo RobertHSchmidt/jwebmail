@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
-<!-- This is part of the French translation of WebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
+<!-- This is part of the French translation of JWebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xalan="http://xml.apache.org/xslt" version="1.0">
   <xsl:output method="html" indent="yes" xalan:content-handler="org.apache.xml.serializer.ToHTMLStream"/>
@@ -30,7 +30,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de Titre</TITLE>
+        <TITLE>Boite aux Lettres JWebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de Titre</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -89,25 +89,25 @@
   </TR>
   <TR>
     <TD align="center">
-        <A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='fournit l Aide WebMail.';"><IMG SRC="{$imgbase}/images/help.gif" BORDER="0" ALT="Aide WebMail" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='fournit l Aide JWebMail.';"><IMG SRC="{$imgbase}/images/help.gif" BORDER="0" ALT="Aide JWebMail" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
     </TD>
   </TR>
   <TR>
     <TD height="30" align="center" valign="top">
-<A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='fournit l Aide WebMail.';">
+<A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='fournit l Aide JWebMail.';">
           <P class="testoScuroSx">Aide<BR/>
-        WebMail</P>
+        JWebMail</P>
         </A>
     </TD>
   </TR>
   <TR>
     <TD align="center">
-        <A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ferme une session WebMail active.';"><IMG SRC="{$imgbase}/images/logout.gif" BORDER="0" ALT="Logout Session" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ferme une session JWebMail active.';"><IMG SRC="{$imgbase}/images/logout.gif" BORDER="0" ALT="Logout Session" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
     </TD>
   </TR>
   <TR>
     <TD height="30" align="center" valign="top">
-        <A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ferme une session WebMail active.';">
+        <A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ferme une session JWebMail active.';">
           <P class="testoScuroSx">Logout<BR/>
         Session</P>
         </A>

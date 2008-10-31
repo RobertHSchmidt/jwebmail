@@ -27,7 +27,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Pantalla de conexi&#243;n de WebMail</TITLE>
+        <TITLE>Pantalla de conexi&#243;n de JWebMail</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -95,8 +95,8 @@
                         </TR>
                         <TR>
                           <TD colspan="4" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center"><SPAN class="bold">BiBop
-              WebMail </SPAN>est&#225; basado en<BR/>
-              WebMail es &#169; 1999-2002 por Sebastian Schaffert</TD>
+              JWebMail </SPAN>est&#225; basado en<BR/>
+              JWebMail es &#169; 1999-2002 por Sebastian Schaffert</TD>
                         </TR>
                       </TABLE>
                     </TD>

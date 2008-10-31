@@ -31,7 +31,7 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Nachrichtenliste (Ordner <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@id"/></TITLE>
+        <TITLE>JWebMail Mailbox für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Nachrichtenliste (Ordner <xsl:value-of select="/USERMODEL/CURRENT[@type='folder']/@id"/></TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 

@@ -27,7 +27,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Bejelentkezési képernyõ</TITLE>
+        <TITLE>JWebMail Bejelentkezési képernyõ</TITLE>
         <script language="JavaScript">
         &lt;!--
         if(top.location!=location)
@@ -113,8 +113,8 @@
                         </TR>
                         <TR>
                           <TD colspan="4" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center"><SPAN class="bold">BiBop
-              WebMail </SPAN> mely a következõn alapul<BR/>
-              WebMail &#169; 1999-@year@, Sebastian Schaffert</TD>
+              JWebMail </SPAN> mely a következõn alapul<BR/>
+              JWebMail &#169; 1999-@year@, Sebastian Schaffert</TD>
                         </TR>
                       </TABLE>
                     </TD>

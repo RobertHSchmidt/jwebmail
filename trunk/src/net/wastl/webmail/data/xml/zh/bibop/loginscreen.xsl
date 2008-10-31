@@ -27,7 +27,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail 系統登入視窗</TITLE>
+        <TITLE>JWebMail 系統登入視窗</TITLE>
         <script language="JavaScript">
         &lt;!--
         if(top.location!=location)
@@ -113,8 +113,8 @@
                         </TR>
                         <TR>
                           <TD colspan="4" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center"><SPAN class="bold">BiBop
-              WebMail </SPAN>is based on<BR/>
-              WebMail is &#169; 1999-@year@ by Sebastian Schaffert</TD>
+              JWebMail </SPAN>is based on<BR/>
+              JWebMail is &#169; 1999-@year@ by Sebastian Schaffert</TD>
                         </TR>
                       </TABLE>
                     </TD>

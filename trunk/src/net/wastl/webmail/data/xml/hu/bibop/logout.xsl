@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Title Frame</TITLE>
+        <TITLE>JWebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Title Frame</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
@@ -70,8 +70,8 @@
                 </TR>
                 <TR>
                   <TD colspan="2" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center">
-                    <SPAN class="bold">BiBop WebMail </SPAN>is based on<BR/>
-                    WebMail is &#169; 1999/@year@ by Sebastian Schaffert<BR/>
+                    <SPAN class="bold">BiBop JWebMail </SPAN>is based on<BR/>
+                    JWebMail is &#169; 1999/@year@ by Sebastian Schaffert<BR/>
                   </TD>
                 </TR>
                </TABLE>

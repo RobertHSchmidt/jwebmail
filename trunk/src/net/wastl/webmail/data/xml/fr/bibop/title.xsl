@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
-<!-- This is part of the French translation of WebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
+<!-- This is part of the French translation of JWebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xalan="http://xml.apache.org/xslt" version="1.0">
   <xsl:output method="html" indent="yes" xalan:content-handler="org.apache.xml.serializer.ToHTMLStream"/>
@@ -29,7 +29,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de Titre</TITLE>
+        <TITLE>Boite aux Lettres JWebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de Titre</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -41,7 +41,7 @@
                 <IMG SRC="{$imgbase}/images/logo.gif" alt="Logo BiBop"/>
             </TD>
             <TD width="13%" background="{$imgbase}/images/sfondino_grigio.gif">
-                <IMG SRC="{$imgbase}/images/webmail.gif" alt="Logo WebMail BiBop"/>
+                <IMG SRC="{$imgbase}/images/webmail.gif" alt="Logo JWebMail BiBop"/>
             </TD>
             <TD width="2%" background="{$imgbase}/images/sfondino_scuro.gif">
                 <IMG SRC="{$imgbase}/images/spacer.gif" width="15" height="1"/>

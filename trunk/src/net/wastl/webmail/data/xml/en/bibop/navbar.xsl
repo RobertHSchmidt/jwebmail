@@ -29,7 +29,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Title Frame</TITLE>
+        <TITLE>JWebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Title Frame</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -88,25 +88,25 @@
   </TR>
   <TR>
     <TD align="center">
-        <A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This is the WebMail help content-provider.';"><IMG SRC="{$imgbase}/images/help.gif" BORDER="0" ALT="WebMailHelp" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This is the JWebMail help content-provider.';"><IMG SRC="{$imgbase}/images/help.gif" BORDER="0" ALT="WebMailHelp" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
     </TD>
   </TR>
   <TR>
     <TD height="30" align="center" valign="top">
-<A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This is the WebMail help content-provider.';">
-          <P class="testoScuroSx">WebMail<BR/>
+<A HREF="{$base}/help?session-id={$session-id}" TARGET="Main" onMouseOver="self.status='This is the JWebMail help content-provider.';">
+          <P class="testoScuroSx">JWebMail<BR/>
         Help</P>
         </A>
     </TD>
   </TR>
   <TR>
     <TD align="center">
-        <A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ContentProvider plugin that closes an active WebMail session.';"><IMG SRC="{$imgbase}/images/logout.gif" BORDER="0" ALT="LogoutSession" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
+        <A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ContentProvider plugin that closes an active JWebMail session.';"><IMG SRC="{$imgbase}/images/logout.gif" BORDER="0" ALT="LogoutSession" WIDTH="{$iconsize}" HEIGTH="{$iconsize}"/></A>
     </TD>
   </TR>
   <TR>
     <TD height="30" align="center" valign="top">
-        <A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ContentProvider plugin that closes an active WebMail session.';">
+        <A HREF="{$base}/logout?session-id={$session-id}" TARGET="_top" onMouseOver="self.status='ContentProvider plugin that closes an active JWebMail session.';">
           <P class="testoScuroSx">Logout<BR/>
         Session</P>
         </A>

@@ -28,9 +28,9 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Configuraci&#243;n de carpetas</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Configuraci&#243;n de carpetas</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
 
@@ -39,7 +39,7 @@
   <TR>
             <TD colspan="4" height="22" class="testoNero">
               <IMG SRC="{$imgbase}/images/icona_folder.gif" align="absmiddle"/>
-            Configuraci&#243;n de carpetas de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">Ayuda</A>)
+            Configuraci&#243;n de carpetas de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">Ayuda</A>)
     </TD>
            </TR>
            <TR>
@@ -59,7 +59,7 @@
           Las carpetas mostradas en <SPAN class="bold">negrita</SPAN> pueden contener a su vez otras carpetas, las carpetas mostradas en texto normal no. Las carpetas mostradas en <I>cursiva</I> est&#225;n ocultas (en la vista principal del buz&#243;n), las otras no.
         </P>
         <P class="testoChiaro">
-          <SPAN class="testoRosso">&#161;Advertencia!</SPAN> &#161;Si borras una carpeta, todos los mensajes (y subcarpetas) en ella ser&#225;n <SPAN class="testoRosso">borrados</SPAN>, no s&#243;lo de WebMail sino tambi&#233;n <SPAN class="testoRosso">f&#237;sicamente del servidor de correo</SPAN>! &#161;Esto es peligroso y no puede deshacerse!
+          <SPAN class="testoRosso">&#161;Advertencia!</SPAN> &#161;Si borras una carpeta, todos los mensajes (y subcarpetas) en ella ser&#225;n <SPAN class="testoRosso">borrados</SPAN>, no s&#243;lo de JWebMail sino tambi&#233;n <SPAN class="testoRosso">f&#237;sicamente del servidor de correo</SPAN>! &#161;Esto es peligroso y no puede deshacerse!
         </P>
       </BODY>
     </HTML>

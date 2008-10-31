@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE help SYSTEM "../../../xml/webmail_help.dtd">
-<!-- This file contains the WebMail help for users, English language --><!--
+<!-- This file contains the JWebMail help for users, English language --><!--
 $Id$
 
 Copyright 2008 by the JWebMail Development Team and Sebastian Schaffert.
@@ -18,7 +18,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <help>
-  <helptopic id="mailbox" title="WebMail Mailbox/Folder Overview">
+  <helptopic id="mailbox" title="JWebMail Mailbox/Folder Overview">
     <icon href="btn-mailbox.png"/>
     <helpdata>
       <p>
@@ -87,7 +87,7 @@ limitations under the License.
     <helpdata>
       <p>
         Mientras redactas un mensaje, puedes adjuntar archivos de tu sistema de archivos. Estos ser&#225;n enviados
-        al servidor WebMail y agregados a tu mensaje (eso puede tardar un tiempo,dependiendo de
+        al servidor JWebMail y agregados a tu mensaje (eso puede tardar un tiempo,dependiendo de
         tu conexi&#243;n a internet).
       </p>
       <p>
@@ -110,7 +110,7 @@ limitations under the License.
         En la  <em>Configuraci&#243;n de carpetas</em> you have to select whether you would like to change your mailbox settings
         or configure folders within existing mailboxes.
       </p>
-      <p><em>Configurando casillas de correo</em>: WebMail allows you to access several completely independent mailboxes
+      <p><em>Configurando casillas de correo</em>: JWebMail allows you to access several completely independent mailboxes
         via IMAP or POP3. For each mailbox you will have to provide the mailhost, the protocol and the
         login information.
       </p>
@@ -132,7 +132,7 @@ limitations under the License.
       </p>
       <warning>
         Las carpetas ser&#225;n  <strong>f&#237;sicamente borradas de tu casilla de correos</strong> (together with all mail and
-        subfolders in them), <strong>no s&#243;lo de WebMail</strong>! This is a <strong>peligroso</strong>
+        subfolders in them), <strong>no s&#243;lo de JWebMail</strong>! This is a <strong>peligroso</strong>
         option and you cannot undo this step!
       </warning>
     </helpdata>
@@ -140,15 +140,15 @@ limitations under the License.
   <helptopic id="folder-setup-mailboxes" title="Setting up Mailboxes">
     <helpdata>
       <p>
-        WebMail te permite acceder a varias casillas de correo POP3/IMAP independientes dentro de una interface. para configurar
+        JWebMail te permite acceder a varias casillas de correo POP3/IMAP independientes dentro de una interface. para configurar
         puedes usar la <em>configuraci&#243;n de la casilla de correo</em>.
       </p>
       <p>
         En la primera parte de la pantalla tienes una lista de las casillas de correo configuradas actualmente. Puedes usar
-        la <em>Borrar</em> link to remove a mailbox from WebMail.
+        la <em>Borrar</em> link to remove a mailbox from JWebMail.
       </p>
       <note>
-        En contraste con la configuraci&#243;n de carpetas, una casilla de correo s&#243;lo se borrara del WebMail si haces click en
+        En contraste con la configuraci&#243;n de carpetas, una casilla de correo s&#243;lo se borrara del JWebMail si haces click en
         <em>Borrar</em> here. You will still be able to access it from other email clients.
       </note>
       <p>
@@ -166,8 +166,8 @@ limitations under the License.
       </p>
       <p>
         <ul>
-          <li><em>Nombre Completo</em>: The name that will appear in outgoing messages and in WebMail greetings.</li>
-          <li><em>Idioma</em>: The language WebMail will use for you.</li>
+          <li><em>Nombre Completo</em>: The name that will appear in outgoing messages and in JWebMail greetings.</li>
+          <li><em>Idioma</em>: The language JWebMail will use for you.</li>
           <li><em>Contrase&#241;a</em> and <em>Verificar</em>: If your setup allows you to change your password, you can
             do it here (ask your administrator). Please don&apos;t forget to enter the same password in both
             fields.</li>

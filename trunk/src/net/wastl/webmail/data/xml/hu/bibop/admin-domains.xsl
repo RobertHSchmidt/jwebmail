@@ -29,12 +29,12 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Adminisztációs felület: Virtuális domén konfiguráció</TITLE>
+        <TITLE>JWebMail Adminisztációs felület: Virtuális domén konfiguráció</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <BODY BGCOLOR="#ffffff">
-        <CENTER><H1>WebMail Virtuális Domén Beállítás</H1></CENTER>
+        <CENTER><H1>JWebMail Virtuális Domén Beállítás</H1></CENTER>
         <FORM ACTION="{$base}/admin/domain/set?session-id={$session-id}" METHOD="POST">
           <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
                <tr>

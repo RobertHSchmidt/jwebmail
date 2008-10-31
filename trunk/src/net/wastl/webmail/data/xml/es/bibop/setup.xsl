@@ -29,7 +29,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Ventana principal</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Ventana principal</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
       </HEAD>
@@ -41,7 +41,7 @@
             <TR>
               <TD width="100%" colspan="4" height="22" class="testoNero">
                 <IMG SRC="{$imgbase}/images/icona_user.gif" align="absmiddle"/>
-              Configuraci&#243;n de WebMail para <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/FULL_NAME)"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=setup">Ayuda</A>)
+              Configuraci&#243;n de JWebMail para <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/FULL_NAME)"/> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=setup">Ayuda</A>)
                 </TD>
             </TR>
             <TR>

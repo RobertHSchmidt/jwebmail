@@ -28,12 +28,12 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Main Frame/Help</TITLE>
+        <TITLE>JWebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Main Frame/Help</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <BODY bgcolor="#dddddd">
-        <H1><CENTER>WebMail Help</CENTER></H1>
+        <H1><CENTER>JWebMail Help</CENTER></H1>
         <P>
           <TABLE WIDTH="100%" BORDER="0">
 
@@ -58,7 +58,7 @@ limitations under the License.
 
             <TR>
               <TD COLSPAN="2" ALIGN="CENTER">
-                <STRONG><EMPH>WebMail <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='webmail version']"/> (c)1999-@year@ by Sebastian Schaffert, schaffer@informatik.uni-muenchen.de</EMPH></STRONG>
+                <STRONG><EMPH>JWebMail <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='webmail version']"/> (c)1999-@year@ by Sebastian Schaffert, schaffer@informatik.uni-muenchen.de</EMPH></STRONG>
               </TD>
             </TR>
           </TABLE>

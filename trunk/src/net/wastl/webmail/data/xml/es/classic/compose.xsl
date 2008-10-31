@@ -25,7 +25,7 @@ limitations under the License.
   <xsl:template match="/">
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Redactar mensaje <xsl:value-of select="/USERMODEL/CURRENT[@type='message']/@id"/></TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Redactar mensaje <xsl:value-of select="/USERMODEL/CURRENT[@type='message']/@id"/></TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
       <BODY bgcolor="#ffffff">

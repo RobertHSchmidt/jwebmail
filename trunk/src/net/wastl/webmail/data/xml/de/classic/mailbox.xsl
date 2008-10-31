@@ -30,7 +30,7 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Briefkasten für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Liste der Mailboxen</TITLE>
+        <TITLE>JWebMail Briefkasten für <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Liste der Mailboxen</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 

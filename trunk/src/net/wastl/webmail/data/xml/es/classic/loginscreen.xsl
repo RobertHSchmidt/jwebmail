@@ -23,7 +23,7 @@ limitations under the License.
   <xsl:template match="/">
     <HTML>
       <HEAD>
-        <TITLE>Pantalla de conexi&#243;n de WebMail </TITLE>
+        <TITLE>Pantalla de conexi&#243;n de JWebMail </TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
       <BODY bgcolor="#ffffff">
@@ -44,7 +44,7 @@ limitations under the License.
                       <TABLE CELLSPACING="0" CELLPADDING="10" BORDER="0" bgcolor="#ff0000">
                         <TR>
                           <TD COLSPAN="2" ALIGN="CENTER">
-                            <IMG SRC="{$imgbase}/images/login_title.png" ALT="WebMail login"/>
+                            <IMG SRC="{$imgbase}/images/login_title.png" ALT="JWebMail login"/>
                           </TD>
                         </TR>
                         <TR>
@@ -108,14 +108,14 @@ limitations under the License.
           <TR>
             <TD COLSPAN="3" ALIGN="CENTER">
               <FONT SIZE="-1">
-                <EM>WebMail es (c)1999/2000 por <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. Est&#225; distribu&#237;do bajo los t&#233;rminos de la GNU Public License (GPL).</EM>
+                <EM>JWebMail es (c)1999/2000 por <A HREF="mailto:schaffer@informatik.uni-muenchen.de">Sebastian Schaffert</A>. Est&#225; distribu&#237;do bajo los t&#233;rminos de la GNU Public License (GPL).</EM>
               </FONT>
             </TD>
           </TR>
           <TR>
             <TD COLSPAN="3" ALIGN="CENTER">
               <FONT SIZE="-1">
-                <EM><STRONG>Versi&#243;n</STRONG>: WebMail <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'webmail version']/@value"/> on &quot;<xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'java virtual machine']/@value"/>&quot;, <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'operating system']/@value"/></EM>
+                <EM><STRONG>Versi&#243;n</STRONG>: JWebMail <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'webmail version']/@value"/> on &quot;<xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'java virtual machine']/@value"/>&quot;, <xsl:value-of select="/GENERICMODEL/STATEDATA/VAR[@name = 'operating system']/@value"/></EM>
               </FONT>
             </TD>
           </TR>

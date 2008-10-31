@@ -29,12 +29,12 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Administration Interface: Virtual Domain Configuration</TITLE>
+        <TITLE>JWebMail Administration Interface: Virtual Domain Configuration</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 
       <BODY BGCOLOR="#ffffff">
-        <CENTER><H1>WebMail Virtual Domain Configuration</H1></CENTER>
+        <CENTER><H1>JWebMail Virtual Domain Configuration</H1></CENTER>
         <FORM ACTION="{$base}/admin/domain/set?session-id={$session-id}" METHOD="POST">
           <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
             <TR BGCOLOR="lightblue">

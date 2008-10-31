@@ -29,7 +29,7 @@ limitations under the License.
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Administration Interface: User Setup</TITLE>
+        <TITLE>JWebMail Administration Interface: User Setup</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
       </HEAD>
 

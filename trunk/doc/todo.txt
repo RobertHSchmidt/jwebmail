@@ -3,11 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Change-control an Eclipse config.
-
-If time permits, turn on lotsa compilation checks with Eclipse and take
-care of the warnings.
-
 Make release build targets.
 
 Roll an RC.  1.0.1rc1.  (Consider waiting on following super-item).

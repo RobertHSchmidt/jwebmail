@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Title Frame</TITLE>
+        <TITLE>JWebMail Mailbox for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Title Frame</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
@@ -56,7 +56,7 @@
                 </TR>
                 <TR>
                   <TD align="center" bgcolor="#FFFFFF" width="315" class="testo">
-                    <BR/><SPAN class="testoGrande">Thanks for using WebMail!</SPAN><BR/><BR/>
+                    <BR/><SPAN class="testoGrande">Thanks for using JWebMail!</SPAN><BR/><BR/>
                     Preparing logout for <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.<BR/><BR/>
                   </TD>
                 </TR>

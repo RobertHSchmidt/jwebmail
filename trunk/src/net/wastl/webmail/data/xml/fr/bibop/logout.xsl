@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
-<!-- This is part of the French translation of WebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
+<!-- This is part of the French translation of JWebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xalan="http://xml.apache.org/xslt" version="1.0">
   <xsl:output method="html" indent="yes" xalan:content-handler="org.apache.xml.serializer.ToHTMLStream"/>
@@ -29,7 +29,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>Boite aux Lettres WebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de Titre</TITLE>
+        <TITLE>Boite aux Lettres JWebMail de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Page de Titre</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
         <link rel="stylesheet" href="{$base}/passthrough/webmail.css"/>
@@ -57,7 +57,7 @@
                 </TR>
                 <TR>
                   <TD align="center" bgcolor="#FFFFFF" width="315" class="testo">
-                    <BR/><SPAN class="testoGrande">Merci d'utiliser WebMail!</SPAN><BR/><BR/>
+                    <BR/><SPAN class="testoGrande">Merci d'utiliser JWebMail!</SPAN><BR/><BR/>
                     Préparation du logout de <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>.<BR/><BR/>
                   </TD>
                 </TR>
@@ -71,8 +71,8 @@
                 </TR>
                 <TR>
                   <TD colspan="2" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center">
-                    <SPAN class="bold">BiBop WebMail </SPAN>is based on<BR/>
-                    WebMail is &#169; 1999/@year@ by Sebastian Schaffert<BR/>
+                    <SPAN class="bold">BiBop JWebMail </SPAN>is based on<BR/>
+                    JWebMail is &#169; 1999/@year@ by Sebastian Schaffert<BR/>
                   </TD>
                 </TR>
                </TABLE>

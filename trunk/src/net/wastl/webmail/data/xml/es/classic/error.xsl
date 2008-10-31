@@ -22,9 +22,9 @@ limitations under the License.
   <xsl:template match="/">
     <HTML>
       <HEAD>
-        <TITLE>Informe de error de WebMail</TITLE>
+        <TITLE>Informe de error de JWebMail</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
       </HEAD>
       <BODY bgcolor="#ffffff">
         <TABLE WIDTH="100%">

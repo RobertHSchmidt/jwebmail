@@ -21,7 +21,7 @@ limitations under the License.
   <xsl:template match="/">
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Marco de t&#237;tulo</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Marco de t&#237;tulo</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
         <META HTTP-EQUIV="REFRESH" CONTENT="5;URL={/USERMODEL/STATEDATA/VAR[@name='base uri']/@value}/"/>
       </HEAD>
@@ -44,7 +44,7 @@ limitations under the License.
           <CENTER>
             <FONT SIZE="-1">
               <EMPH>
-                WebMail es &#169; 2008 de JWebMail Development Team y Sebastian Schaffert.
+                JWebMail es &#169; 2008 de JWebMail Development Team y Sebastian Schaffert.
                 Est&#225; distribu&#237;do bajo los t&#233;rminos de la Apache 2.0 License.
               </EMPH>
             </FONT>

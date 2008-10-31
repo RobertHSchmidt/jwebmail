@@ -27,7 +27,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Login Screen</TITLE>
+        <TITLE>JWebMail Login Screen</TITLE>
         <script language="JavaScript">
         &lt;!--
         if(top.location!=location)

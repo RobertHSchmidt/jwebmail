@@ -24,9 +24,9 @@ limitations under the License.
   <xsl:template match="/">
     <HTML>
       <HEAD>
-        <TITLE>Buz&#243;n de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Configuraci&#243;n de carpetas</TITLE>
+        <TITLE>Buz&#243;n de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/>: Configuraci&#243;n de carpetas</TITLE>
         <META CONTENT="AUTHOR" VALUE="Sebastian Schaffert"/>
-        <META CONTENT="GENERATOR" VALUE="JWebMail 0.7 XSL"/>
+        <META CONTENT="GENERATOR" VALUE="JWebMail 1.0.1 XSL"/>
       </HEAD>
       <BODY bgcolor="#ffffff">
         <TABLE BGCOLOR="#dddddd" CELLSPACING="0" BORDER="0" WIDTH="100%">
@@ -34,7 +34,7 @@ limitations under the License.
             <TD VALIGN="CENTER">
               <IMG SRC="{$imgbase}/images/btn-folders.png"/>
             </TD>
-            <TD VALIGN="CENTER" COLSPAN="2"><FONT SIZE="+2"><STRONG>Configuraci&#243;n de carpetas de WebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">Ayuda</A>)<BR/><EM>Nombre de usuario <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/><EM>La cuenta existe desde <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM></TD>
+            <TD VALIGN="CENTER" COLSPAN="2"><FONT SIZE="+2"><STRONG>Configuraci&#243;n de carpetas de JWebMail para <xsl:value-of select="/USERMODEL/USERDATA/FULL_NAME"/></STRONG></FONT> (<A HREF="{$base}/help?session-id={$session-id}&amp;helptopic=folder-setup-folders">Ayuda</A>)<BR/><EM>Nombre de usuario <xsl:value-of select="normalize-space(/USERMODEL/USERDATA/LOGIN)"/></EM><BR/><EM>La cuenta existe desde <xsl:apply-templates select="/USERMODEL/STATEDATA/VAR[@name='first login']"/></EM></TD>
           </TR>
         </TABLE>
         <TABLE WIDTH="100%">
@@ -45,7 +45,7 @@ limitations under the License.
         <P>
           Las carpetas mostradas en  <STRONG>negrita</STRONG> pueden contener a su vez otras carpetas, las carpetas mostradas en texto normal no. Las carpetas mostradas en <EM>cursiva</EM> est&#225;n ocultas (en la vista principal del buz&#243;n), las otras no.
         </P>
-        <P><FONT color="red"><STRONG>&#161;Advertencia!</STRONG></FONT> &#161;Si borras una carpeta, todos los mensajes (y subcarpetas) en ella ser&#225;n <FONT color="red">borrados</FONT>, no s&#243;lo de WebMail sino tambi&#233;n <FONT color="red">f&#237;sicamente del servidor de correo</FONT>! &#161;Esto es peligroso y no puede deshacerse!
+        <P><FONT color="red"><STRONG>&#161;Advertencia!</STRONG></FONT> &#161;Si borras una carpeta, todos los mensajes (y subcarpetas) en ella ser&#225;n <FONT color="red">borrados</FONT>, no s&#243;lo de JWebMail sino tambi&#233;n <FONT color="red">f&#237;sicamente del servidor de correo</FONT>! &#161;Esto es peligroso y no puede deshacerse!
         </P>
       </BODY>
     </HTML>

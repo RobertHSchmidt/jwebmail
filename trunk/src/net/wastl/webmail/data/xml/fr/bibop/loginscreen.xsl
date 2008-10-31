@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
-<!-- This is part of the French translation of WebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
+<!-- This is part of the French translation of JWebMail - Christian SENET - senet@lpm.u-nancy.fr - 2002 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xalan="http://xml.apache.org/xslt" version="1.0">
   <xsl:output method="html" indent="yes" xalan:content-handler="org.apache.xml.serializer.ToHTMLStream"/>
@@ -28,7 +28,7 @@
 
     <HTML>
       <HEAD>
-        <TITLE>WebMail Login Screen</TITLE>
+        <TITLE>JWebMail Login Screen</TITLE>
         <script language="JavaScript">
         &lt;!--
         if(top.location!=location)
@@ -114,8 +114,8 @@
                         </TR>
                         <TR>
                           <TD colspan="4" width="400" class="testoBianco" bgcolor="#394864" height="35" align="center"><SPAN class="bold">BiBop
-              WebMail </SPAN>is based on<BR/>
-              WebMail is &#169; 1999-2002 by Sebastian Schaffert</TD>
+              JWebMail </SPAN>is based on<BR/>
+              JWebMail is &#169; 1999-2002 by Sebastian Schaffert</TD>
                         </TR>
                       </TABLE>
                     </TD>
