@@ -374,7 +374,7 @@ public abstract class WebMailServer  {
         shutdownServers();
         log.info("Shutdown completed successfully. Terminating.");
         storage.shutdown();
-        log.info("Shutdown complete!  JWebApp threads should all be stopped.");
+        log.info("Shutdown complete!  JWebMail threads should all be stopped.");
         Helper.logThreads("Bottom of WebMailServer.shutdown()");
         //Used to System.exit() here!
     }
