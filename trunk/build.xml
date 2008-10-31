@@ -22,7 +22,7 @@ limitations under the License.
 
   <!-- Default build settings.  Override in your own 'local.properties' file.-->
   <property name="repos.url" value="http://pub.admc.com/lib-repos"/>
-  <property name="exploded.dir" value="build/webapp"/>
+  <property name="exploded.dir" value="dist/webapp"/>
   <property name="contextxml.path" value="config/context.xml"/>
 
   <property name="debug"              value="false"/>
@@ -34,7 +34,7 @@ limitations under the License.
   <!-- This sets the JRE version which will be required by USERS of
        generated classes! -->
   <property name="Name" value="JWebMail"/>
-  <property name="version" value="1.0.1e"/>
+  <property name="app.version" value="1.0.1f"/>
   <property name="year" value="2008"/>
 
   <!-- =================================================================== -->
@@ -43,16 +43,17 @@ limitations under the License.
   <target name="-init" depends="-check-tool-versions">
     <tstamp/>
 
-    <echo message="----------- ${Name} ${version} [${year}] ------------"/>
+    <echo message="----------- ${Name} ${app.version} [${year}] ------------"/>
 
-    <property name="dist.dir" value="dist/${ant.project.name}-${version}"/>
     <filter token="year" value="${year}"/>
-    <filter token="version" value="${version}"/>
+    <filter token="version" value="${app.version}"/>
     <filter token="debug" value="${debug}"/>
     <filter token="date" value="${TODAY}"/>
     <filter token="log" value="true"/>
     <filter token="verbose" value="true"/>
-    <filter token="java-version" value="${java.version}"/>
+    <filter token="java-version" value="${ant.java.version}"/>
+    <!-- We're not forking our javac's, so use ant.java.version instead
+         of java.version -->
   </target>
 
   <!-- =================================================================== -->
@@ -267,8 +268,9 @@ limitations under the License.
   <!-- Copies the class files into the webapp dir for Tomcat.              -->
   <!-- =================================================================== -->
   <target name="war" depends="compile, -stage-xml-and-templates"
-          description="Build .war file in 'build' subdirectory">
-    <delete file="build/${ant.project.name}.war"/>
+          description="Build .war file in 'dist' subdirectory">
+    <mkdir dir="dist"/>
+    <delete file="dist/${ant.project.name}.war"/>
     <!-- This delete behavior is a safe-guard.
          This makes sure the developer never accidentally re-deploys an old
          war after there is a build failure. -->
@@ -284,7 +286,7 @@ limitations under the License.
     <copy tofile="build/stage/mimetypes.txt" file="contrib/mime.types"/>
     <zip destfile="build/stage/data.zip" basedir="data"/>
 
-    <war warfile="build/${ant.project.name}.war" webxml="build/stage/web.xml">
+    <war warfile="dist/${ant.project.name}.war" webxml="build/stage/web.xml">
       <classes dir="build/stage" includes="data.zip, mimetypes.txt"/>
       <classes dir="build/plugin-classes"/>
       <classes dir="build/authenticator-classes"/>
@@ -295,7 +297,7 @@ limitations under the License.
       <lib refid="bundle.refid"/>
     </war>
     <!-- Copy images -->
-    <echo message="War file built at 'build/${ant.project.name}.war'"/>
+    <echo message="War file built at 'dist/${ant.project.name}.war'"/>
   </target>
 
   <target name="clean-webapp"
@@ -310,7 +312,8 @@ limitations under the License.
     <available property="exploded_dir_preexist" file="${exploded.dir}"/>
     <fail unless="exploded.dir"
           message="Property 'exploded.dir' is required by target 'webapp'"/>
-    <unzip src="build/${ant.project.name}.war" dest="${exploded.dir}"/>
+    <unzip src="dist/${ant.project.name}.war" dest="${exploded.dir}"/>
+    <!-- unzip creates all needed intermediate subdirectories" -->
     <echo>
 Exploded web app generated at '${exploded.dir}'.</echo>
     <antcall target="-warn-if-edir"/>
@@ -327,7 +330,7 @@ This behavior is designed to facilitate in-place app serving.</echo>
   <!-- Creates the API documentation                                       -->
   <!-- =================================================================== -->
   <target name="javadoc" depends="-prepare-src"
-          description="Generates the API documentation">
+          description="Generates the API documentation to 'build/apidocs'">
     <mkdir dir="build/apidocs"/>
     <javadoc packagenames="net.wastl.*, org.webengruven.*"
              sourcepath="build/src:plugin-src:authenticator-src"
@@ -347,13 +350,16 @@ This behavior is designed to facilitate in-place app serving.</echo>
   <!-- =================================================================== -->
   <target name="clean" depends="-init" description="Purges derived artifacts">
     <echo message="Deleting build ..."/>
+    <delete dir="dist"/>
     <delete dir="build"/>
     <delete file="data/webmail.xml"/>
     <delete file="doc/jwebmail-guide.html"/>
   </target>
 
   <!-- Windows users will have to install Cygwin, or run another XSLT
-       processor -->
+       processor.
+       We can certainly run XSLT in a portable way with libraries from Ivy,
+       but who has the time to get that working?  -->
   <target name="gen-guide"
           description="Generate the 'doc/jwebmail-guide.html' file">
     <exec executable="xsltproc" failonerror="true">
