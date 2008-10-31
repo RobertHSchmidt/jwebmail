@@ -97,7 +97,7 @@ one line, then any developer can easily discern the parts (so don't wrap it,
 as Sun suggests), but otherwise follow Sun's rules and try to break before
 the ? and : operators.
 Be aware that the Eclipse formatter is set up to work exactly as I specify
-(except for ternaries) by default, but it does not work!
+(except for ternaries) by default, but it does not work, except for comments!
 (Compare the Code Style Formatter settings samples with what it actually
 does when you Format your code).  Once again, this totally defeats the purpose
 of having a code "formatter".  If using a formatter which can't wrap lines

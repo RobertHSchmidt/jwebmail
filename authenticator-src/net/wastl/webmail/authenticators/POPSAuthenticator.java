@@ -19,11 +19,10 @@
 
 package net.wastl.webmail.authenticators;
 
-import net.wastl.webmail.server.*;
-import net.wastl.webmail.exceptions.*;
-import javax.mail.*;
-import net.wastl.webmail.config.*;
-import java.util.*;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import net.wastl.webmail.config.ConfigScheme;
+import net.wastl.webmail.server.Storage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -33,18 +32,23 @@ import org.apache.commons.logging.LogFactory;
 public class POPSAuthenticator extends POPAuthenticator {
     private static Log log = LogFactory.getLog(POPSAuthenticator.class);
 
+    @Override
     public void init(Storage store) {
-        storage=store;
-        Session session=Session.getDefaultInstance(System.getProperties(),null);
+        storage = store;
+        final Session session =
+                Session.getDefaultInstance(System.getProperties(), null);
         try {
-            st=session.getStore("pop3s");
-        } catch(NoSuchProviderException e) {
+            st = session.getStore("pop3s");
+        } catch (final NoSuchProviderException e) {
             log.error("Initialization for 'pop3s' failed", e);
         }
     }
 
+    @Override
     public void register(ConfigScheme store) {
-        key="POP3S";
-        store.configAddChoice("AUTH",key,"Authenticate against a POP3 SSL server on the net. Does not allow password change.");
+        key = "POP3S";
+        store.configAddChoice("AUTH", key,
+                "Authenticate against a POP3 SSL server on the net.  "
+                + "Does not allow password change.");
     }
 }

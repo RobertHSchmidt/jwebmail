@@ -19,32 +19,36 @@
 
 package net.wastl.webmail.authenticators;
 
-import net.wastl.webmail.server.*;
-import net.wastl.webmail.exceptions.*;
-import javax.mail.*;
-import net.wastl.webmail.config.*;
-import java.util.*;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import net.wastl.webmail.config.ConfigScheme;
+import net.wastl.webmail.server.Storage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @author blaine.simpson@admc.com
+ * @author Blaine Simpson
  */
 public class IMAPSAuthenticator extends IMAPAuthenticator {
     private static Log log = LogFactory.getLog(IMAPSAuthenticator.class);
 
+    @Override
     public void init(Storage store) {
-        storage=store;
-        Session session=Session.getDefaultInstance(System.getProperties(),null);
+        storage = store;
+        final Session session =
+                Session.getDefaultInstance(System.getProperties(), null);
         try {
-            st=session.getStore("imaps");
-        } catch(NoSuchProviderException e) {
+            st = session.getStore("imaps");
+        } catch (final NoSuchProviderException e) {
             log.error("Initialization for 'imaps' failed", e);
         }
     }
 
+    @Override
     public void register(ConfigScheme store) {
-        key="IMAPS";
-        store.configAddChoice("AUTH",key,"Authenticate against an SSL IMAP server on the net. Does not allow password change.");
+        key = "IMAPS";
+        store.configAddChoice("AUTH", key,
+                "Authenticate against an SSL IMAP server on the net.  "
+                + "Does not allow password change.");
     }
 }
