@@ -20,6 +20,7 @@
 package net.wastl.webmail.server;
 
 import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
@@ -57,6 +58,12 @@ import com.oreilly.servlet.multipart.Part;
  * @author Sebastian Schaffert
  */
 public class WebMailServlet extends WebMailServer implements Servlet {
+    /*
+     * TODO:
+     * Redo the application startup and shutdown stuff in a dedicated lifecycle
+     * listener.  Should not invoke super.shutdown() from the destroy method,
+     * as happens below.
+     */
     private static Log log = LogFactory.getLog(WebMailServer.class);
 
     ServletConfig srvlt_config;
@@ -71,10 +78,6 @@ public class WebMailServlet extends WebMailServer implements Servlet {
     }
 
     public void init(ServletConfig config) throws ServletException {
-        /*
-         * Egad, are variable names so sparse that we must have a "config"
-         * parameter and a "this.config"???
-         */
         final ServletContext sc = config.getServletContext();
         log.debug("Init");
         final String depName = (String) sc.getAttribute("deployment.name");
@@ -189,8 +192,17 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             throws ServletException {
         final HttpServletRequest req = (HttpServletRequest) req1;
         final HttpServletResponse res = (HttpServletResponse) res1;
-
         final HTTPRequestHeader http_header = new HTTPRequestHeader();
+
+log.fatal("servletPath = (" + req.getServletPath() + ')');
+        if (req.getServletPath().equals("/admin")) try {
+            log.debug("Forwarding /admin request back to self");
+            req.getRequestDispatcher("WebMail/admin").forward(req1, res1);
+            return;
+        } catch (IOException ioe) {
+            log.fatal("Forward from '/admin' failed", ioe);
+            throw new ServletException(ioe.getMessage());
+        }
 
         final Enumeration en = req.getHeaderNames();
         while (en.hasMoreElements()) {
@@ -198,11 +210,8 @@ public class WebMailServlet extends WebMailServer implements Servlet {
             http_header.setHeader(s, req.getHeader(s));
         }
 
-        if (req.getPathInfo() != null) {
-            http_header.setPath(req.getPathInfo());
-        } else {
-            http_header.setPath("/");
-        }
+        http_header.setPath(
+                req.getPathInfo() == null ? "/" : req.getPathInfo());
 
         InetAddress addr;
         try {

@@ -182,7 +182,7 @@ limitations under the License.
         with a web browser.
       </P> <P>
         Please don't forget to visit the administration interface first. You can access
-        it by browsing http://yourhost:PORT/jwebmail/WebMail/admin.  Initial password
+        it by browsing http://yourhost:PORT/jwebmail/admin.  Initial password
         is <CODE>Secret</CODE>.
       </P>
     </SUBSUBSECTION>
@@ -769,7 +769,7 @@ limitations under the License.
       <SUBSUBSECTION name="Connecting" id="config:admin:connecting">
         <P>
           You can connect to the administration interface with your browser by simply entering
-          the URL <CODE>http(s)://webmail_server:port/jwebmail/WebMail/admin</CODE> in the address field of your browser.
+          the URL <CODE>http(s)://webmail_server:port/jwebmail/admin</CODE> in the address field of your browser.
           (set http/https and replace webmail_server and port with the correct values).
         </P>
         <P>

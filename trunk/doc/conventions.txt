@@ -108,6 +108,10 @@ in the worse case, when typing new code into your editor, you just need to hit
 your space bar twice after your editor auto-wraps the first time for each code
 statement.
 EXCEPTION:  Sun's rule for ternary expression wrapping works great, except
-(a) if it all fits on one line, then don't wrap!, and (b) if Sun's rules
-result in more wrapping, then fall back to normal 8-space indenting
+(a) if the entire side* fits on one line, then don't wrap!, and (b) if Sun's
+rules result in more wrapping, then fall back to normal 8-space indenting
 (preferring to break before the ? and : operators).
+(By "side", I mean the LHS or RHS, like in
+            boolean myBool =
+                someOtherVariable == null ? "default value" : extra.getSome();
+the RHS consists of a ternary which doesn't need to be split at all.
