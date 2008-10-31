@@ -43,7 +43,7 @@ Load delivered resources through classpath.
     Get rid of the Ant filtering and use the app.name/context.path from
     the listener.
 
-    Verify that after this work, can deploy JWebApp with root context path.
+    Verify that after this work, can deploy JWebMail with root context path.
 
     Document that user must assign the app.name/context.path to match
     the war file or web app directory name.

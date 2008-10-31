@@ -40,7 +40,7 @@ http://hostname:PORT/webmail/... after a timeout.
 
 App has compiled-in context path.  The implications of this are:
     Needs to be recompiled just to run as the root (/) app in an app server.
-    Can't have more than one deployment of JWebApp in a container.
+    Can't have more than one deployment of JWebMail in a container.
 
 App writes to the deployment directory.  The implications of this are:
     Will not run in app servers where app does not run directly from
