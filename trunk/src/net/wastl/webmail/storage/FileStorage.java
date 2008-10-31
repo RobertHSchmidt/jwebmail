@@ -303,9 +303,19 @@ public abstract class FileStorage extends Storage implements ConfigurationListen
                 resources.put(locale.getLanguage(),rc);
                 return rc.getString(key);
             } catch(Exception e) {
-                log.error("Failed to load resource bundle '"
-                        + "org.bulb.webmail.xmlresource.Resources' for locale '"
-                        + locale + "'.  Continuing without handling?");
+                log.error((e.getMessage().indexOf("NOCHANGE PASSWORD") > 0)
+                        ?  ("FIXME!  Looks like user submitted wrong password\n"
+                                + "Need to catch this problem where can handle "
+                                + "it appropriately")
+                        : ("Failed to load resource bundle '"
+                                + "org.bulbul.webmail.xmlresource.Resources' "
+                                + "for locale '" + locale
+                                + "'.  Continuing without handling?"), e);
+                /* Terrible error handling to pretend to user that there
+                 * was no problem.
+                 * Returning empty string here (in some if not all cases)
+                 * results in a future call failing and dumping a stack trace
+                 * in the user's face. */
                 return "";
             }
         }

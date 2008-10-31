@@ -1642,6 +1642,7 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             String name = e.nextElement();
             disconnect(name);
         }
+        Set<String> zapKeys = new HashSet<String>();
         for (Map.Entry<String, Store> storeEntry : stores.entrySet()) {
             Store st = storeEntry.getValue();
             try {
@@ -1650,8 +1651,9 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
             } catch(Exception ex) {
                 log.warn("Mail: Failed to close connection to "+st.toString()+". Reason: "+ex.getMessage());
             }
-            stores.remove(storeEntry.getKey());
+            zapKeys.add(storeEntry.getKey());
         }
+        for (String key : zapKeys) stores.remove(key);
         folders=null;
     }
 
