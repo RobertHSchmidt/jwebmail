@@ -3,8 +3,6 @@ $Id$
 Ordered short-term TODO list
 ============================
 
-Roll an RC.  1.0.1rc1.  (Consider waiting on following super-item).
-
 Add a new properties setting like webmail.demo or webmail.noxmit, to prevent
 sending messages from the JWebMail server.  And a expiration for user accounts
 Will need to keep a emailaddr/host list, because users could just sign up with
@@ -15,6 +13,39 @@ Host a demo site at jwebmail.admc.com.
 -------------------------------------------
 TAKE A DEEP BREATH
 -------------------------------------------
+
+UNDER CONSIDERATION:  Error handling refactor
+Motivation:  Errors are usually handled in one of two ways now:
+    Logged to the application log, then app continues as if there was no
+     problem.  This is terrible because it encourages state and data
+     inconsistencies.  Often this leads to abstruse data inconsistency
+     exceptions in the same request (which are handled by the following method).
+    Stack trace displayed to end user in a nice window.  The window looks
+     great, but it's hard to imagine that any application developer ever
+     thought it was appropriate to dump Java stack traces before an end user.
+    In some cases, like session timeout, the top-level threads's exception
+     is not handled by the app anywhere, leading to an ugly servlet container
+     error message.
+Tentative refactor:
+    Set an error page in web.xml to catch unanticipated exceptions.  This will
+     log at fatal level (so we can hereafter "anticipate" this failure),
+     display an end-user-friendly message, with a button to view "technical
+     details" (technical message and stack trace(s)), and a "back" button to to
+     to the previous page.
+    Hunt down and eliminate all cases where the code squelches a real problem
+     and just returns.  These methods should throw a WebMailException (or a
+     subclass thereof).  This will take much work.
+    Make a general method to pop and display an error message from the Session
+     in a pop-up window (a plain JS alert() would be a great starting point).
+    In WebMailServlet.service(), catch WebMailExceptions in a case-by-case
+     basis in order to set the Session error message but still generate the
+     target page.  Example: User requested a folder delete.  We set the folder
+     delete failure message in Session, but still display the Folder Management
+     page.  End user will see the Foler Man. page with a pop-up error message.
+    Make WebMailException into an AppendableException, to encourage
+     catch-and-rethrow.  This will (a) greatly decrease duplicate error
+     messages and stack traces in the log, and (b) the "technical details"
+     function described above, can show great details of the entire problem.
 
 More branding updates.
     Review image for old version number and "WebMail" text.  I know of:
