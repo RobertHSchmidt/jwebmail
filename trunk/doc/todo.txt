@@ -3,6 +3,9 @@ $Id$
 Ordered short-term TODO list
 ============================
 
+Consider Spring Framework's XLST support.
+Don't want to add a framework unless it adds really significant improvements.
+
 Add a new properties setting like webmail.demo or webmail.noxmit, to prevent
 sending messages from the JWebMail server.  And a expiration for user accounts
 Will need to keep a emailaddr/host list, because users could just sign up with
