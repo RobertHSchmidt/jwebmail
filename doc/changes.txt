@@ -1,8 +1,15 @@
 # $Id$
 # changed/fixed, + added, - removed
 
-Release tag 1.0.1rc1 = rev. 140
+rev 143
+# Major fix for displaying HTML formatted connections.  Generic XML parsers
+  cannot parse HTML.
++ Use current version of Neko to XML-ify the HTML so we can sanitize it of
+  Javascript.
+# Fix where was accidentally duplicating some content, because XML library
+  functions seem to have changed from case-sensitive to case-insensitive.
 
+Release tag 1.0.1rc1 = rev. 140
 v1.0.1rc1 rev. 136
 # Satisfied all serious compilation warnings.
 + Eclipse integration

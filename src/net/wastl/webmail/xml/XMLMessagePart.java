@@ -84,22 +84,23 @@ public class XMLMessagePart  {
      * messages.
      */
     public void addContent(Document content) {
+log.fatal("addContenting", new Throwable("CONTENTing"));
         Element content_elem=root.createElement("CONTENT");
         content_elem.setAttribute("quotelevel","0");
 
-        /* Find all <BODY> elements and add the child nodes to the content */
-        for(int count=0; count < 2; count++) {
-            NodeList nl=content.getDocumentElement().getElementsByTagName(count==0?"BODY":"body");
-            log.debug("While parsing HTML content: Found "+nl.getLength()
-                    +" body elements");
-            for(int i=0; i<nl.getLength();i++) {
-                NodeList nl2=nl.item(i).getChildNodes();
-                log.debug("While parsing HTML content: Found "
-                        +nl2.getLength()+" child elements");
-                for(int j=0;j<nl2.getLength();j++) {
-                    log.debug("Element: "+j);
-                    content_elem.appendChild(XMLCommon.importNode(root,nl2.item(j),true));
-                }
+        // The case of "BodY" is funny below to make it certain that the
+        // getElementsByTagName() method is case-insensitive (it didn't
+        // used to be).
+        NodeList nl=content.getDocumentElement().getElementsByTagName("BodY");
+        log.debug("While parsing HTML content: Found "+nl.getLength()
+                +" body elements");
+        for(int i=0; i<nl.getLength();i++) {
+            NodeList nl2=nl.item(i).getChildNodes();
+            log.debug("While parsing HTML content: Found "
+                    +nl2.getLength()+" child elements");
+            for(int j=0;j<nl2.getLength();j++) {
+                log.debug("Element: "+j);
+                content_elem.appendChild(XMLCommon.importNode(root,nl2.item(j),true));
             }
         }
 
