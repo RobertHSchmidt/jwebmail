@@ -34,6 +34,8 @@ import net.wastl.webmail.ui.html.Fancyfier;
 import net.wastl.webmail.server.http.HTTPRequestHeader;
 import net.wastl.webmail.exceptions.*;
 import org.bulbul.webmail.util.TranscodeUtil;
+import org.cyberneko.html.parsers.DOMParser;
+import org.xml.sax.InputSource;
 import org.w3c.dom.*;
 
 /**
@@ -661,53 +663,24 @@ String newmsgid=WebMailServer.generateMessageID(user.getUserName());
         XMLMessagePart xml_part;
         try {
             if(p.getContentType().toUpperCase().startsWith("TEXT/HTML")) {
-                /* The part is a text in HTML format. We will try to use "Tidy" to create a well-formatted
-                   XHTML DOM from it and then remove JavaScript and other "evil" stuff.
-                   For replying to such a message, it will be useful to just remove all of the tags and display
-                   only the text.
-                */
+                /* The part is a text in HTML format.
+                 * We will try to use "Neko" to create a well-formatted
+                 * XHTML DOM from it and then remove JavaScript and other
+                 * "evil" stuff.
+                 * For replying to such a message, it will be useful to just
+                 * remove all of the tags and display only the text.
+                 */
 
                 xml_part=parent_part.createPart("html");
 
-                /****************************************************
-                 * LEAVING THESE OLD XML PARSERS COMMENTED OUT
-                 * until know that the new Parser tactic parses HTML properly
-                 * (or adequately).  See the ** comment below.
-                /* Here we create a DOM tree.
-                //Tidy tidy=new Tidy();
-                //tidy.setUpperCaseTags(true);
-                //Document htmldoc=tidy.parseDOM(p.getInputStream(),null);
-//              org.cyberneko.html.parsers.DOMParser parser =
-//                  new org.cyberneko.html.parsers.DOMParser();
-//              DOMParser parser = new DOMParser(new HTMLConfiguration());
-//              parser.parse(new InputSource(p.getInputStream()));
-//              Document htmldoc = parser.getDocument();
-
-                // instantiate a DOM implementation
-                DOM dom = new com.docuverse.dom.DOM();
-                // install the SAX driver for Swing HTML parser
-                dom.setProperty("sax.driver", "com.docuverse.html.swing.SAXDriver");
-
-                // install HTML element factory
-                dom.setFactory(new com.docuverse.dom.html.HTMLFactory());
-                // ** N.B.  WITH docuverse AND NekoHTML, THE PARSER WAS
-                // HTML-Specific.  We are now using generic XML parser.
-                // Is that adequate?
-
-                // now just open the document
-                Document htmldoc = (Document)dom.readDocument(p.getInputStream());
-*/
-                javax.xml.parsers.DocumentBuilder parser =
-                        javax.xml.parsers.DocumentBuilderFactory.newInstance().
-                                newDocumentBuilder();
-                Document htmldoc = parser.parse(p.getInputStream());
+                DOMParser parser = new DOMParser();
+                parser.parse(new InputSource(p.getInputStream()));
+                Document htmldoc = parser.getDocument();
 
                 if(htmldoc == null) {
                     log.error("Document was null!");
                     // Why not throwing?
                 }
-
-                //dom.writeDocument(htmldoc,"/tmp/test.xml");
 
                 /* Now let's look for all the malicious JavaScript and other <SCRIPT> tags,
                    URLS containing the "javascript:" and tags containing "onMouseOver" and such

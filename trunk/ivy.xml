@@ -34,5 +34,9 @@
                 transitive="false" conf="bundle->default"/>
     <dependency name="imap" rev="1.4.1"
                 transitive="false" conf="bundle->default"/>
+    <dependency name="nekohtml" rev="1.9.9"
+                transitive="false" conf="build,bundle->default"/>
+    <dependency name="xercesImpl" rev="2.7.1"
+                transitive="false" conf="bundle->default"/>
   </dependencies>
 </ivy-module>
